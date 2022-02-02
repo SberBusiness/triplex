@@ -1,0 +1,17 @@
+@import '../../../../common/theme/default';
+
+.datePicker {
+    position: relative;
+    width: @picker-width;
+
+    .globalCalendar {
+        .pickerCalendarPopover();
+    }
+
+    &.topOrientation {
+        .globalCalendar {
+            bottom: 36px;
+            margin-top: 0;
+        }
+    }
+}

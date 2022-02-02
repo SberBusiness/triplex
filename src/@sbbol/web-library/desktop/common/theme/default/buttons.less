@@ -1,0 +1,68 @@
+@import 'src/@sbbol/web-library/common/styles/theme/default';
+
+@ufs-theme-button-height-md: 32px;
+@ufs-theme-button-height-sm: 28px;
+
+@ufs-theme-button-min-width-md: 96px;
+@ufs-theme-button-min-width-sm: 80px;
+@ufs-theme-button-min-width-link-md: 0;
+@ufs-theme-button-min-width-link-sm: 0;
+
+@ufs-theme-button-padding-horizontal-md: 24px;
+@ufs-theme-button-padding-horizontal-sm: 16px;
+@ufs-theme-button-padding-horizontal-dots-md: 8px;
+@ufs-theme-button-padding-horizontal-dots-sm: 6px;
+@ufs-theme-button-padding-horizontal-link-md: 2px;
+@ufs-theme-button-padding-horizontal-link-sm: 2px;
+
+@ufs-theme-button-siblings-margin-left: 16px;
+
+@ufs-theme-button-border-width-default: 0;
+@ufs-theme-button-border-width-thin: 1px;
+@ufs-theme-button-border-width-medium: 2px;
+
+@ufs-theme-button-border-color-focus: @color-sunny-01;
+
+.button-padding(@height, @padding-horizontal, @border-width) {
+    @line-height: .line-height-by-font-size(@font-size-14) [@result];
+    @line-height-inline: .line-height-by-font-size-inline(@font-size-14) [@result];
+
+    &.buttonLink {
+        padding: (@height - @line-height - @border-width * 2) / 2 @padding-horizontal - @border-width;
+    }
+
+    &:not(.buttonLink) {
+        padding: (@height - @line-height-inline - @border-width * 2) / 2 @padding-horizontal - @border-width;
+    }
+
+    border-width: @border-width;
+}
+
+.button-size(@height, @min-width) {
+    height: @height;
+    min-width: @min-width;
+
+    &:not(.buttonLink) {
+        border-radius: @height / 2;
+    }
+}
+
+.button-sm(@border-width: @ufs-theme-button-border-width-default, @min-width: @ufs-theme-button-min-width-sm,
+@padding-horizontal: @ufs-theme-button-padding-horizontal-sm, @border-width-focus: @ufs-theme-button-border-width-medium) {
+    .button-size(@ufs-theme-button-height-sm, @min-width);
+    .button-padding(@ufs-theme-button-height-sm, @padding-horizontal, @border-width);
+
+    &.focusVisible:focus {
+        .button-padding(@ufs-theme-button-height-sm, @padding-horizontal, @border-width-focus);
+    }
+}
+
+.button-md(@border-width: @ufs-theme-button-border-width-default, @min-width: @ufs-theme-button-min-width-md,
+@padding-horizontal: @ufs-theme-button-padding-horizontal-md, @border-width-focus: @ufs-theme-button-border-width-medium) {
+    .button-size(@ufs-theme-button-height-md, @min-width);
+    .button-padding(@ufs-theme-button-height-md, @padding-horizontal, @border-width);
+
+    &.focusVisible:focus {
+        .button-padding(@ufs-theme-button-height-md, @padding-horizontal, @border-width-focus);
+    }
+}

@@ -1,0 +1,27 @@
+.styleguidist-accordion {
+    &-header {
+        display: flex;
+        align-items: center;
+
+        .title {
+            cursor: pointer;
+        }
+
+        .icon-caret {
+            transition: all 0.25s ease-in-out;
+            margin-right: 8px;
+        }
+
+        &.opened .icon-caret {
+            transform: rotate(-180deg);
+        }
+    }
+
+    &-content {
+        display: none;
+
+        &.opened {
+            display: block;
+        }
+    }
+}

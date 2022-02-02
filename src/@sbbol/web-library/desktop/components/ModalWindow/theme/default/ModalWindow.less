@@ -1,0 +1,99 @@
+/* stylelint-disable no-descending-specificity */
+@import '../../../../common/theme/default.less';
+@import './ModalWindowKeyFrames.less';
+
+.modalWindowContainer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: @z-index-modal-window;
+
+    .modalWindowBackdrop {
+        .backdropDefault();
+    }
+
+    .modalWindow {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        .modalWindowContentWrapper {
+            position: relative;
+            left: 50vw;
+            animation: modalWindowContentAnimationOnEnter 0.6s ease;
+
+            .modalWindowContent {
+                transform: translate(-50%, 0);
+                margin-top: @ufs-theme-modal-window-top;
+                margin-bottom: @ufs-theme-modal-window-bottom;
+                background: @color-snowy;
+
+                &,
+                .globalSpinnerWidget {
+                    border-radius: @radius-16;
+                }
+
+                .modalWindowBody {
+                    .keyframes-fadeIn();
+
+                    animation: fadeIn 0.3s ease;
+                }
+
+                &.isLoading .modalWindowBody {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    &.modalTopOverlayActive {
+        .modalWindowClose {
+            display: none;
+        }
+
+        // Overlay.
+        .modalWindowContent::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: @z-index-step + @z-index-step / 2;
+            background-color: @ufs-theme-overlay-white-background-color;
+            width: 100%;
+            border-radius: @radius-16;
+            animation: fadeIn 0.3s ease;
+        }
+    }
+}
+
+&.modalWindowTransition-exit .modalWindowContainer .modalWindow .modalWindowContentWrapper {
+    transform: @ufs-theme-modal-content-translate-exit;
+    -ms-transform: @ufs-theme-modal-content-translate-exit-ie11;
+    animation: modalWindowContentAnimationOnExit 0.3s ease;
+
+    .modalWindowBody {
+        .keyframes-fadeOut();
+
+        animation: fadeOut 0.3s ease;
+    }
+}
+
+.modalWindowTopOverlayWrapper {
+    position: absolute;
+    top: 0;
+    width: inherit;
+    z-index: @z-index-step * 2;
+
+    .globalTopOverlay {
+        border-radius: @radius-16 @radius-16 0 0;
+    }
+}
+
+.no-hash-overflow-hidden {
+    overflow: hidden;
+}

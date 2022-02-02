@@ -1,0 +1,18 @@
+@import 'src/@sbbol/web-library/desktop/common/theme/default.less';
+
+.textArea {
+    .input-base();
+
+    height: auto;
+    // Иначе будет лишний отступ снизу.
+    vertical-align: top;
+
+    // В IE скрываем дефолтный ненужный scrollbar.
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        overflow-y: auto;
+    }
+}
+
+.fullWidth {
+    width: 100%;
+}

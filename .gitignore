@@ -1,0 +1,19 @@
+.idea
+.vscode
+/out
+/node_modules
+/styleguidistDist
+hash.json
+
+# Логи
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# codemod
+jscodeshift-
+
+# Tests
+tests/out

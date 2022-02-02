@@ -1,0 +1,39 @@
+@mobile-input-border-width: 1px;
+
+.input-disabled() {
+    cursor: default;
+    -webkit-text-fill-color: @color-asphalt-01; // Цвет в Safari.
+    color: @color-asphalt-01;
+    background-color: @color-asphalt-05;
+    opacity: 1; // iOS
+}
+
+.input-basic() {
+    .b2-text-controls-normal(@color-graphite-01);
+
+    outline: none;
+    box-shadow: none;
+    appearance: none;
+    padding: (@metric-16 - @mobile-input-border-width) (@metric-12 - @mobile-input-border-width);
+    border: 1px solid @color-asphalt-03;
+    border-radius: @metric-8;
+    box-sizing: border-box;
+
+    &.disabled,
+    &:disabled {
+        .input-disabled();
+    }
+
+    &:focus,
+    &.focus {
+        border-color: @color-graphite-01;
+    }
+
+    &.error {
+        border-color: @color-ruby-02;
+    }
+
+    &::placeholder {
+        color: @color-asphalt-01;
+    }
+}

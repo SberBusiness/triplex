@@ -1,0 +1,12 @@
+@import '../../../../common/theme/default.less';
+
+.checkboxYGroup {
+    display: inline-flex;
+    flex-flow: column wrap;
+
+    .checkboxLabel {
+        &:not(:last-of-type) {
+            margin-bottom: @metric-16;
+        }
+    }
+}

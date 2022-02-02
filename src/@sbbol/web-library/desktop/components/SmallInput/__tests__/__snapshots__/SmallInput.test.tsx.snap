@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallInput renders correctly 1`] = `
+<input
+  className="cssClass[smallInput]"
+  onChange={[MockFunction]}
+  type="text"
+  value="default-value"
+/>
+`;

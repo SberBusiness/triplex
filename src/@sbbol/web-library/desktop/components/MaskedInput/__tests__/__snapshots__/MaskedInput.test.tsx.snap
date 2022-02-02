@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaskedInput renders correctly 1`] = `
+<div
+  className="cssClass[wrapper]"
+>
+  <span
+    className="cssClass[placeholder]"
+  >
+    +71234567890
+  </span>
+  <input
+    className="cssClass[input]"
+    maxLength={12}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onCut={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    onPaste={[Function]}
+    spellCheck={false}
+    type="text"
+    value="+71234567890"
+  />
+</div>
+`;

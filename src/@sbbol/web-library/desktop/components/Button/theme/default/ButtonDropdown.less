@@ -1,0 +1,56 @@
+@import '../../../../common/theme/default';
+
+.buttonDropdown {
+    &.block {
+        display: block;
+    }
+
+    & + .button,
+    & + .buttonDropdown,
+    & + .dropdownDeprecated {
+        &:not(.block) {
+            margin-left: @ufs-theme-button-siblings-margin-left;
+        }
+    }
+
+    .buttonDropdownTarget {
+        .caretIcon {
+            margin-left: @metric-4;
+            transition: transform 0.25s ease-in-out;
+        }
+
+        &.active {
+            &.buttonGeneral {
+                background-color: @color-malachite-01;
+            }
+
+            &.buttonSecondary,
+            &.buttonDots {
+                background-color: @color-asphalt-03;
+
+                &:not(.focusVisible):hover,
+                &:not(.focusVisible):focus {
+                    background-clip: border-box;
+                    border-color: transparent;
+                }
+            }
+
+            .caretIcon {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    .buttonDropdownMenu {
+        &.dropup {
+            margin-top: 0;
+            margin-bottom: 4px;
+            bottom: 100%;
+        }
+
+        .buttonDropdownMenuItem {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

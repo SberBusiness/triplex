@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmountCurrencySelect renders correctly 1`] = `
+<div
+  className="cssClass[amountCurrencySelect]"
+>
+  <input
+    autoComplete="off"
+    className="cssClass[input]"
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="0,00"
+    title="-8 964 152,37"
+    type="text"
+    value="-8 964 152,37"
+  />
+  <div
+    className="cssClass[currencySelectExtended] cssClass[selectExtended]"
+  >
+    <div
+      className="cssClass[selectExtendedTargetWrapper]"
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup="listbox"
+        className="cssClass[selectExtendedTarget] cssClass[currencySelectExtendedTarget]"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <div
+          className="cssClass[label]"
+        >
+          RUB
+        </div>
+        <svg
+          className="cssClass[caretIcon] hoverable"
+        />
+      </div>
+    </div>
+    <div
+      className="cssClass[selectExtendedDropdownWrapper]"
+    >
+      <div
+        className="cssClass[dropdown] cssClass[selectExtendedDropdown] cssClass[selectExtendedDropdownClosed]"
+        setOpened={[Function]}
+      >
+        <div
+          className="cssClass[dropdownList]"
+          role="listbox"
+        >
+          <div
+            aria-selected={true}
+            className="cssClass[dropdownListItem] cssClass[selected]"
+            id="RUB"
+            label="RUB"
+            onClick={[Function]}
+            onMouseOver={[Function]}
+            role="option"
+            tabIndex={0}
+            title="RUB"
+            value="RUB"
+          >
+            RUB
+          </div>
+          <div
+            aria-selected={false}
+            className="cssClass[dropdownListItem]"
+            id="USD"
+            label="USD"
+            onClick={[Function]}
+            onMouseOver={[Function]}
+            role="option"
+            tabIndex={0}
+            title="USD"
+            value="USD"
+          >
+            USD
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

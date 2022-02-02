@@ -1,0 +1,35 @@
+@import '../../../../common/theme/default';
+
+.button.buttonSecondary {
+    .b2-text-controls-normal(@color-graphite-01);
+
+    background-color: @color-snowy;
+    border-color: @color-asphalt-03;
+
+    &:hover {
+        border-color: @color-graphite-01;
+    }
+
+    &:active {
+        background-color: @color-asphalt-03;
+    }
+
+    &:not(.focusVisible):enabled:active {
+        background-clip: border-box;
+        border-color: transparent;
+    }
+
+    &:disabled {
+        background-color: @color-snowy;
+        border-color: @color-asphalt-03;
+        color: @color-asphalt-03;
+    }
+
+    &.buttonSm {
+        .button-sm(@ufs-theme-button-border-width-thin);
+    }
+
+    &.buttonMd {
+        .button-md(@ufs-theme-button-border-width-thin);
+    }
+}

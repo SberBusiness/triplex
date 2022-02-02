@@ -1,0 +1,99 @@
+@import '../../../../common/theme/default.less';
+
+.checkboxLabel {
+    display: inline-block;
+    position: relative;
+    min-width: @ufs-theme-size-icon-16;
+    min-height: 20px;
+    line-height: normal;
+    cursor: pointer;
+
+    &[hidden] {
+        display: none;
+    }
+
+    .checkbox,
+    .checkboxIcon,
+    .checkmarkIcon {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: @ufs-theme-size-icon-16;
+        height: @ufs-theme-size-icon-16;
+        margin: 0;
+    }
+
+    .checkboxIcon {
+        box-sizing: border-box;
+        background-color: @color-snowy;
+        border: 1px solid @color-asphalt-03;
+        border-radius: @ufs-theme-base;
+    }
+
+    .checkmarkIcon {
+        transform: scale(0);
+    }
+
+    .content {
+        display: inline-block;
+        padding-left: @metric-24;
+        box-sizing: border-box;
+        .b1-text-main(@color-graphite-01);
+    }
+
+    .checkbox {
+        opacity: 0;
+
+        &:checked {
+            & + .checkboxIcon {
+                background-color: @color-malachite-02;
+                border-color: @color-malachite-02;
+            }
+
+            & ~ .checkmarkIcon {
+                transform: scale(1);
+                transition: transform 200ms ease-out;
+            }
+        }
+
+        &:focus + .checkboxIcon {
+            border-color: @color-sunny-01;
+        }
+
+        &:disabled {
+            & + .checkboxIcon {
+                background-color: @color-asphalt-05;
+                border-color: @color-asphalt-03;
+            }
+
+            &:checked ~ .checkmarkIcon path {
+                fill: @color-asphalt-03;
+            }
+        }
+    }
+
+    &:hover .checkbox:not(:disabled) {
+        & + .checkboxIcon {
+            border-color: @color-malachite-03;
+        }
+
+        &:checked + .checkboxIcon {
+            background-color: @color-malachite-03;
+        }
+    }
+    .ie10-fix-checkbox();
+}
+
+.ie10-fix-checkbox() {
+    // для корректной работы псевдоклассов в ie10+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        .checkboxIcon,
+        .checkmarkIcon {
+            pointer-events: none;
+        }
+
+        .content {
+            pointer-events: auto;
+        }
+    }
+}

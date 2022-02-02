@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page renders correctly 1`] = `
+<div
+  className="cssClass[page]"
+>
+  <div
+    className="cssClass[body] cssClass[withWhiteBackground]"
+    data-markup-guard-id="Body-generateMarkupGuardId"
+  >
+    <div
+      className="cssClass[bodyInner]"
+    >
+      Text
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,27 @@
+@picker-width: 126px;
+
+.pickerCalendarIcon() {
+    position: absolute;
+    top: 6px;
+    right: @metric-12;
+    cursor: pointer;
+
+    &.disabled {
+        cursor: default;
+
+        > svg .service-fill {
+            fill: @color-asphalt-03;
+        }
+    }
+
+    &.focused .service-fill {
+        fill: @color-asphalt-01;
+    }
+}
+
+.pickerCalendarPopover() {
+    position: absolute;
+    z-index: @z-index-popover;
+    margin-top: @metric-4;
+    box-shadow: @shadow-02;
+}

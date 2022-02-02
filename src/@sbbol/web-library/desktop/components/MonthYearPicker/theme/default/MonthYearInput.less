@@ -1,0 +1,27 @@
+@import '../../../../common/theme/default';
+
+.inputBlock {
+    position: relative;
+
+    .pseudoInput {
+        .input-base();
+
+        width: 100%;
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:focus.disabled {
+            border-color: @color-asphalt-03;
+        }
+
+        .placeholder {
+            color: @color-asphalt-01;
+        }
+    }
+
+    .calendarIcon {
+        .pickerCalendarIcon();
+    }
+}

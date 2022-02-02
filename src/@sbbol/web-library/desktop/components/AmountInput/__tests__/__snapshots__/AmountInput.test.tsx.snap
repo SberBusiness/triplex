@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmountInput renders correctly 1`] = `
+<div
+  className="cssClass[numberInput] cssClass[filled] cssClass[withUnit]"
+  data-test-id="NumberInput"
+>
+  <input
+    autoComplete="off"
+    className="cssClass[input]"
+    data-test-id="NumberInput__input"
+    max={9007199254740991}
+    min={-9007199254740991}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="0,00"
+    title="-8 964 152,37"
+    type="text"
+    value="-8 964 152,37"
+  />
+  <div
+    className="cssClass[unitBox]"
+  >
+    <span
+      className="cssClass[unitText]"
+      data-test-id="NumberInput__unit"
+    >
+      RUB
+    </span>
+  </div>
+</div>
+`;

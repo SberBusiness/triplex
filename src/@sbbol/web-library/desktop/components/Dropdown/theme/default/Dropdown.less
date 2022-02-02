@@ -1,0 +1,15 @@
+@import '../../../../common/theme/default';
+
+.dropdown {
+    box-sizing: border-box;
+    z-index: @z-index-dropdown;
+    box-shadow: @shadow-02;
+    border-radius: @radius-8;
+    background-color: @color-snowy;
+    display: none;
+    position: absolute;
+
+    &.opened {
+        display: block;
+    }
+}

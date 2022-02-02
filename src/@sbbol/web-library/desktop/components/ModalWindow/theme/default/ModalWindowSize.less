@@ -1,0 +1,53 @@
+/* stylelint-disable no-descending-specificity */
+
+@import '../../../../common/theme/default.less';
+
+// Расчёт отступа слева у крестика закрытия модального окна.
+.modal-close-left(@modal-window-width) {
+    margin-left: @modal-window-width / 2 + @metric-16;
+}
+
+.modalWindowSm {
+    .modalWindowClose,
+    &.globalModalWindowCloseFixed + .modalWindowClose {
+        .modal-close-left(@ufs-theme-modal-window-sm-width);
+    }
+
+    .modalWindowContent {
+        width: @ufs-theme-modal-window-sm-width;
+
+        .modalWindowBody {
+            min-height: @ufs-theme-modal-window-sm-body-height;
+        }
+    }
+}
+
+.modalWindowMd {
+    .modalWindowClose,
+    &.globalModalWindowCloseFixed + .modalWindowClose {
+        .modal-close-left(@ufs-theme-modal-window-md-width);
+    }
+
+    .modalWindowContent {
+        width: @ufs-theme-modal-window-md-width;
+
+        .modalWindowBody {
+            min-height: @ufs-theme-modal-window-md-body-height;
+        }
+    }
+}
+
+.modalWindowLg {
+    .modalWindowClose,
+    &.globalModalWindowCloseFixed + .modalWindowClose {
+        .modal-close-left(@ufs-theme-modal-window-lg-width);
+    }
+
+    .modalWindowContent {
+        width: @ufs-theme-modal-window-lg-width;
+
+        .modalWindowBody {
+            min-height: @ufs-theme-modal-window-lg-body-height;
+        }
+    }
+}

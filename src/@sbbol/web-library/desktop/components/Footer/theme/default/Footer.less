@@ -1,0 +1,48 @@
+@import '../../../../common/theme/default.less';
+
+.footer {
+    padding: @ufs-theme-page-padding-y @ufs-theme-page-padding-x;
+    background: @color-asphalt-05;
+
+    &.sticky {
+        z-index: @page-header-sticky-z-index;
+        position: sticky;
+        bottom: 0;
+    }
+}
+
+.footerDescription {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerDescriptionContent {
+    flex-grow: 1;
+    margin-right: auto;
+    .b1-text-main(@color-graphite-01);
+}
+
+.footerDescriptionControls {
+    margin-left: auto;
+    white-space: nowrap;
+    padding-left: @ufs-theme-padding-before-controls-column;
+}
+
+each(@scroll-sizes, {
+    @scroll-width: @value;
+
+    html.scroll-@{scroll-width} {
+        /*
+          Breakpoint для экранов менее 1024px.
+          Футер при этом разрешении в лайтбоксе не фиксируется.
+        */
+        @media (max-width: (@lightBox-media-point-0 + @scroll-width)) {
+            .globalLightBoxContent .footer {
+                &.sticky {
+                    position: relative;
+                }
+            }
+        }
+    }
+});

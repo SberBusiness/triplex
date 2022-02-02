@@ -1,0 +1,25 @@
+@import '../../../../common/theme/default';
+
+.keyframes-fadeIn();
+
+.theme__default_spin {
+    .animation-spin-360();
+}
+
+.spinnerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    animation: fadeIn 2s ease-in;
+
+    .textWrapper {
+        margin-top: @metric-16;
+        text-align: center;
+        .b1-text-main(@color-graphite-01);
+
+        &.sm {
+            margin-top: @metric-8;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@import '../../../../common/theme/default';
+
+.button.buttonLink {
+    .b1-text-main(@color-sky-02);
+
+    background-color: transparent;
+
+    &:hover {
+        color: @color-malachite-02;
+    }
+
+    &:active {
+        color: @color-sky-01;
+    }
+
+    &.buttonMd {
+        .button-md(
+            @ufs-theme-button-border-width-default,
+            @ufs-theme-button-min-width-link-md,
+            @ufs-theme-button-padding-horizontal-link-md,
+            @ufs-theme-button-border-width-thin
+        );
+    }
+
+    &.buttonSm {
+        .button-sm(
+            @ufs-theme-button-border-width-default,
+            @ufs-theme-button-min-width-link-sm,
+            @ufs-theme-button-padding-horizontal-link-sm,
+            @ufs-theme-button-border-width-thin
+        );
+    }
+}

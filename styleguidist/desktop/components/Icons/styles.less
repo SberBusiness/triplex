@@ -1,0 +1,28 @@
+@import '../../../../src/@sbbol/web-library/common/styles/theme/default/colors.less';
+
+.icons-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-radius: 4px;
+
+    &.highlighted {
+        background-color: @color-asphalt-01;
+    }
+
+    .icon-item {
+        margin: 0 12px 12px 12px;
+        padding: 8px;
+        display: flex;
+        flex: 1 0 240px;
+        align-items: center;
+    }
+
+    .icon-name {
+        margin-left: 24px;
+
+        &.deprecated {
+            text-decoration: line-through;
+        }
+    }
+}

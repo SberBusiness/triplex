@@ -1,0 +1,45 @@
+@import '../../../../common/theme/default.less';
+
+.lightBoxControls {
+    top: 0;
+    position: fixed;
+    background-color: @color-graphite-02;
+    height: @lightBox-controls-opened-height;
+    z-index: @z-index-step + @z-index-step / 2;
+
+    .lightBoxControlsSmall {
+        display: block;
+    }
+
+    .lightBoxControlsBig {
+        display: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .lightBoxControlsSmall:hover {
+        cursor: pointer;
+    }
+}
+
+.lightBoxControlsWithTriggerOnKeyboardEvent {
+    display: inline-block;
+}
+
+.lightBoxControlsWithoutTriggerOnKeyboardEvent {
+    display: none;
+}
+
+.lightBox.lightBoxSideOverlayActive,
+.lightBox.lightBoxTopOverlayActive,
+.lightBox.isLoading {
+    .lightBoxControlsWithTriggerOnKeyboardEvent {
+        display: none;
+    }
+
+    .lightBoxControlsWithoutTriggerOnKeyboardEvent {
+        display: inline-block;
+    }
+}

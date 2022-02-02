@@ -1,0 +1,15 @@
+@import '../../../../common/theme/default.less';
+
+.checkboxXGroup {
+    display: inline-flex;
+    flex-flow: row wrap;
+
+    @indent: 12, 16, 20, 24, 28, 32;
+    each(@indent, {
+        &.checkboxIndent-@{value} {
+            .checkboxLabel:not(:last-of-type) {
+                margin-right: ~'@{value}px';
+            }
+        }
+    });
+}

@@ -1,0 +1,61 @@
+@import '../../../../common/theme/default';
+
+.header {
+    background: @color-asphalt-05;
+
+    &.sticky {
+        z-index: @page-header-sticky-z-index;
+        position: sticky;
+        top: 0;
+    }
+
+    .globalHeaderTabs:first-child {
+        padding: @ufs-theme-page-padding-y @ufs-theme-page-padding-x 0;
+    }
+
+    .globalHeaderTitle + .globalHeaderTabs {
+        padding: 0 @ufs-theme-page-padding-x @ufs-theme-page-padding-y;
+    }
+}
+
+each(@scroll-sizes, {
+    @scroll-width: @value;
+
+    html.scroll-@{scroll-width} {
+        /*
+          Breakpoint до которого LightBoxControls находятся наверху лайтбокса.
+          Хедер фиксируется под LightBoxControls.
+        */
+        @media (max-width: (@lightBox-media-point-1 + @scroll-width)) {
+            .globalLightBoxContent .header {
+                &.sticky {
+                    top: @lightBox-controls-opened-height;
+                }
+            }
+        }
+
+        /*
+          Breakpoint после которого хедер прилипает к верху экрана.
+        */
+        @media (min-width: @lightBox-media-point-1 + @scroll-width) {
+            .globalLightBoxContent .header {
+                &.sticky {
+                    top: 0;
+                }
+            }
+        }
+
+        /*
+          Breakpoint для экранов менее 1024px.
+          Хедер при этом разрешении в лайтбоксе не фиксируется.
+        */
+        @media (max-width: (@lightBox-media-point-0 + @scroll-width)) {
+            .globalLightBoxContent .header {
+                &.sticky {
+                    position: relative;
+                    top: 0;
+                }
+            }
+        }
+    }
+});

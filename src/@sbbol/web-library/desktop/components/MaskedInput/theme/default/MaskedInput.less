@@ -1,0 +1,47 @@
+@import '../../../../common/theme/default.less';
+
+.wrapper {
+    position: relative;
+}
+
+.input {
+    .input-base();
+
+    position: relative;
+    width: 100%;
+
+    &:focus {
+        caret-color: @color-graphite-01; // Фикс цвета каретки в Chrome и Mozilla
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &.empty {
+        color: @color-asphalt-01;
+    }
+}
+
+.placeholder {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: inherit;
+    color: @color-asphalt-01;
+    background-color: @color-snowy;
+    border: none;
+    border-radius: 8px;
+
+    &.disabled {
+        background-color: @color-asphalt-05;
+    }
+}
+
+.placeholder + .input {
+    background-color: transparent;
+}

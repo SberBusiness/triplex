@@ -1,0 +1,59 @@
+@import '../../../../common/theme/default';
+
+.documentNumberEdit {
+    .label {
+        margin-right: @metric-8;
+    }
+
+    .buttonEdit {
+        .font-regular();
+
+        font-size: inherit;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        .buttonEditInner {
+            position: relative;
+            color: @color-sky-02;
+            text-decoration: none;
+            padding: 0 2px;
+            margin: 0 -2px;
+            border: 1px solid transparent;
+            white-space: nowrap;
+
+            // В IE11 не показывается боковая тень на :focus.
+            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                margin: 0;
+            }
+        }
+
+        &:focus {
+            outline: none;
+
+            .buttonEditInner {
+                border: 1px solid @color-sunny-01;
+            }
+        }
+
+        &:hover {
+            .buttonEditInner {
+                color: @color-malachite-02;
+            }
+        }
+
+        &:active {
+            .buttonEditInner {
+                color: @color-sky-01;
+            }
+        }
+    }
+
+    .inputEditWrapper {
+        width: 64px;
+        display: inline-block;
+    }
+}

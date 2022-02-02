@@ -1,0 +1,17 @@
+@import 'src/@sbbol/web-library/desktop/common/theme/default';
+
+.globalHeaderTabs {
+    display: flex;
+    justify-content: space-between;
+
+    .headerTabsContent {
+        flex-grow: 1;
+        min-width: 1px; // IE fix.
+    }
+
+    .headerTabsControls {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding-left: @ufs-theme-padding-before-controls-column;
+    }
+}

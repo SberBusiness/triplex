@@ -1,0 +1,74 @@
+@import '../../../../common/theme/default';
+
+.globalSmsInput {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+
+    .input {
+        .input-base();
+
+        width: 100%;
+        padding-left: 33px;
+        padding-right: 33px;
+        background-color: @color-snowy;
+        border-radius: @radius-16;
+        box-sizing: border-box;
+        text-align: center;
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:focus:not(:disabled),
+        &.filled:not(:disabled) {
+            border-color: @color-graphite-01;
+        }
+
+        &.error,
+        &.error.filled,
+        &.error:focus {
+            border-color: @color-ruby-02;
+        }
+    }
+
+    .btnRefresh {
+        position: absolute;
+        cursor: pointer;
+        left: 6px;
+        padding-top: 6px;
+        outline: none;
+
+        &.disabled {
+            cursor: default;
+        }
+
+        svg {
+            outline: none;
+        }
+
+        .light {
+            fill: @color-asphalt-02;
+        }
+
+        .dark {
+            fill: @color-graphite-02;
+        }
+    }
+
+    .btnSubmit {
+        cursor: pointer;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: @color-malachite-02;
+
+        &.disabled {
+            cursor: default;
+            background-color: @color-malachite-04;
+        }
+    }
+}

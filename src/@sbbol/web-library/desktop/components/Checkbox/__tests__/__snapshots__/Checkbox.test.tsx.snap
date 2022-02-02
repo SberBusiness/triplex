@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox renders checkbox correctly 1`] = `
+<label
+  className="cssClass[checkboxLabel] cssClass[notEmpty]"
+>
+  <input
+    className="cssClass[checkbox]"
+    type="checkbox"
+  />
+  <span
+    className="cssClass[checkboxIcon]"
+  />
+  <span
+    className="cssClass[content]"
+  >
+    text
+  </span>
+  <svg
+    className="cssClass[checkmarkIcon]"
+  />
+</label>
+`;
+
+exports[`Checkbox renders checkbox disabled correctly 1`] = `
+<label
+  className="cssClass[checkboxLabel] cssClass[notEmpty]"
+>
+  <input
+    className="cssClass[checkbox]"
+    disabled={true}
+    type="checkbox"
+  />
+  <span
+    className="cssClass[checkboxIcon]"
+  />
+  <span
+    className="cssClass[content]"
+  >
+    text
+  </span>
+  <svg
+    className="cssClass[checkmarkIcon]"
+  />
+</label>
+`;
+
+exports[`Checkbox renders checkboxXGroup correctly 1`] = `
+<div
+  className="cssClass[checkboxXGroup] cssClass[checkboxIndent-12]"
+  role="group"
+>
+  <label
+    className="cssClass[checkboxLabel] cssClass[notEmpty]"
+  >
+    <input
+      className="cssClass[checkbox]"
+      type="checkbox"
+    />
+    <span
+      className="cssClass[checkboxIcon]"
+    />
+    <span
+      className="cssClass[content]"
+    >
+      First option
+    </span>
+    <svg
+      className="cssClass[checkmarkIcon]"
+    />
+  </label>
+  <label
+    className="cssClass[checkboxLabel] cssClass[notEmpty]"
+  >
+    <input
+      className="cssClass[checkbox]"
+      type="checkbox"
+    />
+    <span
+      className="cssClass[checkboxIcon]"
+    />
+    <span
+      className="cssClass[content]"
+    >
+      Second option
+    </span>
+    <svg
+      className="cssClass[checkmarkIcon]"
+    />
+  </label>
+</div>
+`;
+
+exports[`Checkbox renders checkboxYGroup correctly 1`] = `
+<div
+  className="cssClass[checkboxYGroup]"
+  role="group"
+>
+  <label
+    className="cssClass[checkboxLabel] cssClass[notEmpty]"
+  >
+    <input
+      className="cssClass[checkbox]"
+      type="checkbox"
+    />
+    <span
+      className="cssClass[checkboxIcon]"
+    />
+    <span
+      className="cssClass[content]"
+    >
+      First option
+    </span>
+    <svg
+      className="cssClass[checkmarkIcon]"
+    />
+  </label>
+  <label
+    className="cssClass[checkboxLabel] cssClass[notEmpty]"
+  >
+    <input
+      className="cssClass[checkbox]"
+      type="checkbox"
+    />
+    <span
+      className="cssClass[checkboxIcon]"
+    />
+    <span
+      className="cssClass[content]"
+    >
+      Second option
+    </span>
+    <svg
+      className="cssClass[checkmarkIcon]"
+    />
+  </label>
+</div>
+`;

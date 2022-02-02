@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select should render correctly 1`] = `
+<div
+  className="cssClass[selectExtended]"
+  data-test-id="Select"
+>
+  <div
+    className="cssClass[selectExtendedTargetWrapper]"
+  >
+    <div
+      aria-expanded={false}
+      aria-haspopup="listbox"
+      className="cssClass[selectExtendedTarget]"
+      data-test-id="Select__target"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+      title="Первый"
+    >
+      <div
+        className="cssClass[label]"
+        data-test-id="Select__target__selected_text"
+      >
+        Первый
+      </div>
+      <svg
+        className="cssClass[caretIcon] hoverable"
+      />
+    </div>
+  </div>
+  <div
+    className="cssClass[selectExtendedDropdownWrapper]"
+  />
+</div>
+`;

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderTitle renders correctly 1`] = `
+<div
+  className="cssClass[globalHeaderTitle]"
+>
+  <div
+    className="cssClass[headerTopLinkWrapper]"
+  >
+    <a
+      className="cssClass[link] hoverable cssClass[lg] cssClass[text] cssClass[focusVisible]"
+      onBlur={[Function]}
+      onMouseDown={[Function]}
+      role="link"
+      tabIndex={0}
+    >
+      Link text
+    </a>
+  </div>
+  <div
+    className="cssClass[headerTitleContent]"
+  >
+    <h1
+      className="cssClass[headerTitleContentText]"
+    >
+      Text
+    </h1>
+    <div
+      className="cssClass[headerTitleContentControls]"
+    >
+      Controls
+    </div>
+  </div>
+  <div
+    className="cssClass[headerTitleSubhead]"
+  >
+    Text
+  </div>
+</div>
+`;

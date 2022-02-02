@@ -1,0 +1,96 @@
+@import '../../../../common/theme/default';
+
+.radio {
+    position: relative;
+    cursor: pointer;
+    line-height: normal;
+
+    &[hidden] {
+        display: none;
+    }
+
+    .input {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        margin: -20px;
+        padding: 0;
+        border: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+    }
+
+    .content {
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: @metric-24;
+        box-sizing: border-box;
+        pointer-events: none;
+
+        .b1-text-main(@color-graphite-01);
+    }
+
+    .input + .content::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        border: 1px solid @color-asphalt-03;
+        border-radius: 50%;
+        text-align: center;
+        background-color: @color-snowy;
+        box-sizing: border-box;
+    }
+
+    .input + .content::after {
+        content: '';
+        position: absolute;
+        top: 7px;
+        left: 5px;
+        width: 6px;
+        height: 6px;
+        background-color: @color-snowy;
+        border-radius: 50%;
+        transform: scale(0);
+    }
+
+    .input:checked + .content::after {
+        transform: scale(1);
+        transition: transform 200ms ease-out;
+    }
+
+    .input:disabled:not(:checked) + .content::after {
+        opacity: 0;
+    }
+
+    .input:checked + .content::before {
+        background-color: @color-malachite-02;
+        border-color: @color-malachite-02;
+    }
+
+    .input:focus + .content::before {
+        border-color: @color-sunny-01;
+    }
+
+    .input:disabled + .content::before {
+        background-color: @color-asphalt-05;
+        border-color: @color-asphalt-03;
+    }
+
+    .input:hover:not(:disabled) {
+        &:checked + .content::before {
+            background-color: @color-malachite-03;
+            border-color: @color-malachite-03;
+        }
+
+        &:not(:checked) + .content::before {
+            border-color: @color-malachite-03;
+        }
+    }
+
+    .input:checked:disabled + .content::after {
+        background-color: @color-asphalt-03;
+    }
+}

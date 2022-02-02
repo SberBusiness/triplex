@@ -1,0 +1,36 @@
+@import '../../../../../common/theme/default.less';
+
+.tableBasic > table {
+    th,
+    td {
+        @media (max-width: @screen-sm - 1) {
+            &.hidexs {
+                display: none;
+            }
+        }
+
+        @media (min-width: @screen-sm) and (max-width: @screen-md - 1) {
+            &.hidesm {
+                display: none;
+            }
+        }
+
+        @media (min-width: @screen-md) and (max-width: @screen-lg - 1) {
+            &.hidemd {
+                display: none;
+            }
+        }
+
+        @media (min-width: @screen-lg) and (max-width: @screen-xl - 1) {
+            &.hidelg {
+                display: none;
+            }
+        }
+
+        @media (min-width: @screen-xl) {
+            &.hidexl {
+                display: none;
+            }
+        }
+    }
+}
