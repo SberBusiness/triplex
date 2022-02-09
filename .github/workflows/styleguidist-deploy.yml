@@ -20,10 +20,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a set of commands using the runners shell
       - name: Connect to server
-        run: |
-          echo ${{ secrets.TRIPLEX_DEV_IP }}
-          echo "${{ secrets.TRIPLEX_DEV_IP }}"
-          sshpass -p "${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}" ssh ${{ secrets.TRIPLEX_DEV_SSH_USER }}@${{ secrets.TRIPLEX_DEV_IP }}
-          echo test, and deploy your project.
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.TRIPLEX_DEV_IP }}
+        username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
+        password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
+        script: whoami
