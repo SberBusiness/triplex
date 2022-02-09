@@ -23,7 +23,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Connect to server
         run: |
-          sshpass -v
           sshpass -p "${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}" ssh ${{ secrets.TRIPLEX_DEV_SSH_USER }}@${{ secrets
           .TRIPLEX_DEV_IP }}
           echo test, and deploy your project.
