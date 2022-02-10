@@ -20,17 +20,6 @@ jobs:
         env:
           XXX: ${{ secrets.XXX }}
           TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
-        if: $XXX == "YYY"
+        if: ${{ secrets.XXX }} == "YYY"
         run: echo "XXX is working."
 
-      - name: Run a multi-line script
-        if: "${{ secrets.XXX }}" == "YYY"
-        run: echo "secrets.XXX is working."
-
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.TRIPLEX_DEV_IP }}
-          username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
-          password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
-          script: whoami
