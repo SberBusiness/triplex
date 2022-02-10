@@ -14,11 +14,12 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      XXX: ${{ secrets.XXX }}
-      TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
 
     steps:
+      - env:
+          XXX: ${{ secrets.XXX }}
+          TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
+
       - name: Run a multi-line script
         if: $XXX == "YYY"
         run: echo "XXX is working."
