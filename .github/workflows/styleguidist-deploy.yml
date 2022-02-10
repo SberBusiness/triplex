@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - name: Run a multi-line script
-        if: ${{ env.XXX == 'YYY' }}
-        run: echo "XXX is working."
+        if: ${{ env.TRIPLEX_DEV_IP == '188.120.224.128' }}
+        run: echo "TRIPLEX_DEV_IP is working."
 
       - name: Run a multi-line script 2
-        if: ${{ env.XXX != 'YYY' }}
-        run: echo "XXX is not working."
+        if: ${{ env.TRIPLEX_DEV_IP != '188.120.224.128' }}
+        run: echo "TRIPLEX_DEV_IP is not working."
 
