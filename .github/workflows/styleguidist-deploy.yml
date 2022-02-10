@@ -16,11 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - env:
+      - name: Run a multi-line script
+        env:
           XXX: ${{ secrets.XXX }}
           TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
-
-      - name: Run a multi-line script
         if: $XXX == "YYY"
         run: echo "XXX is working."
 
