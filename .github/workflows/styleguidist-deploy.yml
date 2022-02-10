@@ -27,18 +27,6 @@ jobs:
         if: "${{ secrets.XXX }}" == "YYY"
         run: echo "secrets.XXX is working."
 
-      - name: Run a multi-line script
-        run: |
-          if [ "$XXX" == "YYY" ]
-          then
-            echo "YYY is working."
-          fi
-
-          if [ "$TRIPLEX_DEV_IP" == "188.120.224.128" ]
-          then
-            echo TRIPLEX_DEV_IP is working.
-          fi
-          echo test, and deploy your project.
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:

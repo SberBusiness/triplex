@@ -152,11 +152,6 @@
         "moment": "2.x",
         "tslib": "> 2.1"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run tsc && lint-staged"
-        }
-    },
     "lint-staged": {
         "!(*test).{ts,tsx}": "npm run eslint:fix",
         "!(*buttons).less": "npm run lint-staged:less:fix"
