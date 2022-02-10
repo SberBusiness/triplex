@@ -24,7 +24,7 @@ jobs:
         run: echo "XXX is working."
 
       - name: Run a multi-line script
-        if: ${{ secrets.XXX }} == "YYY"
+        if: "${{ secrets.XXX }}" == "YYY"
         run: echo "secrets.XXX is working."
 
       - name: Run a multi-line script
