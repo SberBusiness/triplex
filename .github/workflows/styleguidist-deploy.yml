@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - name: Run a multi-line script
-        if: ${{env.XXX}} == 'YYY'
+        if: ${{ env.XXX == 'YYY' }}
         run: echo "XXX is working."
 
       - name: Run a multi-line script 2
-        if: ${{env.XXX}} != 'YYY'
+        if: ${{ env.XXX != 'YYY' }}
         run: echo "XXX is not working."
 
