@@ -17,6 +17,11 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
+          if [ "${{ secrets.XXX }}" == "YYY" ]
+          then
+            echo YYY is working.
+          fi
+
           if [ "${{ secrets.TRIPLEX_DEV_IP }}" == "188.120.224.128" ]
           then
             echo TRIPLEX_DEV_IP is working.
