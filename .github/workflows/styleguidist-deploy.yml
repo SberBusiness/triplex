@@ -13,13 +13,13 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     name: Build
+    env:
+      XXX: ${{ secrets.XXX }}
+      TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Run a multi-line script
-        env:
-          XXX: ${{ secrets.XXX }}
-          TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
-        if: ${{ env.XXX == 'YYY' }}
+        if: ${{env.XXX}} == 'YYY'
         run: echo "XXX is working."
 
