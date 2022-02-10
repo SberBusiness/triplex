@@ -20,6 +20,6 @@ jobs:
         env:
           XXX: ${{ secrets.XXX }}
           TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
-        if: ${{ secrets.XXX }} == "YYY"
+        if: ${{ secrets.XXX == "YYY" }}
         run: echo "XXX is working."
 
