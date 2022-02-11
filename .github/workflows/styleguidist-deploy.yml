@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  XXX: ${{ secrets.XXX }}
+  XXXX: ${{ secrets.XXXX }}
   TRIPLEX_DEV_IP: ${{ secrets.TRIPLEX_DEV_IP }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Run a multi-line script
-        if: ${{ env.TRIPLEX_DEV_IP == '188.120.224.128' }}
-        run: echo "TRIPLEX_DEV_IP is working."
+        if: ${{ env.XXXX == 'YYY' }}
+        run: echo "XXXX is working."
 
       - name: Run a multi-line script 2
-        if: ${{ env.TRIPLEX_DEV_IP != '188.120.224.128' }}
-        run: echo "TRIPLEX_DEV_IP is not working."
+        if: ${{ env.XXXX != 'YYY' }}
+        run: echo "XXXX is not working."
 
