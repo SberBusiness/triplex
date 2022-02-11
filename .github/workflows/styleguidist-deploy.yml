@@ -23,4 +23,4 @@ jobs:
           host: ${{ secrets.TRIPLEX_DEV_HOST }}
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
-          script: whoami
+          script: docker run --rm -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
