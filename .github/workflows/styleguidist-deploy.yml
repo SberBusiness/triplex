@@ -12,17 +12,15 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    name: Build
+
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Connect to server
-        run: |
-          sshpass -p "${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}" ssh ${{ secrets.TRIPLEX_DEV_SSH_USER }}@${{ secrets.TRIPLEX_DEV_IP }}
-          whoami
-          ls -al
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.TRIPLEX_DEV_HOST }}
+          username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
+          password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
+          script: whoami
