@@ -29,5 +29,7 @@ jobs:
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ env.CONTAINER_NAME }} || true
+            docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }} || true
+            docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }}
             docker run --rm -d --name ${{ env.CONTAINER_NAME }} -p 58000:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }}
             docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
