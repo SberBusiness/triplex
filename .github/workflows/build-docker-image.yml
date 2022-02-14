@@ -22,12 +22,13 @@ jobs:
 
       # Runs a set of commands using the runners shell
       # docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
-      # sudo jq '."insecure-registries"="${{ secrets.TRIPLEX_DEV_HOST }}"' /etc/docker/daemon.json >/etc/docker/daemon.json
+      # sudo jq '."insecure-registries"="${{ secrets.TRIPLEX_DEV_HOST }}"' /etc/docker/daemon.json > /etc/docker/daemon.json
       - name: Run a multi-line script
         run: |
           cat /etc/docker/daemon.json
           echo test, and deploy your project.
           sudo bash -c 'echo "{ "insecure-registries": "${{ secrets.TRIPLEX_DEV_HOST }}"}" > /etc/docker/daemon.json'
+          jq '."insecure-registries"="${{ secrets.TRIPLEX_DEV_HOST }}"' /etc/docker/daemon.json > /etc/docker/daemon.json
           echo test, and deploy your project.
           less /etc/docker/daemon.json
           echo test, and deploy your project.
