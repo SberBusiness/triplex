@@ -23,6 +23,6 @@ jobs:
       - name: Login to Docker Container Registry
         uses: docker/login-action@v1
         with:
-          registry: ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
+          registry: http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
           username: ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }}
           password: ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}
