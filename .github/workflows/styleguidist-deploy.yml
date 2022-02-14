@@ -28,6 +28,6 @@ jobs:
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
-            docker rm -f $CONTAINER_NAME || true
-            docker run --rm -d --name $CONTAINER_NAME -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
+            docker rm -f ${{ env.CONTAINER_NAME }} || true
+            docker run --rm -d --name ${{ env.CONTAINER_NAME }} -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
             docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
