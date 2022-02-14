@@ -24,7 +24,7 @@ jobs:
       # docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
       - name: Run a multi-line script
         run: |
-          cd /etc/docker
-          pwd
-          ls
+          cat /etc/docker/daemon.json
+          echo test, and deploy your project.
+          less /etc/docker/daemon.json
           echo test, and deploy your project.
