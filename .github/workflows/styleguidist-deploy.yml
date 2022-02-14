@@ -8,6 +8,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  CONTAINER_NAME: Monday
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -25,5 +28,6 @@ jobs:
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
-            docker run --rm -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
+            docker rm -f $CONTAINER_NAME || true
+            docker run --rm -d --name $CONTAINER_NAME -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
             docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
