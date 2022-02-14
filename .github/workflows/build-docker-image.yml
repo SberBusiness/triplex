@@ -26,7 +26,7 @@ jobs:
         run: |
           cat /etc/docker/daemon.json
           echo test, and deploy your project.
-          sudo bash -c 'jq \'."insecure-registries"="${{ secrets.TRIPLEX_DEV_HOST }}"\' /etc/docker/daemon.json >>/etc/docker/daemon.json'
+          sudo bash -c `jq '."insecure-registries"="${{ secrets.TRIPLEX_DEV_HOST }}"' /etc/docker/daemon.json >>/etc/docker/daemon.json`
           echo test, and deploy your project.
           less /etc/docker/daemon.json
           echo test, and deploy your project.
