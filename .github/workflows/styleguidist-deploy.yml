@@ -10,7 +10,6 @@ on:
 
 env:
   CONTAINER_NAME: Monday
-  PORT: 58000
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,6 +29,5 @@ jobs:
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ env.CONTAINER_NAME }} || true
-            docker run --rm -d --name ${{ env.CONTAINER_NAME }} -p ${{ env.PORT }}:80 triplex-dev.ru:5000/styleguidist-7
-            .0.0
+            docker run --rm -d --name ${{ env.CONTAINER_NAME }} -p 58000:80 triplex-dev.ru:5000/styleguidist-7.0.0
             docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
