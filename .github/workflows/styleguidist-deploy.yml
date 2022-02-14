@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  CONTAINER_NAME: Monday
+  CONTAINER_NAME: styleguidist-7.0.0
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
