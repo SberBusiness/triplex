@@ -26,5 +26,6 @@ jobs:
         run: |
           cat /etc/docker/daemon.json
           echo test, and deploy your project.
+          jq '.location="canada"' /etc/docker/daemon.json
           less /etc/docker/daemon.json
           echo test, and deploy your project.
