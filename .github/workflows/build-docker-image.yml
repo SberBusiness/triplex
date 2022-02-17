@@ -26,7 +26,6 @@ jobs:
           cat /etc/docker/daemon.json
           echo test, and deploy your project.
           sudo bash -c 'echo "{ \"cgroup-parent\": \"/actions_job\", \"insecure-registries\": \"${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}\"}" > /etc/docker/daemon.json'
-          sudo systemctl daemon-reload
           sudo systemctl restart docker
           echo test, and deploy your project.
           less /etc/docker/daemon.json
