@@ -8,22 +8,17 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      octocatcolor:
-        description: 'Eye color of the Octocats'
+      port:
+        description: 'Порт, на котором будет развернут Styleguide'
         required: true
         type: string
 
-      choice:
+      containerName:
         type: choice
-        description: Make a choice
+        description: 'Docker image'
         required: true
         options:
-          - foo
-          - bar
-          - baz
-
-env:
-  CONTAINER_NAME: styleguidist-7.0.0
+          - styleguidist-7.0.0
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,12 +36,5 @@ jobs:
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
-            echo "123"
-            echo "${{ github.event.inputs.octocatcolor }}"
-            echo "choice is ${{ github.event.inputs.choice }}"
-            docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
-            docker rm -f ${{ env.CONTAINER_NAME }} || true
-            docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }} || true
-            docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }}
-            docker run --rm -d --name ${{ env.CONTAINER_NAME }} -p 58000:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }}
-            docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
+            echo "port is ${{ github.event.inputs.port }}"
+            echo "containerName is ${{ github.event.inputs.containerName }}"
