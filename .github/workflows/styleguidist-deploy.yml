@@ -13,6 +13,15 @@ on:
         required: true
         type: string
 
+      choice:
+        type: choice
+        description: Make a choice
+        required: true
+        options:
+          - foo
+          - bar
+          - baz
+
 env:
   CONTAINER_NAME: styleguidist-7.0.0
 
@@ -34,6 +43,7 @@ jobs:
           script: |
             echo "123"
             echo "${{ github.event.inputs.octocatcolor }}"
+            echo "choice is ${{ github.event.inputs.choice }}"
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ env.CONTAINER_NAME }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }} || true
