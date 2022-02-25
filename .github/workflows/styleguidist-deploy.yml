@@ -9,9 +9,11 @@ on:
   workflow_dispatch:
     inputs:
       port:
-        description: 'Порт, на котором будет развернут Styleguide'
+        type: choice
+        description: 'Порт'
         required: true
-        type: string
+        options:
+          - "58000"
 
       containerName:
         type: choice
@@ -36,5 +38,10 @@ jobs:
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
-            echo "port is ${{ github.event.inputs.port }}"
-            echo "containerName is ${{ github.event.inputs.containerName }}"
+            docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
+            docker rm -f ${{ github.event.inputs.containerName }} || true
+            docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }} || true
+            docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
+            docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ github.event.inputs.port }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
+            docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
+            echo "${{ github.event.inputs.containerName }} развернут на порту - :${{ github.event.inputs.port }}."
