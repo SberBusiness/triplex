@@ -7,6 +7,10 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      octocatEyeColor:
+        description: 'Eye color of the Octocats'
+        required: true
 
 env:
   CONTAINER_NAME: styleguidist-7.0.0
@@ -27,6 +31,8 @@ jobs:
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
+            echo "123"
+            echo ${{ INPUT_OCTOCATEYECOLOR }}
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ env.CONTAINER_NAME }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }} || true
