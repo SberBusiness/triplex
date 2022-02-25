@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
           script: |
             echo "123"
-            echo "${{ env.INPUT_OCTOCATEYECOLOR }}"
+            echo ${{ env.INPUT_OCTOCATEYECOLOR }}
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ env.CONTAINER_NAME }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ env.CONTAINER_NAME }} || true
