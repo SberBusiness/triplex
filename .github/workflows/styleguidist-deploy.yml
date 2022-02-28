@@ -8,16 +8,19 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
+      port:
+        type: choice
+        description: 'Порт'
+        required: true
+        options:
+          - "58000"
+
       containerName:
         type: choice
         description: 'Docker image'
         required: true
         options:
           - styleguidist-7.0.0
-          - styleguidist-6.0.0
-
-env:
-  PORT: 10000
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,14 +31,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Sets port 10700
-        if: ${{ github.event.inputs.containerName == 'styleguidist-7.0.0' }}
-        run: echo "PORT=10700" >> $GITHUB_ENV
-
-      - name: Sets port 10600
-        if: ${{ github.event.inputs.containerName == 'styleguidist-6.0.0' }}
-        run: echo "PORT=10600" >> $GITHUB_ENV
-
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
@@ -47,6 +42,6 @@ jobs:
             docker rm -f ${{ github.event.inputs.containerName }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }} || true
             docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
-            docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ env.PORT }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
+            docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ github.event.inputs.port }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
             docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
-            echo "${{ github.event.inputs.containerName }} развернут на порту - ${{ env.PORT }}."
+            echo "${{ github.event.inputs.containerName }} развернут на порту - :${{ github.event.inputs.port }}."
