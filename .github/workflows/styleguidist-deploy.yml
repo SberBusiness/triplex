@@ -29,11 +29,11 @@ jobs:
 
     steps:
       - name: Sets port 10700
-        if: ${{ github.event.inputs.containerName }} == 'styleguidist-7.0.0'
+        if: ${{ github.event.inputs.containerName == 'styleguidist-7.0.0' }}
         run: echo "PORT=10700" >> $GITHUB_ENV
 
       - name: Sets port 10600
-        if: ${{ github.event.inputs.containerName }} == 'styleguidist-6.0.0'
+        if: ${{ github.event.inputs.containerName == 'styleguidist-6.0.0' }}
         run: echo "PORT=10600" >> $GITHUB_ENV
 
       - name: executing remote ssh commands using password
