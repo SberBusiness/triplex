@@ -28,15 +28,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: set port 10700
-        if: ${{ github.event.inputs.containerName }} == 'styleguidist-7.0.0'
-        env:
-          PORT: 10700
+      - name: Sets port 10700
+        run: |
+          echo "PORT=10700" >> $GITHUB_ENV
+        if: "${{ github.event.inputs.containerName }}" == 'styleguidist-7.0.0'
 
-      - name: set port 10600
-        if: ${{ github.event.inputs.containerName }} == 'styleguidist-6.0.0'
-        env:
-          PORT: 10600
+      - name: Sets port 10600
+        run: |
+          echo "PORT=10600" >> $GITHUB_ENV
+        if: "${{ github.event.inputs.containerName }}" == 'styleguidist-6.0.0'
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
