@@ -18,7 +18,7 @@ on:
           - styleguidist-6.0.0
 
 env:
-  PORT: 10000
+  STYLEGUIDIST_PORT: 10000
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -31,15 +31,15 @@ jobs:
     steps:
       - name: Sets port 10700
         if: ${{ github.event.inputs.containerName == 'styleguidist-7.0.0' }}
-        run: echo "PORT=58000" >> $GITHUB_ENV
+        run: echo "STYLEGUIDIST_PORT=58000" >> $GITHUB_ENV
 
       - name: Sets port 10620
         if: ${{ github.event.inputs.containerName == 'styleguidist-6.2.0' }}
-        run: echo "PORT=10620" >> $GITHUB_ENV
+        run: echo "STYLEGUIDIST_PORT=10620" >> $GITHUB_ENV
 
       - name: Sets port 10600
         if: ${{ github.event.inputs.containerName == 'styleguidist-6.0.0' }}
-        run: echo "PORT=10600" >> $GITHUB_ENV
+        run: echo "STYLEGUIDIST_PORT=10600" >> $GITHUB_ENV
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -47,12 +47,11 @@ jobs:
           host: ${{ secrets.TRIPLEX_DEV_HOST }}
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
-          # docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ env.PORT }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
-          # docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ github.event.inputs.containerName }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }} || true
             docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
-
-            echo "${{ github.event.inputs.containerName }} развернут на порту - ${{ env.PORT }}."
+            docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ env.STYLEGUIDIST_PORT }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
+            docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
+            echo "${{ github.event.inputs.containerName }} развернут на порту - ${{ env.STYLEGUIDIST_PORT }}."
