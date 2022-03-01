@@ -47,11 +47,12 @@ jobs:
           host: ${{ secrets.TRIPLEX_DEV_HOST }}
           username: ${{ secrets.TRIPLEX_DEV_SSH_USER }}
           password: ${{ secrets.TRIPLEX_DEV_SSH_USER_PASS }}
+          # docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ env.PORT }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
+          # docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
           script: |
             docker login http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }} -u ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER }} -p "${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY_USER_PASS }}"
             docker rm -f ${{ github.event.inputs.containerName }} || true
             docker rmi ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }} || true
             docker pull ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
-            docker run --rm -d --name ${{ github.event.inputs.containerName }} -p ${{ env.PORT }}:80 ${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}/${{ github.event.inputs.containerName }}
-            docker logout http://${{ secrets.TRIPLEX_DEV_DOCKER_REGISTRY }}
+
             echo "${{ github.event.inputs.containerName }} развернут на порту - ${{ env.PORT }}."
