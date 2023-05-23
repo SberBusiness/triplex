@@ -1,0 +1,23 @@
+@import 'src/desktop/common/theme/default';
+
+.stepperWrapper {
+    padding: @metric-16 @metric-32;
+    background: @color-snowy;
+    position: relative;
+
+    &.withShadow {
+        background: linear-gradient(@color-snowy @metric-64, transparent 0);
+        padding-bottom: @metric-32;
+        margin-bottom: -@metric-16;
+
+        &::before {
+            content: '';
+            position: absolute;
+            height: @metric-64;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 10px 15px 0 rgba(228, 232, 235, 0.5);
+        }
+    }
+}

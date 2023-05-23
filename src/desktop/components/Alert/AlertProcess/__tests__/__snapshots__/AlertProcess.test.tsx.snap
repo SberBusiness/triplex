@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertProcess type error renders correctly 1`] = `
+<div
+  className="cssClass[alertProcess] cssClass[alertTypeError]"
+>
+  <div
+    className="cssClass[themeIcon]"
+  >
+    <svg />
+  </div>
+  <div
+    className="cssClass[alertProcessContentBlock]"
+  >
+    Sample Text
+  </div>
+</div>
+`;
+
+exports[`AlertProcess type info renders correctly 1`] = `
+<div
+  className="cssClass[alertProcess] cssClass[alertTypeInfo]"
+>
+  <div
+    className="cssClass[themeIcon]"
+  >
+    <svg />
+  </div>
+  <div
+    className="cssClass[alertProcessContentBlock]"
+  >
+    Sample Text
+  </div>
+</div>
+`;
+
+exports[`AlertProcess type system renders correctly 1`] = `
+<div
+  className="cssClass[alertProcess] cssClass[alertTypeFeature]"
+>
+  <div
+    className="cssClass[themeIcon]"
+  >
+    <div
+      className="hoverable active"
+    >
+      <svg />
+    </div>
+  </div>
+  <div
+    className="cssClass[alertProcessContentBlock]"
+  >
+    Sample Text
+  </div>
+</div>
+`;
+
+exports[`AlertProcess type warning renders correctly 1`] = `
+<div
+  className="cssClass[alertProcess] cssClass[alertTypeWarning]"
+>
+  <div
+    className="cssClass[themeIcon]"
+  >
+    <svg />
+  </div>
+  <div
+    className="cssClass[alertProcessContentBlock]"
+  >
+    Sample Text
+  </div>
+</div>
+`;

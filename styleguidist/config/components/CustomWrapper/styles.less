@@ -1,0 +1,25 @@
+.custom-wrapper {
+    margin: -16px;
+    padding: 16px;
+    transition: background-color 0.5s;
+
+    &.triplex-theme-dark {
+        background-color: #181819;
+        border-radius: 3px;
+    }
+}
+
+.custom-mobile-wrapper {
+    background: rgb(232, 232, 232);
+}
+
+.custom-mobile-wrapper-content {
+    padding: 16px 0;
+    background: white;
+    max-width: 375px;
+    margin: -16px auto;
+
+    @media (max-width: 376px) {
+        margin: -16px;
+    }
+}

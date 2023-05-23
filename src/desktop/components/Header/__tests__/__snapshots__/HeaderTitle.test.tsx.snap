@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderTitle renders correctly 1`] = `
+<div
+  className="cssClass[globalHeaderTitle]"
+>
+  <div
+    className="cssClass[headerTitleContent]"
+  >
+    <h1
+      className="cssClass[globalHeaderTitleContentText]"
+      data-first-interaction-element={true}
+      tabIndex={-1}
+    >
+      Text
+    </h1>
+    <div
+      className="cssClass[headerTitleContentSubhead]"
+    >
+      Subhead
+    </div>
+  </div>
+  <div
+    className="cssClass[globalHeaderTitleControls]"
+  >
+    Controls
+  </div>
+</div>
+`;

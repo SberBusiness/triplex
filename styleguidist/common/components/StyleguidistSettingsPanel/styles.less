@@ -1,0 +1,87 @@
+.styleguidist-settings-panel {
+    z-index: 2000;
+    position: fixed;
+    padding: 24px;
+    right: 0;
+    width: 300px;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    box-shadow: -16px 0 24px 0 rgba(0, 0, 0, 0.16);
+    overflow: auto;
+    transform: translateX(388px); // width + ширина тени
+    transition: transform 0.3s;
+    
+    > .close-button {
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        cursor: pointer;
+    }
+
+    > .overlay {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+    }
+
+    &.opened {
+        transform: translateX(0);
+
+        > .overlay {
+            display: none;
+        }
+    }
+
+    > .title {
+        margin: 0 0 24px 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .settings-section {
+        margin: 0 0 24px 0;
+
+        > .title {
+            margin: 0 0 12px 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        > .content {}
+
+        .checkbox-line {
+            margin-bottom: 12px;
+
+            .required {
+                width: 4px;
+                height: 4px;
+                display: block;
+                border-radius: 2px;
+                background: #55a532;
+                position: absolute;
+                left: -10px;
+                top: 7px;
+            }
+        }
+    }
+
+    .settings-sub-section {
+        > .title {
+            margin: 0 0 12px 0;
+            font-weight: bold;
+        }
+    }
+}
+
+.settings-panel-icon {
+    cursor: pointer;
+    position: fixed;
+    right: 16px;
+    top: 16px;
+}

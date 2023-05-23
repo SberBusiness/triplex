@@ -1,0 +1,33 @@
+@import '../../../../common/theme/default';
+
+@ufs-theme-dropdown-item-padding-vert: 6px;
+
+.dropdownList {
+    max-height: 196px;
+    padding: 4px;
+    overflow: auto;
+}
+
+.dropdownListItem {
+    .b2-text-controls-normal(@color-graphite-01);
+
+    position: relative;
+    outline: none;
+    padding: @ufs-theme-dropdown-item-padding-vert @metric-8;
+    border-radius: @radius-8;
+    white-space: nowrap;
+
+    + .dropdownListItem {
+        margin-top: 2px;
+    }
+
+    &.active {
+        background-color: @color-asphalt-05;
+        cursor: pointer;
+    }
+
+    &.selected {
+        background-color: @color-asphalt-03;
+        cursor: default;
+    }
+}

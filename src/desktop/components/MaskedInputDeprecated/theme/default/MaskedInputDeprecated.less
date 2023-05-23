@@ -1,0 +1,73 @@
+@import 'src/desktop/common/theme/default';
+
+.wrapper {
+    position: relative;
+}
+
+.input {
+    .input-base();
+
+    position: relative;
+    width: 100%;
+
+    &.empty:not(:focus) {
+        color: @color-asphalt-01;
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+}
+
+.placeholder {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: inherit;
+    color: @color-asphalt-01;
+    border: none;
+    border-radius: 8px;
+
+    &:disabled {
+        background-color: @color-asphalt-05;
+        -webkit-text-fill-color: @color-asphalt-01; // Safari fix
+    }
+}
+
+.placeholder + .input {
+    background-color: transparent;
+}
+
+.grouped {
+    flex: 1;
+
+    &:not(:first-child) {
+        margin-left: -1px;
+    }
+
+    .left {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .intermediate {
+        border-radius: 0;
+    }
+
+    .right {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .input.error {
+        z-index: 1;
+    }
+
+    .input:focus {
+        z-index: 2;
+    }
+}

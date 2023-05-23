@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spoiler renders correctly 1`] = `
+<div
+  className="cssClass[spoiler]"
+>
+  <div
+    className="cssClass[head]"
+  >
+    <button
+      className="cssClass[button] cssClass[link] cssClass[SM]"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      type="button"
+    >
+      <span
+        className="cssClass[content]"
+      >
+        Развернуть
+        <svg
+          className="cssClass[icon] cssClass[animationRotate180]"
+        />
+      </span>
+    </button>
+  </div>
+  <div
+    className="cssClass[content] cssClass[hidden]"
+  >
+    <span>
+      123456
+    </span>
+  </div>
+</div>
+`;

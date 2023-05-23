@@ -1,0 +1,17 @@
+@import '../../../../common/theme/default';
+
+button.mobileButtonDanger {
+    .b3-text-controls-medium(@color-snowy);
+
+    background-color: @color-ruby-02;
+    padding: @metric-16;
+    border-radius: @button-default-border-radius;
+
+    &.globalMobileButtonHover {
+        background-color: @color-ruby-01;
+    }
+
+    &:disabled {
+        background-color: @color-ruby-04;
+    }
+}

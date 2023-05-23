@@ -1,0 +1,35 @@
+@import 'src/desktop/common/theme/default';
+
+.example-background {
+    border-radius: 3px;
+    margin: -16px;
+    padding: 16px;
+
+    &:not(:first-child) {
+        margin-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.light {
+        background: @color-asphalt-05;
+
+        .triplex-theme-dark & {
+            background: @color-graphite-01;
+        }
+    }
+
+    &.dark {
+        background: @color-graphite-01;
+
+        .triplex-theme-dark & {
+            background: @color-asphalt-05;
+        }
+    }
+}

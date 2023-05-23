@@ -1,0 +1,40 @@
+@import '../../../../common/theme/default';
+
+.select {
+    min-width: 72px;
+}
+
+.selectDropdownListItem {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grouped {
+    flex: 1;
+
+    &:not(:first-child) {
+        margin-left: -1px;
+    }
+
+    .left {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .intermediate {
+        border-radius: 0;
+    }
+
+    .right {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .selectTarget.error {
+        z-index: 1;
+    }
+
+    .selectTarget:focus {
+        z-index: 2;
+    }
+}

@@ -1,0 +1,23 @@
+.custom-markdown {
+    // Убирается заголовок внутри Markdown, он уже продублирован в заголовке Аккордеона.
+    h3 {
+        display: none;
+    }
+
+    &-title {
+        > div {
+            margin-bottom: 0;
+        }
+
+        &:not(.opened) {
+            button {
+                outline: none;
+                border-bottom: 2px solid transparent;
+            }
+        }
+
+        h3 {
+            display: block;
+        }
+    }
+}

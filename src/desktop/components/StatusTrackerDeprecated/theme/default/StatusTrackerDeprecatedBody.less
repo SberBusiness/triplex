@@ -1,0 +1,32 @@
+@import 'src/desktop/common/theme/default.less';
+
+.statusTrackerDeprecatedBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 208px;
+    padding: 0 @metric-24;
+    background-color: @color-asphalt-05;
+
+    &:last-child {
+        border-radius: 0 0 @radius-8 @radius-8;
+    }
+
+    > .statusTrackerDeprecatedIcon {
+        margin-bottom: @metric-16;
+    }
+
+    > .statusTrackerDeprecatedBodyText {
+        .b1-text-main(@color-graphite-01);
+
+        max-height: .line-height-by-font-size(@font-size-14) [ @result ] * 2;
+        max-width: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    > .globalMarkerStatus {
+        white-space: nowrap;
+    }
+}

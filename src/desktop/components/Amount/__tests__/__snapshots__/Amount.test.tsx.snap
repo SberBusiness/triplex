@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Amount renders correctly 1`] = `
+<span
+  className=""
+>
+  <span
+    data-test-id="amount__amount"
+  >
+    -8 964 152,37
+  </span>
+   
+  <span
+    data-test-id="amount__currencyName"
+    title="Российские рубли"
+  >
+    RUB
+  </span>
+</span>
+`;

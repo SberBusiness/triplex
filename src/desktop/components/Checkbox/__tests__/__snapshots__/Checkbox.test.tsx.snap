@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox renders correctly 1`] = `
+<label
+  className="cssClass[b1] cssClass[general] cssClass[regular] cssClass[extra] cssClass[label] cssClass[enabled] cssClass[nonempty]"
+  onClick={[Function]}
+  onMouseDown={[Function]}
+>
+  <input
+    className="cssClass[checkbox]"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="cssClass[checkboxIcon]"
+  />
+  <svg
+    className="cssClass[checkmarkIcon]"
+  />
+  Sample Text
+</label>
+`;
+
+exports[`Checkbox renders disabled state correctly 1`] = `
+<label
+  className="cssClass[b1] cssClass[general] cssClass[regular] cssClass[extra] cssClass[label] cssClass[nonempty]"
+  onClick={[Function]}
+  onMouseDown={[Function]}
+>
+  <input
+    className="cssClass[checkbox]"
+    disabled={true}
+    onBlur={[Function]}
+    onFocus={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="cssClass[checkboxIcon]"
+  />
+  <svg
+    className="cssClass[checkmarkIcon]"
+  />
+  Sample Text
+</label>
+`;

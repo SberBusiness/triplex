@@ -1,0 +1,23 @@
+@import '../../../../common/theme/default';
+
+.sliderExtendedRail {
+    height: @metric-4;
+    background: @color-asphalt-03;
+    cursor: pointer;
+}
+
+.sliderExtended {
+    user-select: none;
+    position: relative;
+    // Высота .sliderExtendedDot над .sliderExtendedRail.
+    padding-top: 10px;
+    // Высота .sliderExtendedMarkText под .sliderExtendedRail.
+    padding-bottom: 26px;
+
+    &.disabled {
+        .sliderExtendedRail {
+            pointer-events: none;
+            cursor: default;
+        }
+    }
+}

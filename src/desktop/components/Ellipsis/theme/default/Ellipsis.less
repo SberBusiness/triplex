@@ -1,0 +1,20 @@
+.ellipsisLineClamp {
+    --ellipsis-line-clamp: 1;
+
+    padding: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--ellipsis-line-clamp);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+
+    &.oneLine {
+        word-break: break-all;
+    }
+}
+
+.ellipsisIe {
+    white-space: normal;
+    word-wrap: break-word;
+}

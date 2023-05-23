@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionView closes correctly 1`] = `
+<div
+  className="cssClass[accordionView]"
+>
+  <div>
+    <div
+      aria-controls="AccordionBase-0"
+      aria-expanded="false"
+      className="cssClass[accordionViewHeaderWrapper] cssClass[animating]"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h5
+        className="cssClass[accordionViewHeader]"
+        title="Test"
+      >
+        Test
+      </h5>
+      <svg
+        className="cssClass[caretIcon]"
+      />
+    </div>
+    <div
+      className="cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating]"
+      id="AccordionBase-0"
+      onTransitionEnd={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div>
+        <div
+          className="cssClass[accordionViewBody]"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionView opens correctly 1`] = `
+<div
+  className="cssClass[accordionView]"
+>
+  <div>
+    <div
+      aria-controls="AccordionBase-0"
+      aria-expanded="true"
+      className="cssClass[accordionViewHeaderWrapper] cssClass[animating] cssClass[opened]"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h5
+        className="cssClass[accordionViewHeader]"
+        title="Test"
+      >
+        Test
+      </h5>
+      <svg
+        className="cssClass[caretIcon]"
+      />
+    </div>
+    <div
+      className="cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating] cssClass[globalExpandAnimationOpened]"
+      id="AccordionBase-0"
+      onTransitionEnd={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div>
+        <div
+          className="cssClass[accordionViewBody]"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionView renders correctly 1`] = `
+<div
+  className="cssClass[accordionView]"
+>
+  <div>
+    <div
+      aria-controls="AccordionBase-0"
+      aria-expanded="false"
+      className="cssClass[accordionViewHeaderWrapper]"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onMouseDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h5
+        className="cssClass[accordionViewHeader]"
+        title="Test"
+      >
+        Test
+      </h5>
+      <svg
+        className="cssClass[caretIcon]"
+      />
+    </div>
+    <div
+      className="cssClass[accordionViewContent]"
+      id="AccordionBase-0"
+      onTransitionEnd={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div>
+        <div
+          className="cssClass[accordionViewBody]"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

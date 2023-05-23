@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SMSInput renders correctly 1`] = `
+<div
+  className="cssClass[globalSmsInput]"
+  data-test-id="SMSInput"
+>
+  <button
+    aria-disabled={false}
+    className="cssClass[buttonIcon] cssClass[circle] hoverable cssClass[btnRefresh] cssClass[MD]"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseDown={[Function]}
+    type="button"
+  >
+    <svg
+      focusable="false"
+      height="20"
+      viewBox="0 0 20 20"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <clipPath
+        id="clipFront0.999"
+      >
+        <path
+          d="M10 10L21.883 8.33A12 12 0 1 1 21.099 5.438Z"
+        />
+      </clipPath>
+      <path
+        className="cssClass[light]"
+        d="M18.1 9.101a.9.9 0 0 0-.9.9 7.245 7.245 0 1 1-1.998-4.95h-2.16a.9.9 0 1 0 0 1.8h4.077a.9.9 0 0 0 .9-.9v-4.05a.9.9 0 0 0-1.8 0v1.593A9 9 0 1 0 19 10.001a.9.9 0 0 0-.9-.9z"
+      />
+      <path
+        className="cssClass[dark]"
+        clipPath="url(#clipFront0.999)"
+        d="M18.1 9.101a.9.9 0 0 0-.9.9 7.245 7.245 0 1 1-1.998-4.95h-2.16a.9.9 0 1 0 0 1.8h4.077a.9.9 0 0 0 .9-.9v-4.05a.9.9 0 0 0-1.8 0v1.593A9 9 0 1 0 19 10.001a.9.9 0 0 0-.9-.9z"
+      />
+    </svg>
+  </button>
+  <input
+    autoComplete="off"
+    className="cssClass[input] cssClass[input] cssClass[MD]"
+    maxLength={8}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="Введите код"
+    value=""
+  />
+  <button
+    className="cssClass[buttonIcon] cssClass[circle] hoverable cssClass[btnSubmit] cssClass[MD] disabled"
+    disabled={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseDown={[Function]}
+    type="button"
+  >
+    <svg />
+  </button>
+</div>
+`;

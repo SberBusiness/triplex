@@ -1,0 +1,34 @@
+@import '../../../../common/theme/default';
+
+.skeleton {
+    border-radius: @radius-16;
+    flex-grow: 1;
+    animation: skeleton-gradient-animation 3.4s cubic-bezier(0.59, 0, 0.45, 0.98) infinite;
+    background-position: 0 0;
+    background-size: 200%;
+
+    &.light {
+        background-image: linear-gradient(88.2deg, #fff 0%, #e4e8eb 50.54%, #fff 100%), linear-gradient(0deg, #fff, #fff);
+    }
+
+    &.dark {
+        background-image: linear-gradient(88.2deg, #f2f4f7 0%, #dee3e7 50%, #f2f4f7 100%);
+    }
+}
+
+@keyframes skeleton-gradient-animation {
+    0%,
+    10% {
+        background-position: 2% center;
+    }
+
+    40%,
+    60% {
+        background-position: 99% center;
+    }
+
+    90%,
+    100% {
+        background-position: 2% center;
+    }
+}

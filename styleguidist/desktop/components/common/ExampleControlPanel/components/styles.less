@@ -1,0 +1,39 @@
+@switcher-width: 40px;
+@switcher-height: @switcher-width / 2;
+
+.theme-switcher {
+    float: right;
+    user-select: none;
+
+    .switch {
+        position: relative;
+        width: @switcher-width;
+        height: @switcher-height;
+        margin-left: 4px;
+        background-color: grey;
+        cursor: pointer;
+        border-radius: @switcher-height / 2;
+        transition: background-color 0.5s;
+    }
+
+    .switch::before {
+        position: absolute;
+        content: '';
+        left: 1px;
+        top: 1px;
+        width: @switcher-height - 2;
+        height: @switcher-height - 2;
+        background-color: silver;
+        border-radius: 50%;
+        transition: transform 0.5s ease;
+    }
+
+    input:checked + .switch::before {
+        background-color: white;
+        transform: translateX(@switcher-height);
+    }
+
+    input:checked + .switch {
+        background-color: mediumslateblue;
+    }
+}

@@ -1,0 +1,242 @@
+@import 'src/desktop/common/theme/default';
+
+.accordion {
+    margin: 0;
+    padding: 0;
+
+    .item {
+        border-radius: @radius-16;
+        background-color: @color-asphalt-05;
+        min-height: @metric-64;
+        position: relative;
+        list-style-type: none;
+
+        h5 {
+            margin: 0;
+        }
+
+        & + .item {
+            margin-top: @metric-16;
+        }
+
+        .header {
+            display: flex;
+            width: 100%;
+            margin: 0; // Safari/Firefox fix
+            padding: 19px 31px;
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: @radius-16;
+            text-align: left;
+            background-color: @color-asphalt-05;
+            cursor: pointer;
+
+            &:hover {
+                background-color: @color-asphalt-04;
+            }
+
+            //Фикс, чтобы в IE11 кнопка не утопала при нажатии мышью.
+            .buttonContent {
+                position: relative;
+                display: flex;
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+        &:hover {
+            background-color: @color-asphalt-04;
+
+            .header {
+                background-color: @color-asphalt-04;
+            }
+        }
+
+        .body {
+            display: block;
+            padding-left: @metric-32 + @metric-24 + @metric-24 - 1; // Паддинг заголовка + ширина иконки + отступ надписи - граница.
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-radius: 0 0 @radius-16 @radius-16;
+            // Чтобы focus не попадал во внутренние элементы в закрытом состоянии.
+            visibility: hidden;
+
+            // Шаг аккордеона без статуса.
+            &.bodyWithoutStatus {
+                padding-left: 0;
+
+                .content,
+                .footer {
+                    padding-left: 32px;
+                }
+            }
+        }
+
+        .title {
+            .h5-header-form(@color-graphite-01);
+
+            margin: 0 @metric-24 0 0;
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .caret {
+            margin: @metric-4;
+            flex-shrink: 0;
+            transition: transform 0.25s ease-in-out;
+        }
+
+        .step {
+            margin: 0 @metric-24 0 0;
+
+            > div {
+                cursor: pointer;
+            }
+        }
+
+        .prevLine {
+            top: -@metric-8;
+            height: @metric-24;
+        }
+
+        .nextLine {
+            bottom: -@metric-16;
+            top: @metric-24 * 2;
+        }
+
+        .nextLine,
+        .prevLine {
+            position: absolute;
+            background-color: @color-asphalt-03;
+            width: 2px;
+            left: 43px;
+            border-radius: 1px;
+
+            &.success,
+            &.wait {
+                background-color: @color-malachite-02;
+            }
+
+            &.warning {
+                background-color: @color-pumpkin-02;
+            }
+
+            &.error {
+                background-color: @color-ruby-02;
+            }
+        }
+
+        .content {
+            padding: @metric-24 @metric-32 - 1 @metric-24 0;
+            border-top: @color-asphalt-03 1px solid;
+        }
+
+        .footer {
+            padding: 18px @metric-32 - 1 18px - 1 0; // 18px - исключение из правил.
+            text-align: right;
+            border-top: @color-asphalt-03 1px solid;
+        }
+
+        .remove {
+            position: absolute;
+            right: -(@metric-16 + @metric-4);
+            top: @metric-24;
+        }
+
+        &.opened .header {
+            border-radius: @radius-16 @radius-16 0 0;
+        }
+
+        &.disabled {
+            .header {
+                cursor: default;
+            }
+
+            .title {
+                color: @color-asphalt-02;
+            }
+
+            .step > div {
+                cursor: default;
+            }
+        }
+
+        &.disabled .header,
+        &.opened .header {
+            background-color: @color-asphalt-05;
+        }
+
+        &.focused .header {
+            border-color: @color-asphalt-03;
+
+            &:focus {
+                border-color: @color-sunny-01;
+            }
+        }
+
+        &.disabled,
+        &.opened {
+            &:hover,
+            &:hover .header {
+                background-color: @color-asphalt-05;
+            }
+        }
+
+        &.opened .body {
+            border-bottom: 1px solid transparent;
+            visibility: visible;
+        }
+
+        &.focused.opened .body {
+            border-color: @color-asphalt-03;
+        }
+
+        &.focused {
+            &.opened .header {
+                border-bottom-color: transparent;
+
+                &:focus {
+                    border-color: @color-sunny-01;
+                }
+            }
+
+            &.focusedByMouse .header:focus {
+                border-color: @color-asphalt-03;
+            }
+
+            .headerFocused + .body .content {
+                border-top-color: transparent;
+            }
+
+            &.opened {
+                &.focusedByMouse {
+                    .header {
+                        border-bottom-color: transparent;
+                    }
+                }
+
+                &.focusedByMouse .headerFocused + .body .content {
+                    border-top-color: @color-asphalt-03;
+                }
+            }
+        }
+
+        &.opened .caret {
+            transform: rotate(-180deg);
+        }
+    }
+
+    /* stylelint-disable no-descending-specificity */
+    &.single .item {
+        .body {
+            padding-left: 0;
+        }
+
+        .content,
+        .footer {
+            padding-left: 32px;
+        }
+    }
+}

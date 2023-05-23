@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "target": "es3",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "declaration": true,
+        "baseUrl": "./src",
+        "outDir": "./out",
+        "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "preserveConstEnums": true,
+        "skipLibCheck": false,
+        "jsx": "react",
+        "resolveJsonModule": true,
+        "strict": true,
+        "paths": {
+            "@jest/*": ["../jest/*"],
+            "@sberbusiness/triplex/*": [
+                "./*"
+            ]
+        }
+    },
+    "include": [
+        "./src",
+        "./typings/styles.d.ts",
+    ],
+    "exclude": [
+        "./tools",
+        "./node_modules",
+        "./out"
+    ]
+}

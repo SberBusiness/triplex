@@ -1,0 +1,28 @@
+@import '../../../../common/theme/default';
+
+.button.tile {
+    padding: 7px;
+    min-width: 48px;
+    min-height: 48px;
+    background-color: @color-snowy;
+    background-clip: border-box;
+    border: 1px solid transparent;
+    border-radius: 16px;
+
+    .content {
+        vertical-align: middle;
+    }
+
+    &:hover {
+        background-color: @color-asphalt-05;
+    }
+
+    &.expanded,
+    &:active {
+        background-color: @color-asphalt-04;
+    }
+
+    &:disabled {
+        background-color: @color-snowy;
+    }
+}

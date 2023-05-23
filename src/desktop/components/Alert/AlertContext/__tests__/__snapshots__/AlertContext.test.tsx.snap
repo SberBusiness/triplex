@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertContext type error renders correctly 1`] = `
+<span
+  className="cssClass[alertContext] cssClass[alertTypeError]"
+  role="alert"
+>
+  <svg />
+  <span
+    className="cssClass[alertContextText]"
+  >
+    Sample Text
+  </span>
+</span>
+`;
+
+exports[`AlertContext type info renders correctly 1`] = `
+<span
+  className="cssClass[alertContext] cssClass[alertTypeInfo]"
+  role="alert"
+>
+  <svg />
+  <span
+    className="cssClass[alertContextText]"
+  >
+    Sample Text
+  </span>
+</span>
+`;
+
+exports[`AlertContext type system renders correctly 1`] = `
+<span
+  className="cssClass[alertContext] cssClass[alertTypeSystem]"
+  role="alert"
+>
+  <svg />
+  <span
+    className="cssClass[alertContextText]"
+  >
+    Sample Text
+  </span>
+</span>
+`;
+
+exports[`AlertContext type warning renders correctly 1`] = `
+<span
+  className="cssClass[alertContext] cssClass[alertTypeWarning]"
+  role="alert"
+>
+  <svg />
+  <span
+    className="cssClass[alertContextText]"
+  >
+    Sample Text
+  </span>
+</span>
+`;

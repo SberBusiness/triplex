@@ -1,0 +1,54 @@
+.tabs-extended-content {
+    background-color: #fff;
+    border-radius: 16px;
+
+    .with-notification::after {
+        content: '';
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        background: #f90;
+        border-radius: 4px;
+    }
+
+    .with-notification-dropdown::after {
+        right: 0;
+        top: 0;
+    }
+
+    .ghost-button {
+        border: 1px dashed rgba(208, 215, 221, 1);
+        background: #fff;
+        padding: 5px 15px;
+
+        .ghost-tab-icon {
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            position: relative;
+            top: 1px;
+        }
+
+        > span {
+            color: #b2b8bf;
+        }
+    }
+
+    .tabs-button-dropdown {
+        // Fix IE11.
+        vertical-align: top;
+        // Fix IE11.
+        height: 28px;
+
+        button.active {
+            background-color: #d0d7dd;
+
+            &:hover {
+                background-clip: border-box;
+                border-color: transparent;
+            }
+        }
+    }
+}

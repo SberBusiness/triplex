@@ -1,0 +1,29 @@
+@import '../../../../common/theme/default';
+
+.formFieldLabel {
+    position: absolute;
+    left: 0;
+    top: 16px;
+    box-sizing: border-box;
+    color: @color-graphite-01;
+    // line-height задает дочерний элемент.
+    line-height: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &.smallLabel {
+        top: -8px;
+        left: 12px;
+    }
+
+    .smallLabelText {
+        padding: 0 4px;
+        color: @color-asphalt-01;
+        background: @color-snowy;
+    }
+
+    & > .disabled {
+        color: @color-asphalt-01;
+    }
+}

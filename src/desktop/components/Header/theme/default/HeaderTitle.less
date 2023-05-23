@@ -1,0 +1,64 @@
+@import '../../../../common/theme/default';
+
+.globalHeaderTitle {
+    padding: @ufs-theme-page-padding-y @ufs-theme-page-padding-x;
+    display: flex;
+    justify-content: space-between;
+
+    .headerTitleContent {
+        .globalHeaderTitleContentText {
+            .h1-header-main();
+
+            outline: none;
+            box-sizing: border-box;
+            text-transform: initial;
+        }
+
+        .headerTitleContentSubhead {
+            .font-size(@font-size-14);
+
+            color: @color-asphalt-01;
+        }
+    }
+
+    .globalHeaderTitleControls {
+        white-space: nowrap;
+        padding-left: @ufs-theme-padding-before-controls-column;
+    }
+}
+
+.headerLink + .globalHeaderTitle {
+    padding-top: 0;
+}
+
+@media (max-width: @screen-sm-max) {
+    .globalHeaderTitle {
+        flex-wrap: wrap;
+        padding: 20px 16px;
+
+        .headerTitleContent {
+            width: 100%;
+
+            .globalHeaderTitleContentText {
+                .font-size(@font-size-16);
+            }
+
+            .headerTitleContentSubhead {
+                margin-top: 4px;
+            }
+        }
+
+        .globalHeaderTitleControls {
+            padding-left: 0;
+            white-space: normal;
+            // Отступы, компенсирующие отступы у Button.
+            margin-left: -16px;
+
+            > button,
+            > .globalButtonDropdownExtended {
+                margin-left: 16px;
+                margin-top: 16px;
+            }
+        }
+    }
+}

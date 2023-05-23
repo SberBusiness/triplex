@@ -1,0 +1,32 @@
+@import '../../../../common/theme/default';
+
+.cardTableTotal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 136px;
+    height: 120px;
+    padding: @metric-16;
+    box-sizing: border-box;
+    border-radius: @radius-16;
+    background: @color-malachite-02;
+    background: linear-gradient(228.47deg, @color-malachite-03 0%, @color-malachite-02 100%);
+    box-shadow: @shadow-02;
+    cursor: pointer;
+    margin-right: @metric-24;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    .cardTableTotalTitle {
+        .h4-header-main-modal();
+
+        color: @color-snowy;
+    }
+
+    .cardTableTotalDescription {
+        .b4-text-info(@color-snowy);
+    }
+}

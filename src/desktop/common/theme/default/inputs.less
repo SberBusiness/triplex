@@ -1,0 +1,51 @@
+@import 'src/common/styles/theme/default';
+@ufs-theme-input-border-width: 1px;
+@ufs-theme-input-padding-vertical: @metric-8 - @ufs-theme-input-border-width;
+@ufs-theme-input-padding-horizontal: @metric-12 - @ufs-theme-input-border-width;
+@ufs-theme-input-height: 32px;
+// вертикальный отступ в фигма 8px, но фигма не учитывает внешний бордер,
+// т.к. в дизайнерских инструментах граница является внутренним элементом контейнера.
+// придётся делать внутренний отступ в css на единицу меньше, чем в дизайне (7px 11px)
+@ufs-theme-input-padding: @ufs-theme-input-padding-vertical @ufs-theme-input-padding-horizontal;
+@ufs-theme-input-border-radius: 8px;
+
+.inputDisabled() {
+    cursor: default;
+    -webkit-text-fill-color: @color-asphalt-01; // фиксим цвет в Safari.
+    color: @color-asphalt-01;
+    background-color: @color-asphalt-05;
+}
+
+// Стили по умолчанию для любого поля ввода.
+.input-base() {
+    height: @ufs-theme-input-height;
+    min-width: 0; // https://stackoverflow.com/questions/43314921/strange-input-widths-in-firefox-vs-chrome
+    padding: @ufs-theme-input-padding;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: inherit;
+    color: @color-graphite-01;
+    outline: none;
+    border: @ufs-theme-input-border-width solid @color-asphalt-03;
+    border-radius: @ufs-theme-input-border-radius;
+
+    &.disabled,
+    &:disabled {
+        .inputDisabled();
+    }
+
+    &:focus,
+    &.focus {
+        border-color: @color-graphite-01;
+    }
+
+    &.error {
+        border-color: @color-ruby-02;
+    }
+
+    &::placeholder {
+        color: @color-asphalt-01;
+        opacity: 1; // на FF по дефолту плейсхолдер полупрозрачный, фиксим это.
+    }
+}

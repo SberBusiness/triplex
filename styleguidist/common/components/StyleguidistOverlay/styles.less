@@ -1,0 +1,19 @@
+.styleguidist-overlay {
+    opacity: 0;
+    z-index: 1000;
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 0;
+    background: #fff;
+    cursor: pointer;
+    transition: opacity 0.3s;
+
+    &.opened {
+        height: auto;
+        bottom: 0;
+        opacity: 0.7;
+    }
+}

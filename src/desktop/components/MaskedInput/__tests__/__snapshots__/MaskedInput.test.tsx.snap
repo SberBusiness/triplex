@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaskedInput renders correctly 1`] = `
+<div
+  className="cssClass[maskedInputWrapper]"
+>
+  <input
+    className="cssClass[input] cssClass[maskedInputPlaceholder]"
+    onChange={[Function]}
+    readOnly={true}
+    tabIndex={-1}
+    value=""
+  />
+  <input
+    className="cssClass[maskedInput]"
+    defaultValue=""
+    guide={false}
+    onChange={[Function]}
+    render={[Function]}
+    type="text"
+    value="1234567890"
+  />
+</div>
+`;

@@ -1,0 +1,26 @@
+@import '../../../../common/theme/default';
+
+.button.danger {
+    background-color: @color-ruby-02;
+    .b3-text-controls-medium(@color-snowy);
+
+    &.MD {
+        .size-MD();
+    }
+
+    &.SM {
+        .size-SM();
+    }
+
+    &:hover {
+        background-color: @color-ruby-03;
+    }
+
+    &:active {
+        background-color: @color-ruby-01;
+    }
+
+    &:disabled {
+        background-color: @color-ruby-04;
+    }
+}

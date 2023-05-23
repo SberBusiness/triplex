@@ -1,0 +1,121 @@
+@import '../../../../common/theme/default';
+
+// Длительность анимации открытия/закрытия.
+@topOverlayInnerAnimationDuration: 0.3s; // время opacity анимации .topOverlayInner
+@topOverlayAnimationDuration: 0.3s; // время height + opacity анимации .topOverlay
+@topOverlayToggleAnimationDuration: @topOverlayAnimationDuration + @topOverlayInnerAnimationDuration;
+
+// Отступ содержимого справа = отступ от контента до иконки закрытия + иконка закрытия + основной отступ
+@topOverlayInnerPaddingRight: 16px + 20px + @ufs-theme-page-padding-x;
+
+.topOverlay {
+    box-shadow: inset 0 -1px 0 0 @color-ruby-03;
+    background-color: @color-ruby-05;
+    overflow: hidden;
+    transition: height @topOverlayAnimationDuration;
+    animation: fadeOutTopOverlay @topOverlayToggleAnimationDuration;
+    // Чтобы пользователь не взаимодействовал с контентом во время анимации закрытия.
+    pointer-events: none;
+
+    .globalTopOverlayInner {
+        padding: @ufs-theme-page-padding-y @topOverlayInnerPaddingRight @ufs-theme-page-padding-y @ufs-theme-page-padding-x;
+        animation: fadeOutTopOverlayInner @topOverlayToggleAnimationDuration;
+    }
+
+    .globalTopOverlayClose {
+        display: none;
+        position: absolute;
+        top: @ufs-theme-page-padding-y;
+        right: @ufs-theme-page-padding-x;
+    }
+
+    &.opened {
+        pointer-events: auto;
+        animation: fadeInTopOverlay @topOverlayToggleAnimationDuration;
+
+        .globalTopOverlayInner {
+            animation: fadeInTopOverlayInner @topOverlayToggleAnimationDuration;
+        }
+
+        .globalTopOverlayClose {
+            display: block;
+        }
+    }
+
+    .globalTopOverlayContent {
+        margin-bottom: @metric-32;
+    }
+
+    .topOverlayControls {
+        white-space: nowrap;
+    }
+
+    .globalTopOverlayTitle {
+        .h1-header-main();
+
+        margin-right: @metric-32;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .topOverlaySubTitle {
+        .b1-text-main(@color-graphite-01);
+
+        white-space: normal;
+        overflow: hidden;
+    }
+}
+
+// Кастомизация заголовков TopOverlay в зависимости от размера SideOverlay.
+[data-side-overlay-size='MD'],
+[data-side-overlay-size='SM'] {
+    .topOverlaySubTitle {
+        // Максимальная длина - 2 строки
+        max-height: .line-height-by-font-size(@font-size-14) [ @result] * 2;
+    }
+}
+
+@keyframes fadeInTopOverlayInner {
+    from,
+    50% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutTopOverlayInner {
+    from {
+        opacity: 1;
+    }
+
+    50%,
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInTopOverlay {
+    from {
+        opacity: 0;
+    }
+
+    50%,
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutTopOverlay {
+    from,
+    55% {
+        opacity: 1;
+    }
+
+    85%,
+    to {
+        opacity: 0;
+    }
+}
