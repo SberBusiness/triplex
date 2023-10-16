@@ -1,0 +1,73 @@
+@import 'src/styles/style';
+
+.selectExtendedTarget {
+    .b2-text-controls-normal(@color-graphite-01);
+
+    position: relative;
+    background-color: @color-snowy;
+    border: 1px solid @color-asphalt-03;
+    border-radius: @ufs-theme-input-border-radius;
+    box-sizing: border-box;
+    height: @ufs-theme-input-height;
+    padding: 0 35px 0 @ufs-theme-input-padding-horizontal;
+    align-items: center;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .label {
+        flex-grow: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .caretIcon,
+    .spinnerIcon {
+        position: absolute;
+        top: 0;
+        right: @metric-12 - 1;
+        bottom: 0;
+        margin: auto;
+        pointer-events: none;
+    }
+
+    .caretIcon {
+        transition: transform 0.3s ease;
+        transform: rotate(0);
+    }
+
+    &.placeholder {
+        color: @color-asphalt-01;
+    }
+
+    &.selectOpened,
+    &:focus {
+        border-color: @color-graphite-01;
+    }
+
+    &.disabled,
+    &.disabled:active,
+    &.disabled:focus {
+        color: @color-asphalt-01;
+        border-color: @color-asphalt-03;
+        background-color: @color-asphalt-05;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    &.error {
+        border-color: @color-ruby-02;
+    }
+
+    &.selectOpened {
+        .caretIcon {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.grouped .selectOpened {
+    z-index: 1;
+}

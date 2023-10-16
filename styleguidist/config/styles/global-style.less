@@ -1,74 +1,81 @@
-@import '../../../src/common/styles/theme/default';
-@import '~@sberbusiness/icons/css/icons.css';
-
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'SBSansUI', 'Roboto', 'Arial', 'PT_sans', sans-serif;
-    .font-size(@font-size-14);
+    font-family: Roboto, SBSansUI, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #F2F4F7;
 
     &.modal-open {
         overflow: hidden;
     }
 }
 
-// TODO: Пока не используется. Раскомментировать, как только появится необходимость.
-//@font-face {
-//    font-family: 'SBSansUI';
-//    src:
-//        url('../../../src/common/fonts/SBSansUI/SBSansUI-Light.woff2') format('woff2'),
-//        url('../../../src/common/fonts/SBSansUI/SBSansUI-Light.woff') format('woff');
-//    font-weight: 300;
-//    font-style: normal;
-//}
+@font-face {
+    font-family: SBSansUI;
+    src:
+        url('../../../src/fonts/SBSansUI/SBSansUI-Regular.woff2') format('woff2'),
+        url('../../../src/fonts/SBSansUI/SBSansUI-Regular.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
 
 @font-face {
-    font-family: 'SBSansUI';
+    font-family: SBSansUI;
     src:
-        url('../../../src/common/fonts/SBSansUI/SBSansUI-Regular.woff2') format('woff2'),
-        url('../../../src/common/fonts/SBSansUI/SBSansUI-Regular.woff') format('woff');
+        url('../../../src/fonts/SBSansUI/SBSansUI-Regular.woff2') format('woff2'),
+        url('../../../src/fonts/SBSansUI/SBSansUI-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'SBSansUI';
+    font-family: SBSansUI;
     src:
-        url('../../../src/common/fonts/SBSansUI/SBSansUI-Semibold.woff2') format('woff2'),
-        url('../../../src/common/fonts/SBSansUI/SBSansUI-Semibold.woff') format('woff');
+        url('../../../src/fonts/SBSansUI/SBSansUI-Semibold.woff2') format('woff2'),
+        url('../../../src/fonts/SBSansUI/SBSansUI-Semibold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
 
-// Убирается кнопка возврата ко всем компонентам. visibility: hidden; не прячет ее, а display: none; ломает общую разметку.
-.toolbar-wrapper {
-    position: relative;
-    left: -10000px;
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-100.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
 }
 
-.enable-full-screen-mode .toolbar-wrapper {
-    left: auto;
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-300.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
 }
 
-// Переопределение стандартных заголовков Styleguidist
-@font-size-heading-base: 28px;
-each(range(4), {
-    h@{value}[class*='rsg--heading@{value}'] {
-        font-size: calc(@font-size-heading-base - (@value * 3px));
-        line-height: 1.1;
-    }
-});
-
-.inline-block {
-    display: inline-block;
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
 
-.margin-top-24 {
-    margin-top: @metric-24;
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-500.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
 }
 
-.margin-bottom-12 {
-    margin-bottom: @metric-12;
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('../../public/fonts/Roboto-900.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
 }
 
 .styleguidist-row {

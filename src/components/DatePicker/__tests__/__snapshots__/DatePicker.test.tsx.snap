@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker renders correctly 1`] = `
+<div
+  className="cssClass[datePicker]"
+>
+  <div
+    className="cssClass[inputBlock]"
+  >
+    <div
+      className="cssClass[maskedInputWrapper]"
+    >
+      <input
+        className="cssClass[input] cssClass[maskedInputPlaceholder] cssClass[dateInput]"
+        onChange={[Function]}
+        readOnly={true}
+        tabIndex={-1}
+        value=""
+      />
+      <input
+        className="cssClass[maskedInput] cssClass[dateInput]"
+        defaultValue=""
+        guide={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        render={[Function]}
+        type="text"
+        value="01.01.2021"
+      />
+    </div>
+    <button
+      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[calendarIcon]"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseDown={[Function]}
+      type="button"
+    >
+      <svg />
+    </button>
+  </div>
+</div>
+`;

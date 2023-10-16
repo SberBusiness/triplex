@@ -16,7 +16,7 @@ function writeCommonCssBundles(cssContentByPlatform) {
     const fileName = 'styles.css';
 
     for (const platformName in cssContentByPlatform) {
-        const absoluteFilePath = `${outStyles}/${platformName}/${fileName}`;
+        const absoluteFilePath = `${outStyles}/${fileName}`;
 
         fs.writeFileSync(absoluteFilePath, cssContentByPlatform[platformName]);
     }
@@ -39,7 +39,7 @@ function writeCssBundle(relativeFilePath, cssContent) {
 
 const buildLess = async () => {
     const componentStylesByPlatform = getLessFileList(
-        ['src/desktop/components', 'src/mobile/components'],
+        ['src/components'],
         [/protected/]
     );
 

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmountInput renders correctly 1`] = `
+<div
+  className="cssClass[amountInput] cssClass[filled] cssClass[withCurrency]"
+>
+  <input
+    autoComplete="off"
+    className="cssClass[input]"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    placeholder="0,00"
+    value="1 234 567 890,00"
+  />
+  <span
+    className="cssClass[b1] cssClass[secondary] cssClass[regular] cssClass[normal] cssClass[currency]"
+    onClick={[Function]}
+  >
+    RUB
+  </span>
+</div>
+`;

@@ -1,5 +1,4 @@
-const postcss = require('rollup-plugin-postcss-modules').default;
-const autoprefixer = require('autoprefixer');
+const postcss = require('rollup-plugin-postcss');
 const {getClassName} = require('../../utils/getClassName');
 const buildCssPlugin = require('../../plugins/rollup-plugin-build-css');
 
@@ -10,20 +9,24 @@ let shared = {
 function getPlugins() {
     return [
         postcss({
-            writeDefinitions: false,
-            extract: false,
-            inject: false,
-            minimize: true,
-            modules: {
-                generateScopedName: function(name, filename, _css) {
-                    return getClassName(filename, name);
-                },
-            },
             plugins: [
-                autoprefixer({
-                    env: 'Chrome >= 59 or ff >= 68 or Safari >= 10 or ie >= 11 or Edge >= 17',
+                require('postcss-modules')({
+                    getJSON: function() {},
+                    generateScopedName: function(name, filename) {
+                        return getClassName(filename, name);
+                    },
+                }),
+                require('autoprefixer')({
+                    env: 'Chrome >= 59 or Edge >= 100 or Safari >= 10 or Firefox >= 50',
                 }),
             ],
+            inject: false,
+            minimize: true,
+            use: {
+                less: {
+                    math: 'always',
+                }
+            },
         }),
         buildCssPlugin(shared),
     ];

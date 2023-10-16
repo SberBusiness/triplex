@@ -1,0 +1,66 @@
+@import 'src/styles/style';
+
+@ufs-theme-button-height-md: 32px;
+@ufs-theme-button-height-sm: 28px;
+
+@ufs-theme-button-min-width-md: 96px;
+@ufs-theme-button-min-width-sm: 80px;
+@ufs-theme-button-min-width-link-md: 0;
+@ufs-theme-button-min-width-link-sm: 0;
+
+@ufs-theme-button-padding-horizontal-md: 24px;
+@ufs-theme-button-padding-horizontal-sm: 16px;
+@ufs-theme-button-padding-horizontal-dots-md: 8px;
+@ufs-theme-button-padding-horizontal-dots-sm: 6px;
+@ufs-theme-button-padding-horizontal-link-md: 2px;
+@ufs-theme-button-padding-horizontal-link-sm: 2px;
+
+@ufs-theme-button-siblings-margin-left: 16px;
+
+@ufs-theme-button-border-width-default: 0;
+@ufs-theme-button-border-width-secondary: 1px;
+
+@ufs-theme-button-border-color-focus: @color-sunny-01;
+
+.button-padding(@height, @padding-horizontal, @border-width: @ufs-theme-button-border-width-secondary) {
+    & when (@padding-horizontal = @ufs-theme-button-padding-horizontal-link-md) or (@padding-horizontal = @ufs-theme-button-padding-horizontal-link-sm) {
+        padding: (@height - @line-height - @border-width * 2) / 2 @padding-horizontal - @border-width;
+        @line-height: .line-height-by-font-size(@font-size-14)[@result];
+    }
+
+    & when not (@padding-horizontal = @ufs-theme-button-padding-horizontal-link-md) and not (@padding-horizontal = @ufs-theme-button-padding-horizontal-link-sm) {
+        padding: (@height - @line-height-inline - @border-width * 2) / 2 @padding-horizontal - @border-width;
+        @line-height-inline: .line-height-by-font-size-inline(@font-size-14)[@result];
+    }
+
+    border-width: @border-width;
+}
+
+.button-size(@height, @min-width) {
+    height: @height;
+    min-width: @min-width;
+
+    & when not (@min-width = @ufs-theme-button-min-width-link-md) and not (@min-width = @ufs-theme-button-min-width-link-sm) {
+        border-radius: @height / 2;
+    }
+}
+
+.size-SM(@border-width: @ufs-theme-button-border-width-default, @min-width: @ufs-theme-button-min-width-sm,
+@padding-horizontal: @ufs-theme-button-padding-horizontal-sm) {
+    .button-size(@ufs-theme-button-height-sm, @min-width);
+    .button-padding(@ufs-theme-button-height-sm, @padding-horizontal, @border-width);
+
+    &[data-focus-visible]:focus {
+        .button-padding(@ufs-theme-button-height-sm, @padding-horizontal);
+    }
+}
+
+.size-MD(@border-width: @ufs-theme-button-border-width-default, @min-width: @ufs-theme-button-min-width-md,
+@padding-horizontal: @ufs-theme-button-padding-horizontal-md) {
+    .button-size(@ufs-theme-button-height-md, @min-width);
+    .button-padding(@ufs-theme-button-height-md, @padding-horizontal, @border-width);
+
+    &[data-focus-visible]:focus {
+        .button-padding(@ufs-theme-button-height-md, @padding-horizontal);
+    }
+}

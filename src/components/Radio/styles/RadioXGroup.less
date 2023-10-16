@@ -1,0 +1,20 @@
+@import 'src/styles/style';
+
+@indent: 12, 16, 20, 24, 28, 32;
+
+.radioXGroup {
+    display: inline-flex;
+    flex-flow: row wrap;
+
+    each(@indent, {
+        &.indent-@{value} {
+            margin-left: unit(-@value / 2, px);
+            margin-right: unit(-@value / 2, px);
+
+            .label {
+                margin-left: unit(@value / 2, px);
+                margin-right: unit(@value / 2, px);
+            }
+        }
+    });
+}

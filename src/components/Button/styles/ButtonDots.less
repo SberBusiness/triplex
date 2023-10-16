@@ -1,0 +1,40 @@
+@import 'src/styles/style';
+
+.button.dots {
+    background-color: @color-snowy;
+    border-color: @color-asphalt-03;
+    color: @color-graphite-01;
+
+    &.MD {
+        .size-MD(@ufs-theme-button-border-width-secondary, @ufs-theme-button-height-md, @ufs-theme-button-padding-horizontal-dots-md);
+    }
+
+    &.SM {
+        .size-SM(@ufs-theme-button-border-width-secondary, @ufs-theme-button-height-sm, @ufs-theme-button-padding-horizontal-dots-sm);
+    }
+
+    &:hover {
+        border-color: @color-graphite-01;
+    }
+
+    &.expanded,
+    &:active {
+        background-color: @color-asphalt-03;
+    }
+
+    &.expanded:not([data-focus-visible]):enabled,
+    &:not([data-focus-visible]):enabled:active {
+        background-clip: border-box;
+        border-color: transparent;
+    }
+
+    &:disabled {
+        background-color: @color-snowy;
+        border-color: @color-asphalt-03;
+        color: @color-asphalt-03;
+
+        .dotsIcon path {
+            fill: @color-asphalt-03;
+        }
+    }
+}
