@@ -1,0 +1,107 @@
+@import 'src/styles/style';
+
+@arrow-border-right-width: 20px;
+
+.stepperStep {
+    display: inline-flex;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+
+    + .stepperStep {
+        margin-left: @metric-12;
+    }
+
+    &:not(:last-child) {
+        .content {
+            padding: 7px 0 7px 11px;
+            border-width: 1px 0 1px 1px;
+            border-radius: 6px 0 0 6px;
+        }
+    }
+
+    &:last-child {
+        .content {
+            padding: 7px 11px;
+            border-width: 1px;
+            border-radius: 6px;
+        }
+
+        .arrow {
+            display: none;
+        }
+    }
+
+    &:hover {
+        .content {
+            border-color: @color-malachite-02;
+        }
+
+        .arrow path:last-child {
+            fill: @color-malachite-02;
+        }
+    }
+
+    &.selected {
+        cursor: default;
+
+        .content {
+            background-color: @color-asphalt-05;
+            border-color: @color-malachite-02;
+        }
+
+        .arrow path:first-child {
+            fill: @color-asphalt-05;
+        }
+
+        .arrow path:last-child {
+            fill: @color-malachite-02;
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+
+        .content {
+            border-color: @color-asphalt-03;
+        }
+
+        .arrow path:last-child {
+            fill: @color-asphalt-03;
+        }
+    }
+
+    &.focusVisible {
+        .content {
+            border-color: @color-sunny-01;
+        }
+
+        .arrow path:last-child {
+            fill: @color-sunny-01;
+        }
+    }
+}
+
+.content {
+    display: inline-flex;
+    white-space: nowrap;
+    border-style: solid;
+    border-color: @color-asphalt-03;
+    background-color: @color-snowy;
+
+    &.inactive {
+        color: @color-graphite-02;
+    }
+}
+
+.icon {
+    line-height: 0;
+
+    .nonempty & {
+        margin-right: 4px;
+    }
+}
+
+.arrow {
+    transform: translate(0); // Safari fix
+}

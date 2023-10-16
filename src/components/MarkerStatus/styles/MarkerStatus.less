@@ -1,0 +1,23 @@
+@import 'src/styles/style';
+
+@line-height: 20px;
+@marker-height: 8px;
+
+.globalMarkerStatus {
+    position: relative;
+
+    .markerContainer {
+        position: absolute;
+        top: (@line-height - @marker-height) / 2;
+    }
+
+    .markerStatusText {
+        margin-left: @metric-12;
+        .b1-text-main(@color-graphite-01);
+    }
+
+    .markerStatusDesc {
+        margin: @metric-4 0 0 @metric-12;
+        .b4-text-info(@color-asphalt-01);
+    }
+}

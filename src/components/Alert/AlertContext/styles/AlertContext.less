@@ -1,0 +1,26 @@
+@import 'src/styles/style';
+
+.alertContext {
+    display: flex;
+    .font-size(@font-size-12);
+
+    > svg {
+        flex-shrink: 0;
+    }
+
+    .alertContextText {
+        margin-left: @metric-4;
+    }
+
+    &.alertTypeError .alertContextText {
+        color: @color-ruby-02;
+    }
+
+    &.alertTypeInfo,
+    &.alertTypeWarning,
+    &.alertTypeSystem {
+        .alertContextText {
+            color: @color-graphite-01;
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@import 'src/styles/style';
+
+.marker {
+    width: @metric-8;
+    height: @metric-8;
+    border-radius: 50%;
+
+    &.markerSuccess {
+        background-color: @color-malachite-03;
+    }
+
+    &.markerError {
+        background-color: @color-ruby-03;
+    }
+
+    &.markerWarning {
+        background-color: @color-pumpkin-02;
+    }
+
+    &.markerWaiting {
+        background-color: @color-asphalt-02;
+    }
+}

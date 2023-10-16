@@ -1,0 +1,49 @@
+@import 'src/styles/style';
+
+.tableFooterWrapper {
+    height: 76px;
+    margin-top: @metric-16;
+
+    .tableFooter {
+        background: @color-asphalt-04;
+        padding: @metric-24 @metric-12;
+
+        &::before {
+            content: ' ';
+            position: absolute;
+            top: -@metric-64;
+            left: 0;
+            width: 100%;
+            height: @metric-64;
+            background: linear-gradient(fade(@color-snowy, 0%), @color-snowy);
+            pointer-events: none;
+        }
+
+        .tableFooterSummary {
+            display: flex;
+            align-items: center;
+
+            .tableFooterSummarySelectedCount,
+            .tableFooterSummaryAmount,
+            .tableFooterSummaryDivider {
+                margin-left: @metric-24;
+            }
+        }
+    }
+
+    &.ieBrowser .tableFooter {
+        position: relative;
+
+        &.fixed {
+            position: fixed;
+            bottom: 0;
+            z-index: 1;
+            box-sizing: border-box;
+        }
+    }
+
+    &:not(.ieBrowser) {
+        position: sticky; //IE не поддерживает.
+        bottom: 0;
+    }
+}

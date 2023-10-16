@@ -1,129 +1,110 @@
 const {getReleaseNotesSections} = require('../tools/getReleaseNotesSections');
 
-const sections = [
+module.exports = [
     {
         name: 'Components',
         sections: [
             {
                 name: 'Accordions',
-                sections: [
-                    {
-                        name: 'AccordionForm',
-                        content: './styleguidist/desktop/components/AccordionForm/AccordionForm.md',
-                    },
-                    {
-                        name: 'AccordionView',
-                        content: './styleguidist/desktop/components/AccordionView/AccordionView.md',
-                    },
+                components: [
+                    './src/components/AccordionForm/AccordionForm.tsx',
+                    './src/components/AccordionView/AccordionView.tsx',
                 ],
             },
             {
                 name: 'Alerts',
                 components: [
-                    './src/desktop/components/Alert/AlertContext/AlertContext.tsx',
-                    './src/desktop/components/Alert/AlertProcess/AlertProcess.tsx',
+                    './src/components/Alert/AlertContext/AlertContext.tsx',
+                    './src/components/Alert/AlertProcess/AlertProcess.tsx',
                 ],
             },
             {
                 name: 'Amount',
-                components: ['./src/desktop/components/Amount/Amount.tsx'],
+                components: ['./src/components/Amount/Amount.tsx'],
             },
             {
                 name: 'Buttons',
                 components: [
-                    './src/desktop/components/Button/Button.tsx',
-                    './src/desktop/components/Button/ButtonIcon.tsx',
-                    './src/desktop/components/Button/ButtonDropdown.tsx',
-                    './src/desktop/components/Button/ButtonDropdownExtended.tsx',
+                    './src/components/Button/Button.tsx',
+                    './src/components/Button/ButtonIcon.tsx',
+                    './src/components/Button/ButtonDropdown.tsx',
+                    './src/components/Button/ButtonDropdownExtended.tsx',
                 ],
             },
             {
                 name: 'Calendar',
-                components: ['./src/desktop/components/Calendar/Calendar.tsx'],
+                components: ['./src/components/Calendar/Calendar.tsx'],
             },
             {
                 name: 'Cards',
                 components: [
-                    './src/desktop/components/Card/CardStatic.tsx',
-                    './src/desktop/components/Card/CardAction.tsx',
-                    './src/desktop/components/Card/CardTableTotal.tsx',
+                    './src/components/Card/CardStatic.tsx',
+                    './src/components/Card/CardAction.tsx',
+                    './src/components/Card/CardTableTotal.tsx',
                 ],
             },
             {
                 name: 'Checkboxes',
                 components: [
-                    './src/desktop/components/Checkbox/Checkbox.tsx',
-                    './src/desktop/components/Checkbox/CheckboxXGroup.tsx',
-                    './src/desktop/components/Checkbox/CheckboxYGroup.tsx',
+                    './src/components/Checkbox/Checkbox.tsx',
+                    './src/components/Checkbox/CheckboxXGroup.tsx',
+                    './src/components/Checkbox/CheckboxYGroup.tsx',
                 ],
             },
             {
                 name: 'CheckboxTree',
                 components: [
-                    './src/desktop/components/CheckboxTree/CheckboxTree.tsx',
-                    './src/desktop/components/CheckboxTreeExtended/CheckboxTreeExtended.tsx',
+                    './src/components/CheckboxTree/CheckboxTree.tsx',
+                    './src/components/CheckboxTreeExtended/CheckboxTreeExtended.tsx',
                 ],
             },
             {
                 name: 'Col',
-                content: './styleguidist/desktop/components/Col/Col.md',
+                content: './styleguidist/components/Col/Col.md',
             },
             {
-                name: 'DatePicker',
-                sections: [
-                    {
-                        name: 'DatePicker',
-                        content: './styleguidist/desktop/components/DatePicker/DatePicker.md',
-                    },
-                    {
-                        name: 'MonthYearPicker',
-                        content: './styleguidist/desktop/components/DatePicker/MonthYearPicker.md',
-                    },
+                name: 'Date components',
+                components: [
+                    './src/components/DatePicker/DatePicker.tsx',
+                    './src/components/MonthYearPicker/MonthYearPicker.tsx',
+                    './src/components/DateRange/DateRange.tsx',
                 ],
             },
             {
-                name: 'DateRange',
-                content: './styleguidist/desktop/components/DateRange/DateRange.md',
-            },
-            {
                 name: 'Divider',
-                content: './styleguidist/desktop/components/Divider/Divider.md',
+                content: './styleguidist/components/Divider/Divider.md',
             },
             {
                 name: 'DocumentNumberEdit',
-                content: './styleguidist/desktop/components/DocumentNumberEdit/DocumentNumberEdit.md',
+                content: './styleguidist/components/DocumentNumberEdit/DocumentNumberEdit.md',
             },
             {
                 name: 'Ellipsis',
-                components: ['./src/desktop/components/Ellipsis/Ellipsis.tsx'],
+                components: ['./src/components/Ellipsis/Ellipsis.tsx'],
             },
             {
                 name: 'Gap',
-                content: './styleguidist/desktop/components/Gap/Gap.md',
+                content: './styleguidist/components/Gap/Gap.md',
             },
             {
                 name: 'FormGroup',
                 sections: [
                     {
-                        name: 'FormGroup с Input',
-                        content: './styleguidist/desktop/components/FormGroup/FormGroupInput.md',
-                    },
-                    {
-                        name: 'FormGroup с MaskedInput',
-                        content: './styleguidist/desktop/components/FormGroup/FormGroupMaskedInput.md',
+                        name: 'FormGroup с FormFieldInput',
+                        content: './styleguidist/components/FormGroup/FormGroupInput.md',
                     },
                     {
                         name: 'FormGroup с другими видами полей ввода (в разработке)',
-                        content: './styleguidist/desktop/components/FormGroup/FormGroupDev.md',
-                    }
-                ]
+                        content: './styleguidist/components/FormGroup/FormGroupDev.md',
+                    },
+                ],
             },
             {
                 name: 'HelpBoxes',
                 components: [
-                    './src/desktop/components/HelpBox/HelpBox.tsx',
-                    './src/desktop/components/HelpBox/HelpBoxSM.tsx',
-                    './src/desktop/components/HelpBox/HelpBoxLG.tsx',
+                    './src/components/HelpBox/HelpBox.tsx',
+                    './src/components/HelpBox/HelpBoxSM.tsx',
+                    './src/components/HelpBox/HelpBoxLG.tsx',
                 ],
             },
             {
@@ -131,184 +112,170 @@ const sections = [
                 sections: [
                     {
                         name: 'AmountInput',
-                        components: ['./src/desktop/components/AmountInput/AmountInput.tsx'],
+                        components: ['./src/components/AmountInput/AmountInput.tsx'],
                     },
                     {
                         name: 'Input',
-                        components: ['./src/desktop/components/Input/Input.tsx'],
+                        components: ['./src/components/Input/Input.tsx'],
                     },
                     {
                         name: 'MaskedInput',
-                        components: ['./src/desktop/components/MaskedInput/MaskedInput.tsx'],
+                        components: ['./src/components/MaskedInput/MaskedInput.tsx'],
                     },
                     {
                         name: 'MaskedInputDeprecated',
-                        components: ['./src/desktop/components/MaskedInputDeprecated/MaskedInputDeprecated.tsx'],
+                        components: ['./src/components/MaskedInputDeprecated/MaskedInputDeprecated.tsx'],
                     },
                     {
                         name: 'NumberInput',
-                        components: ['./src/desktop/components/NumberInput/NumberInput.tsx'],
+                        components: ['./src/components/NumberInput/NumberInput.tsx'],
                     },
                     {
                         name: 'SMSInput',
-                        components: ['./src/desktop/components/SMSInput/SMSInput.tsx'],
-                    },
-                    {
-                        name: 'SMSInputDeprecated',
-                        content: './styleguidist/desktop/components/SMSInput/SMSInputDeprecated.md',
+                        components: ['./src/components/SMSInput/SMSInput.tsx'],
                     },
                     {
                         name: 'TextArea',
-                        components: ['./src/desktop/components/TextArea/TextArea.tsx'],
+                        components: ['./src/components/TextArea/TextArea.tsx'],
                     },
                 ],
             },
             {
                 name: 'InputGroup',
-                content: './styleguidist/desktop/components/InputGroup/InputGroup.md',
+                content: './styleguidist/components/InputGroup/InputGroup.md',
             },
             {
                 name: 'Labels',
-                content: './styleguidist/desktop/components/Labels/Labels.md',
+                content: './styleguidist/components/Labels/Labels.md',
             },
             {
                 name: 'LightBoxes',
                 sections: [
                     {
                         name: 'LightBox базовый',
-                        content: './styleguidist/desktop/components/LightBox/LightBox.md',
+                        content: './styleguidist/components/LightBox/LightBox.md',
                     },
                     {
                         name: 'LightBox с TopOverlay и sidebar в header',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithTopOverlayAndHeaderSidebar.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayAndHeaderSidebar.md',
                     },
                     {
                         name: 'LightBox с TopOverlay в SideOverlay',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithTopOverlayInSideOverlay.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayInSideOverlay.md',
                     },
                     {
                         name: 'LightBox с несколькими SideOverlay',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithMultipleSideOverlays.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithMultipleSideOverlays.md',
                     },
                     {
                         name: 'LightBox с SideOverlay через Portal',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithPortalSideOverlays.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithPortalSideOverlays.md',
                     },
                     {
                         name: 'LightBox с табами',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithTabs.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithTabs.md',
                     },
                     {
                         name: 'LightBox, занимающий определенную область экрана',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxCustomView.md',
+                        content: './styleguidist/components/LightBox/LightBoxCustomView.md',
                     },
                     {
                         name: 'LightBox с accessibility',
-                        content: './styleguidist/desktop/components/LightBox/LightBoxWithTopOverlayInSideOverlayAccessibility.md',
+                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayInSideOverlayAccessibility.md',
                     },
                 ],
             },
             {
                 name: 'Link',
-                components: ['./src/desktop/components/Link/Link.tsx'],
+                components: './src/components/Link/Link.tsx',
             },
             {
                 name: 'MarkerStatus',
-                content: './styleguidist/desktop/components/MarkerStatus/MarkerStatus.md',
+                content: './styleguidist/components/MarkerStatus/MarkerStatus.md',
             },
             {
                 name: 'MediaWidth',
-                content: './styleguidist/desktop/components/MediaWidth/MediaWidth.md',
+                content: './styleguidist/components/MediaWidth/MediaWidth.md',
             },
             {
-                name: 'Modal windows',
-                sections: [
-                    {
-                        name: 'ModalWindowBasic',
-                        content: './styleguidist/desktop/components/ModalWindow/ModalWindowBasic.md',
-                    },
+                name: 'ModalWindows',
+                components: [
+                    './src/components/ModalWindow/ModalWindowBasicMD.tsx',
+                    './src/components/ModalWindow/ModalWindowBasicSM.tsx',
+                    './src/components/ModalWindow/ModalWindowBasicLG.tsx',
                 ],
             },
             {
                 name: 'Multiselect',
-                components: ['./src/desktop/components/Multiselect/Multiselect.tsx'],
+                components: ['./src/components/Multiselect/Multiselect.tsx'],
             },
             {
                 name: 'Notification',
                 sections: [
                     {
                         name: 'Notification Success',
-                        content: './styleguidist/desktop/components/Notification/Success.md',
+                        content: './styleguidist/components/Notification/Success.md',
                     },
                     {
                         name: 'Notification Warning',
-                        content: './styleguidist/desktop/components/Notification/Warning.md',
+                        content: './styleguidist/components/Notification/Warning.md',
                     },
                     {
                         name: 'Notification Error',
-                        content: './styleguidist/desktop/components/Notification/Error.md',
+                        content: './styleguidist/components/Notification/Error.md',
                     },
                     {
                         name: 'Notification Redirect',
-                        content: './styleguidist/desktop/components/Notification/Redirect.md',
+                        content: './styleguidist/components/Notification/Redirect.md',
                     },
                     {
                         name: 'Notification сгруппированная',
-                        content: './styleguidist/desktop/components/Notification/Group.md',
+                        content: './styleguidist/components/Notification/Group.md',
                     },
                     {
                         name: 'Notification c аналитикой',
-                        content: './styleguidist/desktop/components/Notification/Analytics.md',
+                        content: './styleguidist/components/Notification/Analytics.md',
                     },
                     {
                         name: 'Notification c isShowCloseOnHover и withExtraBottomPadding',
-                        content: './styleguidist/desktop/components/Notification/Notification.md',
+                        content: './styleguidist/components/Notification/Notification.md',
                     },
                 ],
             },
             {
                 name: 'Overlay',
-                components: ['./src/desktop/components/Overlay/Overlay.tsx'],
+                components: ['./src/components/Overlay/Overlay.tsx'],
             },
             {
                 name: 'Page',
                 components: [
-                    './src/desktop/components/Page/Page.tsx',
-                    './src/desktop/components/Page/components/HeaderPage.tsx',
-                    './src/desktop/components/Page/components/FooterPage.tsx',
+                    './src/components/Page/Page.tsx',
+                    './src/components/Page/components/HeaderPage.tsx',
+                    './src/components/Page/components/FooterPage.tsx',
                 ],
             },
             {
                 name: 'Radios',
                 components: [
-                    './src/desktop/components/Radio/Radio.tsx',
-                    './src/desktop/components/Radio/RadioXGroup.tsx',
-                    './src/desktop/components/Radio/RadioYGroup.tsx',
+                    './src/components/Radio/Radio.tsx',
+                    './src/components/Radio/RadioXGroup.tsx',
+                    './src/components/Radio/RadioYGroup.tsx',
                 ],
             },
             {
                 name: 'SegmentedControl',
-                components: ['./src/desktop/components/SegmentedControl/SegmentedControl.tsx'],
+                components: ['./src/components/SegmentedControl/SegmentedControl.tsx'],
             },
             {
                 name: 'Skeleton',
-                components: ['./src/desktop/components/Skeleton/Skeleton.tsx'],
+                components: ['./src/components/Skeleton/Skeleton.tsx'],
             },
             {
                 name: 'Selects',
-                sections: [
-                    {
-                        name: 'Select',
-                        content: './styleguidist/desktop/components/Select/Select.md',
-                    },
-                    {
-                        name: 'SelectExtended',
-                        content: './styleguidist/desktop/components/SelectExtended/SelectExtended.md',
-                    },
-                    {
-                        name: 'AmountCurrencySelect',
-                        components: ['./src/desktop/components/AmountCurrencySelect/AmountCurrencySelect.tsx'],
-                    },
+                components: [
+                    './src/components/Select/Select.tsx',
+                    './src/components/SelectExtended/SelectExtended.tsx',
+                    './src/components/AmountCurrencySelect/AmountCurrencySelect.tsx',
                 ],
             },
             {
@@ -316,31 +283,31 @@ const sections = [
                 sections: [
                     {
                         name: 'Slider base',
-                        content: './styleguidist/desktop/components/Slider/Slider.md',
+                        content: './styleguidist/components/Slider/Slider.md',
                     },
                     {
                         name: 'Slider with dynamic min max',
-                        content: './styleguidist/desktop/components/Slider/SliderWithDynamicMinMax.md',
+                        content: './styleguidist/components/Slider/SliderWithDynamicMinMax.md',
                     },
                     {
                         name: 'Slider with tooltip',
-                        content: './styleguidist/desktop/components/Slider/SliderTooltip.md',
+                        content: './styleguidist/components/Slider/SliderTooltip.md',
                     },
                     {
                         name: 'Slider reverse',
-                        content: './styleguidist/desktop/components/Slider/SliderReverse.md',
+                        content: './styleguidist/components/Slider/SliderReverse.md',
                     },
                     {
                         name: 'Slider custom steps',
-                        content: './styleguidist/desktop/components/Slider/SliderCustomSteps.md',
+                        content: './styleguidist/components/Slider/SliderCustomSteps.md',
                     },
                     {
                         name: 'Slider amount example',
-                        content: './styleguidist/desktop/components/Slider/SliderAmountExample.md',
+                        content: './styleguidist/components/Slider/SliderAmountExample.md',
                     },
                     {
                         name: 'SliderRange',
-                        content: './styleguidist/desktop/components/Slider/SliderRange.md',
+                        content: './styleguidist/components/Slider/SliderRange.md',
                     },
                 ],
             },
@@ -349,109 +316,84 @@ const sections = [
                 sections: [
                     {
                         name: 'SliderExtended base',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtended.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtended.md',
                     },
                     {
                         name: 'SliderExtended with tooltip',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtendedTooltip.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtendedTooltip.md',
                     },
                     {
                         name: 'SliderExtended reverse',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtendedReverse.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtendedReverse.md',
                     },
                     {
                         name: 'SliderExtended custom steps',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtendedCustomSteps.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtendedCustomSteps.md',
                     },
                     {
                         name: 'SliderExtended amount example',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtendedAmountExample.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtendedAmountExample.md',
                     },
                     {
                         name: 'SliderExtended range',
-                        content: './styleguidist/desktop/components/SliderExtended/SliderExtendedRange.md',
+                        content: './styleguidist/components/SliderExtended/SliderExtendedRange.md',
                     },
                 ],
             },
             {
                 name: 'Spinners',
-                sections: [
-                    {
-                        name: 'Spinner',
-                        components: ['./src/desktop/components/Spinner/Spinner.tsx'],
-                    },
-                    {
-                        name: 'SpinnerWidget',
-                        components: ['./src/desktop/components/SpinnerWidget/SpinnerWidget.tsx'],
-                    },
+                components: [
+                    './src/components/Spinner/Spinner.tsx',
+                    './src/components/SpinnerWidget/SpinnerWidget.tsx',
                 ],
             },
             {
                 name: 'Spoiler',
-                components: ['./src/desktop/components/Spoiler/Spoiler.tsx'],
+                components: ['./src/components/Spoiler/Spoiler.tsx'],
             },
             {
                 name: 'StatusTracker',
-                components: [
-                    './src/desktop/components/StatusTracker/StatusTracker.tsx',
-                    './src/desktop/components/StatusTrackerDeprecated/StatusTrackerDeprecated.tsx',
-                ],
+                components: ['./src/components/StatusTracker/StatusTracker.tsx'],
             },
             {
                 name: 'Stepper',
                 components: [
-                    './src/desktop/components/Stepper/Stepper.tsx',
-                    './src/desktop/components/Stepper/StepperExtended.tsx'
+                    './src/components/Stepper/Stepper.tsx',
+                    './src/components/Stepper/StepperExtended.tsx'
                 ],
             },
             {
                 name: 'Suggest',
-                sections: [
-                    {
-                        name: 'Sync',
-                        content: './styleguidist/desktop/components/Suggest/SyncExample/SuggestSyncExample.md',
-                    },
-                    {
-                        name: 'Async',
-                        content: './styleguidist/desktop/components/Suggest/AsyncExample/SuggestAsyncExample.md',
-                    },
-                    {
-                        name: 'Custom',
-                        content: './styleguidist/desktop/components/Suggest/CustomExample/SuggestCustomExample.md',
-                    },
+                components: [
+                    './src/components/Suggest/Suggest.tsx',
+                    './src/components/Suggest/SuggestCustom.tsx',
                 ],
             },
             {
                 name: 'TableBasic',
-                content: './styleguidist/desktop/components/Tables/TableBasic/TableBasic.md',
+                content: './styleguidist/components/Tables/TableBasic/TableBasic.md',
             },
             {
                 name: 'Tabs',
-                content: './styleguidist/desktop/components/Tabs/Tabs.md',
+                content: './styleguidist/components/Tabs/Tabs.md',
             },
             {
                 name: 'TabsExtended',
-                components: ['./src/desktop/components/TabsExtended/TabsExtended.tsx'],
+                components: ['./src/components/TabsExtended/TabsExtended.tsx'],
             },
             {
                 name: 'TabsFolder',
-                components: ['./src/desktop/components/TabsFolder/TabsFolder.tsx'],
+                components: ['./src/components/TabsFolder/TabsFolder.tsx'],
             },
             {
                 name: 'TabsFolderExtended',
-                content: './styleguidist/desktop/components/TabsFolderExtended/TabsFolderExtended.md',
+                content: './styleguidist/components/TabsFolderExtended/TabsFolderExtended.md',
             },
             {
                 name: 'Tag',
-                sections: [
-                    {
-                        name: 'Tag',
-                        content: './styleguidist/desktop/components/Tag/Tag.md',
-                    },
-                    {
-                        name: 'TagGroup',
-                        content: './styleguidist/desktop/components/Tag/TagGroup.md',
-                    },
+                components: [
+                    './src/components/Tag/Tag.tsx',
+                    './src/components/Tag/TagGroup.tsx',
                 ],
             },
             {
@@ -459,59 +401,32 @@ const sections = [
                 sections: [
                     {
                         name: 'Input',
-                        content: 'styleguidist/desktop/components/TextField/TextField.md'
+                        content: 'styleguidist/components/TextField/TextField.md'
                     },
                     {
                         name: 'MaskedInput',
-                        content: 'styleguidist/desktop/components/TextField/TextFieldMasked.md'
+                        content: 'styleguidist/components/TextField/TextFieldMasked.md'
                     }
                 ],
             },
             {
                 name: 'Tooltip',
-                components: ['./src/desktop/components/Tooltip/Tooltip.tsx'],
+                components: ['./src/components/Tooltip/Tooltip.tsx'],
             },
             {
                 name: 'Typography',
-                sections: [
-                    {
-                        name: 'Text',
-                        content: './styleguidist/desktop/components/Typography/Text.md',
-                    },
-                    {
-                        name: 'Title',
-                        content: './styleguidist/desktop/components/Typography/Title.md',
-                    },
+                components: [
+                    './src/components/Typography/Text.tsx',
+                    './src/components/Typography/Title.tsx',
                 ],
             },
             {
                 name: 'UploadZone',
-                content: './styleguidist/desktop/components/UploadZone/UploadZone.md',
-            },
-            {
-                name: 'XStepper',
-                components: ['./src/desktop/components/XStepper/XStepper.tsx'],
+                content: './styleguidist/components/UploadZone/UploadZone.md',
             },
             {
                 name: 'Widget',
-                components: ['./src/desktop/components/Widget/Widget.tsx'],
-            },
-        ],
-    },
-    {
-        name: 'Mobile Components',
-        sections: [
-            {
-                name: 'Buttons',
-                components: [
-                    './src/mobile/components/Button/ButtonGeneral.tsx',
-                    './src/mobile/components/Button/ButtonSecondary.tsx',
-                    './src/mobile/components/Button/ButtonDanger.tsx',
-                ],
-            },
-            {
-                name: 'Inputs',
-                components: ['./src/mobile/components/input/Input/Input.tsx'],
+                components: ['./src/components/Widget/Widget.tsx'],
             },
         ],
     },
@@ -523,35 +438,35 @@ const sections = [
                 sections: [
                     {
                         name: 'Accent',
-                        content: './styleguidist/desktop/components/Icons/Accent.md',
+                        content: './styleguidist/components/Icons/Accent.md',
                     },
                     {
                         name: 'Animated',
-                        content: './styleguidist/desktop/components/Icons/Animated.md',
+                        content: './styleguidist/components/Icons/Animated.md',
                     },
                     {
                         name: 'Brand',
-                        content: './styleguidist/desktop/components/Icons/Brand.md',
+                        content: './styleguidist/components/Icons/Brand.md',
                     },
                     {
                         name: 'Marketing',
-                        content: './styleguidist/desktop/components/Icons/Marketing.md',
+                        content: './styleguidist/components/Icons/Marketing.md',
                     },
                     {
                         name: 'Navigation',
-                        content: './styleguidist/desktop/components/Icons/Navigation.md',
+                        content: './styleguidist/components/Icons/Navigation.md',
                     },
                     {
                         name: 'Product',
-                        content: './styleguidist/desktop/components/Icons/Product.md',
+                        content: './styleguidist/components/Icons/Product.md',
                     },
                     {
                         name: 'Service',
-                        content: './styleguidist/desktop/components/Icons/Service.md',
+                        content: './styleguidist/components/Icons/Service.md',
                     },
                     {
                         name: 'Statuses',
-                        content: './styleguidist/desktop/components/Icons/Statuses.md',
+                        content: './styleguidist/components/Icons/Statuses.md',
                     },
                 ],
             },
@@ -560,11 +475,11 @@ const sections = [
                 sections: [
                     {
                         name: 'Screen Market',
-                        content: './styleguidist/desktop/components/Icons/ScreenMarket.md',
+                        content: './styleguidist/components/Icons/ScreenMarket.md',
                     },
                     {
                         name: 'Screen System',
-                        content: './styleguidist/desktop/components/Icons/ScreenSystem.md',
+                        content: './styleguidist/components/Icons/ScreenSystem.md',
                     },
                 ],
             },
@@ -575,23 +490,23 @@ const sections = [
         sections: [
             {
                 name: 'FormEditable',
-                content: './styleguidist/desktop/components/Form/FormEditable.md',
+                content: './styleguidist/components/Form/FormEditable.md',
             },
             {
                 name: 'FormDetailed',
-                content: './styleguidist/desktop/components/Form/FormDetailed.md',
+                content: './styleguidist/components/Form/FormDetailed.md',
             },
             {
                 name: 'Input with no autofill',
-                content: './styleguidist/desktop/components/Input/InputNoAutofill.md'
+                content: './styleguidist/components/Input/InputNoAutofill.md'
             },
             {
                 name: 'Select accessibility',
-                content: './styleguidist/desktop/components/Select/SelectAccessibility.md',
+                content: './styleguidist/components/Select/SelectAccessibility.md',
             },
             {
                 name: 'SMSInput in TableBasic',
-                content: './styleguidist/desktop/components/SMSInput/SMSInputTableBasic.md',
+                content: './styleguidist/components/SMSInput/SMSInputTableBasic.md',
             },
         ],
     },
@@ -601,7 +516,7 @@ const sections = [
     },
     {
         name: 'Fonts',
-        content: './styleguidist/desktop/components/Fonts/Fonts.md',
+        content: './styleguidist/components/Fonts/Fonts.md',
     },
     {
         name: 'Screenshot tests',
@@ -611,11 +526,11 @@ const sections = [
                 sections: [
                     {
                         name: 'AlertContext',
-                        content: './styleguidist/test-examples/desktop/Alert/AlertContext/AlertContext.md',
+                        content: './styleguidist/test-examples/Alert/AlertContext/AlertContext.md',
                     },
                     {
                         name: 'AlertProcess',
-                        content: './styleguidist/test-examples/desktop/Alert/AlertProcess/AlertProcess.md',
+                        content: './styleguidist/test-examples/Alert/AlertProcess/AlertProcess.md',
                     },
                 ],
             },
@@ -624,15 +539,15 @@ const sections = [
                 sections: [
                     {
                         name: 'Button',
-                        content: './styleguidist/test-examples/desktop/Button/Button.md',
+                        content: './styleguidist/test-examples/Button/Button.md',
                     },
                     {
                         name: 'ButtonIcon',
-                        content: './styleguidist/test-examples/desktop/Button/ButtonIcon.md',
+                        content: './styleguidist/test-examples/Button/ButtonIcon.md',
                     },
                     {
                         name: 'ButtonDropdown',
-                        content: './styleguidist/test-examples/desktop/Button/ButtonDropdown.md',
+                        content: './styleguidist/test-examples/Button/ButtonDropdown.md',
                     },
                 ],
             },
@@ -641,11 +556,11 @@ const sections = [
                 sections: [
                     {
                         name: 'CardStatic',
-                        content: './styleguidist/test-examples/desktop/Card/CardStatic.md',
+                        content: './styleguidist/test-examples/Card/CardStatic.md',
                     },
                     {
                         name: 'CardAction',
-                        content: './styleguidist/test-examples/desktop/Card/CardAction.md',
+                        content: './styleguidist/test-examples/Card/CardAction.md',
                     },
                 ],
             },
@@ -654,163 +569,161 @@ const sections = [
                 sections: [
                     {
                         name: 'Checkbox',
-                        content: './styleguidist/test-examples/desktop/Checkbox/Checkbox.md',
+                        content: './styleguidist/test-examples/Checkbox/Checkbox.md',
                     },
                     {
                         name: 'CheckboxXGroup',
-                        content: './styleguidist/test-examples/desktop/Checkbox/CheckboxXGroup.md',
+                        content: './styleguidist/test-examples/Checkbox/CheckboxXGroup.md',
                     },
                     {
                         name: 'CheckboxYGroup',
-                        content: './styleguidist/test-examples/desktop/Checkbox/CheckboxYGroup.md',
+                        content: './styleguidist/test-examples/Checkbox/CheckboxYGroup.md',
                     },
                 ],
             },
             {
                 name: 'Col',
-                content: './styleguidist/test-examples/desktop/Col/Col.md',
+                content: './styleguidist/test-examples/Col/Col.md',
             },
             {
                 name: 'DatePicker',
-                content: './styleguidist/test-examples/desktop/DatePicker/DatePicker.md',
+                content: './styleguidist/test-examples/DatePicker/DatePicker.md',
             },
             {
                 name: 'Divider',
-                content: './styleguidist/test-examples/desktop/Divider/Divider.md',
+                content: './styleguidist/test-examples/Divider/Divider.md',
             },
             {
                 name: 'Ellipsis',
-                content: './styleguidist/test-examples/desktop/Ellipsis/Ellipsis.md',
+                content: './styleguidist/test-examples/Ellipsis/Ellipsis.md',
             },
             {
                 name: 'Input',
-                content: './styleguidist/test-examples/desktop/Input/Input.md',
+                content: './styleguidist/test-examples/Input/Input.md',
             },
             {
                 name: 'InputGroup',
-                content: './styleguidist/test-examples/desktop/InputGroup/InputGroup.md',
+                content: './styleguidist/test-examples/InputGroup/InputGroup.md',
             },
             {
                 name: 'Link',
-                content: './styleguidist/test-examples/desktop/Link/Link.md',
+                content: './styleguidist/test-examples/Link/Link.md',
             },
             {
                 name: 'MaskedInput',
-                content: './styleguidist/test-examples/desktop/MaskedInput/MaskedInput.md',
+                content: './styleguidist/test-examples/MaskedInput/MaskedInput.md',
             },
             {
                 name: 'MonthYearPicker',
-                content: './styleguidist/test-examples/desktop/MonthYearPicker/MonthYearPicker.md',
+                content: './styleguidist/test-examples/MonthYearPicker/MonthYearPicker.md',
             },
             {
                 name: 'Multiselect',
-                content: './styleguidist/test-examples/desktop/Multiselect/Multiselect.md',
+                content: './styleguidist/test-examples/Multiselect/Multiselect.md',
             },
             {
                 name: 'Radios',
                 sections: [
                     {
                         name: 'Radio',
-                        content: './styleguidist/test-examples/desktop/Radio/Radio.md',
+                        content: './styleguidist/test-examples/Radio/Radio.md',
                     },
                     {
                         name: 'RadioXGroup',
-                        content: './styleguidist/test-examples/desktop/Radio/RadioXGroup.md',
+                        content: './styleguidist/test-examples/Radio/RadioXGroup.md',
                     },
                     {
                         name: 'RadioYGroup',
-                        content: './styleguidist/test-examples/desktop/Radio/RadioYGroup.md',
+                        content: './styleguidist/test-examples/Radio/RadioYGroup.md',
                     },
                 ],
             },
             {
                 name: 'SegmentedControl',
-                content: './styleguidist/test-examples/desktop/SegmentedControl/SegmentedControl.md',
+                content: './styleguidist/test-examples/SegmentedControl/SegmentedControl.md',
             },
             {
                 name: 'Select',
-                content: './styleguidist/test-examples/desktop/Select/Select.md',
+                content: './styleguidist/test-examples/Select/Select.md',
             },
             {
                 name: 'SliderExtended',
-                content: './styleguidist/test-examples/desktop/SliderExtended/SliderExtended.md',
+                content: './styleguidist/test-examples/SliderExtended/SliderExtended.md',
             },
             {
                 name: 'StatusTracker',
-                content: './styleguidist/test-examples/desktop/StatusTracker/StatusTracker.md',
+                content: './styleguidist/test-examples/StatusTracker/StatusTracker.md',
             },
             {
                 name: 'Stepper',
-                content: './styleguidist/test-examples/desktop/Stepper/Stepper.md',
+                content: './styleguidist/test-examples/Stepper/Stepper.md',
             },
             {
                 name: 'Suggest',
-                content: './styleguidist/test-examples/desktop/Suggest/Suggest.md',
+                content: './styleguidist/test-examples/Suggest/Suggest.md',
             },
             {
                 name: 'SuggestCustom',
-                content: './styleguidist/test-examples/desktop/Suggest/SuggestCustom.md',
+                content: './styleguidist/test-examples/Suggest/SuggestCustom.md',
             },
             {
                 name: 'SMSInput',
-                content: './styleguidist/test-examples/desktop/SMSInput/SMSInput.md',
+                content: './styleguidist/test-examples/SMSInput/SMSInput.md',
             },
             {
                 name: 'Spoiler',
-                content: './styleguidist/test-examples/desktop/Spoiler/Spoiler.md',
+                content: './styleguidist/test-examples/Spoiler/Spoiler.md',
             },
             {
                 name: 'Tabs',
-                content: './styleguidist/test-examples/desktop/Tabs/Tabs.md',
+                content: './styleguidist/test-examples/Tabs/Tabs.md',
             },
             {
                 name: 'TabsFolder',
-                content: './styleguidist/test-examples/desktop/TabsFolder/TabsFolder.md',
+                content: './styleguidist/test-examples/TabsFolder/TabsFolder.md',
             },
             {
                 name: 'Tag',
                 sections: [
                     {
                         name: 'Tag',
-                        content: './styleguidist/test-examples/desktop/Tag/Tag.md',
+                        content: './styleguidist/test-examples/Tag/Tag.md',
                     },
                     {
                         name: 'TagGroup',
-                        content: './styleguidist/test-examples/desktop/Tag/TagGroup.md',
+                        content: './styleguidist/test-examples/Tag/TagGroup.md',
                     },
                 ],
             },
             {
                 name: 'TextArea',
-                content: './styleguidist/test-examples/desktop/TextArea/TextArea.md',
+                content: './styleguidist/test-examples/TextArea/TextArea.md',
             },
             {
                 name: 'Tooltip',
-                content: './styleguidist/test-examples/desktop/Tooltip/Tooltip.md',
+                content: './styleguidist/test-examples/Tooltip/Tooltip.md',
             },
             {
                 name: 'Typography',
                 sections: [
                     {
                         name: 'Text',
-                        content: './styleguidist/test-examples/desktop/Typography/Text.md',
+                        content: './styleguidist/test-examples/Typography/Text.md',
                     },
                     {
                         name: 'Title',
-                        content: './styleguidist/test-examples/desktop/Typography/Title.md',
+                        content: './styleguidist/test-examples/Typography/Title.md',
                     },
                 ],
             },
             {
                 name: 'UploadZone',
-                content: './styleguidist/test-examples/desktop/UploadZone/UploadZone.md',
+                content: './styleguidist/test-examples/UploadZone/UploadZone.md',
             },
             {
                 name: 'Widget',
-                content: './styleguidist/test-examples/desktop/Widget/Widget.md',
+                content: './styleguidist/test-examples/Widget/Widget.md',
             },
         ],
     },
 ];
-
-exports.sections = sections;

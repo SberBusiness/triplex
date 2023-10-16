@@ -1,8 +1,8 @@
-import React, { useEffect, useState }  from 'react';
-import {Checkbox} from '@sberbusiness/triplex/desktop/components/Checkbox/Checkbox';
+import React, {useEffect, useState} from 'react';
+import {Checkbox} from '@sberbusiness/triplex/components/Checkbox/Checkbox';
 import {ICSSBundles} from './CSSSettingsSection';
 import {URLUtils} from '../../ComponentOptions/URLUtils';
-import {mapCSSBundleDesktopComponents, mapCSSBundleMobileComponents} from '../../../MapComponentToCSSBundle';
+import {mapCSSBundleComponents} from '../../../MapComponentToCSSBundle';
 import {ECSSBundlesType} from '../../StyleguidistSettings/StyleguidistSettingsStore';
 
 export interface ICSSSettingsSubSectionProps {
@@ -21,56 +21,52 @@ const CSSSettingsSubSection: React.FC<ICSSSettingsSubSectionProps> = ({bundles, 
 
     useEffect(() => {
         // Проверка на fullScreenMode и соответствие компонента и типу бандла.
-        if (!URLUtils.isComponentPage()
-            || URLUtils.isMobileComponentPage() && bundleType === ECSSBundlesType.DESKTOP
-            || !URLUtils.isMobileComponentPage() && bundleType === ECSSBundlesType.MOBILE
-        ) {
+        if (!URLUtils.isComponentPage()) {
             requiredBundles.length && setRequiredBundles([]);
             return;
         }
         // Название компонента.
         const componentTitle = URLUtils.getComponentTitle();
         // Не common бандлы и есть название компонента.
-        if (componentTitle && bundleType !== ECSSBundlesType.DESKTOP_COMMON && bundleType !== ECSSBundlesType.MOBILE_COMMON) {
+        if (componentTitle && bundleType !== ECSSBundlesType.DESKTOP_COMMON) {
             // Карта соответствия имени бандла и компонента.
-            const map = bundleType === ECSSBundlesType.DESKTOP ? mapCSSBundleDesktopComponents : mapCSSBundleMobileComponents;
+            const map = mapCSSBundleComponents;
 
             const nextRequiredBundles = Object.keys(map)
-                .map(bundleTitle => {
+                .map((bundleTitle) => {
                     if (map[bundleTitle].includes(componentTitle)) {
                         return bundleTitle;
                     }
                     return undefined;
                 })
-                .filter(v => v)
+                .filter((v) => v);
 
             if (nextRequiredBundles.join() !== requiredBundles.join()) {
-                setRequiredBundles(nextRequiredBundles as string[])
+                setRequiredBundles(nextRequiredBundles as string[]);
             }
         }
     });
 
     const handleChange = (bundleTitle: string, checked: boolean) => {
         const nextBundles = {...bundles, [bundleTitle]: checked};
-        onChange(nextBundles)
-    }
+        onChange(nextBundles);
+    };
 
     return (
         <div className="settings-sub-section">
             <div className="title">{title}</div>
             <div className="content">
                 {Object.keys(bundles).map((bundleTitle) => (
-                        <div key={bundleTitle} className="checkbox-line">
-                            <Checkbox
-                                checked={bundles[bundleTitle]}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleChange(bundleTitle, event.target.checked)}
-                            >
-                                {bundleTitle}
-                                {requiredBundles.includes(bundleTitle) ? <span className="required" /> : null}
-                            </Checkbox>
-                        </div>
-                    )
-                )}
+                    <div key={bundleTitle} className="checkbox-line">
+                        <Checkbox
+                            checked={bundles[bundleTitle]}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleChange(bundleTitle, event.target.checked)}
+                        >
+                            {bundleTitle}
+                            {requiredBundles.includes(bundleTitle) ? <span className="required" /> : null}
+                        </Checkbox>
+                    </div>
+                ))}
             </div>
         </div>
     );

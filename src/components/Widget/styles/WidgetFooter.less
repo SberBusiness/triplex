@@ -1,0 +1,57 @@
+@import 'src/styles/style';
+
+.widgetFooter {
+    padding: 0 @metric-32;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 @metric-16 @metric-16;
+}
+
+.widgetFooterContent {
+    padding: 22px 0;
+    flex-grow: 1;
+    margin-right: auto;
+    .font-size(@font-size-14);
+}
+
+.widgetFooterControls {
+    padding: 18px 0 18px @metric-24;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+@media (max-width: @screen-sm-max) {
+    .widgetFooter {
+        padding-left: 16px;
+        padding-right: 16px;
+        flex-wrap: wrap;
+        align-items: normal;
+    }
+
+    .widgetFooterContent {
+        width: 100%;
+        padding: 0;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .widgetFooterControls {
+        padding: 0;
+        white-space: normal;
+        margin-bottom: 16px;
+        // Отступ, компенсирующий margin-left у Button.
+        margin-left: -16px;
+
+        > button,
+        > .globalButtonDropdownExtended {
+            margin-left: 16px;
+            margin-top: 16px;
+        }
+    }
+
+    .widgetFooterContent + .widgetFooterControls {
+        // Отступ, компенсирующий margin-top у Button.
+        margin-top: -16px;
+    }
+}

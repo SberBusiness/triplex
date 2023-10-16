@@ -1,0 +1,56 @@
+@import 'src/styles/style';
+
+.paginationWrapper {
+    position: relative;
+    padding: @metric-24 0;
+    pointer-events: none;
+
+    .paginationSelectBlock {
+        position: absolute;
+        display: flex;
+        align-items: center;
+
+        .paginationSelectText {
+            .b1-text-main(@color-graphite-01);
+        }
+
+        .paginationSelect {
+            margin-left: @metric-8;
+            pointer-events: auto;
+        }
+    }
+
+    .paginationIteratorBlock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.hidden {
+            visibility: hidden;
+        }
+
+        .paginationIteratorButton {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .pageNumber {
+            margin: 0 @metric-24;
+            .b1-text-main(@color-graphite-01);
+        }
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .paginationWrapper {
+        display: flex;
+
+        .paginationSelectBlock {
+            position: relative;
+        }
+
+        .paginationIteratorBlock {
+            margin-left: 12px;
+        }
+    }
+}

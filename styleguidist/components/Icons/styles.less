@@ -1,0 +1,26 @@
+@import ~'@sberbusiness/core-styles/colors.less';
+
+.icons-list {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 4px;
+
+    &.highlighted {
+        background-color: @color-asphalt-01;
+    }
+}
+
+.icon-item {
+    display: flex;
+    margin: 8px;
+    flex: 1 0 240px;
+    align-items: center;
+
+    &.deprecated {
+        text-decoration: line-through;
+    }
+}
+
+.icon-name {
+    margin-left: 8px;
+}

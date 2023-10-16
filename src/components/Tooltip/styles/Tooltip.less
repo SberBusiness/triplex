@@ -1,0 +1,53 @@
+@import 'src/styles/style';
+
+.tooltipSM .tooltipBody {
+    width: 192px;
+    min-height: 52px;
+}
+
+.tooltipLG .tooltipBody {
+    width: 384px;
+    min-height: 72px;
+}
+
+.tooltipOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: @z-index-tooltip - 1;
+
+    .tooltip {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        outline: none;
+        pointer-events: auto;
+        z-index: @z-index-tooltip;
+
+        .tooltipBody {
+            .b1-text-main(@color-snowy);
+
+            text-align: left;
+            overflow-y: auto;
+            position: relative;
+            padding: @metric-16;
+            background-color: @color-graphite-01;
+            border-radius: @radius-8;
+            box-sizing: border-box;
+        }
+
+        .tooltipXButton {
+            position: absolute;
+            right: @metric-8;
+            top: @metric-8;
+        }
+
+        &.withTooltipXButton .tooltipBody {
+            padding-right: @metric-32;
+        }
+    }
+}

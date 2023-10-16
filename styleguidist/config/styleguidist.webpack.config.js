@@ -3,34 +3,28 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const transpileDependencies = [
-    'estree-walker',
-    'regexpu-core',
-    'strip-ansi',
+    'acorn-jsx',
     'ansi-regex',
     'ansi-styles',
-    'react-dev-utils',
     'chalk',
+    'estree-walker',
+    'react-dev-utils',
+    'regexpu-core',
+    'strip-ansi',
     'unicode-match-property-ecmascript',
     'unicode-match-property-value-ecmascript',
-    'acorn-jsx',
-]
+];
 
 module.exports = {
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/,
-                exclude: /node_modules/,
-                use: [
-                    {loader: path.resolve(__dirname, './cssClassNameReplacer.js'),},
-                    {loader: 'ts-loader'}
-                ]
-
-            }, {
                 test: /\.js$/,
-                exclude: (modulePath) =>
-                    (/node_modules/.test(modulePath)) &&
-                    !transpileDependencies.some((mod) => new RegExp(`node_modules[\\\\/]${mod}[\\\\/]`).test(modulePath)),
+                enforce: 'pre',
+                use: ['source-map-loader'],
+            },
+            {
+                test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -40,34 +34,53 @@ module.exports = {
                                 '@babel/preset-env',
                                 {
                                     useBuiltIns: 'usage',
-                                    corejs: 3,
+                                    corejs: 3.32,
                                     targets: {
-                                        ie: '11'
-                                    }
-                                }
+                                        ie: '11',
+                                    },
+                                },
                             ],
                         ],
-                    }
-                }
-            }, {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader']
-            }, {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }, {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'fonts/'
-                        }
-                    }
-                ]
+                    },
+                },
+                exclude: (path) => (/node_modules/.test(path)) &&
+                    !transpileDependencies.some((name) => new RegExp(`node_modules[\\\\/]${name}[\\\\/]`).test(path)),
             },
-        ]
+            {
+                test: /\.(ts|tsx)$/,
+                use: [
+                    {loader: path.resolve(__dirname, './cssClassNameReplacer.js')},
+                    {loader: 'ts-loader'},
+                ],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: {
+                                paths: [path.resolve(__dirname, "../../")],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'fonts/[name][ext]',
+                },
+            },
+        ],
     },
     resolve: {
         alias: {
@@ -86,19 +99,23 @@ module.exports = {
         },
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        }),
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development',
+            STYLEGUIDIST_SETTINGS_MODE: false,
+        }),
         new CopyPlugin({
             patterns: [
                 {from: './styleguidist/config/images/favicon.ico', to: './'},
                 {from: './styleguidist/public', to: './styleguidist/public'},
             ],
         }),
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'development',
-            STYLEGUIDIST_SETTINGS_MODE: false,
-        }),
     ],
     devServer: {
         // Для доступа к приложению из Docker контейнера.
-        disableHostCheck: true
-    }
-}
+        allowedHosts: 'all',
+    },
+    devtool: process.env.NODE_ENV === 'development' ? 'eval' : false,
+};

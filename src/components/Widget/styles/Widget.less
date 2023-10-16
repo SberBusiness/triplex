@@ -1,0 +1,17 @@
+@import 'src/styles/style';
+
+.widget {
+    border-radius: @metric-16;
+    background: @color-snowy;
+    box-shadow: @shadow-01;
+
+    .widgetContent {
+        box-sizing: content-box;
+        visibility: hidden;
+
+        &.globalExpandAnimationAnimating,
+        &.globalExpandAnimationOpened {
+            visibility: visible;
+        }
+    }
+}

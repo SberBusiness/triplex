@@ -1,0 +1,84 @@
+@import 'src/styles/style';
+
+.amountInput {
+    display: flex;
+
+    input {
+        text-align: right;
+    }
+
+    &.withCurrency input {
+        padding-right: @metric-8;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    :focus + .currency {
+        border-color: @color-graphite-01;
+    }
+
+    &.filled .currency {
+        color: @color-graphite-01;
+    }
+
+    &.disabled .currency {
+        cursor: default;
+        user-select: none;
+        color: @color-asphalt-01;
+        background-color: @color-asphalt-05;
+    }
+
+    &.error .currency {
+        border-color: @color-ruby-02;
+    }
+}
+
+.currency {
+    height: @ufs-theme-input-height;
+    padding-top: @metric-8 - 1;
+    padding-right: @metric-12 - 1;
+    padding-bottom: @metric-8 - 1;
+    box-sizing: border-box;
+    line-height: normal; // DCBSWT-1866 выравнивание наименования валюты
+    background-color: @color-snowy;
+    border: 1px solid @color-asphalt-03;
+    border-left-width: 0;
+    border-top-right-radius: @ufs-theme-input-border-radius;
+    border-bottom-right-radius: @ufs-theme-input-border-radius;
+}
+
+.grouped {
+    flex: 1;
+
+    &:not(:first-child) {
+        margin-left: -1px;
+    }
+
+    .left,
+    .left + .currency {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .intermediate,
+    .intermediate + .currency {
+        border-radius: 0;
+    }
+
+    .right,
+    .right + .currency {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &.error input,
+    &.error input + .currency {
+        z-index: 1;
+    }
+
+    input:focus,
+    input:focus + .currency {
+        z-index: 2;
+    }
+}

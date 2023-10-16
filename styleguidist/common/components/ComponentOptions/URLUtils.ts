@@ -9,7 +9,6 @@ const URL_OPTIONS_REGEX = /options=(.*})/;
 interface IURLUtils {
     getOptionsFromURL: () => IStyleguidistURLOptionsProps | null;
     isComponentPage: () => boolean;
-    isMobileComponentPage: () => boolean;
     getComponentTitle: () => string | undefined;
     hasQueryParams: () => boolean;
     updateURLOptionsFromComponent: (props: IStyleguidistURLOptionsProps) => void;
@@ -44,11 +43,6 @@ export const URLUtils: IURLUtils = {
      * Возвращает true, если текущая страница - страница отдельного компонента, а не список компонент. URL опции работают только на странице одного компонента.
      */
     isComponentPage: () => document.location.hash.includes('#!/'),
-
-    /**
-     * Возвращает true, если текущая страница - страница отдельного мобильного компонента, а не список компонент.
-     */
-    isMobileComponentPage: () => decodeURI(document.location.hash).includes('Mobile Components'),
 
     /**
      * Возвращает название компонента, если текущая страница - страница отдельного компонента

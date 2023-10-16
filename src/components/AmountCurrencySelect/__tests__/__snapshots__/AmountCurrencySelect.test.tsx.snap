@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmountCurrencySelect renders correctly 1`] = `
+<div
+  className="cssClass[amountCurrencySelect]"
+>
+  <input
+    autoComplete="off"
+    className="cssClass[input]"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    placeholder="0,00"
+    value="1 234 567 890,00"
+  />
+  <div
+    className="cssClass[selectExtended] cssClass[currencySelectExtended]"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-controls={0}
+      aria-expanded={false}
+      aria-haspopup="listbox"
+      className="cssClass[selectExtendedTarget] cssClass[currencySelectExtendedTarget]"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="combobox"
+      tabIndex={0}
+    >
+      <div
+        className="cssClass[label]"
+      >
+        RUB
+      </div>
+      <svg
+        className="cssClass[caretIcon] hoverable"
+      />
+    </div>
+  </div>
+</div>
+`;

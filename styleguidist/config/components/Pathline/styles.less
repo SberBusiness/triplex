@@ -1,0 +1,20 @@
+.styleguide-pathline {
+    display: flex;
+    color: #7D838A;
+}
+
+.styleguide-pathline-copy-button,
+.styleguide-pathline::after {
+    margin-left: 5px;
+}
+
+.styleguide-pathline::after {
+    content: 'Copied!';
+    opacity: 0;
+    transition: opacity 500ms;
+    pointer-events: none;
+}
+
+.copied::after {
+    opacity: 1;
+}

@@ -1,0 +1,62 @@
+@import 'src/styles/style';
+
+.uploadZoneDragArea() {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.uploadZone {
+    position: relative;
+
+    .uploadZoneDragArea {
+        .uploadZoneDragArea();
+
+        border: 1px dashed @color-asphalt-03;
+        border-radius: @radius-8;
+
+        &:hover {
+            border-color: @color-graphite-01;
+        }
+
+        // фикс ie (что бы не было размытых бордеров)
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            border: 1px dotted @color-asphalt-02;
+        }
+
+        // фикс edge (что бы не было размытых бордеров)
+        @supports (-ms-ime-align: auto) {
+            border: 1px dotted @color-asphalt-02;
+        }
+    }
+
+    .uploadZoneInput {
+        display: none;
+    }
+}
+
+.uploadZoneContainerDragArea {
+    .uploadZoneDragArea();
+
+    background-color: @color-snowy;
+    padding: @metric-4;
+
+    .border {
+        height: 100%;
+        border: 1px dashed @color-graphite-01;
+        border-radius: @radius-8;
+
+        // фикс ie (что бы не было размытых бордеров)
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            border: 1px dotted @color-graphite-01;
+        }
+
+        // фикс edge (что бы не было размытых бордеров)
+        @supports (-ms-ime-align: auto) {
+            border: 1px dotted @color-graphite-01;
+        }
+    }
+}
