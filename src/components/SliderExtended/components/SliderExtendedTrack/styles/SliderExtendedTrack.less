@@ -1,0 +1,35 @@
+@import 'src/styles/style';
+
+.sliderExtendedTrack {
+    height: @metric-4;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    background: @color-malachite-02;
+    z-index: @slider-track-z-index;
+
+    &:focus {
+        box-shadow: inset 0 0 1px 1px @color-sunny-01;
+    }
+
+    &.focusedByClick {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &.hoverOrDragByMouse {
+        background: @color-malachite-01;
+    }
+
+    &.staticSlider {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        background: @color-asphalt-02;
+    }
+}

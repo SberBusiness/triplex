@@ -1,0 +1,97 @@
+@import 'src/styles/style';
+
+.tabsFolder {
+    position: relative;
+    background: @color-asphalt-05;
+    box-shadow: inset 0 -1px 0 0 @color-asphalt-03;
+
+    .inner {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .content {
+        padding: 0;
+        background: transparent;
+    }
+
+    .tab {
+        + .tab {
+            margin-left: -1px;
+        }
+
+        &.disabled {
+            pointer-events: none;
+        }
+    }
+
+    .tabButton {
+        padding: 7px 15px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        color: @color-graphite-01;
+        background: @color-asphalt-05;
+        outline: none;
+        border: 1px solid #d0d7dd;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+
+        &:hover {
+            background: @color-snowy;
+        }
+
+        &.selected {
+            background: @color-snowy;
+            border-bottom-color: #fff;
+
+            &:hover {
+                background: @color-snowy;
+            }
+        }
+
+        &:focus {
+            z-index: 1;
+        }
+
+        &:disabled > span {
+            color: @color-asphalt-03;
+        }
+    }
+
+    .buttonPrev,
+    .buttonNext {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        background-clip: padding-box;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+        }
+    }
+}
+
+.buttonPrev {
+    left: 0;
+    background-image: linear-gradient(to right, @color-asphalt-05 39.06%, rgba(242, 244, 247, 0));
+
+    &:after {
+        left: 0;
+        background-image: linear-gradient(to right, @color-asphalt-03 39.06%, rgba(242, 244, 247, 0));
+    }
+}
+
+.buttonNext {
+    right: 0;
+    background-image: linear-gradient(to left, @color-asphalt-05 39.06%, rgba(242, 244, 247, 0));
+
+    &:after {
+        right: 0;
+        background-image: linear-gradient(to left, @color-asphalt-03 39.06%, rgba(242, 244, 247, 0));
+    }
+}

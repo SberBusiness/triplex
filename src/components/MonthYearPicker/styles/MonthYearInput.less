@@ -1,0 +1,28 @@
+@import 'src/styles/style';
+
+.inputBlock {
+    position: relative;
+}
+
+.pseudoInput {
+    .input-base();
+
+    width: 100%;
+    background: @color-snowy;
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &:focus.disabled {
+        border-color: @color-asphalt-03;
+    }
+
+    .placeholder {
+        color: @color-asphalt-01;
+    }
+}
+
+.calendarIcon {
+    .pickerCalendarIcon();
+}

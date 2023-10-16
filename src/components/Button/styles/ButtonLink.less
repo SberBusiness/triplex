@@ -1,0 +1,26 @@
+@import 'src/styles/style';
+
+.button.link {
+    background-color: transparent;
+    .b1-text-main(@color-sky-02);
+
+    &.MD {
+        .size-MD(@ufs-theme-button-border-width-default, @ufs-theme-button-min-width-link-md, @ufs-theme-button-padding-horizontal-link-md);
+    }
+
+    &.SM {
+        .size-SM(@ufs-theme-button-border-width-default, @ufs-theme-button-min-width-link-sm, @ufs-theme-button-padding-horizontal-link-sm);
+    }
+
+    &:hover {
+        color: @color-malachite-02;
+    }
+
+    &:active {
+        color: @color-sky-01;
+    }
+
+    &:disabled {
+        color: @color-asphalt-03;
+    }
+}

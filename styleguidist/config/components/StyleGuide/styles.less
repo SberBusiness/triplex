@@ -1,0 +1,124 @@
+@import 'src/styles/style';
+
+@sidebar-width: 420px;
+
+.styleguide {
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 72px;
+    max-width: 940px;
+    min-height: calc(100vh - 112px); // 40px + 72px = 112px
+    margin: auto;
+
+    &.has-sidebar {
+        margin-left: @sidebar-width;
+
+        @media (max-width: @screen-md-max) {
+            margin-left: auto;
+        }
+    }
+}
+
+.styleguide-content {
+    padding: 30px 42px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.styleguide-sidebar {
+    height: 100%;
+    max-width: @sidebar-width;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    background-color: #F2F4F7;
+    transition-duration: 500ms;
+
+    &.collapsed {
+        display: none;
+    }
+}
+
+.styleguide-sidebar-logo {
+    padding: 90px 110px 40px;
+}
+
+.styleguide-sidebar-burger {
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    position: fixed;
+    top: 4px;
+    left: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+
+    &.expanded {
+        transform: rotateZ(180deg);
+    }
+}
+
+.styleguide-sidebar-burger-slice {
+    height: 4px;
+    width: 24px;
+    position: absolute;
+    left: 4px;
+    background-color: #1F1F22;
+    border-radius: 2px;
+}
+
+.styleguide-sidebar-burger,
+.styleguide-sidebar-burger-slice {
+    transition-duration: 500ms;
+}
+
+.styleguide-sidebar-burger-slice:nth-child(1) {
+    top: 4px;
+
+    .expanded & {
+        transform: rotateZ(45deg) scaleX(0.75) translate(8px, 0px);
+    }
+}
+
+.styleguide-sidebar-burger-slice:nth-child(2) {
+    top: 14px;
+}
+
+.styleguide-sidebar-burger-slice:nth-child(3) {
+    top: 24px;
+
+    .expanded & {
+        transform: rotateZ(-45deg) scaleX(0.75) translate(8px, 0);
+    }
+}
+
+.styleguide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 24px;
+    left: 0;
+    color: #7D838A;
+}
+
+.styleguide-footer-logo {
+    flex-shrink: 0;
+}
+
+.styleguide-footer-link {
+    color: #1358bf;
+    text-decoration: none;
+
+    &:hover {
+        color: #0eb757;
+    }
+
+    &:active {
+        color: #0F5498;
+    }
+}

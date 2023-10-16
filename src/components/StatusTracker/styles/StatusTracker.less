@@ -1,0 +1,66 @@
+@import 'src/styles/style';
+
+.statusTracker {
+    display: flex;
+}
+
+.statusTrackerIcon {
+    line-height: 0;
+    order: 1;
+}
+
+.statusTrackerBody {
+    flex-grow: 1;
+    order: 3;
+}
+
+.statusTrackerSidebar {
+    order: 5;
+}
+
+.statusTrackerIcon + .statusTrackerBody {
+    margin-left: 16px;
+}
+
+.statusTrackerBody + .statusTrackerSidebar {
+    margin-left: 24px;
+}
+
+@media screen and (max-width: @screen-md) {
+    .statusTracker {
+        flex-wrap: wrap;
+    }
+
+    .statusTracker::before {
+        content: '';
+        flex: 0 0 100%;
+        order: 4;
+    }
+
+    .statusTrackerIcon + .statusTrackerBody {
+        flex-basis: calc(100% - 64px - 16px);
+    }
+
+    .statusTrackerBody + .statusTrackerSidebar {
+        margin-top: 24px;
+        margin-left: 0;
+    }
+
+    .statusTrackerIcon ~ .statusTrackerSidebar {
+        margin-left: 64px + 16px;
+    }
+}
+
+@media screen and (max-width: @screen-sm) {
+    .statusTracker::after {
+        content: '';
+        flex: 0 0 100%;
+        order: 2;
+    }
+
+    .statusTrackerIcon + .statusTrackerBody,
+    .statusTrackerBody + .statusTrackerSidebar {
+        margin-top: 24px;
+        margin-left: 0;
+    }
+}

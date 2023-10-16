@@ -1,6 +1,4 @@
-const pkg = require('../../package');
-
-const regExp = /(mobile|desktop)(?:\/.+\/)(\w+)\/theme\/\w+(?:\.less)?/;
+const regExp = /(src)(?:\/.+\/)(\w+)\/styles\/\w+(?:\.less)?/;
 
 /**
  * Разбираем путь файла на нужные для сборки части.
@@ -19,7 +17,7 @@ module.exports = function(fileName, componentName) {
     const newComponentName = componentName || styleData[2];
 
     return {
-        outPath: `styles/${platform}/components/${newComponentName}`,
+        outPath: `styles/components/${newComponentName}`,
         platform,
         componentName: newComponentName,
     };

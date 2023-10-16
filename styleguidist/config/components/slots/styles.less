@@ -1,0 +1,27 @@
+.styleguide-code-tab-button {
+    line-height: 0;
+    color: #7D838A;
+    cursor: pointer;
+
+    &:hover {
+        color: #2E2F36;
+    }
+}
+
+.styleguide-usage-tab-button {
+    display: inline-flex;
+    color: #1358BF;
+    font-size: 16px;
+
+    &:hover {
+        color: #107f8C;
+    }
+}
+
+.styleguide-usage-tab-button-arrow {
+    transition: transform 0.25s ease-in-out;
+
+    .active & {
+        transform: rotate(-180deg);
+    }
+}

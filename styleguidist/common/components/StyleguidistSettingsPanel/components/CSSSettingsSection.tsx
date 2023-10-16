@@ -8,27 +8,19 @@ import {ECSSBundlesType} from '../../StyleguidistSettings/StyleguidistSettingsSt
  * [название бандла]: подключен или нет
  */
 export interface ICSSBundles {
-    [title: string]: boolean
+    [title: string]: boolean;
 }
 
 /**
  * Свойства CSSSettingsSection;
  */
 export interface ICSSSettingsSectionProps {
-    desktopBundles: {
-        bundles: ICSSBundles,
+    bundles: {
+        bundles: ICSSBundles;
         onChange: (bundles: ICSSBundles) => void;
     };
-    desktopCommonBundles: {
-        bundles: ICSSBundles,
-        onChange: (bundles: ICSSBundles) => void;
-    };
-    mobileBundles: {
-        bundles: ICSSBundles,
-        onChange: (bundles: ICSSBundles) => void;
-    };
-    mobileCommonBundles: {
-        bundles: ICSSBundles,
+    commonBundles: {
+        bundles: ICSSBundles;
         onChange: (bundles: ICSSBundles) => void;
     };
 }
@@ -36,13 +28,11 @@ export interface ICSSSettingsSectionProps {
 /**
  * Секция настроек подключения CSS бандлов.
  */
-const CSSSettingsSection: React.FC<ICSSSettingsSectionProps> = ({desktopCommonBundles, desktopBundles, mobileCommonBundles, mobileBundles}) => {
+const CSSSettingsSection: React.FC<ICSSSettingsSectionProps> = ({commonBundles, bundles}) => {
     return (
         <SettingsSection title="CSS settings">
-           <CSSSettingsSubSection title="Common desktop" bundleType={ECSSBundlesType.DESKTOP_COMMON} {...desktopCommonBundles} />
-           <CSSSettingsSubSection title="Desktop" bundleType={ECSSBundlesType.DESKTOP} {...desktopBundles} />
-           <CSSSettingsSubSection title="Common mobile" bundleType={ECSSBundlesType.MOBILE_COMMON} {...mobileCommonBundles} />
-           <CSSSettingsSubSection title="Mobile" bundleType={ECSSBundlesType.MOBILE} {...mobileBundles} />
+            <CSSSettingsSubSection title="Common desktop" bundleType={ECSSBundlesType.DESKTOP_COMMON} {...commonBundles} />
+            <CSSSettingsSubSection title="Desktop" bundleType={ECSSBundlesType.DESKTOP} {...bundles} />
         </SettingsSection>
     );
 };

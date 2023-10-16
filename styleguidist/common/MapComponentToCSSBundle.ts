@@ -1,12 +1,7 @@
-export enum EComponentType {
-    DESKTOP,
-    MOBILE,
-}
-
 /**
  * Карта соответствия css бандла и desktop компонентов.
  */
-export const mapCSSBundleDesktopComponents: Record<string, string[]> = {
+export const mapCSSBundleComponents: Record<string, string[]> = {
     AccordionForm: ['AccordionForm'],
     AccordionView: ['AccordionView'],
     AlertContext: ['AlertContextBase'],
@@ -118,38 +113,22 @@ export const mapCSSBundleDesktopComponents: Record<string, string[]> = {
 };
 
 /**
- * Карта соответствия css бандла и mobile компонентов.
- */
-export const mapCSSBundleMobileComponents: Record<string, string[]> = {
-    Button: ['ButtonGeneral', 'ButtonSecondary', 'ButtonDanger'],
-    Input: ['Input'],
-};
-
-/**
- * Объект со списком общих css бандлов mobile компонент. На текущий момент общий только один бандл.
- */
-export const mapCSSBundleMobileCommonComponents: Record<string, string[]> = {
-    styles: [],
-};
-
-/**
  * Объект со списком общих css бандлов desktop компонент. На текущий момент общий только один бандл.
  */
-export const mapCSSBundleDesktopCommonComponents: Record<string, string[]> = {
+export const mapCSSBundleCommonComponents: Record<string, string[]> = {
     styles: [],
 };
 
 /**
  * Возвращает имена CSS бандлов на основании имени компонента.
  */
-export const getCSSBundlesFromComponentTitle = (componentTitle: string, componentType: EComponentType): string[] => {
-    const isDesktopComponent = componentType === EComponentType.DESKTOP;
-    const map = isDesktopComponent ? mapCSSBundleDesktopComponents : mapCSSBundleMobileComponents;
+export const getCSSBundlesFromComponentTitle = (componentTitle: string): string[] => {
+    const map = mapCSSBundleComponents;
 
     const arrayBundles = Object.keys(map)
         .map((cssBundleTitle) => {
             if (map[cssBundleTitle] && map[cssBundleTitle].includes(componentTitle)) {
-                return `@sberbusiness/triplex/styles/${isDesktopComponent ? 'desktop' : 'mobile'}/components/${cssBundleTitle}.css`;
+                return `@sberbusiness/triplex/styles/components/${cssBundleTitle}.css`;
             }
 
             return undefined;

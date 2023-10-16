@@ -1,6 +1,6 @@
 import React from 'react';
 import SettingsSection from './SettingsSection';
-import {Checkbox} from '@sberbusiness/triplex/desktop/components/Checkbox/Checkbox';
+import {Checkbox} from '@sberbusiness/triplex/components/Checkbox/Checkbox';
 
 export interface ICollapsedMenuSettingsSectionSectionProps {
     checked: boolean;

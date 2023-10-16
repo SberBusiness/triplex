@@ -1,0 +1,60 @@
+@import 'src/styles/style';
+
+.accordionView {
+    border-radius: @radius-16;
+
+    .accordionViewHeaderWrapper {
+        display: flex;
+        justify-content: space-between;
+        outline: none;
+        border: 1px solid @color-asphalt-03;
+        border-radius: @radius-16;
+        padding: 19px 31px;
+        cursor: pointer;
+
+        .accordionViewHeader {
+            .h5-header-form(@color-graphite-01);
+
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .caretIcon {
+            transition: transform 0.25s ease-in-out;
+            margin: @metric-4 0 @metric-4 @metric-24;
+            flex-shrink: 0;
+        }
+
+        &:not(.focusedByClick):focus {
+            border-color: @color-sunny-01;
+        }
+
+        &.animating,
+        &.opened {
+            border-radius: @radius-16 @radius-16 0 0;
+
+            .caretIcon {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+
+    .accordionViewBody {
+        padding: 24px 31px 23px 31px;
+    }
+
+    .accordionViewContent {
+        box-sizing: content-box;
+        visibility: hidden;
+
+        &.globalExpandAnimationAnimating,
+        &.globalExpandAnimationOpened {
+            border: 1px solid @color-asphalt-03;
+            border-top: none;
+            border-radius: 0 0 @metric-16 @metric-16;
+            visibility: visible;
+        }
+    }
+}

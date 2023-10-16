@@ -1,0 +1,20 @@
+@import 'src/styles/style';
+
+@size: 4, 8, 12, 16, 20, 24, 28, 32;
+
+.divider {
+    height: 1px;
+    margin: 0;
+    background: @color-asphalt-03;
+    border: none;
+}
+
+each(@size, {
+    .marginTopSize-@{value} {
+        margin-top: ~'@{value}px';
+    }
+
+    .marginBottomSize-@{value} {
+        margin-bottom: ~'@{value}px';
+    }
+});

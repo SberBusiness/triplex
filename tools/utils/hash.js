@@ -1,4 +1,4 @@
-const CryptoJS = require('../../src/common/utils/sha256');
+const CryptoJS = require('../../src/utils/sha256');
 
 /**
  * Хэширующая функция, используемая для создания хэшей имён классов css.

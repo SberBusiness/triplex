@@ -4,15 +4,17 @@ module.exports = {
   "root": true,
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "es2017": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": { "jsx": true },
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    "requireConfigFile": false,
   },
   "plugins": ["react"],
   "rules": {
@@ -47,6 +49,7 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": ["warn", {"ignoreRestSiblings": true}],
         "@typescript-eslint/no-non-null-assertion": "off",
         "jsx-a11y/label-has-for": ["error", {"required": {"some": ["nesting", "id"]}}],
+        "jsx-a11y/click-events-have-key-events": "off",
       },
       "overrides": [
         {

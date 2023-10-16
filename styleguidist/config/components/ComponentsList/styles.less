@@ -1,0 +1,27 @@
+.styleguide-components-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.styleguide-components-list-section {
+    margin-top: 10px;
+    list-style: none;
+}
+
+.styleguide-components-list-section-heading {
+    display: flex;
+    align-items: center;
+
+    &.selected {
+        font-weight: 700;
+    }
+}
+
+.styleguide-components-list-section-heading-icon {
+    margin-left: 5px;
+    transition: transform 0.25s ease-in-out;
+
+    .open > & {
+        transform: rotate(-180deg);
+    }
+}

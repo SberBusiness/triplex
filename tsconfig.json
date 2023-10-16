@@ -1,31 +1,36 @@
 {
     "compilerOptions": {
-        "downlevelIteration": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "target": "es3",
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "declaration": true,
-        "baseUrl": "./src",
-        "outDir": "./out",
-        "experimentalDecorators": true,
-        "noImplicitAny": true,
-        "preserveConstEnums": true,
-        "skipLibCheck": false,
-        "jsx": "react",
-        "resolveJsonModule": true,
+        // Type Checking
         "strict": true,
+        // Modules
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "baseUrl": "./src",
         "paths": {
             "@jest/*": ["../jest/*"],
             "@sberbusiness/triplex/*": [
                 "./*"
             ]
-        }
+        },
+        // Emit
+        "declaration": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "preserveConstEnums": true,
+        "outDir": "./out",
+        // Interop Constraints
+        "esModuleInterop": true,
+        // Language and Environment
+        "target": "es5",
+        "jsx": "react",
+        "experimentalDecorators": true,
+        // Completeness
+        "skipLibCheck": false
     },
     "include": [
         "./src",
-        "./typings/styles.d.ts",
+        "./typings/styles.d.ts"
     ],
     "exclude": [
         "./tools",

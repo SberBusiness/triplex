@@ -1,0 +1,27 @@
+@import 'src/styles/style';
+
+.button.general {
+    background-color: @color-malachite-02;
+    .b3-text-controls-medium(@color-snowy);
+
+    &.MD {
+        .size-MD();
+    }
+
+    &.SM {
+        .size-SM();
+    }
+
+    &:hover {
+        background-color: @color-malachite-03;
+    }
+
+    &.expanded,
+    &:active {
+        background-color: @color-malachite-01;
+    }
+
+    &:disabled {
+        background-color: @color-malachite-04;
+    }
+}
