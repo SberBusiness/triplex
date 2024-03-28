@@ -34,7 +34,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
     } = props;
     const [styles, setStyles] = useState<React.CSSProperties>({...style, opacity: 0});
     const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const dropdownRes = useRef<{width: number; height: number}>({width: 0, height: 0});
+    const dropdownRes = useRef<{width: number; height: number}>({height: 0, width: 0});
     const classNames = classnames('cssClass[dropdown]', className);
 
     /** Расчёт положения по горизонтали. */
@@ -106,7 +106,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
             calculatePositionVertical(css, dropdownRect, targetRect);
             calculatePositionHorizontal(css, dropdownRect, targetRect);
 
-            dropdownRes.current = {width: dropdownRect.width, height: dropdownRect.height};
+            dropdownRes.current = {height: dropdownRect.height, width: dropdownRect.width};
             setStyles({...style, ...css});
         }
     }, [targetRef, fixedWidth, style, calculatePositionVertical, calculatePositionHorizontal]);
@@ -115,7 +115,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
         if (opened) {
             setPosition();
         } else {
-            dropdownRes.current = {width: 0, height: 0};
+            dropdownRes.current = {height: 0, width: 0};
             setStyles({...style, opacity: 0});
         }
     }, [opened, setPosition, style]);

@@ -14,22 +14,22 @@ export interface ISliderExtendedMarkProps extends React.HTMLAttributes<HTMLSpanE
 export const SliderExtendedMark: React.FC<ISliderExtendedMarkProps> = ({children, className, value, ...htmlSpanAttributes}) => {
     const {disabled, dots, min, max, reverse} = React.useContext(SliderExtendedContext);
 
-    const handleClick = () => SliderExtendedMarkActions.moveNearestDot({value, dots});
+    const handleClick = () => SliderExtendedMarkActions.moveNearestDot({dots, value});
 
     return (
         <span
             className={classnames('cssClass[sliderExtendedMark]', className, {
                 // Одна из SliderExtended.Dot, находится на текущей позиции.
-                'cssClass[active]': SliderExtendedMarkActions.isActive({value, dots}) && !disabled,
+                'cssClass[active]': SliderExtendedMarkActions.isActive({dots, value}) && !disabled,
                 'cssClass[disabled]': disabled,
                 'cssClass[reverse]': reverse,
             })}
             {...htmlSpanAttributes}
-            style={SliderExtendedMarkActions.getStyle({min, max, reverse, value})}
+            style={SliderExtendedMarkActions.getStyle({max, min, reverse, value})}
         >
             <span
                 className={classnames('cssClass[sliderExtendedMarkDot]', {
-                    'cssClass[inSelectedRange]': SliderExtendedMarkActions.isInSelectedRange({value, min, dots}),
+                    'cssClass[inSelectedRange]': SliderExtendedMarkActions.isInSelectedRange({dots, min, value}),
                 })}
                 onClick={handleClick}
             />

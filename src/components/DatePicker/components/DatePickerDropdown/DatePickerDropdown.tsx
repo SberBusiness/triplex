@@ -45,8 +45,8 @@ export const DatePickerDropdown = React.forwardRef<HTMLDivElement, IDatePickerDr
                 <FocusTrap
                     {...focusTrapProps}
                     focusTrapOptions={{
-                        initialFocus: keyboardNavigation && 'td[tabIndex="0"]',
                         clickOutsideDeactivates: true,
+                        initialFocus: keyboardNavigation && 'td[tabIndex="0"]',
                         returnFocusOnDeactivate: keyboardNavigation,
                         ...focusTrapProps?.focusTrapOptions,
                     }}

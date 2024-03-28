@@ -1,9 +1,7 @@
 import {AmountBaseInputFormatter} from '../AmountBaseInputFormatter';
 
 describe('AmountBaseInputFormatter', () => {
-    const commonTests = [
-        ['', ''],
-    ];
+    const commonTests = [['', '']];
 
     beforeEach(() => {
         allure.feature('AmountBaseInputFormatter');

@@ -6,6 +6,8 @@ export interface IAccordionFormItemTitleProps {
 }
 
 /** Компонент заголовка элемента аккордеона. */
-export const AccordionFormItemTitle: React.FC<IAccordionFormItemTitleProps> = ({children}) => <div className="cssClass[title]">{children}</div>;
+export const AccordionFormItemTitle: React.FC<IAccordionFormItemTitleProps> = ({children}) => (
+    <div className="cssClass[title]">{children}</div>
+);
 
 AccordionFormItemTitle.displayName = 'AccordionFormItemTitle';

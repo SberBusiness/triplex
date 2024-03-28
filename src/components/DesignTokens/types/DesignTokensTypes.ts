@@ -14,6 +14,8 @@ import {
     TDesignTokensComponentsSmallInput,
     TDesignTokensComponentsDropdown,
     TDesignTokensComponentsDropdownList,
+    TDesignTokensComponentsDropdownMobile,
+    TDesignTokensComponentsDropdownMobileList,
     TDesignTokensComponentsFooter,
     TDesignTokensComponentsFormField,
     TDesignTokensComponentsHeader,
@@ -130,9 +132,9 @@ export type TDesignTokensCoreGroupInfo = {Info: TDesignTokensCoreGroupInfoValue}
 export type TDesignTokensCoreGroupAccent = {Accent: TDesignTokensCoreGroupAccentValue};
 
 // Тип локальных токенов компонента Backdrop.
-export type TDesignTokensComponentsBackdrop = {backdrop: TDesignTokensComponentsBackdropValue};
+export type TDesignTokensComponentsBackdrop = {Backdrop: TDesignTokensComponentsBackdropValue};
 // Тип локальных токенов компонента Overlay.
-export type TDesignTokensComponentsOverlay = {overlay: TDesignTokensComponentsOverlayValue};
+export type TDesignTokensComponentsOverlay = {Overlay: TDesignTokensComponentsOverlayValue};
 
 // Тип глобальных токенов.
 export type TDesignTokensCore = TDesignTokensCoreGroupPrimary &
@@ -158,6 +160,8 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsDivider &
     TDesignTokensComponentsDropdown &
     TDesignTokensComponentsDropdownList &
+    TDesignTokensComponentsDropdownMobile &
+    TDesignTokensComponentsDropdownMobileList &
     TDesignTokensComponentsFooter &
     TDesignTokensComponentsFormField &
     TDesignTokensComponentsHeader &

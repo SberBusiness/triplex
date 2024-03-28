@@ -16,6 +16,8 @@ import {
     Divider_Tokens,
     Dropdown_Tokens,
     DropdownList_Tokens,
+    DropdownMobile_Tokens,
+    DropdownMobileList_Tokens,
     Footer_Tokens,
     FormField_Tokens,
     Header_Tokens,
@@ -60,6 +62,8 @@ import {
     TDesignTokensComponentsConfirmValue,
     TDesignTokensComponentsDividerValue,
     TDesignTokensComponentsDropdownListValue,
+    TDesignTokensComponentsDropdownMobileValue,
+    TDesignTokensComponentsDropdownMobileListValue,
     TDesignTokensComponentsDropdownValue,
     TDesignTokensComponentsFooterValue,
     TDesignTokensComponentsFormFieldValue,
@@ -99,9 +103,9 @@ export const DesignTokensComponents: TDesignTokensComponents = {
     AccordionView: GetTokensValueByTheme<TDesignTokensComponentsAccordionViewValue>(ETriplexTheme.LIGHT, AccordionView_Tokens),
     AlertContext: GetTokensValueByTheme<TDesignTokensComponentsAlertContextValue>(ETriplexTheme.LIGHT, AlertContext_Tokens),
     AlertProcess: GetTokensValueByTheme<TDesignTokensComponentsAlertProcessValue>(ETriplexTheme.LIGHT, AlertProcess_Tokens),
-    backdrop: {
+    Backdrop: {
         background: {
-            value: 'rgba(31, 31, 34, 0.56)', //     var(--triplex-backdrop-background)
+            value: 'rgba(31, 31, 34, 0.56)', //     var(--triplex-Backdrop-background)
         },
     },
     Body: GetTokensValueByTheme<TDesignTokensComponentsBodyValue>(ETriplexTheme.LIGHT, Body_Tokens),
@@ -113,6 +117,8 @@ export const DesignTokensComponents: TDesignTokensComponents = {
     Divider: GetTokensValueByTheme<TDesignTokensComponentsDividerValue>(ETriplexTheme.LIGHT, Divider_Tokens),
     Dropdown: GetTokensValueByTheme<TDesignTokensComponentsDropdownValue>(ETriplexTheme.LIGHT, Dropdown_Tokens),
     DropdownList: GetTokensValueByTheme<TDesignTokensComponentsDropdownListValue>(ETriplexTheme.LIGHT, DropdownList_Tokens),
+    DropdownMobile: GetTokensValueByTheme<TDesignTokensComponentsDropdownMobileValue>(ETriplexTheme.LIGHT, DropdownMobile_Tokens),
+    DropdownMobileList: GetTokensValueByTheme<TDesignTokensComponentsDropdownMobileListValue>(ETriplexTheme.LIGHT, DropdownMobileList_Tokens),
     Footer: GetTokensValueByTheme<TDesignTokensComponentsFooterValue>(ETriplexTheme.LIGHT, Footer_Tokens),
     FormField: GetTokensValueByTheme<TDesignTokensComponentsFormFieldValue>(ETriplexTheme.LIGHT, FormField_Tokens),
     Header: GetTokensValueByTheme<TDesignTokensComponentsHeaderValue>(ETriplexTheme.LIGHT, Header_Tokens),
@@ -124,18 +130,18 @@ export const DesignTokensComponents: TDesignTokensComponents = {
     MarkerStatus: GetTokensValueByTheme<TDesignTokensComponentsMarkerStatusValue>(ETriplexTheme.LIGHT, MarkerStatus_Tokens),
     Multiselect: GetTokensValueByTheme<TDesignTokensComponentsMultiselectValue>(ETriplexTheme.LIGHT, Multiselect_Tokens),
     Notification: GetTokensValueByTheme<TDesignTokensComponentsNotificationValue>(ETriplexTheme.LIGHT, Notification_Tokens),
-    overlay: {
+    Overlay: {
         maskBackground: {
-            value: 'rgba(255, 255, 255, 0.8)', //     var(--triplex-overlay-maskBackground)
+            value: 'rgba(255, 255, 255, 0.8)', //     var(--triplex-Overlay-maskBackground)
         },
     },
     Radio: GetTokensValueByTheme<TDesignTokensComponentsRadioValue>(ETriplexTheme.LIGHT, Radio_Tokens),
+    SMSInput: GetTokensValueByTheme<TDesignTokensComponentsSMSInputValue>(ETriplexTheme.LIGHT, SMSInput_Tokens),
     SegmentedControl: GetTokensValueByTheme<TDesignTokensComponentsSegmentedControlValue>(ETriplexTheme.LIGHT, SegmentedControl_Tokens),
     Select: GetTokensValueByTheme<TDesignTokensComponentsSelectValue>(ETriplexTheme.LIGHT, Select_Tokens),
     Skeleton: GetTokensValueByTheme<TDesignTokensComponentsSkeletonValue>(ETriplexTheme.LIGHT, Skeleton_Tokens),
     Slider: Slider_LM,
     SmallInput: GetTokensValueByTheme<TDesignTokensComponentsSmallInputValue>(ETriplexTheme.LIGHT, SmallInput_Tokens),
-    SMSInput: GetTokensValueByTheme<TDesignTokensComponentsSMSInputValue>(ETriplexTheme.LIGHT, SMSInput_Tokens),
     Spinner: GetTokensValueByTheme<TDesignTokensComponentsSpinnerValue>(ETriplexTheme.LIGHT, Spinner_Tokens),
     Spoiler: GetTokensValueByTheme<TDesignTokensComponentsSpoilerValue>(ETriplexTheme.LIGHT, Spoiler_Tokens),
     Stepper: GetTokensValueByTheme<TDesignTokensComponentsStepperValue>(ETriplexTheme.LIGHT, Stepper_Tokens),

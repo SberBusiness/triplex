@@ -40,7 +40,6 @@ export const Select: React.FC<ISelectProps> = ({className, groupPosition, target
             }}
             dropdownListItemClassName="cssClass[selectDropdownListItem]"
             {...selectBaseProps}
-            data-tinfo="9.1.0"
         />
     );
 };

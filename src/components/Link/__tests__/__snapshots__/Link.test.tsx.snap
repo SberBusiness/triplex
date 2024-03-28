@@ -2,7 +2,7 @@
 
 exports[`Link renders correctly 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -15,7 +15,7 @@ exports[`Link renders correctly 1`] = `
 
 exports[`Link renders correctly with after content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -35,7 +35,7 @@ exports[`Link renders correctly with after content 1`] = `
 
 exports[`Link renders correctly with before content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -56,7 +56,7 @@ exports[`Link renders correctly with before content 1`] = `
 
 exports[`Link renders correctly with both before and after content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -64,7 +64,7 @@ exports[`Link renders correctly with both before and after content 1`] = `
   tabIndex={0}
 >
   <span
-    className="cssClass[wordWithContent] cssClass[before] cssClass[after]"
+    className="cssClass[wordWithContent] cssClass[after] cssClass[before]"
   >
     ​
     <span>
@@ -80,7 +80,7 @@ exports[`Link renders correctly with both before and after content 1`] = `
 
 exports[`Link renders correctly with three words and both before and after content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -112,7 +112,7 @@ exports[`Link renders correctly with three words and both before and after conte
 
 exports[`Link renders correctly with two words and after content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -136,7 +136,7 @@ exports[`Link renders correctly with two words and after content 1`] = `
 
 exports[`Link renders correctly with two words and before content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -161,7 +161,7 @@ exports[`Link renders correctly with two words and before content 1`] = `
 
 exports[`Link renders correctly with two words and both before and after content 1`] = `
 <a
-  className="cssClass[link] hoverable cssClass[sm] cssClass[text] cssClass[focusVisible]"
+  className="cssClass[link] hoverable cssClass[focusVisible] cssClass[sm] cssClass[text]"
   href="#"
   onBlur={[Function]}
   onMouseDown={[Function]}
@@ -169,7 +169,7 @@ exports[`Link renders correctly with two words and both before and after content
   tabIndex={0}
 >
   <span
-    className="cssClass[wordWithContent] cssClass[before] cssClass[after]"
+    className="cssClass[wordWithContent] cssClass[after] cssClass[before]"
   >
     ​
     <span>

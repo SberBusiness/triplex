@@ -52,3 +52,5 @@ export const SMSInputInput = React.forwardRef<HTMLInputElement, ISMSInputInputPr
         );
     }
 );
+
+SMSInputInput.displayName = 'SMSInputInput';

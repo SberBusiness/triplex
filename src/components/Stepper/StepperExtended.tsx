@@ -43,7 +43,7 @@ export const StepperExtended: React.FC<IStepperExtendedProps> & IStepperExtended
     const handleSelect = (id: string) => onSelectStep(id);
 
     return (
-        <StepperExtendedContext.Provider value={{type, selectedId, onSelectStep: handleSelect}}>
+        <StepperExtendedContext.Provider value={{onSelectStep: handleSelect, selectedId, type}}>
             <ol className={classNames} role="tablist" {...rest} ref={forwardedRef}>
                 {children}
             </ol>

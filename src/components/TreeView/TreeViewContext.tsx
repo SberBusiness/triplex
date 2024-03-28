@@ -55,15 +55,15 @@ export interface ITreeViewContext {
 
 // Начальное значение контекста. Здесь нужно только для типизации и будет заполнено в @sberbusiness/triplex/components/TreeView/TreeView.tsx.
 export const initialTreeContext = {
-    updateCount: 0,
-    rootNode: null,
-    parentNode: new TreeViewAbstractNode({id: 'contextNode'}),
     /* eslint-disable @typescript-eslint/no-empty-function */
     getNode: (): TreeViewAbstractNode | undefined => undefined,
+    parentNode: new TreeViewAbstractNode({id: 'contextNode'}),
     registerNode: (): void => {},
     removeNode: (): void => {},
+    rootNode: null,
     setActiveNode: (): void => {},
     setOpenedNode: (): void => {},
+    updateCount: 0,
     /* eslint-enable @typescript-eslint/no-empty-function */
 };
 

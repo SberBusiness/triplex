@@ -24,8 +24,8 @@ export interface IButtonIconProps extends React.ButtonHTMLAttributes<HTMLButtonE
 export const ButtonIcon = React.forwardRef<HTMLButtonElement, IButtonIconProps>(
     ({className, disabled, shape = EButtonIconShape.SQUIRCLE, active, ...rest}, ref) => {
         const classNames = classnames('cssClass[buttonIcon]', getButtonIconShapeClassName(shape), 'hoverable', className, {
-            disabled: !!disabled,
             active: !!active,
+            disabled: !!disabled,
         });
 
         return <ButtonBase className={classNames} disabled={disabled} {...rest} ref={ref} />;

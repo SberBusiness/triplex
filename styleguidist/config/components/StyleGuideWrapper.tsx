@@ -14,7 +14,6 @@ const styleguidistLiveClassName = 'styleguidist-live';
 moment.locale('ru');
 
 const StyleGuideWrapper: React.FC<any> = (props) => {
-
     useEffect(() => {
         const {hash} = document.location;
 

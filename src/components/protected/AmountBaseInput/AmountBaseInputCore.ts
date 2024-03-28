@@ -36,7 +36,7 @@ export class AmountBaseInputCore {
         this.caret = 0;
         this.maxIntegerDigits = maxIntegerDigits;
         this.fractionDigits = fractionDigits;
-        this.cache = {formattedValue: '', key: '', selectionStart: null, selectionEnd: null, selectionDirection: null};
+        this.cache = {formattedValue: '', key: '', selectionDirection: null, selectionEnd: null, selectionStart: null};
     }
 
     /** Применение входных данных. */

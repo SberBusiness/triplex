@@ -13,7 +13,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((prop
     const classNames = classnames('cssClass[checkbox]', className);
     const classNamesLabel = classnames(
         'cssClass[label]',
-        {'cssClass[nonempty]': !!children, 'cssClass[disabled]': !!disabled},
+        {'cssClass[disabled]': !!disabled, 'cssClass[nonempty]': !!children},
         labelAttributes?.className
     );
     const inputRef = useRef<HTMLInputElement | null>(null);

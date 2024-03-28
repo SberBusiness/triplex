@@ -150,7 +150,7 @@ export class ButtonDropdownExtended extends React.Component<IButtonDropdownExten
         return (
             <div className={classNames} ref={this.ref} {...props}>
                 {renderButton({opened: this.getOpened(), setOpened: this.handleOpen})}
-                {renderDropdown({opened: this.getOpened(), setOpened: this.handleOpen, className: 'cssClass[buttonDropdownExtendedBlock]'})}
+                {renderDropdown({className: 'cssClass[buttonDropdownExtendedBlock]', opened: this.getOpened(), setOpened: this.handleOpen})}
             </div>
         );
     }

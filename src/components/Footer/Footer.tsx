@@ -22,7 +22,6 @@ export const Footer: IFooterFC = ({children, className, sticky, ...htmlDivAttrib
             'cssClass[sticky]': Boolean(sticky),
         })}
         {...htmlDivAttributes}
-        data-tinfo="9.1.0"
     >
         {children}
     </div>

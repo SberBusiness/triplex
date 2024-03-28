@@ -8,10 +8,10 @@ import {DesignTokensComponentsThemeDark} from '@sberbusiness/triplex/components/
 import {TDesignTokenValue} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokenTypes';
 
 export interface IDesignTokenUtils {
-    // Возвращает токены, которые использует компонент.
-    getComponentTokens: (componentName: string) => {core: string[]; components: string[]};
     // Возвращает строку с css-переменными группы токенов, вида `--variable-name-1: '#fff'; --variable-name-2: '#0ed'`.
     getCSSVariableByTokenGroup: (tokenGroup: TDesignTokensGroupAbstract, tokens: TDesignTokens) => string;
+    // Возвращает токены, которые использует компонент.
+    getComponentTokens: (componentName: string) => {core: string[]; components: string[]};
     // Возвращает строку с css-переменными на основе темы и токенов.
     getStyle: (theme: ETriplexTheme | undefined, tokens: TDesignTokensPartial) => string;
     // Возвращает строку с css-переменными.
@@ -21,25 +21,6 @@ export interface IDesignTokenUtils {
 }
 
 export const DesignTokenUtils: IDesignTokenUtils = {
-    // Возвращает токены, которые использует компонент.
-    getComponentTokens: (componentName) => {
-        // Общие токены.
-        const coreTokens: string[] = [];
-        // Токены компонента.
-        const componentsTokens: string[] = [];
-
-        Object.keys(DesignTokensComponents).forEach((tokenGroup) => {
-            Object.keys((DesignTokensComponents as TDesignTokensComponentsWithIndex)[tokenGroup]).forEach((tokenTitle) => {
-                // Группа токенов соответствует имени файла.
-                if (tokenGroup === componentName) {
-                    componentsTokens.push(`${tokenGroup}.${tokenTitle}`);
-                    return;
-                }
-            });
-        });
-
-        return {core: coreTokens, components: componentsTokens};
-    },
     getCSSVariableByTokenGroup: (tokenGroup, tokens) => {
         const tokenGroupTitle = Object.keys(tokenGroup)[0];
 
@@ -59,6 +40,26 @@ export const DesignTokenUtils: IDesignTokenUtils = {
             )
             .join('\n');
     },
+    // Возвращает токены, которые использует компонент.
+    getComponentTokens: (componentName) => {
+        // Общие токены.
+        const coreTokens: string[] = [];
+        // Токены компонента.
+        const componentsTokens: string[] = [];
+
+        Object.keys(DesignTokensComponents).forEach((tokenGroup) => {
+            Object.keys((DesignTokensComponents as TDesignTokensComponentsWithIndex)[tokenGroup]).forEach((tokenTitle) => {
+                // Группа токенов соответствует имени файла.
+                if (tokenGroup === componentName) {
+                    componentsTokens.push(`${tokenGroup}.${tokenTitle}`);
+                    return;
+                }
+            });
+        });
+
+        return {components: componentsTokens, core: coreTokens};
+    },
+
     getStyle: (theme = ETriplexTheme.LIGHT, tokens) => {
         let style = '';
         switch (theme) {

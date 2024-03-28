@@ -134,8 +134,8 @@ export class LightBox extends React.Component<ILightBoxProps> {
                         {...focusTrapProps}
                         focusTrapOptions={{
                             clickOutsideDeactivates: true,
-                            preventScroll: true,
                             initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(this.containerRef),
+                            preventScroll: true,
                             ...focusTrapProps?.focusTrapOptions,
                         }}
                     >

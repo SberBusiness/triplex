@@ -37,10 +37,10 @@ export class WidgetHeader extends React.Component<IWidgetHeaderProps> {
                     {...htmlDivAttributes}
                     className={classnames(className, 'cssClass[widgetHeader]', {
                         'cssClass[animating]': animating,
-                        'cssClass[opened]': isOpen,
-                        'cssClass[isStatic]': isStatic,
                         'cssClass[controlsAlignLeft]': controlsAlign === EWidgetHeaderControlsAlign.LEFT,
                         'cssClass[controlsAlignRight]': controlsAlign === EWidgetHeaderControlsAlign.RIGHT,
+                        'cssClass[isStatic]': isStatic,
+                        'cssClass[opened]': isOpen,
                     })}
                     onClick={toggle}
                 >

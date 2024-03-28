@@ -30,9 +30,9 @@ describe('Select', () => {
 
     it('should render correctly', () => {
         const options: Array<ISelectOption> = [
-            {value: 'i1', label: 'Первый'},
-            {value: 'i2', label: 'Второй'},
-            {value: 'i3', label: 'Третий'},
+            {label: 'Первый', value: 'i1'},
+            {label: 'Второй', value: 'i2'},
+            {label: 'Третий', value: 'i3'},
         ];
 
         const tree = renderer.create(

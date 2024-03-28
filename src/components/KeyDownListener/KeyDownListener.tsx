@@ -1,7 +1,7 @@
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import React from 'react';
 
-type keyCode = typeof EVENT_KEY_CODES[keyof typeof EVENT_KEY_CODES];
+type keyCode = (typeof EVENT_KEY_CODES)[keyof typeof EVENT_KEY_CODES];
 
 export interface IKeyDownListenerProps {
     children?: React.ReactNode;

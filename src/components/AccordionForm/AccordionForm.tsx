@@ -67,13 +67,13 @@ export class AccordionForm extends React.PureComponent<IAccordionProps> {
                     if (child) {
                         if (checkItem(child)) {
                             childArray[i] = React.cloneElement<IAccordionItemProps>(child, {
-                                num: child.props.num || i + 1,
                                 id: child.props.id || i.toString(),
                                 key: child.props.id || i,
-                                prevStatus,
                                 nextStatus,
+                                num: child.props.num || i + 1,
                                 onRemove: glueFunctions(child.props.onRemove, onRemove),
                                 onToggle: glueFunctions(child.props.onToggle, onToggle),
+                                prevStatus,
                             });
                         } else {
                             throw new Error('You can use as children only AccordionFormItem components');

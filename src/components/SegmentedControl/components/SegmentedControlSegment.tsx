@@ -44,11 +44,11 @@ export const SegmentedControlSegment: React.FC<ISegmentedControlSegmentProps> = 
         // Класс для подсвечивания иконок.
         'hoverable',
         {
-            'cssClass[selected]': getSelectedStatus(),
             // Класс для подсвечивания иконок.
             active: getSelectedStatus(),
-            'cssClass[segmentedControlSingleSegment]': type === ESegmentedControlType.SINGLE,
             'cssClass[segmentedControlMultipleSegment]': type === ESegmentedControlType.MULTIPLE,
+            'cssClass[segmentedControlSingleSegment]': type === ESegmentedControlType.SINGLE,
+            'cssClass[selected]': getSelectedStatus(),
         },
         className
     );

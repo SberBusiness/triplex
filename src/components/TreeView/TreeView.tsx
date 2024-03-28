@@ -74,14 +74,14 @@ export class TreeView extends React.Component<ITreeViewProps, ITreeViewState> {
         return (
             <TreeViewContext.Provider
                 value={{
-                    updateCount,
                     getNode: this.getNode,
                     parentNode: this.abstractRootNode,
-                    rootNode: this.abstractRootNode,
                     registerNode: this.registerNode,
                     removeNode: this.removeNode,
+                    rootNode: this.abstractRootNode,
                     setActiveNode: this.setActiveNode,
                     setOpenedNode: this.setOpenedNode,
+                    updateCount,
                 }}
             >
                 <ul className={classnames('cssClass[treeView]', className)} role="tree" {...props} ref={this.setTreeDOMNode}>

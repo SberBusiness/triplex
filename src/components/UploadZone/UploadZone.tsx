@@ -23,8 +23,8 @@ export interface IUploadZoneContext {
 }
 
 export const UploadZoneContext = React.createContext<IUploadZoneContext>({
-    openUploadDialog: () => void 0,
     onChange: () => void 0,
+    openUploadDialog: () => void 0,
 });
 
 /** Свойства компонента UploadZone. */
@@ -99,8 +99,8 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZon
         return (
             <UploadZoneContext.Provider
                 value={{
-                    onChange,
                     inputNode,
+                    onChange,
                     openUploadDialog: this.openUploadDialog,
                     setInputNode: (node) => {
                         this.setState({inputNode: node});

@@ -39,13 +39,13 @@ export const TabsExtended: React.FC<ITabsExtendedProps> & ITabsExtendedCompositi
     return (
         <TabsExtendedContext.Provider
             value={{
-                inlineItemsIds,
                 dropdownItemsIds,
                 dropdownRef,
+                inlineItemsIds,
                 onSelectTab: handleSelectTab,
                 selectedId,
-                setInlineItemsIds,
                 setDropdownItemsIds,
+                setInlineItemsIds,
             }}
         >
             <div className={classnames('cssClass[tabsExtended]', className)} role="tablist" {...htmlDivAttributes}>

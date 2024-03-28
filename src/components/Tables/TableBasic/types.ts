@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import {EScreenWidth} from '@sberbusiness/triplex/enums/EScreenWidth';
-import {
-    ECellType,
-    EHorizontalAlign,
-    EVerticalAlign,
-    EOrderDirection,
-} from '@sberbusiness/triplex/components/Tables/TableBasic/enums';
+import {ECellType, EHorizontalAlign, EVerticalAlign, EOrderDirection} from '@sberbusiness/triplex/components/Tables/TableBasic/enums';
 import {TAriaHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/AriaAttributes';
 import {TDataHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/DataAttributes';
 

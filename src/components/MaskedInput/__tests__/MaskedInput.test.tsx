@@ -4,8 +4,8 @@ import {MaskedInput} from '@sberbusiness/triplex/components/MaskedInput/MaskedIn
 
 jest.mock('react-text-mask', () => ({
     __esModule: true,
-    default: jest.fn(({mask, placeholderChar, ...props}: any) => <input type="text" {...props} />),
     conformToMask: jest.fn((x) => ({conformedValue: x})),
+    default: jest.fn(({mask, placeholderChar, ...props}: any) => <input type="text" {...props} />),
 }));
 
 describe('MaskedInput', () => {

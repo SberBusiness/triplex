@@ -36,9 +36,9 @@ export class CardAction extends React.Component<ICardActionProps, ICardActionSta
     public static Media = CardMedia;
 
     public state = {
-        isSelected: !!this.props.selected,
-        isControlled: this.props.selected !== undefined,
         focusSource: EFocusSource.NONE,
+        isControlled: this.props.selected !== undefined,
+        isSelected: !!this.props.selected,
     };
 
     public componentDidUpdate(prevProps: Readonly<ICardActionProps>): void {
@@ -71,7 +71,7 @@ export class CardAction extends React.Component<ICardActionProps, ICardActionSta
             'cssClass[card]',
             'cssClass[action]',
             mapCardRoundingSizeToCssClass[roundingSize],
-            {'cssClass[selected]': isControlled ? !!selected : isSelected, 'cssClass[focusVisible]': focusSource === EFocusSource.KEYBOARD},
+            {'cssClass[focusVisible]': focusSource === EFocusSource.KEYBOARD, 'cssClass[selected]': isControlled ? !!selected : isSelected},
             className
         );
 

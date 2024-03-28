@@ -84,10 +84,10 @@ export class AccordionFormItem extends React.Component<IAccordionItemProps, IAcc
     };
 
     public state: IAccordionItemState = {
-        isOpen: this.props.opened || false,
         focused: false,
         focusedByMouse: false,
         headerFocused: false,
+        isOpen: this.props.opened || false,
     };
     private instanceId = uniqueId();
     private headerInstanceId = `${this.instanceId}header`;
@@ -207,10 +207,10 @@ export class AccordionFormItem extends React.Component<IAccordionItemProps, IAcc
             <li
                 {...rest}
                 className={classnames(className, 'cssClass[item]', {
-                    'cssClass[opened]': isOpen,
                     'cssClass[disabled]': !!disabled,
                     'cssClass[focused]': focused && !disabled,
                     'cssClass[focusedByMouse]': focusedByMouse,
+                    'cssClass[opened]': isOpen,
                 })}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur}

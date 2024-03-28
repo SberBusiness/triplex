@@ -16,5 +16,4 @@ export const AccordionView_Tokens: TDesignTokensComponentsAccordionViewValues = 
     BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.500'}], // var(--triplex-AccordionView-BorderColor_Default)
     BorderColor_Focus: [{ref: 'Accent.500'}, {ref: 'Accent.500'}], // var(--triplex-AccordionView-BorderColor_Focus)
     Header_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-AccordionView-Header_Color)
-
 };

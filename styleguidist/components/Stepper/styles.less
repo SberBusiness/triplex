@@ -1,0 +1,42 @@
+.stepper-extended {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.stepper-extended-carousel {
+    margin-left: -32px;
+    margin-right: -32px;
+    position: relative;
+
+    .button-prev,
+    .button-next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .button-prev {
+        left: 0;
+    }
+
+    .button-next {
+        right: 0;
+    }
+
+    .button-prev-icon {
+        background: linear-gradient(to right, #FFFFFF 39.06%, transparent);
+
+        .styleguidist-dark-theme & {
+           background: linear-gradient(to right, #181819 39.06%, transparent)
+        }
+    }
+
+    .button-next-icon {
+        background: linear-gradient(to left, #FFFFFF 39.06%, transparent);
+
+        .styleguidist-dark-theme & {
+            background: linear-gradient(to left, #181819 39.06%, transparent);
+        }
+    }
+}

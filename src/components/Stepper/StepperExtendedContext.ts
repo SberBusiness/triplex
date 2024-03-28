@@ -13,6 +13,6 @@ export interface IStepperExtendedContext {
 
 /** Контекст в StepperExtended. */
 export const StepperExtendedContext = React.createContext<IStepperExtendedContext>({
-    selectedId: undefined,
     onSelectStep: () => {},
+    selectedId: undefined,
 });

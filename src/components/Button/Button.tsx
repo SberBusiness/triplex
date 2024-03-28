@@ -141,8 +141,8 @@ export const Button = React.forwardRef<HTMLButtonElement, TButtonProps>((props, 
         // Классы для иконок, начало.
         'hoverable',
         {
-            disabled: !!disabled,
             active: !!expanded,
+            disabled: !!disabled,
         },
         // Классы для иконок, конец.
         className

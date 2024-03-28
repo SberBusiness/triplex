@@ -95,10 +95,10 @@ export class SelectExtended extends React.Component<ISelectExtendedProps, ISelec
                 >
                     {renderTarget({opened, setOpened: this.setOpened})}
                     {children({
+                        dropdownRef: this.dropdownRef,
                         opened,
                         setOpened: this.setOpened,
                         targetRef: this.targetRef,
-                        dropdownRef: this.dropdownRef,
                     })}
                 </div>
             </KeyDownListener>

@@ -91,9 +91,9 @@ const checkDisabled = (inputDate: Moment, disabledDays: string[] | undefined, fo
 /** Компонент ввода и выбора даты. */
 export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePickerState> {
     public static defaultProps = {
+        alignment: EDropdownAlignment.LEFT,
         format: dateFormatYYYYMMDD,
         limitRange: globalLimitRange,
-        alignment: EDropdownAlignment.LEFT,
     };
 
     private readonly targetRef: React.RefObject<HTMLDivElement>;
@@ -104,12 +104,12 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         const {value, format} = props;
 
         this.state = {
-            inputValue: this.getInputValueFromValue(),
             calendarValue: this.getCalendarValueFromValue(),
-            lastValidValue: moment(value, format, true).isValid() ? value : '',
-            inputFocused: false,
             dropdownOpen: false,
+            inputFocused: false,
+            inputValue: this.getInputValueFromValue(),
             keyboardNavigation: true,
+            lastValidValue: moment(value, format, true).isValid() ? value : '',
         };
 
         this.targetRef = React.createRef();
@@ -202,10 +202,10 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
                         keyboardNavigation={keyboardNavigation}
                         inputProps={{
                             ...dropdownInputProps,
-                            value: inputValue,
-                            placeholderMask,
                             autoFocus: inputFocused == true,
                             onChange: this.handleChangeInput,
+                            placeholderMask,
+                            value: inputValue,
                         }}
                     />
                 </div>
@@ -335,7 +335,7 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
     /** Обработчик установки фокуса поля ввода. */
     private handleFocusInput = (): void => {
         const {keyboardNavigation, dropdownOpen} = this.state;
-        const nextState = {inputFocused: true, dropdownOpen};
+        const nextState = {dropdownOpen, inputFocused: true};
 
         if (!keyboardNavigation) {
             nextState.dropdownOpen = true;
@@ -364,7 +364,7 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         const inputDate = moment(event.target.value, inputDateFormat, true);
 
         if (inputDate.isValid()) {
-            this.setState({inputValue: value, calendarValue: inputDate});
+            this.setState({calendarValue: inputDate, inputValue: value});
         } else {
             this.setState({inputValue: value});
         }

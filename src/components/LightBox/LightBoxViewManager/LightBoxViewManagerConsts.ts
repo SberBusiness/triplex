@@ -75,18 +75,18 @@ export const LightBoxViewManagerConsts: ILightBoxViewManagerConsts = {
         'more-media-point-1': 'LB-more-media-point-1-no-hash',
         'more-media-point-2': 'LB-more-media-point-2-no-hash',
     },
-    // Ширина стрелки лайтбокса.
-    lightBoxArrowWidth,
     // Расстояние от стрелки до лайтбокса.
     lightBoxArrowMarginToLightBox,
     // Расстояние от стрелки до края экрана.
     lightBoxArrowMarginToScreen,
+    // Ширина стрелки лайтбокса.
+    lightBoxArrowWidth,
     //  Ширина стрелки лайтбокса с полями по бокам.
     lightBoxArrowWithMarginWidth,
-    // Минимальная ширина тела лайтбокса.
-    lightBoxContentMinWidth,
     // Максимальная ширина тела лайтбокса.
     lightBoxContentMaxWidth,
+    // Минимальная ширина тела лайтбокса.
+    lightBoxContentMinWidth,
     // Breakpoint для экранов менее 1024px.
     lightBoxMediaPoint0: lightBoxMediaPoint0 + getScrollbarWidth(),
     /*

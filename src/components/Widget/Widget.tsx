@@ -67,8 +67,8 @@ export class Widget extends React.Component<IWidgetProps> {
         const {renderHeader, isStatic} = this.props;
         return renderHeader({
             ...props,
-            toggle: isStatic ? undefined : props.toggle,
             isStatic: Boolean(isStatic),
+            toggle: isStatic ? undefined : props.toggle,
         });
     };
 }

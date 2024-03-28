@@ -78,8 +78,8 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
 
             if (words.length < 2 || (words.length < 3 && contentBefore && contentAfter)) {
                 const className = classnames('cssClass[wordWithContent]', {
-                    'cssClass[before]': Boolean(contentBefore),
                     'cssClass[after]': Boolean(contentAfter),
+                    'cssClass[before]': Boolean(contentBefore),
                 });
                 return (
                     <span className={className}>
@@ -150,11 +150,11 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
                 role="link"
                 {...rest}
                 className={classnames(className, 'cssClass[link]', 'hoverable', {
-                    'cssClass[sm]': size === ELinkSize.SM,
-                    'cssClass[lg]': size === ELinkSize.LG,
-                    'cssClass[text]': linkType === ELinkType.TEXT,
-                    'cssClass[line]': linkType === ELinkType.LINE,
                     'cssClass[focusVisible]': !focusedByClick,
+                    'cssClass[lg]': size === ELinkSize.LG,
+                    'cssClass[line]': linkType === ELinkType.LINE,
+                    'cssClass[sm]': size === ELinkSize.SM,
+                    'cssClass[text]': linkType === ELinkType.TEXT,
                 })}
                 onBlur={handleBlur}
                 onMouseDown={handleMouseDown}

@@ -12,9 +12,9 @@ jest.mock('@sberbusiness/triplex/components/DesignTokens/DesignTokensCore', () =
 jest.mock('@sberbusiness/triplex/components/DesignTokens/DesignTokensComponents', () => ({
     DesignTokensComponents: {
         input: {
+            borderColorActive: {ref: 'Primary.900'},
             borderColorDefault: {value: '#fff'},
             borderColorDisabled: {value: '#fff'},
-            borderColorActive: {ref: 'Primary.900'},
         },
     },
 }));
@@ -29,12 +29,12 @@ describe('DesignTokenUtils', () => {
         const tokens = DesignTokenUtils.getComponentTokens('input');
 
         expect(tokens.core).toEqual([]);
-        expect(tokens.components).toEqual(['input.borderColorDefault', 'input.borderColorDisabled', 'input.borderColorActive']);
+        expect(tokens.components).toEqual(['input.borderColorActive', 'input.borderColorDefault', 'input.borderColorDisabled']);
     });
 
     it('getCSSVariableByTokenGroup returns css variables', () => {
         const cssVariables = DesignTokenUtils.getCSSVariableByTokenGroup(
-            {Primary: {900: {value: '#fff'}, 700: {value: '#ccc'}}},
+            {Primary: {700: {value: '#ccc'}, 900: {value: '#fff'}}},
             {} as TDesignTokens
         );
 

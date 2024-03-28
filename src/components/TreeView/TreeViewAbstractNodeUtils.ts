@@ -3,45 +3,47 @@ import {TreeViewAbstractNode} from '@sberbusiness/triplex/components/TreeView/Tr
 
 /** Утилиты для работы с AbstractNode. */
 interface ITreeViewAbstractNodeUtils {
-    // Возвращает AbstractNode по id.
-    getNode: (nodeId: string, rootNode: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
+    // Возвращает активную ноду в случае ее наличия.
+    getActiveNode: (node: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
     // Возвращает следующую ноду текущего уровня. Если prevNode имеет дочерние ноды, и prevNode.getOpened() === true будет возвращена первая дочерняя нода. Если prevNode - последняя нода текущего уровня, будет возвращена следующая нода
     // верхнего уровня. Если верхний уровень - rootNode, будет возвращена первая дочерняя нода rootNode.
     getNextNode: (prevNode: TreeViewAbstractNode) => TreeViewAbstractNode;
+    // Возвращает следующую ноду текущего уровня. Если prevNode - последняя нода, будет возвращено undefined.
+    getNextSiblingNode: (prevNode: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
+    // Возвращает AbstractNode по id.
+    getNode: (nodeId: string, rootNode: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
     // Возвращает предыдущую ноду текущего уровня. Если предыдущая нода имеет детей и она раскрыта, будет возвращена последняя ее дочерняя нода. Если nextNode - первая нода, будет возвращена родительская нода. Если верхний
     // уровень - rootNode, будет возвращена последняя дочерняя нода rootNode.
     getPrevNode: (nextNode: TreeViewAbstractNode) => TreeViewAbstractNode;
-    // Возвращает следующую ноду текущего уровня. Если prevNode - последняя нода, будет возвращено undefined.
-    getNextSiblingNode: (prevNode: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
     // Возвращает предыдущую ноду текущего уровня дерева. В случае если nextNode - первая нода, будет возвращено undefined.
     getPrevSiblingNode: (nextNode: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
-    // Возвращает активную ноду в случае ее наличия.
-    getActiveNode: (node: TreeViewAbstractNode) => TreeViewAbstractNode | undefined;
-    // Устанавливает флаг активности AbstractNode.
-    setActiveNode: (node: TreeViewAbstractNode, rootNode: TreeViewAbstractNode, isActive: boolean) => void;
-    // Устанавливает флаг активности AbstractNode для следующей ноды дерева. Если нода раскрыта, будет активна первая дочерняя нода, если нода закрыта - будет активирована следующая нода этого же уровня.
-    setActiveNextNode: (rootNode: TreeViewAbstractNode) => void;
-    // Устанавливает флаг активности AbstractNode для предыдущей ноды дерева.
-    setActivePrevNode: (rootNode: TreeViewAbstractNode) => void;
     // Возвращает true если нода – последняя в дереве.
     isLastNode: (node: TreeViewAbstractNode) => boolean;
+    // Устанавливает флаг активности AbstractNode для следующей ноды дерева. Если нода раскрыта, будет активна первая дочерняя нода, если нода закрыта - будет активирована следующая нода этого же уровня.
+    setActiveNextNode: (rootNode: TreeViewAbstractNode) => void;
+    // Устанавливает флаг активности AbstractNode.
+    setActiveNode: (node: TreeViewAbstractNode, rootNode: TreeViewAbstractNode, isActive: boolean) => void;
+    // Устанавливает флаг активности AbstractNode для предыдущей ноды дерева.
+    setActivePrevNode: (rootNode: TreeViewAbstractNode) => void;
 }
 
 /** Утилиты для работы с AbstractNode. */
 export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
-    getNode: (nodeId, rootNode) => {
-        let result;
-        traverseAbstractTree(rootNode, (node) => {
-            if (node.getId() === nodeId) {
-                result = node;
+    getActiveNode: (node) => {
+        let activeNode: TreeViewAbstractNode | undefined;
+
+        traverseAbstractTree(node, (n) => {
+            if (n.getActive()) {
+                activeNode = n;
                 // Прервать обход дерева.
                 return false;
             }
+
             // Продолжить обход дерева.
             return true;
         });
 
-        return result;
+        return activeNode;
     },
     getNextNode: (node) => {
         const childrenNodes = node.getChildren();
@@ -82,6 +84,46 @@ export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
 
         return nextNode;
     },
+    getNextSiblingNode: (node) => {
+        const parentNode = node.getParent();
+        // node является rootNode.
+        if (!parentNode) {
+            return undefined;
+        }
+
+        const parentNodeChildren = parentNode.getChildren();
+        // Индекс текущей активной ноды в parentNodeChildren.
+        let currentActiveNodeIndex = 0;
+        // Поиск индекса текущей активной ноды в parentNodeChildren.
+        parentNodeChildren.some((n, index) => {
+            if (n.getId() === node.getId()) {
+                currentActiveNodeIndex = index;
+                return true;
+            }
+        });
+
+        // Текущая активная нода - последняя.
+        if (currentActiveNodeIndex === parentNodeChildren.length - 1) {
+            return undefined;
+        }
+
+        // Возвращается следующая нода.
+        return parentNodeChildren[currentActiveNodeIndex + 1];
+    },
+    getNode: (nodeId, rootNode) => {
+        let result;
+        traverseAbstractTree(rootNode, (node) => {
+            if (node.getId() === nodeId) {
+                result = node;
+                // Прервать обход дерева.
+                return false;
+            }
+            // Продолжить обход дерева.
+            return true;
+        });
+
+        return result;
+    },
     getPrevNode: (node) => {
         const prevSiblingNode = TreeViewAbstractNodeUtils.getPrevSiblingNode(node);
 
@@ -119,32 +161,6 @@ export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
 
         return prevNode;
     },
-    getNextSiblingNode: (node) => {
-        const parentNode = node.getParent();
-        // node является rootNode.
-        if (!parentNode) {
-            return undefined;
-        }
-
-        const parentNodeChildren = parentNode.getChildren();
-        // Индекс текущей активной ноды в parentNodeChildren.
-        let currentActiveNodeIndex = 0;
-        // Поиск индекса текущей активной ноды в parentNodeChildren.
-        parentNodeChildren.some((n, index) => {
-            if (n.getId() === node.getId()) {
-                currentActiveNodeIndex = index;
-                return true;
-            }
-        });
-
-        // Текущая активная нода - последняя.
-        if (currentActiveNodeIndex === parentNodeChildren.length - 1) {
-            return undefined;
-        }
-
-        // Возвращается следующая нода.
-        return parentNodeChildren[currentActiveNodeIndex + 1];
-    },
     getPrevSiblingNode: (node) => {
         const parentNode = node.getParent();
         // node является rootNode.
@@ -171,21 +187,30 @@ export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
         // Возвращается предыдущая нода.
         return parentNodeChildren[currentActiveNodeIndex - 1];
     },
-    getActiveNode: (node) => {
-        let activeNode: TreeViewAbstractNode | undefined;
+    isLastNode: (node) => {
+        const parentNode = node.getParent();
 
-        traverseAbstractTree(node, (n) => {
-            if (n.getActive()) {
-                activeNode = n;
-                // Прервать обход дерева.
-                return false;
+        if (parentNode) {
+            // Если нода является последней на текущем уровне.
+            if (parentNode.getChildren()[parentNode.getChildren().length - 1] == node) {
+                return TreeViewAbstractNodeUtils.isLastNode(parentNode);
             }
-
-            // Продолжить обход дерева.
+        }
+        // node является rootNode.
+        else {
             return true;
-        });
+        }
 
-        return activeNode;
+        return false;
+    },
+    setActiveNextNode: (rootNode) => {
+        const activeNode = TreeViewAbstractNodeUtils.getActiveNode(rootNode);
+
+        if (activeNode) {
+            const nextNode = TreeViewAbstractNodeUtils.getNextNode(activeNode);
+
+            TreeViewAbstractNodeUtils.setActiveNode(nextNode, rootNode, true);
+        }
     },
     setActiveNode: (node, rootNode, isActive) => {
         if (isActive) {
@@ -204,15 +229,6 @@ export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
             node.setActive(false);
         }
     },
-    setActiveNextNode: (rootNode) => {
-        const activeNode = TreeViewAbstractNodeUtils.getActiveNode(rootNode);
-
-        if (activeNode) {
-            const nextNode = TreeViewAbstractNodeUtils.getNextNode(activeNode);
-
-            TreeViewAbstractNodeUtils.setActiveNode(nextNode, rootNode, true);
-        }
-    },
     setActivePrevNode: (rootNode) => {
         const activeNode = TreeViewAbstractNodeUtils.getActiveNode(rootNode);
 
@@ -221,21 +237,5 @@ export const TreeViewAbstractNodeUtils: ITreeViewAbstractNodeUtils = {
 
             TreeViewAbstractNodeUtils.setActiveNode(prevNode, rootNode, true);
         }
-    },
-    isLastNode: (node) => {
-        const parentNode = node.getParent();
-
-        if (parentNode) {
-            // Если нода является последней на текущем уровне.
-            if (parentNode.getChildren()[parentNode.getChildren().length - 1] == node) {
-                return TreeViewAbstractNodeUtils.isLastNode(parentNode);
-            }
-        }
-        // node является rootNode.
-        else {
-            return true;
-        }
-
-        return false;
     },
 };

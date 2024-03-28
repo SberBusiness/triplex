@@ -40,8 +40,8 @@ export function Text<T extends keyof JSX.IntrinsicElements = 'span'>({
         mapFontWeightToCssClass[weight],
         mapLineTypeToCssClass[line],
         {
-            'cssClass[underline]': !!underline && !strikethrough,
             'cssClass[strikethrough]': !!strikethrough && !underline,
+            'cssClass[underline]': !!underline && !strikethrough,
             'cssClass[underlineStrikethrough]': !!strikethrough && !!underline,
         },
         className

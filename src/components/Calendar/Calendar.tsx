@@ -127,10 +127,10 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
               : getHeader(viewDate);
 
         this.state = {
-            viewDate,
             currentView: currentTab,
             header,
             pickedDate: pickedDateState,
+            viewDate,
         };
     }
 
@@ -158,9 +158,9 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
 
             if (viewDate && !viewDate.isSame(pickedDateState, 'month')) {
                 newDateContext = {
-                    viewDate: resultDate!.clone(),
                     currentTab: ECalendarViewMode.DAYS,
                     header: getHeader(resultDate),
+                    viewDate: resultDate!.clone(),
                 };
             }
 
@@ -295,9 +295,9 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
         const viewDateNew: Moment = this.getSafeDate(viewDate).set('year', year);
 
         this.setState({
-            viewDate: viewDateNew,
             currentView: ECalendarViewMode.MONTHS,
             header: formatDate(viewDateNew, ECalendarViewMode.MONTHS) || getHeader(pickedDate),
+            viewDate: viewDateNew,
         });
     };
 
@@ -312,9 +312,9 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
             this.handleClick(viewDateNew.date(1));
         } else {
             this.setState({
-                viewDate: viewDateNew,
                 currentView: ECalendarViewMode.DAYS,
                 header: formatDate(viewDateNew, ECalendarViewMode.DAYS) || getHeader(viewDateNew),
+                viewDate: viewDateNew,
             });
         }
     };
@@ -493,8 +493,8 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
 
                 if (isInRange) {
                     changedStateElements = {
-                        viewDate: viewDate,
                         header: formatDate(viewDate, prevState.currentView) || getHeader(pickedDate),
+                        viewDate: viewDate,
                     };
                 }
                 return {
@@ -522,8 +522,8 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
 
                 if (isInRange) {
                     changedStateElements = {
-                        viewDate,
                         header: formatDate(viewDate, prevState.currentView) || getHeader(pickedDate),
+                        viewDate,
                     };
                 }
                 return {

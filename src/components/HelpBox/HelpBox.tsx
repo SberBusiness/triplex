@@ -119,7 +119,7 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
             <TooltipBody className="cssClass[helpBoxTooltipBody]" forwardedRef={tooltipBodyRef}>
                 <FocusTrap
                     active={opened}
-                    focusTrapOptions={{initialFocus: `[id='${tooltipId.current}']`, clickOutsideDeactivates: true, preventScroll: true}}
+                    focusTrapOptions={{clickOutsideDeactivates: true, initialFocus: `[id='${tooltipId.current}']`, preventScroll: true}}
                 >
                     <div>
                         {children}

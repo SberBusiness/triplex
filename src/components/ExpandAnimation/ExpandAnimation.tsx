@@ -120,8 +120,8 @@ export class ExpandAnimation extends React.Component<IExpandAnimationProps, IExp
         }
 
         return {
-            overflow,
             height,
+            overflow,
             transition: `height ${animationTime!}ms ease-in-out`,
         };
     };

@@ -150,8 +150,8 @@ export const LightBoxSideOverlay: ILightBoxSideOverlayFC = ({
             {...focusTrapProps}
             focusTrapOptions={{
                 clickOutsideDeactivates: true,
-                preventScroll: true,
                 initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(contentRef.current),
+                preventScroll: true,
                 ...focusTrapProps?.focusTrapOptions,
             }}
         >

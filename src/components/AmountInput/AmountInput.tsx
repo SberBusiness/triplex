@@ -58,11 +58,11 @@ export const AmountInput = React.forwardRef<HTMLInputElement, IAmountInputProps>
                 className={classnames(
                     'cssClass[amountInput]',
                     {
-                        'cssClass[filled]': !!value,
-                        'cssClass[withCurrency]': !!currency,
                         'cssClass[disabled]': !!disabled,
                         'cssClass[error]': !!error,
+                        'cssClass[filled]': !!value,
                         'cssClass[grouped]': !!groupPosition,
+                        'cssClass[withCurrency]': !!currency,
                     },
                     className
                 )}

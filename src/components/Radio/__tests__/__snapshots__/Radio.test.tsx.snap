@@ -21,7 +21,7 @@ exports[`Radio renders correctly 1`] = `
 
 exports[`Radio renders disabled state correctly 1`] = `
 <label
-  className="cssClass[label] cssClass[nonempty] cssClass[disabled]"
+  className="cssClass[label] cssClass[disabled] cssClass[nonempty]"
   onClick={[Function]}
   onMouseDown={[Function]}
 >

@@ -68,10 +68,10 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
         return render(
             {
                 ...renderProvideProps,
-                id: instanceId.current,
                 className: classNames,
-                onFocus: handleFocus,
+                id: instanceId.current,
                 onBlur: handleBlur,
+                onFocus: handleFocus,
                 /* Когда элемент не в фокусе, вместо placeholder показывается Label. */
                 placeholder: focused ? placeholder : ' ',
                 style: {paddingLeft, paddingRight, ...style},

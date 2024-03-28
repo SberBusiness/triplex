@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import {TAriaHTMLAttributes} from "@sberbusiness/triplex/utils/HTML/AriaAttributes";
+import {TAriaHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/AriaAttributes';
 
 /** Контекст WidgetHeader. */
 export interface IWidgetHeaderContext {

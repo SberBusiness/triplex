@@ -14,7 +14,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, ITextAreaProps>(
     ({className, cols, style, error, resize = 'none', ...props}, ref) => {
         const classNames = classnames('cssClass[textArea]', {'cssClass[error]': Boolean(error), 'cssClass[fullWidth]': !cols}, className);
 
-        return <textarea className={classNames} cols={cols} style={{...style, resize: resize}} {...props} ref={ref} data-tinfo="9.1.0" />;
+        return <textarea className={classNames} cols={cols} style={{...style, resize: resize}} {...props} ref={ref} />;
     }
 );
 

@@ -30,7 +30,6 @@ export const Header: IHeaderFC = ({children, className, sticky, ...htmlDivAttrib
             'cssClass[sticky]': Boolean(sticky),
         })}
         {...htmlDivAttributes}
-        data-tinfo="12.0.0"
     >
         {children}
     </div>

@@ -81,16 +81,16 @@ export const SliderExtended: React.FC<ISliderExtendedProps> & {
 
                 setSteps(
                     values.map((value) => ({
-                        value,
                         normalizedValue: SliderExtendedUtils.getNormalizedValue({max, min, value}),
+                        value,
                     }))
                 );
             } else {
                 setSteps(
                     /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call */
                     step.map((val) => ({
-                        value: val,
                         normalizedValue: SliderExtendedUtils.getNormalizedValue({max, min, value: val}),
+                        value: val,
                     }))
                 );
             }
@@ -114,8 +114,8 @@ export const SliderExtended: React.FC<ISliderExtendedProps> & {
                 max,
                 min,
                 railNode,
-                reverse: Boolean(reverse),
                 removeDot,
+                reverse: Boolean(reverse),
                 setFocused,
                 setIsHoverOrDragTrack,
                 setRailNode,

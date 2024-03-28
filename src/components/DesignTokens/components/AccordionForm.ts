@@ -6,13 +6,13 @@ export const designTokensComponentsAccordionFormKeys = [
     'Background_Hover',
     'BorderColor_Default',
     'BorderColor_Focus',
-    'Title_Color_Default',
-    'Title_Color_Disabled',
+    'Divider_Color',
     'Step_Line_Default',
+    'Step_Line_Error',
     'Step_Line_Success',
     'Step_Line_Warning',
-    'Step_Line_Error',
-    'Divider_Color',
+    'Title_Color_Default',
+    'Title_Color_Disabled',
 ] as const;
 // Тип, содержащий названия токенов компонента AccordionForm.
 export type TDesignTokensComponentsAccordionFormKeys = (typeof designTokensComponentsAccordionFormKeys)[number];
@@ -29,11 +29,11 @@ export const AccordionForm_Tokens: TDesignTokensComponentsAccordionFormValues = 
     Background_Hover: [{ref: 'Neutral.300'}, {ref: 'Basic.500'}], // var(--triplex-AccordionForm-Background_Hover)
     BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.500'}], // var(--triplex-AccordionForm-BorderColor_Default)
     BorderColor_Focus: [{ref: 'Accent.500'}, {ref: 'Accent.500'}], // var(--triplex-AccordionForm-BorderColor_Focus)
-    Title_Color_Default: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-AccordionForm-Title_Color_Default)
-    Title_Color_Disabled: [{ref: 'Neutral.700'}, {ref: 'Neutral.900'}], // var(--triplex-AccordionForm-Title_Color_Disabled)
+    Divider_Color: [{ref: 'Neutral.500'}, {ref: 'Basic.500'}], // var(--triplex-AccordionForm-Divider_Color)
     Step_Line_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-AccordionForm-Step_Line_Default)
+    Step_Line_Error: [{ref: 'Error.700'}, {ref: 'Error.500'}], // var(--triplex-AccordionForm-Step_Line_Error)
     Step_Line_Success: [{ref: 'Primary.700'}, {ref: 'Primary.500'}], // var(--triplex-AccordionForm-Step_Line_Success)
     Step_Line_Warning: [{ref: 'Warning.700'}, {ref: 'Warning.700'}], // var(--triplex-AccordionForm-Step_Line_Warning)
-    Step_Line_Error: [{ref: 'Error.700'}, {ref: 'Error.500'}], // var(--triplex-AccordionForm-Step_Line_Error)
-    Divider_Color: [{ref: 'Neutral.500'}, {ref: 'Basic.500'}], // var(--triplex-AccordionForm-Divider_Color)
+    Title_Color_Default: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-AccordionForm-Title_Color_Default)
+    Title_Color_Disabled: [{ref: 'Neutral.700'}, {ref: 'Neutral.900'}], // var(--triplex-AccordionForm-Title_Color_Disabled)
 };

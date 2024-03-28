@@ -19,7 +19,7 @@ export const FormFieldLabel = React.forwardRef<HTMLLabelElement, IFormFieldLabel
 
         const classNames = classnames(
             'cssClass[formFieldLabel]',
-            {'cssClass[floating]': floating, 'cssClass[disabled]': disabled},
+            {'cssClass[disabled]': disabled, 'cssClass[floating]': floating},
             className
         );
 

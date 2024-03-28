@@ -8,6 +8,8 @@ exports[`Spoiler renders correctly 1`] = `
     className="cssClass[head]"
   >
     <button
+      aria-controls="Spoiler-0"
+      aria-expanded={false}
       className="cssClass[button] cssClass[link] cssClass[SM] hoverable cssClass[toggleButton]"
       onBlur={[Function]}
       onClick={[Function]}
@@ -27,6 +29,7 @@ exports[`Spoiler renders correctly 1`] = `
   </div>
   <div
     className="cssClass[content] cssClass[hidden]"
+    id="Spoiler-0"
   >
     <span>
       123456

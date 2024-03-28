@@ -43,11 +43,11 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
     const classNames = classnames(
         'cssClass[stepperStep]',
         {
-            'cssClass[nonempty]': !!children,
-            'cssClass[intact]': !selected && !icon && !disabled,
-            'cssClass[selected]': selected,
             'cssClass[disabled]': !!disabled,
             'cssClass[focusVisible]': focusSource === EFocusSource.KEYBOARD,
+            'cssClass[intact]': !selected && !icon && !disabled,
+            'cssClass[nonempty]': !!children,
+            'cssClass[selected]': selected,
         },
         className
     );
