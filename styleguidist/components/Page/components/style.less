@@ -1,0 +1,20 @@
+.sidebar {
+    position: relative;
+    background: #4BB6ED;
+    padding: 32px;
+}
+
+.sidebar-background {
+    position: absolute;
+    // Должно быть 0, но в Safari неправильно отрисовыввается с багом.
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    background: #F2F4F7;
+    border-radius: 0 16px 16px 0,
+}
+
+.styleguidist-dark-theme .sidebar-background {
+    background: #1F1F22;
+}
