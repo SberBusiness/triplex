@@ -31,8 +31,8 @@ export function Title<T extends keyof JSX.IntrinsicElements = `h1`>({
         mapFontTypeToCssClass[type],
         mapFontWeightToCssClass[weight],
         {
-            'cssClass[underline]': !!underline && !strikethrough,
             'cssClass[strikethrough]': !!strikethrough && !underline,
+            'cssClass[underline]': !!underline && !strikethrough,
             'cssClass[underlineStrikethrough]': !!strikethrough && !!underline,
         },
         className

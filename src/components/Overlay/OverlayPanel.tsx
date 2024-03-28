@@ -3,7 +3,7 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EOverlayDirection, IOverlayChildrenProvideProps} from './OverlayBase';
 
 /** Свойства компонента OverlayPanel. */
-interface IOverlayPanelProps extends  React.HTMLAttributes<HTMLDivElement>, IOverlayChildrenProvideProps {}
+interface IOverlayPanelProps extends React.HTMLAttributes<HTMLDivElement>, IOverlayChildrenProvideProps {}
 
 /** Выезжающая с контентом панель оверлея. */
 export const OverlayPanel = React.forwardRef<HTMLDivElement, IOverlayPanelProps>(
@@ -37,9 +37,9 @@ export const OverlayPanel = React.forwardRef<HTMLDivElement, IOverlayPanelProps>
         return (
             <div
                 className={classnames('cssClass[overlayPanel]', className, {
-                    'cssClass[opened]': opened,
                     'cssClass[bottom]': direction === EOverlayDirection.BOTTOM,
                     'cssClass[left]': direction === EOverlayDirection.LEFT,
+                    'cssClass[opened]': opened,
                     'cssClass[right]': direction === EOverlayDirection.RIGHT,
                     'cssClass[top]': direction === EOverlayDirection.TOP,
                 })}

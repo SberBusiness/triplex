@@ -240,10 +240,10 @@ export const SliderExtendedTrack: React.FC<ISliderExtendedTrackProps> = ({
                         {...htmlSpanAttributes}
                         className={classnames('cssClass[sliderExtendedTrack]', className, {
                             'cssClass[disabled]': disabled,
-                            // Не перетаскиваемый.
-                            'cssClass[staticSlider]': !innerDraggable,
                             'cssClass[focusedByClick]': isFocusedByClick,
                             'cssClass[hoverOrDragByMouse]': isHoverOrDragTrack,
+                            // Не перетаскиваемый.
+                            'cssClass[staticSlider]': !innerDraggable,
                         })}
                         onBlur={handleBlur}
                         onFocus={handleFocus}

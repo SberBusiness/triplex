@@ -38,8 +38,8 @@ describe('SliderExtendedUtils', () => {
 
     it('getNearestDotByValue returns nearest dot', () => {
         const dots: ISliderExtendedDot[] = [
-            {value: 10, changeValue: jest.fn(), normalizedValue: 10, id: '1', stepIndex: 0},
-            {value: 20, changeValue: jest.fn(), normalizedValue: 20, id: '2', stepIndex: 1},
+            {changeValue: jest.fn(), id: '1', normalizedValue: 10, stepIndex: 0, value: 10},
+            {changeValue: jest.fn(), id: '2', normalizedValue: 20, stepIndex: 1, value: 20},
         ];
 
         const value = 12;
@@ -49,8 +49,8 @@ describe('SliderExtendedUtils', () => {
 
     it('getNearestStep returns nearest step', () => {
         const steps: ISliderExtendedStep[] = [
-            {value: 10, normalizedValue: 10},
-            {value: 20, normalizedValue: 20},
+            {normalizedValue: 10, value: 10},
+            {normalizedValue: 20, value: 20},
         ];
 
         const normalizedValue = 12;
@@ -60,8 +60,8 @@ describe('SliderExtendedUtils', () => {
 
     it('getStepIndexByNormalizedValue returns step index', () => {
         const steps: ISliderExtendedStep[] = [
-            {value: 10, normalizedValue: 10},
-            {value: 20, normalizedValue: 20},
+            {normalizedValue: 10, value: 10},
+            {normalizedValue: 20, value: 20},
         ];
 
         const normalizedValue = 10;

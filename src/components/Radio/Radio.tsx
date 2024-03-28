@@ -11,7 +11,7 @@ export const Radio = React.forwardRef<HTMLInputElement, IRadioProps>((props, ref
     const classNames = classnames('cssClass[radio]', className);
     const labelClassNames = classnames(
         'cssClass[label]',
-        {'cssClass[nonempty]': !!children, 'cssClass[disabled]': !!disabled},
+        {'cssClass[disabled]': !!disabled, 'cssClass[nonempty]': !!children},
         labelAttributes?.className
     );
     const inputRef = useRef<HTMLInputElement | null>(null);

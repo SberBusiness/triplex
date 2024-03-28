@@ -36,13 +36,13 @@ export const initialFormFieldContextContext: IFormFieldContext = {
     id: '',
     postfixWidth: 0,
     prefixWidth: 0,
-    valueExist: false,
     setDisabled: () => {},
     setFocused: () => {},
     setId: () => {},
     setPostfixWidth: () => {},
     setPrefixWidth: () => {},
     setValueExist: () => {},
+    valueExist: false,
 };
 
 /**

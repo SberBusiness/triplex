@@ -19,7 +19,7 @@ exports[`Calendar render disabled days 1`] = `
     </button>
     <a
       aria-live="polite"
-      className="cssClass[link] hoverable cssClass[lg] cssClass[text] cssClass[focusVisible]"
+      className="cssClass[link] hoverable cssClass[focusVisible] cssClass[lg] cssClass[text]"
       id="calendar-period-0"
       onBlur={[Function]}
       onClick={[Function]}
@@ -672,7 +672,7 @@ exports[`Calendar render marked days 1`] = `
     </button>
     <a
       aria-live="polite"
-      className="cssClass[link] hoverable cssClass[lg] cssClass[text] cssClass[focusVisible]"
+      className="cssClass[link] hoverable cssClass[focusVisible] cssClass[lg] cssClass[text]"
       id="calendar-period-0"
       onBlur={[Function]}
       onClick={[Function]}
@@ -1331,7 +1331,7 @@ exports[`Calendar renders correctly 1`] = `
     </button>
     <a
       aria-live="polite"
-      className="cssClass[link] hoverable cssClass[lg] cssClass[text] cssClass[focusVisible]"
+      className="cssClass[link] hoverable cssClass[focusVisible] cssClass[lg] cssClass[text]"
       id="calendar-period-0"
       onBlur={[Function]}
       onClick={[Function]}

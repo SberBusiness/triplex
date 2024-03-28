@@ -172,8 +172,10 @@ const calcBounds = (el: HTMLElement | Window): ITooltipBounds => {
  * Проверка помещается ли элемент в область.
  * @param {ETooltipSizeParameter} dimension Тип координаты для сравнения (высота/ширина).
  */
-const fitWithinChecker = (dimension: ETooltipSizeParameter) => (domainSize: ITooltipDomainSize, itemSize: ITooltipSize): boolean =>
-    domainSize[dimension] >= itemSize[dimension];
+const fitWithinChecker =
+    (dimension: ETooltipSizeParameter) =>
+    (domainSize: ITooltipDomainSize, itemSize: ITooltipSize): boolean =>
+        domainSize[dimension] >= itemSize[dimension];
 
 const doesWidthFitWithin = fitWithinChecker(ETooltipSizeParameter.W);
 const doesHeightFitWithin = fitWithinChecker(ETooltipSizeParameter.H);

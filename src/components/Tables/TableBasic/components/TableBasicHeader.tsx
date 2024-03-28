@@ -52,9 +52,9 @@ export class TableBasicHeader extends React.PureComponent<ITableBasicHeaderProps
         }
 
         const orderButtonClassName = classnames('cssClass[orderButton]', {
-            'cssClass[sorted]': c.orderDirection !== EOrderDirection.NONE,
             'cssClass[alignLeft]': c.horizontalAlign === EHorizontalAlign.RIGHT,
             'cssClass[alignRight]': c.horizontalAlign !== EHorizontalAlign.RIGHT,
+            'cssClass[sorted]': c.orderDirection !== EOrderDirection.NONE,
         });
 
         return <span className={orderButtonClassName}>{icon}</span>;
@@ -62,14 +62,14 @@ export class TableBasicHeader extends React.PureComponent<ITableBasicHeaderProps
 
     /** Рендер заголовка таблицы. */
     private renderTh = (c: ITableBasicColumn, hasOrderFunc: boolean) => {
-        const styleTh = c.width ? {minWidth: c.width, maxWidth: c.width, width: c.width} : undefined;
+        const styleTh = c.width ? {maxWidth: c.width, minWidth: c.width, width: c.width} : undefined;
         const orderEnabled = hasOrderFunc && !isNullOrUndefined(c.orderDirection);
         const handleClickOrder = orderEnabled ? () => this.handleClickOrder(c.fieldKey, c.orderDirection!) : undefined;
         const orderIcon = orderEnabled && this.renderOrderIcon(c);
         const classNameTh = classnames(mapHorizontalAlignToClassName(c.horizontalAlign), mapScreenSizeToClassName(c.hideScreenWidth));
         const classNameThBlock = classnames('cssClass[thBlock]', 'hoverable', {
-            'cssClass[order]': orderEnabled,
             'cssClass[checkboxType]': c.cellType === ECellType.CHECKBOX,
+            'cssClass[order]': orderEnabled,
         });
 
         const content =
@@ -120,7 +120,7 @@ export class TableBasicHeader extends React.PureComponent<ITableBasicHeaderProps
         }
 
         if (onOrderBy) {
-            const OrderObj: ISortOrder = {fieldKey, direction: nextDirection};
+            const OrderObj: ISortOrder = {direction: nextDirection, fieldKey};
             onOrderBy(OrderObj);
         }
     };

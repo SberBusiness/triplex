@@ -19,16 +19,16 @@ export interface ICarouselExtendedProps extends React.HTMLAttributes<HTMLDivElem
 /** Карусель. */
 export const CarouselExtended = React.forwardRef<HTMLDivElement, ICarouselExtendedProps>(
     ({children, buttonPrev, buttonNext, stepPrev, stepNext, ...htmlDivAttributes}, ref) => {
-        const [controlsState, setControlsState] = useState({prevDisabled: true, nextDisabled: false, hidden: true});
+        const [controlsState, setControlsState] = useState({hidden: true, nextDisabled: false, prevDisabled: true});
         const carouselRef = useRef<HTMLDivElement | null>(null);
 
         /** Функция, контролирующая состояние кнопок. */
         const checkControls = useCallback((): void => {
             const carousel = carouselRef.current!;
             const newState = {
-                prevDisabled: Math.round(carousel.scrollLeft) <= 0,
-                nextDisabled: Math.round(carousel.scrollLeft) + carousel.offsetWidth >= carousel.scrollWidth,
                 hidden: carousel.scrollWidth == carousel.clientWidth,
+                nextDisabled: Math.round(carousel.scrollLeft) + carousel.offsetWidth >= carousel.scrollWidth,
+                prevDisabled: Math.round(carousel.scrollLeft) <= 0,
             };
 
             if (isEqual(newState, controlsState) == false) {
@@ -72,11 +72,11 @@ export const CarouselExtended = React.forwardRef<HTMLDivElement, ICarouselExtend
 
         return (
             <div {...htmlDivAttributes}>
-                {buttonPrev({onClick: handleMovePrev, disabled: controlsState.prevDisabled, hidden: controlsState.hidden})}
+                {buttonPrev({disabled: controlsState.prevDisabled, hidden: controlsState.hidden, onClick: handleMovePrev})}
                 <div className="cssClass[carouselExtended]" onScroll={checkControls} ref={setRef}>
                     {children}
                 </div>
-                {buttonNext({onClick: handleMoveNext, disabled: controlsState.nextDisabled, hidden: controlsState.hidden})}
+                {buttonNext({disabled: controlsState.nextDisabled, hidden: controlsState.hidden, onClick: handleMoveNext})}
             </div>
         );
     }

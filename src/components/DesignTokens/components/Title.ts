@@ -20,10 +20,10 @@ export type TDesignTokensComponentsTitle = {Title: TDesignTokensComponentsTitleV
 
 // Токены компонента Title в светлой и темной темах.
 export const Title_Tokens: TDesignTokensComponentsTitleValues = {
+    Danger_Color: [{ref: 'Error.700'}, {ref: 'Error.500'}], // var(--triplex-Title-Danger_Color)
+    Disabled_Color: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-Title-Disabled_Color)
     General_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Title-General_Color)
     Secondary_Color: [{ref: 'Neutral.900'}, {ref: 'Neutral.900'}], // var(--triplex-Title-Secondary_Color)
     Success_Color: [{ref: 'Primary.700'}, {ref: 'Primary.500'}], // var(--triplex-Title-Success_Color)
     Warning_Color: [{ref: 'Warning.700'}, {ref: 'Warning.500'}], // var(--triplex-Title-Warning_Color)
-    Danger_Color: [{ref: 'Error.700'}, {ref: 'Error.500'}], // var(--triplex-Title-Danger_Color)
-    Disabled_Color: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-Title-Disabled_Color)
 };

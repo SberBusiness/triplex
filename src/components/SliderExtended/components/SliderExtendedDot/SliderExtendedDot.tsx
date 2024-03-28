@@ -62,8 +62,8 @@ export const SliderExtendedDot: React.FC<ISliderExtendedDotProps> = ({
 
         // Добавление Dot в контекст.
         addDot({
-            id,
             changeValue: onChange,
+            id,
             normalizedValue,
             stepIndex: SliderExtendedUtils.getStepIndexByNormalizedValue({normalizedValue, steps}),
             value,
@@ -80,8 +80,8 @@ export const SliderExtendedDot: React.FC<ISliderExtendedDotProps> = ({
         }
 
         updateDot({
-            id,
             changeValue: onChange,
+            id,
             normalizedValue: nextNormalizedValue,
             stepIndex: SliderExtendedUtils.getStepIndexByNormalizedValue({normalizedValue: nextNormalizedValue, steps}),
             value,
@@ -236,8 +236,8 @@ export const SliderExtendedDot: React.FC<ISliderExtendedDotProps> = ({
                         {...htmlSpanAttributes}
                         className={classnames('cssClass[sliderExtendedDot]', className, {
                             'cssClass[disabled]': disabled,
-                            'cssClass[focusedByClick]': isFocusedByClick,
                             'cssClass[dragByMouse]': isDragged || isHoverOrDragTrack,
+                            'cssClass[focusedByClick]': isFocusedByClick,
                         })}
                         onBlur={handleBlur}
                         onFocus={handleFocus}

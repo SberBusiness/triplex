@@ -27,17 +27,17 @@ interface ITableFilterDropdownProps extends React.HTMLAttributes<HTMLDivElement>
 
 /** Состояние компонента TableFilterDropdown. */
 interface ITableFilterDropdownState {
-    /** Состояние открытости дропдауна. */
-    opened: boolean;
     /** Текущий активный элемент (его идентификатор). */
     activeDescendant?: string;
+    /** Состояние открытости дропдауна. */
+    opened: boolean;
 }
 
 /** Компонент TableFilterDropdown. */
 export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdownProps, ITableFilterDropdownState> {
     state = {
-        opened: false,
         activeDescendant: undefined,
+        opened: false,
     };
 
     private readonly targetRef: React.RefObject<HTMLDivElement>;

@@ -52,9 +52,9 @@ export const CalendarDay: React.FC<ICalendarDay> = ({
         'cssClass[calendarDay]',
         {
             'cssClass[marked]': marked,
-            'cssClass[rangeStart]': rangeStart,
-            'cssClass[rangeEnd]': rangeEnd,
             'cssClass[rangeBetween]': rangeBetween,
+            'cssClass[rangeEnd]': rangeEnd,
+            'cssClass[rangeStart]': rangeStart,
         },
         className
     );
@@ -68,10 +68,10 @@ export const CalendarDay: React.FC<ICalendarDay> = ({
     /** Отрисовка номера дня. */
     const renderDayNumber = () => {
         const classNames = classnames('cssClass[calendarDayNumber]', {
-            'cssClass[muted]': muted,
             'cssClass[current]': current,
-            'cssClass[selected]': selected,
             'cssClass[disabled]': disabled,
+            'cssClass[muted]': muted,
+            'cssClass[selected]': selected,
         });
 
         return (

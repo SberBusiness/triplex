@@ -120,9 +120,9 @@ export class TooltipBase extends React.Component<ITooltipBaseProps, ITooltipBase
     public renderContainer: Element;
     public orderConfig: IReorderConfig = {
         order: [
-            {type: TooltipBody, required: true},
-            {type: TooltipTarget, required: true},
-            {type: TooltipXButton, required: false},
+            {required: true, type: TooltipBody},
+            {required: true, type: TooltipTarget},
+            {required: false, type: TooltipXButton},
         ],
     };
 
@@ -233,7 +233,7 @@ export class TooltipBase extends React.Component<ITooltipBaseProps, ITooltipBase
         if (this.state.exiting) {
             this.animateExitStop();
         }
-        this.setState({opened: true, needRenderTooltip: true});
+        this.setState({needRenderTooltip: true, opened: true});
     };
 
     // Закрыть поповер
@@ -548,18 +548,8 @@ export class TooltipBase extends React.Component<ITooltipBaseProps, ITooltipBase
 
     // Отрисовка самого Tooltip
     private tooltipRender: () => React.ReactElement = () => {
-        const {
-            alignTip,
-            children,
-            isOpen,
-            setTooltipRef,
-            closeTooltip,
-            onShow,
-            preferPlace,
-            size,
-            tooltipRenderContainer,
-            ...htmlAttrs
-        } = this.props;
+        const {alignTip, children, isOpen, setTooltipRef, closeTooltip, onShow, preferPlace, size, tooltipRenderContainer, ...htmlAttrs} =
+            this.props;
 
         // проверяем наличие TooltipBody
         if (!this.state.orderedChildren[0]) {

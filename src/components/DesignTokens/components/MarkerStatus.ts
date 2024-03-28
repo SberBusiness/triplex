@@ -1,7 +1,7 @@
 import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokenTypes';
 
 // Название токенов компонента MarkerStatus.
-export const designTokensComponentsMarkerStatusKeys = ['Text_Color', 'Desc_Color'] as const;
+export const designTokensComponentsMarkerStatusKeys = ['Desc_Color', 'Text_Color'] as const;
 // Тип, содержащий названия токенов компонента MarkerStatus.
 export type TDesignTokensComponentsMarkerStatusKeys = (typeof designTokensComponentsMarkerStatusKeys)[number];
 // Тип, содержащий названия токенов компонента MarkerStatus и их значения.
@@ -13,6 +13,6 @@ export type TDesignTokensComponentsMarkerStatus = {MarkerStatus: TDesignTokensCo
 
 // Токены компонента MarkerStatus в светлой и темной темах.
 export const MarkerStatus_Tokens: TDesignTokensComponentsMarkerStatusValues = {
-    Text_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-MarkerStatus-Text_Color)
     Desc_Color: [{ref: 'Neutral.900'}, {ref: 'Neutral.900'}], // var(--triplex-MarkerStatus-Desc_Color)
+    Text_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-MarkerStatus-Text_Color)
 };

@@ -81,7 +81,6 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, IButtonBaseProps>(
             ref={setRef}
             type="button"
             {...rest}
-            data-tinfo="12.0.1"
         >
             {children}
         </button>

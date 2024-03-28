@@ -52,7 +52,6 @@ module.exports = {
                 use: [
                     {loader: path.resolve(__dirname, './cssClassNameReplacer.js')},
                     {loader: 'ts-loader'},
-                    {loader: path.resolve(__dirname, './triplexInfoReplacer.js')},
                 ],
                 exclude: /node_modules/,
             },

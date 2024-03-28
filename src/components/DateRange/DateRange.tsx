@@ -120,23 +120,23 @@ export const DateRange: React.FC<IDateRangeProps> = ({
             {renderButtonBack({
                 children: <TabfoldercarouselleftSrvxIcon32 />,
                 className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
-                onClick: shiftRangeBack,
                 disabled: !(start && end),
+                onClick: shiftRangeBack,
             })}
             {renderPickerFrom({
-                value: start,
                 onChange: handleChangePickerFrom,
+                value: start,
             })}
             {renderSeparator()}
             {renderPickerTo({
-                value: end,
                 onChange: handleChangePickerTo,
+                value: end,
             })}
             {renderButtonForward({
                 children: <TabfoldercarouselrightSrvxIcon32 />,
                 className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
-                onClick: shiftRangeForward,
                 disabled: !(start && end),
+                onClick: shiftRangeForward,
             })}
         </div>
     );

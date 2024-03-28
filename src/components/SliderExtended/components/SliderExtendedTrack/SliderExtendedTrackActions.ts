@@ -3,10 +3,6 @@ import {SliderExtendedUtils} from '../../SliderExtendedUtils';
 
 interface ISliderExtendedTrackActions {
     /**
-     * Возвращает левую и правую позиции трека.
-     */
-    getTrackPosition: (params: {dots: ISliderExtendedDot[]; reverse: boolean}) => {left: number; right: number};
-    /**
      * Перемещение SliderExtended.Dots, при перемещении SliderExtended.Track.
      */
     dragDots: (params: {
@@ -18,54 +14,20 @@ interface ISliderExtendedTrackActions {
         steps: ISliderExtendedStep[];
     }) => void;
     /**
-     * Перемещение трека и точек на предыдущий шаг.
+     * Возвращает левую и правую позиции трека.
      */
-    moveToPrevStep: (dots: ISliderExtendedDot[], steps: ISliderExtendedStep[]) => void;
+    getTrackPosition: (params: {dots: ISliderExtendedDot[]; reverse: boolean}) => {left: number; right: number};
     /**
      * Перемещение трека и точек на следующий шаг.
      */
     moveToNextStep: (dots: ISliderExtendedDot[], steps: ISliderExtendedStep[]) => void;
+    /**
+     * Перемещение трека и точек на предыдущий шаг.
+     */
+    moveToPrevStep: (dots: ISliderExtendedDot[], steps: ISliderExtendedStep[]) => void;
 }
 
 export const SliderExtendedTrackActions: ISliderExtendedTrackActions = {
-    getTrackPosition: ({dots, reverse}) => {
-        const position = {
-            left: 0,
-            right: 0,
-        };
-
-        // Слайдер с одним Slider.Dot.
-        if (dots.length === 1) {
-            if (reverse) {
-                position.left = 100 - dots[0].normalizedValue;
-                position.right = 0;
-            } else {
-                position.left = 0;
-                position.right = 100 - dots[0].normalizedValue;
-            }
-            // Слайдер с двумя Slider.Dot.
-        } else {
-            if (reverse) {
-                if (dots[0].value < dots[1].value) {
-                    position.right = dots[0].normalizedValue;
-                    position.left = 100 - dots[1].normalizedValue;
-                } else {
-                    position.right = dots[1].normalizedValue;
-                    position.left = 100 - dots[0].normalizedValue;
-                }
-            } else {
-                if (dots[0].value < dots[1].value) {
-                    position.left = dots[0].normalizedValue;
-                    position.right = 100 - dots[1].normalizedValue;
-                } else {
-                    position.left = dots[1].normalizedValue;
-                    position.right = 100 - dots[0].normalizedValue;
-                }
-            }
-        }
-
-        return position;
-    },
     dragDots: ({cursorPrevNormalizedValue, cursorXPosition, dots, railNode, reverse, steps}) => {
         if (railNode) {
             /**
@@ -142,14 +104,52 @@ export const SliderExtendedTrackActions: ISliderExtendedTrackActions = {
             }
         }
     },
-    moveToPrevStep: (dots, steps) => {
-        if (dots.every((d) => d.stepIndex !== 0)) {
-            dots.forEach((d) => d.changeValue(steps[d.stepIndex - 1].value));
+    getTrackPosition: ({dots, reverse}) => {
+        const position = {
+            left: 0,
+            right: 0,
+        };
+
+        // Слайдер с одним Slider.Dot.
+        if (dots.length === 1) {
+            if (reverse) {
+                position.left = 100 - dots[0].normalizedValue;
+                position.right = 0;
+            } else {
+                position.left = 0;
+                position.right = 100 - dots[0].normalizedValue;
+            }
+            // Слайдер с двумя Slider.Dot.
+        } else {
+            if (reverse) {
+                if (dots[0].value < dots[1].value) {
+                    position.right = dots[0].normalizedValue;
+                    position.left = 100 - dots[1].normalizedValue;
+                } else {
+                    position.right = dots[1].normalizedValue;
+                    position.left = 100 - dots[0].normalizedValue;
+                }
+            } else {
+                if (dots[0].value < dots[1].value) {
+                    position.left = dots[0].normalizedValue;
+                    position.right = 100 - dots[1].normalizedValue;
+                } else {
+                    position.left = dots[1].normalizedValue;
+                    position.right = 100 - dots[0].normalizedValue;
+                }
+            }
         }
+
+        return position;
     },
     moveToNextStep: (dots, steps) => {
         if (dots.every((d) => d.stepIndex !== steps.length - 1)) {
             dots.forEach((d) => d.changeValue(steps[d.stepIndex + 1].value));
+        }
+    },
+    moveToPrevStep: (dots, steps) => {
+        if (dots.every((d) => d.stepIndex !== 0)) {
+            dots.forEach((d) => d.changeValue(steps[d.stepIndex - 1].value));
         }
     },
 };

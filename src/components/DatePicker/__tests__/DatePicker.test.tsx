@@ -22,22 +22,22 @@ jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
 
 jest.mock('react-text-mask', () => ({
     __esModule: true,
-    default: jest.fn(({mask, placeholderChar, ...props}: any) => <input type="text" {...props} />),
     conformToMask: jest.fn((x) => ({conformedValue: x})),
+    default: jest.fn(({mask, placeholderChar, ...props}: any) => <input type="text" {...props} />),
 }));
 
 Object.defineProperty(window, 'matchMedia', {
-    writable: true,
     value: jest.fn().mockImplementation((query) => ({
+        addEventListener: jest.fn(),
+        addListener: jest.fn(), // deprecated
+        dispatchEvent: jest.fn(),
         matches: false,
         media: query,
         onchange: null,
-        addListener: jest.fn(), // deprecated
-        removeListener: jest.fn(), // deprecated
-        addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        removeListener: jest.fn(), // deprecated
     })),
+    writable: true,
 });
 
 describe('DatePicker', () => {

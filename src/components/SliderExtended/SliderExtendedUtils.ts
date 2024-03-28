@@ -24,8 +24,6 @@ interface ISliderExtendedUtils {
 }
 
 export const SliderExtendedUtils: ISliderExtendedUtils = {
-    getNormalizedCursorValue: ({cursorXPosition, railNode}) =>
-        ((cursorXPosition - railNode.getBoundingClientRect().left) * 100) / railNode.offsetWidth,
     getNearestDotByValue: ({value, dots}) => {
         let nearestDot: ISliderExtendedDot = dots[0];
         let delta = Infinity;
@@ -57,6 +55,8 @@ export const SliderExtendedUtils: ISliderExtendedUtils = {
 
         return nearestStep;
     },
+    getNormalizedCursorValue: ({cursorXPosition, railNode}) =>
+        ((cursorXPosition - railNode.getBoundingClientRect().left) * 100) / railNode.offsetWidth,
     getNormalizedValue: ({max, min, value}) => {
         const valuesLength = max - min;
         const valueMinDelta = value - min;

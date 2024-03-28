@@ -6,6 +6,8 @@ export interface IAccordionFormItemFooterProps {
 }
 
 /** Компонент подвала элемента акоордеона. */
-export const AccordionFormItemFooter: React.FC<IAccordionFormItemFooterProps> = ({children}) => <div className="cssClass[footer]">{children}</div>;
+export const AccordionFormItemFooter: React.FC<IAccordionFormItemFooterProps> = ({children}) => (
+    <div className="cssClass[footer]">{children}</div>
+);
 
 AccordionFormItemFooter.displayName = 'AccordionFormItemFooter';

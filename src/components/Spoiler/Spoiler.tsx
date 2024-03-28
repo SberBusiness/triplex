@@ -5,6 +5,7 @@ import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 
 /** Базовые свойства компонента Spoiler. */
 interface ISpoilerBaseProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -51,9 +52,12 @@ export class Spoiler extends React.Component<TSpoilerProps, ISpoilerState> {
 
     node: HTMLButtonElement | null = null;
 
+    // Уникальный id, для передачи a11y aria-атрибутов.
+    private instanceId = `Spoiler-${uniqueId()}`;
+
     public state = {
-        isExpanded: !!this.props.expanded,
         isControlled: this.props.expanded !== undefined,
+        isExpanded: !!this.props.expanded,
     };
 
     public render(): JSX.Element {
@@ -71,6 +75,8 @@ export class Spoiler extends React.Component<TSpoilerProps, ISpoilerState> {
                 <div {...divHTMLAttributes} className={classnames('cssClass[spoiler]', className)}>
                     <div className={'cssClass[head]'}>
                         <Button
+                            aria-controls={this.instanceId}
+                            aria-expanded={open}
                             className="cssClass[toggleButton]"
                             theme={EButtonTheme.LINK}
                             size={EButtonSize.SM}
@@ -82,7 +88,9 @@ export class Spoiler extends React.Component<TSpoilerProps, ISpoilerState> {
                         </Button>
                         {rightBlock}
                     </div>
-                    {children && <div className={classContent}>{children}</div>}
+                    <div className={classContent} id={this.instanceId}>
+                        {children}
+                    </div>
                 </div>
             </KeyDownListener>
         );

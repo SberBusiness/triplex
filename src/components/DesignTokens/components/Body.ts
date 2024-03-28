@@ -13,7 +13,7 @@ export type TDesignTokensComponentsBody = {Body: TDesignTokensComponentsBodyValu
 
 // Токены компонента Body в светлой и темной темах.
 export const Body_Tokens: TDesignTokensComponentsBodyValues = {
-    Background_White: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-Body-Background_White)
-    Background_Gray: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Body-Background_Gray)
     Background_Darkgray: [{ref: 'Neutral.900'}, {ref: 'Basic.700'}], // var(--triplex-Body-Background_Darkgray)
+    Background_Gray: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Body-Background_Gray)
+    Background_White: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-Body-Background_White)
 };

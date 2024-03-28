@@ -28,12 +28,12 @@ const contextInitial: ISMSInputContext = {
     disabled: false,
     disabledSubmit: true,
     error: false,
-    sizeClassName: '',
-    tooltipId: undefined,
     onChangeCode: () => {},
     onSubmitCode: () => {},
     setDisabledSubmit: () => {},
     setTooltipId: () => {},
+    sizeClassName: '',
+    tooltipId: undefined,
 };
 
 export const SMSInputContext = React.createContext(contextInitial);

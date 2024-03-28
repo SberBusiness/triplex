@@ -53,7 +53,7 @@ export const AlertProcess: React.FC<IAlertProcessProps> & IAlertProcessCompositi
     const handleClose = () => setIsOpen(false);
 
     const render = () => (
-        <div className={classnames('cssClass[alertProcess]', mapAlertTypeToClassName(type), className)} {...rest} data-tinfo="11.0.0">
+        <div className={classnames('cssClass[alertProcess]', mapAlertTypeToClassName(type), className)} {...rest}>
             <div className="cssClass[themeIcon]">{renderIcon ? renderIcon() : renderDefaultIcon(type)}</div>
             <div className="cssClass[alertProcessContentBlock]">
                 {renderHeader?.()}

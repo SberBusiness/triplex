@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import MaskedInputTextMask, {conformToMask, MaskedInputProps} from 'react-text-mask';
 import {Input} from '../Input/Input';
 import {EInputGroupPosition} from '../InputGroup/InputGroup';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {presets, TMaskedInputPresets} from './presets';
-import {useCallback} from 'react';
 
 /** Маска. Каждый элемент массива должен быть либо строкой, либо регулярным выражением. Каждая строка — это фиксированный символ в маске, а каждое регулярное выражение — это заполнитель, который принимает пользовательский ввод.
  * Подробнее можно ознакомиться https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md#mask.

@@ -33,7 +33,7 @@ export interface IStepperProps extends IStepperExtendedProps {
 
 /** Компонент Stepper, список шагов */
 export const Stepper: React.FC<IStepperProps> & IStepperComposition = ({className, steps, selectedStepId, ...rest}) => {
-    const [state, setState] = useState({stepPrev: 0, stepNext: 0});
+    const [state, setState] = useState({stepNext: 0, stepPrev: 0});
     const carouselRef = useRef<HTMLDivElement>(null);
     const stepRefs = useRef<Record<string, HTMLLIElement | null>>({});
     const classNames = classnames('cssClass[stepper]', className);
@@ -58,7 +58,7 @@ export const Stepper: React.FC<IStepperProps> & IStepperComposition = ({classNam
         if (carousel) {
             const value = carousel.getBoundingClientRect().width * 0.3;
 
-            setState({stepPrev: value, stepNext: value});
+            setState({stepNext: value, stepPrev: value});
         }
     }, []);
 
@@ -126,7 +126,6 @@ export const Stepper: React.FC<IStepperProps> & IStepperComposition = ({classNam
             stepPrev={state.stepPrev}
             stepNext={state.stepNext}
             ref={carouselRef}
-            data-tinfo="9.1.0"
         >
             <StepperExtended className={classNames} selectedStepId={selectedStepId} {...rest}>
                 {steps.map(({label, ...step}) => (

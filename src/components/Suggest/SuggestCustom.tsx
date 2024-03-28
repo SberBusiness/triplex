@@ -54,16 +54,16 @@ const KEY_CODES_SELECTABLE = [EVENT_KEY_CODES.ENTER];
  */
 export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends React.Component<ISuggestCustomProps<T>, ISuggestCustomState> {
     public state = {
-        opened: false,
-        focused: false,
-        query: this.props.value?.label || '',
         activeDescendant: undefined,
+        focused: false,
+        opened: false,
+        query: this.props.value?.label || '',
     };
 
     public static defaultProps = {
-        saveFilterOnFocus: false,
         disabled: false,
         loading: false,
+        saveFilterOnFocus: false,
         tabIndex: 0,
         value: undefined,
     };
@@ -154,10 +154,10 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
             'hoverable',
             {
                 'cssClass[disabled]': Boolean(disabled),
-                'cssClass[loading]': Boolean(loading) && Boolean(!error) && Boolean(!disabled),
-                'cssClass[opened]': opened && options && options.length > 0,
                 'cssClass[error]': Boolean(error),
                 'cssClass[grouped]': Boolean(groupPosition),
+                'cssClass[loading]': Boolean(loading) && Boolean(!error) && Boolean(!disabled),
+                'cssClass[opened]': opened && options && options.length > 0,
             },
             groupPosition && mapInputGroupPositionToCSSClass[groupPosition]
         );
@@ -188,23 +188,23 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                         opened={opened}
                     />
                     {this.renderDropdown({
-                        opened: isDropdownOpened,
-                        showListSpinner: showListSpinner,
                         className: dropDownClassName,
-                        spinnerClassName: 'cssClass[globalSpin]',
                         dataTestId,
                         instanceId: this.instanceId,
+                        listRef: this.listRef,
+                        onSelect: this.handleSelect,
+                        opened: isDropdownOpened,
+                        options,
                         renderCustom: renderDropdown,
                         renderDropdownItem: this.renderDropdownItem,
                         renderDropdownItemLabel,
                         selected: value,
-                        options,
-                        onSelect: this.handleSelect,
-                        listRef: this.listRef,
-                        suggestRef: this.suggestRef,
                         setOpened: this.setOpened,
-                        suggestDropdownListClassName: 'cssClass[suggestDropdownList]',
+                        showListSpinner: showListSpinner,
+                        spinnerClassName: 'cssClass[globalSpin]',
                         suggestDropdownItemClassName: 'cssClass[suggestDropdownListItem]',
+                        suggestDropdownListClassName: 'cssClass[suggestDropdownList]',
+                        suggestRef: this.suggestRef,
                     })}
                 </DropdownListContext.Provider>
             </div>
@@ -289,14 +289,14 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                         const key = this.calculateKey(option.label || dataTestId || SuggestCustom.displayName, index);
 
                         return renderDropdownItem({
-                            option,
-                            selected: isEqual(selected, option),
-                            key,
+                            className: suggestDropdownItemClassName,
                             dataTestId,
+                            key,
+                            onSelect,
+                            option,
                             renderCustom: this.props.renderDropdownItem,
                             renderDropdownItemLabel,
-                            onSelect,
-                            className: suggestDropdownItemClassName,
+                            selected: isEqual(selected, option),
                         });
                     })}
 
@@ -350,9 +350,9 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         this.setOpened(
             false,
             {
+                activeDescendant: undefined,
                 focused: false,
                 query: item?.label || '',
-                activeDescendant: undefined,
             },
             () => {
                 onSelect(item);
@@ -369,9 +369,9 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
             this.setOpened(
                 false,
                 {
+                    activeDescendant: undefined,
                     focused: false,
                     query: saveFilterOnFocus && value?.label ? value.label : '',
-                    activeDescendant: undefined,
                 },
                 () => {
                     onSelect(value, e);

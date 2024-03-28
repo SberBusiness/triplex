@@ -4,13 +4,13 @@ import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETri
 import {DesignTokensCore, DesignTokensComponents} from '@sberbusiness/triplex/components/DesignTokens';
 
 export interface IThemeProviderContext {
-    tokens: TDesignTokens;
     theme: ETriplexTheme;
+    tokens: TDesignTokens;
 }
 
 const contextInitial: IThemeProviderContext = {
-    tokens: {...DesignTokensCore, ...DesignTokensComponents},
     theme: ETriplexTheme.LIGHT,
+    tokens: {...DesignTokensCore, ...DesignTokensComponents},
 };
 
 export const ThemeProviderContext = React.createContext<IThemeProviderContext>(contextInitial);

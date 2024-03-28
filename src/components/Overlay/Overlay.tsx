@@ -50,8 +50,8 @@ export const Overlay: IOverlayFC = ({
         <div
             className={classnames('cssClass[overlay]', className, {
                 'cssClass[closing]': closing,
-                'cssClass[opened]': opened,
                 'cssClass[fixed]': Boolean(fixed),
+                'cssClass[opened]': opened,
             })}
             {...htmlDivAttributes}
         >

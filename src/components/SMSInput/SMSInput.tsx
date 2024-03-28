@@ -42,12 +42,12 @@ export const SMSInput: React.FC<ISMSInputProps> & ISMSInputComposition = (props)
                 disabled: !!disabled,
                 disabledSubmit,
                 error: !!error,
-                sizeClassName,
-                tooltipId,
                 onChangeCode,
                 onSubmitCode,
                 setDisabledSubmit,
                 setTooltipId,
+                sizeClassName,
+                tooltipId,
             }}
         >
             <div className={classSMSInput} {...htmlDivAttributes}>

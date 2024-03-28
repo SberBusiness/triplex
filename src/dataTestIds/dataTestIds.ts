@@ -1,8 +1,8 @@
 export const TestIds = {
     AccountDropdownListItem: {
+        amount: '__amount_currency',
         company: '__company',
         label: '__account',
-        amount: '__amount_currency',
     },
 
     AccountSelectButton: {
@@ -11,9 +11,9 @@ export const TestIds = {
     },
 
     AmountCurrencySelect: {
+        dropdown: '__dropdown',
         input: '__input',
         select: '__select',
-        dropdown: '__dropdown',
     },
 
     AmountInput: {
@@ -38,8 +38,8 @@ export const TestIds = {
     },
 
     Multiselect: {
-        tags: '__tags',
         placeholder: '__placeholder',
+        tags: '__tags',
     },
 
     Select: {
@@ -56,16 +56,16 @@ export const TestIds = {
     },
 
     SMSInput: {
-        input: '__input',
-        button_submit: '__button_submit',
         button_refresh: '__button_refresh',
+        button_submit: '__button_submit',
+        input: '__input',
     },
 
     StatusTrackerDeprecated: {
-        icon_wait: '__icon_wait',
-        icon_warning: '__icon_warning',
         icon_error: '__icon_error',
         icon_success: '__icon_success',
+        icon_wait: '__icon_wait',
+        icon_warning: '__icon_warning',
     },
 
     Suggest: {
@@ -76,10 +76,10 @@ export const TestIds = {
 
     Tables: {
         PaginationBasic: {
-            select: '__select',
-            prevPage: '__prevPage',
-            pageNumber: '__pageNumber',
             nextPage: '__nextPage',
+            pageNumber: '__pageNumber',
+            prevPage: '__prevPage',
+            select: '__select',
         },
         TableBasic: {
             td: '__td',

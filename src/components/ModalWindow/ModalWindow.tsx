@@ -52,8 +52,8 @@ export class ModalWindow extends React.PureComponent<IModalWindowProps> {
         size: EModalWindowSize.MD,
     };
     public state: IModalWindowState = {
-        renderPortal: this.props.isOpen,
         isTopOverlayOpen: false,
+        renderPortal: this.props.isOpen,
     };
 
     private mountNode: HTMLDivElement | null = null;

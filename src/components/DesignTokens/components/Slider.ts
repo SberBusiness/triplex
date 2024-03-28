@@ -2,10 +2,10 @@ import {TDesignTokenValue} from '@sberbusiness/triplex/components/DesignTokens/t
 
 // Название токенов компонента Slider.
 export const designTokensComponentsSliderKeys = [
-    'Dot_Inner_Background',
     'Dot_Background_Default',
     'Dot_Background_Disabled',
     'Dot_Background_Hover',
+    'Dot_Inner_Background',
     'Mark_Color_Default',
     'Mark_Color_Active',
     'Mark_Dot_Background_Default',
@@ -15,8 +15,8 @@ export const designTokensComponentsSliderKeys = [
     'Tooltip_Background',
     'Tooltip_Color',
     'Track_Background_Default',
-    'Track_Background_Hover',
     'Track_Background_Disabled',
+    'Track_Background_Hover',
 ] as const;
 // Тип, содержащий названия токенов компонента Slider.
 export type TDesignTokensComponentsSliderKeys = (typeof designTokensComponentsSliderKeys)[number];
@@ -27,9 +27,6 @@ export type TDesignTokensComponentsSlider = {Slider: TDesignTokensComponentsSlid
 
 // Токены компонента Slider в теме по-умолчанию.
 export const Slider_LM: TDesignTokensComponentsSliderValue = {
-    Dot_Inner_Background: {
-        ref: 'Basic.100', // var(--triplex-Slider_Dot_Inner_Background)
-    },
     Dot_Background_Default: {
         ref: 'Primary.700', // var(--triplex-Slider_Dot_Background_Default)
     },
@@ -39,11 +36,14 @@ export const Slider_LM: TDesignTokensComponentsSliderValue = {
     Dot_Background_Hover: {
         ref: 'Primary.900', // var(--triplex-Slider_Dot_Background_Hover)
     },
-    Mark_Color_Default: {
-        ref: 'Neutral.700', // var(--triplex-Slider-Mark_Color_Default)
+    Dot_Inner_Background: {
+        ref: 'Basic.100', // var(--triplex-Slider_Dot_Inner_Background)
     },
     Mark_Color_Active: {
         ref: 'Basic.700', // var(--triplex-Slider-Mark_Color_Active)
+    },
+    Mark_Color_Default: {
+        ref: 'Neutral.700', // var(--triplex-Slider-Mark_Color_Default)
     },
     Mark_Dot_Background_Default: {
         ref: 'Neutral.500', // var(--triplex-Slider-Mark_Dot_Background_Default)
@@ -66,19 +66,16 @@ export const Slider_LM: TDesignTokensComponentsSliderValue = {
     Track_Background_Default: {
         ref: 'Primary.700', // var(--triplex-Slider-Track_Background_Default)
     },
-    Track_Background_Hover: {
-        ref: 'Primary.900', // var(--triplex-Slider-Track_Background_Hover)
-    },
     Track_Background_Disabled: {
         ref: 'Neutral.700', // var(--triplex-Slider-Track_Background_Disabled)
+    },
+    Track_Background_Hover: {
+        ref: 'Primary.900', // var(--triplex-Slider-Track_Background_Hover)
     },
 };
 
 // Токены компонента Slider в темной теме.
 export const Slider_DM: TDesignTokensComponentsSliderValue = {
-    Dot_Inner_Background: {
-        ref: 'Basic.700', // var(--triplex-Slider_Dot_Inner_Background)
-    },
     Dot_Background_Default: {
         ref: 'Primary.500', // var(--triplex-Slider_Dot_Background_Default)
     },
@@ -88,11 +85,14 @@ export const Slider_DM: TDesignTokensComponentsSliderValue = {
     Dot_Background_Hover: {
         ref: 'Primary.700', // var(--triplex-Slider_Dot_Background_Hover)
     },
-    Mark_Color_Default: {
-        ref: 'Neutral.900', // var(--triplex-Slider-Mark_Color_Default)
+    Dot_Inner_Background: {
+        ref: 'Basic.700', // var(--triplex-Slider_Dot_Inner_Background)
     },
     Mark_Color_Active: {
         ref: 'Neutral.100', // var(--triplex-Slider-Mark_Color_Active)
+    },
+    Mark_Color_Default: {
+        ref: 'Neutral.900', // var(--triplex-Slider-Mark_Color_Default)
     },
     Mark_Dot_Background_Default: {
         ref: 'Basic.300', // var(--triplex-Slider-Mark_Dot_Background_Default)
@@ -115,10 +115,10 @@ export const Slider_DM: TDesignTokensComponentsSliderValue = {
     Track_Background_Default: {
         ref: 'Primary.500', // var(--triplex-Slider-Track_Background_Default)
     },
-    Track_Background_Hover: {
-        ref: 'Primary.700', // var(--triplex-Slider-Track_Background_Hover)
-    },
     Track_Background_Disabled: {
         ref: 'Neutral.900', // var(--triplex-Slider-Track_Background_Disabled)
+    },
+    Track_Background_Hover: {
+        ref: 'Primary.700', // var(--triplex-Slider-Track_Background_Hover)
     },
 };

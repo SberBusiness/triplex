@@ -59,9 +59,9 @@ function checkOutOfRange(date: Moment, limitRange: IDateLimitRange): boolean {
 /** Компонент ввода и выбора даты. */
 export class MonthYearPicker extends React.PureComponent<IMonthYearPickerProps, IMonthYearPickerState> {
     public static defaultProps = {
+        alignment: EDropdownAlignment.LEFT,
         format: dateFormatYYYYMMDD,
         limitRange: globalLimitRange,
-        alignment: EDropdownAlignment.LEFT,
     };
 
     private readonly targetRef: React.RefObject<HTMLDivElement>;
@@ -74,8 +74,8 @@ export class MonthYearPicker extends React.PureComponent<IMonthYearPickerProps, 
         this.state = {
             calendarValue: this.getCalendarValueFromValue(),
             focused: false,
-            lastValidValue: moment(value, format, true).isValid() ? value : '',
             inputValue: this.getInputValueFromValue(),
+            lastValidValue: moment(value, format, true).isValid() ? value : '',
             limitRange: {
                 dateFrom: limitRange?.dateFrom || globalLimitRange.dateFrom,
                 dateTo: limitRange?.dateTo || globalLimitRange.dateTo,

@@ -27,14 +27,14 @@ export const DropdownMobileInner = React.forwardRef<HTMLDivElement, IDropdownMob
 
         const classNamesBackDrop = classnames('cssClass[dropdownMobileBackdrop]', {
             'cssClass[closing]': closing,
-            'cssClass[opening]': openingState,
             'cssClass[opened]': openedState,
+            'cssClass[opening]': openingState,
         });
 
         const classNamesContent = classnames('cssClass[dropdownMobile]', {
             'cssClass[closing]': closing,
-            'cssClass[opening]': openingState,
             'cssClass[opened]': openedState,
+            'cssClass[opening]': openingState,
         });
 
         const handleTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {

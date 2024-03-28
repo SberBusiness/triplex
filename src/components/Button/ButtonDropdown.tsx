@@ -74,8 +74,8 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
 
     const renderButton = ({opened, setOpened}: IButtonDropdownExtendedButtonProvideProps) => {
         const classNames = classnames('cssClass[buttonDropdownTarget]', 'hoverable', {
-            'cssClass[block]': !!block,
             'cssClass[active]': opened,
+            'cssClass[block]': !!block,
         });
 
         return (

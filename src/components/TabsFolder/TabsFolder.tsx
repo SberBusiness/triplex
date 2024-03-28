@@ -1,8 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {
-    CarouselExtended,
-    ICarouselExtendedButtonProvideProps,
-} from '@sberbusiness/triplex/components/CarouselExtended/CarouselExtended';
+import {CarouselExtended, ICarouselExtendedButtonProvideProps} from '@sberbusiness/triplex/components/CarouselExtended/CarouselExtended';
 import {TabsExtended} from '@sberbusiness/triplex/components/TabsExtended/TabsExtended';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {TabfoldercarouselleftSrvxIcon32} from '@sberbusiness/icons/TabfoldercarouselleftSrvxIcon32';

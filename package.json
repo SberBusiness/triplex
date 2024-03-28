@@ -1,6 +1,6 @@
 {
     "name": "@sberbusiness/triplex",
-    "version": "12.0.0",
+    "version": "12.0.1",
     "description": "Библиотека компонент дизайн-системы Triplex.",
     "author": "СберБизнес",
     "license": "Sber Public License at-nc-sa v.2",
@@ -28,7 +28,7 @@
         "removedts": "node tools/task/removeDtsInFolder",
         "postremovedts": "node tools/task/buidlDtsBundle",
         "generatepackage": "node tools/task/package",
-        "build-publish": "npm ci && npm run build && npm publish ./out",
+        "build-publish": "npm ci && npm run build && npm publish --access public ./out",
         "pretest:unit": "npm run test:unit:clean",
         "test:unit": "jest --config=jest/unit/jest.config.ts",
         "test:clean": "run-p test:unit:clean test:screenshot:clean",

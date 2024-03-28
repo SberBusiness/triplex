@@ -61,13 +61,13 @@ const contextInitial: ISliderExtendedContext = {
     isHoverOrDragTrack: false,
     max: 0,
     min: 0,
-    steps: [],
     railNode: null,
-    reverse: false,
     removeDot: () => {},
+    reverse: false,
     setFocused: () => {},
     setIsHoverOrDragTrack: () => {},
     setRailNode: () => {},
+    steps: [],
     updateDot: () => {},
 };
 

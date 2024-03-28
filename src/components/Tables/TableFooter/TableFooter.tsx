@@ -14,10 +14,10 @@ interface ITableFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /** Состояние компонента TableFooter. */
 interface ITableFooterState {
-    /** Фиксированное позиционирование (прижат к низу окна). */
-    isFixed: boolean;
     /** Ширина подвала в пикселях. */
     footerWidth: number;
+    /** Фиксированное позиционирование (прижат к низу окна). */
+    isFixed: boolean;
 }
 
 /** Компонент подвала таблицы. */
@@ -25,8 +25,8 @@ export class TableFooter extends React.PureComponent<ITableFooterProps, ITableFo
     public static displayName = 'TableFooter';
 
     state = {
-        isFixed: false,
         footerWidth: 0,
+        isFixed: false,
     };
 
     public static Summary = TableFooterSummary;
@@ -80,8 +80,8 @@ export class TableFooter extends React.PureComponent<ITableFooterProps, ITableFo
         const isFixed = rectTable.bottom + rectFooter.height > window.innerHeight;
 
         this.setState((prevState) => ({
-            isFixed: isFixed,
             footerWidth: isFixed && !this.state.isFixed ? rectTable.width : prevState.footerWidth,
+            isFixed: isFixed,
         }));
     };
 }

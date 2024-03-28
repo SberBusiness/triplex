@@ -52,9 +52,9 @@ export const TabsExtendedTab = React.forwardRef<HTMLSpanElement, ITabsExtendedTa
                 ref={isFakeTab ? undefined : ref}
             >
                 {children({
-                    selected: selectedId === id,
                     isFirstInlineTab: inlineItemsIds[0] === id,
                     isLastInlineTab: inlineItemsIds[inlineItemsIds.length - 1] === id,
+                    selected: selectedId === id,
                 })}
             </span>
         );

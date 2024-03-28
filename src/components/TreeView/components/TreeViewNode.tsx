@@ -109,10 +109,10 @@ export class TreeViewNodeWithContext extends React.Component<ITreeViewNodePropsW
                 >
                     {children({
                         activeNode: this.abstractNode.getActive(),
-                        openedNode: this.abstractNode.getOpened(),
                         hasChildNodes: Boolean(this.abstractNode.getChildren().length),
-                        setOpenedNode: this.setOpenedNode(),
                         isLastNode: TreeViewAbstractNodeUtils.isLastNode(this.abstractNode),
+                        openedNode: this.abstractNode.getOpened(),
+                        setOpenedNode: this.setOpenedNode(),
                     })}
                 </li>
             </TreeViewContext.Provider>

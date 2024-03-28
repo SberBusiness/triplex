@@ -49,11 +49,11 @@ export const SelectExtendedTarget = React.forwardRef<HTMLDivElement, ISelectExte
     const classNames = classnames(
         'cssClass[selectExtendedTarget]',
         {
+            'cssClass[disabled]': !!disabled,
+            'cssClass[error]': !!error,
+            'cssClass[loading]': !!loading,
             'cssClass[placeholder]': !!placeholder && !label,
             'cssClass[selectOpened]': opened,
-            'cssClass[loading]': !!loading,
-            'cssClass[error]': !!error,
-            'cssClass[disabled]': !!disabled,
         },
         className
     );

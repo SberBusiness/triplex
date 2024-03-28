@@ -22,7 +22,7 @@ describe('classnames', () => {
     });
 
     it('returns a string from valid object keys', () => {
-        expect(classnames({foo: true, bar: true, baz: false})).toBe('foo bar');
+        expect(classnames({bar: true, baz: false, foo: true})).toBe('bar foo');
     });
 
     it('returns a string from multiple params', () => {

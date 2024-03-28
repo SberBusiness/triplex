@@ -32,8 +32,8 @@ export class Tooltip extends React.Component<ITooltipProps, IState> {
     public target: Element | null | Text = null;
 
     public state: IState = {
-        isOpen: !!this.props.isOpen,
         isControlled: this.props.isOpen !== undefined && this.props.toggle !== undefined,
+        isOpen: !!this.props.isOpen,
         tooltipNode: null,
     };
 

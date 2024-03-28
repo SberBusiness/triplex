@@ -6,6 +6,7 @@ export const designTokensComponentsSegmentedControlKeys = [
     'General_Background_Disabled',
     'General_Background_Selected_Default',
     'General_Background_Selected_Disabled',
+    'General_Multiple_Background_Selected_Hover',
 
     'General_BorderColor_Default',
     'General_BorderColor_Disabled',
@@ -15,7 +16,6 @@ export const designTokensComponentsSegmentedControlKeys = [
     'General_BorderColor_Selected_Disabled',
     'General_Multiple_BorderColor_Selected_Hover',
 
-    'General_Multiple_Background_Selected_Hover',
     'General_Color_Default',
     'General_Color_Disabled',
     'General_Color_Selected_Default',

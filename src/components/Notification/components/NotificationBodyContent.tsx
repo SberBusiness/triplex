@@ -6,6 +6,8 @@ interface INotificationBodyContentProps {
 }
 
 /** Основное сообщение нотификации. */
-export const NotificationBodyContent: React.FC<INotificationBodyContentProps> = ({children}) => <div className="cssClass[notificationBodyContent]">{children}</div>;
+export const NotificationBodyContent: React.FC<INotificationBodyContentProps> = ({children}) => (
+    <div className="cssClass[notificationBodyContent]">{children}</div>
+);
 
 NotificationBodyContent.displayName = 'NotificationBodyContent';

@@ -13,7 +13,7 @@ export type TDesignTokensComponentsTag = {Tag: TDesignTokensComponentsTagValue};
 
 // Токены компонента Tag в светлой и темной темах.
 export const Tag_Tokens: TDesignTokensComponentsTagValues = {
-    Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Tag-Color)
     Background: [{ref: 'Basic.100'}, {ref: 'Basic.500'}], // var(--triplex-Tag-Background)
     BorderColor: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-Tag-BorderColor)
+    Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Tag-Color)
 };
