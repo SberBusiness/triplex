@@ -148,18 +148,21 @@ export const MaskedInput: IIMaskedInputFC = ({
                 )}
                 disabled={disabled}
                 onChange={() => {}}
-                placeholder={placeholder}
+                placeholder={!value && placeholder ? '' : placeholderValue}
                 readOnly
+                aria-hidden="true"
                 tabIndex={-1}
-                value={!value && placeholder ? '' : placeholderValue}
                 style={style}
             />
 
             {/* Input, отображающий введенное значение. */}
             <MaskedInputTextMask
-                className={classnames('cssClass[maskedInput]', groupPosition && mapInputGroupPositionToCSSClass[groupPosition], className, {
-                    'cssClass[error]': Boolean(inputProps.error),
-                })}
+                className={classnames(
+                    'cssClass[maskedInput]',
+                    groupPosition && mapInputGroupPositionToCSSClass[groupPosition],
+                    {'cssClass[error]': Boolean(inputProps.error)},
+                    className
+                )}
                 // https://github.com/text-mask/text-mask/pull/993
                 defaultValue=""
                 disabled={disabled}

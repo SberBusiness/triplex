@@ -1,10 +1,9 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * @prop {boolean} [isLoading] Состояние загрузки.
- */
+/** Свойства компонента FilterPanel. */
 export interface IFilterPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Состояние загрузки. */
     isLoading?: boolean;
 }
 

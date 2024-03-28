@@ -15,21 +15,21 @@
     .uploadZoneDragArea {
         .uploadZoneDragArea();
 
-        border: 1px dashed @color-asphalt-03;
+        border: 1px dashed var(--triplex-UploadZone-BorderColor_Default);
         border-radius: @radius-8;
 
         &:hover {
-            border-color: @color-graphite-01;
+            border-color: var(--triplex-UploadZone-BorderColor_Hover);
         }
 
-        // фикс ie (что бы не было размытых бордеров)
+        // фикс ie (что бы не было размытых границ)
         @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            border: 1px dotted @color-asphalt-02;
+            border: 1px dotted var(--triplex-UploadZone-BorderColor_Default);
         }
 
-        // фикс edge (что бы не было размытых бордеров)
+        // фикс edge (что бы не было размытых границ)
         @supports (-ms-ime-align: auto) {
-            border: 1px dotted @color-asphalt-02;
+            border: 1px dotted var(--triplex-UploadZone-BorderColor_Default);
         }
     }
 
@@ -41,22 +41,22 @@
 .uploadZoneContainerDragArea {
     .uploadZoneDragArea();
 
-    background-color: @color-snowy;
+    background: var(--triplex-UploadZone-DragArea_Background);
     padding: @metric-4;
 
     .border {
         height: 100%;
-        border: 1px dashed @color-graphite-01;
+        border: 1px dashed var(--triplex-UploadZone-DragArea_BorderColor);
         border-radius: @radius-8;
 
-        // фикс ie (что бы не было размытых бордеров)
+        // фикс ie (что бы не было размытых границ)
         @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            border: 1px dotted @color-graphite-01;
+            border: 1px dotted var(--triplex-UploadZone-DragArea_BorderColor);
         }
 
-        // фикс edge (что бы не было размытых бордеров)
+        // фикс edge (что бы не было размытых границ)
         @supports (-ms-ime-align: auto) {
-            border: 1px dotted @color-graphite-01;
+            border: 1px dotted var(--triplex-UploadZone-DragArea_BorderColor);
         }
     }
 }

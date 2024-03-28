@@ -34,22 +34,23 @@ const mapInputGroupPositionToCSSClass = {
     [EInputGroupPosition.RIGHT]: 'cssClass[right]',
 };
 
-/**
- * Внутреннее состояние компонента.
- * @prop {boolean} opened Состояние выпадающего списка - открыт/закрыт.
- * @prop {boolean} focused Состояние поля ввода - в фокусе/не в фокусе.
- * @prop {string} query Поисковая строка.
- */
+/** Состояния компонента SuggestCustom. */
 interface ISuggestCustomState {
+    /** Состояние выпадающего списка - открыт/закрыт. */
     opened: boolean;
+    /** Состояние поля ввода - в фокусе/не в фокусе. */
     focused: boolean;
+    /** Поисковая строка. */
     query: string;
+    /** Идентификатор текущего активного элемента. */
     activeDescendant?: string;
 }
+
 const KEY_CODES_SELECTABLE = [EVENT_KEY_CODES.ENTER];
 
 /**
- * Выпадающий список с возможностью поиска по введённому значению, позволяет задать кастомные компоненты для отображения всех элементов управления.
+ * Выпадающий список с возможностью поиска по введённому значению, позволяет задать кастомные компоненты для отображения всех элементов
+ * управления.
  */
 export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends React.Component<ISuggestCustomProps<T>, ISuggestCustomState> {
     public state = {
@@ -64,7 +65,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         disabled: false,
         loading: false,
         tabIndex: 0,
-        value: null,
+        value: undefined,
     };
 
     private instanceId = uniqueId();
@@ -92,7 +93,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
 
         if (this.state.opened && !prevState.opened) {
             // Таймаут тк listRef.current будет доступен только после рендера DropdownList.
-            setTimeout(() => this.listRef?.current?.addEventListener('scroll', (this.onScrollList as unknown) as (e: Event) => void));
+            setTimeout(() => this.listRef?.current?.addEventListener('scroll', this.onScrollList as unknown as (e: Event) => void));
         }
 
         if (this.state.focused && !prevState.focused) {
@@ -103,30 +104,22 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
     public componentWillUnmount(): void {
         this.removeListeners();
 
-        this.listRef?.current?.removeEventListener('scroll', (this.onScrollList as unknown) as (e: Event) => void);
+        this.listRef?.current?.removeEventListener('scroll', this.onScrollList as unknown as (e: Event) => void);
     }
 
     public render(): React.ReactElement {
-        const {notFound, error, 'data-test-id': dataTestId, groupPosition, tooltipHint, isTooltipOpened, disabled} = this.props;
+        const {notFound, 'data-test-id': dataTestId, tooltipHint, isTooltipOpened, disabled} = this.props;
         const {focused} = this.state;
-        const wrapperClassName = classnames('cssClass[wrapper]', {
-            'cssClass[grouped]': !!groupPosition,
-            'cssClass[focused]': focused,
-            'cssClass[error]': !!error,
-        });
 
         return (
-            <div className={wrapperClassName} ref={this.setWrapperRef}>
-                <Tooltip
-                    size={ETooltipSize.SM}
-                    isOpen={!!((isTooltipOpened && focused) || (notFound && focused)) && !disabled}
-                    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
-                    toggle={() => {}}
-                >
-                    <TooltipBody data-test-id={dataTestId && `${dataTestId}${TestIds.Suggest.tooltip}`}>{tooltipHint}</TooltipBody>
-                    <TooltipTarget>{this.renderSuggest()}</TooltipTarget>
-                </Tooltip>
-            </div>
+            <Tooltip
+                size={ETooltipSize.SM}
+                isOpen={!!((isTooltipOpened && focused) || (notFound && focused)) && !disabled}
+                toggle={() => {}}
+            >
+                <TooltipBody data-test-id={dataTestId && `${dataTestId}${TestIds.Suggest.tooltip}`}>{tooltipHint}</TooltipBody>
+                <TooltipTarget>{this.renderSuggest()}</TooltipTarget>
+            </Tooltip>
         );
     }
 
@@ -159,16 +152,15 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         const suggestClassName = classnames(
             'cssClass[suggest]',
             'hoverable',
-            groupPosition && mapInputGroupPositionToCSSClass[groupPosition],
             {
                 'cssClass[disabled]': Boolean(disabled),
                 'cssClass[loading]': Boolean(loading) && Boolean(!error) && Boolean(!disabled),
                 'cssClass[opened]': opened && options && options.length > 0,
                 'cssClass[error]': Boolean(error),
-                disabled: Boolean(disabled),
-            }
+                'cssClass[grouped]': Boolean(groupPosition),
+            },
+            groupPosition && mapInputGroupPositionToCSSClass[groupPosition]
         );
-        const inputClassName = classnames('cssClass[input]');
         const dropDownClassName = classnames('cssClass[suggestDropdown]', {
             'cssClass[visible]': isDropdownOpened,
         });
@@ -179,13 +171,14 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                 <DropdownListContext.Provider value={{activeDescendant, setActiveDescendant: this.setActiveDescendant}}>
                     <Target
                         {...rest}
-                        className={inputClassName}
+                        className="cssClass[suggestDesktopTarget]"
                         optionsLength={options.length}
                         setRef={this.setSuggestRef}
                         onFocus={this.handleFocus}
                         onClick={this.handleClick}
                         onChange={this.handleChange}
                         disabled={disabled}
+                        error={error}
                         query={query}
                         dataTestId={dataTestId}
                         loading={loading}
@@ -202,12 +195,16 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                         dataTestId,
                         instanceId: this.instanceId,
                         renderCustom: renderDropdown,
-                        renderDropdownItem,
+                        renderDropdownItem: this.renderDropdownItem,
                         renderDropdownItemLabel,
                         selected: value,
                         options,
                         onSelect: this.handleSelect,
                         listRef: this.listRef,
+                        suggestRef: this.suggestRef,
+                        setOpened: this.setOpened,
+                        suggestDropdownListClassName: 'cssClass[suggestDropdownList]',
+                        suggestDropdownItemClassName: 'cssClass[suggestDropdownListItem]',
                     })}
                 </DropdownListContext.Provider>
             </div>
@@ -272,30 +269,34 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
             options,
             onSelect,
             listRef,
+            suggestRef,
+            setOpened,
+            suggestDropdownListClassName,
+            suggestDropdownItemClassName,
         } = props;
 
         return (
             <Dropdown
-                setOpened={this.setOpened}
+                setOpened={setOpened}
                 className={className}
                 data-test-id={dataTestId && `${dataTestId}${TestIds.Suggest.dropdown}`}
                 opened={opened}
-                targetRef={this.suggestRef}
+                targetRef={suggestRef}
                 fixedWidth
             >
-                <DropdownList id={instanceId} dropdownOpened={opened} className="cssClass[suggestDropdownList]" listRef={listRef}>
+                <DropdownList id={instanceId} dropdownOpened={opened} className={suggestDropdownListClassName} listRef={listRef}>
                     {options?.map((option, index) => {
                         const key = this.calculateKey(option.label || dataTestId || SuggestCustom.displayName, index);
 
-                        return this.renderDropdownItem({
+                        return renderDropdownItem({
                             option,
                             selected: isEqual(selected, option),
                             key,
                             dataTestId,
-                            renderCustom: renderDropdownItem,
+                            renderCustom: this.props.renderDropdownItem,
                             renderDropdownItemLabel,
                             onSelect,
-                            className: 'cssClass[suggestDropdownListItem]',
+                            className: suggestDropdownItemClassName,
                         });
                     })}
 
@@ -342,10 +343,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         return <SuggestDropdownItemLabel option={props.option} />;
     };
 
-    /**
-     * Обработчик выбора элемента из списка.
-     * @param {T extends ISuggestOption} item Элемент списка.
-     */
+    /** Обработчик выбора элемента из списка. */
     private handleSelect = (item: T) => {
         const {onSelect} = this.props;
 
@@ -363,9 +361,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Обработчик клика снаружи.
-     */
+    /** Обработчик клика снаружи. */
     private handleOutsideClick = (e: Event) => {
         const {value, onSelect, saveFilterOnFocus} = this.props;
         const {opened, focused} = this.state;
@@ -384,9 +380,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         }
     };
 
-    /**
-     * Обработчик открытия выпадающего списка.
-     */
+    /** Обработчик открытия выпадающего списка. */
     private openSuggest = () => {
         const {saveFilterOnFocus, value} = this.props;
         this.setOpened(true, {
@@ -414,9 +408,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Обработчик фокуса.
-     */
+    /** Обработчик получения фокуса. */
     private handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         const {onFocus, saveFilterOnFocus} = this.props;
         const {query} = this.state;
@@ -430,9 +422,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         this.suggestRef.current?.focus();
     };
 
-    /**
-     * Обработчик клика по инпуту.
-     */
+    /** Обработчик клика. */
     private handleClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -443,10 +433,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         !this.state.opened && !!options?.length && this.openSuggest();
     };
 
-    /**
-     * Обработчик изменения значения.
-     * @param {ChangeEvent} e Событие.
-     */
+    /** Обработчик изменения значения. */
     private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
@@ -460,9 +447,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Обработчик нажатия на таб (снятие фокуса).
-     */
+    /** Обработчик нажатия на таб (снятие фокуса). */
     private handleTab = (e: Event) => {
         this.setState(
             {
@@ -475,9 +460,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Обработчик безусловного снятия фокуса.
-     */
+    /** Обработчик безусловного снятия фокуса. */
     private forceBlur = (e: Event) => {
         const {value, onSelect} = this.props;
         this.setState(
@@ -492,23 +475,17 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Добавление слушателя нажатий клавиш для инпута в эксклюзивном режиме.
-     */
+    /** Добавление слушателя нажатий клавиш для инпута в эксклюзивном режиме. */
     private addInputOnlyListener = () => {
         document.addEventListener('keydown', this.keyDownInputOnlyListener);
     };
 
-    /**
-     * Удаление слушателя нажатий клавиш для инпута в эксклюзивном режиме.
-     */
+    /** Удаление слушателя нажатий клавиш для инпута в эксклюзивном режиме. */
     private removeInputOnlyListener = () => {
         document.removeEventListener('keydown', this.keyDownInputOnlyListener);
     };
 
-    /**
-     * Добавление слушателей нажатий клавиш и слушателя клика снаружи компонента.
-     */
+    /** Добавление слушателей нажатий клавиш и слушателя клика снаружи компонента. */
     private addListeners = () => {
         const {disabled} = this.props;
         if (!disabled) {
@@ -518,19 +495,14 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         }
     };
 
-    /**
-     * Удаление слушателей нажатий клавиш и слушателя клика снаружи компонента.
-     */
+    /** Удаление слушателей нажатий клавиш и слушателя клика снаружи компонента. */
     private removeListeners = () => {
         document.removeEventListener('keydown', this.keyDownListener);
         this.removeInputOnlyListener();
         document.removeEventListener('mousedown', this.clickOutsideListener);
     };
 
-    /**
-     * Слушатели нажатий клавиш, работающие только на инпуте, когда выпадающий список закрыт.
-     * @param {KeyboardEvent} e Событие.
-     */
+    /** Слушатели нажатий клавиш, работающие только на инпуте, когда выпадающий список закрыт. */
     private keyDownInputOnlyListener = (e: KeyboardEvent): void => {
         const key = e.code || e.keyCode;
         if (!this.state.opened) {
@@ -540,10 +512,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         }
     };
 
-    /**
-     * Слушатели нажатий клавиш.
-     * @param {KeyboardEvent} e Событие.
-     */
+    /** Слушатели нажатий клавиш. */
     private keyDownListener = (e: KeyboardEvent) => {
         const {opened} = this.state;
         const {onKeyDown} = this.props;
@@ -558,13 +527,10 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
             this.forceBlur(e);
         }
 
-        onKeyDown && onKeyDown((e as unknown) as React.KeyboardEvent<HTMLInputElement>);
+        onKeyDown && onKeyDown(e as unknown as React.KeyboardEvent<HTMLInputElement>);
     };
 
-    /**
-     * Слушатель клика снаружи.
-     * @param {MouseEvent} e Событие мыши.
-     */
+    /** Слушатель клика снаружи. */
     private clickOutsideListener = (e: MouseEvent): void => {
         if (this.isOutsideClick(e)) {
             this.handleOutsideClick(e);
@@ -572,10 +538,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         }
     };
 
-    /**
-     * Предикат для определения клика снаружи.
-     * @param {MouseEvent} event Событие мыши.
-     */
+    /** Предикат для определения клика снаружи. */
     private isOutsideClick = (event: MouseEvent) => {
         const {target} = event;
         const {dropdownRef} = this.props;
@@ -593,30 +556,12 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /**
-     * Проверка таргета на принадлежность поддереву ref.
-     * @param {(T extends HTMLElement) | null} ref Ссылка на поддерево.
-     * @param {Node} target Целевой узел.
-     */
+    /** Проверка таргета на принадлежность поддереву ref. */
     private isTargetInside = (ref: HTMLElement | null, target: Node) => {
         return ref ? ref.contains(target) : false;
     };
 
-    /**
-     * Установка рефа на обёртку.
-     * @param {HTMLButtonElement} instance Инстанс HTML элемента.
-     */
-    private setWrapperRef: TSetRef<HTMLElement | null> = (instance) => {
-        this.wrapper = instance;
-        if (this.props.setRef) {
-            this.props.setRef(instance);
-        }
-    };
-
-    /**
-     * Установка рефа на инпут.
-     * @param {HTMLInputElement} instance Инстанс HTML элемента.
-     */
+    /** Установка рефа на инпут. */
     private setSuggestRef: TSetRef<HTMLInputElement | null> = (instance) => {
         (this.suggestRef as React.MutableRefObject<HTMLInputElement | null>).current = instance;
     };

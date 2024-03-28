@@ -6,11 +6,11 @@
     cursor: pointer;
     position: absolute;
     top: 10px;
-    background: @color-malachite-02;
+    background: var(--triplex-Slider-Track_Background_Default);
     z-index: @slider-track-z-index;
 
     &:focus {
-        box-shadow: inset 0 0 1px 1px @color-sunny-01;
+        box-shadow: inset 0 0 1px 1px var(--triplex-Accent-500);
     }
 
     &.focusedByClick {
@@ -20,7 +20,7 @@
     }
 
     &.hoverOrDragByMouse {
-        background: @color-malachite-01;
+        background: var(--triplex-Slider-Track_Background_Hover);
     }
 
     &.staticSlider {
@@ -30,6 +30,6 @@
 
     &.disabled {
         pointer-events: none;
-        background: @color-asphalt-02;
+        background: var(--triplex-Slider-Track_Background_Disabled);
     }
 }

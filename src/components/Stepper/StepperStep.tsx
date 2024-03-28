@@ -1,7 +1,5 @@
 import React, {useState, useContext, useMemo, useRef} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {Text} from '@sberbusiness/triplex/components/Typography/Text';
-import {EFontType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {StepperStepIcon} from './StepperStepIcon';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 import {StepperExtendedContext} from './StepperExtendedContext';
@@ -12,7 +10,7 @@ interface IStepperStepComposition {
     Icon: typeof StepperStepIcon;
 }
 
-/** Свойства StepperStep. */
+/** Свойства компонента StepperStep. */
 export interface IStepperStepProps extends React.LiHTMLAttributes<HTMLLIElement> {
     id: string;
     disabled?: boolean;
@@ -41,10 +39,12 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
     const [focusSource, setFocusSource] = useState(EFocusSource.NONE);
     const ref = useRef<HTMLLIElement | null>(null);
     const selected = id === selectedId;
+
     const classNames = classnames(
         'cssClass[stepperStep]',
         {
             'cssClass[nonempty]': !!children,
+            'cssClass[intact]': !selected && !icon && !disabled,
             'cssClass[selected]': selected,
             'cssClass[disabled]': !!disabled,
             'cssClass[focusVisible]': focusSource === EFocusSource.KEYBOARD,
@@ -110,17 +110,12 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
         return <span className={classNames}>{icon}</span>;
     };
 
-    const renderContent = () => {
-        const type = disabled ? EFontType.DISABLED : selected || icon ? EFontType.GENERAL : EFontType.SECONDARY;
-        const classNames = classnames('cssClass[content]', {'cssClass[inactive]': !selected && type === EFontType.GENERAL});
-
-        return (
-            <Text className={classNames} size={ETextSize.B2} type={type}>
-                {icon && renderIcon()}
-                {children}
-            </Text>
-        );
-    };
+    const renderContent = () => (
+        <div className="cssClass[content]">
+            {icon && renderIcon()}
+            {children}
+        </div>
+    );
 
     const rightBorderArrow = useMemo(
         () => (
@@ -136,13 +131,11 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M11.6167 29.2619C10.3977 30.9795 8.42205 32 6.31585 32L0.0079937 32C0.00799463 21.3333 0.00795742 10.6667 0.0079984 9.69544e-06L6.31587 4.52484e-06C8.42206 8.52367e-06 10.3977 1.02053 11.6167 2.73815L19.18 13.3956C20.287 14.9554 20.287 17.0446 19.18 18.6044L11.6167 29.2619Z"
-                    fill="#FFFFFF"
                 />
                 <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M11.6176 29.2619C10.3987 30.9795 8.42303 32 6.31682 32L0.00897026 32L0.00897035 31L6.31683 31C8.099 31 9.7707 30.1365 10.8021 28.6831L18.3655 18.0256C19.2265 16.8124 19.2265 15.1876 18.3655 13.9744L10.8021 3.31689C9.7707 1.86353 8.099 1.00001 6.31684 1L0.00897106 1.00001L0.00897497 9.69544e-06L6.31684 4.52484e-06C8.42304 8.52367e-06 10.3987 1.02053 11.6176 2.73815L19.181 13.3956C20.288 14.9554 20.288 17.0446 19.181 18.6044L11.6176 29.2619Z"
-                    fill="#D0D7DD"
                 />
             </svg>
         ),
@@ -158,7 +151,10 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
             onMouseDown={handleMouseDown}
             onClick={handleClick}
             tabIndex={disabled ? -1 : 0}
-            role="tab"
+            aria-disabled={disabled}
+            aria-current={selected || undefined}
+            /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */
+            role="button"
             {...rest}
             ref={setRef}
         >

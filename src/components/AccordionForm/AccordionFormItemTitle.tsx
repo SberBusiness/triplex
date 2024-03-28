@@ -1,10 +1,11 @@
 import React from 'react';
 
-/**
- * Компонент заголовка элемента аккордеона.
- */
-const AccordionFormItemTitle: React.FC = (props) => <div className="cssClass[title]">{props.children}</div>;
+/** Свойства компонента AccordionFormItemTitle. */
+export interface IAccordionFormItemTitleProps {
+    children?: React.ReactNode;
+}
+
+/** Компонент заголовка элемента аккордеона. */
+export const AccordionFormItemTitle: React.FC<IAccordionFormItemTitleProps> = ({children}) => <div className="cssClass[title]">{children}</div>;
 
 AccordionFormItemTitle.displayName = 'AccordionFormItemTitle';
-
-export {AccordionFormItemTitle};

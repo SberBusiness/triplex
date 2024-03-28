@@ -1,4 +1,4 @@
-@import 'src/styles/style';
+@import url('src/styles/style');
 
 .accordionView {
     border-radius: @radius-16;
@@ -7,7 +7,7 @@
         display: flex;
         justify-content: space-between;
         outline: none;
-        border: 1px solid @color-asphalt-03;
+        border: 1px solid var(--triplex-AccordionView-BorderColor_Default);
         border-radius: @radius-16;
         padding: 19px 31px;
         cursor: pointer;
@@ -15,6 +15,7 @@
         .accordionViewHeader {
             .h5-header-form(@color-graphite-01);
 
+            color: var(--triplex-AccordionView-Header_Color);
             flex-grow: 1;
             overflow: hidden;
             white-space: nowrap;
@@ -28,7 +29,7 @@
         }
 
         &:not(.focusedByClick):focus {
-            border-color: @color-sunny-01;
+            border-color: var(--triplex-AccordionView-BorderColor_Focus);
         }
 
         &.animating,
@@ -42,7 +43,7 @@
     }
 
     .accordionViewBody {
-        padding: 24px 31px 23px 31px;
+        padding: 24px 31px 23px;
     }
 
     .accordionViewContent {
@@ -51,7 +52,7 @@
 
         &.globalExpandAnimationAnimating,
         &.globalExpandAnimationOpened {
-            border: 1px solid @color-asphalt-03;
+            border: 1px solid var(--triplex-AccordionView-BorderColor_Default);
             border-top: none;
             border-radius: 0 0 @metric-16 @metric-16;
             visibility: visible;

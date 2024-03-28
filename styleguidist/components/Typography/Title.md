@@ -1,50 +1,75 @@
+### Text sizes
+
 ```jsx
-import {ETitleSize, EFontType, EFontWeight} from '@sberbusiness/triplex/components/Typography/enums';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ETitleSize} from '@sberbusiness/triplex/components/Typography/enums';
 
-const [type, setType] = React.useState(EFontType.GENERAL);
-const [weight, setWeight] = React.useState(EFontWeight.SEMIBOLD);
-const [underline, setUnderline] = React.useState(false);
-const [strikethrough, setStrikethrough] = React.useState(false);
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Title size={ETitleSize.H1}>Sample Text H1</Title>
+    <Title size={ETitleSize.H2}>Sample Text H2</Title>
+    <Title size={ETitleSize.H3}>Sample Text H3</Title>
+    <Title size={ETitleSize.H4}>Sample Text H4</Title>
+</div>
+```
 
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={type}
-            setValue={setType}
-            options={Object.values(EFontType)}
-        >
-            Font type
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={weight}
-            setValue={setWeight}
-            options={Object.values(EFontWeight)}
-        >
-            Font weight
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Checkbox checked={underline} setChecked={setUnderline}>
-            Underline
-        </ComponentControlPanel.Checkbox>
-        <ComponentControlPanel.Checkbox checked={strikethrough} setChecked={setStrikethrough}>
-            Strikethrough
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
+### Font types
 
-<>
-    {renderControlPanel()}
-    <Title size={ETitleSize.H1} type={type} weight={weight} underline={underline} strikethrough={strikethrough}>
-        H1 Sample Text
+```jsx
+import {ETitleSize, EFontType} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Title size={ETitleSize.H4} type={EFontType.GENERAL}>
+        General
     </Title>
-    <Title size={ETitleSize.H2} type={type} weight={weight} underline={underline} strikethrough={strikethrough}>
-        H2 Sample Text
+    <Title size={ETitleSize.H4} type={EFontType.SECONDARY}>
+        Secondary
     </Title>
-    <Title size={ETitleSize.H3} type={type} weight={weight} underline={underline} strikethrough={strikethrough}>
-        H3 Sample Text
+    <Title size={ETitleSize.H4} type={EFontType.SUCCESS}>
+        Success
     </Title>
-    <Title size={ETitleSize.H4} type={type} weight={weight} underline={underline} strikethrough={strikethrough}>
-        H4 Sample Text
+    <Title size={ETitleSize.H4} type={EFontType.WARNING}>
+        Warning
     </Title>
-</>
+    <Title size={ETitleSize.H4} type={EFontType.DANGER}>
+        Danger
+    </Title>
+    <Title size={ETitleSize.H4} type={EFontType.DISABLED}>
+        Disabled
+    </Title>
+</div>
+```
+
+### Font weights
+
+```jsx
+import {ETitleSize, EFontWeight} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Title size={ETitleSize.H4} weight={EFontWeight.LIGHT}>
+        Light
+    </Title>
+    <Title size={ETitleSize.H4} weight={EFontWeight.REGULAR}>
+        Regular
+    </Title>
+    <Title size={ETitleSize.H4} weight={EFontWeight.SEMIBOLD}>
+        Semibold
+    </Title>
+    <Title size={ETitleSize.H4} weight={EFontWeight.BOLD}>
+        Bold
+    </Title>
+</div>
+```
+
+### States
+
+```jsx
+import {ETitleSize} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Title size={ETitleSize.H4} underline>
+        Underline
+    </Title>
+    <Title size={ETitleSize.H4} strikethrough>
+        Strikethrough
+    </Title>
+</div>
 ```

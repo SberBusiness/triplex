@@ -1,22 +1,30 @@
-const pkgName = require('../../../package').name;
+/* eslint-env node */
+const packageJson = require('../../../package');
 const typescript = require('rollup-plugin-typescript');
 const hashReplace = require('../../plugins/rollup-plugin-hash-replace');
-const regexpExtractExt = /(.*)\.tsx?$/;
-const {terser} = require('rollup-plugin-terser');
+const terser = require('@rollup/plugin-terser');
 const replace = require('@rollup/plugin-replace');
+const {nodeResolve} = require('@rollup/plugin-node-resolve');
 
 const isProd = process.env.NODE_ENV === 'production';
 
 function getPlugins() {
     return [
+        nodeResolve(),
         typescript({
-            target: 'es5',
-            importHelpers: true,
+            include: [
+                "src/**/*.ts+(|x)",
+                "typings/styles.d.ts"
+            ],
+            exclude: [
+                "src/**/*.test.ts+(|x)",
+            ],
         }),
         hashReplace(),
         replace({
             preventAssignment: true,
             values: {
+                'process.env.npm_package_version': JSON.stringify(packageJson.version),
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
                 'process.env.JEST_WORKER_ID': JSON.stringify(process.env.JEST_WORKER_ID),
             },
@@ -45,9 +53,11 @@ function external(id, parentId, isResolved) {
         id.indexOf('lodash') === 0 ||
         id.indexOf('@sberbusiness/icons') === 0 ||
         // Если импорт начинается с нашей либы.
-        id.indexOf(pkgName) === 0
+        id.indexOf(packageJson.name) === 0
     );
 }
+
+const regexpExtractExt = /(.*)\.tsx?$/;
 
 module.exports = function(name) {
     return {

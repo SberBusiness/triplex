@@ -27,7 +27,8 @@ export const UploadZoneContext = React.createContext<IUploadZoneContext>({
     onChange: () => void 0,
 });
 
-interface IUploadZoneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+/** Свойства компонента UploadZone. */
+interface IUploadZoneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'children'> {
     /** В качестве чилда передаётся функция. */
     children: (props: IUploadZoneChildrenProvideProps) => React.ReactNode;
     /** Обработчик изменения значения. */
@@ -38,7 +39,8 @@ interface IUploadZoneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
     renderContainerContent?: () => JSX.Element;
 }
 
-interface IState {
+/** Состояния компонента UploadZone. */
+interface IUploadZoneState {
     /** Состояние ховера при перетаскивании. */
     hoverOnDrag: boolean;
     /** Ссылка на элемент поля. */
@@ -46,7 +48,7 @@ interface IState {
 }
 
 /** Компонент зоны загрузки файлов. */
-export class UploadZone extends React.PureComponent<IUploadZoneProps, IState> {
+export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZoneState> {
     public static displayName = 'UploadZone';
     public static Input = UploadZoneInput;
 
@@ -58,7 +60,7 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IState> {
     /** Элемент-обёртка для дроп-зоны. */
     private dropZoneWrapperDiv: HTMLDivElement | null = null;
 
-    state: IState = {
+    state: IUploadZoneState = {
         hoverOnDrag: false,
         inputNode: undefined,
     };
@@ -67,7 +69,7 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IState> {
         this.addListeners(this.props.dropZoneContainer);
     }
 
-    componentDidUpdate(prevProps: Readonly<IUploadZoneProps>, prevState: Readonly<IState>): void {
+    componentDidUpdate(prevProps: Readonly<IUploadZoneProps>, prevState: Readonly<IUploadZoneState>): void {
         const {dropZoneContainer} = this.props;
         const {hoverOnDrag} = this.state;
 

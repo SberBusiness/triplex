@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 import StyleGuide from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuide';
 import {isIE} from './utils';
-import moment from 'moment';
-import StyleguidistSettings, {StyleguidistSettingsContext} from '../../common/components/StyleguidistSettings/StyleguidistSettings';
-import StyleguidistSettingsPanel from '../../common/components/StyleguidistSettingsPanel/StyleguidistSettingsPanel';
-import RequireCSSBundles from '../../common/components/StyleguidistSettings/components/RequireCSSBundles';
-import StyleguidistOverlay from '../../common/components/StyleguidistOverlay/StyleguidistOverlay';
-import {SettingsSrvIcon20} from '@sberbusiness/icons/SettingsSrvIcon20';
+
+// Подгружаем заранее собранные стили.
+import '@sberbusiness/triplex/styles/styles.css';
 
 // Имя класса, добавляемого к body, когда styleguidist открыт в режиме просмотра из styleGuide.
 const styleguidistLiveClassName = 'styleguidist-live';
@@ -16,6 +14,7 @@ const styleguidistLiveClassName = 'styleguidist-live';
 moment.locale('ru');
 
 const StyleGuideWrapper: React.FC<any> = (props) => {
+
     useEffect(() => {
         const {hash} = document.location;
 
@@ -29,6 +28,7 @@ const StyleGuideWrapper: React.FC<any> = (props) => {
         }
 
         // Переменная передает окружение в GTM.
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         window.GTM_ENV_TYPE = process.env.NODE_ENV;
 
@@ -37,41 +37,7 @@ const StyleGuideWrapper: React.FC<any> = (props) => {
         };
     }, []);
 
-    // Стайлгайдист без панели настроек. Для сборок прод режима и скриншот тестов.
-    if (process.env.STYLEGUIDIST_SETTINGS_MODE !== 'true') {
-        // Подгружаем заранее собранные стили.
-        require('@sberbusiness/triplex/styles/styles.css');
-
-        return <StyleGuide {...props} />;
-    }
-
-    return (
-        <StyleguidistSettings>
-            <StyleguidistSettingsContext.Consumer>
-                {(styleguidistSettingsContextValue) => (
-                    <>
-                        <RequireCSSBundles {...styleguidistSettingsContextValue.cssBundles} />
-
-                        <StyleGuide {...props} />
-
-                        <StyleguidistSettingsPanel value={styleguidistSettingsContextValue} />
-
-                        <span
-                            className="settings-panel-icon"
-                            onClick={() => styleguidistSettingsContextValue.settingsPanel.setOpened(true)}
-                        >
-                            <SettingsSrvIcon20 />
-                        </span>
-
-                        <StyleguidistOverlay
-                            opened={styleguidistSettingsContextValue.settingsPanel.opened}
-                            onClick={() => styleguidistSettingsContextValue.settingsPanel.setOpened(false)}
-                        />
-                    </>
-                )}
-            </StyleguidistSettingsContext.Consumer>
-        </StyleguidistSettings>
-    );
+    return <StyleGuide {...props} />;
 };
 
 export default StyleGuideWrapper;

@@ -1,8 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
-import {Text} from '@sberbusiness/triplex/components/Typography/Text';
 
+/** Свойства компонента FormFieldDescription. */
 export interface IFormFieldDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Состояние ошибки. */
     error?: boolean;
@@ -10,14 +9,9 @@ export interface IFormFieldDescriptionProps extends React.HTMLAttributes<HTMLDiv
 
 /** Отображает дополнительную информацию под полем ввода. */
 export const FormFieldDescription: React.FC<IFormFieldDescriptionProps> = ({children, className, error, ...htmlDivAttributes}) => (
-    <Text
-        className={classnames('cssClass[formFieldDescription]', {'cssClass[error]': Boolean(error)}, className)}
-        size={ETextSize.B2}
-        {...htmlDivAttributes}
-        tag="div"
-    >
+    <div className={classnames('cssClass[formFieldDescription]', {'cssClass[error]': Boolean(error)}, className)} {...htmlDivAttributes}>
         {children}
-    </Text>
+    </div>
 );
 
 FormFieldDescription.displayName = 'FormFieldDescription';

@@ -1,15 +1,28 @@
-import React from 'react';
-import {useEffect, useState, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EOverlayDirection, IOverlayChildrenProvideProps} from '@sberbusiness/triplex/components/Overlay/OverlayBase';
 import {Overlay, IOverlayProps} from '@sberbusiness/triplex/components/Overlay/Overlay';
-import {ModalFocusOnMount} from '@sberbusiness/triplex/components/ModalFocusManager/ModalFocusOnMount';
+import FocusTrap from 'focus-trap-react';
 
-export interface ILightBoxTopOverlayProps extends Pick<IOverlayProps, 'opened' | 'onOpen' | 'onClose'> {}
+/** Свойства компонента LightBoxTopOverlay. */
+export interface ILightBoxTopOverlayProps extends Pick<IOverlayProps, 'opened' | 'onOpen' | 'onClose'> {
+    children?: React.ReactNode;
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
+}
 
-export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children, opened, onClose, onOpen, ...OverlayBaseProps}) => {
+export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({
+    children,
+    focusTrapProps,
+    opened,
+    onClose,
+    onOpen,
+    ...OverlayBaseProps
+}) => {
     // Флаг, в текущий момент оверлей закрывается.
     const [closing, setClosing] = useState(false);
+    // FocusTrap активен.
+    const [activeFocusTrap, setActiveFocusTrap] = useState(false);
     // Позиция top для lightBoxTopOverlayWrapper, высчитывается исходя из scrollTop родителя.
     const [overlayWrapperTopPosition, setOverlayWrapperTopPosition] = useState<number | string>(0);
     // Предыдущее состояние открыт/закрыт.
@@ -43,7 +56,7 @@ export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children
 
     const handleOpen = () => {
         updateTopPosition();
-
+        setActiveFocusTrap(true);
         onOpen?.();
     };
 
@@ -66,6 +79,8 @@ export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children
         onClose?.();
     };
 
+    const handleClosing = () => setActiveFocusTrap(false);
+
     const renderOverlay = (overlayProps: IOverlayChildrenProvideProps) => (
         <>
             <Overlay.Mask opened={overlayProps.opened} className="cssClass[lightBoxTopOverlayMask]" />
@@ -86,6 +101,7 @@ export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children
     const overlay = (
         <Overlay
             onClose={handleClose}
+            onClosing={handleClosing}
             onOpen={handleOpen}
             opened={opened}
             setOpened={setOpened}
@@ -98,7 +114,11 @@ export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children
     );
 
     return (
-        <ModalFocusOnMount disabled={!opened}>
+        <FocusTrap
+            active={activeFocusTrap}
+            {...focusTrapProps}
+            focusTrapOptions={{clickOutsideDeactivates: true, preventScroll: true, ...focusTrapProps?.focusTrapOptions}}
+        >
             <div
                 className={classNameOverlayWrapper}
                 ref={overlayWrapperRef}
@@ -106,6 +126,6 @@ export const LightBoxTopOverlay: React.FC<ILightBoxTopOverlayProps> = ({children
             >
                 {overlay}
             </div>
-        </ModalFocusOnMount>
+        </FocusTrap>
     );
 };

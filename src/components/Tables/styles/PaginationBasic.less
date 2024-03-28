@@ -12,6 +12,7 @@
 
         .paginationSelectText {
             .b1-text-main(@color-graphite-01);
+            color: var(--triplex-TableBasic-PaginationBasic_Color);
         }
 
         .paginationSelect {
@@ -32,11 +33,40 @@
         .paginationIteratorButton {
             display: flex;
             pointer-events: auto;
+
+            circle {
+                fill: var(--triplex-TableBasic-PaginationBasic_Icon_Circle_Fill_Default);
+            }
+
+            path {
+                fill: var(--triplex-TableBasic-PaginationBasic_Icon_Path_Fill_Default);
+            }
+
+            :hover {
+                circle {
+                    fill: var(--triplex-TableBasic-PaginationBasic_Icon_Circle_Fill_Hover);
+                }
+
+                path {
+                    fill: var(--triplex-TableBasic-PaginationBasic_Icon_Path_Fill_Hover);
+                }
+            }
+
+            :disabled {
+                circle {
+                    fill: var(--triplex-TableBasic-PaginationBasic_Icon_Circle_Fill_Disabled);
+                }
+
+                path {
+                    fill: var(--triplex-TableBasic-PaginationBasic_Icon_Path_Fill_Disabled);
+                }
+            }
         }
 
         .pageNumber {
             margin: 0 @metric-24;
             .b1-text-main(@color-graphite-01);
+            color: var(--triplex-TableBasic-PaginationBasic_Color);
         }
     }
 }

@@ -14,10 +14,10 @@ import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 
-/**
- * Свойства компонента HelpBox.
- */
-export interface IHelpBoxProps extends React.HTMLAttributes<HTMLButtonElement>, Pick<ITooltipProps, 'isOpen' | 'onShow' | 'toggle'> {
+/** Свойства компонента HelpBox. */
+export interface IHelpBoxProps
+    extends React.HTMLAttributes<HTMLButtonElement>,
+        Pick<ITooltipProps, 'isOpen' | 'preferPlace' | 'onShow' | 'toggle'> {
     /** Aria-атрибуты tooltip. */
     tooltipAriaAttributes?: TAriaHTMLAttributes;
     /** Data-атрибуты tooltip. */
@@ -26,16 +26,16 @@ export interface IHelpBoxProps extends React.HTMLAttributes<HTMLButtonElement>, 
     tooltipSize: ETooltipSize;
 }
 
-/**
- * Компонент HelpBox. Иконка "?" со всплывающей подсказкой выбраного размера.
- */
+/** Иконка "?" со всплывающей подсказкой выбраного размера. */
 export const HelpBox: React.FC<IHelpBoxProps> = ({
     children,
     className,
     isOpen,
+    onClick,
     onShow,
     onKeyDown,
     tooltipSize,
+    preferPlace,
     toggle,
     tooltipAriaAttributes,
     tooltipDataAttributes,
@@ -69,23 +69,6 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
     );
 
     /**
-     * Обработчик открытия/закрытия с клавиатуры.
-     */
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        const key = event.nativeEvent.code || event.nativeEvent.keyCode;
-
-        if (isKey(key, 'ENTER') || isKey(key, 'SPACE')) {
-            handleChangeOpened(!opened);
-            // preventDefault предотвращает скролл страницы и потерю фокуса с кнопки при закрытии Tooltip.
-            event.preventDefault();
-        }
-
-        if (onKeyDown) {
-            onKeyDown(event);
-        }
-    };
-
-    /**
      * Обработчик клика по кнопке закрытия Tooltip.
      */
     const handleClickCloseButton = () => {
@@ -93,6 +76,18 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
         const event = new MouseEvent('mouseleave', {bubbles: true, cancelable: true});
 
         tooltipBodyRef.current?.dispatchEvent(event);
+    };
+
+    /**
+     * Обработчик нажатия мыши на TargetButton.
+     * Скринридеры на Windows при нажатии на кнопку вызывают не событие клавиатуры(Enter), а клик.
+     */
+    const handleClickTargetButton = (event: React.MouseEvent<HTMLButtonElement>): void => {
+        if (!opened) {
+            handleChangeOpened(true);
+        }
+
+        onClick?.(event);
     };
 
     return (
@@ -103,6 +98,7 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
             isOpen={opened}
             toggle={handleChangeOpened}
             size={tooltipSize}
+            preferPlace={preferPlace}
             onShow={onShow}
             toggleType="hover"
             tabSensitive={false}
@@ -113,7 +109,7 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
                 <ButtonIcon
                     className={classnames('cssClass[helpBoxButton]', className)}
                     aria-label="Подсказка"
-                    onKeyDown={handleKeyDown}
+                    onClick={handleClickTargetButton}
                     shape={EButtonIconShape.CIRCLE}
                     {...targetHtmlAttrs}
                 >
@@ -121,7 +117,10 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
                 </ButtonIcon>
             </TooltipTarget>
             <TooltipBody className="cssClass[helpBoxTooltipBody]" forwardedRef={tooltipBodyRef}>
-                <FocusTrap active={opened} focusTrapOptions={{initialFocus: `[id='${tooltipId.current}']`, clickOutsideDeactivates: true}}>
+                <FocusTrap
+                    active={opened}
+                    focusTrapOptions={{initialFocus: `[id='${tooltipId.current}']`, clickOutsideDeactivates: true, preventScroll: true}}
+                >
                     <div>
                         {children}
                         <Tooltip.XButton aria-label="Закрыть" onClick={handleClickCloseButton} />

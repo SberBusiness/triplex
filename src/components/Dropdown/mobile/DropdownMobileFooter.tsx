@@ -1,9 +1,11 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-export interface IDropdownFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+/** Свойства компонента DropdownMobileFooter. */
+export interface IDropdownMobileFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const DropdownMobileFooter = React.forwardRef<HTMLDivElement, IDropdownFooterProps>(
+/** Футер мобильной версии Dropdown. */
+export const DropdownMobileFooter = React.forwardRef<HTMLDivElement, IDropdownMobileFooterProps>(
     ({children, className, ...htmlAttributes}, ref) => (
         <div className={classnames('cssClass[dropdownMobileFooter]', className)} ref={ref} {...htmlAttributes}>
             {children}

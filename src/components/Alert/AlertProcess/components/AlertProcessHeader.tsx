@@ -1,15 +1,9 @@
 import React from 'react';
 
-/**
- * Интерфейс компонента AlertProcessHeader.
- */
-export interface IAlertProcessHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactText;
-}
+/** Свойства компонента AlertProcessHeader. */
+export interface IAlertProcessHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Компонент заголовка AlertProcessHeader компонента AlertProcess.
- */
+/** Заголовок компонента AlertProcess. */
 export const AlertProcessHeader: React.FC<IAlertProcessHeaderProps> = ({children, ...htmlAttributes}) => (
     <div {...htmlAttributes} className="cssClass[alertProcessContentHeader]">
         {children}

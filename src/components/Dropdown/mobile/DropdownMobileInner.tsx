@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {IOverlayChildrenProvideProps} from '@sberbusiness/triplex/components/Overlay/OverlayBase';
 
+/** Свойства компонента DropdownMobileInner. */
 export interface IDropdownMobileInnerProps extends IOverlayChildrenProvideProps, React.HTMLAttributes<HTMLDivElement> {}
 
 /** Контент мобильного Dropdown. */

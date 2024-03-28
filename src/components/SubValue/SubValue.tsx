@@ -1,10 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента SubValue.
- * @prop {string} children Нередактируемый текст(значение).
- */
+/** Свойства компонента SubValue. */
 interface ISubValueProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**

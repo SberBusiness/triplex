@@ -1,0 +1,20 @@
+.unorderedList {
+    padding-left: 0;
+    margin-top: -8px;
+    margin-bottom: -8px;
+    list-style: none;
+}
+
+.unorderedListItem {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: var(--triplex-UnorderedList-Color);
+
+    &::before {
+        content: '\2022';
+        display: inline-block;
+        width: 12px;
+        font-weight: bold;
+        color: var(--triplex-UnorderedList-Color);
+    }
+}

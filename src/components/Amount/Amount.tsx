@@ -1,6 +1,6 @@
+import React from 'react';
 import {formatAmount} from '@sberbusiness/triplex/utils/amountUtils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import React from 'react';
 
 /** Длина форматированной (с отступами и разделителем) строки amount, начиная с которой будет уменьшен шрифт. */
 const adaptiveAmountLength = 14;
@@ -32,14 +32,15 @@ export const Amount: React.FC<IAmountProps> = ({
     dataTestId,
     ...restProps
 }) => {
-    const formattedAmount = formatAmount(value, fractionLength);
-    let amountClassName: string | undefined;
+    let formattedAmount = formatAmount(value, fractionLength);
+    const classNames = classnames({'cssClass[amountAdaptive]': !!adaptive && formattedAmount.length >= adaptiveAmountLength}, className);
 
-    if (adaptive && formattedAmount.length >= adaptiveAmountLength) {
-        amountClassName = 'cssClass[amountAdaptive]';
+    if (formattedAmount[0] == '-') {
+        // (Accessibility) Меняем дефис-минус на знак минуса для его озвучивания скрин-ридерами.
+        formattedAmount = formattedAmount.replace('\u002D', '\u2212');
     }
 
-    const renderCurrency = () => [
+    const renderCurrencyName = () => [
         '\u00A0',
         <span data-test-id={dataTestId && `${dataTestId}__currencyName`} title={currencyTitle} key="currencyName">
             {currency}
@@ -47,9 +48,9 @@ export const Amount: React.FC<IAmountProps> = ({
     ];
 
     return (
-        <span {...restProps} className={classnames(className, amountClassName)}>
+        <span className={classNames} {...restProps}>
             <span data-test-id={dataTestId && `${dataTestId}__amount`}>{formattedAmount}</span>
-            {currency && renderCurrency()}
+            {currency && renderCurrencyName()}
         </span>
     );
 };

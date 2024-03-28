@@ -7,49 +7,18 @@
 // Ширина контента нотификации с иконкой.
 @ufs-theme-notification-content-width-without-icon: @ufs-theme-notification-content-width-with-icon + @ufs-theme-size-icon-20;
 
-.notificationGroupedWrapper {
-    width: @ufs-theme-notification-width;
-    position: relative;
-    margin-bottom: @metric-32;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    .notificationGroupedFooterItem {
-        border-radius: 0 0 @metric-8 @metric-8;
-        position: absolute;
-        background-color: @color-snowy;
-        width: @ufs-theme-notification-width - 2px;
-        transform: translateX(-50%);
-        left: 50%;
-        height: @metric-16;
-        box-shadow: @shadow-02;
-
-        &.first {
-            bottom: -@metric-8;
-            z-index: @z-index-step*2;
-        }
-
-        &.second {
-            bottom: -@metric-16;
-            z-index: @z-index-step;
-        }
-    }
-}
-
 .notification {
     display: flex;
     width: @ufs-theme-notification-width;
     position: relative;
     border-radius: @metric-8;
-    box-shadow: @shadow-02;
-    background-color: @color-snowy;
+    box-shadow: var(--triplex-Notification-Shadow);
+    background: var(--triplex-Notification-Background);
     margin-top: @metric-8;
     padding: @metric-16 @metric-32 @metric-16 @metric-16;
     box-sizing: border-box;
-    color: @color-graphite-01;
-    z-index: @z-index-step*3;
+    color: var(--triplex-Notification-Color);
+    z-index: @z-index-step * 3;
 
     &:first-child {
         margin-top: 0;
@@ -63,7 +32,7 @@
         .font-size(@font-size-16);
         .font-medium();
 
-        color: @color-graphite-01;
+        color: var(--triplex-Notification-Color);
         width: 100%;
         margin-top: 0;
         margin-bottom: @metric-8;
@@ -77,24 +46,7 @@
         margin-left: @metric-8;
 
         ul {
-            box-sizing: border-box;
-            padding-left: 0;
-            margin: @ufs-theme-base*2 0 0 0;
-            list-style: none;
-
-            li {
-                &::before {
-                    content: '\2022';
-                    color: @color-graphite-01;
-                    display: inline-block;
-                    width: @metric-12;
-                    font-weight: bold;
-                }
-
-                &:not(:last-child) {
-                    margin-bottom: @metric-8;
-                }
-            }
+            margin-top: 0;
         }
     }
 
@@ -104,6 +56,7 @@
 
     .notificationBodyContent {
         width: 100%;
+        .font-size(@font-size-14);
     }
 
     .notificationClose {
@@ -150,5 +103,36 @@
         position: absolute;
         bottom: @metric-8;
         right: @metric-8;
+    }
+}
+
+.notificationGroupedWrapper {
+    width: @ufs-theme-notification-width;
+    position: relative;
+    margin-bottom: @metric-32;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .notificationGroupedFooterItem {
+        border-radius: 0 0 @metric-8 @metric-8;
+        position: absolute;
+        background: var(--triplex-Basic-100);
+        width: @ufs-theme-notification-width - 2px;
+        transform: translateX(-50%);
+        left: 50%;
+        height: @metric-16;
+        box-shadow: @shadow-02;
+
+        &.first {
+            bottom: -@metric-8;
+            z-index: @z-index-step * 2;
+        }
+
+        &.second {
+            bottom: -@metric-16;
+            z-index: @z-index-step;
+        }
     }
 }

@@ -1,0 +1,93 @@
+@import url('src/styles/style');
+
+.calendarDay {
+    padding: 0;
+    position: relative;
+
+    &:focus-visible {
+        outline: none;
+
+        .calendarDayNumber {
+            border-color: var(--triplex-Calendar-View_Item_BorderColor_Focus);
+        }
+    }
+
+    &.marked::after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: calc(50% - 4px / 2);
+        bottom: 0;
+        width: 4px;
+        height: 4px;
+        background: var(--triplex-Calendar-View_Item_Mark_Background);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    &.rangeStart {
+        background: var(--triplex-Calendar-View_Item_Background_Range);
+        box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+        border-radius: 50% 0 0 50%;
+    }
+
+    &.rangeEnd {
+        background: var(--triplex-Calendar-View_Item_Background_Range);
+        box-shadow: -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+        border-radius: 0 50% 50% 0;
+    }
+
+    &.rangeBetween {
+        background: var(--triplex-Calendar-View_Item_Background_Range);
+        box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range), -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+
+        &:first-child {
+            box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+            border-radius: 50% 0 0 50%;
+        }
+
+        &:last-child {
+            box-shadow: -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+            border-radius: 0 50% 50% 0;
+        }
+    }
+}
+
+.calendarDayNumber {
+    padding: 1px 0;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid var(--triplex-Calendar-View_Item_BorderColor_Default);
+    border-radius: @metric-12;
+    cursor: pointer;
+
+    .adaptive & {
+        padding: 8px 0;
+    }
+
+    &:hover {
+        background: var(--triplex-Calendar-View_Item_Background_Hover);
+    }
+
+    &.muted {
+        color: var(--triplex-Calendar-View_Item_Color_Muted);
+    }
+
+    &.current {
+        font-weight: @font-weight-600;
+    }
+
+    &.selected {
+        color: var(--triplex-Calendar-View_Item_Color_Selected);
+        background: var(--triplex-Calendar-View_Item_Background_Selected_Default);
+
+        &:hover {
+            background: var(--triplex-Calendar-View_Item_Background_Selected_Hover);
+        }
+    }
+
+    &.disabled {
+        color: var(--triplex-Calendar-View_Item_Color_Disabled);
+        pointer-events: none;
+    }
+}

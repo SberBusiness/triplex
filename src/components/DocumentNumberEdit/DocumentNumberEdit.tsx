@@ -1,36 +1,30 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
 import {ISmallInputProps, SmallInput} from '@sberbusiness/triplex/components/SmallInput/SmallInput';
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import {focusButton} from '@sberbusiness/triplex/components/Button/utils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента.
- *
- * @param {string} [buttonLabel] Текст кнопки "Изменить". По умолчанию - "Изменить".
- * @param {string} [emptyNumberButtonLabel] Текст кнопки "Изменить" при отсутствии номера. По умолчанию - "Задать номер".
- * @param {string} [emptyNumberLabel] Текст перед номером, при отсутствии номера. По умолчанию - "Номер документа будет присвоен автоматически".
- * @param {string} [numberLabel] Текст перед номером. По умолчанию - "Документ №".
- * @param {Function} onChange Обработчик изменения номера.
- * @param {number} [value] Номер документа.
- */
+/** Свойства компонента DocumentNumberEdit. */
 export interface IDocumentNumberEditProps extends Omit<ISmallInputProps, 'onChange' | 'value'> {
-    buttonLabel: string;
-    emptyNumberButtonLabel: string;
-    emptyNumberLabel: string;
-    numberLabel: string;
-    onChange: (value?: number) => void;
+    /** Номер документа. */
     value?: number;
+    /** Текст кнопки "Изменить". По умолчанию - "Изменить". */
+    buttonLabel: string;
+    /** Текст кнопки "Изменить" при отсутствии номера. По умолчанию - "Задать номер". */
+    emptyNumberButtonLabel: string;
+    /** Текст перед номером, при отсутствии номера. По умолчанию - "Номер документа будет присвоен автоматически". */
+    emptyNumberLabel: string;
+    /** Текст перед номером. По умолчанию - "Документ №". */
+    numberLabel: string;
+    /** Обработчик изменения номера. */
+    onChange: (value?: number) => void;
 }
 
-/**
- * Состояние компонента.
- *
- * @param {boolean} isEdit Номер редактируется в текущий момент.
- */
+/** Состояния компонента DocumentNumberEdit. */
 interface IDocumentNumberEditState {
+    /** Номер редактируется в текущий момент. */
     isEdit: boolean;
 }
 
@@ -39,9 +33,7 @@ const DATA_INPUT_SELECTOR_ID = 'document-number-edit-input';
 // Максимальное число символов.
 const INPUT_MAX_LENGTH = 6;
 
-/**
- * Компонент редактирования номера документа.
- */
+/** Компонент редактирования номера документа. */
 export class DocumentNumberEdit extends React.Component<IDocumentNumberEditProps, IDocumentNumberEditState> {
     public static displayName = 'DocumentNumberEdit';
 
@@ -72,7 +64,7 @@ export class DocumentNumberEdit extends React.Component<IDocumentNumberEditProps
         const labelText = this.renderLabel();
 
         return (
-            <div className={classnames(className, 'cssClass[documentNumberEdit]')}>
+            <div className={classnames('cssClass[documentNumberEdit]', className)}>
                 <span className="cssClass[label]">{labelText}</span>
 
                 {isEdit ? (
@@ -81,11 +73,12 @@ export class DocumentNumberEdit extends React.Component<IDocumentNumberEditProps
                             <div className="cssClass[inputEditWrapper]">
                                 <SmallInput
                                     {...smallInputProps}
+                                    value={value || ''}
+                                    placeholder="000000"
+                                    maxLength={maxLength}
                                     data-selector-id={DATA_INPUT_SELECTOR_ID}
                                     onBlur={this.handleBlur}
                                     onChange={this.handleChange}
-                                    maxLength={maxLength}
-                                    value={value || ''}
                                 />
                             </div>
                         </KeyDownListener>

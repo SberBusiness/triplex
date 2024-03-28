@@ -18,16 +18,22 @@
         z-index: 1;
         background-clip: padding-box;
     }
-}
 
-.buttonPrev {
-    left: 0;
-    background-image: linear-gradient(to right, @color-snowy 39.06%, transparent);
-}
+    .buttonPrev {
+        left: 0;
+    }
 
-.buttonNext {
-    right: 0;
-    background-image: linear-gradient(to left, @color-snowy 39.06%, transparent);
+    .buttonNext {
+        right: 0;
+    }
+
+    .buttonPrevIcon {
+        background: var(--triplex-Stepper-ButtonPrev_Background);
+    }
+
+    .buttonNextIcon {
+        background: var(--triplex-Stepper-ButtonNext_Background);
+    }
 }
 
 @media (max-width: @screen-sm-max) {

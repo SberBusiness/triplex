@@ -2,6 +2,7 @@ import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EDropdownAlignment, EDropdownDirection} from '../Dropdown';
 
+/** Свойства компонента DropdownDesktop. */
 export interface IDropdownDesktopProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Открыт. */
     opened: boolean;
@@ -31,8 +32,9 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
         targetRef,
         ...rest
     } = props;
-    const [styles, setStyles] = useState<React.CSSProperties>({...style, visibility: 'hidden'});
+    const [styles, setStyles] = useState<React.CSSProperties>({...style, opacity: 0});
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const dropdownRes = useRef<{width: number; height: number}>({width: 0, height: 0});
     const classNames = classnames('cssClass[dropdown]', className);
 
     /** Расчёт положения по горизонтали. */
@@ -104,6 +106,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
             calculatePositionVertical(css, dropdownRect, targetRect);
             calculatePositionHorizontal(css, dropdownRect, targetRect);
 
+            dropdownRes.current = {width: dropdownRect.width, height: dropdownRect.height};
             setStyles({...style, ...css});
         }
     }, [targetRef, fixedWidth, style, calculatePositionVertical, calculatePositionHorizontal]);
@@ -112,9 +115,22 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
         if (opened) {
             setPosition();
         } else {
-            setStyles({...style, visibility: 'hidden'});
+            dropdownRes.current = {width: 0, height: 0};
+            setStyles({...style, opacity: 0});
         }
     }, [opened, setPosition, style]);
+
+    // При любом изменении контента внутри Dropdown.
+    useEffect(() => {
+        if (dropdownRef.current) {
+            const {width, height} = dropdownRef.current.getBoundingClientRect();
+
+            // Если разрешение не изменилось, позицию не пересчитываем.
+            if (width != dropdownRes.current.width || height != dropdownRes.current.height) {
+                setPosition();
+            }
+        }
+    }, [children, setPosition]);
 
     /** Обработчик изменения положения меню. */
     const handleReposition = useCallback(() => {

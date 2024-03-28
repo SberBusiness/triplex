@@ -1,3 +1,4 @@
+/* eslint-env node */
 module.exports = require('react-docgen-typescript').withCompilerOptions(
     {
         esModuleInterop: true,

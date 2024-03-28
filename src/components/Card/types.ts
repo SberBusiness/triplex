@@ -1,7 +1,7 @@
 import React from 'react';
 import {ECardRoundingSize} from '@sberbusiness/triplex/components/Card/enums';
 
-/** Свойства карточки. */
+/** Свойства компонента Card. */
 export interface ICardProps extends React.HTMLAttributes<HTMLDivElement> {
     roundingSize?: ECardRoundingSize;
 }

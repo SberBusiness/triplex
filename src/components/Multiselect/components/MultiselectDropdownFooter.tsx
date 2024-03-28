@@ -1,6 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента MultiselectDropdownFooter. */
 interface IMultiselectDropdownFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const MultiselectDropdownFooter: React.FC<IMultiselectDropdownFooterProps> = ({children, className, ...htmlDivAttributes}) => (

@@ -28,6 +28,7 @@
     .remove,
     .tagContent {
         .b4-text-info(@color-graphite-01);
+        color: var(--triplex-Tag-Color);
     }
 
     .edit,
@@ -44,15 +45,15 @@
 
     &.sm .tagContent {
         height: @metric-24;
-        background-color: @color-asphalt-05;
+        background: var(--triplex-Tag-Background);
         padding: @metric-4 @metric-8 @metric-4 @metric-12;
         border: none;
     }
 
     &.md .tagContent {
         height: @metric-32;
-        background-color: @color-snowy;
+        background: var(--triplex-Tag-Background);
         padding: @metric-8 - @border-width @metric-8 - @border-width @metric-8 - @border-width @metric-12 - @border-width;
-        border: @border-width solid @color-asphalt-03;
+        border: @border-width solid var(--triplex-Tag-BorderColor);
     }
 }

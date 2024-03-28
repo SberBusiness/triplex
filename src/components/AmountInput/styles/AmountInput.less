@@ -15,22 +15,23 @@
     }
 
     :focus + .currency {
-        border-color: @color-graphite-01;
+        border-color: var(--triplex-Input-BorderColor_Focus);
     }
 
     &.filled .currency {
-        color: @color-graphite-01;
+        color: var(--triplex-Input-Color_Default);
     }
 
     &.disabled .currency {
         cursor: default;
         user-select: none;
-        color: @color-asphalt-01;
-        background-color: @color-asphalt-05;
+        color: var(--triplex-Input-Color_Disabled);
+        background-color: var(--triplex-Input-Background_Disabled);
+        border-color: var(--triplex-Input-BorderColor_Disabled);
     }
 
     &.error .currency {
-        border-color: @color-ruby-02;
+        border-color: var(--triplex-Input-BorderColor_Error);
     }
 }
 
@@ -40,9 +41,12 @@
     padding-right: @metric-12 - 1;
     padding-bottom: @metric-8 - 1;
     box-sizing: border-box;
+    font-size: 14px;
     line-height: normal; // DCBSWT-1866 выравнивание наименования валюты
-    background-color: @color-snowy;
-    border: 1px solid @color-asphalt-03;
+    white-space: nowrap;
+    color: var(--triplex-Input-Placeholder_Color);
+    background-color: var(--triplex-Input-Background_Default);
+    border: 1px solid var(--triplex-Input-BorderColor_Default);
     border-left-width: 0;
     border-top-right-radius: @ufs-theme-input-border-radius;
     border-bottom-right-radius: @ufs-theme-input-border-radius;

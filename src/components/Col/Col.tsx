@@ -1,6 +1,6 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {cssClass} from '@sberbusiness/triplex/utils/cssClass';
 import React from 'react';
+import {cssClass} from '@sberbusiness/triplex/utils/cssClass';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 export type TColumnSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type TOffsetSize = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
@@ -64,9 +64,7 @@ interface IGetClasses {
     size?: TColumnSize;
 }
 
-/**
- * Возвращает css-классы.
- */
+/** Возвращает css-классы. */
 const getClasses = ({block, hidden, offset, prefix, size}: IGetClasses): string => {
     const classes: string[] = [];
     const prefixAsPart = prefix ? `${prefix}-` : '';
@@ -91,10 +89,8 @@ const getClasses = ({block, hidden, offset, prefix, size}: IGetClasses): string 
     return classnames(...classes);
 };
 
-/**
- * Компонент Col. Колонка по бутстраповским гридам.
- */
-const Col: React.FC<IColProps> = ({
+/** Колонка по бутстраповским гридам. */
+export const Col: React.FC<IColProps> = ({
     children,
     className,
     hidden,
@@ -133,5 +129,3 @@ const Col: React.FC<IColProps> = ({
 };
 
 Col.displayName = 'Col';
-
-export {Col};

@@ -2,43 +2,23 @@
 
 ```jsx
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
-import {SettingsSrvIcon20} from '@sberbusiness/icons/SettingsSrvIcon20';
 
-const iconWrapperStyle = {
-    position: 'relative',
-    top: '4px',
-};
-
-<>
-    <HeaderPage>
-        <HeaderPage.Title>
-            <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
-            </HeaderPage.Title.Content>
-        </HeaderPage.Title>
-    </HeaderPage>
-    <Gap size={16} />
-    <HeaderPage>
-        <HeaderPage.Title>
-            <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>
-                    Шаблонный текст заголовка в одну строку{' '}
-                    <span style={iconWrapperStyle}>
-                        <SettingsSrvIcon20 />
-                    </span>
-                </HeaderPage.Title.Content.Text>
-            </HeaderPage.Title.Content>
-        </HeaderPage.Title>
-    </HeaderPage>
-</>
+<HeaderPage>
+    <HeaderPage.Title>
+        <HeaderPage.Title.Content>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+        </HeaderPage.Title.Content>
+    </HeaderPage.Title>
+</HeaderPage>
 ```
 
 ### Basic Link Controls
 
 ```jsx
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
-import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
+import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
 const options = [
@@ -47,47 +27,42 @@ const options = [
     {id: 'headerPageBasicLinkOption3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
-<>
-    <HeaderPage>
-        <HeaderPage.Link href="#">Текст ссылки</HeaderPage.Link>
-        <HeaderPage.Title>
-            <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
-            </HeaderPage.Title.Content>
-            <HeaderPage.Title.Controls>
-                <ButtonDropdown theme={EButtonTheme.SECONDARY} size={EButtonSize.MD} options={options}>
-                    Button Name
-                </ButtonDropdown>
-                <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.MD} options={options}>
-                    Button Name
-                </ButtonDropdown>
-            </HeaderPage.Title.Controls>
-        </HeaderPage.Title>
-    </HeaderPage>
-</>
+<HeaderPage>
+    <HeaderPage.Link href="#" onClick={(event) => event.preventDefault()}>
+        Текст ссылки
+    </HeaderPage.Link>
+    <HeaderPage.Title>
+        <HeaderPage.Title.Content>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+        </HeaderPage.Title.Content>
+        <HeaderPage.Title.Controls>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
+            <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD}>
+                Button Name
+            </Button>
+        </HeaderPage.Title.Controls>
+    </HeaderPage.Title>
+</HeaderPage>
 ```
 
 ### Extended
 
 ```jsx
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
-import {SettingsSrvIcon20} from '@sberbusiness/icons/SettingsSrvIcon20';
-
-const iconWrapperStyle = {
-    position: 'relative',
-    top: '4px',
-};
 
 <HeaderPage>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
             <HeaderPage.Title.Content.Text>
-                Шаблонный текст заголовка в одну строку{' '}
-                <span style={iconWrapperStyle}>
-                    <SettingsSrvIcon20 />
-                </span>
+                Шаблонный текст заголовка в одну строку
             </HeaderPage.Title.Content.Text>
-            <HeaderPage.Title.Content.Subhead>Шаблонный текст для описания</HeaderPage.Title.Content.Subhead>
+            <HeaderPage.Title.Content.Subhead>
+                Шаблонный текст для описания
+            </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
 </HeaderPage>
@@ -110,11 +85,17 @@ const options = [
 <HeaderPage>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
-            <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
-            <HeaderPage.Title.Content.Subhead>Шаблонный текст для описания</HeaderPage.Title.Content.Subhead>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+            <HeaderPage.Title.Content.Subhead>
+                Шаблонный текст для описания
+            </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
         <HeaderPage.Title.Controls>
-            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>Button Name</Button>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
@@ -127,11 +108,17 @@ const options = [
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 
 <HeaderPage>
-    <HeaderPage.Link href="#">Текст ссылки</HeaderPage.Link>
+    <HeaderPage.Link href="#" onClick={(event) => event.preventDefault()}>
+        Текст ссылки
+    </HeaderPage.Link>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
-            <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
-            <HeaderPage.Title.Content.Subhead>Шаблонный текст для описания</HeaderPage.Title.Content.Subhead>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+            <HeaderPage.Title.Content.Subhead>
+                Шаблонный текст для описания
+            </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
 </HeaderPage>
@@ -146,22 +133,28 @@ import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDrop
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
 const options = [
-    {id: 'headerPageExtendedLinkOption1', label: 'действие 1', onSelect: () => alert('действие 1')},
-    {id: 'headerPageExtendedLinkOption2', label: 'действие 2', onSelect: () => alert('действие 2')},
-    {id: 'headerPageExtendedLinkOption3', label: 'действие 3', onSelect: () => alert('действие 3')},
+    {id: 'header-page-extended-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
+    {id: 'header-page-extended-option-2', label: 'действие 2', onSelect: () => alert('действие 2')},
+    {id: 'header-page-extended-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
 <HeaderPage>
-    <HeaderPage.Link href="#">Текст ссылки</HeaderPage.Link>
+    <HeaderPage.Link href="#" onClick={(event) => event.preventDefault()}>
+        Текст ссылки
+    </HeaderPage.Link>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
             <HeaderPage.Title.Content.Text>
-                Шаблонный текст заголовка в одну строку шаблонный текст заголовка в одну строку
+                Шаблонный текст заголовка в одну строку
             </HeaderPage.Title.Content.Text>
-            <HeaderPage.Title.Content.Subhead>Шаблонный текст для описания</HeaderPage.Title.Content.Subhead>
+            <HeaderPage.Title.Content.Subhead>
+                Шаблонный текст для описания
+            </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
         <HeaderPage.Title.Controls>
-            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>Button Name</Button>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
@@ -172,7 +165,6 @@ const options = [
 ### Редактирование номера документа
 
 ```jsx
-import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
@@ -180,17 +172,19 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 import {DocumentNumberEdit} from '@sberbusiness/triplex/components/DocumentNumberEdit/DocumentNumberEdit';
 
 const options = [
-    {id: 'headerPageEditOption1', label: 'действие 1', onSelect: () => alert('действие 1')},
-    {id: 'headerPageEditOption2', label: 'действие 2', onSelect: () => alert('действие 2')},
-    {id: 'headerPageEditOption3', label: 'действие 3', onSelect: () => alert('действие 3')},
+    {id: 'header-page-edit-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
+    {id: 'header-page-edit-option-2', label: 'действие 2', onSelect: () => alert('действие 2')},
+    {id: 'header-page-edit-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
-const [value, setValue] = useState();
+const [value, setValue] = React.useState();
 
 const handleChange = (value) => setValue(value);
 
 <HeaderPage>
-    <HeaderPage.Link href="#">Текст ссылки</HeaderPage.Link>
+    <HeaderPage.Link href="#" onClick={(event) => event.preventDefault()}>
+        Текст ссылки
+    </HeaderPage.Link>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
             <HeaderPage.Title.Content.Text>Рублёвый платёж контрагенту</HeaderPage.Title.Content.Text>
@@ -208,7 +202,9 @@ const handleChange = (value) => setValue(value);
         </HeaderPage.Title.Content>
 
         <HeaderPage.Title.Controls>
-            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>Button Name</Button>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
@@ -218,18 +214,17 @@ const handleChange = (value) => setValue(value);
 ### Tabs
 
 ```jsx
-import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
-const [selectedTabId, setSelectedTabId] = useState('3');
+const [selectedTabId, setSelectedTabId] = React.useState('3');
 
 const options = [
-    {id: 'headerPageTabOption1', label: 'действие 1', onSelect: () => alert('действие 1')},
-    {id: 'headerPageTabOption2', label: 'действие 2', onSelect: () => alert('действие 2')},
-    {id: 'headerPageTabOption3', label: 'действие 3', onSelect: () => alert('действие 3')},
+    {id: 'header-page-tabs-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
+    {id: 'header-page-tabs-option-2', label: 'действие 2', onSelect: () => alert('действие 2')},
+    {id: 'header-page-tabs-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
 const tabs = [
@@ -248,12 +243,18 @@ const tabs = [
     <HeaderPage>
         <HeaderPage.Title>
             <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
+                <HeaderPage.Title.Content.Text>
+                    Шаблонный текст заголовка в одну строку
+                </HeaderPage.Title.Content.Text>
             </HeaderPage.Title.Content>
         </HeaderPage.Title>
         <HeaderPage.Tabs>
             <HeaderPage.Tabs.Content>
-                <HeaderPage.Tabs.Content.Tabs tabs={tabs} selectedTabId={selectedTabId} onSelectTab={(id) => setSelectedTabId(id)} />
+                <HeaderPage.Tabs.Content.Tabs
+                    tabs={tabs}
+                    selectedTabId={selectedTabId}
+                    onSelectTab={(id) => setSelectedTabId(id)}
+                />
             </HeaderPage.Tabs.Content>
             <HeaderPage.Tabs.Controls>
                 <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
@@ -266,21 +267,21 @@ const tabs = [
 </>
 ```
 
-### С sidebar
+### With sidebar
 
 ```jsx
-import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import './style.less';
 
-const [selectedTabId, setSelectedTabId] = useState('3');
+const [selectedTabId, setSelectedTabId] = React.useState('3');
 
 const options = [
-    {id: 'headerPageTabOption1', label: 'действие 1', onSelect: () => alert('действие 1')},
-    {id: 'headerPageTabOption2', label: 'действие 2', onSelect: () => alert('действие 2')},
-    {id: 'headerPageTabOption3', label: 'действие 3', onSelect: () => alert('действие 3')},
+    {id: 'header-page-sidebar-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
+    {id: 'header-page-sidebar-option-2', label: 'действие 2', onSelect: () => alert('действие 2')},
+    {id: 'header-page-sidebar-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
 const tabs = [
@@ -295,50 +296,37 @@ const tabs = [
     {id: '9', label: 'Tab Name'},
 ];
 
-<>
-    <HeaderPage>
-        <HeaderPage.LayoutSidebar>
-            <HeaderPage.LayoutSidebar.Content>
-                <HeaderPage.Title>
-                    <HeaderPage.Title.Content>
-                        <HeaderPage.Title.Content.Text>Шаблонный текст заголовка в одну строку</HeaderPage.Title.Content.Text>
-                    </HeaderPage.Title.Content>
-                </HeaderPage.Title>
+<HeaderPage>
+    <HeaderPage.LayoutSidebar>
+        <HeaderPage.LayoutSidebar.Content>
+            <HeaderPage.Title>
+                <HeaderPage.Title.Content>
+                    <HeaderPage.Title.Content.Text>
+                        Шаблонный текст заголовка в одну строку
+                    </HeaderPage.Title.Content.Text>
+                </HeaderPage.Title.Content>
+            </HeaderPage.Title>
 
-                <HeaderPage.Tabs>
-                    <HeaderPage.Tabs.Content>
-                        <HeaderPage.Tabs.Content.Tabs
-                            tabs={tabs}
-                            selectedTabId={selectedTabId}
-                            onSelectTab={(id) => setSelectedTabId(id)}
-                        />
-                    </HeaderPage.Tabs.Content>
-                    <HeaderPage.Tabs.Controls>
-                        <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
-                            Button Name
-                        </Button>
-                    </HeaderPage.Tabs.Controls>
-                </HeaderPage.Tabs>
-            </HeaderPage.LayoutSidebar.Content>
+            <HeaderPage.Tabs>
+                <HeaderPage.Tabs.Content>
+                    <HeaderPage.Tabs.Content.Tabs
+                        tabs={tabs}
+                        selectedTabId={selectedTabId}
+                        onSelectTab={(id) => setSelectedTabId(id)}
+                    />
+                </HeaderPage.Tabs.Content>
+                <HeaderPage.Tabs.Controls>
+                    <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                        Button Name
+                    </Button>
+                </HeaderPage.Tabs.Controls>
+            </HeaderPage.Tabs>
+        </HeaderPage.LayoutSidebar.Content>
 
-            {/* Вместо style лучше передать className. */}
-            <HeaderPage.LayoutSidebar.Sidebar style={{position: 'relative', background: '#4BB6ED', padding: '32px'}}>
-                Sidebar
-                {/* Фон */}
-                <span
-                    style={{
-                        position: 'absolute',
-                        // Должно быть 0, но в Safari неправильно отрисовыввается с багом.
-                        left: '-1px',
-                        top: 0,
-                        bottom: 0,
-                        width: '16px',
-                        background: '#F2F4F7',
-                        borderRadius: '0 16px 16px 0',
-                    }}
-                />
-            </HeaderPage.LayoutSidebar.Sidebar>
-        </HeaderPage.LayoutSidebar>
-    </HeaderPage>
-</>
+        <HeaderPage.LayoutSidebar.Sidebar className="sidebar">
+            Sidebar
+            <span className="sidebar-background" />
+        </HeaderPage.LayoutSidebar.Sidebar>
+    </HeaderPage.LayoutSidebar>
+</HeaderPage>
 ```

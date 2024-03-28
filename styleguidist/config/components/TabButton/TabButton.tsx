@@ -3,6 +3,7 @@ import cx from 'clsx';
 import './styles.less';
 
 interface TabButtonProps {
+    children: React.ReactNode;
     className?: string;
     name: string;
     active?: boolean;

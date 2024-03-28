@@ -1,5 +1,4 @@
 import {decorate} from '@sberbusiness/triplex/utils/accountsUtils';
-import {allure} from '@jest/unit/allure-report';
 
 /** Ожидаемое значение, аргументы для получения этого значения. */
 type TMapper = [string, string];

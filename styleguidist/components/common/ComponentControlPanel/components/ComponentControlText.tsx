@@ -3,6 +3,7 @@ import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 import '../styles/ComponentControlText.less';
 
 interface IComponentControlNumberProps {
+    children: React.ReactNode;
     value: string;
     setValue: (value: string) => void;
 }

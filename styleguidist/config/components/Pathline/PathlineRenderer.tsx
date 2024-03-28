@@ -3,7 +3,11 @@ import copy from 'clipboard-copy';
 import ToolbarButton from 'react-styleguidist/lib/client/rsg-components/ToolbarButton';
 import './styles.less';
 
-const PathlineRenderer: React.FC = ({children}) => {
+interface IPathlineRendererProps {
+    children: React.ReactNode;
+}
+
+const PathlineRenderer: React.FC<IPathlineRendererProps> = ({children}) => {
     const timeoutId = useRef<number>();
 
     const renderPath = (children: React.ReactNode) => {

@@ -1,19 +1,14 @@
+import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {isComponentType, isReactElement} from '@sberbusiness/triplex/utils/reactChild';
-import React from 'react';
 
-/**
- * Свойства компонента Row.
- * @prop {boolean} [paddingBottom] Вертикальный нижний отступ.
- * @prop {React.ReactNode} children Контент, отображаемый в компоненте.
- */
+/** Свойства компонента Row. */
 interface IRowProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Вертикальный нижний отступ. */
     paddingBottom?: boolean;
 }
 
-/**
- * Компонент Row. Строка с нижним отступом, принимающая в children только колонки Col.
- */
+/** Строка с нижним отступом, принимающая в children только колонки Col. */
 export class Row extends React.Component<IRowProps> {
     public static displayName = 'Row';
 

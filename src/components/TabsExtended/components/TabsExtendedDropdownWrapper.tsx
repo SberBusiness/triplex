@@ -8,7 +8,8 @@ export interface ITabsExtendedDropdownWrapperProvideProps {
     onSelectTab: TTabsExtendedOnSelectTab;
 }
 
-export interface ITabsExtendedDropdownWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+/** Свойства компонента TabsExtendedDropdownWrapper. */
+export interface ITabsExtendedDropdownWrapperProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
     children: (props: ITabsExtendedDropdownWrapperProvideProps) => React.ReactNode;
 }
 

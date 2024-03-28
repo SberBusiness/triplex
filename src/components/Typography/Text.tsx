@@ -9,6 +9,7 @@ import {
 } from '@sberbusiness/triplex/components/Typography/utils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента Text. */
 type TTextProps<T extends keyof JSX.IntrinsicElements> = {
     /** Размер текста. */
     size: ETextSize;
@@ -17,6 +18,7 @@ type TTextProps<T extends keyof JSX.IntrinsicElements> = {
 } & ITypographyProps &
     JSX.IntrinsicElements[T];
 
+/** Текст (типографика). */
 export function Text<T extends keyof JSX.IntrinsicElements = 'span'>({
     children,
     className,
@@ -30,13 +32,17 @@ export function Text<T extends keyof JSX.IntrinsicElements = 'span'>({
     ...props
 }: TTextProps<T>): JSX.Element {
     const classes = classnames(
+        'cssClass[text]',
         mapTextSizeToCssClass[size],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         mapFontTypeToCssClass[type],
         mapFontWeightToCssClass[weight],
         mapLineTypeToCssClass[line],
         {
-            'cssClass[underline]': !!underline,
-            'cssClass[strikethrough]': !!strikethrough,
+            'cssClass[underline]': !!underline && !strikethrough,
+            'cssClass[strikethrough]': !!strikethrough && !underline,
+            'cssClass[underlineStrikethrough]': !!strikethrough && !!underline,
         },
         className
     );

@@ -1,15 +1,19 @@
 import React, {useContext, useState, useRef, useLayoutEffect, isValidElement} from 'react';
 import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
+import pickBy from 'lodash/pickBy';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TabsExtendedContext} from '../TabsExtendedContext';
-import pickBy from 'lodash/pickBy';
+import {TabsExtendedTabContext} from './TabsExtendedTabContext';
+
+/** Свойства компонента TabsExtendedTabsWrapper. */
+export interface ITabsExtendedTabsWrapperProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**
  * Контейнер табов.
  * Рендерит инлайн табы и определяет табы, которые должны быть отрендерены в Dropdown.
  */
-export const TabsExtendedTabsWrapper: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({children, className, ...htmlDivAttributes}) => {
-    const {setDropdownItemsIds, dropdownRef} = useContext(TabsExtendedContext);
+export const TabsExtendedTabsWrapper: React.FC<ITabsExtendedTabsWrapperProps> = ({children, className, ...htmlDivAttributes}) => {
+    const {setDropdownItemsIds, setInlineItemsIds, dropdownRef} = useContext(TabsExtendedContext);
     const [dropdownWidth, setDropdownWidth] = useState(0);
     const tabsFakeRef = useRef<HTMLDivElement>(null);
     const childrenCount = useRef(React.Children.count(children));
@@ -19,6 +23,7 @@ export const TabsExtendedTabsWrapper: React.FC<React.HTMLAttributes<HTMLDivEleme
             const {children} = tabsFakeRef.current;
             let {right: containerRight} = tabsFakeRef.current.getBoundingClientRect();
             const dropdownIds: string[] = [];
+            const inlineIds: string[] = [];
             let overflow = false;
 
             // Padding-right контейнера равен 2px и отступ между кнопками 2px. Правая граница таба не должна выходить за (граница контейнера - 4px).
@@ -32,6 +37,10 @@ export const TabsExtendedTabsWrapper: React.FC<React.HTMLAttributes<HTMLDivEleme
                     if (!overflow && containerRight < right) {
                         overflow = true;
                     }
+                } else {
+                    if (tab.getAttribute('data-tab-item-id')) {
+                        inlineIds.push(tab.getAttribute('data-tab-item-id')!);
+                    }
                 }
             });
 
@@ -40,6 +49,8 @@ export const TabsExtendedTabsWrapper: React.FC<React.HTMLAttributes<HTMLDivEleme
             } else {
                 setDropdownItemsIds([]);
             }
+
+            setInlineItemsIds(inlineIds);
         }
     };
 
@@ -86,15 +97,17 @@ export const TabsExtendedTabsWrapper: React.FC<React.HTMLAttributes<HTMLDivEleme
 
     return (
         <>
-            <div className={classnames('cssClass[tabsReal]', {'cssClass[hidden]': !tabsFakeRef.current}, className)} {...htmlDivAttributes}>
-                {children}
-            </div>
             {/* Скрытый контейнер с дубликатом табов, для вычисления табов, передаваемых в Dropdown. */}
+            {/* TabsFake идут в коде обязательно выше, чем tabsReal. */}
             <div className="cssClass[tabsFake]" ref={tabsFakeRef}>
                 {dropdownRef.current && (
                     <ReactResizeDetector handleWidth onResize={checkVisibleItems} refreshMode="throttle" refreshRate={150} />
                 )}
-                {stripDataAttributes(children)}
+                <TabsExtendedTabContext.Provider value={{isFakeTab: true}}>{stripDataAttributes(children)}</TabsExtendedTabContext.Provider>
+            </div>
+
+            <div className={classnames('cssClass[tabsReal]', {'cssClass[hidden]': !tabsFakeRef.current}, className)} {...htmlDivAttributes}>
+                {children}
             </div>
         </>
     );

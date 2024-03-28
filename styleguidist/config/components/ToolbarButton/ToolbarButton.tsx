@@ -3,6 +3,7 @@ import cx from 'clsx';
 import './styles.less';
 
 interface IToolbarButtonProps {
+    children: React.ReactNode;
     className?: string;
     href?: string;
     onClick?: () => void;

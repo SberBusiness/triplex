@@ -1,14 +1,13 @@
 ```jsx
-import React, {useState} from 'react';
 import {Row} from '@sberbusiness/triplex/components/Row/Row';
 import {Col} from '@sberbusiness/triplex/components/Col/Col';
 import {Label} from '@sberbusiness/triplex/components/Label/Label';
 import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [labelText, setLabelText] = useState('Название поля');
-const [codeNumber, setCodeNumber] = useState('000');
-const [description, setDescription] = useState('Текст пояснения');
+const labelText = 'Название поля';
+const codeNumber = '000';
+const description = 'Текст пояснения';
 
 <>
     <Row>
@@ -93,5 +92,5 @@ const [description, setDescription] = useState('Текст пояснения');
             </Label>
         </Col>
     </Row>
-</>;
+</>
 ```

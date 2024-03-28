@@ -1,9 +1,9 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства StepperWrapper. */
+/** Свойства компонента StepperWrapper. */
 export interface IStepperWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
-    // Признак отображения тени под Stepper.
+    /** Признак отображения тени под Stepper. */
     shadow?: boolean;
 }
 

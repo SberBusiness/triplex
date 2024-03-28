@@ -65,14 +65,15 @@
             height: @ufs-theme-size-icon-16 + @metric-16 * 2;
 
             > th {
-                background-color: @color-asphalt-04;
+                background-color: var(--triplex-TableBasic-Header_Background);
                 padding: @metric-16 @metric-12;
                 box-sizing: border-box;
                 .b4-text-info(@color-graphite-01);
+                color: var(--triplex-TableBasic-Color);
 
                 // Фикс бага движка IE11. Иначе по бокам от колонки появляется белая линия.
                 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                    box-shadow: inset -1px 0 0 @color-asphalt-04, inset 1px 0 0 @color-asphalt-04;
+                    box-shadow: inset -1px 0 0 var(--triplex-TableBasic-Header_Background), inset 1px 0 0 var(--triplex-TableBasic-Header_Background);
                 }
 
                 &:first-child {
@@ -123,6 +124,7 @@
                     vertical-align: top;
                     box-sizing: border-box;
                     .b1-text-main(@color-graphite-01);
+                    color: var(--triplex-TableBasic-Color);
 
                     &:first-child {
                         border-radius: @radius-8 0 0 @radius-8;
@@ -146,11 +148,11 @@
                 }
 
                 &.selected > td {
-                    background-color: @color-asphalt-04;
+                    background-color: var(--triplex-TableBasic-Background_Selected);
 
                     // Фикс бага движка IE11. Иначе по бокам от колонки появляется белая линия.
                     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                        box-shadow: inset -1px 0 0 @color-asphalt-04, inset 1px 0 0 @color-asphalt-04;
+                        box-shadow: inset -1px 0 0 var(--triplex-TableBasic-Background_Selected), inset 1px 0 0 var(--triplex-TableBasic-Background_Selected);
                     }
                 }
             }
@@ -160,11 +162,11 @@
             }
 
             &.hoverable > tr:hover > td {
-                background-color: @color-asphalt-05;
+                background-color: var(--triplex-TableBasic-Background_Hover);
 
                 // Фикс бага движка IE11. Иначе по бокам от колонки появляется белая линия.
                 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                    box-shadow: inset -1px 0 0 @color-asphalt-05, inset 1px 0 0 @color-asphalt-05;
+                    box-shadow: inset -1px 0 0 var(--triplex-TableBasic-Background_Hover), inset 1px 0 0 var(--triplex-TableBasic-Background_Hover);
                 }
             }
         }

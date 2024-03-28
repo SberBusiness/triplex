@@ -2,28 +2,34 @@
 
 .formFieldLabel {
     position: absolute;
-    left: 0;
     top: 16px;
-    box-sizing: border-box;
-    color: @color-graphite-01;
+    left: 0;
+    overflow: hidden;
     // line-height задает дочерний элемент.
     line-height: 0;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
 
-    &.smallLabel {
+    &.floating {
         top: -8px;
         left: 12px;
     }
+}
 
-    .smallLabelText {
-        padding: 0 4px;
-        color: @color-asphalt-01;
-        background: @color-snowy;
+.formFieldLabelText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--triplex-FormField-Label_Color_Default);
+
+    .floating & {
+        padding-left: 4px;
+        padding-right: 4px;
+        font-size: 12px;
+        background: var(--triplex-FormField-Label_Background);
     }
 
-    & > .disabled {
-        color: @color-asphalt-01;
+    .disabled & {
+        color: var(--triplex-FormField-Label_Color_Disabled);
     }
 }

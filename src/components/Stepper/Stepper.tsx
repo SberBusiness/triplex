@@ -3,10 +3,7 @@ import {IStepperExtendedProps, StepperExtended} from './StepperExtended';
 import {StepperWrapper} from './StepperWrapper';
 import {StepperStep, IStepperStepProps} from './StepperStep';
 import {StepperProgress} from './StepperProgress';
-import {
-    CarouselExtended,
-    ICarouselExtendedButtonProvideProps,
-} from '@sberbusiness/triplex/components/CarouselExtended/CarouselExtended';
+import {CarouselExtended, ICarouselExtendedButtonProvideProps} from '@sberbusiness/triplex/components/CarouselExtended/CarouselExtended';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {TabfoldercarouselleftSrvxIcon32} from '@sberbusiness/icons/TabfoldercarouselleftSrvxIcon32';
 import {TabfoldercarouselrightSrvxIcon32} from '@sberbusiness/icons/TabfoldercarouselrightSrvxIcon32';
@@ -44,14 +41,14 @@ export const Stepper: React.FC<IStepperProps> & IStepperComposition = ({classNam
     const renderPrevButton = ({hidden, ...rest}: ICarouselExtendedButtonProvideProps) =>
         hidden ? null : (
             <ButtonIcon className="cssClass[buttonPrev]" {...rest} aria-label="Прокрутить назад">
-                <TabfoldercarouselleftSrvxIcon32 />
+                <TabfoldercarouselleftSrvxIcon32 className="cssClass[buttonPrevIcon]" />
             </ButtonIcon>
         );
 
     const renderNextButton = ({hidden, ...rest}: ICarouselExtendedButtonProvideProps) =>
         hidden ? null : (
             <ButtonIcon className="cssClass[buttonNext]" {...rest} aria-label="Прокрутить вперёд">
-                <TabfoldercarouselrightSrvxIcon32 />
+                <TabfoldercarouselrightSrvxIcon32 className="cssClass[buttonNextIcon]" />
             </ButtonIcon>
         );
 
@@ -129,6 +126,7 @@ export const Stepper: React.FC<IStepperProps> & IStepperComposition = ({classNam
             stepPrev={state.stepPrev}
             stepNext={state.stepNext}
             ref={carouselRef}
+            data-tinfo="9.1.0"
         >
             <StepperExtended className={classNames} selectedStepId={selectedStepId} {...rest}>
                 {steps.map(({label, ...step}) => (

@@ -1,21 +1,23 @@
 import React from 'react';
-import moment, {Moment} from 'moment';
 import FocusTrap from 'focus-trap-react';
-import {DateInput} from '@sberbusiness/triplex/components/DatePicker/components/DateInput';
+import moment, {Moment} from 'moment';
+import {DatePickerInput} from '@sberbusiness/triplex/components/DatePicker/components/DatePickerInput/DatePickerInput';
 import {inputDateFormat} from '@sberbusiness/triplex/components/DatePicker/const';
 import {Calendar} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {ICalendarNestedProps} from '@sberbusiness/triplex/components/Calendar/types';
-import {Dropdown, EDropdownAlignment} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
+import {EDropdownAlignment} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
+import {IMaskedInputProps} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
 import {dateFormatYYYYMMDD, globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
 import {getFormattedDate} from '@sberbusiness/triplex/utils/dateUtils';
-import {EVENT_KEY_CODES, EVENT_KEYS} from '@sberbusiness/triplex/utils/keyboard';
+import {isKey, EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
+import {DatePickerDropdown} from './components/DatePickerDropdown/DatePickerDropdown';
 
-/** Свойства DatePicker. */
+/** Свойства компонента DatePicker. */
 export interface IDatePickerProps
-    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'type' | 'onChange' | 'onBlur'>,
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'type' | 'onChange'>,
         ICalendarNestedProps {
     /** Использование запрещено. */
     children?: never;
@@ -25,6 +27,8 @@ export interface IDatePickerProps
     disabled?: boolean;
     /** Состояние ошибки. */
     error?: boolean;
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
     /** Формат для значения. */
     format?: string;
     /** Выравнивание календаря по горизонтали. */
@@ -35,36 +39,34 @@ export interface IDatePickerProps
     markedDays?: string[];
     /** Отключенные дни */
     disabledDays?: string[];
-    /** Callback для события потери фокуса. */
-    onBlur?: () => void;
     /** Callback для события изменения значения. */
     onChange: (date: string) => void;
     /** Символы для заполнения пустых редактируемых позиций в маске (например, строка вида "дд.мм.гггг"). */
-    placeholderAsMask?: string;
+    placeholderMask?: string;
     /** Обратный порядок выбора даты. */
     reversedPick?: boolean;
     /** Значение даты текстом. */
     value: string;
+    /** Свойства поля ввода в Dropdown. */
+    dropdownInputProps?: Omit<IMaskedInputProps, 'value' | 'type' | 'onChange' | 'mask' | 'placeholderMask'>;
 }
 
 type TDatePickerProps = typeof DatePicker.defaultProps & IDatePickerProps;
 
-/** Состояния DatePicker. */
+/** Состояния компонента DatePicker. */
 interface IDatePickerState {
     /** Value для компонента Calendar. */
     calendarValue: Moment | null;
-    /** Фокус в поле открывает popover с выбором даты, а так же позволяет вводить дату вручную. */
-    focused: boolean;
     /** Value для компонента DateInput. */
     inputValue: string;
     /** Последняя валидная дата. */
     lastValidValue: string;
+    /** Фокус в поле открывает popover с выбором даты, а так же позволяет вводить дату вручную. */
+    inputFocused: boolean;
     /** Dropdown выбора даты открыт. */
-    opened: boolean;
-    /** Активна ловушка фокуса внутри Dropdown. */
-    focusTrapActive: boolean;
-    /** Пользователь взаимодействует с компонентом через клавиатуру, а не мышь. В этом режиме Dropdown не открывается при фокусе на input. */
-    accessibilityMode: boolean;
+    dropdownOpen: boolean;
+    /** Пользователь использует клавиатуру для навигации. В этом случае Dropdown не открывается при фокусе на поле ввода. */
+    keyboardNavigation: boolean;
 }
 
 /**
@@ -102,13 +104,12 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         const {value, format} = props;
 
         this.state = {
-            accessibilityMode: true,
-            calendarValue: this.getCalendarValueFromValue(),
-            focused: false,
-            focusTrapActive: false,
-            opened: false,
-            lastValidValue: moment(value, format, true).isValid() ? value : '',
             inputValue: this.getInputValueFromValue(),
+            calendarValue: this.getCalendarValueFromValue(),
+            lastValidValue: moment(value, format, true).isValid() ? value : '',
+            inputFocused: false,
+            dropdownOpen: false,
+            keyboardNavigation: true,
         };
 
         this.targetRef = React.createRef();
@@ -120,25 +121,13 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         document.addEventListener('touchstart', this.handleClickOutside);
     }
 
-    public componentDidUpdate(prevProps: Readonly<IDatePickerProps>, prevState: Readonly<IDatePickerState>): void {
+    public componentDidUpdate(prevProps: Readonly<IDatePickerProps>): void {
         const {value, format} = this.props;
-        const {opened} = this.state;
-        const {opened: prevOpened} = prevState;
 
         if (value != prevProps.value) {
             this.setLastValidValue(value, format);
             this.setCalendarValue();
             this.setInputValue();
-        }
-
-        if (!prevOpened && opened) {
-            this.setState({
-                focusTrapActive: true,
-            });
-        } else if (prevOpened && !opened) {
-            this.setState({
-                focusTrapActive: false,
-            });
         }
     }
 
@@ -153,6 +142,7 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
             error,
             defaultViewDate,
             disabled,
+            focusTrapProps,
             format,
             limitRange,
             markedDays,
@@ -162,120 +152,72 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
             reversedPick,
             value,
             alignment,
+            'aria-label': ariaLabel,
+            dropdownInputProps,
             dayHtmlAttributes,
             monthHtmlAttributes,
             yearHtmlAttributes,
             prevButtonProps,
             nextButtonProps,
             changeViewLinkProps,
-            placeholderAsMask,
+            placeholderMask,
             ...htmlProps
         } = this.props;
-        const {accessibilityMode, calendarValue, focused, focusTrapActive, inputValue, opened} = this.state;
+        const {inputValue, inputFocused, dropdownOpen, keyboardNavigation} = this.state;
 
         const classNames = classnames('cssClass[datePicker]', className);
 
         return (
             <KeyDownListener onMatch={this.handleEsc} eventKeyCode={EVENT_KEY_CODES.ESCAPE}>
-                <div className={classNames} ref={this.targetRef}>
-                    <DateInput
-                        {...htmlProps}
-                        value={inputValue}
-                        disabled={disabled}
-                        focused={focused}
-                        error={error}
-                        onClickIcon={this.handleClickCalendarIcon}
-                        onBlur={this.handleInputBlur}
-                        onFocus={this.handleFocus}
-                        onChange={this.handleValueChangeFromInput}
-                        onKeyDown={this.handleInputKeyDown}
-                        onMouseDown={this.handleInputMouseDown}
-                        placeholderAsMask={placeholderAsMask}
-                    />
-                    <Dropdown
-                        opened={opened}
-                        setOpened={this.setOpenedDropdown}
+                <div className={classNames} onMouseDown={this.handleMouseDown} ref={this.targetRef}>
+                    <DatePickerInput>
+                        <DatePickerInput.Target
+                            {...htmlProps}
+                            value={inputValue}
+                            placeholderMask={placeholderMask}
+                            disabled={disabled}
+                            error={error}
+                            onFocus={this.handleFocusInput}
+                            onBlur={this.handleBlurInput}
+                            onChange={this.handleChangeInput}
+                            onKeyDown={this.handleKeyDownInput}
+                        />
+                        <DatePickerInput.Icon
+                            active={inputFocused}
+                            disabled={disabled}
+                            aria-label={ariaLabel}
+                            onClick={this.handleClickInputIcon}
+                        />
+                    </DatePickerInput>
+                    <DatePickerDropdown
+                        opened={dropdownOpen}
+                        setOpened={this.setDropdownOpen}
                         alignment={alignment}
+                        focusTrapProps={focusTrapProps}
                         targetRef={this.targetRef}
-                        ref={this.dropdownRef}
-                        aria-modal="true"
                         role="dialog"
-                        aria-label={htmlProps['aria-label']}
-                    >
-                        <FocusTrap active={accessibilityMode && focusTrapActive} focusTrapOptions={{clickOutsideDeactivates: true}}>
-                            <div>
-                                <Calendar
-                                    pickedDate={calendarValue}
-                                    limitRange={limitRange}
-                                    markedDays={markedDays}
-                                    defaultViewDate={defaultViewDate}
-                                    disabledDays={disabledDays}
-                                    onChangeDate={this.handleValueChangeFromCalendar}
-                                    reversedPick={reversedPick}
-                                    dayHtmlAttributes={dayHtmlAttributes}
-                                    monthHtmlAttributes={monthHtmlAttributes}
-                                    yearHtmlAttributes={yearHtmlAttributes}
-                                    prevButtonProps={prevButtonProps}
-                                    nextButtonProps={nextButtonProps}
-                                    changeViewLinkProps={changeViewLinkProps}
-                                />
-                            </div>
-                        </FocusTrap>
-                    </Dropdown>
+                        aria-modal="true"
+                        ref={this.dropdownRef}
+                        renderCalendar={this.renderCalendar}
+                        keyboardNavigation={keyboardNavigation}
+                        inputProps={{
+                            ...dropdownInputProps,
+                            value: inputValue,
+                            placeholderMask,
+                            autoFocus: inputFocused == true,
+                            onChange: this.handleChangeInput,
+                        }}
+                    />
                 </div>
             </KeyDownListener>
         );
     }
 
-    private handleClickCalendarIcon = () => {
-        const {opened} = this.state;
-        this.setOpenedDropdown(!opened);
-    };
-
-    private handleEsc = () => {
-        this.setOpenedDropdown(false);
-    };
-
-    private setOpenedDropdown = (opened: boolean) => {
-        this.setState({
-            opened,
-        });
-    };
-
-    /**
-     * Обработчик нажатия мыши.
-     */
-    private handleInputMouseDown = () => {
-        this.setState({
-            accessibilityMode: false,
-        });
-    };
-
-    /**
-     * Обработчик нажатия с клавиатуры.
-     * @param {React.KeyboardEvent<HTMLInputElement>} e Событие нажатия клавиши.
-     */
-    private handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (EVENT_KEYS.ENTER.includes(e.key)) {
-            this.makeValueChangeFromInput();
-        }
-    };
-
-    private setInputValue = (): void => {
-        const {inputValue} = this.state;
-        const nextInputValue = this.getInputValueFromValue();
-
-        if (inputValue !== nextInputValue) {
-            this.setState({
-                inputValue: nextInputValue,
-            });
-        }
-    };
-
+    /** Геттер значения поля ввода. */
     private getInputValueFromValue = (): string => {
         const {format, value} = this.props;
+        const date = moment(value, format, true);
         let inputValue = value;
-        const date = moment(inputValue, format, true);
 
         if (value && date.isValid()) {
             inputValue = date.format(inputDateFormat);
@@ -284,17 +226,7 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         return inputValue;
     };
 
-    private setCalendarValue = (): void => {
-        const {calendarValue} = this.state;
-        const nextCalendarValue = this.getCalendarValueFromValue();
-
-        if (!nextCalendarValue || !calendarValue || !moment(nextCalendarValue).isSame(calendarValue)) {
-            this.setState({
-                calendarValue: nextCalendarValue,
-            });
-        }
-    };
-
+    /** Геттер значения календаря. */
     private getCalendarValueFromValue = (): Moment | null => {
         const {format, value} = this.props;
         const lastValidValue = this.state ? this.state.lastValidValue : '';
@@ -313,109 +245,7 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
         return calendarValue;
     };
 
-    /** Вызов изменения значения по текущему внутреннему состоянию Input. */
-    private makeValueChangeFromInput = () => {
-        const {onChange, format, disabledDays, limitRange} = this.props;
-        const {inputValue, lastValidValue} = this.state;
-
-        if (inputValue === '' && inputValue !== lastValidValue) {
-            onChange('');
-        }
-
-        const inputDate: Moment = moment(inputValue, inputDateFormat, true);
-
-        const checkSuccess =
-            inputDate.isValid() && !checkOutOfRange(inputDate, limitRange) && !checkDisabled(inputDate, disabledDays, format);
-        if (checkSuccess) {
-            const newValue = inputDate.format(format);
-            if (newValue !== lastValidValue) {
-                onChange(newValue);
-            }
-        } else {
-            // возврат состояния к value, которое валидно в этом случае и равно lastValidValue
-            this.setCalendarValue();
-            this.setInputValue();
-        }
-    };
-
-    /** Обработчик установки фокуса. */
-    private handleFocus = (): void => {
-        const {accessibilityMode, opened} = this.state;
-        const nextState = {focused: true, opened};
-
-        if (!accessibilityMode) {
-            nextState.opened = true;
-        }
-
-        this.setState(nextState);
-    };
-
-    /**
-     * Обработчик потери фокуса поля ввода даты.
-     */
-    private handleInputBlur = (): void => {
-        const {onBlur} = this.props;
-
-        this.makeValueChangeFromInput();
-
-        this.setState({
-            accessibilityMode: true,
-            focused: false,
-        });
-
-        onBlur?.();
-    };
-
-    /**
-     * Обработчик изменения даты из поля для ввода.
-     */
-    private handleValueChangeFromInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const {value} = event.target;
-        const inputDate: Moment = moment(event.target.value, inputDateFormat, true);
-        if (inputDate.isValid()) {
-            this.setState({
-                inputValue: value,
-                calendarValue: inputDate,
-            });
-        } else {
-            this.setState({
-                inputValue: value,
-            });
-        }
-    };
-
-    private toggleDropdown = (opened: boolean) => {
-        this.setState({
-            opened,
-        });
-    };
-
-    /**
-     * Обработчик изменения даты из календаря.
-     * @param {Moment} date Новое значение поля.
-     */
-    private handleValueChangeFromCalendar = (date: Moment): void => {
-        const {onChange, format} = this.props;
-
-        onChange(getFormattedDate(date, format));
-
-        this.toggleDropdown(false);
-    };
-
-    /** При клике вне компонента скрываем выпадающий список. */
-    private handleClickOutside = (event: UIEvent) => {
-        const {focused} = this.state;
-        const {current: target} = this.targetRef;
-        const {current: dropdown} = this.dropdownRef;
-
-        if (focused) {
-            if (!target?.contains(event.target as Node) && !dropdown?.contains(event.target as Node)) {
-                this.toggleDropdown(false);
-            }
-        }
-    };
-
-    /** Заполнение валидного значения даты. */
+    /** Сеттер валидного значения даты. */
     private setLastValidValue = (value: string | null, format: string | undefined): void => {
         const {lastValidValue} = this.state;
         const {onChange, limitRange} = this.props;
@@ -437,12 +267,212 @@ export class DatePicker extends React.PureComponent<TDatePickerProps, IDatePicke
             return;
         }
 
-        const isOutOfRangeValue = checkOutOfRange(date, limitRange);
+        const isOutOfRangeValue = checkOutOfRange(date, this.getCompletedLimitRange(limitRange));
         if (isOutOfRangeValue) {
             onChange(lastValidValue);
             return;
         }
 
         this.setState({lastValidValue: value});
+    };
+
+    /** Сеттер значения поля ввода. */
+    private setInputValue = (): void => {
+        const {inputValue} = this.state;
+        const nextInputValue = this.getInputValueFromValue();
+
+        if (inputValue !== nextInputValue) {
+            this.setState({inputValue: nextInputValue});
+        }
+    };
+
+    /** Сеттер значения календаря. */
+    private setCalendarValue = (): void => {
+        const {calendarValue} = this.state;
+        const nextCalendarValue = this.getCalendarValueFromValue();
+
+        if (!nextCalendarValue || !calendarValue || !moment(nextCalendarValue).isSame(calendarValue)) {
+            this.setState({calendarValue: nextCalendarValue});
+        }
+    };
+
+    /** Сеттер состояния открытости выпадающего меню. */
+    private setDropdownOpen = (opened: boolean, closedByCalendar?: boolean) => {
+        if (opened) {
+            this.setState({dropdownOpen: opened});
+        } else {
+            this.setState({dropdownOpen: opened, keyboardNavigation: true}, () => {
+                if (!closedByCalendar) {
+                    this.makeValueChangeFromInput();
+                }
+            });
+        }
+    };
+
+    /** Обработчик клика вне компонента. */
+    private handleClickOutside = (event: UIEvent) => {
+        const {dropdownOpen} = this.state;
+        const {current: target} = this.targetRef;
+        const {current: dropdown} = this.dropdownRef;
+
+        if (dropdownOpen) {
+            if (!target?.contains(event.target as Node) && !dropdown?.contains(event.target as Node)) {
+                this.setDropdownOpen(false);
+            }
+        }
+    };
+
+    /** Обработчик нажатия клавиши Escape. */
+    private handleEsc = () => {
+        this.setDropdownOpen(false);
+    };
+
+    /** Обработчик нажатия мыши. */
+    private handleMouseDown = () => {
+        this.setState({keyboardNavigation: false});
+    };
+
+    /** Обработчик установки фокуса поля ввода. */
+    private handleFocusInput = (): void => {
+        const {keyboardNavigation, dropdownOpen} = this.state;
+        const nextState = {inputFocused: true, dropdownOpen};
+
+        if (!keyboardNavigation) {
+            nextState.dropdownOpen = true;
+        }
+
+        this.setState(nextState);
+    };
+
+    /** Обработчик потери фокуса поля ввода. */
+    private handleBlurInput = (event: React.FocusEvent<HTMLInputElement>): void => {
+        const {onBlur} = this.props;
+        const {dropdownOpen} = this.state;
+
+        this.setState({inputFocused: false}, () => {
+            if (dropdownOpen == false) {
+                this.makeValueChangeFromInput();
+            }
+        });
+
+        onBlur?.(event);
+    };
+
+    /** Обработчик изменения даты из поля для ввода. */
+    private handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const {value} = event.target;
+        const inputDate = moment(event.target.value, inputDateFormat, true);
+
+        if (inputDate.isValid()) {
+            this.setState({inputValue: value, calendarValue: inputDate});
+        } else {
+            this.setState({inputValue: value});
+        }
+    };
+
+    /** Обработчик нажатия клавиши. */
+    private handleKeyDownInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        const {dropdownOpen} = this.state;
+        const {onKeyDown} = this.props;
+        const key = event.code || event.keyCode;
+
+        if (isKey(key, 'ENTER')) {
+            this.makeValueChangeFromInput();
+        } else if (dropdownOpen) {
+            if (isKey(key, 'TAB')) {
+                // Фокус переходит на предыдущий элемент – закрываем Dropdown.
+                if (event.shiftKey) {
+                    this.setDropdownOpen(false);
+                }
+            }
+        }
+
+        onKeyDown?.(event);
+    };
+
+    /** Обработчик клика по иконке календаря. */
+    private handleClickInputIcon = () => {
+        const {dropdownOpen} = this.state;
+
+        this.setDropdownOpen(!dropdownOpen);
+    };
+
+    /** Вызов изменения значения по текущему внутреннему состоянию Input. */
+    private makeValueChangeFromInput = () => {
+        const {onChange, format, disabledDays, limitRange} = this.props;
+        const {inputValue, lastValidValue} = this.state;
+
+        if (inputValue === '' && inputValue !== lastValidValue) {
+            onChange('');
+        }
+
+        const inputDate: Moment = moment(inputValue, inputDateFormat, true);
+
+        const checkSuccess =
+            inputDate.isValid() &&
+            !checkOutOfRange(inputDate, this.getCompletedLimitRange(limitRange)) &&
+            !checkDisabled(inputDate, disabledDays, format);
+
+        if (checkSuccess) {
+            const newValue = inputDate.format(format);
+            if (newValue !== lastValidValue) {
+                onChange(newValue);
+            }
+        } else {
+            // возврат состояния к value, которое валидно в этом случае и равно lastValidValue
+            this.setCalendarValue();
+            this.setInputValue();
+        }
+    };
+
+    /** Отрисовка календаря. */
+    private renderCalendar = (adaptiveMode: boolean) => {
+        const {
+            defaultViewDate,
+            limitRange,
+            markedDays,
+            disabledDays,
+            reversedPick,
+            dayHtmlAttributes,
+            monthHtmlAttributes,
+            yearHtmlAttributes,
+            prevButtonProps,
+            nextButtonProps,
+            changeViewLinkProps,
+        } = this.props;
+        const {calendarValue} = this.state;
+
+        return (
+            <Calendar
+                defaultViewDate={defaultViewDate}
+                pickedDate={calendarValue}
+                limitRange={this.getCompletedLimitRange(limitRange)}
+                markedDays={markedDays}
+                disabledDays={disabledDays}
+                reversedPick={reversedPick}
+                adaptiveMode={adaptiveMode}
+                onChangeDate={this.handleChangeDateCalendar}
+                dayHtmlAttributes={dayHtmlAttributes}
+                monthHtmlAttributes={monthHtmlAttributes}
+                yearHtmlAttributes={yearHtmlAttributes}
+                prevButtonProps={prevButtonProps}
+                nextButtonProps={nextButtonProps}
+                changeViewLinkProps={changeViewLinkProps}
+            />
+        );
+    };
+
+    /** Получить обогащённый диапазон дат на случай, если один из ограничителей не задан. */
+    private getCompletedLimitRange = (limitRange: IDateLimitRange) => {
+        return {...globalLimitRange, ...limitRange};
+    };
+
+    /** Обработчик изменения даты из календаря. */
+    private handleChangeDateCalendar = (date: Moment): void => {
+        const {onChange, format} = this.props;
+
+        onChange(getFormattedDate(date, format));
+
+        this.setDropdownOpen(false, true);
     };
 }

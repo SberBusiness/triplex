@@ -1,8 +1,8 @@
+import React from 'react';
+import {Moment} from 'moment';
 import {ICalendarRangeProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {IButtonIconProps} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {ILinkTextProps} from '../Link/Link';
-import {Moment} from 'moment';
-import React from 'react';
 
 /** Внешний тип даты, который можно передать в компонент через свойства компонента. */
 export type TPickedDateProp = string | Moment | null;
@@ -13,51 +13,43 @@ export type TPickedDate = Moment | null;
 /** Внешний тип периода, который можно передать в компонент через свойства компонента. */
 export type TPickedRangeProp = [TPickedDateProp, TPickedDateProp];
 
-/** Приведенный к Moment тип периода  для внутренних вычислений. */
+/** Приведенный к Moment тип периода для внутренних вычислений. */
 export type TPickedRange = [TPickedDate, TPickedDate];
 
 /**
  * Интерфейс параметров, которые можно передать в функцию для получения HTML атрибутов компонента дня,
  * если они участвуют в формировании значений атрибутов.
- *
- * @prop isMarked Является ли дата отмеченной.
  */
 export interface IDayHtmlAttributesFunctionParams {
-    isMarked: boolean;
+    /** День является отмеченным. */
+    marked: boolean;
 }
 
-/**
- * Функция для получения HTML атрибутов компонента дня
- */
-export type TDayHtmlAttributesFunction = (params: IDayHtmlAttributesFunctionParams) => React.HTMLAttributes<HTMLDivElement>;
+/** Функция для получения HTML атрибутов компонента дня. */
+export type TDayHtmlAttributesFunction = (params: IDayHtmlAttributesFunctionParams) => React.HTMLAttributes<HTMLTableCellElement>;
 
-/**
- * Alias для data атрибутов
- */
+/** Alias для data атрибутов. */
 type TDataAttributeAlias = `data-${string}`;
 
 export type THTMLAttributesWithData = {
     [dataAttribute in TDataAttributeAlias]: string;
-} &
-    React.HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLTableCellElement>;
 
-/**
- * Тип HTML атрибутов компонента дня
- */
+/** Тип HTML атрибутов компонента дня. */
 export type TDayHtmlAttributes = THTMLAttributesWithData | TDayHtmlAttributesFunction;
 
 export interface ICalendarNestedProps {
     /** HTML атрибуты компонента дня. */
     dayHtmlAttributes?: TDayHtmlAttributes;
     /** HTML атрибуты компонента месяца. */
-    monthHtmlAttributes?: React.HTMLAttributes<HTMLDivElement>;
+    monthHtmlAttributes?: React.HTMLAttributes<HTMLTableCellElement>;
     /** HTML атрибуты компонента года. */
-    yearHtmlAttributes?: React.HTMLAttributes<HTMLDivElement>;
-    /** Пропсы кнопки переключения на предыдущую страницу (месяца, года, десятилетия). */
+    yearHtmlAttributes?: React.HTMLAttributes<HTMLTableCellElement>;
+    /** Пропсы кнопки переключения на предыдущую страницу. */
     prevButtonProps?: IButtonIconProps;
-    /** Пропсы кнопки переключения на следующую страницу (месяца, года, десятилетия). */
+    /** Пропсы кнопки переключения на следующую страницу. */
     nextButtonProps?: IButtonIconProps;
-    /** Пропсы ссылки для смены вида календаря (месяц, год, десятилетие). */
+    /** Пропсы ссылки для смены вида календаря. */
     changeViewLinkProps?: Omit<ILinkTextProps, 'linkType' | 'size'>;
 }
 

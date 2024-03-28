@@ -11,6 +11,7 @@ export enum ExampleBackgroundColor {
 
 /** Свойства ExampleBackground. */
 interface IExampleBackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
+    children?: React.ReactNode;
     background?: ExampleBackgroundColor;
 }
 

@@ -2,29 +2,23 @@ import React, {useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 
-/**
- * Свойства DropdownListItem.
- *
- * @prop {boolean} [active] Флаг активного элемента при навигации с клавиатуры. Свойство передается из DropdownList.
- * @prop {string} id Идентификатор элемента.
- * @prop {Function} [onSelect] Обработчик выбора текущего элемента. Выбор осуществляется по клику либо при нажатии на пробел.
- * @prop {boolean} [selected] Флаг - текущий элемент выбран.
- * @prop {number[]} [keyCodesForSelection] Коды клавиш для выбора элемента с помощью клавиатуры.
- */
+/** Свойства компонента DropdownListItem. */
 export interface IDropdownListItemProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Флаг активного элемента при навигации с клавиатуры. Свойство передается из DropdownList. */
     active?: boolean;
+    /** Идентификатор элемента. */
     id: string;
+    /** Обработчик выбора текущего элемента. Выбор осуществляется по клику либо при нажатии на пробел. */
     onSelect?: () => void;
+    /** Флаг - текущий элемент выбран. */
     selected?: boolean;
+    /** Коды клавиш для выбора элемента с помощью клавиатуры. */
     keyCodesForSelection?: number[];
 }
 
 const KEY_CODES_FOR_SELECTION_DEFAULT = [EVENT_KEY_CODES.SPACE, EVENT_KEY_CODES.ENTER];
 
-/**
- * Компонент DropdownList.
- * Элемент выпадающего списка.
- */
+/** Элемент выпадающего списка. */
 export const DropdownListItem = React.forwardRef<HTMLDivElement, IDropdownListItemProps>(
     (
         {

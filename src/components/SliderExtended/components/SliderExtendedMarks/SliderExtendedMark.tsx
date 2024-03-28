@@ -1,17 +1,16 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SliderExtendedContext} from '../../SliderExtendedContext';
 import {Text} from '../../../Typography/Text';
 import {ETextSize} from '../../../Typography/enums';
 import {SliderExtendedMarkActions} from './SliderExtendedMarkActions';
 
+/** Свойства компонента SliderExtendedMark. */
 export interface ISliderExtendedMarkProps extends React.HTMLAttributes<HTMLSpanElement> {
     value: number;
 }
 
-/**
- * Компонент SliderExtendedMark.
- */
+/** Компонент SliderExtendedMark. */
 export const SliderExtendedMark: React.FC<ISliderExtendedMarkProps> = ({children, className, value, ...htmlSpanAttributes}) => {
     const {disabled, dots, min, max, reverse} = React.useContext(SliderExtendedContext);
 

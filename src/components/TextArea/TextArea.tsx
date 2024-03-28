@@ -1,23 +1,21 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * @prop {boolean} [error] Признак ошибки ввода данных.
- * @prop {'none' | 'both' | 'horizontal' | 'vertical' | 'inherit'} [resize] Указывает, можно ли пользователю изменять размеры текстового поля. (http://htmlbook.ru/css/resize).
- */
+/** Свойства компонента TextArea. */
 export interface ITextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    /** Признак ошибки ввода данных. */
     error?: boolean;
+    /** Указывает, можно ли пользователю изменять размеры текстового поля. (http://htmlbook.ru/css/resize). */
     resize?: 'none' | 'both' | 'horizontal' | 'vertical' | 'inherit';
 }
 
 /** Компонент поля ввода многострочного текста. */
+export const TextArea = React.forwardRef<HTMLTextAreaElement, ITextAreaProps>(
+    ({className, cols, style, error, resize = 'none', ...props}, ref) => {
+        const classNames = classnames('cssClass[textArea]', {'cssClass[error]': Boolean(error), 'cssClass[fullWidth]': !cols}, className);
 
-export const TextArea: React.FC<ITextAreaProps> = ({cols, className, error, resize = 'none', ...props}) => {
-    const cn = classnames(className, 'cssClass[textArea]', {
-        'cssClass[error]': Boolean(error),
-        'cssClass[fullWidth]': !cols,
-    });
-    return <textarea {...props} cols={cols} className={cn} style={{resize: resize}} />;
-};
+        return <textarea className={classNames} cols={cols} style={{...style, resize: resize}} {...props} ref={ref} data-tinfo="9.1.0" />;
+    }
+);
 
 TextArea.displayName = 'TextArea';

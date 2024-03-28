@@ -3,7 +3,7 @@ import {ESegmentedControlType, SegmentedControlContext} from '../SegmentedContro
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {ButtonBase} from '../../protected/ButtonBase/ButtonBase';
 
-/** Свойства SegmentedControlSegment. */
+/** Свойства компонента SegmentedControlSegment. */
 export interface ISegmentedControlSegmentProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     value: string;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Input} from '@sberbusiness/triplex/components/Input/Input';
 import {TestIds} from '../../../dataTestIds/dataTestIds';
 import {ISuggestTargetProps} from '../types';
 
@@ -21,7 +22,7 @@ export function TargetInput<T>(props: ISuggestTargetProps<T>): JSX.Element {
         ...rest
     } = props;
     return (
-        <input
+        <Input
             {...rest}
             ref={setRef}
             tabIndex={disabled ? -1 : tabIndex}

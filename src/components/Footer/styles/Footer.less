@@ -2,7 +2,7 @@
 
 .footer {
     padding: @ufs-theme-page-padding-y @ufs-theme-page-padding-x;
-    background: @color-asphalt-05;
+    background: var(--triplex-Footer-Background);
 
     &.sticky {
         z-index: @page-header-sticky-z-index;
@@ -21,6 +21,7 @@
     flex-grow: 1;
     margin-right: auto;
     .b1-text-main(@color-graphite-01);
+    color: var(--triplex-Footer-Color);
 }
 
 .footerDescriptionControls {
@@ -72,6 +73,18 @@ each(@scroll-sizes, {
           Футер при этом разрешении в лайтбоксе не фиксируется.
         */
         @media (max-width: (@lightBox-media-point-0 + @scroll-width)) {
+            .globalLightBoxContent .footer,
+            .globalLightBoxSideOverlay .footer {
+                &.sticky {
+                    position: relative;
+                }
+            }
+        }
+
+        /**
+            При высоте экрана менее 800px lightBoxControls, header и footer не прилипают к экрану.
+         */
+        @media screen and (max-height: @lightBox-disable-sticky-screen-height) {
             .globalLightBoxContent .footer,
             .globalLightBoxSideOverlay .footer {
                 &.sticky {

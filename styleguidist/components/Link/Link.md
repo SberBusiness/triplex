@@ -1,16 +1,16 @@
-```jsx {"props": {"className": "semidark-background"}}
+```jsx {"props": {"className": "white-to-black-background"}}
 import {ELinkSize, ELinkType} from '@sberbusiness/triplex/components/Link/Link';
 
 const handleClick = (event) => event.preventDefault();
 
 <div style={{display: 'flex'}}>
     <div style={{flexBasis: '50%', textAlign: 'center'}}>
-        <Link href="#" linkType={ELinkType.TEXT} size={ELinkSize.MD} onClick={handleClick}>
+        <Link href="#" linkType={ELinkType.TEXT} size={ELinkSize.LG} onClick={handleClick}>
             Link Text
         </Link>
     </div>
     <div style={{flexBasis: '50%', textAlign: 'center'}}>
-        <Link href="#" linkType={ELinkType.LINE} size={ELinkSize.MD} onClick={handleClick}>
+        <Link href="#" linkType={ELinkType.LINE} size={ELinkSize.LG} onClick={handleClick}>
             Link Line
         </Link>
     </div>
@@ -19,7 +19,7 @@ const handleClick = (event) => event.preventDefault();
 
 ### Small size
 
-```jsx {"props": {"className": "semidark-background"}}
+```jsx {"props": {"className": "white-to-black-background"}}
 import {ELinkSize, ELinkType} from '@sberbusiness/triplex/components/Link/Link';
 
 const handleClick = (event) => event.preventDefault();
@@ -51,7 +51,7 @@ const renderContentAfter = () => <LinkNavIcon16 />;
 <Link
     href="#"
     linkType={ELinkType.TEXT}
-    size={ELinkSize.MD}
+    size={ELinkSize.LG}
     contentAfter={renderContentAfter}
     onClick={handleClick}
 >

@@ -30,7 +30,7 @@ exports[`AccordionView closes correctly 1`] = `
     id="AccordionBase-0"
     onTransitionEnd={[Function]}
     style={
-      Object {
+      {
         "display": "none",
       }
     }
@@ -76,7 +76,7 @@ exports[`AccordionView opens correctly 1`] = `
     id="AccordionBase-0"
     onTransitionEnd={[Function]}
     style={
-      Object {
+      {
         "display": "none",
       }
     }
@@ -122,7 +122,7 @@ exports[`AccordionView renders correctly 1`] = `
     id="AccordionBase-0"
     onTransitionEnd={[Function]}
     style={
-      Object {
+      {
         "display": "none",
       }
     }

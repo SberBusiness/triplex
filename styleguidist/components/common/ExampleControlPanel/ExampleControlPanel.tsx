@@ -1,10 +1,9 @@
 import React from 'react';
-import ThemeSwitcher from './components/ThemeSwitcher';
-import {isIE} from '../../../config/components/utils';
 import './styles.less';
 
 /** Свойства панели управления. */
 interface IControlPanelProps {
+    children?: React.ReactNode;
     /** Поддержка темизации. */
     themed?: boolean;
 }
@@ -23,12 +22,6 @@ type TControlElement = IInputControlElement | ISelectControlElement;
 /** Панель управления для примера компонента. */
 export const ExampleControlPanel: React.FC<IControlPanelProps> = ({children, themed}) => {
     const count = React.Children.count(children);
-
-    const renderThemeSwitcher = () => {
-        if (themed && !isIE) {
-            return <ThemeSwitcher />;
-        }
-    };
 
     const wrapControlElement = (left: TControlElement | string, right: TControlElement | string) => (
         // eslint-disable-next-line jsx-a11y/label-has-for
@@ -62,7 +55,7 @@ export const ExampleControlPanel: React.FC<IControlPanelProps> = ({children, the
             if (React.isValidElement(child)) {
                 return (
                     <>
-                        {renderControlElement(child)}
+                        {renderControlElement(child as TControlElement)}
                         {index + 1 < count && <br />}
                     </>
                 );
@@ -72,7 +65,6 @@ export const ExampleControlPanel: React.FC<IControlPanelProps> = ({children, the
     return (
         <fieldset className="example-control-panel">
             <legend>Settings</legend>
-            {renderThemeSwitcher()}
             {renderControlElements()}
         </fieldset>
     );

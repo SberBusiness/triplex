@@ -32,7 +32,7 @@ export class TableBasicRow extends React.PureComponent<ITableBasicRowProps> {
         const {columns, data, onClickRow} = this.props;
         const {rowKey, rowData, rowLayout, ariaAttributes, dataAttributes, selected = false} = data;
 
-        const classNameTr = classnames({'cssClass[selected]': selected});
+        const classNameTr = classnames({'cssClass[selected]': selected, selected});
         const onClick = onClickRow ? () => onClickRow(rowKey) : undefined;
         const dataTestId = dataAttributes ? dataAttributes['test-id'] : undefined;
 

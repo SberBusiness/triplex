@@ -108,3 +108,134 @@ body {
 .styleguidist-live #atlwdg-trigger {
     display: none;
 }
+// Логотип в хедере.
+.header-logo-light {
+    display: block;
+}
+// Логотип в хедере.
+.header-logo-dark {
+    display: none;
+}
+
+// Темная тема.
+html.styleguidist-dark-theme {
+    body {
+        color: #F2F4F7;
+    }
+
+    body,
+    .styleguide-sidebar,
+    .styleguide-section:not(:last-child)::after {
+        background-color: #1F1F22;
+    }
+
+    .styleguide-sidebar-burger-slice {
+        background-color: #F2F4F7;
+    }
+
+    .component-control-panel,
+    .styleguide-para,
+    a.styleguide-section-heading-link,
+    .styleguide-heading {
+        color: #F2F4F7;
+    }
+
+    // Ссылка левого меню.
+    .styleguide-link {
+        color: #b2b8bf;
+    }
+
+    // Контент лайаута.
+    .styleguide-content {
+        background: #181819;
+    }
+
+
+    .styleguide-components-list-section-heading-icon > path {
+        fill: #D0D7DD;
+    }
+
+    // Контейнер примера.
+    .styleguide-playground-preview {
+        border-color: #565B62;
+    }
+
+    // Иконка поиска.
+    .styleguide-search-input-icon path {
+        fill: #565B62 !important;
+    }
+
+    // Поле поиска.
+    .styleguide-search-input,
+    .styleguide-search-input:focus {
+        background: #1F1F22;
+        border: 1px solid #7D838A;
+        color: #7D838A;
+    }
+
+    // Логотип в хедере.
+    .header-logo-light {
+        display: none;
+    }
+    // Логотип в хедере.
+    .header-logo-dark {
+        display: block;
+    }
+
+    // Checkbox в примере компонента.
+    .checkbox-frame rect {
+        stroke: #565B62;
+        fill: transparent;
+    }
+
+    // Select в примере компонента.
+    .component-control-select select {
+        border-color: #565B62;
+        background: transparent;
+        color: #F2F4F7;
+    }
+    // Select в примере компонента, иконка стрелка.
+    .component-control-select-arrow path {
+        stroke: #565B62;
+    }
+
+    .example-background {
+        &.light {
+            background: #1F1F22;
+        }
+
+        &.dark {
+            background: #F2F4F7;
+        }
+    }
+}
+//
+//#triplex-info {
+//    position: fixed;
+//    top: 0;
+//    right: 0;
+//    background: #fff;
+//    min-height: 20px;
+//    min-width: 100px;
+//    padding: 10px;
+//    z-index: 10000000;
+//
+//    .triplex-info-list {
+//        margin: 0;
+//        padding: 0;
+//        list-style: none;
+//
+//        .triplex-info-list-item {
+//            margin-bottom: 10px;
+//            display: flex;
+//        }
+//
+//        .triplex-info-list-item-color {
+//            width: 20px;
+//            height: 20px;
+//            border-radius: 10px;
+//            margin-right: 8px;
+//        }
+//    }
+//}
+

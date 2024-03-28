@@ -2,7 +2,7 @@
 
 exports[`Button renders correctly 1`] = `
 <button
-  className="cssClass[button] cssClass[general] cssClass[MD]"
+  className="cssClass[button] cssClass[general] cssClass[MD] hoverable"
   onBlur={[Function]}
   onFocus={[Function]}
   onMouseDown={[Function]}

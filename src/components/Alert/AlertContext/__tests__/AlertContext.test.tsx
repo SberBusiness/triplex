@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {allure} from '@jest/unit/allure-report';
 import {AlertContext} from '@sberbusiness/triplex/components/Alert/AlertContext/AlertContext';
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 

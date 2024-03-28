@@ -120,6 +120,8 @@ const getButtonThemeCssClass = (theme: EButtonTheme) => {
 /** Возвращает CSS класс размера кнопки. */
 const getButtonSizeCssClass = (size?: EButtonSize) => {
     switch (size) {
+        case EButtonSize.LG:
+            return 'cssClass[LG]';
         case EButtonSize.MD:
             return 'cssClass[MD]';
         case EButtonSize.SM:
@@ -129,13 +131,20 @@ const getButtonSizeCssClass = (size?: EButtonSize) => {
 
 /** Кнопка. */
 export const Button = React.forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
-    const {children, className, theme, size, block, loading, spinnerIcon, ...rest} = props;
+    const {children, className, disabled, theme, size, block, loading, spinnerIcon, ...rest} = props;
     const {'aria-expanded': expanded} = props;
     const classNames = classnames(
         'cssClass[button]',
         getButtonThemeCssClass(theme),
         getButtonSizeCssClass(size),
         {'cssClass[block]': !!block, 'cssClass[loading]': !!loading, 'cssClass[expanded]': !!expanded},
+        // Классы для иконок, начало.
+        'hoverable',
+        {
+            disabled: !!disabled,
+            active: !!expanded,
+        },
+        // Классы для иконок, конец.
         className
     );
 
@@ -152,7 +161,7 @@ export const Button = React.forwardRef<HTMLButtonElement, TButtonProps>((props, 
     };
 
     return (
-        <ButtonBase className={classNames} tabIndex={loading ? -1 : undefined} ref={ref} {...rest}>
+        <ButtonBase className={classNames} tabIndex={loading ? -1 : undefined} ref={ref} disabled={disabled} {...rest}>
             <span className="cssClass[content]">
                 {theme === EButtonTheme.DOTS ? <DotsIcon className="cssClass[dotsIcon]" /> : children}
             </span>

@@ -6,9 +6,9 @@
     line-height: 16px;
     margin: 0;
     flex-shrink: 0;
-    border: 1px solid transparent;
+    border: 1px solid var(--triplex-Tabs-Tab_BorderColor_Default);
     outline: none;
-    background: @color-snowy;
+    background: var(--triplex-Tabs-Tab_Background_Default);
     cursor: pointer;
     border-radius: 14px;
     padding: 5px 15px;
@@ -25,16 +25,15 @@
     }
 
     &:hover {
-        background: @color-asphalt-05;
+        background: var(--triplex-Tabs-Tab_Background_Hover);
     }
 
     &[data-focus-visible]:focus {
-        border-color: @color-sunny-01;
+        border-color: var(--triplex-Tabs-Tab_BorderColor_Focus);
     }
 
-    &.selected,
-    &.selected:hover {
-        background: @color-asphalt-03;
+    &.selected {
+        background: var(--triplex-Tabs-Tab_Background_Selected);
         cursor: default;
     }
 

@@ -2,33 +2,13 @@
 import {Divider} from '@sberbusiness/triplex/components/Divider/Divider';
 import {Row} from '@sberbusiness/triplex/components/Row/Row';
 import {Col} from '@sberbusiness/triplex/components/Col/Col';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
-const marginSizes = [undefined, 4, 8, 12, 16, 20, 24, 28, 32];
-const [marginTopSize, setMarginTopSize] = React.useState(marginSizes[6]);
-const [marginBottomSize, setMarginBottomSize] = React.useState(marginSizes[4]);
+// Supported sizes: 4, 8, 12, 16, 20, 24, 28, 32
 
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={marginTopSize}
-            setValue={setMarginTopSize}
-            options={marginSizes}
-        >
-            Margin top
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={marginBottomSize}
-            setValue={setMarginBottomSize}
-            options={marginSizes}
-        >
-            Margin bottom
-        </ComponentControlPanel.Select>
-    </ComponentControlPanel>
-);
+const marginTopSize = 24;
+const marginBottomSize = 16;
 
 <>
-    {renderControlPanel()}
     <span>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium cum, dicta dolores illum nemo quam? Accusamus ad asperiores ea
         earum, eveniet ex facilis illum ipsa modi natus quae voluptate, voluptatum.

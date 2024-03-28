@@ -4,6 +4,7 @@ import {ConfirmClose} from '@sberbusiness/triplex/components/Confirm/components/
 import {ConfirmContent} from '@sberbusiness/triplex/components/Confirm/components/ConfirmContent';
 import {ConfirmControls} from '@sberbusiness/triplex/components/Confirm/components/ConfirmControls';
 
+/** Свойства компонента Confirm. */
 export interface IConfirmProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface IConfirmFC extends React.FC<IConfirmProps> {
@@ -12,9 +13,7 @@ export interface IConfirmFC extends React.FC<IConfirmProps> {
     Controls: typeof ConfirmControls;
 }
 
-/**
- * Компонент предупреждения, о закрытии лайтбокса / боковой панели лайтбокса.
- */
+/** Компонент предупреждения, о закрытии лайтбокса / боковой панели лайтбокса. */
 export const Confirm: IConfirmFC = ({children, className, ...htmlDivAttributes}) => (
     <div className={classnames(className, 'cssClass[confirm]')} role="dialog" aria-modal="true" {...htmlDivAttributes}>
         {children}

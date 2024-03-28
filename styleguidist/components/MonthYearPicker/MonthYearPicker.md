@@ -1,52 +1,143 @@
 ```jsx
-import moment from 'moment';
-import {EDropdownAlignment} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {Field} from '@sberbusiness/triplex/components/Field/Field';
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
+import {Label} from '@sberbusiness/triplex/components/Label/Label';
 
 const [value, setValue] = React.useState('');
-const [alignment, setAlignment] = React.useState(EDropdownAlignment.LEFT);
-const [limit, setLimit] = React.useState(false);
-const [reversedPick, setReversedPick] = React.useState(false);
-const [error, setError] = React.useState(false);
-const [disabled, setDisabled] = React.useState(false);
 
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={alignment}
-            setValue={setAlignment}
-            options={Object.values(EDropdownAlignment)}
-        >
-            Alignment
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Checkbox checked={limit} setChecked={setLimit}>
-            Current year only
-        </ComponentControlPanel.Checkbox>
-        <ComponentControlPanel.Checkbox checked={reversedPick} setChecked={setReversedPick}>
-            ReversedPick
-        </ComponentControlPanel.Checkbox>
-        <ComponentControlPanel.Checkbox checked={error} setChecked={setError}>
-            Error
-        </ComponentControlPanel.Checkbox>
-        <ComponentControlPanel.Checkbox checked={disabled} setChecked={setDisabled}>
-            Disabled
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
+<Field alignLabel>
+    <Col size={2}>
+        <Label>
+            <Label.Text id="month-year-picker-label">Дата</Label.Text>
+        </Label>
+    </Col>
+    <Col size={10}>
+        <MonthYearPicker
+            value={value}
+            onChange={setValue}
+            aria-label="Выберите дату"
+            aria-labelledby="month-year-picker-label"
+        />
+    </Col>
+</Field>
+```
+
+### Disabled state
+
+```jsx
+import {Field} from '@sberbusiness/triplex/components/Field/Field';
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
+import {Label} from '@sberbusiness/triplex/components/Label/Label';
+
+const [value, setValue] = React.useState('');
+
+<Field alignLabel>
+    <Col size={2}>
+        <Label>
+            <Label.Text id="month-year-picker-disabled-label">Дата</Label.Text>
+        </Label>
+    </Col>
+    <Col size={10}>
+        <MonthYearPicker
+            value={value}
+            onChange={setValue}
+            aria-label="Выберите дату"
+            aria-labelledby="month-year-picker-disabled-label"
+            disabled
+        />
+    </Col>
+</Field>
+```
+
+### Error state
+
+```jsx
+import {Field} from '@sberbusiness/triplex/components/Field/Field';
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
+import {Label} from '@sberbusiness/triplex/components/Label/Label';
+import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
+import {AlertContext} from '@sberbusiness/triplex/components/Alert/AlertContext/AlertContext';
+import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
+
+const [value, setValue] = React.useState('');
+
+<Field alignLabel>
+    <Col size={2}>
+        <Label>
+            <Label.Text id="month-year-picker-error-label">Дата</Label.Text>
+        </Label>
+    </Col>
+    <Col size={10}>
+        <MonthYearPicker
+            value={value}
+            onChange={setValue}
+            aria-label="Выберите дату"
+            aria-labelledby="month-year-picker-error-label"
+            aria-invalid={true}
+            aria-errormessage="month-year-picker-error-message"
+            error
+        />
+        <Gap size={8} />
+        <AlertContext id="month-year-picker-error-message" type={EAlertType.ERROR}>
+            Описание ошибки
+        </AlertContext>
+    </Col>
+</Field>
+```
+
+### Reversed pick
+
+```jsx
+import {Field} from '@sberbusiness/triplex/components/Field/Field';
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
+import {Label} from '@sberbusiness/triplex/components/Label/Label';
+
+const [value, setValue] = React.useState('');
+
+<Field alignLabel>
+    <Col size={2}>
+        <Label>
+            <Label.Text id="month-year-picker-reversed-label">Дата</Label.Text>
+        </Label>
+    </Col>
+    <Col size={10}>
+        <MonthYearPicker
+            value={value}
+            onChange={setValue}
+            aria-label="Выберите дату"
+            aria-labelledby="month-year-picker-reversed-label"
+            reversedPick
+        />
+    </Col>
+</Field>
+```
+
+### With limit range (current year only)
+
+```jsx
+import moment from 'moment';
+import {Field} from '@sberbusiness/triplex/components/Field/Field';
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
+import {Label} from '@sberbusiness/triplex/components/Label/Label';
+
+const [value, setValue] = React.useState('');
 
 const limitRange = {dateFrom: moment().startOf('year'), dateTo: moment().endOf('year')};
 
-<>
-    {renderControlPanel()}
-    <MonthYearPicker
-        value={value}
-        onChange={setValue}
-        alignment={alignment}
-        limitRange={limit ? limitRange : undefined}
-        reversedPick={reversedPick}
-        error={error}
-        disabled={disabled}
-        data-id="month-year-picker"
-    />
-</>
+<Field alignLabel>
+    <Col size={2}>
+        <Label>
+            <Label.Text id="month-year-picker-limit-label">Дата</Label.Text>
+        </Label>
+    </Col>
+    <Col size={10}>
+        <MonthYearPicker
+            value={value}
+            onChange={setValue}
+            limitRange={limitRange}
+            aria-label="Выберите дату"
+            aria-labelledby="month-year-picker-limit-label"
+        />
+    </Col>
+</Field>
 ```

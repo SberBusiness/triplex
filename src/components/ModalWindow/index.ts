@@ -1,19 +1,17 @@
+import {ModalWindow} from '@sberbusiness/triplex/components/ModalWindow/ModalWindow';
 import {ModalWindowBody} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowBody';
 import {ModalWindowClose} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowClose';
 import {ModalWindowContent} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowContent';
 import {ModalWindowFooter} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowFooter';
 import {ModalWindowHeader} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowHeader';
-import {ModalWindowBasicLG} from '@sberbusiness/triplex/components/ModalWindow/ModalWindowBasicLG';
-import {ModalWindowBasicMD} from '@sberbusiness/triplex/components/ModalWindow/ModalWindowBasicMD';
-import {ModalWindowBasicSM} from '@sberbusiness/triplex/components/ModalWindow/ModalWindowBasicSM';
+import {modalWindowViewManagerNodeId} from '@sberbusiness/triplex/components/ModalWindow/components/ModalWindowViewManager';
 
 export {
-    ModalWindowBasicSM,
-    ModalWindowBasicMD,
-    ModalWindowBasicLG,
+    ModalWindow,
     ModalWindowContent,
     ModalWindowHeader,
     ModalWindowBody,
     ModalWindowFooter,
     ModalWindowClose,
+    modalWindowViewManagerNodeId,
 };

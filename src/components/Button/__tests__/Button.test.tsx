@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {shallow} from 'enzyme';
-import {allure} from '@jest/unit/allure-report';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
@@ -35,7 +34,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onClick={handleClick} />);
 
         button.simulate('click');
-        expect(handleClick).toBeCalled();
+        expect(handleClick).toHaveBeenCalled();
     });
 
     it('triggers mouseOver event', () => {
@@ -43,7 +42,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onMouseOver={handleMouseOver} />);
 
         button.simulate('mouseOver');
-        expect(handleMouseOver).toBeCalled();
+        expect(handleMouseOver).toHaveBeenCalled();
     });
 
     it('triggers mouseOut event', () => {
@@ -51,7 +50,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onMouseOut={handleMouseOut} />);
 
         button.simulate('mouseOut');
-        expect(handleMouseOut).toBeCalled();
+        expect(handleMouseOut).toHaveBeenCalled();
     });
 
     it('triggers mouseDown event', () => {
@@ -59,7 +58,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onMouseDown={handleMouseDown} />);
 
         button.simulate('mouseDown');
-        expect(handleMouseDown).toBeCalled();
+        expect(handleMouseDown).toHaveBeenCalled();
     });
 
     it('triggers mouseUp event', () => {
@@ -67,7 +66,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onMouseUp={handleMouseUp} />);
 
         button.simulate('mouseUp');
-        expect(handleMouseUp).toBeCalled();
+        expect(handleMouseUp).toHaveBeenCalled();
     });
 
     it('triggers keyDown event', () => {
@@ -75,7 +74,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onKeyDown={handleKeyDown} />);
 
         button.simulate('keyDown');
-        expect(handleKeyDown).toBeCalled();
+        expect(handleKeyDown).toHaveBeenCalled();
     });
 
     it('triggers keyUp event', () => {
@@ -83,7 +82,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onKeyUp={handleKeyUp} />);
 
         button.simulate('keyUp');
-        expect(handleKeyUp).toBeCalled();
+        expect(handleKeyUp).toHaveBeenCalled();
     });
 
     it('triggers focus event', () => {
@@ -91,7 +90,7 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onFocus={handleFocus} />);
 
         button.simulate('focus');
-        expect(handleFocus).toBeCalled();
+        expect(handleFocus).toHaveBeenCalled();
     });
 
     it('triggers blur event', () => {
@@ -99,6 +98,6 @@ describe('Button', () => {
         const button = shallow(<Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} onBlur={handleBlur} />);
 
         button.simulate('blur');
-        expect(handleBlur).toBeCalled();
+        expect(handleBlur).toHaveBeenCalled();
     });
 });

@@ -6,13 +6,13 @@ import {mapAlertTypeToClassName, renderDefaultIcon} from '@sberbusiness/triplex/
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {ClosenotificationSrvxIcon16} from '@sberbusiness/icons/ClosenotificationSrvxIcon16';
 
-/** @deprecated Устаревший интерфейс компонента AlertProcess. */
+/** @deprecated Устаревшие свойства компонента AlertProcess. */
 export interface IDeprecatedAlertProcessProps extends Omit<IAlertProcessProps, 'type'> {
     /** Текст внутри компонента. */
     text: React.ReactNode;
 }
 
-/** Интерфейс общих свойств компонента AlertProcess. */
+/** Свойства компонента AlertProcess. */
 export interface IAlertProcessProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Тип предупреждения. */
     type: Exclude<EAlertType, EAlertType.SYSTEM>;
@@ -53,7 +53,7 @@ export const AlertProcess: React.FC<IAlertProcessProps> & IAlertProcessCompositi
     const handleClose = () => setIsOpen(false);
 
     const render = () => (
-        <div className={classnames('cssClass[alertProcess]', mapAlertTypeToClassName(type), className)} {...rest}>
+        <div className={classnames('cssClass[alertProcess]', mapAlertTypeToClassName(type), className)} {...rest} data-tinfo="11.0.0">
             <div className="cssClass[themeIcon]">{renderIcon ? renderIcon() : renderDefaultIcon(type)}</div>
             <div className="cssClass[alertProcessContentBlock]">
                 {renderHeader?.()}

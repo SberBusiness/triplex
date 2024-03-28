@@ -1,8 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {shallow} from 'enzyme';
-import {SmallInput} from '../SmallInput';
-import {allure} from '@jest/unit/allure-report';
+import {SmallInput} from '@sberbusiness/triplex/components/SmallInput/SmallInput';
 
 describe('SmallInput', () => {
     beforeEach(() => {
@@ -24,6 +23,6 @@ describe('SmallInput', () => {
         const component = shallow(<SmallInput onChange={handleChange} value={'default-value'} />);
         component.simulate('change', event);
 
-        expect(handleChange).toBeCalledWith({currentTarget: {value: 'some-value'}});
+        expect(handleChange).toHaveBeenCalledWith({currentTarget: {value: 'some-value'}});
     });
 });

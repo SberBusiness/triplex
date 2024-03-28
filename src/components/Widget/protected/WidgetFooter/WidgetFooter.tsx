@@ -1,8 +1,9 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {WidgetFooterContent} from './WidgetFooterContent';
 import {WidgetFooterControls} from './WidgetFooterControls';
 
+/** Свойства компонента WidgetFooter. */
 interface IWidgetFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export type TWidgetFooter = React.FC<IWidgetFooterProps> & {

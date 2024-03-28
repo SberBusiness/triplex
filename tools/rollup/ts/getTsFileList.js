@@ -1,3 +1,4 @@
+/* eslint-env node */
 const forEachFolder = require('../../utils/forEachFolder');
 
 const typescriptRegEx = /.*\.tsx?$/;

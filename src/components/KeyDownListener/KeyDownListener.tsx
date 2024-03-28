@@ -4,16 +4,13 @@ import React from 'react';
 type keyCode = typeof EVENT_KEY_CODES[keyof typeof EVENT_KEY_CODES];
 
 export interface IKeyDownListenerProps {
+    children?: React.ReactNode;
     eventKeyCode: keyCode | keyCode[];
-    /**
-     * Обработчик нажатия клавиши.
-     */
+    /** Обработчик совпадения нужной клавиши. */
     onMatch: (event: KeyboardEvent) => void;
 }
 
-/**
- * Слушатель нажатия клавиш. При совпадении нужной клавиши вызывает onMatch.
- */
+/** Слушатель нажатия клавиш. При совпадении нужной клавиши вызывает onMatch. */
 export class KeyDownListener extends React.Component<IKeyDownListenerProps> {
     public componentDidMount(): void {
         window.addEventListener('keydown', this.handleKeyDown);
@@ -23,11 +20,7 @@ export class KeyDownListener extends React.Component<IKeyDownListenerProps> {
         window.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    /**
-     * Обработчик для нажатия клавиш.
-     *
-     * @param {KeyboardEvent} event Событие нажатия клавиши.
-     */
+    /** Обработчик для нажатия клавиш. */
     public handleKeyDown = (event: KeyboardEvent): void => {
         const {eventKeyCode, onMatch} = this.props;
 

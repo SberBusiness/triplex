@@ -24,7 +24,7 @@ exports[`Select should render correctly 1`] = `
       Первый
     </div>
     <svg
-      className="cssClass[caretIcon] hoverable"
+      className="cssClass[caretIcon]"
     />
   </div>
 </div>

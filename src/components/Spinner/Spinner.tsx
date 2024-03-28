@@ -1,19 +1,16 @@
+import React from 'react';
 import {SpinnerlargeAniIcon64} from '@sberbusiness/icons/SpinnerlargeAniIcon64';
 import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
-import React from 'react';
 import {ESpinnerSize} from '@sberbusiness/triplex/components/Spinner/enum';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента Spinner. */
 export interface ISpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Размер спиннера. */
     size?: ESpinnerSize;
 }
 
-/**
- * Спиннер.
- *
- * @param {ISpinnerProps} props Параметры спиннера.
- */
+/** Спиннер. */
 export const Spinner: React.FC<ISpinnerProps> = ({children, className, size = ESpinnerSize.MD, ...htmlDivAttributes}) => {
     const isSM = size === ESpinnerSize.SM;
 

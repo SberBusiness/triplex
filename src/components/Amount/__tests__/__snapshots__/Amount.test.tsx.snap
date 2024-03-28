@@ -7,7 +7,7 @@ exports[`Amount renders correctly 1`] = `
   <span
     data-test-id="amount__amount"
   >
-    -8 964 152,37
+    −8 964 152,37
   </span>
    
   <span

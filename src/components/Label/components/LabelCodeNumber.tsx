@@ -1,13 +1,9 @@
 import React from 'react';
 
-/**
- * Свойства компонента LabelCodeNumber.
- */
+/** Свойства компонента LabelCodeNumber. */
 interface ILabelCodeNumberProps {
-    children: React.ReactText;
+    children?: React.ReactNode;
 }
 
-/**
- * Компонент LabelCodeNumber. Код-номер лейбла.
- */
+/** Код-номер лейбла. */
 export const LabelCodeNumber: React.FC<ILabelCodeNumberProps> = ({children}) => <span className="cssClass[codeNumber]">{children}</span>;

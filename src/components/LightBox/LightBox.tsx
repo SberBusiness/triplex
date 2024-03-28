@@ -8,31 +8,31 @@ import {addClassNameWithScrollbarWidth} from '@sberbusiness/triplex/utils/scroll
 import {LightBoxTopOverlay} from './LightBoxTopOverlay/LightBoxTopOverlay';
 import {LightBoxViewManager} from './LightBoxViewManager/LightBoxViewManager';
 import {isOnlyIE} from '../../utils/userAgentUtils';
-import {ModalFocusOnMount} from '@sberbusiness/triplex/components/ModalFocusManager/ModalFocusOnMount';
+import FocusTrap from 'focus-trap-react';
+import {FocusTrapUtils} from '@sberbusiness/triplex/utils/focus/FocusTrapUtils';
 
-/**
- * Id DOM элемента, в который рендерится Лайтбокс.
- * При отсутствия элемента в DOM - создается в body.
- */
+// Идентификатор DOM-элемента, в который рендерится лайтбокс. При отсутствии элемента в DOM – создается в body.
 export const lightBoxMountNodeIdDefault = 'LightBox-mount-node';
-/**
- * Id DOM элемента, в визуальных границах(левая и правая координата) которого рендерится LightBox.
- */
+
+// Идентификатор DOM-элемента, в визуальных границах (левая и правая координата) которого рендерится лайтбокс.
 export const lightBoxViewManagerNodeIdDefault = 'LightBox-view-manager-node';
 
-/**
- * Свойства компонента LightBox.
- *
- */
+/** Свойства компонента LightBox. */
 export interface ILightBoxProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactElement[];
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
     /** Ref на контейнер LightBox. */
-    forwardRef?: React.RefObject<HTMLDivElement>;
+    forwardRef?: React.MutableRefObject<HTMLElement | null>;
+    /** DOM-нода в которую будет рендерится лайтбокс. */
     mountNode?: HTMLDivElement;
-    // Id DOM элемента, в визуальных границах(левая и правая координата) которого рендерится LightBox.
+    /** Идентификатор DOM-элемента, в визуальных границах (левая и правая координата) которого рендерится лайтбокс. */
     lightBoxViewManagerNodeId?: string;
+    /** Флаг состояния загрузки. */
     isLoading?: boolean;
+    /** Флаг открытия боковой панели. */
     isSideOverlayOpened?: boolean;
+    /** Флаг открытия верхней панели. */
     isTopOverlayOpened?: boolean;
 }
 
@@ -41,9 +41,7 @@ if (isOnlyIE) {
     bodyClassNamesIsLightBoxOpen.push('cssClass[LightBoxIE]');
 }
 
-/**
- * Компонент лайтбокс.
- */
+/** Лайтбокс. */
 export class LightBox extends React.Component<ILightBoxProps> {
     public static displayName = 'LightBox';
 
@@ -68,6 +66,8 @@ export class LightBox extends React.Component<ILightBoxProps> {
      * Левая и правая граница LightBox будут соответствовать левой и правой границе lightBoxViewManagerNode.
      */
     private lightBoxViewManagerNode: HTMLDivElement | null = null;
+
+    private containerRef: HTMLDivElement | null = null;
 
     constructor(props: ILightBoxProps) {
         super(props);
@@ -107,6 +107,7 @@ export class LightBox extends React.Component<ILightBoxProps> {
         const {
             children,
             className,
+            focusTrapProps,
             forwardRef,
             isLoading,
             isSideOverlayOpened,
@@ -129,13 +130,21 @@ export class LightBox extends React.Component<ILightBoxProps> {
         return (
             <>
                 <Portal container={this.lightBoxMountNode}>
-                    <ModalFocusOnMount disabled={isTopOverlayOpened || isSideOverlayOpened}>
-                        <div className={classNameLightBox} ref={forwardRef} role="dialog" aria-modal="true" {...htmlDivAttributes}>
+                    <FocusTrap
+                        {...focusTrapProps}
+                        focusTrapOptions={{
+                            clickOutsideDeactivates: true,
+                            preventScroll: true,
+                            initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(this.containerRef),
+                            ...focusTrapProps?.focusTrapOptions,
+                        }}
+                    >
+                        <div className={classNameLightBox} ref={this.setRef} role="dialog" aria-modal="true" {...htmlDivAttributes}>
                             <div className="cssClass[lightBoxBackdrop]" />
                             {children}
                             <span ref={this.tempButtonRef} className="cssClass[tempElSafariBug]" />
                         </div>
-                    </ModalFocusOnMount>
+                    </FocusTrap>
                 </Portal>
 
                 {this.lightBoxViewManagerNode && (
@@ -147,6 +156,16 @@ export class LightBox extends React.Component<ILightBoxProps> {
             </>
         );
     }
+
+    /** Функция для хранения ссылки. */
+    private setRef = (instance: HTMLDivElement | null) => {
+        const {forwardRef} = this.props;
+        this.containerRef = instance;
+
+        if (forwardRef) {
+            forwardRef.current = instance;
+        }
+    };
 
     private addClassNamesToDocumentElement = () => {
         bodyClassNamesIsLightBoxOpen.forEach((className) => document.documentElement.classList.add(className));

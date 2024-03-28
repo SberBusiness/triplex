@@ -4,14 +4,14 @@ import {MonthYearInput} from '@sberbusiness/triplex/components/MonthYearPicker/c
 import {inputMonthYearFormat} from '@sberbusiness/triplex/components/MonthYearPicker/const';
 import {Calendar} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {ICalendarNestedProps} from '@sberbusiness/triplex/components/Calendar/types';
-import {EPickType} from '@sberbusiness/triplex/components/Calendar/enums';
+import {ECalendarPickType} from '@sberbusiness/triplex/components/Calendar/enums';
 import {Dropdown, EDropdownAlignment} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
 import {dateFormatYYYYMMDD, globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
 import {getFormattedDate} from '@sberbusiness/triplex/utils/dateUtils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства MonthYearPicker. */
+/** Свойства компонента MonthYearPicker. */
 export interface IMonthYearPickerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'onBlur'>, ICalendarNestedProps {
     /** Значение даты текстом. */
     value: string;
@@ -37,7 +37,7 @@ export interface IMonthYearPickerProps extends Omit<React.HTMLAttributes<HTMLDiv
     children?: never;
 }
 
-/** Состояния MonthYearPicker. */
+/** Состояния компонента MonthYearPicker. */
 interface IMonthYearPickerState {
     /** Value для компонента Calendar. */
     calendarValue: Moment;
@@ -51,12 +51,7 @@ interface IMonthYearPickerState {
     limitRange: IDateLimitRange;
 }
 
-/**
- * Проверяет дату на лимиты.
- *
- * @prop {Moment} date Дата для проверки.
- * @prop {IDateLimitRange} limitRange Диапазон даты начала и конца периода ограничения.
- */
+/** Проверяет дату на лимиты. */
 function checkOutOfRange(date: Moment, limitRange: IDateLimitRange): boolean {
     return date.isBefore(limitRange.dateFrom) || date.isAfter(limitRange.dateTo);
 }
@@ -171,7 +166,7 @@ export class MonthYearPicker extends React.PureComponent<IMonthYearPickerProps, 
                         limitRange={limitRange}
                         onChangeDate={this.handleValueChangeFromCalendar}
                         onBlur={this.handleBlur}
-                        pickType={EPickType.monthYearPick}
+                        pickType={ECalendarPickType.monthYearPick}
                         reversedPick={reversedPick}
                         dayHtmlAttributes={dayHtmlAttributes}
                         monthHtmlAttributes={monthHtmlAttributes}

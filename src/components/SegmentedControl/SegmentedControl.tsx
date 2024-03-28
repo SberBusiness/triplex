@@ -9,17 +9,13 @@ import {
     TSegmentedControlSingleValue,
 } from './types';
 
-/**
- * Тип SegmentedControl, определяет возможность множественного выбора.
- */
+// Тип SegmentedControl, определяет возможность множественного выбора.
 export enum ESegmentedControlType {
     MULTIPLE,
     SINGLE,
 }
 
-/**
- * Тема SegmentedControl, определяет визуальный стиль.
- */
+// Тема SegmentedControl, определяет визуальный стиль.
 export enum ESegmentedControlTheme {
     GENERAL,
     SECONDARY,
@@ -33,35 +29,27 @@ export const SegmentedControlContext = React.createContext<ISegmentedControlCont
     value: '',
 });
 
-/**
- * Общие свойства для SegmentedControl type MULTIPLE и SegmentedControl type SINGLE.
- */
+/** Общие свойства компонента SegmentedControl. */
 export interface ISegmentedControlCommonProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
     disabled?: boolean;
     theme?: ESegmentedControlTheme;
 }
 
-/**
- * Свойства SegmentedControl type MULTIPLE.
- */
+/** Свойства компонента SegmentedControl типа MULTIPLE. */
 export interface ISegmentedControlMultipleProps extends ISegmentedControlCommonProps {
     onSelect: TSegmentedControlMultipleOnSelect;
     type: ESegmentedControlType.MULTIPLE;
     value: TSegmentedControlMultipleValue;
 }
 
-/**
- * Свойства SegmentedControl type SINGLE.
- */
+/** Свойства компонента SegmentedControl типа SINGLE. */
 export interface ISegmentedControlSingleProps extends ISegmentedControlCommonProps {
     onSelect: TSegmentedControlSingleOnSelect;
     type: ESegmentedControlType.SINGLE;
     value: TSegmentedControlSingleValue;
 }
 
-/**
- * Компонент SegmentedControl. Дает возможность выбора одного или нескольких элементов.
- */
+/** Компонент SegmentedControl. Дает возможность выбора одного или нескольких элементов. */
 export const SegmentedControl: React.FC<ISegmentedControlSingleProps | ISegmentedControlMultipleProps> & {
     Segment: React.FC<ISegmentedControlSegmentProps>;
 } = ({children, className, disabled, onSelect, theme = ESegmentedControlTheme.GENERAL, type, value, ...divHTMLAttributes}) => {

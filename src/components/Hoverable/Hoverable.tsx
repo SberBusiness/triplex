@@ -1,22 +1,20 @@
-import {isReactElement} from '@sberbusiness/triplex/utils/reactChild';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {isReactElement} from '@sberbusiness/triplex/utils/reactChild';
 
-/**
- *  @prop {React.ReactElement | THoverableFunc} children Элемент на который должно навешиваться событие ховера.
- *  @prop {(isHovered: boolean) => void} onHoverToggle Коллбэк, вызываемый при смене состояния ховера.
- *  @prop {HTMLElement} [additionalTarget] Второй элемент на который должно навешиваться событие ховера.
- */
+/** Свойства компонента Hoverable. */
 export interface IHoverableProps {
+    /** Элемент на который должно навешиваться событие ховера. */
     children: React.ReactElement | THoverableFunc;
+    /** Коллбэк, вызываемый при смене состояния ховера. */
     onHoverToggle?: (isHovered: boolean) => void;
+    /** Второй элемент на который должно навешиваться событие ховера. */
     additionalTarget?: HTMLElement;
 }
 
-/**
- * @prop {boolean} isHovered Признак того что элементы в состоянии ховера.
- */
+/** Состояния компонента Hoverable. */
 interface IHoverableState {
+    /** Признак того что элементы в состоянии ховера. */
     isHovered: boolean;
 }
 
@@ -24,9 +22,7 @@ type THoverableFunc = ({isHovered}: IHoverableState) => React.ReactElement;
 
 const DEFAULT_CLOSE_TIMER_LENGTH = 500;
 
-/**
- * Обертка для реализации ховера.
- */
+/** Обертка для реализации ховера. */
 export class Hoverable extends React.Component<IHoverableProps, IHoverableState> {
     public timeout: any;
     public target: Element | null | Text = null;
@@ -37,6 +33,8 @@ export class Hoverable extends React.Component<IHoverableProps, IHoverableState>
 
     public render() {
         const {isHovered} = this.state;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         if (isReactElement(this.props.children)) {
             return React.cloneElement(this.props.children, {isHovered});
         } else {

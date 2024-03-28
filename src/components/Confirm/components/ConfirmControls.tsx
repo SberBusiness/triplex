@@ -1,6 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента ConfirmControls. */
 export interface IConfirmControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const ConfirmControls: React.FC<IConfirmControlsProps> = ({children, className, ...htmlDivAttributes}) => (

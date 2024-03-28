@@ -1,40 +1,54 @@
 @import 'src/styles/style';
 
 .button.dots {
-    background-color: @color-snowy;
-    border-color: @color-asphalt-03;
-    color: @color-graphite-01;
+    background: var(--triplex-Button-Dots_Background_Default);
+    box-shadow: var(--triplex-Button-Dots_Shadow_Default);
+
+    .dotsIcon path {
+        fill: var(--triplex-Button-Dots_Color_Default);
+    }
 
     &.MD {
-        .size-MD(@ufs-theme-button-border-width-secondary, @ufs-theme-button-height-md, @ufs-theme-button-padding-horizontal-dots-md);
+        .size-MD(@ufs-theme-button-height-md, @ufs-theme-button-padding-horizontal-dots-md);
     }
 
     &.SM {
-        .size-SM(@ufs-theme-button-border-width-secondary, @ufs-theme-button-height-sm, @ufs-theme-button-padding-horizontal-dots-sm);
+        .size-SM(@ufs-theme-button-height-sm, @ufs-theme-button-padding-horizontal-dots-sm);
+    }
+
+    &.LG {
+        .size-LG(@ufs-theme-button-height-lg, @ufs-theme-button-padding-horizontal-dots-lg);
     }
 
     &:hover {
-        border-color: @color-graphite-01;
+        background: var(--triplex-Button-Dots_Background_Hover);
+        box-shadow: var(--triplex-Button-Dots_Shadow_Hover);
+
+        .dotsIcon path {
+            fill: var(--triplex-Button-Dots_Color_Hover);
+        }
     }
 
     &.expanded,
     &:active {
-        background-color: @color-asphalt-03;
-    }
+        background: var(--triplex-Button-Dots_Background_Active);
+        box-shadow: var(--triplex-Button-Dots_Shadow_Active);
 
-    &.expanded:not([data-focus-visible]):enabled,
-    &:not([data-focus-visible]):enabled:active {
-        background-clip: border-box;
-        border-color: transparent;
+        .dotsIcon path {
+            fill: var(--triplex-Button-Dots_Color_Active);
+        }
     }
 
     &:disabled {
-        background-color: @color-snowy;
-        border-color: @color-asphalt-03;
-        color: @color-asphalt-03;
+        background: var(--triplex-Button-Dots_Background_Disabled);
+        box-shadow: var(--triplex-Button-Dots_Shadow_Disabled);
 
         .dotsIcon path {
-            fill: @color-asphalt-03;
+            fill: var(--triplex-Button-Dots_Color_Disabled);
         }
+    }
+
+    &[data-focus-visible]:focus {
+        box-shadow: var(--triplex-Button-Dots_Shadow_Focus);
     }
 }

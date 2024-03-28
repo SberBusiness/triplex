@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
+import isEqual from 'lodash.isequal';
 import {scrollSmoothHorizontally} from '@sberbusiness/triplex/utils/scroll';
 
 export interface ICarouselExtendedButtonProvideProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-/** Свойства CarouselExtended. */
+/** Свойства компонента CarouselExtended. */
 export interface ICarouselExtendedProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Рендер-функция кнопки "Назад". */
     buttonPrev: (props: ICarouselExtendedButtonProvideProps) => React.ReactNode;
@@ -18,40 +19,24 @@ export interface ICarouselExtendedProps extends React.HTMLAttributes<HTMLDivElem
 /** Карусель. */
 export const CarouselExtended = React.forwardRef<HTMLDivElement, ICarouselExtendedProps>(
     ({children, buttonPrev, buttonNext, stepPrev, stepNext, ...htmlDivAttributes}, ref) => {
-        const [controlsHidden, setControlsHidden] = useState(false);
-        const [buttonPrevDisabled, setButtonPrevDisabled] = useState(false);
-        const [buttonNextDisabled, setButtonNextDisabled] = useState(true);
+        const [controlsState, setControlsState] = useState({prevDisabled: true, nextDisabled: false, hidden: true});
         const carouselRef = useRef<HTMLDivElement | null>(null);
 
         /** Функция, контролирующая состояние кнопок. */
         const checkControls = useCallback((): void => {
-            const {current: carousel} = carouselRef;
+            const carousel = carouselRef.current!;
+            const newState = {
+                prevDisabled: Math.round(carousel.scrollLeft) <= 0,
+                nextDisabled: Math.round(carousel.scrollLeft) + carousel.offsetWidth >= carousel.scrollWidth,
+                hidden: carousel.scrollWidth == carousel.clientWidth,
+            };
 
-            if (carousel) {
-                if (carousel.scrollWidth === carousel.clientWidth) {
-                    !controlsHidden && setControlsHidden(true);
-                } else {
-                    controlsHidden && setControlsHidden(false);
-
-                    if (carousel.scrollLeft == 0) {
-                        !buttonPrevDisabled && setButtonPrevDisabled(true);
-                    } else {
-                        buttonPrevDisabled && setButtonPrevDisabled(false);
-                    }
-
-                    // Округление необходимо, т.к. число может быть с плавающей точкой.
-                    if (Math.round(carousel.scrollLeft) + carousel.offsetWidth == carousel.scrollWidth) {
-                        !buttonNextDisabled && setButtonNextDisabled(true);
-                    } else {
-                        buttonNextDisabled && setButtonNextDisabled(false);
-                    }
-                }
+            if (isEqual(newState, controlsState) == false) {
+                setControlsState(newState);
             }
-        }, [controlsHidden, buttonPrevDisabled, buttonNextDisabled]);
+        }, [controlsState]);
 
         useEffect(() => {
-            checkControls();
-
             window.addEventListener('resize', checkControls);
             document.addEventListener('scroll', checkControls);
 
@@ -61,22 +46,18 @@ export const CarouselExtended = React.forwardRef<HTMLDivElement, ICarouselExtend
             };
         }, [checkControls]);
 
+        useEffect(() => {
+            checkControls();
+        }, [children, checkControls]);
+
         /** Обработчик клика по кнопке "Назад". */
         const handleMovePrev = (): void => {
-            const {current: carousel} = carouselRef;
-
-            if (carousel) {
-                scrollSmoothHorizontally(carousel, Math.floor(-stepPrev));
-            }
+            scrollSmoothHorizontally(carouselRef.current!, Math.floor(-stepPrev));
         };
 
         /** Обработчик клика по кнопке "Вперёд". */
         const handleMoveNext = (): void => {
-            const {current: carousel} = carouselRef;
-
-            if (carousel) {
-                scrollSmoothHorizontally(carousel, Math.ceil(stepNext));
-            }
+            scrollSmoothHorizontally(carouselRef.current!, Math.ceil(stepNext));
         };
 
         /** Функция для хранения ссылки. */
@@ -91,11 +72,11 @@ export const CarouselExtended = React.forwardRef<HTMLDivElement, ICarouselExtend
 
         return (
             <div {...htmlDivAttributes}>
-                {buttonPrev({onClick: handleMovePrev, disabled: buttonPrevDisabled, hidden: controlsHidden})}
+                {buttonPrev({onClick: handleMovePrev, disabled: controlsState.prevDisabled, hidden: controlsState.hidden})}
                 <div className="cssClass[carouselExtended]" onScroll={checkControls} ref={setRef}>
                     {children}
                 </div>
-                {buttonNext({onClick: handleMoveNext, disabled: buttonNextDisabled, hidden: controlsHidden})}
+                {buttonNext({onClick: handleMoveNext, disabled: controlsState.nextDisabled, hidden: controlsState.hidden})}
             </div>
         );
     }

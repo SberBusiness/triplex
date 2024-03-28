@@ -5,7 +5,7 @@ import {
     IButtonDropdownExtendedDropdownProvideProps,
 } from '@sberbusiness/triplex/components/Button/ButtonDropdownExtended';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
-import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button/enums';
 import {DropdownwhiteSrvxIcon16} from '@sberbusiness/icons/DropdownwhiteSrvxIcon16';
 import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
@@ -19,6 +19,8 @@ import {DropdownMobileBody} from '@sberbusiness/triplex/components/Dropdown/mobi
 import {DropdownMobileList} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileList';
 import {DropdownMobileListItem} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileListItem';
 import {DropdownMobileClose} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileClose';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 /** Свойства опции в выпадающем списке действий. */
 export interface IButtonDropdownOption
@@ -33,6 +35,8 @@ export interface IButtonDropdownOption
 
 /** Свойства кнопки с выпадающим списком действий. */
 interface IButtonDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** HTML-атрибуты кнопки. */
+    buttonAttributes?: React.ButtonHTMLAttributes<HTMLButtonElement>;
     /** Размер кнопки. */
     size: EButtonSize;
     /** Список опций. */
@@ -46,7 +50,7 @@ interface IButtonDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
 /** Свойства основной/вспомогательной кнопки с выпадающим списком действий. */
 interface IButtonDropdownBaseProps extends IButtonDropdownProps {
     /** Тема кнопки. */
-    theme: EButtonTheme.GENERAL | EButtonTheme.SECONDARY | EButtonTheme.DANGER | EButtonTheme.LINK;
+    theme: EButtonTheme.GENERAL | EButtonTheme.SECONDARY | EButtonTheme.DANGER;
     /** Блочное состояние кнопки. */
     block?: boolean;
 }
@@ -61,7 +65,7 @@ interface IButtonDotsProps extends IButtonDropdownProps {
 
 /** Кнопка с выпадающим списком действий. */
 export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdownBaseProps | IButtonDotsProps>((props, ref) => {
-    const {children, className, theme, size, options, selected, block, disabled, ...rest} = props;
+    const {buttonAttributes, children, className, theme, size, options, selected, block, disabled, ...rest} = props;
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const classNames = classnames('cssClass[buttonDropdown]', {'cssClass[block]': !!block}, className);
@@ -82,10 +86,11 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
                 onKeyDown={handleKeyDown({opened, setOpened})}
                 onClick={handleClick({opened, setOpened})}
                 disabled={disabled}
-                aria-haspopup="listbox"
+                aria-haspopup="menu"
                 aria-expanded={opened}
                 aria-controls={instanceId.current}
                 aria-activedescendant={activeDescendant}
+                {...buttonAttributes}
                 ref={setRef}
             >
                 {children}
@@ -94,22 +99,23 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
         );
     };
 
-    const handleClick = ({opened, setOpened}: IButtonDropdownExtendedButtonProvideProps) => () => setOpened(!opened);
+    const handleClick =
+        ({opened, setOpened}: IButtonDropdownExtendedButtonProvideProps) =>
+        () =>
+            setOpened(!opened);
 
-    const handleKeyDown = ({opened, setOpened}: IButtonDropdownExtendedButtonProvideProps) => (
-        event: React.KeyboardEvent<HTMLButtonElement>
-    ) => {
-        const {key} = event;
+    const handleKeyDown =
+        ({opened, setOpened}: IButtonDropdownExtendedButtonProvideProps) =>
+        (event: React.KeyboardEvent<HTMLButtonElement>) => {
+            const {key} = event;
 
-        if (isKey(key, 'SPACE') || isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN')) {
-            event.preventDefault();
-        }
-        if (opened) {
-            isKey(key, 'TAB') && setOpened(false);
-        } else if (isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN')) {
-            setOpened(true);
-        }
-    };
+            if (isKey(key, 'SPACE') || isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN')) {
+                event.preventDefault();
+            }
+            if (!opened && (isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN'))) {
+                setOpened(true);
+            }
+        };
 
     const renderCaret = () => {
         switch (theme) {
@@ -117,7 +123,6 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
             case EButtonTheme.DANGER:
                 return <DropdownwhiteSrvxIcon16 className="cssClass[caretIcon]" />;
             case EButtonTheme.SECONDARY:
-            case EButtonTheme.LINK:
                 return <CaretdownSrvxIcon16 className="cssClass[caretIcon]" />;
         }
     };
@@ -137,7 +142,9 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
                         children: (
                             <>
                                 <DropdownMobileHeader>
-                                    {children}
+                                    <Text size={ETextSize.B1} line={ELineType.EXTRA}>
+                                        {children}
+                                    </Text>
                                     <DropdownMobileClose onClick={() => setOpened(false)} />
                                 </DropdownMobileHeader>
                                 <DropdownMobileBody>
@@ -198,6 +205,7 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
             renderButton={renderButton}
             renderDropdown={renderDropdown}
             dropdownRef={dropdownRef}
+            closeOnTab
             {...rest}
         />
     );

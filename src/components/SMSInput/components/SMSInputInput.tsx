@@ -14,7 +14,7 @@ export const SMSInputInput = React.forwardRef<HTMLInputElement, ISMSInputInputPr
         const {code, disabled: allDisabled, disabledSubmit, error, sizeClassName, onChangeCode, onSubmitCode} = useContext(SMSInputContext);
 
         const inputDisabled = allDisabled || disabled;
-        const inputClassName = classnames('cssClass[input]', sizeClassName, className, {'cssClass[error]': error});
+        const inputClassName = classnames('cssClass[input]', sizeClassName, className);
         const placeholderText = placeholder || (error ? 'Неверный код' : 'Введите код');
 
         /** Обработчик ввода sms-кода. */
@@ -37,16 +37,17 @@ export const SMSInputInput = React.forwardRef<HTMLInputElement, ISMSInputInputPr
 
         return (
             <Input
-                ref={ref}
                 autoComplete="off"
                 className={inputClassName}
                 disabled={inputDisabled}
+                error={error}
                 maxLength={maxLength}
                 placeholder={placeholderText}
                 value={code}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 {...restProps}
+                ref={ref}
             />
         );
     }

@@ -7,16 +7,24 @@
     border: 1px solid #D0D7DD;
     border-radius: 8px;
 
-    &.light-background {
+    &.light-mode.light-background,
+    &.dark-mode.dark-background {
         background: #F2F4F7;
     }
 
-    &.dark-background {
+    &.light-mode.dark-background,
+    &.dark-mode.light-background {
         background: #1F1F22;
     }
 
-    &.semidark-background {
-        background: linear-gradient(to right, #fff 50%, #1F1F22 50%);
+    &.light-mode.white-to-black-background,
+    &.dark-mode.black-to-white-background {
+        background: linear-gradient(to right, #ffffff 50%, #181819 50%);
+    }
+
+    &.light-mode.black-to-white-background,
+    &.dark-mode.white-to-black-background {
+        background: linear-gradient(to left, #ffffff 50%, #181819 50%);
     }
 }
 

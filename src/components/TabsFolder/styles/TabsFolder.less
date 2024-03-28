@@ -2,8 +2,8 @@
 
 .tabsFolder {
     position: relative;
-    background: @color-asphalt-05;
-    box-shadow: inset 0 -1px 0 0 @color-asphalt-03;
+    background: var(--triplex-TabsFolder-Background);
+    box-shadow: var(--triplex-TabsFolder-Shadow);
 
     .inner {
         padding-left: 32px;
@@ -12,7 +12,6 @@
 
     .content {
         padding: 0;
-        background: transparent;
     }
 
     .tab {
@@ -29,24 +28,20 @@
         padding: 7px 15px;
         box-sizing: border-box;
         white-space: nowrap;
-        color: @color-graphite-01;
-        background: @color-asphalt-05;
+        color: var(--triplex-TabsFolder-Tab_Color_Default);
+        background: var(--triplex-TabsFolder-Tab_Background_Default);
         outline: none;
-        border: 1px solid #d0d7dd;
+        border: 1px solid var(--triplex-TabsFolder-Tab_BorderColor);
         border-radius: 8px 8px 0 0;
         cursor: pointer;
 
         &:hover {
-            background: @color-snowy;
+            background: var(--triplex-TabsFolder-Tab_Background_Hover);
         }
 
         &.selected {
-            background: @color-snowy;
-            border-bottom-color: #fff;
-
-            &:hover {
-                background: @color-snowy;
-            }
+            background: var(--triplex-TabsFolder-Tab_Background_Selected);
+            border-bottom-color: var(--triplex-TabsFolder-Tab_Background_Selected);
         }
 
         &:focus {
@@ -54,7 +49,7 @@
         }
 
         &:disabled > span {
-            color: @color-asphalt-03;
+            color: var(--triplex-TabsFolder-Tab_Color_Disabled);
         }
     }
 
@@ -74,24 +69,24 @@
             bottom: 0;
         }
     }
-}
 
-.buttonPrev {
-    left: 0;
-    background-image: linear-gradient(to right, @color-asphalt-05 39.06%, rgba(242, 244, 247, 0));
-
-    &:after {
+    .buttonPrev {
         left: 0;
-        background-image: linear-gradient(to right, @color-asphalt-03 39.06%, rgba(242, 244, 247, 0));
+        background: var(--triplex-TabsFolder-ButtonPrev_Background);
+
+        &:after {
+            left: 0;
+            background: var(--triplex-TabsFolder-ButtonPrev_Background);
+        }
     }
-}
 
-.buttonNext {
-    right: 0;
-    background-image: linear-gradient(to left, @color-asphalt-05 39.06%, rgba(242, 244, 247, 0));
-
-    &:after {
+    .buttonNext {
         right: 0;
-        background-image: linear-gradient(to left, @color-asphalt-03 39.06%, rgba(242, 244, 247, 0));
+        background: var(--triplex-TabsFolder-ButtonNext_Background);
+
+        &:after {
+            right: 0;
+            background: var(--triplex-TabsFolder-ButtonNext_Background);
+        }
     }
 }

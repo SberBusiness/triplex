@@ -3,10 +3,10 @@ import {Notification} from '@sberbusiness/triplex/components/Notification/Notifi
 import {Link, ELinkSize, ELinkType} from '@sberbusiness/triplex/components/Link/Link';
 import {LinkNavIcon16} from '@sberbusiness/icons/LinkNavIcon16';
 
+const handleClick = () => alert('Обработчик клика на нотификацию');
 const closeNotification = () => alert('Обработчик закрытия нотификации');
-const handleNotificationClick = () => alert('Обработчик клика на нотификацию');
 
-const renderLink = () => (
+const renderLink = (children) => (
     <Link
         href="#"
         linkType={ELinkType.TEXT}
@@ -14,16 +14,16 @@ const renderLink = () => (
         contentAfter={() => <LinkNavIcon16 />}
         onClick={(event) => event.preventDefault()}
     >
-        ссылке
+        {children}
     </Link>
 );
 
-<Notification withExtraBottomPadding isShowCloseOnHover onClick={handleNotificationClick}>
+<Notification withExtraBottomPadding isShowCloseOnHover onClick={handleClick}>
     <Notification.Body>
         <Notification.Body.Header>Внимание</Notification.Body.Header>
         <Notification.Body.Content>
-            Вы собираетесь перейти по {renderLink()} Не указывайте свой логин и пароль от интернет-банка на внешнем
-            ресурсе.
+            Вы собираетесь перейти по {renderLink('ссылке')} Не указывайте свой логин и пароль от
+            интернет-банка на внешнем ресурсе.
         </Notification.Body.Content>
     </Notification.Body>
     <Notification.Close onClick={closeNotification} />

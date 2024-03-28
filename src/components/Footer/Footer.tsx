@@ -2,7 +2,12 @@ import React from 'react';
 import {FooterDescription} from '@sberbusiness/triplex/components/Footer/components/FooterDescription';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента Footer. */
 export interface IFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+    /**
+     * Footer прилипает к нижней границе экрана при скролле.
+     * Свойство работает на экранах высотой более 800px и шириной более 1024px.
+     * */
     sticky?: boolean;
 }
 
@@ -17,6 +22,7 @@ export const Footer: IFooterFC = ({children, className, sticky, ...htmlDivAttrib
             'cssClass[sticky]': Boolean(sticky),
         })}
         {...htmlDivAttributes}
+        data-tinfo="9.1.0"
     >
         {children}
     </div>

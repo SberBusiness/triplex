@@ -1,10 +1,11 @@
 import React from 'react';
 
-/**
- * Компонент содержимого элемента аккордеона.
- */
-const AccordionFormItemContent: React.FC = (props) => <div className="cssClass[content]">{props.children}</div>;
+/** Свойства компонента AccordionFormItemContent. */
+export interface IAccordionFormItemContentProps {
+    children?: React.ReactNode;
+}
+
+/** Компонент содержимого элемента аккордеона. */
+export const AccordionFormItemContent: React.FC<IAccordionFormItemContentProps> = ({children}) => <div className="cssClass[content]">{children}</div>;
 
 AccordionFormItemContent.displayName = 'AccordionFormItemContent';
-
-export {AccordionFormItemContent};

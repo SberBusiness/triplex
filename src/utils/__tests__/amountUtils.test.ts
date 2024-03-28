@@ -1,6 +1,5 @@
 import {formatAmount, amountComparator} from '../amountUtils';
 import {AmountConst} from '../../consts/AmountConst';
-import {allure} from '@jest/unit/allure-report';
 
 /** Ожидаемое значение, аргументы для получения этого значения. */
 type TMapper = [string, string, (number | null)?, boolean?, boolean?];

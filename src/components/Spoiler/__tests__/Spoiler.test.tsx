@@ -1,8 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {shallow} from 'enzyme';
-import {Spoiler} from '../Spoiler';
-import {allure} from '@jest/unit/allure-report';
+import {Spoiler} from '@sberbusiness/triplex/components/Spoiler/Spoiler';
 
 jest.mock('@sberbusiness/icons/SpinnersmallAniIcon20', () => ({
     SpinnersmallAniIcon20: 'svg',
@@ -35,28 +34,16 @@ describe('Spoiler', () => {
     it('calls onToggle', () => {
         const handleToggle = jest.fn();
         const spoiler = shallow(<Spoiler labelExpand="Развернуть" onToggle={handleToggle} />);
-        spoiler
-            .childAt(0)
-            .childAt(0)
-            .childAt(0)
-            .simulate('click');
-        expect(handleToggle).toBeCalledTimes(1);
+        spoiler.childAt(0).childAt(0).childAt(0).simulate('click');
+        expect(handleToggle).toHaveBeenCalledTimes(1);
     });
 
     it('changes visibility state', () => {
         const spoiler = shallow(<Spoiler labelExpand="Развернуть" />);
         expect(spoiler.state('isExpanded')).toBeFalsy();
-        spoiler
-            .childAt(0)
-            .childAt(0)
-            .childAt(0)
-            .simulate('click');
+        spoiler.childAt(0).childAt(0).childAt(0).simulate('click');
         expect(spoiler.state('isExpanded')).toBeTruthy();
-        spoiler
-            .childAt(0)
-            .childAt(0)
-            .childAt(0)
-            .simulate('click');
+        spoiler.childAt(0).childAt(0).childAt(0).simulate('click');
         expect(spoiler.state('isExpanded')).toBeFalsy();
     });
 

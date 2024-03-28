@@ -2,15 +2,10 @@ import {isComponentType, isReactElement} from '@sberbusiness/triplex/utils/react
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
 
-/**
- * Свойства компонента SubRow.
- * @prop {React.ReactNode} children Контент, отображаемый в компоненте.
- */
+/** Свойства компонента SubRow. */
 interface ISubRowProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Компонент SubRow. Подстрока с небольшим отступом, принимающая в children только колонки Col.
- */
+/** Компонент SubRow. Подстрока с небольшим отступом, принимающая в children только колонки Col. */
 export class SubRow extends React.Component<ISubRowProps> {
     public static displayName = 'SubRow';
 

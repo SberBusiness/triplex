@@ -3,11 +3,10 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {FormFieldContext} from './FormFieldContext';
 import {INPUT_PADDING_X_DEFAULT} from './consts';
 
+/** Свойства компонента FormField. */
 interface IFormFieldProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Элемент, отображающий input/select/textarea + label.
- */
+/** Элемент, отображающий input/select/textarea + label. */
 export const FormField: React.FC<IFormFieldProps> = ({children, className, onMouseEnter, onMouseLeave, ...htmlDivAttributes}) => {
     const [disabled, setDisabled] = useState(false);
     const [focused, setFocused] = useState(false);

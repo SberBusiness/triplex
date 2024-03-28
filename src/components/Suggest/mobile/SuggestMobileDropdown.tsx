@@ -1,15 +1,15 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {SuggestMobileInput} from '@sberbusiness/triplex/components/Suggest/mobile/SuggestMobileInput';
-import {ISuggestOption} from '@sberbusiness/triplex/components/Suggest/types';
+import React, {useState, useEffect, useRef} from 'react';
+import isEqual from 'lodash.isequal';
+import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
+import {Dropdown} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
+import {DropdownMobileInput} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileInput';
 import {DropdownMobileHeader} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileHeader';
 import {DropdownMobileClose} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileClose';
 import {DropdownMobileBody} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileBody';
 import {DropdownMobileList} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileList';
 import {DropdownMobileListItem} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileListItem';
-import isEqual from 'lodash.isequal';
-import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
-import {Dropdown} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {SuggestMobileDropdownHint} from '@sberbusiness/triplex/components/Suggest/mobile/SuggestMobileDropdownHint';
+import {ISuggestOption} from '@sberbusiness/triplex/components/Suggest/types';
 
 export interface ISuggestMobileDropdown {
     // Флаг для отображения лоадера в инпуте в Dropdown. Показывается, когда не загружен ни один элемент списка.
@@ -17,7 +17,7 @@ export interface ISuggestMobileDropdown {
     // Флаг для отображения лоадера в списке Dropdown. Показывается для подгрузки новых данных.
     loadingDropdownList?: boolean;
     // Обработчик выбора элемента из списка.
-    onSelect: (item: ISuggestOption, e?: Event) => void;
+    onSelect: (item: ISuggestOption | undefined, e?: Event) => void;
     // Обработчик окончания скролла списка (доступные в данный момент элементы закончились). Используется для подгрузки длинных списков.
     onScrollEnd?: () => void;
     // Dropdown открыт.
@@ -85,6 +85,7 @@ export const SuggestMobileDropdown = React.forwardRef<HTMLDivElement, ISuggestMo
 
         const handleClickCloseButton = () => {
             setOpened(false);
+            onSelect(value);
         };
 
         const handleInputFocus = () => {
@@ -106,9 +107,16 @@ export const SuggestMobileDropdown = React.forwardRef<HTMLDivElement, ISuggestMo
             }
         };
 
+        const handleChangeDropdownOpened = (opened: boolean) => {
+            setOpened(opened);
+            if (!opened) {
+                onSelect(value);
+            }
+        };
+
         return (
             <Dropdown
-                setOpened={setOpened}
+                setOpened={handleChangeDropdownOpened}
                 opened={opened}
                 targetRef={targetRef}
                 ref={ref}
@@ -116,7 +124,7 @@ export const SuggestMobileDropdown = React.forwardRef<HTMLDivElement, ISuggestMo
                     children: (
                         <>
                             <DropdownMobileHeader closeButton={() => <DropdownMobileClose onClick={handleClickCloseButton} />}>
-                                <SuggestMobileInput
+                                <DropdownMobileInput
                                     onChange={handleChangeInput}
                                     onFocus={handleInputFocus}
                                     placeholder={placeholder}

@@ -4,23 +4,17 @@ import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
 
-/**
- * Свойства компонента DropdownList.
- *
- * @prop {boolean} dropdownOpened Dropdown открыт.
- * @prop {RefObject} [listRef] Объект для создания ссылки на html-элемент "список".
- */
+/** Свойства компонента DropdownList. */
 export interface IDropdownListProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Dropdown открыт. */
     dropdownOpened: boolean;
+    /** Объект для создания ссылки на html-элемент "список". */
     listRef?: React.RefObject<HTMLDivElement>;
 }
 
-/**
- * Состояние компонента DropdownList.
- *
- * @prop {number} [activeListItemIndex] Индекс текущего выделенного элемента списка при навигации с клавиатуры.
- */
+/** Состояние компонента DropdownList. */
 interface IDropdownListState {
+    /** Индекс текущего выделенного элемента списка при навигации с клавиатуры. */
     activeListItemIndex?: number;
 }
 
@@ -134,6 +128,10 @@ export class DropdownList extends React.Component<IDropdownListProps, IDropdownL
 
         // Нет выбранного значения, контейнер скроллится к первому значению.
         if (!isSelectedItemExist) {
+            // activeListItemIndex - первый элемент списка.
+            this.setState({
+                activeListItemIndex: 0,
+            });
             this.scrollContainerToTop();
         }
     };

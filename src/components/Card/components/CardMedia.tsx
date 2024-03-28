@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства медийного элемента. */
+/** Свойства компонента CardMedia. */
 export interface ICardMediaProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Медийный элемент карточки. */

@@ -4,10 +4,10 @@ import {Text} from '@sberbusiness/triplex/components/Typography/Text';
 import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {ButtonBase} from '../../protected/ButtonBase/ButtonBase';
 
+/** Свойства компонента TabsExtendedTabButton. */
 export interface ITabsExtendedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /** Выбранное состояние. */
     selected?: boolean;
-    children: React.ReactNode;
 }
 
 /**

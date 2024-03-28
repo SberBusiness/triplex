@@ -1,31 +1,25 @@
+import React from 'react';
 import {ReactHeight} from '@sberbusiness/triplex/components/ReactHeight/ReactHeight';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TopOverlayClose} from '@sberbusiness/triplex/components/TopOverlay/components/TopOverlayClose';
 import {TopOverlayContent} from '@sberbusiness/triplex/components/TopOverlay/components/TopOverlayContent';
 import {TopOverlayControls} from '@sberbusiness/triplex/components/TopOverlay/components/TopOverlayControls';
-import React from 'react';
 
-/**
- * Свойства компонента.
- *
- * @prop {boolean} isOpen Статус отображения компонента.
- * @prop {Function} [onClose] Обработчик скрытия компонента.
- * @prop {Function} [onOpen] Обработчик открытия компонента.
- */
+/** Свойства компонента TopOverlay. */
 export interface ITopOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Статус отображения компонента. */
     isOpen: boolean;
+    /** Обработчик скрытия компонента. */
     onClose?: () => void;
+    /** Обработчик открытия компонента. */
     onOpen?: () => void;
 }
 
-/**
- * Состояние компонента.
- *
- * @prop {boolean} isShown Статус отображения компонента. Отличие от props.isOpen в том, что он устанавливается в false после завершения анимации закрытия.
- * @prop {number} overlayHeight Высота компонента.
- */
+/** Состояние компонента TopOverlay. */
 export interface ITopOverlayState {
+    /** Статус отображения компонента. Отличие от props.isOpen в том, что он устанавливается в false после завершения анимации закрытия. */
     isShown: boolean;
+    /** Высота компонента. */
     overlayHeight: number;
 }
 
@@ -34,9 +28,7 @@ const TOP_OVERLAY_INNER_ANIMATION_DURATION = 300;
 // Высота TopOverlay в скрытом состоянии.
 const TOP_OVERLAY_HEIGHT_COLLAPSED = 0;
 
-/**
- * Компонент верхнего предупреждения, о закрытии лайтбокса / боковой панели лайтбокса.
- */
+/** Компонент верхнего предупреждения, о закрытии лайтбокса / боковой панели лайтбокса. */
 export class TopOverlay extends React.Component<ITopOverlayProps, ITopOverlayState> {
     public static displayName = 'TopOverlay';
 
@@ -58,10 +50,7 @@ export class TopOverlay extends React.Component<ITopOverlayProps, ITopOverlaySta
     // Id таймера анимации закрытия.
     public closeAnimationTimeoutTimeoutId: any;
 
-    /**
-     * Установка рефа containerRef.
-     *
-     */
+    /** Установка рефа containerRef. */
     public setContainerRef = (container: HTMLDivElement) => {
         this.containerRef = container;
     };
@@ -83,18 +72,13 @@ export class TopOverlay extends React.Component<ITopOverlayProps, ITopOverlaySta
         }
     }
 
-    /**
-     * Таймаут (на время fadeOut анимации конетнта) перед закрытием TopOverlay.
-     */
+    /** Таймаут (на время fadeOut анимации конетнта) перед закрытием TopOverlay. */
     public closeAnimationTimeout = () =>
         setTimeout(() => {
             this.setState({overlayHeight: TOP_OVERLAY_HEIGHT_COLLAPSED});
         }, TOP_OVERLAY_INNER_ANIMATION_DURATION);
 
-    /**
-     * Обработка завершения анимации открытия/закрытия.
-     *
-     */
+    /** Обработка завершения анимации открытия/закрытия. */
     public handleTransitionEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
         const {target} = event;
         const {isOpen, onClose, onOpen} = this.props;
@@ -115,10 +99,7 @@ export class TopOverlay extends React.Component<ITopOverlayProps, ITopOverlaySta
         }
     };
 
-    /**
-     * Установка высоты оверлея.
-     *
-     */
+    /** Установка высоты оверлея. */
     public setOverlayHeight = (height: number) => {
         const {overlayHeight} = this.state;
 

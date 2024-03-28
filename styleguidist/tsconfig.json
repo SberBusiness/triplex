@@ -3,10 +3,10 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@sberbusiness/triplex/*": ["../src/*"]
+            "@sberbusiness/triplex/*": ["../src/*"],
         }
     },
     "include": [
-        "."
+        ".",
     ]
 }

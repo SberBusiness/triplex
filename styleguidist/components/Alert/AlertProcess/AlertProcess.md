@@ -1,73 +1,26 @@
-```jsx
-import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
-
-<>
-    <AlertProcess type={EAlertType.INFO}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.WARNING}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.ERROR}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.FEATURE}>
-        Текст сообщения
-    </AlertProcess>
-</>
+```jsx {"file": "./examples/AlertProcess_0_default.jsx"}
 ```
 
 ### Closable
 
-```jsx
-import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
-
-const handleClose = () => alert();
-
-<>
-    <AlertProcess type={EAlertType.INFO} onClose={handleClose} closable>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.WARNING} onClose={handleClose} closable>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.ERROR} onClose={handleClose} closable>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.FEATURE} onClose={handleClose} closable>
-        Текст сообщения
-    </AlertProcess>
-</>
+```jsx {"file": "./examples/AlertProcess_1_closable.jsx"}
 ```
 
-### With header
+### Header
 
-```jsx
-import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
+```jsx {"file": "./examples/AlertProcess_2_header.jsx"}
+```
 
-const renderHeader = () => <AlertProcess.Header>Текст заголовка</AlertProcess.Header>;
+### With Button
 
-<>
-    <AlertProcess type={EAlertType.INFO} renderHeader={renderHeader}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.WARNING} renderHeader={renderHeader}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.ERROR} renderHeader={renderHeader}>
-        Текст сообщения
-    </AlertProcess>
-    <br />
-    <AlertProcess type={EAlertType.FEATURE} renderHeader={renderHeader}>
-        Текст сообщения
-    </AlertProcess>
-</>
+```jsx {"file": "./examples/AlertProcess_3_Button.jsx"}
+```
+
+### With Link
+```jsx {"file": "./examples/AlertProcess_4_Link.jsx"}
+```
+
+### With UnorderedList
+
+```jsx {"file": "./examples/AlertProcess_5_UnorderedList.jsx"}   
 ```

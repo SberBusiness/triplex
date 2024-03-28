@@ -14,6 +14,7 @@ import {FormGroup, FormGroupLine} from '@sberbusiness/triplex/components/FormGro
 import {TickStsIcon16} from '@sberbusiness/icons/TickStsIcon16';
 import {HelpBox, IHelpBoxProps} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
 
+/** Свойства TextField. */
 export interface ITextFieldProps extends Pick<IFormFieldInputProps, 'className' | 'disabled' | 'error' | 'onChange' | 'type' | 'value'> {
     /** Описание поля ввода. */
     description: React.ReactNode;
@@ -22,39 +23,45 @@ export interface ITextFieldProps extends Pick<IFormFieldInputProps, 'className' 
     /** Свойства HelpBox. */
     helpBoxProps?: IHelpBoxProps;
     /** Свойства поля ввода. */
-    inputProps: IFormFieldInputProps;
+    inputProps: IFormFieldInputProps & {ref?: React.RefObject<HTMLInputElement>};
     /** Лейбл поля ввода. */
     label?: React.ReactNode;
     /** Отображение зеленой галочки. */
     success?: boolean;
+    /** Поле ввода не будет растягиваться на 100% при остутствии helpBoxProps. */
+    shrink?: boolean;
 }
 
 /** Компонент текстового ввода.
  *  Является более компактным вариантом отображения инпутов, чем FormGroup.
  * */
-export const TextField: React.FC<ITextFieldProps> = ({clearButtonProps, description, inputProps, helpBoxProps, label, success}) => (
-    <FormGroup>
-        <FormGroupLine flex>
-            <FormField>
-                <FormFieldInput {...inputProps} />
+export const TextField: React.FC<ITextFieldProps> = ({clearButtonProps, description, inputProps, helpBoxProps, label, shrink, success}) => {
+    const showSidebar = helpBoxProps || shrink;
 
-                {label ? <FormFieldLabel>{label}</FormFieldLabel> : null}
+    return (
+        <FormGroup>
+            <FormGroupLine flex>
+                <FormField>
+                    <FormFieldInput {...inputProps} />
 
-                <FormFieldPostfix>
-                    {clearButtonProps ? <FormFieldClear {...clearButtonProps} /> : null}
-                    {success ? <TickStsIcon16 /> : null}
-                </FormFieldPostfix>
-            </FormField>
+                    {label ? <FormFieldLabel>{label}</FormFieldLabel> : null}
 
-            <FormFieldSidebar>{helpBoxProps ? <HelpBox {...helpBoxProps} /> : null}</FormFieldSidebar>
-        </FormGroupLine>
+                    <FormFieldPostfix>
+                        {clearButtonProps ? <FormFieldClear {...clearButtonProps} /> : null}
+                        {success ? <TickStsIcon16 /> : null}
+                    </FormFieldPostfix>
+                </FormField>
 
-        {description ? (
-            <FormGroupLine>
-                <FormFieldDescription error={inputProps.error}>{description}</FormFieldDescription>
+                {showSidebar ? <FormFieldSidebar>{helpBoxProps ? <HelpBox {...helpBoxProps} /> : null}</FormFieldSidebar> : null}
             </FormGroupLine>
-        ) : null}
-    </FormGroup>
-);
+
+            {description ? (
+                <FormGroupLine>
+                    <FormFieldDescription error={inputProps.error}>{description}</FormFieldDescription>
+                </FormGroupLine>
+            ) : null}
+        </FormGroup>
+    );
+};
 
 TextField.displayName = 'TextField';

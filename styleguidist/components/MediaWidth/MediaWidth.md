@@ -3,8 +3,6 @@
 Брейкпоинты - https://getbootstrap.com/docs/5.0/layout/breakpoints/.
 
 ```jsx
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
-
 const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
 React.useEffect(() => {
@@ -15,11 +13,9 @@ React.useEffect(() => {
     return () => window.removeEventListener('resize', handleResize);
 });
 
-<ComponentControlPanel>
-    <ComponentControlPanel.Text value={`${windowWidth}px`} readOnly>
-        Текущая ширина экрана:
-    </ComponentControlPanel.Text>
-</ComponentControlPanel>
+<>
+    Текущая ширина экрана: {windowWidth}px
+</>
 ```
 
 #### Контент переключается между мобильной (< 768px) и десктоп (>= 768px) версиями. Реализация на компоненте MediaWidth.

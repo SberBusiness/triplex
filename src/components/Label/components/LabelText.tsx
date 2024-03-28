@@ -1,17 +1,12 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-interface ILabelTextProps extends React.HTMLAttributes<HTMLLabelElement> {
-    /* Текст лейбла */
-    children: string;
-    htmlFor?: string;
-}
+/** Свойства компонента LabelText. */
+interface ILabelTextProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
 
-/**
- * Компонент LabelText. Основной текст лейбла.
- */
-export const LabelText: React.FC<ILabelTextProps> = ({children, className, htmlFor, ...htmlLabelAttributes}) => (
-    <label htmlFor={htmlFor} className={classnames('cssClass[label]', className)} {...htmlLabelAttributes}>
+/** Основной текст лейбла. */
+export const LabelText: React.FC<ILabelTextProps> = ({children, className, ...htmlLabelAttributes}) => (
+    <label className={classnames('cssClass[label]', className)} {...htmlLabelAttributes}>
         {children}
     </label>
 );

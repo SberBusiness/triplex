@@ -1,6 +1,6 @@
+import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TableFilterPanelLinks} from '@sberbusiness/triplex/components/Tables/TableFilterPanel/components/TableFilterPanelLinks';
-import React from 'react';
 
 /** Свойства компонента TableFilterPanel. */
 export interface ITableFilterPanelProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -1,51 +1,43 @@
 ```jsx
-import React, { useState } from 'react';
-import {AccordionView} from '@sberbusiness/triplex/components/AccordionView/AccordionView';
-import {Row} from '@sberbusiness/triplex/components/Row/Row';
-import {Col} from '@sberbusiness/triplex/components/Col/Col';
-import {Label} from '@sberbusiness/triplex/components/Label/Label';
-import {Amount} from '@sberbusiness/triplex/components/Amount/Amount';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
+<AccordionView>
+    <AccordionView.Header>Заголовок аккордеона</AccordionView.Header>
+    <AccordionView.Body>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </AccordionView.Body>
+</AccordionView>
+```
 
-const currencyTitle = 'Российские рубли';
-const currency = 'RUB';
-const [isOpen, setIsOpen] = useState(false);
-const [additionalDataLine, setAdditionalDataLine] = useState(false);
 
-const DataLine = () => (
-    <Row>
-       <Col size={3}>
-           <Label>
-               <Label.Text>Сумма</Label.Text>
-           </Label>
-       </Col>
-       <Col size={4}>
-           <Amount value="8967452.3145" currency={currency} currencyTitle={currencyTitle} />
-       </Col>
-        <Col size={5}>
-            {!additionalDataLine && <span onClick={() => setAdditionalDataLine(true)}>Добавить строку</span>}
-        </Col>
-    </Row>
+### Controlled
+
+```jsx
+import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+
+const [isOpen, setIsOpen] = React.useState(false);
+
+const renderControlPanel = () => (
+    <ComponentControlPanel>
+        <ComponentControlPanel.Checkbox checked={isOpen} setChecked={setIsOpen}>
+            Open
+        </ComponentControlPanel.Checkbox>
+    </ComponentControlPanel>
 );
 
 <>
-    <AccordionView>
-        <AccordionView.Header>Заголовок аккордеона (Управление состоянием открытия/закрытия внутри). Текст заголовка может быть только в одну строку</AccordionView.Header>
-        <AccordionView.Body>
-            <DataLine />
-            {additionalDataLine && <DataLine />}
-        </AccordionView.Body>
-    </AccordionView>
-
-    <Gap size={16} />
-
+    {renderControlPanel()}
     <AccordionView isOpen={isOpen} toggle={setIsOpen}>
-        <AccordionView.Header>Заголовок аккордеона (Управление состоянием открытия/закрытия снаружи)</AccordionView.Header>
+        <AccordionView.Header>Заголовок аккордеона</AccordionView.Header>
         <AccordionView.Body>
-              <DataLine />
-              {additionalDataLine && <DataLine />}       
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </AccordionView.Body>
     </AccordionView>
 </>
-
 ```

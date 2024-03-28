@@ -9,26 +9,27 @@ import {TestProps} from '@sberbusiness/triplex/types/CoreTypes';
 import {IAccordionBodyProvideProps, IAccordionHeaderProvideProps} from '@sberbusiness/triplex/components/AccordionBase/types';
 import {AccordionBase} from '../AccordionBase/protected/AccordionBase';
 
-/**
- * Свойства компонента.
- * @prop {[React.ReactElement<AccordionViewHeader>, React.ReactElement<AccordionViewBody>]} children Children.
- * @prop {boolean} [IsOpen] флаг открытия/закрытия аккордеона, для внешнего управления. Если пропс не передан,
- *  то управление открытием/закрытием происходит внутри компонента.
- * @prop {(isOpen: boolean) => void} [onToggle] функция вызывающаяся после открытие/закрытии аккордиона пользователем.
- *  isOpen - состояние открыт/закрыт после действий пользователя.
- * @prop {(isOpen: boolean) => void} [toggle] функция вызывающаяся для открытие/закрытии аккордиона пользователем.
- *  isOpen - состояние открыт/закрыт после действий пользователя.
- */
+/** Свойства компонента AccordionView. */
 interface AccordionViewPros extends React.HTMLAttributes<HTMLDivElement>, TestProps {
     children: [React.ReactElement<IAccordionViewHeaderProps>, React.ReactElement<IAccordionViewBodyProps>];
+    /**
+     * Флаг открытия/закрытия аккордеона, для внешнего управления.
+     * Если пропс не передан, то управление открытием/закрытием происходит внутри компонента.
+     */
     isOpen?: boolean;
+    /**
+     * Функция вызывающаяся после открытия/закрытия аккордеона пользователем.
+     * isOpen - состояние открыт/закрыт после действий пользователя.
+     */
     onToggle?: (isOpen: boolean) => void;
+    /**
+     * Функция вызывающаяся для открытия/закрытия аккордеона пользователем.
+     * isOpen - состояние открыт/закрыт после действий пользователя.
+     */
     toggle?: (isOpen: boolean) => void;
 }
 
-/**
- * Компонент аккордеон, только для отображения пользователю информации
- */
+/** Компонент аккордеон, только для отображения пользователю информации. */
 export class AccordionView extends React.Component<AccordionViewPros> {
     public static displayName = 'AccordionView';
 

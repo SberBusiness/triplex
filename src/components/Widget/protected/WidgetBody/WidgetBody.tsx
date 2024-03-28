@@ -2,6 +2,7 @@ import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {IWidgetBodyProvideProps} from '../../types';
 
+/** Свойства компонента WidgetBody. */
 export interface IWidgetBodyProps extends IWidgetBodyProvideProps, React.HTMLAttributes<HTMLDivElement> {}
 
 export const WidgetBody: React.FC<IWidgetBodyProps> = ({

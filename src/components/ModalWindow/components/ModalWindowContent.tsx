@@ -1,9 +1,11 @@
+import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {ESpinnerSize} from '@sberbusiness/triplex/components/Spinner/enum';
 import {SpinnerWidget} from '@sberbusiness/triplex/components/SpinnerWidget/SpinnerWidget';
-import React from 'react';
 
+/** Свойства компонента ModalWindowContent. */
 interface IModalWindowContentProps {
+    children?: React.ReactNode;
     /** Состояние загрузки.*/
     isLoading?: boolean;
     /** Текст под спиннером.*/

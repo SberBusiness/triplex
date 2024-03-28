@@ -1,7 +1,13 @@
-import {Footer} from '@sberbusiness/triplex/components/Footer/Footer';
 import React from 'react';
+import {Footer} from '@sberbusiness/triplex/components/Footer/Footer';
 
-export const ModalWindowFooter: React.FC = ({children}) => (
+/** Свойства компонента ModalWindowFooter. */
+interface IModalWindowFooterProps {
+    children?: React.ReactNode;
+}
+
+/** Футер модального окна. */
+export const ModalWindowFooter: React.FC<IModalWindowFooterProps> = ({children}) => (
     <div>
         <Footer className="cssClass[modalWindowFooter]">{children}</Footer>
     </div>

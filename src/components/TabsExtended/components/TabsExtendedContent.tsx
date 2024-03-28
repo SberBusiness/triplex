@@ -5,14 +5,16 @@ import {TabsExtendedTabButton} from './TabsExtendedTabButton';
 import {TabsExtendedDropdownWrapper} from './TabsExtendedDropdownWrapper';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента TabsExtendedContent. */
+export interface ITabsExtendedContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+/** Внутренние составляющие TabsExtendedContent. */
 export interface ITabsExtendedContentComposition {
     TabsWrapper: typeof TabsExtendedTabsWrapper;
     Tab: typeof TabsExtendedTab;
     TabButton: typeof TabsExtendedTabButton;
     DropdownWrapper: typeof TabsExtendedDropdownWrapper;
 }
-
-export interface ITabsExtendedContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const TabsExtendedContent: React.FC<ITabsExtendedContentProps> & ITabsExtendedContentComposition = ({
     children,

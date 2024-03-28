@@ -4,6 +4,7 @@ import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import './styles.less';
 
 interface SectionHeadingRendererProps {
+    children: React.ReactNode;
     toolbar?: React.ReactNode;
     id: string;
     href?: string;

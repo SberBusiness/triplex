@@ -5,39 +5,27 @@ import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/
 import {SelectExtendedTarget} from './components/SelectExtendedTarget';
 import {SelectExtendedDropdown} from './components/SelectExtendedDropdown';
 
-/**
- * Свойства, передаваемые из Select в функцию рендера target - renderTarget.
- *
- * @prop {boolean} opened Флаг Select открыт.
- * @prop {Function} setOpened Функция открытия/закрытия Select.
- */
+/** Свойства, передаваемые из Select в функцию рендера target - renderTarget. */
 export interface ISelectExtendedTargetProvideProps {
+    /** Флаг открытости выпадающего списка. */
     opened: boolean;
+    /** Функция открытия/закрытия Select. */
     setOpened: (opened: boolean) => void;
 }
 
-/**
- * Свойства, передаваемые из Select в функцию рендера выпадающего списка - children.
- *
- * @prop {string} [className] Флаг Select открыт.
- * @prop {boolean} opened Флаг Select открыт.
- * @prop {Function} setOpened Функция открытия/закрытия Select.
- */
+/** Свойства, передаваемые из Select в функцию рендера dropdown - children. */
 export interface ISelectExtendedDropdownProvideProps {
     className?: string;
+    /** Флаг открытости выпадающего списка. */
     opened: boolean;
     setOpened: (opened: boolean) => void;
+    /** Функция открытия/закрытия Select. */
     targetRef: React.RefObject<HTMLDivElement>;
     dropdownRef: React.RefObject<HTMLDivElement>;
 }
 
-/**
- * Свойства компонента Select.
- *
- * @prop {Function} children Render функция для выпадающего списка Select.
- * @prop {Function} renderTarget Render функция для target.
- */
-export interface ISelectExtendedProps extends React.HTMLAttributes<HTMLDivElement> {
+/** Свойства компонента SelectExtended. */
+export interface ISelectExtendedProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
     /** Рендер-функция поля выбора. */
     renderTarget: (props: ISelectExtendedTargetProvideProps) => React.ReactNode;
     /** Рендер-функция выпадающего блока. */
@@ -50,12 +38,9 @@ export interface ISelectExtendedProps extends React.HTMLAttributes<HTMLDivElemen
     closeOnTab?: boolean;
 }
 
-/**
- * Состояние компонента Select.
- *
- * @prop {boolean} opened Флаг открытости выпадающего списка.
- */
+/** Состояние компонента Select. */
 interface ISelectExtendedState {
+    /** Флаг открытости выпадающего списка. */
     opened: boolean;
 }
 

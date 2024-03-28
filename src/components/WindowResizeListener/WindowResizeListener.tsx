@@ -1,20 +1,16 @@
-import throttle from 'lodash.throttle';
 import React from 'react';
+import throttle from 'lodash.throttle';
 
-/**
- * Свойства компонента.
- *
- * @prop {Function} onResize Обработчик изменения размер окна.
- * @prop {number} [throttleDelay] Задержка для функции throttle, в миллисекундах.
- */
+/** Свойства компонента WindowResizeListener. */
 interface IWindowResizeListenerProps {
+    children?: React.ReactNode;
+    /** Обработчик изменения размер окна. */
     onResize: (event: UIEvent) => any;
+    /** Задержка для функции throttle, в миллисекундах. */
     throttleDelay?: number;
 }
 
-/**
- * Слушатель изменения размеров окна браузера.
- */
+/** Слушатель изменения размеров окна браузера. */
 export class WindowResizeListener extends React.Component<IWindowResizeListenerProps> {
     public static displayName = 'WindowResizeListener';
 

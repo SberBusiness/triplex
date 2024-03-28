@@ -1,4 +1,3 @@
-import {allure} from '@jest/unit/allure-report';
 import {AbstractTreeNode} from '../AbstractTreeNode';
 
 describe('AbstractTreeNode', () => {

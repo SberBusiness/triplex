@@ -1,8 +1,12 @@
 import React, {RefObject} from 'react';
 
 export interface ITabsExtendedContext {
+    // Массив id табов, отрендереных inline.
+    inlineItemsIds: string[];
     // Массив id табов, передаваемых в Dropdown.
     dropdownItemsIds: string[];
+    // Определяет id табов, отрендереных inline.
+    setInlineItemsIds: (inlineItemsIds: string[]) => void;
     // Определяет id табов, передаваемых в Dropdown.
     setDropdownItemsIds: (dropdownItemsIds: string[]) => void;
     // Id выбранного таба.
@@ -15,9 +19,11 @@ export interface ITabsExtendedContext {
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 const contextInitial: ITabsExtendedContext = {
+    inlineItemsIds: [],
     dropdownItemsIds: [],
     selectedId: '',
     onSelectTab: () => {},
+    setInlineItemsIds: () => {},
     setDropdownItemsIds: () => {},
     dropdownRef: {current: null},
 };

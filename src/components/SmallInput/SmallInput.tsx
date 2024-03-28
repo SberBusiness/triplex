@@ -1,16 +1,12 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства SmallInput.
- */
+/** Свойства компонента SmallInput. */
 export interface ISmallInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-/**
- * Компонент "Уменьшенное поле ввода". Используется в HeaderPage.
- */
-export const SmallInput: React.FC<ISmallInputProps> = ({className, ...inputHTMLAttributes}) => (
-    <input {...inputHTMLAttributes} type="text" className={classnames(className, 'cssClass[smallInput]')} />
-);
+/** Уменьшенное поле ввода, используется в HeaderPage. */
+export const SmallInput = React.forwardRef<HTMLInputElement, ISmallInputProps>(({className, ...rest}, ref) => (
+    <input className={classnames('cssClass[smallInput]', className)} {...rest} type="text" ref={ref} />
+));
 
 SmallInput.displayName = 'SmallInput';

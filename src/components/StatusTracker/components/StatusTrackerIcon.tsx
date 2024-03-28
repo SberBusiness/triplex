@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства контейнера для иконки StatusTracker. */
+/** Свойства компонента StatusTrackerIcon. */
 export interface StatusTrackerIconProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Контейнер для иконки StatusTracker. */

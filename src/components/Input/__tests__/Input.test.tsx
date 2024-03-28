@@ -2,7 +2,6 @@ import React from 'react';
 import {Input} from '../Input';
 import renderer from 'react-test-renderer';
 import {shallow} from 'enzyme';
-import {allure} from '@jest/unit/allure-report';
 
 describe('Input', () => {
     beforeEach(() => {
@@ -24,6 +23,6 @@ describe('Input', () => {
         const component = shallow(<Input onChange={handleChange} value={'default-value'} />);
         component.simulate('change', event);
 
-        expect(handleChange).toBeCalledWith({currentTarget: {value: 'some-value'}});
+        expect(handleChange).toHaveBeenCalledWith({currentTarget: {value: 'some-value'}});
     });
 });

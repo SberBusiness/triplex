@@ -1,36 +1,62 @@
 @import 'src/styles/style';
 
 .button.secondary {
-    background-color: @color-snowy;
-    border-color: @color-asphalt-03;
-    .b2-text-controls-normal(@color-graphite-01);
+    .font-regular();
+    .font-size-inline(@font-size-14);
+
+    background: var(--triplex-Button-Secondary_Background_Default);
+    box-shadow: var(--triplex-Button-Secondary_Shadow_Default);
+    color: var(--triplex-Button-Secondary_Color_Default);
+    text-transform: none;
+
+    .caretIcon path {
+        fill: var(--triplex-Button-Secondary_Caret_Color_Default);
+    }
 
     &.MD {
-        .size-MD(@ufs-theme-button-border-width-secondary);
+        .size-MD();
     }
 
     &.SM {
-        .size-SM(@ufs-theme-button-border-width-secondary);
+        .size-SM();
+    }
+
+    &.LG {
+        .size-LG();
     }
 
     &:hover {
-        border-color: @color-graphite-01;
+        background: var(--triplex-Button-Secondary_Background_Hover);
+        box-shadow: var(--triplex-Button-Secondary_Shadow_Hover);
+        color: var(--triplex-Button-Secondary_Color_Hover);
+
+        .caretIcon path {
+            fill: var(--triplex-Button-Secondary_Caret_Color_Hover);
+        }
     }
 
     &.expanded,
     &:active {
-        background-color: @color-asphalt-03;
-    }
+        background: var(--triplex-Button-Secondary_Background_Active);
+        box-shadow: var(--triplex-Button-Secondary_Shadow_Active);
+        color: var(--triplex-Button-Secondary_Color_Active);
 
-    &.expanded:not([data-focus-visible]):enabled,
-    &:not([data-focus-visible]):enabled:active {
-        background-clip: border-box;
-        border-color: transparent;
+        .caretIcon path {
+            fill: var(--triplex-Button-Secondary_Caret_Color_Active);
+        }
     }
 
     &:disabled {
-        background-color: @color-snowy;
-        border-color: @color-asphalt-03;
-        color: @color-asphalt-03;
+        background: var(--triplex-Button-Secondary_Background_Disabled);
+        box-shadow: var(--triplex-Button-Secondary_Shadow_Disabled);
+        color: var(--triplex-Button-Secondary_Color_Disabled);
+
+        .caretIcon path {
+            fill: var(--triplex-Button-Secondary_Caret_Color_Disabled);
+        }
+    }
+
+    &[data-focus-visible]:focus {
+        box-shadow: var(--triplex-Button-Secondary_Shadow_Focus);
     }
 }

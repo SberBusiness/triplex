@@ -120,7 +120,7 @@ export const SelectExtendedTarget = React.forwardRef<HTMLDivElement, ISelectExte
             {loading ? (
                 <SpinnersmallAniIcon20 className={classnames('cssClass[spinnerIcon]', 'cssClass[globalSpin]')} />
             ) : (
-                <CaretdownSrvxIcon16 className={classnames('cssClass[caretIcon]', 'hoverable', {disabled: !!disabled})} />
+                <CaretdownSrvxIcon16 className="cssClass[caretIcon]" />
             )}
         </div>
     );

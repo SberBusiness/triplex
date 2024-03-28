@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {allure} from '@jest/unit/allure-report';
 import {mount} from 'enzyme';
 import {TreeView} from '@sberbusiness/triplex/components/TreeView/TreeView';
 import {TreeViewNode} from '@sberbusiness/triplex/components/TreeView/components/TreeViewNode';

@@ -5,13 +5,19 @@
     position: relative;
     min-width: @ufs-theme-size-icon-16;
     min-height: @ufs-theme-size-icon-16;
-
-    &.enabled {
-        cursor: pointer;
-    }
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--triplex-Checkbox-Color_Default);
+    cursor: pointer;
 
     &.nonempty {
         padding-left: 24px;
+    }
+
+    &.disabled {
+        color: var(--triplex-Checkbox-Color_Disabled);
+        cursor: default;
     }
 
     &[hidden] {
@@ -26,13 +32,17 @@
 
 .checkboxIcon {
     box-sizing: border-box;
-    background-color: @color-snowy;
-    border: 1px solid @color-asphalt-03;
+    background-color: var(--triplex-Checkbox-Background_Default);
+    border: 1px solid var(--triplex-Checkbox-BorderColor_Default);
     border-radius: @ufs-theme-base;
 }
 
 .checkmarkIcon {
     transform: scale(0);
+
+    path {
+        fill: var(--triplex-Checkbox-Checkmark_Fill_Default);
+    }
 }
 
 .checkboxIcon,
@@ -59,8 +69,8 @@
 
 .checkbox:checked {
     + .checkboxIcon {
-        background-color: @color-malachite-02;
-        border-color: @color-malachite-02;
+        background-color: var(--triplex-Checkbox-Background_Checked_Default);
+        border-color: var(--triplex-Checkbox-BorderColor_Checked);
     }
 
     ~ .checkmarkIcon {
@@ -70,24 +80,24 @@
 }
 
 .checkbox:hover + .checkboxIcon {
-    border-color: @color-malachite-03;
+    border-color: var(--triplex-Checkbox-BorderColor_Hover);
 }
 
 .checkbox:disabled {
     + .checkboxIcon {
-        background-color: @color-asphalt-05;
-        border-color: @color-asphalt-03;
+        background-color: var(--triplex-Checkbox-Background_Disabled);
+        border-color: var(--triplex-Checkbox-BorderColor_Disabled);
     }
 
     ~ .checkmarkIcon path {
-        fill: @color-asphalt-03;
+        fill: var(--triplex-Checkbox-Checkmark_Fill_Disabled);
     }
 }
 
 .checkbox[data-focus-visible]:focus + .checkboxIcon {
-    border-color: @color-sunny-01;
+    border-color: var(--triplex-Checkbox-BorderColor_Focus);
 }
 
 .checkbox:checked:enabled:hover + .checkboxIcon {
-    background-color: @color-malachite-03;
+    background-color: var(--triplex-Checkbox-Background_Checked_Hover);
 }

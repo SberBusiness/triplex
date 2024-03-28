@@ -1,4 +1,3 @@
-import {allure} from '@jest/unit/allure-report';
 import {AmountBaseInputFormatter} from '../AmountBaseInputFormatter';
 
 describe('AmountBaseInputFormatter', () => {

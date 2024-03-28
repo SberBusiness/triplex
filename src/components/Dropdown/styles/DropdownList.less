@@ -11,6 +11,8 @@
 .dropdownListItem {
     .b2-text-controls-normal(@color-graphite-01);
 
+    color: var(--triplex-DropdownList-Color);
+    background: var(--triplex-DropdownList-Background_Default);
     position: relative;
     outline: none;
     padding: @ufs-theme-dropdown-item-padding-vert @metric-8;
@@ -22,12 +24,12 @@
     }
 
     &.active {
-        background-color: @color-asphalt-05;
+        background: var(--triplex-DropdownList-Background_Active);
         cursor: pointer;
     }
 
     &.selected {
-        background-color: @color-asphalt-03;
+        background: var(--triplex-DropdownList-Background_Selected);
         cursor: default;
     }
 }

@@ -33,7 +33,7 @@ export interface ISuggestCustomProps<T>
     /** Позиция внутри компонента InputGroup. */
     groupPosition?: EInputGroupPosition;
     /** Выбранное значение. */
-    value: T;
+    value?: T;
     /** Список значений. */
     options: T[];
     /** Обработчик установки фокуса. */
@@ -41,7 +41,7 @@ export interface ISuggestCustomProps<T>
     /** Обработчик фильтрации значений. */
     onFilter: (filterString: string) => void;
     /** Обработчик выбора элемента из списка. */
-    onSelect: (item: T, e?: Event) => void;
+    onSelect: (item?: T, e?: Event) => void;
     /** Обработчик окончания скролла списка (доступные в данный момент элементы закончились). */
     onScrollEnd?: () => void;
     /** Установка ссылки на обёртку для манипуляции с ней снаружи. */
@@ -96,12 +96,14 @@ export interface ISuggestTargetProps<T>
     focused: boolean;
     /** Флаг состояния открыт/закрыт. */
     opened: boolean;
+    /** Флаг состояния ошибки. */
+    error?: boolean;
     /** CSS класс. @default undefined. */
     className?: string;
     /** Поисковая строка. @default ''. */
     query: string;
     /** Поисковая строка. @default ''. */
-    value: T;
+    value?: T;
     /** Идентификатор для тестирования. */
     dataTestId?: string;
     /** Количество опций. @default 0. */
@@ -112,7 +114,7 @@ export interface ISuggestTargetProps<T>
     onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
     /** Обработчик клика по компоненту. */
     onClick: (e: React.MouseEvent<HTMLElement>) => void;
-    /** Рендер инпута. */
+    /** Рендер поля ввода. */
     renderTargetInput?: (targetInputProps: ISuggestTargetProps<T>) => JSX.Element;
     /** Рендер заглушки с выбранным значением. */
     renderTargetLabel?: (targetLabelProps: ISuggestTargetProps<T>) => JSX.Element;
@@ -135,17 +137,25 @@ export interface ISuggestDropdownProps<T> {
     /** Идентификатор инстанса компонента. */
     instanceId: string;
     /** Выбранный элемент. */
-    selected: T;
+    selected?: T;
     /** Рендер-функция для отображения элемента списка. */
     renderCustom?: (itemProps: ISuggestDropdownProps<T>) => JSX.Element;
     /** Рендер-функция для отображения элемента списка. */
-    renderDropdownItem?: (itemProps: ISuggestDropdownItemProps<T>) => JSX.Element;
+    renderDropdownItem: (itemProps: ISuggestDropdownItemProps<T>) => JSX.Element;
     /** Рендер-функция для отображения лейбла элемента списка. */
     renderDropdownItemLabel?: (labelProps: ISuggestDropdownItemLabelProps<T>) => JSX.Element;
     /** Ссылка на DOM элемент списка. */
     listRef?: React.RefObject<HTMLDivElement>;
+    /** Ссылка на DOM элемент suggest. */
+    suggestRef: React.RefObject<HTMLInputElement>;
     /** Обработчик выбора элемента. */
     onSelect: (option: T) => void;
+    /** Обработчик открытия выпадающего списка. */
+    setOpened: (opened: boolean) => void;
+    /** Css класс для выпадающего списка. */
+    suggestDropdownListClassName: string;
+    /** Css класс для элемента выпадающего списка. */
+    suggestDropdownItemClassName: string;
 }
 
 /** Свойства компонента SuggestDropdownItem. */

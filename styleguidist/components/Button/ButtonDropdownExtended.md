@@ -2,6 +2,8 @@
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
+import {DropdownwhiteSrvxIcon16} from '@sberbusiness/icons/DropdownwhiteSrvxIcon16';
+import './style.less';
 
 const [activeDescendant, setActiveDescendant] = React.useState();
 
@@ -38,6 +40,7 @@ const renderButton = ({opened, setOpened}) => (
         ref={targetRef}
     >
         Button Name
+      <DropdownwhiteSrvxIcon16 className={`caret-icon ${opened ? 'opened' : ''}`} />
     </Button>
 );
 
@@ -79,6 +82,8 @@ import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
 import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {DropdownwhiteSrvxIcon16} from '@sberbusiness/icons/DropdownwhiteSrvxIcon16';
+import './style.less';
 
 const [opened, setOpened] = React.useState(false);
 const [activeDescendant, setActiveDescendant] = React.useState();
@@ -124,6 +129,7 @@ const renderButton = () => (
         ref={targetRef}
     >
         Button Name
+        <DropdownwhiteSrvxIcon16 className={`caret-icon ${opened ? 'opened' : ''}`} />
     </Button>
 );
 

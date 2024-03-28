@@ -42,9 +42,14 @@ export interface IButtonDropdownExtendedProps extends React.HTMLAttributes<HTMLD
     renderDropdown: (props: IButtonDropdownExtendedDropdownProvideProps) => React.ReactNode;
     /** Ссылка на выпадающий блок. */
     dropdownRef: React.RefObject<HTMLElement>;
+    /** Закрытие выпадающего блока при нажатии клавиши Tab. */
+    closeOnTab?: boolean;
 }
 
-/** Компонент "Кнопка с выпадающим блоком". */
+/**
+ * Компонент "Кнопка с выпадающим блоком".
+ * Позволяет кастомизировать кнопку открытия Dropdown и сам Dropdown.
+ * */
 export class ButtonDropdownExtended extends React.Component<IButtonDropdownExtendedProps, IButtonDropdownExtendedState> {
     public static Dropdown = Dropdown;
     public static DropdownList = DropdownList;
@@ -72,10 +77,13 @@ export class ButtonDropdownExtended extends React.Component<IButtonDropdownExten
     };
 
     private handleKeyDown = (event: KeyboardEvent) => {
+        const {closeOnTab} = this.props;
         const key = event.code || event.keyCode;
 
-        if (isKey(key, 'ESCAPE') && this.getOpened()) {
-            this.handleOpen(false);
+        if (this.getOpened()) {
+            if (isKey(key, 'ESCAPE') || (closeOnTab && isKey(key, 'TAB'))) {
+                this.handleOpen(false);
+            }
         }
     };
 
@@ -136,7 +144,7 @@ export class ButtonDropdownExtended extends React.Component<IButtonDropdownExten
     }
 
     public render(): JSX.Element {
-        const {className, opened, setOpened, renderButton, renderDropdown, dropdownRef, ...props} = this.props;
+        const {className, opened, setOpened, renderButton, renderDropdown, dropdownRef, closeOnTab, ...props} = this.props;
         const classNames = classnames('cssClass[globalButtonDropdownExtended]', className);
 
         return (

@@ -8,15 +8,15 @@
         "resolveJsonModule": true,
         "baseUrl": "./src",
         "paths": {
-            "@jest/*": ["../jest/*"],
             "@sberbusiness/triplex/*": [
                 "./*"
-            ]
+            ],
         },
         // Emit
         "declaration": true,
         "downlevelIteration": true,
         "importHelpers": true,
+        "noEmitHelpers": true,
         "preserveConstEnums": true,
         "outDir": "./out",
         // Interop Constraints
@@ -28,13 +28,4 @@
         // Completeness
         "skipLibCheck": false
     },
-    "include": [
-        "./src",
-        "./typings/styles.d.ts"
-    ],
-    "exclude": [
-        "./tools",
-        "./node_modules",
-        "./out"
-    ]
 }

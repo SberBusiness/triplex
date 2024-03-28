@@ -14,7 +14,7 @@
     cursor: pointer;
 
     .sliderExtendedMarkDot {
-        background: @color-asphalt-03;
+        background: var(--triplex-Slider-Mark_Dot_Background_Default);
         width: @metric-8;
         height: @metric-8;
         border-radius: @metric-4;
@@ -25,13 +25,13 @@
         transform: translateX(-50%);
 
         &.inSelectedRange {
-            background: @color-malachite-02;
+            background: var(--triplex-Slider-Mark_Dot_Background_Selected);
         }
     }
 
     .sliderExtendedMarkText {
         user-select: none;
-        color: @color-asphalt-02;
+        color: var(--triplex-Slider-Mark_Color_Default);
         white-space: nowrap;
         cursor: pointer;
     }
@@ -44,7 +44,7 @@
         }
 
         .sliderExtendedMarkDot.inSelectedRange {
-            background: @color-asphalt-02;
+            background: var(--triplex-Slider-Mark_Dot_Background_Selected_Disabled);
         }
     }
 
@@ -107,7 +107,7 @@
         pointer-events: none;
 
         .sliderExtendedMarkText {
-            color: @color-graphite-01;
+            color: var(--triplex-Slider-Mark_Color_Active);
         }
     }
 }

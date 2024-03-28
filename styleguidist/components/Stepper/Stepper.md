@@ -1,53 +1,24 @@
 ```jsx
 import {EStepperStepIconType} from '@sberbusiness/triplex/components/Stepper/StepperStepIcon';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
 const [selectedStepId, setSelectedStepId] = React.useState('stepper-step-3');
-const [iconType, setIconType] = React.useState(EStepperStepIconType.SUCCESS);
-const [progress, setProgress] = React.useState(60);
-const [shadow, setShadow] = React.useState(false);
-
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={iconType}
-            setValue={setIconType}
-            options={Object.values(EStepperStepIconType)}
-        >
-            Icon type
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Number
-            value={progress}
-            setValue={setProgress}
-            min={0}
-            max={100}
-        >
-            Progress
-        </ComponentControlPanel.Number>
-        <ComponentControlPanel.Checkbox checked={shadow} setChecked={setShadow}>
-            Shadow
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
-
-const getStepIcon = (type) => <Stepper.Step.Icon type={type} />;
 
 const steps = [
     {
         id: 'stepper-step-1',
         label: 'Completed',
-        icon: getStepIcon(EStepperStepIconType.FILLED),
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.FILLED} />,
     },
     {
         id: 'stepper-step-2',
         label: 'Disabled',
-        icon: getStepIcon(EStepperStepIconType.FILLED),
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.FILLED} />,
         disabled: true,
     },
     {
         id: 'stepper-step-3',
         label: 'Completed',
-        icon: getStepIcon(iconType),
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.SUCCESS} />,
     },
     {
         id: 'stepper-step-4',
@@ -60,31 +31,66 @@ const steps = [
     },
 ];
 
-<>
-    {renderControlPanel()}
-    <Stepper.Wrapper shadow={shadow}>
-        <Stepper steps={steps} onSelectStep={setSelectedStepId} selectedStepId={selectedStepId} />
-        <Stepper.Progress value={progress} />
-    </Stepper.Wrapper>
-</>
+<Stepper.Wrapper>
+    <Stepper steps={steps} onSelectStep={setSelectedStepId} selectedStepId={selectedStepId} />
+    <Stepper.Progress value={60} />
+</Stepper.Wrapper>
+```
+
+### With shadow
+
+```jsx
+import {EStepperStepIconType} from '@sberbusiness/triplex/components/Stepper/StepperStepIcon';
+
+const [selectedStepId, setSelectedStepId] = React.useState('stepper-shadow-step-3');
+
+const steps = [
+    {
+        id: 'stepper-shadow-step-1',
+        label: 'Completed',
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.FILLED} />,
+    },
+    {
+        id: 'stepper-shadow-step-2',
+        label: 'Disabled',
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.FILLED} />,
+        disabled: true,
+    },
+    {
+        id: 'stepper-shadow-step-3',
+        label: 'Completed',
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.SUCCESS} />,
+    },
+    {
+        id: 'stepper-shadow-step-4',
+        label: selectedStepId != 'stepper-shadow-step-4' ? 'Available' : 'In progress',
+    },
+    {
+        id: 'stepper-shadow-step-5',
+        label: 'Disabled',
+        disabled: true,
+    },
+];
+
+<Stepper.Wrapper shadow>
+    <Stepper steps={steps} onSelectStep={setSelectedStepId} selectedStepId={selectedStepId} />
+    <Stepper.Progress value={60} />
+</Stepper.Wrapper>
 ```
 
 ### With many steps (overflow)
 
 ```jsx
 import {EStepperStepIconType} from '@sberbusiness/triplex/components/Stepper/StepperStepIcon';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
-const [selectedStepId, setSelectedStepId] = React.useState('stepper-step-overflow-2');
-
-const getStepIcon = (type) => <Stepper.Step.Icon type={type} />;
+const [selectedStepId, setSelectedStepId] = React.useState('stepper-overflow-step-2');
 
 const steps = Array(12)
     .fill(undefined)
     .map((value, index) => ({
-        id: `stepper-step-overflow-${index + 1}`,
+        id: `stepper-overflow-step-${index + 1}`,
         label: `Completed`,
-        icon: getStepIcon(EStepperStepIconType.FILLED),
+        icon: <Stepper.Step.Icon type={EStepperStepIconType.FILLED} />,
     }));
 
 <Stepper.Wrapper>

@@ -4,6 +4,7 @@ import {LightBoxNext} from '@sberbusiness/triplex/components/LightBox/LightBoxCo
 import {LightBoxPrev} from '@sberbusiness/triplex/components/LightBox/LightBoxControls/LightBoxPrev';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента LightBoxControls. */
 interface ILightBoxControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface ILightBoxControlsFC extends React.FC<ILightBoxControlsProps> {
@@ -12,9 +13,7 @@ export interface ILightBoxControlsFC extends React.FC<ILightBoxControlsProps> {
     Prev: typeof LightBoxPrev;
 }
 
-/**
- * Контейнер кнопок-действий(закрыть/вперед/назад).
- */
+/** Контейнер кнопок-действий (закрыть/вперед/назад). */
 export const LightBoxControls: ILightBoxControlsFC = ({children, className, ...htmlDivAttributes}) => (
     <div className={classnames(className, 'cssClass[lightBoxControls]')} {...htmlDivAttributes} data-lightbox-component="controls">
         {children}

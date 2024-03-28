@@ -11,6 +11,8 @@ export const EVENT_KEYS = {
     ENTER: ['Enter'],
     ESCAPE: ['Escape', 'Esc'],
     HOME: ['Home'],
+    PAGE_UP: ['PageUp'],
+    PAGE_DOWN: ['PageDown'],
     PERIOD: ['Period'],
     SPACE: ['Spacebar', 'Space'],
     TAB: ['Tab'],
@@ -23,7 +25,7 @@ export const EVENT_KEYS = {
 export type TEventKeys = keyof typeof EVENT_KEYS;
 
 // Тип значения EVENT_KEYS.
-export type TEventKeysValues = typeof EVENT_KEYS[TEventKeys];
+export type TEventKeysValues = (typeof EVENT_KEYS)[TEventKeys];
 
 /** Числовые коды клавиш. */
 export const EVENT_KEY_CODES = {
@@ -38,6 +40,8 @@ export const EVENT_KEY_CODES = {
     ENTER: 13,
     ESCAPE: 27,
     HOME: 36,
+    PAGE_UP: 33,
+    PAGE_DOWN: 34,
     PERIOD: 190,
     SPACE: 32,
     TAB: 9,

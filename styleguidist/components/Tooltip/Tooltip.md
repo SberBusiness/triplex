@@ -1,51 +1,17 @@
+### Small size
+
 ```jsx
-import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
 import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
-import './TooltipExample.less';
+import './styles.less';
 
-const [size, setSize] = React.useState(ETooltipSize.SM);
-const [preferPlace, setPreferPlace] = React.useState(ETooltipPreferPlace.ABOVE);
-const [toggleType, setToggleType] = React.useState('hover');
-const [xButton, setXButton] = React.useState(false);
-
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={size}
-            setValue={setSize}
-            options={Object.values(ETooltipSize)}
-        >
-            Size
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={preferPlace}
-            setValue={setPreferPlace}
-            options={Object.values(ETooltipPreferPlace)}
-        >
-            Placement
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={toggleType}
-            setValue={setToggleType}
-            options={['hover', 'click']}
-        >
-            Toggle type
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Checkbox checked={xButton} setChecked={setXButton}>
-            X-Button
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
-
-<>
-    {renderControlPanel()}
+const renderTooltip = (size, closable) => (
     <div className="tooltip-example-icon">
-        <Tooltip size={size} toggleType={toggleType} preferPlace={preferPlace}>
+        <Tooltip size={ETooltipSize.SM} toggleType="hover">
             <Tooltip.Body>Текст подсказки.</Tooltip.Body>
-            {xButton && <Tooltip.XButton aria-label="Закрыть" />}
+            {closable && <Tooltip.XButton aria-label="Закрыть" />}
             <Tooltip.Target>
                 <ButtonIcon shape={EButtonIconShape.CIRCLE}>
                     <HintSrvIcon16 />
@@ -53,50 +19,140 @@ const renderControlPanel = () => (
             </Tooltip.Target>
         </Tooltip>
     </div>
-</>
+);
+
+<div style={{display: 'flex', textAlign: 'center'}}>
+    <div style={{flex: '1 1 0'}}>
+        <div>Basic</div>
+        {renderTooltip(ETooltipSize.SM, false)}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>X-Button</div>
+        {renderTooltip(ETooltipSize.SM, true)}
+    </div>
+</div>
 ```
-### Tooltip & render container
+
+### Large size
 
 ```jsx
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
 import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
-import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
-import './TooltipExample.less';
+import './styles.less';
 
-const [tooltipRenderContainer, setTooltipRenderContainer] = React.useState(null);
+const renderTooltip = (closable) => (
+    <div className="tooltip-example-icon">
+        <Tooltip size={ETooltipSize.LG} toggleType="hover">
+            <Tooltip.Body>Текст подсказки.</Tooltip.Body>
+            {closable && <Tooltip.XButton aria-label="Закрыть" />}
+            <Tooltip.Target>
+                <ButtonIcon shape={EButtonIconShape.CIRCLE}>
+                    <HintSrvIcon16 />
+                </ButtonIcon>
+            </Tooltip.Target>
+        </Tooltip>
+    </div>
+);
 
-React.useEffect(() => {
-    setTooltipRenderContainer(() => document.querySelector('.tooltip-render-container'));
-}, []);
-
-<>
-    <div className="tooltip-render-container" />
-    {tooltipRenderContainer ? (
-        <div className="tooltip-example-icon">
-            <Tooltip size={ETooltipSize.SM} toggleType="hover" tooltipRenderContainer={tooltipRenderContainer}>
-                <Tooltip.Body>Текст подсказки.</Tooltip.Body>
-                <Tooltip.Target>
-                    <ButtonIcon shape={EButtonIconShape.CIRCLE}>
-                        <HintSrvIcon16 />
-                    </ButtonIcon>
-                </Tooltip.Target>
-            </Tooltip>
-        </div>
-    ) : null}
-</>
+<div style={{display: 'flex', textAlign: 'center'}}>
+    <div style={{flex: '1 1 0'}}>
+        <div>Basic</div>
+        {renderTooltip(false)}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>X-Button</div>
+        {renderTooltip(true)}
+    </div>
+</div>
 ```
 
-### Tooltip Controlled
+### Toggle types
 
 ```jsx
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
+import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
+import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
+import './styles.less';
+
+const renderTooltip = (size, toggleType) => (
+    <div className="tooltip-example-icon">
+        <Tooltip size={size} toggleType={toggleType}>
+            <Tooltip.Body>Текст подсказки.</Tooltip.Body>
+            <Tooltip.Target>
+                <ButtonIcon shape={EButtonIconShape.CIRCLE}>
+                    <HintSrvIcon16 />
+                </ButtonIcon>
+            </Tooltip.Target>
+        </Tooltip>
+    </div>
+);
+
+<div style={{display: 'flex', textAlign: 'center'}}>
+    <div style={{flex: '1 1 0'}}>
+        <div>Hover</div>
+        {renderTooltip(ETooltipSize.SM, 'hover')}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Click</div>
+        {renderTooltip(ETooltipSize.SM, 'click')}
+    </div>
+</div>
+```
+
+### Placement types
+
+```jsx
+import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
+import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
+import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
+import './styles.less';
+
+const renderTooltip = (size, preferPlace) => (
+    <div className="tooltip-example-icon">
+        <Tooltip size={size} toggleType="hover" preferPlace={preferPlace}>
+            <Tooltip.Body>Текст подсказки.</Tooltip.Body>
+            <Tooltip.Target>
+                <ButtonIcon shape={EButtonIconShape.CIRCLE}>
+                    <HintSrvIcon16 />
+                </ButtonIcon>
+            </Tooltip.Target>
+        </Tooltip>
+    </div>
+);
+
+<div style={{display: 'flex', textAlign: 'center'}}>
+    <div style={{flex: '1 1 0'}}>
+        <div>Left</div>
+        {renderTooltip(ETooltipSize.SM, ETooltipPreferPlace.LEFT)}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Above</div>
+        {renderTooltip(ETooltipSize.SM, ETooltipPreferPlace.ABOVE)}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Below</div>
+        {renderTooltip(ETooltipSize.SM, ETooltipPreferPlace.BELOW)}
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Right</div>
+        {renderTooltip(ETooltipSize.SM, ETooltipPreferPlace.RIGHT)}
+    </div>
+</div>
+```
+
+### Controlled
+
+```jsx
+import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
 import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
 import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
-import './TooltipExample.less';
+import './styles.less';
 
 const [isOpen, setIsOpen] = React.useState(false);
 
@@ -108,10 +164,9 @@ const renderControlPanel = () => (
     </ComponentControlPanel>
 );
 
-<>
-    {renderControlPanel()}
+const renderTooltip = (size, preferPlace) => (
     <div className="tooltip-example-icon">
-        <Tooltip size={ETooltipSize.SM} toggleType="hover" isOpen={isOpen} toggle={setIsOpen}>
+        <Tooltip size={size} preferPlace={preferPlace} isOpen={isOpen} toggle={setIsOpen}>
             <Tooltip.Body>Текст подсказки.</Tooltip.Body>
             <Tooltip.Target>
                 <ButtonIcon shape={EButtonIconShape.CIRCLE}>
@@ -120,5 +175,44 @@ const renderControlPanel = () => (
             </Tooltip.Target>
         </Tooltip>
     </div>
+);
+
+<>
+    {renderControlPanel()}
+    {renderTooltip(ETooltipSize.SM, ETooltipPreferPlace.RIGHT)}
+</>
+```
+
+### Render container
+
+```jsx
+import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
+import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
+import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
+import './styles.less';
+
+const [tooltipRenderContainer, setTooltipRenderContainer] = React.useState(null);
+
+React.useEffect(() => {
+    setTooltipRenderContainer(() => document.getElementById('tooltip-render-container'));
+}, []);
+
+const renderTooltip = (size) => (
+    <div className="tooltip-example-icon">
+        <Tooltip size={size} toggleType="hover" tooltipRenderContainer={tooltipRenderContainer}>
+            <Tooltip.Body>Текст подсказки.</Tooltip.Body>
+            <Tooltip.Target>
+                <ButtonIcon shape={EButtonIconShape.CIRCLE}>
+                    <HintSrvIcon16 />
+                </ButtonIcon>
+            </Tooltip.Target>
+        </Tooltip>
+    </div>
+);
+
+<>
+    <div id="tooltip-render-container" />
+    {tooltipRenderContainer && renderTooltip(ETooltipSize.SM)}
 </>
 ```

@@ -3,20 +3,22 @@ import {AmountBaseInput} from '../protected/AmountBaseInput/AmountBaseInput';
 import {IInputProps} from '@sberbusiness/triplex/components/Input/Input';
 import {TestProps} from '@sberbusiness/triplex/types/CoreTypes';
 import {EInputGroupPosition} from '@sberbusiness/triplex/components/InputGroup/InputGroup';
-import {Text} from '@sberbusiness/triplex/components/Typography/Text';
-import {EFontType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента AmountInput. */
-export interface IAmountInputProps extends Omit<IInputProps, 'type' | 'onChange'>, TestProps {
+export interface IAmountInputProps extends Omit<IInputProps, 'type' | 'maxLength' | 'onChange'>, TestProps {
+    /** Значение. */
     value: string;
-    onChange: (value: string) => void;
+    /** Максимальное количество знаков перед запятой. */
+    maxIntegerDigits?: number;
     /** Количество знаков после запятой. */
-    fractionLength?: number;
+    fractionDigits?: number;
     /** Валюта. */
     currency?: string;
     /** Позиция внутри компонента InputGroup. */
     groupPosition?: EInputGroupPosition;
+    /** Обработчик изменения значения. */
+    onChange: (value: string) => void;
 }
 
 const mapInputGroupPositionToCSSClass = {
@@ -32,15 +34,13 @@ export const AmountInput = React.forwardRef<HTMLInputElement, IAmountInputProps>
         const inputRef = useRef<HTMLInputElement | null>(null);
 
         const renderCurrency = () => (
-            <Text
+            <span
                 className="cssClass[currency]"
                 data-test-id={dataTestId ? `${dataTestId}__unit` : undefined}
-                size={ETextSize.B1}
-                type={EFontType.SECONDARY}
                 onClick={() => inputRef.current?.focus()}
             >
                 {currency}
-            </Text>
+            </span>
         );
 
         /** Функция для хранения ссылки. */

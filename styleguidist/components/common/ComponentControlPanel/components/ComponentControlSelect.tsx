@@ -4,6 +4,7 @@ import '../styles/ComponentControlSelect.less';
 
 /** Свойства ComponentControlSelect. */
 interface IComponentControlSelectProps {
+    children: React.ReactNode;
     value: string;
     setValue: (value: string) => void;
     options: string[];

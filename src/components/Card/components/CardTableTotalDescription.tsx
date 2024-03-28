@@ -1,16 +1,11 @@
 import React from 'react';
 
-/**
- * Свойства компонента CardTableTotalDescription.
- * @prop {string} children Общее описание счетов.
- */
+/** Свойства компонента CardTableTotalDescription. */
 interface ICardTableTotalDescriptionProps {
-    children: string;
+    children?: React.ReactNode;
 }
 
-/**
- * Компонент CardTableTotalDescription. Общее описание счетов.
- */
+/** Общее описание счетов. */
 export class CardTableTotalDescription extends React.PureComponent<ICardTableTotalDescriptionProps> {
     public render(): JSX.Element {
         const {children} = this.props;

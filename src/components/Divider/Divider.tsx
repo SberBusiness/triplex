@@ -13,7 +13,7 @@ export interface IDividerProps extends React.HTMLAttributes<HTMLHRElement> {
     marginBottomSize?: TDividerMarginSize;
 }
 
-/** Компонент Divider. */
+/** Разделитель. */
 export const Divider: React.FC<IDividerProps> = (props) => {
     const {className, marginTopSize, marginBottomSize, ...htmlDivAttributes} = props;
     const classNames = classnames(

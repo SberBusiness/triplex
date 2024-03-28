@@ -1,11 +1,14 @@
+import React from 'react';
 import {TopOverlayContentSubTitle} from '@sberbusiness/triplex/components/TopOverlay/components/TopOverlayContentSubTitle';
 import {TopOverlayContentTitle} from '@sberbusiness/triplex/components/TopOverlay/components/TopOverlayContentTitle';
-import React from 'react';
 
-/**
- * Контент верхнего предупреждения.
- */
-export class TopOverlayContent extends React.Component {
+/** Свойства компонента TopOverlayContent. */
+interface ITopOverlayContentProps {
+    children?: React.ReactNode;
+}
+
+/** Контент верхнего предупреждения. */
+export class TopOverlayContent extends React.Component<ITopOverlayContentProps> {
     public static displayName = 'TopOverlayContent';
     public static Title = TopOverlayContentTitle;
     public static SubTitle = TopOverlayContentSubTitle;

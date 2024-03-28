@@ -2,7 +2,7 @@ import React from 'react';
 import {ESMSInputSize} from './enums';
 import {TestProps} from '@sberbusiness/triplex/types/CoreTypes';
 
-/** Свойство компонента SMSInput. */
+/** Свойства компонента SMSInput. */
 export interface ISMSInputProps extends React.HTMLAttributes<HTMLDivElement>, TestProps {
     /** Значение кода. */
     code: string;

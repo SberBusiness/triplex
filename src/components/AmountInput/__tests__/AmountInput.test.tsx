@@ -1,5 +1,4 @@
 import React from 'react';
-import {allure} from '@jest/unit/allure-report';
 import renderer from 'react-test-renderer';
 import {AmountInput} from '../AmountInput';
 

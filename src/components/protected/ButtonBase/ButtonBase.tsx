@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {EFocusSource} from '@sberbusiness/triplex/enums/EFocusSource';
 
-/** Свойства ButtonBase. */
+/** Свойства компонента ButtonBase. */
 interface IButtonBaseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 /** База для кнопок. */
@@ -81,6 +81,7 @@ export const ButtonBase = React.forwardRef<HTMLButtonElement, IButtonBaseProps>(
             ref={setRef}
             type="button"
             {...rest}
+            data-tinfo="12.0.1"
         >
             {children}
         </button>

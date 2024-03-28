@@ -1,15 +1,9 @@
 import React from 'react';
 
-/**
- * Свойства компонента.
- */
-export interface ITopOverlayContentSubTitleProps extends React.HTMLAttributes<HTMLDivElement> {
-    children?: string;
-}
+/** Свойства компонента TopOverlayContentSubTitle. */
+export interface ITopOverlayContentSubTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Компонент подзаголовка блока с контентом.
- */
+/** Компонент подзаголовка блока с контентом. */
 export const TopOverlayContentSubTitle: React.FC<ITopOverlayContentSubTitleProps> = ({children, ...divHTMLAttributes}) => (
     <div data-test-id="confirm__confirmSubtitle" {...divHTMLAttributes} className="cssClass[topOverlaySubTitle]">
         {children}

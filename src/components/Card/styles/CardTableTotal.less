@@ -10,8 +10,7 @@
     padding: @metric-16;
     box-sizing: border-box;
     border-radius: @radius-16;
-    background: @color-malachite-02;
-    background: linear-gradient(228.47deg, @color-malachite-03 0%, @color-malachite-02 100%);
+    background: linear-gradient(228.47deg, var(--triplex-Primary-500) 0%, var(--triplex-Primary-700) 100%);
     box-shadow: @shadow-02;
     cursor: pointer;
     margin-right: @metric-24;
@@ -22,11 +21,11 @@
 
     .cardTableTotalTitle {
         .h4-header-main-modal();
-
-        color: @color-snowy;
+        color: var(--triplex-Card-TableTotal_Color)
     }
 
     .cardTableTotalDescription {
         .b4-text-info(@color-snowy);
+        color: var(--triplex-Card-TableTotal_Color);
     }
 }

@@ -1,3 +1,4 @@
+/* eslint-env node */
 const webpack = require('webpack');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -34,7 +35,7 @@ module.exports = {
                                 '@babel/preset-env',
                                 {
                                     useBuiltIns: 'usage',
-                                    corejs: 3.32,
+                                    corejs: 3.35,
                                     targets: {
                                         ie: '11',
                                     },
@@ -51,6 +52,7 @@ module.exports = {
                 use: [
                     {loader: path.resolve(__dirname, './cssClassNameReplacer.js')},
                     {loader: 'ts-loader'},
+                    {loader: path.resolve(__dirname, './triplexInfoReplacer.js')},
                 ],
                 exclude: /node_modules/,
             },
@@ -105,6 +107,7 @@ module.exports = {
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
             STYLEGUIDIST_SETTINGS_MODE: false,
+            npm_package_version: process.env.npm_package_version,
         }),
         new CopyPlugin({
             patterns: [

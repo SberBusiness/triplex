@@ -1,13 +1,10 @@
+import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EBodyBackgroundColor} from '@sberbusiness/triplex/components/Body/enums';
-import React from 'react';
 
-/**
- * Свойства компонента.
- *
- * @prop {boolean} [grayBackground] Добавляет серый фон для body.
- */
+/** Свойства компонента Body. */
 export interface IBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Цвет фона. */
     backgroundColor?: EBodyBackgroundColor;
 }
 
@@ -23,6 +20,7 @@ export const Body: React.FC<IBodyProps> = ({children, className, backgroundColor
             'cssClass[withWhiteBackground]': backgroundColor === EBodyBackgroundColor.WHITE,
         })}
         {...htmlDivAttributes}
+        data-tinfo="12.0.0"
     >
         <div className="cssClass[bodyInner]">{children}</div>
     </div>

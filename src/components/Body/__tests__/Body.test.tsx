@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Body} from '../Body';
-import {allure} from '@jest/unit/allure-report';
 
 describe('Body', () => {
     beforeEach(() => {

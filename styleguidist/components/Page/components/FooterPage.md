@@ -29,7 +29,16 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 
 <FooterPage>
     <FooterPage.Description>
-        <FooterPage.Description.Content><Link linkType={ELinkType.TEXT} size={ELinkSize.LG}>Текст ссылки</Link></FooterPage.Description.Content>
+        <FooterPage.Description.Content>
+            <Link
+                href="#"
+                linkType={ELinkType.TEXT}
+                size={ELinkSize.LG}
+                onClick={(event) => event.preventDefault()}
+            >
+                Текст ссылки
+            </Link>
+        </FooterPage.Description.Content>
         <FooterPage.Description.Controls>
             <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
                 Button Name

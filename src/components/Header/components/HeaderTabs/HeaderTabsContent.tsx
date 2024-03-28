@@ -1,12 +1,11 @@
+import React from 'react';
 import {Tabs} from '@sberbusiness/triplex/components/Tabs/Tabs';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import React from 'react';
 
+/** Свойства компонента HeaderTabsContent. */
 interface IHeaderTabsContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- *  Контейнер табов.
- */
+/** Контейнер табов. */
 export class HeaderTabsContent extends React.PureComponent<IHeaderTabsContentProps> {
     public static displayName = 'HeaderTabsContent';
 

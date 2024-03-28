@@ -1,4 +1,3 @@
-import {allure} from '@jest/unit/allure-report';
 import {SliderExtendedUtils} from '../SliderExtendedUtils';
 import {ISliderExtendedDot, ISliderExtendedStep} from '../SliderExtendedContext';
 
