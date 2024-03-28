@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства подвала контента карточки. */
+/** Свойства компонента CardContentFooter. */
 interface ICardContentFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Подвал контента карточки. */

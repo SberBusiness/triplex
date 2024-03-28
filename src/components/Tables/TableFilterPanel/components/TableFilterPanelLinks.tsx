@@ -1,8 +1,10 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента TableFilterPanelLinks. */
-export interface ITableFilterPanelLinksProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ITableFilterPanelLinksProps extends React.HTMLAttributes<HTMLDivElement> {
+    children?: React.ReactNode;
+}
 
 /** Компонент TableFilterPanelLinks. */
 export const TableFilterPanelLinks: React.FC<ITableFilterPanelLinksProps> = ({children, className, ...htmlDivAttributes}): JSX.Element => {

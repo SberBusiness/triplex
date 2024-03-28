@@ -1,12 +1,10 @@
-import {IKeyDownListenerProps, KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
 import React from 'react';
+import {IKeyDownListenerProps, KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
 
-/**
- * Свойства компонента ComposedKeyDownListener.
- *
- * @prop {IKeyDownListenerProps[]} keyDownListeners Массив-конфигуратор keydown слушателей.
- */
+/** Свойства компонента ComposedKeyDownListener. */
 interface IKeyDownListenerManagerProps {
+    children?: React.ReactNode;
+    /** Массив-конфигуратор keydown слушателей. */
     keyDownListeners: IKeyDownListenerProps[];
 }
 

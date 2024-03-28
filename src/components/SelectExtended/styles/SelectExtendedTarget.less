@@ -3,9 +3,10 @@
 .selectExtendedTarget {
     .b2-text-controls-normal(@color-graphite-01);
 
+    color: var(--triplex-Select-Color_Default);
     position: relative;
-    background-color: @color-snowy;
-    border: 1px solid @color-asphalt-03;
+    background: var(--triplex-Select-Background_Default);
+    border: 1px solid var(--triplex-Select-Border_Color_Default);
     border-radius: @ufs-theme-input-border-radius;
     box-sizing: border-box;
     height: @ufs-theme-input-height;
@@ -36,29 +37,37 @@
     .caretIcon {
         transition: transform 0.3s ease;
         transform: rotate(0);
+
+        path {
+            fill: var(--triplex-Select-Caret_Color_Default);
+        }
     }
 
     &.placeholder {
-        color: @color-asphalt-01;
+        color: var(--triplex-Select-Color_Placeholder);
     }
 
     &.selectOpened,
     &:focus {
-        border-color: @color-graphite-01;
+        border-color: var(--triplex-Select-Border_Color_Focus);
     }
 
     &.disabled,
     &.disabled:active,
     &.disabled:focus {
-        color: @color-asphalt-01;
-        border-color: @color-asphalt-03;
-        background-color: @color-asphalt-05;
+        color: var(--triplex-Select-Color_Disabled);
+        border-color: var(--triplex-Select-Border_Color_Disabled);
+        background: var(--triplex-Select-Background_Disabled);
         user-select: none;
         pointer-events: none;
+
+        path {
+            fill: var(--triplex-Select-Caret_Color_Disabled);
+        }
     }
 
     &.error {
-        border-color: @color-ruby-02;
+        border-color: var(--triplex-Select-Border_Color_Error);
     }
 
     &.selectOpened {

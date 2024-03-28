@@ -4,20 +4,22 @@
 
 .modalWindowContainer {
     position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
+    left: var(--modalWindow-screen-left, 0);
+    top: var(--modalWindow-screen-top, 0);
+    width: var(--modalWindow-screen-width, 100%);
     bottom: 0;
     z-index: @z-index-modal-window;
 
     .modalWindowBackdrop {
         .backdropDefault();
+
+        width: var(--modalWindow-screen-width, 100%);
     }
 
     .modalWindow {
         position: fixed;
-        height: 100%;
-        width: 100%;
+        height: calc(100% - var(--modalWindow-screen-top, 0));
+        width: var(--modalWindow-screen-width, 100%);
         overflow-y: scroll;
         overflow-x: hidden;
 
@@ -31,7 +33,6 @@
             .modalWindowContent {
                 margin-top: @ufs-theme-modal-window-top;
                 width: 100%;
-                background: @color-snowy;
 
                 &,
                 .globalSpinnerWidget {
@@ -93,7 +94,7 @@
     }
 }
 
-.modalWindowTransition-exit .modalWindowContainer .modalWindow .modalWindowContentWrapper {
+.modalWindowTransition-exit .modalWindow .modalWindowContentWrapper {
     transform: @ufs-theme-modal-content-translate-exit;
     -ms-transform: @ufs-theme-modal-content-translate-exit-ie11;
     animation: modalWindowContentAnimationOnExit 0.3s ease;

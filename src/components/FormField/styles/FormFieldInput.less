@@ -1,35 +1,25 @@
 @import 'src/styles/style';
 
 .formFieldInput {
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    min-width: 0; // https://stackoverflow.com/questions/43314921/strange-input-widths-in-firefox-vs-chrome
-    line-height: 16px;
-    font-size: 14px;
-    font-family: inherit;
-    padding: 16px 12px;
     height: 48px;
-    width: 100%;
-    box-sizing: border-box;
-    background: @color-snowy;
-    box-shadow: 0 0 0 1px rgba(208, 215, 221, 1) inset;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border: none;
+    box-shadow: var(--triplex-FormField-Shadow_Default);
+
+    &::placeholder {
+        color: var(--triplex-FormField-Placeholder_Color);
+    }
 
     &:focus {
-        box-shadow: 0 0 0 1px rgba(255, 221, 100, 1) inset;
+        box-shadow: var(--triplex-FormField-Shadow_Focus);
     }
 
     &:disabled {
-        color: @color-asphalt-01;
-        background: @color-asphalt-05;
-        box-shadow: 0 0 0 1px rgba(208, 215, 221, 1) inset;
+        box-shadow: var(--triplex-FormField-Shadow_Disabled);
     }
 
     &.error {
-        box-shadow: 0 0 0 1px rgba(193, 16, 48, 1) inset;
-    }
-
-    &::placeholder {
-        color: @color-asphalt-02;
+        box-shadow: var(--triplex-FormField-Shadow_Error);
     }
 }

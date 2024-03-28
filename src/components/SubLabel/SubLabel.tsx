@@ -1,10 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента SubLabel.
- * @prop {string} children Текст подлейбла.
- */
+/** Свойства компонента SubLabel. */
 interface ISubLabelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**

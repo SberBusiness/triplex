@@ -36,7 +36,7 @@ export const MultiselectDropdown: IMultiselectDropdownFC = ({children, opened, t
     }
 
     return (
-        <FocusTrap active={trapActive}>
+        <FocusTrap active={trapActive} focusTrapOptions={{clickOutsideDeactivates: true, preventScroll: true}}>
             <Dropdown opened={opened} fixedWidth={true} targetRef={targetRef} {...rest} ref={forwardedRef}>
                 {children}
             </Dropdown>

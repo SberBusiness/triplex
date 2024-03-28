@@ -1,31 +1,26 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {FooterDescription} from '@sberbusiness/triplex/components/Footer/components/FooterDescription';
 import {TableFooterSummary} from '@sberbusiness/triplex/components/Tables/TableFooter/components/TableFooterSummary';
 import {isIE} from '@sberbusiness/triplex/utils/userAgentUtils';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import {FooterDescriptionControls} from '@sberbusiness/triplex/components/Footer/components/FooterDescriptionControls';
 
-/**
- * Состояние компонента подвала таблицы.
- *
- * @prop {boolean} isFixed Фиксированное позиционирование (прижат к низу окна).
- * @prop {number} footerWidth Ширина подвала в пикселях.
- */
-interface ITableFooterState {
-    isFixed: boolean;
-    footerWidth: number;
-}
-
-/**
- * @prop {boolean} [isLoading] Состояние загрузки.
- */
+/** Свойства компонента TableFooter. */
 interface ITableFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Состояние загрузки. */
     isLoading?: boolean;
 }
 
+/** Состояние компонента TableFooter. */
+interface ITableFooterState {
+    /** Фиксированное позиционирование (прижат к низу окна). */
+    isFixed: boolean;
+    /** Ширина подвала в пикселях. */
+    footerWidth: number;
+}
+
 /** Компонент подвала таблицы. */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export class TableFooter extends React.PureComponent<ITableFooterProps, ITableFooterState> {
     public static displayName = 'TableFooter';
 

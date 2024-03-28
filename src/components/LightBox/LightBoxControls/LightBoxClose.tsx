@@ -7,18 +7,13 @@ import {TriggerClickOnKeyDownEvent} from '@sberbusiness/triplex/components/Trigg
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
 
-/**
- * Свойства компонента кнопки закрытия лайтбокса.
- *
- * @prop {Function} onClick Обработчик закрытия лайтбокса.
- */
+/** Свойства LightBoxClose. */
 interface ILightBoxCloseProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Обработчик закрытия лайтбокса. */
     onClick: () => void;
 }
 
-/**
- * Компонент кнопки закрытия лайтбокса.
- */
+/** Кнопка закрытия лайтбокса. */
 export const LightBoxClose: React.FC<ILightBoxCloseProps> = ({className, onClick, title = 'Закрыть', ...htmlDivAttributes}) => {
     const renderButton = () => (
         <ButtonIcon onClick={onClick} title={title} data-exclude-modal-focus>

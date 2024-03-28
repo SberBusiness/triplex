@@ -3,14 +3,20 @@
 
 .widgetHeaderTitle {
     .h5-header-form(@color-graphite-01);
-
-    padding: @widget-vertical-padding 0;
+    color: var(--triplex-Widget-Title_Color);
+    padding: @widget-vertical-padding 8px;
     margin-right: auto;
+    margin-left: -8px;
+    outline: none;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 1px var(--triplex-Accent-500);
+    }
 }
 
 .widgetHeaderControls {
     white-space: nowrap;
-    padding-left: @metric-32;
+    padding-left: @metric-24;
 }
 
 .widgetHeader {
@@ -29,6 +35,10 @@
         .caretIcon {
             vertical-align: middle;
             transition: transform 0.25s ease-in-out;
+
+            path {
+                fill: var(--triplex-Widget-Caret_Color);
+            }
         }
     }
 
@@ -38,7 +48,7 @@
 
     &:focus {
         &:not(.focusedByClick):focus {
-            border-color: @color-sunny-01;
+            border-color: var(--triplex-Accent-500);
         }
     }
 

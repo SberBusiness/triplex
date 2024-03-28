@@ -10,6 +10,7 @@ export enum EButtonTheme {
 
 /** Размеры кнопки. */
 export enum EButtonSize {
+    LG = 'LG',
     MD = 'MD',
     SM = 'SM',
 }

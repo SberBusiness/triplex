@@ -16,6 +16,8 @@ import {DropdownMobileBody} from '@sberbusiness/triplex/components/Dropdown/mobi
 import {DropdownMobileList} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileList';
 import {DropdownMobileListItem} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileListItem';
 import {DropdownMobileClose} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileClose';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 /** Свойства опции списка. */
 export interface ISelectBaseOption
@@ -37,8 +39,8 @@ export interface ISelectBaseProps
     options: ISelectBaseOption[];
     /** Обработчик изменения значения. */
     onChange: (option: ISelectBaseOption) => void;
-    /** ClassName передающийся в SelectExtended.Target. */
-    targetClassName?: string;
+    /** Свойства, передающиеся в SelectExtended.Target. */
+    targetProps?: Omit<ISelectExtendedTargetProps, 'opened' | 'setOpened'>;
     /** ClassName передающийся в DropdownListItem. */
     dropdownListItemClassName?: string;
     /** Название Select отображающееся в мобильном режиме. */
@@ -60,7 +62,7 @@ export const SelectBase: React.FC<ISelectBaseProps> = ({
     'data-test-id': dataTestId,
     dropdownListItemClassName,
     mobileTitle,
-    targetClassName,
+    targetProps,
     ...rest
 }) => {
     const [activeDescendant, setActiveDescendant] = useState<string>();
@@ -69,7 +71,6 @@ export const SelectBase: React.FC<ISelectBaseProps> = ({
 
     const renderTarget = (props: ISelectExtendedTargetProvideProps) => (
         <SelectExtended.Target
-            className={targetClassName}
             label={value?.label}
             placeholder={placeholder}
             loading={loading}
@@ -81,6 +82,7 @@ export const SelectBase: React.FC<ISelectBaseProps> = ({
             aria-labelledby={ariaLabelledby}
             data-test-id={dataTestId && `${dataTestId}${TestIds.Select.target}`}
             ref={targetRef}
+            {...targetProps}
             {...props}
         />
     );
@@ -99,7 +101,9 @@ export const SelectBase: React.FC<ISelectBaseProps> = ({
                     children: (
                         <>
                             <DropdownMobileHeader closeButton={() => <DropdownMobileClose onClick={() => setOpened(false)} />}>
-                                {mobileTitle}
+                                <Text size={ETextSize.B1} line={ELineType.EXTRA}>
+                                    {mobileTitle}
+                                </Text>
                             </DropdownMobileHeader>
                             <DropdownMobileBody>
                                 <DropdownMobileList>

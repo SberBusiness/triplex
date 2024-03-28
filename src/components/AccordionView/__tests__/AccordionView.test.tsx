@@ -1,10 +1,9 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 import {AccordionView} from '@sberbusiness/triplex/components/AccordionView/AccordionView';
 import {AccordionBase} from '@sberbusiness/triplex/components/AccordionBase/protected/AccordionBase';
 import {AccordionViewHeader} from '@sberbusiness/triplex/components/AccordionView/components/AccordionViewHeader';
-import {allure} from '@jest/unit/allure-report';
-import {shallow} from 'enzyme';
-import renderer from 'react-test-renderer';
-import React from 'react';
 
 jest.mock('@sberbusiness/icons/CaretdownSrvxIcon16', () => ({
     CaretdownSrvxIcon16: 'svg',

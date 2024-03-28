@@ -1,23 +1,17 @@
-import {EMarkerStatus} from '@sberbusiness/triplex/components/Marker/enums';
-import {Marker} from '@sberbusiness/triplex/components/Marker/Marker';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import React from 'react';
+import {Marker} from '@sberbusiness/triplex/components/Marker/Marker';
+import {EMarkerStatus} from '@sberbusiness/triplex/components/Marker/enums';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Интерфейс компонента MarkerStatus.
- *
- * @prop {EMarkerStatus} status Статус.
- * @prop {React.ReactText} children Наименование статуса.
- * @prop {React.ReactText} [description] Дополнительное описание под наименованием статуса.
- */
+/** Свойства компонента MarkerStatus. */
 export interface IMarkerStatusProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Статус. */
     status: EMarkerStatus;
+    /** Дополнительное описание под наименованием статуса. */
     description?: React.ReactNode;
 }
 
-/**
- * Компонент иконки статуса подписи.
- */
+/** Компонент иконки статуса подписи. */
 export class MarkerStatus extends React.PureComponent<IMarkerStatusProps> {
     static displayName = 'MarkerStatus';
 

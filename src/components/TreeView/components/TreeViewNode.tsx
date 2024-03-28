@@ -1,44 +1,34 @@
 import React from 'react';
-import {
-    IWithTreeViewContextProps,
-    TreeViewContext,
-    withTreeViewContext,
-} from '@sberbusiness/triplex/components/TreeView/TreeViewContext';
+import {IWithTreeViewContextProps, TreeViewContext, withTreeViewContext} from '@sberbusiness/triplex/components/TreeView/TreeViewContext';
 import {TreeViewAbstractNode} from '@sberbusiness/triplex/components/TreeView/TreeViewAbstractNode';
 import {TreeViewAbstractNodeUtils} from '@sberbusiness/triplex/components/TreeView/TreeViewAbstractNodeUtils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства передаваемые TreeViewNode в render-функцию children.
- *
- * @prop {boolean} activeNode - Текущая нода является активной при перемещении с клавиатуры.
- * @prop {boolean} openedNode - Состояние ноды - свернута/раскрыта.
- * @prop {boolean} hasChildNodes - Текущая нода имеет дочерние ноды.
- * @prop {Function} setOpenedNode - Функция смены значения opened.
- * @prop {boolean} isLastNode - Текущая нода является последней в дереве.
- */
+/** Свойства передаваемые TreeViewNode в render-функцию children. */
 export interface ITreeViewNodeProvideProps {
+    /** Текущая нода является активной при перемещении с клавиатуры. */
     activeNode: boolean;
+    /** Состояние ноды - свернута/раскрыта. */
     openedNode: boolean;
+    /** Текущая нода имеет дочерние ноды. */
     hasChildNodes: boolean;
+    /** Функция смены значения opened. */
     setOpenedNode: (opened: boolean) => void;
+    /** Текущая нода является последней в дереве. */
     isLastNode: boolean;
 }
 
-/**
- * Свойства TreeViewNode.
- *
- * @param {Function} children - Render-функция дочерних элементов.
- * @param {string} id - Id ноды.
- * @param {boolean} [opened] - Состояние ноды - свернута/раскрыта.
- * @param {string} nextNodeId - Id следующей ноды.
- * @param {string} prevNodeId - Id предыдущей ноды.
- */
-export interface ITreeViewNodeProps extends React.HTMLAttributes<HTMLLIElement> {
+/** Свойства компонента TreeViewNode. */
+export interface ITreeViewNodeProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'children'> {
+    /** Render-функция дочерних элементов. */
     children: (props: ITreeViewNodeProvideProps) => JSX.Element;
+    /** Идентификатор ноды. */
     id: string;
+    /** Состояние ноды - свернута/раскрыта. */
     opened?: boolean;
+    /** Идентификатор следующей ноды. */
     nextNodeId?: string;
+    /** Идентификатор предыдущей ноды. */
     prevNodeId?: string;
 }
 
@@ -157,9 +147,7 @@ export class TreeViewNodeWithContext extends React.Component<ITreeViewNodePropsW
 
     private setContainerDOMNode = (DOMNode: HTMLLIElement) => (this.containerDOMNode = DOMNode);
 
-    /**
-     * Устанавливает флаг opened ноды.
-     */
+    /** Устанавливает флаг opened ноды. */
     private setOpenedNode = () => (opened: boolean) => {
         this.props.treeViewContext.setOpenedNode(this.abstractNode, opened);
     };

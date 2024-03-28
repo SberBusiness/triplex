@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства заголовка контента карточки. */
+/** Свойства CardContentHeader. */
 interface ICardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Заголовок контента карточки. */

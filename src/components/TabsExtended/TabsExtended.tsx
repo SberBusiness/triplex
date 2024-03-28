@@ -5,6 +5,7 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 export type TTabsExtendedOnSelectTab = (id: string) => void;
 
+/** Свойства компонента TabsExtended. */
 export interface ITabsExtendedProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Уникальный идентификатор выбранного таба. */
     selectedId: string;
@@ -12,6 +13,7 @@ export interface ITabsExtendedProps extends React.HTMLAttributes<HTMLDivElement>
     onSelectTab: TTabsExtendedOnSelectTab;
 }
 
+/** Внутренние составляющие компонента TabsExtended. */
 interface ITabsExtendedComposition {
     Content: typeof TabsExtendedContent;
 }
@@ -24,6 +26,7 @@ export const TabsExtended: React.FC<ITabsExtendedProps> & ITabsExtendedCompositi
     onSelectTab,
     ...htmlDivAttributes
 }) => {
+    const [inlineItemsIds, setInlineItemsIds] = useState<string[]>([]);
     const [dropdownItemsIds, setDropdownItemsIds] = useState<string[]>([]);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -36,10 +39,12 @@ export const TabsExtended: React.FC<ITabsExtendedProps> & ITabsExtendedCompositi
     return (
         <TabsExtendedContext.Provider
             value={{
+                inlineItemsIds,
                 dropdownItemsIds,
                 dropdownRef,
                 onSelectTab: handleSelectTab,
                 selectedId,
+                setInlineItemsIds,
                 setDropdownItemsIds,
             }}
         >

@@ -9,45 +9,45 @@
 @ufs-theme-input-padding: @ufs-theme-input-padding-vertical @ufs-theme-input-padding-horizontal;
 @ufs-theme-input-border-radius: 8px;
 
-.inputDisabled() {
-    // fix opacity в iOS Safari.
-    opacity: 1;
-    cursor: default;
-    -webkit-text-fill-color: @color-asphalt-01; // fix цвет в Safari.
-    color: @color-asphalt-01;
-    background-color: @color-asphalt-05;
-}
-
 // Стили по умолчанию для любого поля ввода.
 .input-base() {
-    height: @ufs-theme-input-height;
+    height: 32px;
     min-width: 0; // https://stackoverflow.com/questions/43314921/strange-input-widths-in-firefox-vs-chrome
-    padding: @ufs-theme-input-padding;
+    padding: 7px 11px;
     box-sizing: border-box;
+    font-family: inherit;
     font-size: 14px;
     line-height: 16px;
-    font-family: inherit;
-    color: @color-graphite-01;
+    color: var(--triplex-Input-Color_Default);
+    background: var(--triplex-Input-Background_Default);
+    caret-color: var(--triplex-Input-Caret_Color);
+    border: 1px solid var(--triplex-Input-BorderColor_Default);
     outline: none;
-    border: @ufs-theme-input-border-width solid @color-asphalt-03;
     border-radius: @ufs-theme-input-border-radius;
 
-    &.disabled,
+    &::placeholder {
+        color: var(--triplex-Input-Placeholder_Color);
+        opacity: 1; // На Firefox по-дефолту цвет полупрозрачный
+    }
+
+    &:focus {
+        border-color: var(--triplex-Input-BorderColor_Focus);
+    }
+
     &:disabled {
         .inputDisabled();
     }
 
-    &:focus,
-    &.focus {
-        border-color: @color-graphite-01;
-    }
-
     &.error {
-        border-color: @color-ruby-02;
+        border-color: var(--triplex-Input-BorderColor_Error);
     }
+}
 
-    &::placeholder {
-        color: @color-asphalt-01;
-        opacity: 1; // на FF по дефолту плейсхолдер полупрозрачный, фиксим это.
-    }
+.inputDisabled() {
+    opacity: 1; // fix opacity в iOS Safari.
+    -webkit-text-fill-color: var(--triplex-Input-Color_Disabled); // fix цвет в Safari.
+    color: var(--triplex-Input-Color_Disabled);
+    background: var(--triplex-Input-Background_Disabled);
+    border-color: var(--triplex-Input-BorderColor_Disabled);
+    cursor: default;
 }

@@ -6,6 +6,7 @@ import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/TooltipBody'
 import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
 import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/TooltipTarget';
 
+/** Свойства компонента Step. */
 export interface IStepMarkerProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Номер шага для отображения в кружке. */
     step: number;

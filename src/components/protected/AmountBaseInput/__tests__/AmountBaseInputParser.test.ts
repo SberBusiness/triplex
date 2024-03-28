@@ -1,4 +1,3 @@
-import {allure} from '@jest/unit/allure-report';
 import {AmountBaseInputParser} from '../AmountBaseInputParser';
 
 describe('AmountBaseInputParser', () => {
@@ -31,7 +30,7 @@ describe('AmountBaseInputParser', () => {
             const parser = new AmountBaseInputParser(24, 0);
             const [expected, value] = test;
 
-            parser.apply(value, value.length);
+            parser.apply(value, value.length, '');
 
             expect(parser.getValue()).toBe(expected);
         });
@@ -56,7 +55,7 @@ describe('AmountBaseInputParser', () => {
             const parser = new AmountBaseInputParser(24, 2);
             const [expected, value] = test;
 
-            parser.apply(value, value.length);
+            parser.apply(value, value.length, '');
 
             expect(parser.getValue()).toBe(expected);
         });

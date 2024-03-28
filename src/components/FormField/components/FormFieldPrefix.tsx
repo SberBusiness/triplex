@@ -2,8 +2,11 @@ import React, {useContext, useEffect, useRef} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {FormFieldContext} from '../FormFieldContext';
 
+/** Свойства компонента FormFieldPrefix. */
+interface IFormFieldPrefixProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
 /** Контейнер элементов, отображающихся в левой части FormField. */
-export const FormFieldPrefix = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+export const FormFieldPrefix = React.forwardRef<HTMLSpanElement, IFormFieldPrefixProps>(
     ({children, className, ...htmlSpanAttributes}, ref) => {
         const classNames = classnames('cssClass[formFieldPrefix]', className);
         const {prefixWidth, setPrefixWidth} = useContext(FormFieldContext);

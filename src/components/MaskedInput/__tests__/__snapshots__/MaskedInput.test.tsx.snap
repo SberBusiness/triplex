@@ -5,11 +5,12 @@ exports[`MaskedInput renders correctly 1`] = `
   className="cssClass[maskedInputWrapper]"
 >
   <input
+    aria-hidden="true"
     className="cssClass[input] cssClass[maskedInputPlaceholder]"
     onChange={[Function]}
+    placeholder=""
     readOnly={true}
     tabIndex={-1}
-    value=""
   />
   <input
     className="cssClass[maskedInput]"

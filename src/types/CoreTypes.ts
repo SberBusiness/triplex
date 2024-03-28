@@ -5,10 +5,3 @@
 export interface TestProps {
     'data-test-id'?: string;
 }
-
-/**
- * Интерфейс для описания хэш-мапов, в которых ключ является строкой.
- */
-export interface IStringHashMap<TValue> {
-    [prop: string]: TValue;
-}

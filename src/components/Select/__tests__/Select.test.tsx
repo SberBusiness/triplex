@@ -1,7 +1,7 @@
 import React from 'react';
-import {create} from 'react-test-renderer';
+import renderer from 'react-test-renderer';
+import '../../../tests/mock/matchMedia.mock';
 import {ISelectOption, Select} from '../Select';
-import {allure} from '@jest/unit/allure-report';
 
 jest.mock('@sberbusiness/icons/CaretdownSrvxIcon16', () => ({
     CaretdownSrvxIcon16: 'svg',
@@ -35,10 +35,11 @@ describe('Select', () => {
             {value: 'i3', label: 'Третий'},
         ];
 
-        const tree = create(
+        const tree = renderer.create(
             <Select data-test-id="Select" options={options} placeholder="Placeholder" value={options[0]} onChange={jest.fn()} />
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(tree.toJSON()).toMatchSnapshot();
+        tree.unmount();
     });
 });

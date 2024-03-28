@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства тела содержимого карточки. */
+/** Свойства компонента CardContentBody. */
 interface ICardContentBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Тело контента карточки. */

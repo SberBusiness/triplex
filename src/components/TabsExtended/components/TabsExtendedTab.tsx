@@ -1,13 +1,19 @@
 import React, {useContext} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TabsExtendedContext} from '../TabsExtendedContext';
+import {TabsExtendedTabContext} from './TabsExtendedTabContext';
 
 export interface ITabsExtendedItemProvideProps {
     /** Выбранное состояние. */
     selected: boolean;
+    /** Первый таб. */
+    isFirstInlineTab: boolean;
+    /** Последний, отображаемый в строке таб. */
+    isLastInlineTab: boolean;
 }
 
-export interface ITabsExtendedTabProps extends React.HTMLAttributes<HTMLSpanElement> {
+/** Свойства компонента TabsExtendedTab. */
+export interface ITabsExtendedTabProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
     id: string;
     children: (props: ITabsExtendedItemProvideProps) => React.ReactNode;
 }
@@ -18,25 +24,38 @@ export interface ITabsExtendedTabProps extends React.HTMLAttributes<HTMLSpanElem
  */
 export const TabsExtendedTab = React.forwardRef<HTMLSpanElement, ITabsExtendedTabProps>(
     ({children, id, className, onClick, ...htmlSpanAttributes}, ref) => {
-        const {dropdownItemsIds, selectedId, onSelectTab} = useContext(TabsExtendedContext);
+        const {dropdownItemsIds, inlineItemsIds, selectedId, onSelectTab} = useContext(TabsExtendedContext);
+        const {isFakeTab} = useContext(TabsExtendedTabContext);
 
         const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
             onSelectTab(id);
             onClick?.(event);
         };
 
+        // Возвращает id таба. Если таб отображается в Dropdown, или это fakeTab, возвращается undefined, чтобы не было 2-х элементов в DOM с одинаковыми ID.
+        const getId = () => {
+            if (isFakeTab || dropdownItemsIds.includes(id)) {
+                return undefined;
+            }
+            return id;
+        };
+
         return (
             <span
-                id={id}
+                id={getId()}
                 className={classnames('cssClass[tabsExtendedTab]', {'cssClass[hidden]': dropdownItemsIds.includes(id)}, className)}
-                onClick={handleClick}
+                onClick={isFakeTab ? undefined : handleClick}
                 {...htmlSpanAttributes}
                 role="presentation"
                 // Нужен для идентификации таба компонентом TabsWrapper.
                 data-tab-item-id={id}
-                ref={ref}
+                ref={isFakeTab ? undefined : ref}
             >
-                {children({selected: selectedId === id})}
+                {children({
+                    selected: selectedId === id,
+                    isFirstInlineTab: inlineItemsIds[0] === id,
+                    isLastInlineTab: inlineItemsIds[inlineItemsIds.length - 1] === id,
+                })}
             </span>
         );
     }

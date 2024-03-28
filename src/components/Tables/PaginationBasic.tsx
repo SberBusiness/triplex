@@ -7,51 +7,49 @@ import React from 'react';
 import {getDataHTMLAttributes, TDataHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/DataAttributes';
 import {TestIds} from '@sberbusiness/triplex/dataTestIds/dataTestIds';
 import {Select, ISelectOption} from '@sberbusiness/triplex/components/Select/Select';
+import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 
-/**
- * Пагинация для таблицы.
- * @prop rowNumberOptions Опции отображения количества строк в таблице.
- * @prop [rowNumber] Количество записей на страницу.
- * @prop onSelectRowNumber Функция при выборе опции количества строк в таблице.
- * @prop currentPageNumber Номер текущей страницы в таблице.
- * @prop paginationLabel Текст лейбла пагинации.
- * @prop hasPrevPage Имеется ли предыдущая страница.
- * @prop hasNextPage Имеется ли следующая страница.
- * @prop onClickPrevPage Функция при смене страницы на предыдущую.
- * @prop onClickNextPage Функция при смене страницы на следующую.
- * @prop [isLoading] Состояние загрузки.
- * @prop [dataAttributes] Data-атрибуты.
- */
+/** Свойства компонента TableBasicPagination. */
 interface ITableBasicPaginationProps {
+    /** Опции отображения количества строк в таблице. */
     rowNumberOptions: number[];
+    /** Количество записей на страницу. */
     rowNumber?: number;
+    /** Функция при выборе опции количества строк в таблице. */
     onSelectRowNumber: (option: number) => void;
+    /** Номер текущей страницы в таблице. */
     currentPageNumber: number;
+    /** Текст лейбла пагинации. */
     paginationLabel: string;
+    /** Имеется ли предыдущая страница. */
     hasPrevPage: boolean;
+    /** Имеется ли следующая страница. */
     hasNextPage: boolean;
+    /** Функция при смене страницы на предыдущую. */
     onClickPrevPage: () => void;
+    /** Функция при смене страницы на следующую. */
     onClickNextPage: () => void;
     children?: never;
+    /** Состояние загрузки. */
     isLoading?: boolean;
+    /** Data-атрибуты. */
     dataAttributes?: TDataHTMLAttributes;
+    /** Свойства кнопки "Предыдущая страница". */
+    buttonPrevProps?: Partial<IButtonIconProps>;
+    /** Свойства кнопки "Следующая страница". */
+    buttonNextProps?: Partial<IButtonIconProps>;
 }
 
 /** Компонент пагинации для таблицы. */
 export class PaginationBasic extends React.PureComponent<ITableBasicPaginationProps> {
     public static displayName = 'PaginationBasic';
 
+    // Уникальный id, для передачи aria-атрибутов accessibility.
+    private instanceId = `PaginationBasic-${uniqueId()}`;
+
     public render(): JSX.Element {
-        const {
-            rowNumberOptions,
-            rowNumber,
-            currentPageNumber,
-            hasNextPage,
-            hasPrevPage,
-            isLoading,
-            paginationLabel,
-            dataAttributes,
-        } = this.props;
+        const {rowNumberOptions, rowNumber, currentPageNumber, hasNextPage, hasPrevPage, isLoading, paginationLabel, dataAttributes} =
+            this.props;
         const dataTestId = dataAttributes ? dataAttributes['test-id'] : undefined;
 
         const options: ISelectOption[] = rowNumberOptions.map((o) => ({label: o, value: String(o)}));
@@ -61,13 +59,16 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
         return (
             <div className="cssClass[paginationWrapper]" {...(Boolean(dataAttributes) && getDataHTMLAttributes(dataAttributes!))}>
                 <div className="cssClass[paginationSelectBlock]">
-                    <div className="cssClass[paginationSelectText]">{paginationLabel}</div>
+                    <div className="cssClass[paginationSelectText]" id={this.instanceId}>
+                        {paginationLabel}
+                    </div>
                     <div className="cssClass[paginationSelect]">
                         <Select
                             options={options}
                             value={selectedOption}
                             onChange={this.onSelectRowNumber}
                             disabled={isLoading}
+                            aria-labelledby={this.instanceId}
                             data-test-id={dataTestId && `${dataTestId}${TestIds.Tables.PaginationBasic.select}`}
                         />
                     </div>
@@ -82,6 +83,7 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
                     <span
                         className="cssClass[pageNumber]"
                         data-test-id={dataTestId && `${dataTestId}${TestIds.Tables.PaginationBasic.pageNumber}`}
+                        aria-live="polite"
                     >
                         {currentPageNumber}
                     </span>
@@ -92,17 +94,17 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
     }
 
     private renderPrevButton = (dataTestId: string | undefined) => {
-        const {hasPrevPage, onClickPrevPage} = this.props;
+        const {buttonPrevProps, hasPrevPage, onClickPrevPage} = this.props;
         const dti = dataTestId && `${dataTestId}${TestIds.Tables.PaginationBasic.prevPage}`;
 
-        return this.renderButtonIcon(<PaginatorleftNavIcon32 />, hasPrevPage, {onClick: onClickPrevPage}, dti);
+        return this.renderButtonIcon(<PaginatorleftNavIcon32 />, hasPrevPage, {...buttonPrevProps, onClick: onClickPrevPage}, dti);
     };
 
     private renderNextButton = (dataTestId: string | undefined) => {
-        const {hasNextPage, onClickNextPage} = this.props;
+        const {buttonNextProps, hasNextPage, onClickNextPage} = this.props;
         const dti = dataTestId && `${dataTestId}${TestIds.Tables.PaginationBasic.nextPage}`;
 
-        return this.renderButtonIcon(<PaginatorrightNavIcon32 />, hasNextPage, {onClick: onClickNextPage}, dti);
+        return this.renderButtonIcon(<PaginatorrightNavIcon32 />, hasNextPage, {...buttonNextProps, onClick: onClickNextPage}, dti);
     };
 
     private renderButtonIcon = (icon: JSX.Element, isActive: boolean, buttonProps: Partial<IButtonIconProps>, dti?: string) => {
@@ -112,7 +114,7 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
         return (
             <span
                 className={classnames({
-                    'cssClass[disable]': disabled,
+                    'cssClass[disabled]': disabled,
                     'cssClass[paginationIteratorButton]': true,
                 })}
             >

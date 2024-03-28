@@ -3,6 +3,7 @@ import {SearchSrvIcon20} from '@sberbusiness/icons/SearchSrvIcon20';
 import './styles.less';
 
 interface TableOfContentsRendererProps {
+    children: React.ReactNode;
     searchTerm: string;
     onSearchTermChange(term: string): void;
 }

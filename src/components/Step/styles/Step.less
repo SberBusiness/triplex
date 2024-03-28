@@ -1,7 +1,11 @@
 @import 'src/styles/style';
 
 .globalStep {
-    .b3-text-controls-medium(@color-snowy);
+    .font-medium();
+    .font-size-inline(@font-size-14);
+
+    text-transform: none;
+    color: var(--triplex-Basic-100);
 
     display: flex;
     flex-shrink: 0; //ie11-fix
@@ -17,29 +21,29 @@
     border-radius: 50%;
 
     &.wait {
-        color: @color-malachite-02;
-        background-color: @color-snowy;
-        border-color: @color-malachite-02;
+        color: var(--triplex-Primary-700);
+        background-color: var(--triplex-Basic-100);
+        border-color: var(--triplex-Primary-700);
     }
 
     &.disabled {
-        color: @color-asphalt-02;
-        background-color: @color-snowy;
+        color: var(--triplex-Neutral-700);
+        background-color: var(--triplex-Basic-100);
     }
 
     &.success {
-        color: @color-snowy;
-        background-color: @color-malachite-02;
+        color: var(--triplex-Basic-100);
+        background-color: var(--triplex-Primary-700);
     }
 
     &.warning {
-        color: @color-pumpkin-02;
-        background-color: @color-snowy;
-        border-color: @color-pumpkin-02;
+        color: var(--triplex-Warning-700);
+        background-color: var(--triplex-Basic-100);
+        border-color: var(--triplex-Warning-700);
     }
 
     &.error {
-        color: @color-snowy;
-        background-color: @color-ruby-02;
+        color: var(--triplex-Basic-100);
+        background-color: var(--triplex-Error-700);
     }
 }

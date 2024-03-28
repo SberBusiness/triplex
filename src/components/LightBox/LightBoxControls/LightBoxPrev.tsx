@@ -9,19 +9,17 @@ import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import React from 'react';
 import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
 
-/**
- * Свойства LightBoxPrev.
- *
- * @prop {boolean} [clickByArrowLeft] - Кликнуть по кнопке при нажатии стрелки влево на клавиатуре.
- * @prop {Function} onClick Обработчик клика по кнопке.
- * @prop {string} dataTutorialId.
- */
+/** Свойства LightBoxPrev. */
 interface ILightBoxPrevProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Кликнуть по кнопке при нажатии стрелки влево на клавиатуре. */
     clickByArrowLeft?: boolean;
+    /** Обработчик клика по кнопке. */
     onClick: () => void;
+    /** Идентификатор для обучающего тура. */
     dataTutorialId?: string;
 }
 
+/** Стрелка лайтбокса "Назад". */
 export const LightBoxPrev: React.FC<ILightBoxPrevProps> = ({
     className,
     clickByArrowLeft,

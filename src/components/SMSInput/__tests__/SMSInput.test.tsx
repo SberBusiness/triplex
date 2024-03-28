@@ -1,4 +1,3 @@
-import {allure} from '@jest/unit/allure-report';
 import renderer from 'react-test-renderer';
 import React from 'react';
 import {SMSInput} from '../SMSInput';

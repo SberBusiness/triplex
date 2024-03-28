@@ -1,19 +1,18 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {ButtonIcon, IButtonIconProps} from '@sberbusiness/triplex/components/Button/ButtonIcon';
-import {ClosetooltipSrvxIcon16} from '@sberbusiness/icons/ClosetooltipSrvxIcon16';
+import {ClosenotificationSrvxIcon16} from '@sberbusiness/icons/ClosenotificationSrvxIcon16';
 
+/** Свойства компонента DropdownMobileClose. */
 export interface IDropdownMobileCloseProps extends IButtonIconProps {
     children?: never;
 }
 
-/**
- * Элемент закрытия мобильного Dropdown.
- */
+/** Кнопка закрытия мобильной версии Dropdown. */
 export const DropdownMobileClose = React.forwardRef<HTMLButtonElement, IDropdownMobileCloseProps>(
     ({className, ...buttonIconProps}, ref) => (
         <ButtonIcon className={classnames('cssClass[dropdownMobileClose]', className)} ref={ref} {...buttonIconProps}>
-            <ClosetooltipSrvxIcon16 />
+            <ClosenotificationSrvxIcon16 />
         </ButtonIcon>
     )
 );

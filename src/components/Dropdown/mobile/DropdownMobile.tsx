@@ -2,12 +2,14 @@ import React, {useEffect} from 'react';
 import {EOverlayDirection, IOverlayChildrenProvideProps, OverlayBase} from '@sberbusiness/triplex/components/Overlay/OverlayBase';
 import {DropdownMobileInner} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileInner';
 
+/** Свойства компонента DropdownMobile. */
 export interface IDropdownMobileProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Открыт. */
     opened: boolean;
     /** Устанавливает флаг opened. */
     setOpened: (opened: boolean) => void;
 }
+
 const dropdownMobileBodyOverflowClassName = 'cssClass[dropdownMobileBodyOverflow]';
 
 /** Мобильная версия Dropdown. */

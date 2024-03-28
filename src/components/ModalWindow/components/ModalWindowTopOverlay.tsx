@@ -1,7 +1,7 @@
 import React from 'react';
 import {ITopOverlayConfirmProps, TopOverlayConfirm} from '@sberbusiness/triplex/components/TopOverlay/TopOverlayConfirm';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {ModalFocusOnMount} from '@sberbusiness/triplex/components/ModalFocusManager/ModalFocusOnMount';
+import FocusTrap from 'focus-trap-react';
 
 /**
  * Свойства ModalWindowTopOverlay.
@@ -18,11 +18,11 @@ export class ModalWindowTopOverlay extends React.PureComponent<ModalWindowTopOve
         const {isOpen} = this.props;
 
         return (
-            <div className={classnames('cssClass[modalWindowTopOverlayWrapper]')} {...(isOpen && {[overlayDataAttributeIsOpen]: true})}>
-                <ModalFocusOnMount disabled={!isOpen}>
+            <FocusTrap active={isOpen} focusTrapOptions={{clickOutsideDeactivates: true}}>
+                <div className={classnames('cssClass[modalWindowTopOverlayWrapper]')} {...(isOpen && {[overlayDataAttributeIsOpen]: true})}>
                     <TopOverlayConfirm {...this.props} />
-                </ModalFocusOnMount>
-            </div>
+                </div>
+            </FocusTrap>
         );
     }
 }

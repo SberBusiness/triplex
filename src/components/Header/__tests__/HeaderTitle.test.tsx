@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {HeaderTitle} from '../components/HeaderTitle/HeaderTitle';
-import {allure} from '@jest/unit/allure-report';
 
 describe('HeaderTitle', () => {
     beforeEach(() => {

@@ -3,6 +3,7 @@ import '../styles/ComponentControlCheckbox.less';
 
 /** Свойства ComponentControlCheckbox. */
 interface IComponentControlCheckboxProps {
+    children: React.ReactNode;
     checked: boolean;
     setChecked: (checked: boolean) => void;
 }

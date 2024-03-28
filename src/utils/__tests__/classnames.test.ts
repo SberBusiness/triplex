@@ -1,5 +1,4 @@
 import {classnames} from '../classnames/classnames';
-import {allure} from '@jest/unit/allure-report';
 
 describe('classnames', () => {
     beforeEach(() => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства боковой панели StatusTracker. */
+/** Свойства компонента StatusTrackerSidebar. */
 export interface StatusTrackerSidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Боковая панель StatusTracker. */

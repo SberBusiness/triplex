@@ -1,10 +1,11 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Блок с кнопками действий HeaderTabs.
- */
-export class HeaderTabsControls extends React.Component<React.HTMLAttributes<HTMLDivElement>> {
+/** Свойства компонента HeaderTabsControls. */
+interface IHeaderTabsControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+/** Блок с кнопками действий HeaderTabs. */
+export class HeaderTabsControls extends React.Component<IHeaderTabsControlsProps> {
     public static displayName = 'HeaderTabsControls';
 
     public render(): React.ReactNode {

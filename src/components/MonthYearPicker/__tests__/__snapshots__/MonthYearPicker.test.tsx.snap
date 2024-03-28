@@ -5,18 +5,18 @@ exports[`MonthYearPicker renders correctly 1`] = `
   className="cssClass[monthYearPicker]"
 >
   <div
-    className="cssClass[inputBlock]"
+    className="cssClass[monthYearInput]"
   >
-    <div
-      className="cssClass[pseudoInput]"
+    <input
+      className="cssClass[input]"
       onFocus={[Function]}
-      tabIndex={0}
-    >
-      Jan 1970
-    </div>
+      placeholder="мм.гггг"
+      readOnly={true}
+      value="Jan 1970"
+    />
     <span
       aria-hidden="true"
-      className="cssClass[calendarIcon]"
+      className="cssClass[calendarIcon] hoverable"
       onMouseDown={[Function]}
     >
       <svg />

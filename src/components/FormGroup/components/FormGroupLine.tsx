@@ -1,6 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента FormGroupLine. */
 interface IFormGroupLineProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Flex режим. */
     flex?: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства тела StatusTracker. */
+/** Свойства компонента StatusTrackerBody. */
 export interface StatusTrackerBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Тело StatusTracker. */

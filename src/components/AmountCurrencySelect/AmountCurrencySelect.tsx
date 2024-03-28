@@ -11,11 +11,13 @@ import {ISelectExtendedDropdownProvideProps, ISelectExtendedTargetProvideProps, 
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
 
 /** Свойства AmountCurrencySelect. */
-export interface IAmountCurrencySelectProps extends Omit<IInputProps, 'type' | 'onChange' | 'onSelect'>, TestProps {
+export interface IAmountCurrencySelectProps extends Omit<IInputProps, 'type' | 'maxLength' | 'onChange' | 'onSelect'>, TestProps {
+    /** Значение.  */
     value: string;
-    onChange: (value: string) => void;
+    /** Максимальное количество знаков перед запятой. */
+    maxIntegerDigits?: number;
     /** Количество знаков после запятой. */
-    fractionLength?: number;
+    fractionDigits?: number;
     /** Выбранная валюта. */
     currency: ISelectOption | null;
     /** Список валют. */
@@ -26,6 +28,8 @@ export interface IAmountCurrencySelectProps extends Omit<IInputProps, 'type' | '
     loading?: boolean;
     /** Свойства компонента выбора валюты. */
     currencyProps?: ISelectProps;
+    /** Обработчик изменения значения. */
+    onChange: (value: string) => void;
 }
 
 /** Состояния AmountCurrencySelect. */
@@ -46,7 +50,7 @@ export class AmountCurrencySelect extends React.Component<IAmountCurrencySelectP
     };
 
     public static defaultProps = {
-        fractionLength: 2,
+        fractionDigits: 2,
     };
 
     private instanceId = uniqueId();
@@ -102,7 +106,7 @@ export class AmountCurrencySelect extends React.Component<IAmountCurrencySelectP
                     className="cssClass[currencySelectExtended]"
                     data-test-id={dataTestId && `${dataTestId}${TestIds.AmountCurrencySelect.select}`}
                     renderTarget={renderTarget}
-                    closeOnTab={true}
+                    closeOnTab
                 >
                     {({
                         className: dropdownClassName,

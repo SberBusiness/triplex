@@ -1,29 +1,27 @@
 ```jsx
 import {ESpinnerSize} from '@sberbusiness/triplex/components/Spinner/enum';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
-const [size, setSize] = React.useState(ESpinnerSize.MD);
-const [text, setText] = React.useState('');
+<div style={{'position': 'relative', 'height': '200px'}}>
+    <SpinnerWidget size={ESpinnerSize.MD} />
+</div>
+```
 
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={size}
-            setValue={setSize}
-            options={Object.values(ESpinnerSize)}
-        >
-            Spinner size
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Text value={text} setValue={setText}>
-            Spinner text
-        </ComponentControlPanel.Text>
-    </ComponentControlPanel>
-);
+### Small size
 
-<>
-    {renderControlPanel()}
-    <div style={{'position': 'relative', 'height': '600px'}}>
-        <SpinnerWidget size={size}>{text}</SpinnerWidget>
-    </div>
-</>;
+```jsx
+import {ESpinnerSize} from '@sberbusiness/triplex/components/Spinner/enum';
+
+<div style={{'position': 'relative', 'height': '200px'}}>
+    <SpinnerWidget size={ESpinnerSize.SM} />
+</div>
+```
+
+### With message
+
+```jsx
+import {ESpinnerSize} from '@sberbusiness/triplex/components/Spinner/enum';
+
+<div style={{'position': 'relative', 'height': '200px'}}>
+    <SpinnerWidget size={ESpinnerSize.SM}>Текст сообщения</SpinnerWidget>
+</div>
 ```

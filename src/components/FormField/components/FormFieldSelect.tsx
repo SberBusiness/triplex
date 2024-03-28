@@ -7,9 +7,17 @@ import {FormFieldContext} from '../FormFieldContext';
 export interface IFormFieldSelectProps extends ISelectProps {}
 
 /** Компонент, отображающий select. */
-export const FormFieldSelect: React.FC<IFormFieldSelectProps> = ({className, onBlur, onFocus, placeholder, value, ...selectProps}) => {
+export const FormFieldSelect: React.FC<IFormFieldSelectProps> = ({
+    className,
+    onBlur,
+    onFocus,
+    placeholder,
+    targetProps,
+    value,
+    ...selectProps
+}) => {
     const selectClassNames = classnames('cssClass[formFieldSelect]', className);
-    const selectTargetClassNames = classnames('cssClass[formFieldSelectTarget]', className);
+    const selectTargetClassNames = classnames('cssClass[formFieldSelectTarget]', targetProps?.className, className);
     const {focused, setFocused, setValueExist} = useContext(FormFieldContext);
 
     useEffect(() => {
@@ -29,7 +37,10 @@ export const FormFieldSelect: React.FC<IFormFieldSelectProps> = ({className, onB
     // TODO. Добавить возможность передавать в рендер функцию любой select, например SelectExtended.
     return (
         <SelectBase
-            targetClassName={selectTargetClassNames}
+            targetProps={{
+                ...targetProps,
+                className: selectTargetClassNames,
+            }}
             dropdownListItemClassName="cssClass[formFieldSelectDropdownListItem]"
             {...selectProps}
             className={selectClassNames}

@@ -3,7 +3,6 @@ import moment from 'moment';
 import renderer from 'react-test-renderer';
 import {getFormattedDate} from '@sberbusiness/triplex/utils/dateUtils';
 import {Calendar} from '../Calendar';
-import {allure} from '@jest/unit/allure-report';
 
 jest.mock('@sberbusiness/icons/CaretleftSrvxIcon24', () => ({
     CaretleftSrvxIcon24: 'svg',

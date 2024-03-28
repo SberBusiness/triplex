@@ -1,10 +1,11 @@
-import {CalendarSrvIcon20} from '@sberbusiness/icons/CalendarSrvIcon20';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {defaultMonthYearPlaceholder} from '@sberbusiness/triplex/components/MonthYearPicker/const';
-import {IInputProps} from '@sberbusiness/triplex/components/Input/Input';
 import React from 'react';
+import {CalendarSrvIcon20} from '@sberbusiness/icons/CalendarSrvIcon20';
+import {defaultMonthYearPlaceholder} from '@sberbusiness/triplex/components/MonthYearPicker/const';
+import {Input, IInputProps} from '@sberbusiness/triplex/components/Input/Input';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-export interface IMonthYearInputProps extends IInputProps {
+/** Свойства компонента MonthYearInput. */
+export interface IMonthYearInputProps extends Omit<IInputProps, 'groupPosition'> {
     /** Состояние фокусировки элемента. */
     focused?: boolean;
     /** Обработчик фокусировки на элементе. */
@@ -12,30 +13,26 @@ export interface IMonthYearInputProps extends IInputProps {
 }
 
 /** Поля ввода для компонента выбора даты. */
-export class MonthYearInput extends React.PureComponent<IMonthYearInputProps> {
-    public render(): JSX.Element {
-        const {error, focused, disabled, placeholder, value, ...inputProps} = this.props;
-        const inputClassNames = classnames('cssClass[pseudoInput]', {
+export const MonthYearInput: React.FC<IMonthYearInputProps> = (props) => {
+    const {value, placeholder = defaultMonthYearPlaceholder, disabled, error, focused, ...rest} = props;
+
+    const renderIcon = () => {
+        const classNames = classnames('cssClass[calendarIcon]', 'hoverable', {
+            'cssClass[active]': Boolean(focused),
             'cssClass[disabled]': Boolean(disabled),
-            'cssClass[error]': Boolean(error),
-            'cssClass[focus]': Boolean(focused),
-        });
-        const iconClassNames = classnames({
-            'cssClass[calendarIcon]': true,
-            'cssClass[disabled]': Boolean(disabled),
-            'cssClass[error]': Boolean(error),
-            'cssClass[focused]': Boolean(focused),
         });
 
         return (
-            <div className="cssClass[inputBlock]">
-                <div {...inputProps} className={inputClassNames} tabIndex={disabled ? undefined : 0}>
-                    {value || <span className="cssClass[placeholder]">{placeholder || defaultMonthYearPlaceholder}</span>}
-                </div>
-                <span aria-hidden="true" className={iconClassNames} onMouseDown={this.props.onFocus}>
-                    <CalendarSrvIcon20 />
-                </span>
-            </div>
+            <span aria-hidden="true" className={classNames} onMouseDown={props.onFocus}>
+                <CalendarSrvIcon20 />
+            </span>
         );
-    }
-}
+    };
+
+    return (
+        <div className="cssClass[monthYearInput]">
+            <Input {...rest} value={value} placeholder={placeholder} readOnly={true} disabled={disabled} error={error} />
+            {renderIcon()}
+        </div>
+    );
+};

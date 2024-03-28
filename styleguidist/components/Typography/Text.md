@@ -1,57 +1,91 @@
+### Text sizes
+
 ```jsx
-import {ETextSize, EFontType, EFontWeight, ELineType} from '@sberbusiness/triplex/components/Typography/enums';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
-const [type, setType] = React.useState(EFontType.GENERAL);
-const [weight, setWeight] = React.useState(EFontWeight.REGULAR);
-const [line, setLine] = React.useState(ELineType.NORMAL);
-const [underline, setUnderline] = React.useState(false);
-const [strikethrough, setStrikethrough] = React.useState(false);
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Text size={ETextSize.B1}>Sample Text B1</Text>
+    <Text size={ETextSize.B2}>Sample Text B2</Text>
+    <Text size={ETextSize.B3}>Sample Text B3</Text>
+</div>
+```
 
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Select
-            value={type}
-            setValue={setType}
-            options={Object.values(EFontType)}
-        >
-            Font type
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={weight}
-            setValue={setWeight}
-            options={Object.values(EFontWeight)}
-        >
-            Font weight
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Select
-            value={line}
-            setValue={setLine}
-            options={Object.values(ELineType)}
-        >
-            Line type
-        </ComponentControlPanel.Select>
-        <ComponentControlPanel.Checkbox checked={underline} setChecked={setUnderline}>
-            Underline
-        </ComponentControlPanel.Checkbox>
-        <ComponentControlPanel.Checkbox checked={strikethrough} setChecked={setStrikethrough}>
-            Strikethrough
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
+### Font types
 
-<>
-    {renderControlPanel()}
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-        <Text size={ETextSize.B1} type={type} weight={weight} line={line} underline={underline} strikethrough={strikethrough}>
-            B1 Шаблонный текст
-        </Text>
-        <Text size={ETextSize.B2} type={type} weight={weight} line={line} underline={underline} strikethrough={strikethrough}>
-            B2 Шаблонный текст
-        </Text>
-        <Text size={ETextSize.B3} type={type} weight={weight} line={line} underline={underline} strikethrough={strikethrough}>
-            B3 Шаблонный текст
-        </Text>
-    </div>
-</>
+```jsx
+import {ETextSize, EFontType} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Text size={ETextSize.B1} type={EFontType.GENERAL}>
+        General
+    </Text>
+    <Text size={ETextSize.B1} type={EFontType.SECONDARY}>
+        Secondary
+    </Text>
+    <Text size={ETextSize.B1} type={EFontType.SUCCESS}>
+        Success
+    </Text>
+    <Text size={ETextSize.B1} type={EFontType.WARNING}>
+        Warning
+    </Text>
+    <Text size={ETextSize.B1} type={EFontType.DANGER}>
+        Danger
+    </Text>
+    <Text size={ETextSize.B1} type={EFontType.DISABLED}>
+        Disabled
+    </Text>
+</div>
+```
+
+### Font weights
+
+```jsx
+import {ETextSize, EFontWeight} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Text size={ETextSize.B1} weight={EFontWeight.LIGHT}>
+        Light
+    </Text>
+    <Text size={ETextSize.B1} weight={EFontWeight.REGULAR}>
+        Regular
+    </Text>
+    <Text size={ETextSize.B1} weight={EFontWeight.SEMIBOLD}>
+        Semibold
+    </Text>
+    <Text size={ETextSize.B1} weight={EFontWeight.BOLD}>
+        Bold
+    </Text>
+</div>
+```
+
+### Line types
+
+```jsx
+import {ETextSize, ELineType} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Text size={ETextSize.B1} line={ELineType.NORMAL}>
+        Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal
+        Normal Normal Normal Normal Normal Normal Normal Normal Normal Normal
+    </Text>
+    <Text size={ETextSize.B1} line={ELineType.EXTRA}>
+        Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra
+        Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra Extra
+    </Text>
+</div>
+```
+
+### States
+
+```jsx
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
+
+<div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <Text size={ETextSize.B1} underline>
+        Underline
+    </Text>
+    <Text size={ETextSize.B1} strikethrough>
+        Strikethrough
+    </Text>
+</div>
 ```

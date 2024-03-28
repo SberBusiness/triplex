@@ -1,8 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {allure} from '@jest/unit/allure-report';
-import {ModalWindowBasicMD} from '../ModalWindowBasicMD';
 import {
+    ModalWindow,
     ModalWindowBody,
     ModalWindowContent,
     ModalWindowFooter,
@@ -13,6 +12,7 @@ import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button/enums';
 
 import {Header} from '../../Header/Header';
+import {EModalWindowSize} from '@sberbusiness/triplex/components/ModalWindow/enums';
 
 jest.mock('@sberbusiness/icons/SpinnersmallwhiteAniIcon20', () => ({
     SpinnersmallwhiteAniIcon20: 'svg',
@@ -42,8 +42,8 @@ jest.mock('@sberbusiness/icons/SpinnerlargeAniIcon64', () => ({
     SpinnerlargeAniIcon64: 'svg',
 }));
 
-jest.mock('@sberbusiness/icons/ClosetooltipSrvxIcon16', () => ({
-    ClosetooltipSrvxIcon16: 'svg',
+jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
+    ClosenotificationSrvxIcon16: 'svg',
 }));
 
 const handleCloseClick = () => null;
@@ -61,7 +61,8 @@ describe.skip('ModalWindow', () => {
         // document.body.appendChild(newDiv);
         const tree = renderer
             .create(
-                <ModalWindowBasicMD isOpen closeButton={handleCloseClick} onAbort={handleCloseClick}>
+                // @ts-ignore
+                <ModalWindow size={EModalWindowSize.MD} isOpen closeButton={handleCloseClick} onAbort={handleCloseClick}>
                     <ModalWindowContent key="content">
                         <ModalWindowHeader>
                             <Header.Title>
@@ -84,7 +85,7 @@ describe.skip('ModalWindow', () => {
                             </FooterDescription>
                         </ModalWindowFooter>
                     </ModalWindowContent>
-                </ModalWindowBasicMD>
+                </ModalWindow>
             )
             .toJSON();
 

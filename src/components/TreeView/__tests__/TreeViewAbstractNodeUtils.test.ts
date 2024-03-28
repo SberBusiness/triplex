@@ -1,6 +1,5 @@
-import {allure} from '@jest/unit/allure-report';
-import {TreeViewAbstractNode} from '../TreeViewAbstractNode';
-import {TreeViewAbstractNodeUtils} from '../TreeViewAbstractNodeUtils';
+import {TreeViewAbstractNode} from '@sberbusiness/triplex/components/TreeView/TreeViewAbstractNode';
+import {TreeViewAbstractNodeUtils} from '@sberbusiness/triplex/components/TreeView/TreeViewAbstractNodeUtils';
 
 describe('TreeViewAbstractNodeUtils', () => {
     let rootNode: TreeViewAbstractNode;

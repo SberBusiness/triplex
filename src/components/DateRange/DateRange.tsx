@@ -119,7 +119,7 @@ export const DateRange: React.FC<IDateRangeProps> = ({
         <div className={classNames} {...rest}>
             {renderButtonBack({
                 children: <TabfoldercarouselleftSrvxIcon32 />,
-                className: classnames({disabled: !(start && end)}),
+                className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
                 onClick: shiftRangeBack,
                 disabled: !(start && end),
             })}
@@ -134,7 +134,7 @@ export const DateRange: React.FC<IDateRangeProps> = ({
             })}
             {renderButtonForward({
                 children: <TabfoldercarouselrightSrvxIcon32 />,
-                className: classnames({disabled: !(start && end)}),
+                className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
                 onClick: shiftRangeForward,
                 disabled: !(start && end),
             })}

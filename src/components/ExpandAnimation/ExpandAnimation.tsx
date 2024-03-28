@@ -13,38 +13,29 @@ enum EExpandAnimationStep {
     // Открывается.
     OPENING,
 }
-/**
- * Свойства компонента ExpandAnimation.
- *
- * @prop {number} animationTime Время анимации в ms.
- * @prop {boolean} expanded Развёрнут ли компонент.
- * @prop {Function} [onStart] Коллбэк на начало анимации.
- * @prop {Function} [onEnd] Коллбэк на окончание анимации.
- */
+
+/** Свойства компонента ExpandAnimation. */
 export interface IExpandAnimationProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Время анимации (мс). */
     animationTime?: number;
+    /** Развёрнут ли компонент. */
     expanded: boolean;
+    /** Коллбэк на начало анимации. */
     onStart?: () => void;
+    /** Коллбэк на окончание анимации. */
     onEnd?: () => void;
 }
 
-/**
- * Состояние компонента анимации ExpandAnimation.
- *
- * @prop {EExpandAnimationStep} currentAnimationStep Текущий шаг анимации.
- */
+/** Состояние компонента ExpandAnimation. */
 export interface IExpandAnimationState {
+    /** Текущий шаг анимации. */
     currentAnimationStep: EExpandAnimationStep;
 }
 
-/**
- * Время исполнения анимации по-умолчанию.
- */
+// Время исполнения анимации по-умолчанию.
 const ANIMATION_TIME_DEFAULT = 250;
 
-/**
- * Компонент анимации сворачивания/разворачивания контента.
- */
+/** Компонент анимации сворачивания/разворачивания контента. */
 export class ExpandAnimation extends React.Component<IExpandAnimationProps, IExpandAnimationState> {
     public static displayName = 'ExpandAnimation';
 

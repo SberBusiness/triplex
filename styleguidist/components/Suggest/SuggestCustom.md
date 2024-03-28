@@ -1,6 +1,7 @@
 ```jsx
 import {SuggestMobile} from '@sberbusiness/triplex/components/Suggest/mobile/SuggestMobile';
 import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
+import {Input} from '@sberbusiness/triplex/components/Input/Input';
 
 const options = [
     {label: 'Ewan McGregor', firstName: 'Ewan', lastName: 'McGregor'},
@@ -64,15 +65,14 @@ const SuggestCustomExample = () => {
                 </div>
             )}
             renderTargetLabel={({className, value, placeholder, onFocus, onClick}) => (
-                <div className={className} onFocus={onFocus} onClick={onClick}>
-                    {!value ? (
-                        placeholder
-                    ) : (
-                        <>
-                            <b>{value.firstName}</b> <i>{value.lastName}</i>
-                        </>
-                    )}
-                </div>
+                <Input
+                    className={className}
+                    value={value && `${value.firstName} ${value.lastName}`}
+                    placeholder={placeholder}
+                    readOnly
+                    onFocus={onFocus}
+                    onClick={onClick}
+                />
             )}
         />
     );

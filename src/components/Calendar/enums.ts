@@ -1,13 +1,18 @@
 /** Вариант выбора даты. */
-export enum EPickType {
+export enum ECalendarPickType {
     datePick,
     monthYearPick,
 }
 
-/**
- * Направление переключения страницы календаря.
- */
-export enum EChangePageDirection {
+/** Режим отображения календаря. */
+export enum ECalendarViewMode {
+    DAYS,
+    MONTHS,
+    YEARS,
+}
+
+/** Направление переключения страницы календаря. */
+export enum ECalendarPageDirection {
     FORWARD,
     BACKWARD,
 }

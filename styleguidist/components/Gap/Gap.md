@@ -1,13 +1,13 @@
 ```jsx
+import {Page} from '@sberbusiness/triplex/components/Page/Page';
 import {Row} from '@sberbusiness/triplex/components/Row/Row';
 import {Col} from '@sberbusiness/triplex/components/Col/Col';
 import {Label} from '@sberbusiness/triplex/components/Label/Label';
-import {Page} from '@sberbusiness/triplex/components/Page/Page';
 import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
 
 <Page.Body>
-    {[4, 8, 12, 16, 24, 32, 64, 128].map(size => (
-        <Row>
+    {[4, 8, 12, 16, 24, 32, 64, 128].map((size, index) => (
+        <Row key={index}>
             <Col size={3}>
                 <Label>
                     <Label.Text>Высота {size}px</Label.Text>

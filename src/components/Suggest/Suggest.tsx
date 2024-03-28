@@ -26,9 +26,10 @@ export function Suggest<T extends ISuggestOption>(props: TSuggestProps<T>): JSX.
         saveFilterOnFocus,
         showListSpinner,
         value,
+        groupPosition,
     } = props;
 
-    const handleSelect = (value: ISuggestOption) => {
+    const handleSelect = (value?: ISuggestOption) => {
         onSelect(value as T);
     };
 
@@ -48,6 +49,7 @@ export function Suggest<T extends ISuggestOption>(props: TSuggestProps<T>): JSX.
                 placeholder={placeholder}
                 saveFilterOnFocus={saveFilterOnFocus}
                 value={value}
+                groupPosition={groupPosition}
             />
         </MobileView>
     );

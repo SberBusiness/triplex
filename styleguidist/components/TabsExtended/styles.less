@@ -1,25 +1,27 @@
-.tabs-extended-content {
-    background-color: #fff;
-    border-radius: 16px;
-
-    .with-notification::after {
-        content: '';
-        position: absolute;
-        right: 4px;
-        top: 4px;
-        width: 8px;
-        height: 8px;
-        background: #f90;
-        border-radius: 4px;
+.tabs-extended {
+    .content {
+        background-color: #fff;
+        border-radius: 16px;
     }
 
-    .with-notification-dropdown::after {
-        right: 0;
-        top: 0;
+    .button-dropdown {
+        // Fix IE11.
+        vertical-align: top;
+        // Fix IE11.
+        height: 28px;
+
+        button.active {
+            background-color: #d0d7dd;
+
+            &:hover {
+                background-clip: border-box;
+                border-color: transparent;
+            }
+        }
     }
 
-    .ghost-button {
-        border: 1px dashed rgba(208, 215, 221, 1);
+    .ghost-tab-button {
+        border: 1px dashed rgb(208 215 221 / 100%);
         background: #fff;
         padding: 5px 15px;
 
@@ -35,20 +37,31 @@
             color: #b2b8bf;
         }
     }
+}
 
-    .tabs-button-dropdown {
-        // Fix IE11.
-        vertical-align: top;
-        // Fix IE11.
-        height: 28px;
+.tabs-extended,
+.tabs-extended-dropdown {
+    .notification::after {
+        content: '';
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        background: #f90;
+        border-radius: 4px;
+    }
+}
 
-        button.active {
-            background-color: #d0d7dd;
+.tabs-extended-dropdown {
+    .notification::after {
+        right: 0;
+        top: 0;
+    }
+}
 
-            &:hover {
-                background-clip: border-box;
-                border-color: transparent;
-            }
-        }
+html.styleguidist-dark-theme {
+    .tabs-extended-content {
+        background: #2D2D30;
     }
 }

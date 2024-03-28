@@ -1,21 +1,19 @@
 ```jsx
 import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
 
 <HelpBox tooltipSize={ETooltipSize.SM}>
     <div>Текст подсказки.</div>
 </HelpBox>
 ```
 
-### HelpBox со ссылкой внутри
+### Large Tooltip with Link
 
 ```jsx
 import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
+import {Link, ELinkType, ELinkSize} from '@sberbusiness/triplex/components/Link/Link';
 
 <HelpBox tooltipSize={ETooltipSize.LG}>
     <div>
@@ -26,13 +24,11 @@ import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 </HelpBox>
 ```
 
-### HelpBox контролируемый снаружи
+### Controlled
 
 ```jsx
 import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
-import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
 const [open, setOpen] = React.useState(false);
@@ -47,8 +43,42 @@ const renderControlPanel = () => (
 
 <>
     {renderControlPanel()}
-    <HelpBox tooltipSize={ETooltipSize.SM} isOpen={open} toggle={setOpen}>
+    <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT} isOpen={open} toggle={setOpen}>
         <div>Текст подсказки.</div>
     </HelpBox>
 </>
+```
+
+### Placement types
+
+```jsx
+import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
+import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
+
+<div style={{display: 'flex', textAlign: 'center'}}>
+    <div style={{flex: '1 1 0'}}>
+        <div>Left</div>
+        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.LEFT}>
+            <div>Текст подсказки.</div>
+        </HelpBox>
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Above</div>
+        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.ABOVE}>
+            <div>Текст подсказки.</div>
+        </HelpBox>
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Below</div>
+        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.BELOW}>
+            <div>Текст подсказки.</div>
+        </HelpBox>
+    </div>
+    <div style={{flex: '1 1 0'}}>
+        <div>Right</div>
+        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT}>
+            <div>Текст подсказки.</div>
+        </HelpBox>
+    </div>
+</div>
 ```

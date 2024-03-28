@@ -1,27 +1,22 @@
-import {UnorderedList} from '@sberbusiness/triplex/components/List/UnorderedList';
-import {NotificationBodyContent} from '@sberbusiness/triplex/components/Notification/components/NotificationBodyContent';
-import {NotificationFooter} from '@sberbusiness/triplex/components/Notification/components/NotificationFooter';
-import {NotificationHeader} from '@sberbusiness/triplex/components/Notification/components/NotificationHeader';
 import React from 'react';
+import {NotificationHeader} from '@sberbusiness/triplex/components/Notification/components/NotificationHeader';
+import {NotificationBodyContent} from '@sberbusiness/triplex/components/Notification/components/NotificationBodyContent';
+import {UnorderedList} from '@sberbusiness/triplex/components/List/UnorderedList';
+import {NotificationFooter} from '@sberbusiness/triplex/components/Notification/components/NotificationFooter';
 
-/**
- * Интерфейс компонента NotificationBody.
- * @param {typeof NotificationHeader} Header Сообщение в теле нотификации.
- * @param {typeof NotificationBodyContent} Text Сообщение в теле нотификации.
- * @param {typeof UnorderedList} List Список в теле нотификации.
- * @param {typeof NotificationFooter} Footer Сообщение в теле нотификации.
- *
- */
-export interface INotificationBodySFC extends React.FC {
+/** Свойства компонента NotificationBody. */
+interface INotificationBodyProps {
+    children?: React.ReactNode;
+}
+
+export interface INotificationBodySFC extends React.FC<INotificationBodyProps> {
     Header: typeof NotificationHeader;
     Content: typeof NotificationBodyContent;
     List: typeof UnorderedList;
     Footer: typeof NotificationFooter;
 }
 
-/**
- * Тело нотификации. Состоит из 4х уровней Header, Content, List, Footer.
- */
+/** Тело нотификации. Состоит из 4х уровней Header, Content, List, Footer. */
 export const NotificationBody: INotificationBodySFC = ((props) => {
     const {children} = props;
 

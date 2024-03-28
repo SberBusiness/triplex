@@ -1,10 +1,10 @@
 import React from 'react';
+import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
 import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
 
 /** Базовые свойства компонента Spoiler. */
 interface ISpoilerBaseProps extends React.HTMLAttributes<HTMLDivElement> {

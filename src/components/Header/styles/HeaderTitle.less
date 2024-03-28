@@ -7,7 +7,13 @@
 
     .headerTitleContent {
         .globalHeaderTitleContentText {
-            .h1-header-main();
+            .font-medium();
+            .font-size(@font-size-21);
+
+            text-transform: none;
+            color: var(--triplex-Header-Title_Color);
+            margin: 0;
+            padding: 0;
 
             outline: none;
             box-sizing: border-box;
@@ -17,7 +23,7 @@
         .headerTitleContentSubhead {
             .font-size(@font-size-14);
 
-            color: @color-asphalt-01;
+            color: var(--triplex-Header-TitleSubhead_Color);
         }
     }
 

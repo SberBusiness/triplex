@@ -1,21 +1,14 @@
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {Col} from '@sberbusiness/triplex/components/Col/Col';
-import {isComponentType, isReactElement} from '@sberbusiness/triplex/utils/reactChild';
 import React from 'react';
+import {isComponentType, isReactElement} from '@sberbusiness/triplex/utils/reactChild';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента Field.
- * @prop {React.ReactElement} children Чилдрены. принимает максимум три <Col/>.
- * @prop {boolean} [alignLabel] Выравнивание лейбла относительно input или select(добавление верхнего отступа).
- */
+/** Свойства компонента Field. */
 interface IFieldProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactNode;
+    /** Выравнивание лейбла относительно input или select (добавление верхнего отступа). */
     alignLabel?: boolean;
 }
 
-/**
- * Компонент Field. Поле с количеством колонок от одной до трех.
- */
+/** Поле с количеством колонок от одной до трех. */
 export class Field extends React.Component<IFieldProps> {
     public static displayName = 'Field';
 

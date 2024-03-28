@@ -9,22 +9,17 @@ import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import React from 'react';
 import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
 
-/**
- * Свойства LightBoxNext.
- *
- * @prop {boolean} [clickByArrowRight] - Кликнуть по кнопке при нажатии стрелки вправо на клавиатуре.
- * @prop {Function} onClick Обработчик клика по кнопке.
- * @prop {string} dataTutorialId.
- */
+/** Свойства LightBoxNext. */
 interface ILightBoxNextProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Кликнуть по кнопке при нажатии стрелки вправо на клавиатуре. */
     clickByArrowRight?: boolean;
+    /** Обработчик клика по кнопке. */
     onClick: () => void;
+    /** Идентификатор для обучающего тура. */
     dataTutorialId?: string;
 }
 
-/**
- * Стрелка Next.
- */
+/** Стрелка лайтбокса "Вперёд". */
 export const LightBoxNext: React.FC<ILightBoxNextProps> = ({
     className,
     clickByArrowRight,

@@ -1,9 +1,12 @@
 @import 'src/styles/style';
 
 .formFieldDescription {
-    color: @color-graphite-02;
+    color: var(--triplex-FormField-Description_Color_Default);
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 400;
 
     &.error {
-        color: @color-ruby-02;
+        color: var(--triplex-FormField-Description_Color_Error);
     }
 }

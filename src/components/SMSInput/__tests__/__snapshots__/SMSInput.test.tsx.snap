@@ -29,11 +29,11 @@ exports[`SMSInput renders correctly 1`] = `
         />
       </clipPath>
       <path
-        className="cssClass[light]"
+        className="cssClass[empty]"
         d="M18.1 9.101a.9.9 0 0 0-.9.9 7.245 7.245 0 1 1-1.998-4.95h-2.16a.9.9 0 1 0 0 1.8h4.077a.9.9 0 0 0 .9-.9v-4.05a.9.9 0 0 0-1.8 0v1.593A9 9 0 1 0 19 10.001a.9.9 0 0 0-.9-.9z"
       />
       <path
-        className="cssClass[dark]"
+        className="cssClass[full]"
         clipPath="url(#clipFront0.999)"
         d="M18.1 9.101a.9.9 0 0 0-.9.9 7.245 7.245 0 1 1-1.998-4.95h-2.16a.9.9 0 1 0 0 1.8h4.077a.9.9 0 0 0 .9-.9v-4.05a.9.9 0 0 0-1.8 0v1.593A9 9 0 1 0 19 10.001a.9.9 0 0 0-.9-.9z"
       />

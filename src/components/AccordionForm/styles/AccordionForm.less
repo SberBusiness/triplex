@@ -6,7 +6,7 @@
 
     .item {
         border-radius: @radius-16;
-        background-color: @color-asphalt-05;
+        background: var(--triplex-AccordionForm-Background_Default);
         min-height: @metric-64;
         position: relative;
         list-style-type: none;
@@ -28,14 +28,14 @@
             border: 1px solid transparent;
             border-radius: @radius-16;
             text-align: left;
-            background-color: @color-asphalt-05;
+            background-color: var(--triplex-AccordionForm-Background_Default);
             cursor: pointer;
 
             &:hover {
-                background-color: @color-asphalt-04;
+                background-color: var(--triplex-AccordionForm-Background_Hover);
             }
 
-            //Фикс, чтобы в IE11 кнопка не утопала при нажатии мышью.
+            // Фикс, чтобы в IE11 кнопка не утопала при нажатии мышью.
             .buttonContent {
                 position: relative;
                 display: flex;
@@ -45,10 +45,10 @@
         }
 
         &:hover {
-            background-color: @color-asphalt-04;
+            background-color: var(--triplex-AccordionForm-Background_Hover);
 
             .header {
-                background-color: @color-asphalt-04;
+                background-color: var(--triplex-AccordionForm-Background_Hover);
             }
         }
 
@@ -75,6 +75,7 @@
         .title {
             .h5-header-form(@color-graphite-01);
 
+            color: var(--triplex-AccordionForm-Title_Color_Default);
             margin: 0 @metric-24 0 0;
             flex-grow: 1;
             overflow: hidden;
@@ -109,34 +110,34 @@
         .nextLine,
         .prevLine {
             position: absolute;
-            background-color: @color-asphalt-03;
+            background-color: var(--triplex-AccordionForm-Step_Line_Default);
             width: 2px;
             left: 43px;
             border-radius: 1px;
 
             &.success,
             &.wait {
-                background-color: @color-malachite-02;
+                background-color: var(--triplex-AccordionForm-Step_Line_Success);
             }
 
             &.warning {
-                background-color: @color-pumpkin-02;
+                background-color: var(--triplex-AccordionForm-Step_Line_Warning);
             }
 
             &.error {
-                background-color: @color-ruby-02;
+                background-color: var(--triplex-AccordionForm-Step_Line_Error);
             }
         }
 
         .content {
             padding: @metric-24 @metric-32 - 1 @metric-24 0;
-            border-top: @color-asphalt-03 1px solid;
+            border-top: var(--triplex-AccordionForm-BorderColor_Default) 1px solid;
         }
 
         .footer {
             padding: 18px @metric-32 - 1 18px - 1 0; // 18px - исключение из правил.
             text-align: right;
-            border-top: @color-asphalt-03 1px solid;
+            border-top: var(--triplex-AccordionForm-BorderColor_Default) 1px solid;
         }
 
         .remove {
@@ -155,7 +156,7 @@
             }
 
             .title {
-                color: @color-asphalt-02;
+                color: var(--triplex-AccordionForm-Title_Color_Disabled);
             }
 
             .step > div {
@@ -165,14 +166,14 @@
 
         &.disabled .header,
         &.opened .header {
-            background-color: @color-asphalt-05;
+            background-color: var(--triplex-AccordionForm-Background_Default);
         }
 
         &.focused .header {
-            border-color: @color-asphalt-03;
+            border-color: var(--triplex-AccordionForm-BorderColor_Default);
 
             &:focus {
-                border-color: @color-sunny-01;
+                border-color: var(--triplex-AccordionForm-BorderColor_Focus);
             }
         }
 
@@ -180,7 +181,7 @@
         &.opened {
             &:hover,
             &:hover .header {
-                background-color: @color-asphalt-05;
+                background-color: var(--triplex-AccordionForm-Background_Default);
             }
         }
 
@@ -190,7 +191,7 @@
         }
 
         &.focused.opened .body {
-            border-color: @color-asphalt-03;
+            border-color: var(--triplex-AccordionForm-BorderColor_Default);
         }
 
         &.focused {
@@ -198,12 +199,12 @@
                 border-bottom-color: transparent;
 
                 &:focus {
-                    border-color: @color-sunny-01;
+                    border-color: var(--triplex-AccordionForm-BorderColor_Focus);
                 }
             }
 
             &.focusedByMouse .header:focus {
-                border-color: @color-asphalt-03;
+                border-color: var(--triplex-AccordionForm-BorderColor_Default);
             }
 
             .headerFocused + .body .content {
@@ -218,7 +219,7 @@
                 }
 
                 &.focusedByMouse .headerFocused + .body .content {
-                    border-top-color: @color-asphalt-03;
+                    border-top-color: var(--triplex-AccordionForm-BorderColor_Default);
                 }
             }
         }

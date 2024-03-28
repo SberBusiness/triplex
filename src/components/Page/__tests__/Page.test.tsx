@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Page} from '../Page';
-import {allure} from '@jest/unit/allure-report';
 
 jest.mock('@sberbusiness/icons/SpinnersmallAniIcon20', () => ({
     SpinnersmallAniIcon20: 'svg',
@@ -19,10 +18,9 @@ jest.mock('@sberbusiness/icons/CaretdownSrvxIcon16', () => ({
     CaretdownSrvxIcon16: 'svg',
 }));
 
-jest.mock('@sberbusiness/icons/ClosetooltipSrvxIcon16', () => ({
-    ClosetooltipSrvxIcon16: 'svg',
+jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
+    ClosenotificationSrvxIcon16: 'svg',
 }));
-
 
 describe.skip('Page', () => {
     beforeEach(() => {

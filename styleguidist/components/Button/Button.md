@@ -12,9 +12,6 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
     <Button theme={EButtonTheme.DANGER} size={EButtonSize.MD}>
         Button Name
     </Button>
-    <Button theme={EButtonTheme.DOTS} size={EButtonSize.MD}>
-        Button Name
-    </Button>
     <Button theme={EButtonTheme.LINK} size={EButtonSize.MD}>
         Button Name
     </Button>
@@ -24,12 +21,33 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
 </div>
 ```
 
-### Size small
+### Size large
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
 <div style={{display: 'flex', alignItems: 'center'}}>
+    <Button theme={EButtonTheme.GENERAL} size={EButtonSize.LG}>
+        Button Name
+    </Button>
+    <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.LG}>
+        Button Name
+    </Button>
+    <Button theme={EButtonTheme.DANGER} size={EButtonSize.LG}>
+        Button Name
+    </Button>
+    <Button theme={EButtonTheme.LINK} size={EButtonSize.LG}>
+        Button Name
+    </Button>
+</div>
+```
+
+### Size small
+
+```jsx
+import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+
+<>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.SM}>
         Button Name
     </Button>
@@ -39,13 +57,10 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
     <Button theme={EButtonTheme.DANGER} size={EButtonSize.SM}>
         Button Name
     </Button>
-    <Button theme={EButtonTheme.DOTS} size={EButtonSize.SM}>
-        Button Name
-    </Button>
     <Button theme={EButtonTheme.LINK} size={EButtonSize.SM}>
         Button Name
     </Button>
-</div>
+</>
 ```
 
 ### Block mode
@@ -87,9 +102,6 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
         Button Name
     </Button>
     <Button theme={EButtonTheme.DANGER} size={EButtonSize.MD} disabled>
-        Button Name
-    </Button>
-    <Button theme={EButtonTheme.DOTS} size={EButtonSize.MD} disabled>
         Button Name
     </Button>
     <Button theme={EButtonTheme.LINK} size={EButtonSize.MD} disabled>
@@ -136,11 +148,26 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
     <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD} aria-expanded>
         Button Name
     </Button>
-    <Button theme={EButtonTheme.DOTS} size={EButtonSize.MD} aria-expanded>
-        Button Name
-    </Button>
     <Button theme={EButtonTheme.TILE} size={EButtonSize.MD} aria-expanded>
         <MailbellPrdIcon32 />
+    </Button>
+</div>
+```
+
+### Link with icons
+
+```jsx
+import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {AttachmentSrvIcon20} from '@sberbusiness/icons/AttachmentSrvIcon20';
+
+
+<div>
+    <Button theme={EButtonTheme.LINK} size={EButtonSize.LG}>
+      <AttachmentSrvIcon20 />&nbsp;Button Name
+    </Button>
+    <br />
+    <Button theme={EButtonTheme.LINK} size={EButtonSize.LG}>
+      Button Name&nbsp;<AttachmentSrvIcon20 />
     </Button>
 </div>
 ```

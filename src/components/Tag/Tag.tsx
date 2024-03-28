@@ -7,22 +7,16 @@ import {EdittextSrvIcon16} from '@sberbusiness/icons/EdittextSrvIcon16';
 import {ClosenotificationSrvxIcon16} from '@sberbusiness/icons/ClosenotificationSrvxIcon16';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 
-/**
- * Компонент Тэг.
- */
+/** Тэг. */
 export class Tag extends React.Component<ITagProps> {
-    /**
-     * Обработчик клика по кнопке редактирования.
-     */
+    /** Обработчик клика по кнопке редактирования. */
     private handleEdit = (): void => this.props.onEdit?.(this.props.id);
 
-    /**
-     * Обработчик клика по кнопке удаления.
-     */
+    /** Обработчик клика по кнопке удаления. */
     private handleRemove = (): void => this.props.onRemove(this.props.id);
 
     render(): JSX.Element {
-        const {className, size, children, onEdit, maxWidth, title, onRemove, ...props} = this.props;
+        const {className, size, children, onEdit, maxWidth, title, onRemove, editButtonProps, removeButtonProps, ...props} = this.props;
         if (process.env.NODE_ENV !== 'production') {
             if (onEdit && size === ETagSize.SM) {
                 throw new Error('Only MD-size tags can be editable');
@@ -40,13 +34,13 @@ export class Tag extends React.Component<ITagProps> {
                         </span>
                         {onEdit && (
                             <span className="cssClass[edit]">
-                                <ButtonIcon onClick={this.handleEdit}>
+                                <ButtonIcon {...editButtonProps} onClick={this.handleEdit}>
                                     <EdittextSrvIcon16 />
                                 </ButtonIcon>
                             </span>
                         )}
                         <span className="cssClass[remove]">
-                            <ButtonIcon onClick={this.handleRemove}>
+                            <ButtonIcon {...removeButtonProps} onClick={this.handleRemove}>
                                 <ClosenotificationSrvxIcon16 />
                             </ButtonIcon>
                         </span>

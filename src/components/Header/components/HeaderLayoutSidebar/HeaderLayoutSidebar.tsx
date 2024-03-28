@@ -3,14 +3,15 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {HeaderLayoutSidebarContent} from './HeaderLayoutSidebarContent';
 import {HeaderLayoutSidebarSidebar} from './HeaderLayoutSidebarSidebar';
 
-interface IHeaderLayoutSidebarFC extends React.FC<React.HTMLAttributes<HTMLDivElement>> {
+/** Свойства компонента HeaderLayoutSidebar. */
+interface IHeaderLayoutSidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+interface IHeaderLayoutSidebarFC extends React.FC<IHeaderLayoutSidebarProps> {
     Content: typeof HeaderLayoutSidebarContent;
     Sidebar: typeof HeaderLayoutSidebarSidebar;
 }
 
-/**
- * Layout для Header с sidebar.
- */
+/** Layout для Header с sidebar. */
 export const HeaderLayoutSidebar: IHeaderLayoutSidebarFC = ({children, className, ...htmlDivAttributes}) => (
     <div className={classnames(className, 'cssClass[headerLayoutSidebar]')} {...htmlDivAttributes}>
         {children}

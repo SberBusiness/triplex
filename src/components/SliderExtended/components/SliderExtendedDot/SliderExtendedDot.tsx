@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect, useContext, useRef} from 'react';
+import React, {useState, useEffect, useContext, useRef, useLayoutEffect} from 'react';
 import throttle from 'lodash.throttle';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
@@ -10,14 +10,13 @@ import {KeyDownListener} from '../../../KeyDownListener/KeyDownListener';
 import {SliderExtendedDotActions} from './SliderExtendedDotActions';
 import {useSliderExtendedDotTabIndex} from './useSliderExtendedDotTabIndex';
 
+/** Свойства компонента SlideExtendedDot. */
 export interface ISliderExtendedDotProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'onChange' | 'value'> {
     onChange: (value: number) => void;
     value: number;
 }
 
-/**
- * Компонент SliderExtendedDot. Слайдер может иметь 1 или 2 SliderExtendedDot.
- */
+/** Компонент SliderExtendedDot. Слайдер может иметь 1 или 2 SliderExtendedDot. */
 export const SliderExtendedDot: React.FC<ISliderExtendedDotProps> = ({
     children,
     className,

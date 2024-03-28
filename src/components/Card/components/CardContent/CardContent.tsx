@@ -5,7 +5,7 @@ import {CardContentFooter} from '@sberbusiness/triplex/components/Card/component
 import {ECardContentPaddingSize} from '@sberbusiness/triplex/components/Card/enums';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Внутренние составляющие контента карточки. */
+/** Внутренние составляющие компонента CardContent. */
 export interface ICardContentComposition {
     /** Тело карточки. */
     Body: typeof CardContentBody;
@@ -21,7 +21,7 @@ const mapCardContentPaddingSizeToCssClass = {
     [ECardContentPaddingSize.SM]: 'cssClass[paddingSM]',
 };
 
-/** Свойства контента карточки. */
+/** Свойства компонента CardContent. */
 export interface ICardContentProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Размер внутреннего отступа контента карточки. */
     paddingSize?: ECardContentPaddingSize;

@@ -13,7 +13,7 @@ interface IStepperExtendedComposition {
     Wrapper: typeof StepperWrapper;
 }
 
-/** Свойства StepperExtended. */
+/** Свойства компонента StepperExtended. */
 export interface IStepperExtendedProps extends React.HTMLAttributes<HTMLOListElement> {
     /** Тип списка. */
     type?: IStepperType;

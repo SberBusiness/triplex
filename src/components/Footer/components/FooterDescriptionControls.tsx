@@ -1,14 +1,10 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента.
- */
-interface IFooterDescriptionControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
+/** Свойства компонента FooterDescriptionControls. */
+export interface IFooterDescriptionControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Футер, кнопки действий основной части.
- */
+/** Футер, кнопки действий основной части. */
 export class FooterDescriptionControls extends React.PureComponent<IFooterDescriptionControlsProps> {
     public static displayName = 'FooterDescriptionControls';
 

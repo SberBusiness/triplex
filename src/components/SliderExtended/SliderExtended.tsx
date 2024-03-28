@@ -11,22 +11,15 @@ import {ISliderExtendedDot, ISliderExtendedStep, SliderExtendedContext} from './
 import {SliderExtendedUtils} from './SliderExtendedUtils';
 import {SliderExtendedTooltip} from './components/SliderExtendedTooltip/SliderExtendedTooltip';
 
+/** Свойства компонента SliderExtended. */
 export interface ISliderExtendedProps extends React.HTMLAttributes<HTMLDivElement> {
-    /**
-     * Слайдер не активен.
-     */
+    /** Слайдер не активен. */
     disabled?: boolean;
-    /**
-     * Максимальное значение слайдера.
-     */
+    /** Максимальное значение слайдера. */
     max: number;
-    /**
-     * Минимальное значение слайдера.
-     */
+    /** Минимальное значение слайдера. */
     min: number;
-    /**
-     * Реверсивный слайдер.
-     */
+    /** Реверсивный слайдер. */
     reverse?: boolean;
     /**
      * Длина шага, например при длине шага 1, с min-0. max-100, слайдер будет разделен на 100 шагов.
@@ -35,9 +28,7 @@ export interface ISliderExtendedProps extends React.HTMLAttributes<HTMLDivElemen
     step: number | number[];
 }
 
-/**
- * Компонент SliderExtended.
- */
+/** Компонент SliderExtended. */
 export const SliderExtended: React.FC<ISliderExtendedProps> & {
     Dot: typeof SliderExtendedDot;
     Mark: typeof SliderExtendedMark;

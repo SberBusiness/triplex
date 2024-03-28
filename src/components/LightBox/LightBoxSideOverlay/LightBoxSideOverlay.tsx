@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect, useState, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {
     EOverlayDirection,
@@ -10,7 +9,8 @@ import {
 import {OverlayMask} from '../../Overlay/OverlayMask';
 import {LightBoxSideOverlayClose} from './LightBoxSideOverlayClose';
 import {LightBoxSideOverlayLoader} from './LightBoxSideOverlayLoader';
-import {ModalFocusOnMount} from '@sberbusiness/triplex/components/ModalFocusManager/ModalFocusOnMount';
+import FocusTrap from 'focus-trap-react';
+import {FocusTrapUtils} from '@sberbusiness/triplex/utils/focus/FocusTrapUtils';
 
 export enum ELightBoxSideOverlaySize {
     SM,
@@ -18,21 +18,18 @@ export enum ELightBoxSideOverlaySize {
     LG,
 }
 
+/** Свойства компонента LightBoxSideOverlay. */
 export interface ILightBoxSideOverlayProps
-    extends Pick<IOverlayBaseProps, 'opened' | 'onClose' | 'onOpen'>,
-        Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+    extends React.HTMLAttributes<HTMLDivElement>,
+        Pick<IOverlayBaseProps, 'opened' | 'onClose' | 'onOpen'> {
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
     isLoading?: boolean;
-    /**
-     * Текст под спиннером.
-     */
+    /** Текст под спиннером. */
     loadingTitle?: React.ReactNode;
-    /**
-     * Открыт другой SideOverlay поверх текущего.
-     */
+    /** Открыт другой SideOverlay поверх текущего. */
     isTopLevelSideOverlayOpened?: boolean;
-    /**
-     * Открыт TopOverlay в текущей SideOverlay.
-     */
+    /** Открыт TopOverlay в текущей SideOverlay. */
     isTopOverlayOpened?: boolean;
     size?: ELightBoxSideOverlaySize;
 }
@@ -48,6 +45,7 @@ export interface ILightBoxSideOverlayFC extends React.FC<ILightBoxSideOverlayPro
 export const LightBoxSideOverlay: ILightBoxSideOverlayFC = ({
     children,
     className,
+    focusTrapProps,
     isLoading,
     loadingTitle,
     isTopLevelSideOverlayOpened,
@@ -64,6 +62,7 @@ export const LightBoxSideOverlay: ILightBoxSideOverlayFC = ({
     const [opening, setOpening] = useState(false);
     // Предыдущее состояние открыт/закрыт.
     const prevOpened = useRef(opened);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (prevOpened.current && !opened) {
@@ -103,6 +102,7 @@ export const LightBoxSideOverlay: ILightBoxSideOverlayFC = ({
                 'cssClass[opened]': opened,
             })}
             onTransitionEnd={handleTransitionEnd}
+            ref={contentRef}
         >
             {children}
 
@@ -145,11 +145,20 @@ export const LightBoxSideOverlay: ILightBoxSideOverlayFC = ({
     );
 
     return (
-        <ModalFocusOnMount disabled={!opened || isTopLevelSideOverlayOpened || isTopOverlayOpened}>
+        <FocusTrap
+            active={opened && !opening && !closing}
+            {...focusTrapProps}
+            focusTrapOptions={{
+                clickOutsideDeactivates: true,
+                preventScroll: true,
+                initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(contentRef.current),
+                ...focusTrapProps?.focusTrapOptions,
+            }}
+        >
             <div className={classNameOverlayWrapper} role="dialog" aria-modal="true" {...htmlDivAttributes}>
                 {content}
             </div>
-        </ModalFocusOnMount>
+        </FocusTrap>
     );
 };
 

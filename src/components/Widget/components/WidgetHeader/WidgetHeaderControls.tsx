@@ -1,6 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента WidgetHeaderControls. */
 export interface IWidgetHeaderControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const WidgetHeaderControls: React.FC<IWidgetHeaderControlsProps> = ({children, className, ...htmlDivAttributes}) => {

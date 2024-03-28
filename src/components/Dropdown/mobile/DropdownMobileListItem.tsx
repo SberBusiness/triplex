@@ -3,12 +3,14 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Text} from '@sberbusiness/triplex/components/Typography/Text';
 import {ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
+/** Свойства компонента DropdownMobileListItem. */
 export interface IDropdownMobileListItemProps extends React.HTMLAttributes<HTMLDivElement> {
     id: string;
     onSelect?: () => void;
     selected?: boolean;
 }
 
+/** Элемент списка мобильной версии Dropdown. */
 export const DropdownMobileListItem = React.forwardRef<HTMLDivElement, IDropdownMobileListItemProps>(
     ({children, className, id, onClick, onSelect, selected, ...htmlAttributes}, ref) => {
         const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {

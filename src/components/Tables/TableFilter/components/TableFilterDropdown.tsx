@@ -6,6 +6,8 @@ import {DropdownList} from '@sberbusiness/triplex/components/Dropdown/desktop/Dr
 import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {ITableFilterItem} from '@sberbusiness/triplex/components/Tables/TableFilter';
+import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
+import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 
 /** Свойства компонента TableFilterDropdown. */
 interface ITableFilterDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,16 +29,20 @@ interface ITableFilterDropdownProps extends React.HTMLAttributes<HTMLDivElement>
 interface ITableFilterDropdownState {
     /** Состояние открытости дропдауна. */
     opened: boolean;
+    /** Текущий активный элемент (его идентификатор). */
+    activeDescendant?: string;
 }
 
 /** Компонент TableFilterDropdown. */
 export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdownProps, ITableFilterDropdownState> {
     state = {
         opened: false,
+        activeDescendant: undefined,
     };
 
     private readonly targetRef: React.RefObject<HTMLDivElement>;
     private readonly dropdownRef: React.RefObject<HTMLDivElement>;
+    private instanceId = uniqueId();
 
     constructor(props: ITableFilterDropdownProps) {
         super(props);
@@ -62,10 +68,15 @@ export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdow
         );
     }
 
+    /** Установка значения activeDescendant. */
+    private setActiveDescendant = (activeDescendant?: string) => {
+        this.setState({activeDescendant});
+    };
+
     /** Рендер кнопки, раскрывающей список. */
     private renderTarget = () => {
         const {isActive, label, targetHtmlAttributes} = this.props;
-        const {opened} = this.state;
+        const {activeDescendant, opened} = this.state;
 
         const buttonClassName = classnames('cssClass[filterItem]', 'cssClass[dropdownTarget]', {'cssClass[active]': isActive});
         const caretClassName = classnames('cssClass[dropdownTargetCaret]', {'cssClass[opened]': opened});
@@ -77,6 +88,10 @@ export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdow
                 onClick={this.handleTargetClick}
                 onKeyDown={this.handleTargetKeyDown}
                 type="button"
+                aria-haspopup="menu"
+                aria-expanded={opened}
+                aria-controls={this.instanceId}
+                aria-activedescendant={activeDescendant}
             >
                 <span className="cssClass[filterItemInner]">
                     <span className="cssClass[dropdownTargetInner]">
@@ -91,7 +106,7 @@ export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdow
     /** Рендер дропдаун списка. */
     private renderDropdown = () => {
         const {filters, selected} = this.props;
-        const {opened} = this.state;
+        const {activeDescendant, opened} = this.state;
 
         return (
             <Dropdown
@@ -101,30 +116,32 @@ export class TableFilterDropdown extends React.PureComponent<ITableFilterDropdow
                 targetRef={this.targetRef}
                 ref={this.dropdownRef}
             >
-                <DropdownList dropdownOpened={opened}>
-                    {filters.map((filter) => {
-                        const {id, label, showNotificationIcon, ...htmlDivAttributes} = filter;
-                        const className = classnames('cssClass[dropdownItem]', {
-                            'cssClass[withNotification]': Boolean(filter.showNotificationIcon),
-                        });
+                <DropdownListContext.Provider value={{activeDescendant, setActiveDescendant: this.setActiveDescendant}}>
+                    <DropdownList dropdownOpened={opened} id={this.instanceId}>
+                        {filters.map((filter) => {
+                            const {id, label, showNotificationIcon, ...htmlDivAttributes} = filter;
+                            const className = classnames('cssClass[dropdownItem]', {
+                                'cssClass[withNotification]': Boolean(filter.showNotificationIcon),
+                            });
 
-                        return (
-                            <DropdownList.Item
-                                {...htmlDivAttributes}
-                                className={className}
-                                id={filter.id}
-                                key={filter.id}
-                                onSelect={() => {
-                                    this.handleFilterClick(filter);
-                                }}
-                                selected={filter === selected}
-                            >
-                                <span className="cssClass[dropdownItemInner]">{filter.label}</span>
-                                {filter.showNotificationIcon && <span className="cssClass[notificationIcon]" />}
-                            </DropdownList.Item>
-                        );
-                    })}
-                </DropdownList>
+                            return (
+                                <DropdownList.Item
+                                    {...htmlDivAttributes}
+                                    className={className}
+                                    id={filter.id}
+                                    key={filter.id}
+                                    onSelect={() => {
+                                        this.handleFilterClick(filter);
+                                    }}
+                                    selected={filter === selected}
+                                >
+                                    <span className="cssClass[dropdownItemInner]">{filter.label}</span>
+                                    {filter.showNotificationIcon && <span className="cssClass[notificationIcon]" />}
+                                </DropdownList.Item>
+                            );
+                        })}
+                    </DropdownList>
+                </DropdownListContext.Provider>
             </Dropdown>
         );
     };

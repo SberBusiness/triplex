@@ -1,22 +1,16 @@
-import React, {FocusEventHandler, useContext, useEffect, useRef, useState} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {FormFieldContext} from '../FormFieldContext';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 import {INPUT_PADDING_X_DEFAULT} from '@sberbusiness/triplex/components/FormField/consts';
-import {Input} from '@sberbusiness/triplex/components/Input/Input';
+import {Input, IInputProps} from '@sberbusiness/triplex/components/Input/Input';
 
-/**
- * Свойства, передаваемые в рендер-функцию(render) IFormFieldInputProps.
- */
+/** Свойства, передаваемые в рендер-функцию IFormFieldInputProps. */
 export interface IFormFieldInputProvideProps extends Omit<IFormFieldInputProps, 'render'> {}
 
-/**
- * Свойства FormFieldInput.
- */
-export interface IFormFieldInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    /** Состояние ошибки. */
-    error?: boolean;
-    /** Рендер-функция, в которую можно передать любой инпут с нужным функционалом(валидация ввода, маска).
+/** Свойства компонента FormFieldInput. */
+export interface IFormFieldInputProps extends Omit<IInputProps, 'groupPosition'> {
+    /** Рендер-функция, в которую можно передать любой инпут с нужным функционалом (валидация ввода, маска).
      *  Через аргументы props инпуту передастся нужная стилизация.
      * */
     render?: (props: IFormFieldInputProvideProps, ref?: React.ForwardedRef<HTMLInputElement>) => React.ReactElement | null;
@@ -59,12 +53,12 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
         setValueExist(Boolean(value));
     }, [setValueExist, value]);
 
-    const handleBlur: FocusEventHandler<HTMLInputElement> = (event) => {
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         setFocused(false);
         onBlur?.(event);
     };
 
-    const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setFocused(true);
         onFocus?.(event);
     };
@@ -88,15 +82,15 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
         // Рендер текстового инпута по-умолчанию.
         return (
             <Input
+                className={classNames}
                 {...props}
                 id={instanceId.current}
-                ref={ref}
-                className={classNames}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 /* Когда элемент не в фокусе, вместо placeholder показывается Label. */
                 placeholder={focused ? placeholder : undefined}
                 style={{paddingLeft, paddingRight, ...style}}
+                ref={ref}
             />
         );
     }

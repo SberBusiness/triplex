@@ -11,7 +11,7 @@ interface IStatusTrackerComposition {
     Icon: typeof StatusTrackerIcon;
 }
 
-/** Свойства StatusTracker. */
+/** Свойства компонента StatusTracker. */
 export interface IStatusTrackerProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Компонент StatusTracker. */

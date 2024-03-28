@@ -34,11 +34,17 @@
 
     &:hover {
         .content {
-            border-color: @color-malachite-02;
+            border-color: var(--triplex-Stepper-Step_BorderColor_Hover);
         }
 
         .arrow path:last-child {
-            fill: @color-malachite-02;
+            fill: var(--triplex-Stepper-Step_BorderColor_Hover);
+        }
+    }
+
+    &.intact {
+        .content {
+            color: var(--triplex-Stepper-Step_Color_Intact);
         }
     }
 
@@ -46,16 +52,16 @@
         cursor: default;
 
         .content {
-            background-color: @color-asphalt-05;
-            border-color: @color-malachite-02;
+            background: var(--triplex-Stepper-Step_Background_Selected);
+            border-color: var(--triplex-Stepper-Step_BorderColor_Hover);
         }
 
         .arrow path:first-child {
-            fill: @color-asphalt-05;
+            fill: var(--triplex-Stepper-Step_Background_Selected);
         }
 
         .arrow path:last-child {
-            fill: @color-malachite-02;
+            fill: var(--triplex-Stepper-Step_BorderColor_Hover);
         }
     }
 
@@ -63,35 +69,36 @@
         pointer-events: none;
 
         .content {
-            border-color: @color-asphalt-03;
+            color: var(--triplex-Stepper-Step_Color_Disabled);
+            border-color: var(--triplex-Stepper-Step_BorderColor_Disabled);
         }
 
         .arrow path:last-child {
-            fill: @color-asphalt-03;
+            fill: var(--triplex-Stepper-Step_BorderColor_Disabled);
         }
     }
 
     &.focusVisible {
         .content {
-            border-color: @color-sunny-01;
+            border-color: var(--triplex-Stepper-Step_BorderColor_Focus);
         }
 
         .arrow path:last-child {
-            fill: @color-sunny-01;
+            fill: var(--triplex-Stepper-Step_BorderColor_Focus);
         }
     }
 }
 
 .content {
     display: inline-flex;
-    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--triplex-Stepper-Step_Color_Default);
+    background: var(--triplex-Stepper-Step_Background_Default);
     border-style: solid;
-    border-color: @color-asphalt-03;
-    background-color: @color-snowy;
-
-    &.inactive {
-        color: @color-graphite-02;
-    }
+    border-color: var(--triplex-Stepper-Step_BorderColor_Default);
+    white-space: nowrap;
 }
 
 .icon {
@@ -104,4 +111,12 @@
 
 .arrow {
     transform: translate(0); // Safari fix
+
+    path:first-child {
+        fill: var(--triplex-Stepper-Step_Background_Default);
+    }
+
+    path:last-child {
+        fill: var(--triplex-Stepper-Step_BorderColor_Default);
+    }
 }

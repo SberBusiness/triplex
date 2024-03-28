@@ -1,5 +1,7 @@
-import {dateFormatYYYYMMDD, globalLimitRange, YEARS_SET} from '@sberbusiness/triplex/consts/DateConst';
-import {ECalendarMomentPeriodType, ECalendarTab} from '@sberbusiness/triplex/enums/EDatePeriod';
+import React from 'react';
+import moment, {Moment} from 'moment';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
+import {dateFormatYYYYMMDD, globalLimitRange, MONTHS_SET} from '@sberbusiness/triplex/consts/DateConst';
 import {IButtonIconProps} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {
     ICalendarNestedProps,
@@ -10,13 +12,11 @@ import {
 } from '@sberbusiness/triplex/components/Calendar/types';
 import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
 import {CalendarControls} from '@sberbusiness/triplex/components/Calendar/components/CalendarControls';
-import {Decade} from '@sberbusiness/triplex/components/Calendar/components/Decade';
-import {Month} from '@sberbusiness/triplex/components/Calendar/components/Month';
-import {Year} from '@sberbusiness/triplex/components/Calendar/components/Year';
-import {EChangePageDirection, EPickType} from '@sberbusiness/triplex/components/Calendar/enums';
+import {CalendarViewYears} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewYears';
+import {CalendarViewDays} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewDays';
+import {CalendarViewMonths} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewMonths';
+import {ECalendarPickType, ECalendarViewMode, ECalendarPageDirection} from '@sberbusiness/triplex/components/Calendar/enums';
 import {CalendarRange} from '@sberbusiness/triplex/components/Calendar/CalendarRange';
-import moment, {Moment} from 'moment';
-import React from 'react';
 import {formatDate, getHeader, isCalendarRange, parsePickedDate} from '@sberbusiness/triplex/components/Calendar/utils';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 
@@ -24,72 +24,75 @@ import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 export interface ICalendarCommonProps extends ICalendarNestedProps {
     /** Отображаемая по умолчанию дата. */
     defaultViewDate?: string | Moment;
-    /** Отключённые дни. */
-    disabledDays?: string[];
     /** Формат для значения. */
     format?: string;
+    /** Вариант выбора даты. */
+    pickType?: ECalendarPickType;
     /** Ограничение выбираемого периода. */
     limitRange?: IDateLimitRange;
     /** Отмеченные дни. */
     markedDays?: string[];
+    /** Отключённые дни. */
+    disabledDays?: string[];
+    /** Обратный порядок выбора даты. */
+    reversedPick?: boolean;
     /** Обработчик потери фокуса. */
     onBlur?: () => void;
     /** Обработчик изменения страницы. */
-    onChangePage?: (date: Moment, tab: ECalendarTab, direction: EChangePageDirection) => void;
+    onChangePage?: (date: Moment, mode: ECalendarViewMode, direction: ECalendarPageDirection) => void;
     /** Обработчик выбора месяца. */
     onSetMonth?: (date: Moment) => void;
-    /** Вариант выбора даты. */
-    pickType?: EPickType;
-    /** Обратный порядок выбора даты. */
-    reversedPick?: boolean;
 }
 
 /** Свойства обычного календаря. */
 export interface ICalendarSingleProps extends ICalendarCommonProps {
-    /** Обработчик изменения даты. */
-    onChangeDate: (date: Moment) => void;
     /** Выбранная дата. */
     pickedDate: TPickedDateProp;
+    /** Обработчик изменения даты. */
+    onChangeDate: (date: Moment) => void;
+    /** Адаптированный режим. */
+    adaptiveMode?: boolean;
 }
 
 /** Свойства календаря для выбора периода. */
 export interface ICalendarRangeProps extends ICalendarCommonProps {
-    /** Дата календаря по умолчанию. */
-    defaultDate?: TPickedDateProp;
-    /** Обработчик изменения периода. */
-    onChangeDate: (date: TPickedRange) => void;
     /** Выбранный период. */
     pickedDate: TPickedRangeProp;
+    /** Обработчик изменения периода. */
+    onChangeDate: (date: TPickedRange) => void;
+    /** Дата календаря по умолчанию. */
+    defaultDate?: TPickedDateProp;
 }
 
-/** Свойства компонента календаря. */
+/** Свойства компонента Calendar. */
 export type TCalendarProps = ICalendarSingleProps | ICalendarRangeProps;
 
-interface IState {
-    /** День, доступный для фокусировки в текущий момент при навигации с клавиатуры. Элемент с этой датой имеет tabIndex=0, остальные даты -1. */
-    availableToFocusDay?: Moment;
-    /** День, находящийся в фокусе в текущий момент при навигации с клавиатуры. */
-    focusedDay?: Moment;
-    /** Выбранная дата в формате Moment. */
-    pickedDate: TPickedDate;
+/** Состояния компонента Calendar. */
+interface ICalendarState {
     /** Дата является курсором, для навигации по интерфейсу. */
     viewDate: Moment;
-    /** Текущая вкладка. */
-    currentTab: ECalendarTab;
+    /** Выбранная дата в формате Moment. */
+    pickedDate: TPickedDate;
     /** Заголовок календаря. */
     header: string;
+    /** Текущий вид. */
+    currentView: ECalendarViewMode;
+    /** День, доступный для фокусировки в при навигации с клавиатуры. */
+    tabbableDay?: Moment;
+    /** День, находящийся в фокусе в текущий момент. */
+    focusedDay?: Moment;
 }
 
-/** Компонент календаря. */
-export class Calendar extends React.PureComponent<TCalendarProps, IState> {
+/** Календарь. */
+export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState> {
     public static Range = CalendarRange;
 
     public static defaultProps = {
         format: dateFormatYYYYMMDD,
-        pickType: EPickType.datePick,
+        pickType: ECalendarPickType.datePick,
     };
 
-    // Уникальный id, для передачи a11y aria-атрибутов в Month и CalendarControls.
+    // Уникальный идентификатор для связи периода с таблицей.
     private periodId = `calendar-period-${uniqueId()}`;
 
     constructor(props: Readonly<TCalendarProps>) {
@@ -102,30 +105,30 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
 
         let viewDate = moment();
 
-        if (pickedDateState && pickedDateState.isValid) {
+        if (pickedDateState && pickedDateState.isValid()) {
             viewDate = pickedDateState.clone();
         } else if (defaultViewDate) {
             const parsedDefaultViewDate = defaultViewDate && parsePickedDate(defaultViewDate, format!);
 
-            if (parsedDefaultViewDate && parsedDefaultViewDate.isValid) {
+            if (parsedDefaultViewDate && parsedDefaultViewDate.isValid()) {
                 viewDate = parsedDefaultViewDate.clone();
             }
         }
 
         const currentTab = reversedPick
-            ? ECalendarTab.DECADE
-            : pickType === EPickType.monthYearPick
-            ? ECalendarTab.YEAR
-            : ECalendarTab.MONTH;
+            ? ECalendarViewMode.YEARS
+            : pickType === ECalendarPickType.monthYearPick
+              ? ECalendarViewMode.MONTHS
+              : ECalendarViewMode.DAYS;
         const header = reversedPick
-            ? formatDate(viewDate, ECalendarTab.DECADE)!
-            : pickType === EPickType.monthYearPick
-            ? formatDate(viewDate, ECalendarTab.YEAR)!
-            : getHeader(viewDate);
+            ? formatDate(viewDate, ECalendarViewMode.YEARS)!
+            : pickType === ECalendarPickType.monthYearPick
+              ? formatDate(viewDate, ECalendarViewMode.MONTHS)!
+              : getHeader(viewDate);
 
         this.state = {
             viewDate,
-            currentTab,
+            currentView: currentTab,
             header,
             pickedDate: pickedDateState,
         };
@@ -135,7 +138,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         this.setAvailableToFocusDay();
     }
 
-    public componentDidUpdate(prevProps: TCalendarProps, prevState: IState): void {
+    public componentDidUpdate(prevProps: TCalendarProps, prevState: ICalendarState): void {
         const {format} = this.props;
         const {viewDate, focusedDay} = this.state;
         const {focusedDay: prevFocusedDay, viewDate: prevViewDate} = prevState;
@@ -153,10 +156,10 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         if (!(!pickedDateValid || prevPickedDate?.isSame(resultDate, 'day'))) {
             let newDateContext = {};
 
-            if (viewDate && !viewDate.isSame(pickedDateState, ECalendarMomentPeriodType.MONTH)) {
+            if (viewDate && !viewDate.isSame(pickedDateState, 'month')) {
                 newDateContext = {
                     viewDate: resultDate!.clone(),
-                    currentTab: ECalendarTab.MONTH,
+                    currentTab: ECalendarViewMode.DAYS,
                     header: getHeader(resultDate),
                 };
             }
@@ -170,7 +173,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         if (
             (!viewDate && prevViewDate) ||
             (viewDate && !prevViewDate) ||
-            (viewDate && prevViewDate && !viewDate.isSame(prevViewDate, ECalendarMomentPeriodType.MONTH))
+            (viewDate && prevViewDate && !viewDate.isSame(prevViewDate, 'month'))
         ) {
             // Сменился период отображения.
             this.setAvailableToFocusDay();
@@ -179,21 +182,50 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         if ((focusedDay && !prevFocusedDay) || (focusedDay && prevFocusedDay && !focusedDay.isSame(prevFocusedDay, 'day'))) {
             // Сменился день, на котором установлен фокус.
             this.setState({
-                availableToFocusDay: focusedDay,
+                tabbableDay: focusedDay,
             });
         }
     }
 
-    public render(): JSX.Element {
+    public render() {
+        const classNames = classnames('cssClass[calendar]', {
+            'cssClass[adaptive]': !isCalendarRange(this.props) && !!this.props.adaptiveMode,
+        });
+
         return (
-            <div className="cssClass[globalCalendar]">
+            <div className={classNames}>
                 {this.renderCalendarControls()}
-                {this.renderCalendarItem()}
+                {this.renderCalendarView()}
             </div>
         );
     }
 
-    /** Устанавливает значение availableToFocusDay. Это или выбранная дата или первый день месяца. */
+    /** Возвращает первый доступный для выбора день месяца или undefined, если все дни задисейблены. */
+    private getFirstEnabledDayInMonth = (date: Moment): Moment | undefined => {
+        // Количество дней в текущем месяце.
+        const daysInMonth = moment(date).daysInMonth();
+        // Первый день месяца.
+        const firstDay = moment(date).startOf('month');
+        // Первый доступный для выбора день месяца.
+        let enabledDay;
+
+        if (this.checkDisabled(firstDay)) {
+            for (let i = 1; i < daysInMonth; i++) {
+                firstDay.add(1, 'day');
+                enabledDay = firstDay;
+                if (!this.checkDisabled(firstDay)) {
+                    enabledDay = firstDay;
+                    break;
+                }
+            }
+        } else {
+            enabledDay = firstDay;
+        }
+
+        return enabledDay;
+    };
+
+    /** Устанавливает значение availableToFocusDay. Это или выбранная дата, или первый день месяца. */
     private setAvailableToFocusDay = () => {
         const {pickedDate, viewDate} = this.state;
         let nextAvailableToFocusDay;
@@ -203,28 +235,25 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
             // Выбранный день.
             nextAvailableToFocusDay = pickedDate;
         } else {
-            // Первый день месяца.
-            nextAvailableToFocusDay = moment(viewDate).startOf('month');
+            // Первый доступный день месяца.
+            nextAvailableToFocusDay = this.getFirstEnabledDayInMonth(viewDate);
         }
 
         if (nextAvailableToFocusDay) {
             this.setState({
-                availableToFocusDay: nextAvailableToFocusDay,
+                tabbableDay: nextAvailableToFocusDay,
             });
         }
     };
 
-    /**
-     * Проверяет, является ли дата отключённой.
-     * @param {Moment} date Проверяемая дата.
-     */
+    /** Проверяет, является ли дата отключённой. */
     private checkDisabled = (date: Moment): boolean => {
         const {disabledDays} = this.props;
         return Boolean(disabledDays?.includes(date.format(dateFormatYYYYMMDD)));
     };
 
     /** Обработчик перемещения фокуса на другой день. */
-    private handleChangeFocusedDay = (day: Moment | undefined) => {
+    private handleChangeFocusedDay = (day: Moment | undefined, byKeyDown?: boolean) => {
         const {focusedDay, viewDate} = this.state;
 
         if (!day) {
@@ -237,12 +266,15 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
             return;
         }
 
-        // Фокус переместился на день предыдущего месяца.
-        if (day.isBefore(viewDate, 'month')) {
-            this.changeCalendarPageToBack();
-        } else if (day.isAfter(viewDate, 'month')) {
-            // Фокус переместился на день следующего месяца.
-            this.changeCalendarPageToForward();
+        // Фокус изменен при навигации с клавиатуры.
+        if (byKeyDown) {
+            // Фокус переместился на день предыдущего месяца.
+            if (day.isBefore(viewDate, 'month')) {
+                this.changeCalendarPageToBack();
+            } else if (day.isAfter(viewDate, 'month')) {
+                // Фокус переместился на день следующего месяца.
+                this.changeCalendarPageToForward();
+            }
         }
 
         if (!this.checkDisabled(day)) {
@@ -257,48 +289,40 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
     /** Если дата отсутствует - вернётся текущая. */
     private getSafeDate = (date: TPickedDate): Moment => date?.clone() || moment();
 
-    /**
-     * Задать отображаемый год
-     * @param {number} year Год.
-     */
+    /** Задать отображаемый год. */
     private setViewYear = (year: number) => {
         const {viewDate, pickedDate} = this.state;
-        const viewDateNew: Moment = this.getSafeDate(viewDate).set(ECalendarMomentPeriodType.YEAR, year);
+        const viewDateNew: Moment = this.getSafeDate(viewDate).set('year', year);
 
         this.setState({
             viewDate: viewDateNew,
-            currentTab: ECalendarTab.YEAR,
-            header: formatDate(viewDateNew, ECalendarTab.YEAR) || getHeader(pickedDate),
+            currentView: ECalendarViewMode.MONTHS,
+            header: formatDate(viewDateNew, ECalendarViewMode.MONTHS) || getHeader(pickedDate),
         });
     };
 
-    /**
-     * Задать отображаемый месяц
-     * @param {number} month Месяц.
-     */
+    /** Задать отображаемый месяц. */
     private setViewMonth = (month: number) => {
         const {viewDate} = this.state;
         const viewDateNew: Moment = this.getSafeDate(viewDate).month(month);
 
         this.props.onSetMonth?.(viewDateNew);
 
-        if (this.props.pickType === EPickType.monthYearPick) {
+        if (this.props.pickType === ECalendarPickType.monthYearPick) {
             this.handleClick(viewDateNew.date(1));
         } else {
             this.setState({
                 viewDate: viewDateNew,
-                currentTab: ECalendarTab.MONTH,
-                header: formatDate(viewDateNew, ECalendarTab.MONTH) || getHeader(viewDateNew),
+                currentView: ECalendarViewMode.DAYS,
+                header: formatDate(viewDateNew, ECalendarViewMode.DAYS) || getHeader(viewDateNew),
             });
         }
     };
 
-    /**
-     * Обработчик выбора даты.
-     * @param {Moment} date Выбранная дата.
-     */
+    /** Обработчик выбора даты. */
     private handleClick = (date: Moment) => {
         const {format} = this.props;
+
         if (isCalendarRange(this.props)) {
             let newRange: TPickedRange;
             if (this.props.pickedDate[0] && !this.props.pickedDate[1]) {
@@ -313,28 +337,44 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         }
     };
 
-    /** Отрисовка года. */
-    private renderYear = (): JSX.Element => {
+    /** Отрисовка таблицы с выбором года. */
+    private renderViewYears = (): JSX.Element => {
         const {viewDate, pickedDate} = this.state;
-        const {pickType, limitRange, monthHtmlAttributes} = this.props;
+        const {limitRange, yearHtmlAttributes} = this.props;
 
         return (
-            <Year
+            <CalendarViewYears
                 viewDate={this.getSafeDate(viewDate)}
-                onClick={this.setViewMonth}
                 pickedDate={pickedDate}
-                limitRange={pickType === EPickType.monthYearPick ? limitRange : undefined}
-                monthHtmlAttributes={monthHtmlAttributes}
+                limitRange={limitRange}
+                yearHtmlAttributes={yearHtmlAttributes}
+                onClick={this.setViewYear}
             />
         );
     };
 
-    /** Отрисовка месяца. */
-    private renderMonth = (): JSX.Element => {
-        const {availableToFocusDay, focusedDay, viewDate, pickedDate} = this.state;
-        const {format, limitRange, markedDays, disabledDays, dayHtmlAttributes} = this.props;
+    /** Отрисовка таблицы с выбором месяца. */
+    private renderViewMonths = (): JSX.Element => {
+        const {viewDate, pickedDate} = this.state;
+        const {limitRange, monthHtmlAttributes} = this.props;
 
+        return (
+            <CalendarViewMonths
+                viewDate={this.getSafeDate(viewDate)}
+                pickedDate={pickedDate}
+                limitRange={limitRange}
+                monthHtmlAttributes={monthHtmlAttributes}
+                onClick={this.setViewMonth}
+            />
+        );
+    };
+
+    /** Отрисовка таблицы с выбором дня. */
+    private renderViewDays = (): JSX.Element => {
+        const {tabbableDay, focusedDay, viewDate, pickedDate} = this.state;
+        const {format, limitRange, markedDays, disabledDays, dayHtmlAttributes} = this.props;
         let pickedRange;
+
         if (isCalendarRange(this.props)) {
             pickedRange = [
                 parsePickedDate(this.props.pickedDate[0], format!),
@@ -343,40 +383,42 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         }
 
         return (
-            <Month
-                periodId={this.periodId}
-                availableToFocusDay={availableToFocusDay}
-                focusedDay={focusedDay}
-                onChangeFocusedDay={this.handleChangeFocusedDay}
+            <CalendarViewDays
+                viewDate={viewDate}
+                pickedDate={pickedDate}
+                pickedRange={pickedRange}
                 limitRange={limitRange}
+                dayHtmlAttributes={dayHtmlAttributes}
+                tabbableDay={tabbableDay}
+                focusedDay={focusedDay}
                 markedDays={markedDays}
                 disabledDays={disabledDays}
-                pickedDate={pickedDate}
-                viewDate={viewDate}
-                pickedRange={pickedRange}
+                periodId={this.periodId}
                 onClick={this.handleClick}
-                onPickNextMonth={this.changeCalendarPageToBack}
-                onPickPreviousMonth={this.changeCalendarPageToForward}
-                dayHtmlAttributes={dayHtmlAttributes}
+                onChangeFocusedDay={this.handleChangeFocusedDay}
             />
         );
     };
 
     /** Отрисовка элементов управления календаря. */
     private renderCalendarControls = (): JSX.Element => {
-        const {header, currentTab, viewDate, pickedDate} = this.state;
+        const {header, currentView, viewDate, pickedDate} = this.state;
         const {prevButtonProps, nextButtonProps, changeViewLinkProps} = this.props;
 
-        const nextTab: ECalendarTab = currentTab - 1;
-        const changeCalendarView =
-            nextTab > 0
-                ? () => {
-                      this.setState({
-                          currentTab: nextTab,
-                          header: formatDate(viewDate, nextTab) || getHeader(pickedDate),
-                      });
-                  }
-                : undefined;
+        const nextView = {
+            [ECalendarViewMode.DAYS]: ECalendarViewMode.MONTHS,
+            [ECalendarViewMode.MONTHS]: ECalendarViewMode.YEARS,
+            [ECalendarViewMode.YEARS]: undefined,
+        }[currentView] as Exclude<ECalendarViewMode, ECalendarViewMode.DAYS> | undefined;
+
+        const handleChangeView =
+            nextView &&
+            (() => {
+                this.setState({
+                    currentView: nextView,
+                    header: formatDate(viewDate, nextView) || getHeader(pickedDate),
+                });
+            });
 
         const prevInRange = this.isInRange(this.getSafeDate(viewDate).add(-this.getOffset(), this.getPage()));
         const nextInRange = this.isInRange(this.getSafeDate(viewDate).add(this.getOffset(), this.getPage()));
@@ -389,7 +431,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
                 periodId={this.periodId}
                 onPrev={this.changeCalendarPageToBack}
                 onNext={this.changeCalendarPageToForward}
-                onChangeView={changeCalendarView}
+                onChangeView={handleChangeView}
                 prevButtonProps={{...prevButtonProps, disabled: prevDisabled} as IButtonIconProps}
                 nextButtonProps={{...nextButtonProps, disabled: nextDisabled} as IButtonIconProps}
                 changeViewLinkProps={changeViewLinkProps}
@@ -400,57 +442,42 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
     };
 
     /** Отрисовка текущей вкладки календаря. */
-    private renderCalendarItem = (): React.ReactNode => {
-        const {pickedDate, currentTab, viewDate} = this.state;
-        const {yearHtmlAttributes} = this.props;
+    private renderCalendarView = (): React.ReactNode => {
+        const {currentView} = this.state;
 
-        switch (currentTab) {
-            case ECalendarTab.DECADE:
-                return (
-                    <Decade
-                        viewDate={viewDate}
-                        onClick={this.setViewYear}
-                        pickedDate={pickedDate}
-                        yearHtmlAttributes={yearHtmlAttributes}
-                    />
-                );
-            case ECalendarTab.YEAR:
-                return this.renderYear();
-            case ECalendarTab.MONTH:
-                return this.renderMonth();
-            default:
-                return null;
+        switch (currentView) {
+            case ECalendarViewMode.YEARS:
+                return this.renderViewYears();
+            case ECalendarViewMode.MONTHS:
+                return this.renderViewMonths();
+            case ECalendarViewMode.DAYS:
+                return this.renderViewDays();
         }
     };
 
     /** Получить изменяемую страницу в формате Moment. */
-    private getPage = (): ECalendarMomentPeriodType =>
-        this.state.currentTab === ECalendarTab.MONTH ? ECalendarMomentPeriodType.MONTH : ECalendarMomentPeriodType.YEAR;
+    private getPage = () => (this.state.currentView === ECalendarViewMode.DAYS ? 'month' : 'year');
 
     /** Получить текущий offset. */
-    private getOffset = (): number => (this.state.currentTab === ECalendarTab.DECADE ? 12 : 1);
+    private getOffset = (): number => (this.state.currentView === ECalendarViewMode.YEARS ? 12 : 1);
 
     private isInRange = (viewDate: Moment): boolean => {
-        const {currentTab} = this.state;
+        const {currentView} = this.state;
         const {dateFrom, dateTo} = globalLimitRange;
 
         return (
             viewDate.isBetween(dateFrom, dateTo) ||
-            (currentTab === ECalendarTab.DECADE &&
-                YEARS_SET.some((offset) => viewDate.clone().add(offset, this.getPage()).isBetween(dateFrom, dateTo)))
+            (currentView === ECalendarViewMode.YEARS &&
+                MONTHS_SET.some((offset) => viewDate.clone().add(offset, this.getPage()).isBetween(dateFrom, dateTo)))
         );
     };
 
-    /**
-     * Обработчик смены страницы.
-     *
-     * @param {EChangePageDirection} direction Направление смены.
-     */
-    private handlePageChange = (direction: EChangePageDirection) => {
-        const {viewDate, currentTab} = this.state;
+    /** Обработчик смены страницы. */
+    private handlePageChange = (direction: ECalendarPageDirection) => {
+        const {viewDate, currentView} = this.state;
         const {onChangePage} = this.props;
 
-        onChangePage?.(viewDate, currentTab, direction);
+        onChangePage?.(viewDate, currentView, direction);
     };
 
     /** Обработка листания календаря назад. */
@@ -458,7 +485,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         const {pickedDate} = this.state;
 
         this.setState(
-            (prevState): IState => {
+            (prevState): ICalendarState => {
                 const viewDate: Moment = this.getSafeDate(prevState.viewDate).add(-this.getOffset(), this.getPage());
                 const isInRange = this.isInRange(viewDate);
 
@@ -467,7 +494,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
                 if (isInRange) {
                     changedStateElements = {
                         viewDate: viewDate,
-                        header: formatDate(viewDate, prevState.currentTab) || getHeader(pickedDate),
+                        header: formatDate(viewDate, prevState.currentView) || getHeader(pickedDate),
                     };
                 }
                 return {
@@ -477,7 +504,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
                 };
             },
             () => {
-                this.handlePageChange(EChangePageDirection.BACKWARD);
+                this.handlePageChange(ECalendarPageDirection.BACKWARD);
             }
         );
     };
@@ -487,7 +514,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
         const {pickedDate} = this.state;
 
         this.setState(
-            (prevState): IState => {
+            (prevState): ICalendarState => {
                 const viewDate: Moment = this.getSafeDate(prevState.viewDate).add(this.getOffset(), this.getPage());
                 const isInRange = this.isInRange(viewDate);
 
@@ -496,7 +523,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
                 if (isInRange) {
                     changedStateElements = {
                         viewDate,
-                        header: formatDate(viewDate, prevState.currentTab) || getHeader(pickedDate),
+                        header: formatDate(viewDate, prevState.currentView) || getHeader(pickedDate),
                     };
                 }
                 return {
@@ -506,7 +533,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, IState> {
                 };
             },
             () => {
-                this.handlePageChange(EChangePageDirection.FORWARD);
+                this.handlePageChange(ECalendarPageDirection.FORWARD);
             }
         );
     };

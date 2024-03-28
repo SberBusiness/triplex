@@ -3,6 +3,7 @@ import {Title} from '@sberbusiness/triplex/components/Typography/Title';
 import {ETitleSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {EScreenWidth} from '@sberbusiness/triplex/enums/EScreenWidth';
 
+/** Свойства компонента ConfirmContentTitle. */
 export interface IConfirmContentTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
 
 export const ConfirmContentTitle: React.FC<IConfirmContentTitleProps> = ({children, ...htmlAttributes}) => (

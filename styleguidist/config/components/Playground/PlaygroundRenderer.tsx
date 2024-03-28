@@ -1,5 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
+import {useToken} from '@sberbusiness/triplex/components/ThemeProvider/useToken';
+import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
 import './styles.less';
 
 interface PlaygroundRendererProps {
@@ -24,10 +26,11 @@ const PlaygroundRenderer: React.FC<PlaygroundRendererProps> = ({
     toolbar,
 }) => {
     const {className, ...restProps} = previewProps;
+    const {theme} = useToken();
 
     return (
         <div className="styleguide-playground">
-            <div className={cx('styleguide-playground-preview', className, {padded})} {...restProps}>
+            <div className={cx('styleguide-playground-preview', `${theme}-mode`, className, {padded})} {...restProps}>
                 {preview}
             </div>
             <div className="styleguide-playground-controls">

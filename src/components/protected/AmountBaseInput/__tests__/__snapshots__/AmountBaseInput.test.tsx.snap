@@ -5,8 +5,8 @@ exports[`AmountBaseInput renders correctly 1`] = `
   autoComplete="off"
   className="cssClass[input]"
   onChange={[Function]}
-  onClick={[Function]}
   onKeyDown={[Function]}
+  onSelect={[Function]}
   placeholder="0,00"
   value="1 234 567 890,00"
 />

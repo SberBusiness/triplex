@@ -1,19 +1,18 @@
 import React from 'react';
 
-/**
- * Интерфейс компонента несортированного списка.
- *
- * @param {React.ReactNode[]} values Пункты для несортированного списка.
- */
+/** Свойства компонента UnorderedList. */
 export interface IUnorderedListProps {
+    /** Пункты для несортированного списка. */
     values: React.ReactNode[];
 }
 
-/** Компонент несортированного списока. */
+/** Несортированный список. */
 export const UnorderedList: React.FC<IUnorderedListProps> = ({values}: IUnorderedListProps) => (
     <ul className="cssClass[unorderedList]">
-        {values.map((value, idx) => (
-            <li key={idx}>{value}</li>
+        {values.map((value, index) => (
+            <li key={index} className="cssClass[unorderedListItem]">
+                {value}
+            </li>
         ))}
     </ul>
 );

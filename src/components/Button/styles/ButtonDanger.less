@@ -1,8 +1,16 @@
 @import 'src/styles/style';
 
 .button.danger {
-    background-color: @color-ruby-02;
-    .b3-text-controls-medium(@color-snowy);
+    background: var(--triplex-Button-Danger_Background_Default);
+    .font-medium();
+    .font-size-inline(@font-size-14);
+
+    text-transform: none;
+    color: var(--triplex-Button-Danger_Color_Default);
+
+    .caretIcon path {
+        fill: var(--triplex-Button-Danger_Caret_Color_Default);
+    }
 
     &.MD {
         .size-MD();
@@ -12,15 +20,31 @@
         .size-SM();
     }
 
-    &:hover {
-        background-color: @color-ruby-03;
+    &.LG {
+        .size-LG();
     }
 
+    &:hover {
+        background: var(--triplex-Button-Danger_Background_Hover);
+        color: var(--triplex-Button-Danger_Color_Hover);
+    }
+
+    &.expanded,
     &:active {
-        background-color: @color-ruby-01;
+        background: var(--triplex-Button-Danger_Background_Active);
+        color: var(--triplex-Button-Danger_Color_Active);
     }
 
     &:disabled {
-        background-color: @color-ruby-04;
+        background: var(--triplex-Button-Danger_Background_Disabled);
+        color: var(--triplex-Button-Danger_Color_Disabled);
+
+        .caretIcon path {
+            fill: var(--triplex-Button-Danger_Caret_Color_Disabled);
+        }
+    }
+
+    &[data-focus-visible]:focus {
+        box-shadow: inset 0 0 1px 1px var(--triplex-Accent-500);
     }
 }

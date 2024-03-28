@@ -5,17 +5,17 @@
     margin-top: @metric-16;
 
     .tableFooter {
-        background: @color-asphalt-04;
+        background: var(--triplex-TableBasic-TableFooter_Background);
         padding: @metric-24 @metric-12;
 
         &::before {
-            content: ' ';
+            content: '';
             position: absolute;
             top: -@metric-64;
             left: 0;
             width: 100%;
             height: @metric-64;
-            background: linear-gradient(fade(@color-snowy, 0%), @color-snowy);
+            background: var(--triplex-TableBasic-TableFooter_Highlight);
             pointer-events: none;
         }
 
@@ -43,7 +43,13 @@
     }
 
     &:not(.ieBrowser) {
-        position: sticky; //IE не поддерживает.
+        position: sticky; // IE не поддерживает.
         bottom: 0;
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .tableFooterWrapper {
+        height: 112px;
     }
 }

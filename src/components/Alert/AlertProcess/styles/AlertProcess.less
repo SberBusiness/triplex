@@ -10,6 +10,7 @@
     border-style: solid;
     border-radius: @radius-8;
     .b1-text-main(@color-graphite-01);
+    color: var(--triplex-AlertProcess-Color);
 
     .themeIcon {
         padding-top: 2px;
@@ -19,23 +20,23 @@
     }
 
     &.alertTypeError {
-        background: @color-ruby-05;
-        border-color: @color-ruby-02;
+        background: var(--triplex-AlertProcess-Error_Background);
+        border-color: var(--triplex-AlertProcess-Error_Border_Color);
     }
 
     &.alertTypeInfo {
-        background: @color-sky-05;
-        border-color: @color-sky-02;
+        background: var(--triplex-AlertProcess-Info_Background);
+        border-color: var(--triplex-AlertProcess-Info_Border_Color);
     }
 
     &.alertTypeWarning {
-        background: @color-pumpkin-05;
-        border-color: @color-pumpkin-02;
+        background: var(--triplex-AlertProcess-Warning_Background);
+        border-color: var(--triplex-AlertProcess-Warning_Border_Color);
     }
 
     &.alertTypeFeature {
-        background: @color-malachite-05;
-        border-color: @color-malachite-03;
+        background: var(--triplex-AlertProcess-Feature_Background);
+        border-color: var(--triplex-AlertProcess-Feature_Border_Color);
 
         .themeIcon {
             padding-top: 0;
@@ -48,29 +49,11 @@
 
         .alertProcessContentHeader {
             margin-bottom: @metric-8;
-            .b3-text-controls-medium(@color-graphite-01);
-        }
+            .font-medium();
+            .font-size-inline(@font-size-14);
 
-        ul {
-            list-style: none;
-            margin: 0 0 0 @alert-list-marker-width;
-            padding: 0;
-
-            li {
-                color: @color-graphite-01;
-
-                &::before {
-                    content: '\2022';
-                    display: inline-block;
-                    width: @alert-list-marker-width;
-                    margin-left: -@alert-list-marker-width;
-                    font-weight: bold;
-                }
-
-                &:not(:last-child) {
-                    margin-bottom: @metric-8;
-                }
-            }
+            text-transform: none;
+            color: var(--triplex-AlertProcess-Color);
         }
     }
 

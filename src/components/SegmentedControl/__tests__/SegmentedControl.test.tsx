@@ -1,7 +1,6 @@
 import {shallow} from 'enzyme';
 import React from 'react';
 import {ESegmentedControlType, SegmentedControl} from '@sberbusiness/triplex/components/SegmentedControl/SegmentedControl';
-import {allure} from '@jest/unit/allure-report';
 
 describe('SegmentedControl', () => {
     beforeEach(() => {

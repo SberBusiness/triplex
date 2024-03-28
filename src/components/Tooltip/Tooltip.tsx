@@ -17,7 +17,7 @@ interface IState {
     tooltipNode: HTMLDivElement | null;
 }
 
-/** Компонент тултипа. Появляется при ховере, клике или просто открытым. */
+/** Всплывающая подсказка. */
 export class Tooltip extends React.Component<ITooltipProps, IState> {
     public static displayName = 'Tooltip';
 

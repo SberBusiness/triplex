@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {AmountCurrencySelect} from '../AmountCurrencySelect';
-import {allure} from '@jest/unit/allure-report';
 
 jest.mock('@sberbusiness/icons/CurrencySrvIcon20', () => ({
     CurrencySrvIcon20: 'svg',

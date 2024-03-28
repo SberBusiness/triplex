@@ -13,14 +13,16 @@
     }
 
     &.alertTypeError .alertContextText {
-        color: @color-ruby-02;
+        color: var(--triplex-AlertContext-Error_Color);
     }
 
-    &.alertTypeInfo,
-    &.alertTypeWarning,
-    &.alertTypeSystem {
-        .alertContextText {
-            color: @color-graphite-01;
-        }
+    &.alertTypeInfo .alertContextText {
+        color: var(--triplex-AlertContext-Info_Color);
+    }
+    &.alertTypeWarning .alertContextText {
+        color: var(--triplex-AlertContext-Warning_Color);
+    }
+    &.alertTypeSystem .alertContextText {
+        color: var(--triplex-AlertContext-System_Color);
     }
 }

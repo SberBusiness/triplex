@@ -3,36 +3,37 @@
 exports[`DatePicker renders correctly 1`] = `
 <div
   className="cssClass[datePicker]"
+  onMouseDown={[Function]}
 >
   <div
-    className="cssClass[inputBlock]"
+    className="cssClass[datePickerInput]"
   >
     <div
       className="cssClass[maskedInputWrapper]"
     >
       <input
-        className="cssClass[input] cssClass[maskedInputPlaceholder] cssClass[dateInput]"
+        aria-hidden="true"
+        className="cssClass[input] cssClass[maskedInputPlaceholder] cssClass[datePickerInputTarget]"
         onChange={[Function]}
+        placeholder=""
         readOnly={true}
         tabIndex={-1}
-        value=""
       />
       <input
-        className="cssClass[maskedInput] cssClass[dateInput]"
+        className="cssClass[maskedInput] cssClass[datePickerInputTarget]"
         defaultValue=""
         guide={false}
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
-        onMouseDown={[Function]}
         render={[Function]}
         type="text"
         value="01.01.2021"
       />
     </div>
     <button
-      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[calendarIcon]"
+      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[datePickerInputIcon]"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

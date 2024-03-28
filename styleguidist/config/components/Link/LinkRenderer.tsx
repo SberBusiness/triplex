@@ -3,6 +3,7 @@ import cx from 'clsx';
 import './styles.less';
 
 interface LinkProps {
+    children: React.ReactNode;
     className?: string;
     href?: string;
     target?: string;

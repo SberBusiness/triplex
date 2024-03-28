@@ -1,9 +1,10 @@
+import React from 'react';
 import {LabelCodeNumber} from '@sberbusiness/triplex/components/Label/components/LabelCodeNumber';
 import {LabelDescription} from '@sberbusiness/triplex/components/Label/components/LabelDescription';
 import {LabelText} from '@sberbusiness/triplex/components/Label/components/LabelText';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import React from 'react';
 
+/** Свойства компонента Label. */
 export interface ILabelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface ILabelFC extends React.FC<ILabelProps> {
@@ -12,11 +13,9 @@ export interface ILabelFC extends React.FC<ILabelProps> {
     Description: typeof LabelDescription;
 }
 
-/**
- * Компонент Label.
- */
+/** Компонент Label. */
 export const Label: ILabelFC = ({children, className, ...props}) => (
-    <div className={classnames('cssClass[globalLabelWrapper]', className)} {...props}>
+    <div className={classnames('cssClass[globalLabelWrapper]', className)} {...props} data-tinfo="9.1.0">
         {children}
     </div>
 );

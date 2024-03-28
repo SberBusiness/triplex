@@ -64,8 +64,8 @@ export const RefreshIcon: React.FC<IProps> = (props: IProps) => {
             <clipPath id={`clipFront${percent}`}>
                 <path d={calculateSectorPath(10, 10, 12, percent)} />
             </clipPath>
-            <path className="cssClass[light]" d={iconPath} />
-            <path className="cssClass[dark]" d={iconPath} clipPath={`url(#clipFront${percent})`} />
+            <path className="cssClass[empty]" d={iconPath} />
+            <path className="cssClass[full]" d={iconPath} clipPath={`url(#clipFront${percent})`} />
         </svg>
     );
 };

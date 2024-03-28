@@ -1,14 +1,14 @@
 ```jsx
 const [value, setValue] = React.useState('');
 
-const maxLength = 24;
-const fractionLength = 2;
+const maxIntegerDigits = 16;
+const fractionDigits = 2;
 const currency = 'RUB';
 
 <AmountInput
     value={value}
-    maxLength={maxLength}
-    fractionLength={fractionLength}
+    maxIntegerDigits={maxIntegerDigits}
+    fractionDigits={fractionDigits}
     currency={currency}
     onChange={setValue}
 />
@@ -19,14 +19,14 @@ const currency = 'RUB';
 ```jsx
 const [value, setValue] = React.useState('');
 
-const maxLength = 24;
-const fractionLength = 2;
+const maxIntegerDigits = 16;
+const fractionDigits = 2;
 const currency = 'RUB';
 
 <AmountInput
     value={value}
-    maxLength={maxLength}
-    fractionLength={fractionLength}
+    maxIntegerDigits={maxIntegerDigits}
+    fractionDigits={fractionDigits}
     currency={currency}
     onChange={setValue}
     disabled
@@ -38,14 +38,14 @@ const currency = 'RUB';
 ```jsx
 const [value, setValue] = React.useState('');
 
-const maxLength = 24;
-const fractionLength = 2;
+const maxIntegerDigits = 16;
+const fractionDigits = 2;
 const currency = 'RUB';
 
 <AmountInput
     value={value}
-    maxLength={maxLength}
-    fractionLength={fractionLength}
+    maxIntegerDigits={maxIntegerDigits}
+    fractionDigits={fractionDigits}
     currency={currency}
     onChange={setValue}
     error

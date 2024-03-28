@@ -2,60 +2,43 @@ import React from 'react';
 import {ISliderExtendedProps, SliderExtended} from '../SliderExtended/SliderExtended';
 
 /**
- * Значения Range - массив из двух чисел, в соответствии которому строятся ползунки. Оба числа должны быть в диапазоне от min до max. Левое число меньше правого.
+ * Значения Range - массив из двух чисел, в соответствии которому строятся ползунки.
+ * Оба числа должны быть в диапазоне от min до max. Левое число меньше правого.
  */
 export type TSliderRangeValues = [number, number];
 
-/**
- * Лейбл под полосой слайдера.
- */
+/** Лейбл под полосой слайдера. */
 export interface ISliderRangeMark {
-    /**
-     * Значение расположения метки, должно быть в диапазоне от min до max.
-     */
+    /** Значение расположения метки, должно быть в диапазоне от min до max. */
     value: number;
     label: React.ReactNode;
 }
 
 export interface ISliderRangeProps extends Omit<ISliderExtendedProps, 'onChange' | 'step'> {
     children?: never;
-    /**
-     * Трек можно передвигать. По-умолчанию true.
-     */
+    /** Трек можно передвигать. По-умолчанию true. */
     draggableTrack?: boolean;
-    /**
-     * Массив меток под полосой слайдера.
-     */
+    /** Массив меток под полосой слайдера. */
     marks: ISliderRangeMark[];
-    /**
-     * Обработчик изменения значений.
-     */
+    /** Обработчик изменения значений. */
     onChange: (values: TSliderRangeValues) => void;
     /**
      * Длина шага, например при длине шага 1, с min-0. max-100, слайдер будет разделен на 100 шагов.
      * Вместо длины шага можно передать массив шагов, например [0, 25, 50, 75, 100]. Начальное значение должно быть равно min, последнее значение должно быть равно max.
      */
     step?: number | number[];
-    /**
-     * Значения Range - массив из двух чисел, в соответствии которому строятся ползунки. Оба числа должны быть в диапазоне от min до max.
-     */
+    /** Значения Range - массив из двух чисел, в соответствии которому строятся ползунки. Оба числа должны быть в диапазоне от min до max. */
     values: TSliderRangeValues;
-    /**
-     * Содержимое тултипа, отображаемого при наведении на точку и перемещении.
-     */
+    /** Содержимое тултипа, отображаемого при наведении на точку и перемещении. */
     renderTooltipContent?: (value: number) => React.ReactNode;
 }
 
 interface ISliderRangeState {
-    /**
-     * Внутренние значения values, они не отсортированы так, что первое значение всегда меньше второго.
-     */
+    /** Внутренние значения values, они не отсортированы так, что первое значение всегда меньше второго. */
     innerValues: TSliderRangeValues;
 }
 
-/**
- * Компонент SliderRange. Слайдер с двумя ползунками.
- */
+/** Слайдер с двумя ползунками. */
 class SliderRange extends React.Component<ISliderRangeProps, ISliderRangeState> {
     public static displayName = 'SliderRange';
 
@@ -132,9 +115,7 @@ class SliderRange extends React.Component<ISliderRangeProps, ISliderRangeState> 
         );
     }
 
-    /**
-     * Проверка values, меньшее значение, должно быть перед большим.
-     */
+    /** Проверка values, меньшее значение, должно быть перед большим. */
     private validateValues = () => {
         const {onChange, values} = this.props;
         if (values[0] > values[1]) {

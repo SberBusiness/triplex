@@ -3,12 +3,6 @@ import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {mapAlertTypeToClassName, renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
 
-/** @deprecated Устаревшие свойства компонента AlertContext. */
-export interface IDeprecatedAlertContextProps extends Omit<IAlertContextProps, 'type' | 'children'> {
-    /** Текст внутри компонента. */
-    text: React.ReactNode;
-}
-
 /** Свойства компонента AlertContext. */
 export interface IAlertContextProps extends React.HTMLAttributes<HTMLSpanElement> {
     /** Тип предупреждения (info/warning/error/system). */

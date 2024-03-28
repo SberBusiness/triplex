@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {allure} from '@jest/unit/allure-report';
 import {CheckboxXGroup} from '@sberbusiness/triplex/components/Checkbox/CheckboxXGroup';
 import {Checkbox} from '@sberbusiness/triplex/components/Checkbox/Checkbox';
 

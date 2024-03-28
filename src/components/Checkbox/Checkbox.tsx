@@ -1,11 +1,9 @@
-import React, {useRef, useState} from 'react';
-import {ICheckboxProps} from '@sberbusiness/triplex/components/Checkbox/types';
-import {Text} from '@sberbusiness/triplex/components/Typography/Text';
-import {ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {EFocusSource} from '@sberbusiness/triplex/enums/EFocusSource';
+import React, {useState, useRef} from 'react';
 import {CheckboxbulkStsIcon16} from '@sberbusiness/icons/CheckboxbulkStsIcon16';
 import {CheckboxtickStsIcon16} from '@sberbusiness/icons/CheckboxtickStsIcon16';
+import {ICheckboxProps} from '@sberbusiness/triplex/components/Checkbox/types';
+import {EFocusSource} from '@sberbusiness/triplex/enums/EFocusSource';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Чекбокс с описанием. */
 export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((props, ref) => {
@@ -15,20 +13,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((prop
     const classNames = classnames('cssClass[checkbox]', className);
     const classNamesLabel = classnames(
         'cssClass[label]',
-        {'cssClass[enabled]': !disabled, 'cssClass[nonempty]': !!children},
+        {'cssClass[nonempty]': !!children, 'cssClass[disabled]': !!disabled},
         labelAttributes?.className
     );
     const inputRef = useRef<HTMLInputElement | null>(null);
-
-    /** Обработчик нажатия мыши. */
-    const handleMouseDown = (event: React.MouseEvent<HTMLLabelElement>) => {
-        if (!disabled) {
-            if (focusSource.current === EFocusSource.NONE) {
-                focusSource.current = EFocusSource.MOUSE;
-            }
-        }
-        labelAttributes?.onMouseDown?.(event);
-    };
 
     /** Обработчик клика. */
     const handleClick = (event: React.MouseEvent<HTMLLabelElement>) => {
@@ -43,6 +31,16 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((prop
             }
         }
         labelAttributes?.onClick?.(event);
+    };
+
+    /** Обработчик нажатия мыши. */
+    const handleMouseDown = (event: React.MouseEvent<HTMLLabelElement>) => {
+        if (!disabled) {
+            if (focusSource.current === EFocusSource.NONE) {
+                focusSource.current = EFocusSource.MOUSE;
+            }
+        }
+        labelAttributes?.onMouseDown?.(event);
     };
 
     /** Обработчик получения фокуса. */
@@ -86,30 +84,21 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((prop
     };
 
     return (
-        <Text
-            tag="label"
-            size={ETextSize.B1}
-            line={ELineType.EXTRA}
-            htmlFor={inputAttributes.id}
-            {...labelAttributes}
-            className={classNamesLabel}
-            onMouseDown={handleMouseDown}
-            onClick={handleClick}
-        >
+        <label {...labelAttributes} className={classNamesLabel} onClick={handleClick} onMouseDown={handleMouseDown}>
             <input
                 type="checkbox"
                 className={classNames}
                 disabled={disabled}
+                data-focus-visible={focusVisible ? '' : undefined}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                data-focus-visible={focusVisible ? '' : undefined}
-                ref={setRef}
                 {...inputAttributes}
+                ref={setRef}
             />
             <span className="cssClass[checkboxIcon]" />
             {renderCheckmarkIcon()}
             {children}
-        </Text>
+        </label>
     );
 });
 

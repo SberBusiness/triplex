@@ -1,6 +1,5 @@
 import React from 'react';
-import {mount, shallow} from 'enzyme';
-import {allure} from '@jest/unit/allure-report';
+import {mount} from 'enzyme';
 import {SliderExtended} from '../SliderExtended';
 
 describe('SliderExtended', () => {
@@ -33,13 +32,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-dot-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 50%');
+        expect(wrapper.find('[data-dot-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 50%');
     });
 
     it('renders dot at the correct position where reverse is true', () => {
@@ -49,13 +42,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-dot-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 60%');
+        expect(wrapper.find('[data-dot-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 60%');
     });
 
     it('renders mark at the correct position', () => {
@@ -69,13 +56,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-mark-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 40%');
+        expect(wrapper.find('[data-mark-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 40%');
     });
 
     it('renders mark at the correct position where reverse is true', () => {
@@ -89,13 +70,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-mark-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 60%');
+        expect(wrapper.find('[data-mark-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 60%');
     });
 
     it('renders track at the correct position', () => {
@@ -106,13 +81,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-track-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 0%; right: 60%;');
+        expect(wrapper.find('[data-track-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 0%; right: 60%;');
     });
 
     it('renders track at the correct position where reverse is true', () => {
@@ -123,13 +92,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-track-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 60%; right: 0%;');
+        expect(wrapper.find('[data-track-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 60%; right: 0%;');
     });
 
     it('renders track at the correct position when two dots', () => {
@@ -141,13 +104,7 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-track-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 20%; right: 30%;');
+        expect(wrapper.find('[data-track-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 20%; right: 30%;');
     });
 
     it('renders track at the correct position when two dots and reverse is true', () => {
@@ -159,12 +116,6 @@ describe('SliderExtended', () => {
             </SliderExtended>
         );
 
-        expect(
-            wrapper
-                .find('[data-track-id=1]')
-                .at(0)
-                .getDOMNode()
-                .getAttribute('style')
-        ).toMatch('left: 30%; right: 20%;');
+        expect(wrapper.find('[data-track-id=1]').at(0).getDOMNode().getAttribute('style')).toMatch('left: 30%; right: 20%;');
     });
 });

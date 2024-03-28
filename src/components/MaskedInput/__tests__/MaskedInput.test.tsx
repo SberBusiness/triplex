@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {allure} from '@jest/unit/allure-report';
 import {MaskedInput} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
 
 jest.mock('react-text-mask', () => ({
@@ -15,10 +14,9 @@ describe('MaskedInput', () => {
     });
 
     it('renders correctly', () => {
-        const tree = renderer
-            .create(<MaskedInput value="1234567890" onChange={() => undefined} mask={MaskedInput.presets.masks.phone} />)
-            .toJSON();
+        const tree = renderer.create(<MaskedInput value="1234567890" onChange={() => undefined} mask={MaskedInput.presets.masks.phone} />);
 
-        expect(tree).toMatchSnapshot();
+        expect(tree.toJSON()).toMatchSnapshot();
+        tree.unmount();
     });
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SliderExtendedContext} from '../../SliderExtendedContext';
 
+/** Свойства компонента SliderExtendedTooltip. */
 export interface ISliderExtendedTooltipProps extends React.HTMLAttributes<HTMLDivElement> {
     value?: number;
 }

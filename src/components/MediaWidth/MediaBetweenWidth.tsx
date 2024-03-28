@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {EScreenWidth} from '@sberbusiness/triplex/enums/EScreenWidth';
-import {isIE} from '@sberbusiness/triplex/utils/userAgentUtils';
 
 /**
  * Свойства MediaBetweenWidth.
@@ -27,17 +26,17 @@ export const MediaBetweenWidth: React.FC<IMediaBetweenWidthProps> = ({children, 
         const mediaQueryList = window.matchMedia(`(max-width: ${maxWidth}) and (min-width: ${minWidth}`);
         const handleChangeMatches = (e: MediaQueryListEvent) => setMatches(e.matches);
 
-        if (isIE) {
-            mediaQueryList.addListener(handleChangeMatches);
-        } else {
+        if ('addEventListener' in mediaQueryList) {
             mediaQueryList.addEventListener('change', handleChangeMatches);
+        } else if ('addListener' in mediaQueryList) {
+            (mediaQueryList as MediaQueryList).addListener(handleChangeMatches);
         }
 
         return () => {
-            if (isIE) {
-                mediaQueryList.removeListener(handleChangeMatches);
-            } else {
+            if ('removeEventListener' in mediaQueryList) {
                 mediaQueryList.removeEventListener('change', handleChangeMatches);
+            } else if ('removeListener' in mediaQueryList) {
+                (mediaQueryList as MediaQueryList).removeListener(handleChangeMatches);
             }
         };
     }, [maxWidth, minWidth]);

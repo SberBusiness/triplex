@@ -3,9 +3,7 @@ import {ITagGroupProps} from '@sberbusiness/triplex/components/Tag/types';
 import {mapTagSizeToCssClass} from '@sberbusiness/triplex/components/Tag/utils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Компонент Группа тэгов.
- */
+/** Группа тэгов. */
 export class TagGroup extends React.PureComponent<ITagGroupProps> {
     public static displayName = 'TagGroup';
 

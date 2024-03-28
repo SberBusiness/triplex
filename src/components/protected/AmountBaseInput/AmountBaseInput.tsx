@@ -1,106 +1,154 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef, useMemo, useLayoutEffect} from 'react';
 import {IInputProps, Input} from '@sberbusiness/triplex/components/Input/Input';
-import {getCaretPosition, setCaretPosition} from '@sberbusiness/triplex/utils/inputUtils';
+import {setCaretPosition} from '@sberbusiness/triplex/utils/inputUtils';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 import {AmountConst} from '@sberbusiness/triplex/consts/AmountConst';
+import {StringUtils} from '@sberbusiness/triplex/utils/stringUtils';
 import {AmountBaseInputCore} from './AmountBaseInputCore';
 
 /** Свойства компонента AmountBaseInput. */
-interface IAmountBaseInputProps extends Omit<IInputProps, 'type' | 'onChange'> {
+interface IAmountBaseInputProps extends Omit<IInputProps, 'type' | 'maxLength' | 'onChange'> {
+    /** Значение. */
     value: string;
-    onChange: (value: string) => void;
+    /** Максимальное количество знаков перед запятой. */
+    maxIntegerDigits?: number;
     /** Количество знаков после запятой. */
-    fractionLength?: number;
+    fractionDigits?: number;
+    /** Обработчик изменения значения. */
+    onChange: (value: string) => void;
 }
 
 /** База для поля ввода суммы. */
 export const AmountBaseInput = React.forwardRef<HTMLInputElement, IAmountBaseInputProps>(
-    ({value, placeholder, maxLength = 24, onKeyDown, onClick, fractionLength = 2, onChange, ...rest}, ref) => {
+    ({value, placeholder, onKeyDown, onSelect, maxIntegerDigits = 16, fractionDigits = 2, onChange, ...rest}, ref) => {
+        const core = useRef(new AmountBaseInputCore(maxIntegerDigits, fractionDigits));
         const inputRef = useRef<HTMLInputElement | null>(null);
-        const core = useRef(new AmountBaseInputCore(maxLength, fractionLength));
-        const cached = useRef({value: '', formattedValue: '', caret: -1, key: '', noTextSelected: false});
 
-        useEffect(() => {
+        useLayoutEffect(() => {
             if (inputRef.current == document.activeElement) {
                 setCaretPosition(inputRef.current, Math.max(core.current.caret, 0));
             }
         }, [value]);
 
-        useEffect(() => {
-            core.current = new AmountBaseInputCore(maxLength, fractionLength);
-        }, [maxLength, fractionLength]);
-
         /** Функция, возвращающая отформатированное значение. */
-        const getFormattedValue = (): string => {
-            if (value != cached.current.value) {
+        const getFormattedValue = () => {
+            if (
+                value != core.current.value ||
+                maxIntegerDigits != core.current.maxIntegerDigits ||
+                fractionDigits != core.current.fractionDigits
+            ) {
+                core.current.maxIntegerDigits = maxIntegerDigits;
+                core.current.fractionDigits = fractionDigits;
                 core.current.apply(value, value.length);
-                cached.current.value = core.current.value;
             }
 
-            cached.current.formattedValue = core.current.formattedValue;
+            core.current.cache.formattedValue = core.current.formattedValue;
 
             return core.current.formattedValue;
         };
 
+        /** Текст подсказки по-умолчанию. */
+        const defaultPlaceholder = useMemo(() => {
+            const buffer: string[] = [];
+
+            buffer.push('0');
+            if (fractionDigits > 0) {
+                buffer.push(AmountConst.DecimalComma);
+                for (let i = 0; i < fractionDigits; i++) {
+                    buffer.push('0');
+                }
+            }
+
+            return buffer.join('');
+        }, [fractionDigits]);
+
         /** Обработчик изменения значения. */
         const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            const caret = getCaretPosition(event.target);
+            const caret = event.target.selectionStart ?? event.target.value.length;
 
             core.current.apply(event.target.value, caret);
 
-            cached.current.value = core.current.value;
-
-            setFallbackCaret(caret);
+            setFallbackCaret(event.target);
 
             onChange(core.current.value);
         };
 
-        /** Установка каретки на случай, если не произойдёт изменения значения. */
-        const setFallbackCaret = (caret: number) => {
-            const {formattedValue, caret: cachedCaret, key, noTextSelected} = cached.current;
+        /**
+         * Установка каретки на случай, если не произойдёт изменения значения.
+         *
+         * Значение может не измениться по двум причинам:
+         *     1) Значение невалидно. Обработчик снаружи не обновляет состояние;
+         *     2) Значение идентично предыдущему. Обработчик снаружи [не] обновляет состояние.
+         **/
+        const setFallbackCaret = (input: HTMLInputElement) => {
+            const {formattedValue, key, selectionStart, selectionEnd, selectionDirection} = core.current.cache;
 
-            inputRef.current!.value = formattedValue;
+            input.value = formattedValue;
 
-            if (noTextSelected) {
-                // Если была нажата клавиша Backspace, и каретка находится перед групповым разделителем, либо после целой части – сдвигаем каретку назад.
-                if (
-                    isKey(key, 'BACKSPACE') &&
-                    (formattedValue[caret] == ' ' ||
-                        formattedValue[caret] == AmountConst.DecimalComma ||
-                        formattedValue.length - fractionLength < cachedCaret)
-                )
-                    return setCaretPosition(inputRef.current, cachedCaret - 1);
-                // Если была введена точка/запятая перед десятичным разделителем – сдвигаем каретку вперёд.
-                if (
-                    (key == AmountConst.DecimalComma || key == AmountConst.DecimalPoint) &&
-                    formattedValue[cachedCaret] == AmountConst.DecimalComma
-                )
-                    return setCaretPosition(inputRef.current, cachedCaret + 1);
+            if (selectionStart == null || selectionEnd == null || selectionDirection == null) {
+                return;
+            }
+
+            if (key == AmountConst.DecimalComma || key == AmountConst.DecimalPoint) {
+                // Если каретка находится непосредственно перед десятичным разделителем, сдвигаем каретку вперёд.
+                if (selectionStart == selectionEnd && formattedValue[selectionStart] == AmountConst.DecimalComma) {
+                    return input.setSelectionRange(selectionStart + 1, selectionStart + 1);
+                }
+            } else if (isKey(key, 'BACKSPACE')) {
+                if (selectionStart == selectionEnd) {
+                    // Если каретка стоит непосредственно после группового/десятичного разделителя, сдвигаем каретку назад.
+                    if (StringUtils.isDigit(formattedValue[selectionStart - 1]) == false) {
+                        return input.setSelectionRange(selectionStart - 1, selectionEnd - 1);
+                    }
+                }
+                // Если есть выделенный текст, ставим каретку в начало выделения.
+                else {
+                    // Ставим каретку в начало выделения.
+                    return input.setSelectionRange(selectionStart, selectionStart);
+                }
+            } else if (isKey(key, 'DELETE')) {
+                if (selectionStart == selectionEnd) {
+                    // Если каретка стоит непосредственно перед групповым/десятичным разделителем, сдвигаем каретку вперёд.
+                    if (StringUtils.isDigit(formattedValue[selectionStart]) == false) {
+                        return input.setSelectionRange(selectionStart + 1, selectionEnd + 1);
+                    }
+                }
+                // Если есть выделенный текст, ставим каретку в конец выделения.
+                else {
+                    return input.setSelectionRange(selectionEnd, selectionEnd);
+                }
             }
 
             // Если каретка находится после десятичного разделителя.
-            if (fractionLength > 0 && formattedValue.length - fractionLength - 1 < cachedCaret) {
-                return setCaretPosition(inputRef.current, core.current.caret);
+            if (fractionDigits > 0 && formattedValue.length - fractionDigits - 1 < selectionStart) {
+                // Если новое значение повторяет старое, ставим каретку в расчётное место.
+                if (core.current.formattedValue == formattedValue) {
+                    return input.setSelectionRange(core.current.caret, core.current.caret);
+                }
             }
 
-            // В остальных случаях: ставим каретку на прежнее место.
-            setCaretPosition(inputRef.current, cachedCaret);
+            // Если текст выделялся в обратном порядке, ставим каретку в конец выделения.
+            if (selectionDirection == 'backward') {
+                return input.setSelectionRange(selectionEnd, selectionEnd);
+            }
+
+            // В остальных случаях ставим каретку в начало выделения.
+            return input.setSelectionRange(selectionStart, selectionStart);
         };
 
         /** Обработчик нажатия клавиши. */
         const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-            cached.current.caret = getCaretPosition(event.currentTarget);
-            cached.current.key = event.key;
-            cached.current.noTextSelected = event.currentTarget.selectionStart == event.currentTarget.selectionEnd;
+            core.current.cache.key = event.key;
             onKeyDown?.(event);
         };
 
-        /** Обработчик клика. */
-        const handleClick = (event: React.MouseEvent<HTMLInputElement>) => {
-            cached.current.caret = getCaretPosition(event.currentTarget);
-            cached.current.key = '';
-            cached.current.noTextSelected = event.currentTarget.selectionStart == event.currentTarget.selectionEnd;
-            onClick?.(event);
+        /** Обработчик выбора текста. */
+        const handleSelect = (event: React.SyntheticEvent<HTMLInputElement>) => {
+            core.current.cache.key = '';
+            core.current.cache.selectionStart = event.currentTarget.selectionStart;
+            core.current.cache.selectionEnd = event.currentTarget.selectionEnd;
+            core.current.cache.selectionDirection = event.currentTarget.selectionDirection;
+            onSelect?.(event);
         };
 
         /** Функция для хранения ссылки. */
@@ -116,11 +164,11 @@ export const AmountBaseInput = React.forwardRef<HTMLInputElement, IAmountBaseInp
         return (
             <Input
                 value={getFormattedValue()}
-                placeholder={placeholder || core.current.placeholder}
+                placeholder={placeholder || defaultPlaceholder}
                 autoComplete="off"
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                onClick={handleClick}
+                onSelect={handleSelect}
                 {...rest}
                 ref={setRef}
             />

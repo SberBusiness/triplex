@@ -3,6 +3,7 @@ import {ConfirmContentSubTitle} from '@sberbusiness/triplex/components/Confirm/c
 import {ConfirmContentTitle} from '@sberbusiness/triplex/components/Confirm/components/ConfirmContentTitle';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
+/** Свойства компонента ConfirmContent. */
 export interface IConfirmContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export interface IConfirmContentFC extends React.FC<IConfirmContentProps> {

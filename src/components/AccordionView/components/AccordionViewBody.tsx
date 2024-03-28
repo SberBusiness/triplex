@@ -2,14 +2,10 @@ import React from 'react';
 import {IAccordionBodyProvideProps} from '@sberbusiness/triplex/components/AccordionBase/types';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/**
- * Свойства компонента.
- */
+/** Свойства компонента AccordionViewBody. */
 export interface IAccordionViewBodyProps extends Partial<IAccordionBodyProvideProps>, React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Тело компонента аккордеон.
- */
+/** Тело компонента аккордеон. */
 export class AccordionViewBody extends React.PureComponent<IAccordionViewBodyProps> {
     public static displayName = 'AccordionViewBody';
 

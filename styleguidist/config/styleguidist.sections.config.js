@@ -1,3 +1,4 @@
+/* eslint-env node */
 const {getReleaseNotesSections} = require('../tools/getReleaseNotesSections');
 
 module.exports = [
@@ -71,12 +72,16 @@ module.exports = [
                 ],
             },
             {
+                name: 'DesignTokens',
+                content: './styleguidist/components/DesignTokens/DesignTokens.md',
+            },
+            {
                 name: 'Divider',
-                content: './styleguidist/components/Divider/Divider.md',
+                components: './src/components/Divider/Divider.tsx',
             },
             {
                 name: 'DocumentNumberEdit',
-                content: './styleguidist/components/DocumentNumberEdit/DocumentNumberEdit.md',
+                components: './src/components/DocumentNumberEdit/DocumentNumberEdit.tsx',
             },
             {
                 name: 'Ellipsis',
@@ -123,10 +128,6 @@ module.exports = [
                         components: ['./src/components/MaskedInput/MaskedInput.tsx'],
                     },
                     {
-                        name: 'MaskedInputDeprecated',
-                        components: ['./src/components/MaskedInputDeprecated/MaskedInputDeprecated.tsx'],
-                    },
-                    {
                         name: 'NumberInput',
                         components: ['./src/components/NumberInput/NumberInput.tsx'],
                     },
@@ -142,48 +143,15 @@ module.exports = [
             },
             {
                 name: 'InputGroup',
-                content: './styleguidist/components/InputGroup/InputGroup.md',
+                components: './src/components/InputGroup/InputGroup.tsx',
             },
             {
                 name: 'Labels',
                 content: './styleguidist/components/Labels/Labels.md',
             },
             {
-                name: 'LightBoxes',
-                sections: [
-                    {
-                        name: 'LightBox базовый',
-                        content: './styleguidist/components/LightBox/LightBox.md',
-                    },
-                    {
-                        name: 'LightBox с TopOverlay и sidebar в header',
-                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayAndHeaderSidebar.md',
-                    },
-                    {
-                        name: 'LightBox с TopOverlay в SideOverlay',
-                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayInSideOverlay.md',
-                    },
-                    {
-                        name: 'LightBox с несколькими SideOverlay',
-                        content: './styleguidist/components/LightBox/LightBoxWithMultipleSideOverlays.md',
-                    },
-                    {
-                        name: 'LightBox с SideOverlay через Portal',
-                        content: './styleguidist/components/LightBox/LightBoxWithPortalSideOverlays.md',
-                    },
-                    {
-                        name: 'LightBox с табами',
-                        content: './styleguidist/components/LightBox/LightBoxWithTabs.md',
-                    },
-                    {
-                        name: 'LightBox, занимающий определенную область экрана',
-                        content: './styleguidist/components/LightBox/LightBoxCustomView.md',
-                    },
-                    {
-                        name: 'LightBox с accessibility',
-                        content: './styleguidist/components/LightBox/LightBoxWithTopOverlayInSideOverlayAccessibility.md',
-                    },
-                ],
+                name: 'LightBox',
+                components: './src/components/LightBox/LightBox.tsx',
             },
             {
                 name: 'Link',
@@ -198,16 +166,12 @@ module.exports = [
                 content: './styleguidist/components/MediaWidth/MediaWidth.md',
             },
             {
-                name: 'ModalWindows',
-                components: [
-                    './src/components/ModalWindow/ModalWindowBasicMD.tsx',
-                    './src/components/ModalWindow/ModalWindowBasicSM.tsx',
-                    './src/components/ModalWindow/ModalWindowBasicLG.tsx',
-                ],
+                name: 'ModalWindow',
+                components: './src/components/ModalWindow/ModalWindow.tsx',
             },
             {
                 name: 'Multiselect',
-                components: ['./src/components/Multiselect/Multiselect.tsx'],
+                components: './src/components/Multiselect/Multiselect.tsx',
             },
             {
                 name: 'Notification',
@@ -279,65 +243,11 @@ module.exports = [
                 ],
             },
             {
-                name: 'Slider',
-                sections: [
-                    {
-                        name: 'Slider base',
-                        content: './styleguidist/components/Slider/Slider.md',
-                    },
-                    {
-                        name: 'Slider with dynamic min max',
-                        content: './styleguidist/components/Slider/SliderWithDynamicMinMax.md',
-                    },
-                    {
-                        name: 'Slider with tooltip',
-                        content: './styleguidist/components/Slider/SliderTooltip.md',
-                    },
-                    {
-                        name: 'Slider reverse',
-                        content: './styleguidist/components/Slider/SliderReverse.md',
-                    },
-                    {
-                        name: 'Slider custom steps',
-                        content: './styleguidist/components/Slider/SliderCustomSteps.md',
-                    },
-                    {
-                        name: 'Slider amount example',
-                        content: './styleguidist/components/Slider/SliderAmountExample.md',
-                    },
-                    {
-                        name: 'SliderRange',
-                        content: './styleguidist/components/Slider/SliderRange.md',
-                    },
-                ],
-            },
-            {
-                name: 'SliderExtended',
-                sections: [
-                    {
-                        name: 'SliderExtended base',
-                        content: './styleguidist/components/SliderExtended/SliderExtended.md',
-                    },
-                    {
-                        name: 'SliderExtended with tooltip',
-                        content: './styleguidist/components/SliderExtended/SliderExtendedTooltip.md',
-                    },
-                    {
-                        name: 'SliderExtended reverse',
-                        content: './styleguidist/components/SliderExtended/SliderExtendedReverse.md',
-                    },
-                    {
-                        name: 'SliderExtended custom steps',
-                        content: './styleguidist/components/SliderExtended/SliderExtendedCustomSteps.md',
-                    },
-                    {
-                        name: 'SliderExtended amount example',
-                        content: './styleguidist/components/SliderExtended/SliderExtendedAmountExample.md',
-                    },
-                    {
-                        name: 'SliderExtended range',
-                        content: './styleguidist/components/SliderExtended/SliderExtendedRange.md',
-                    },
+                name: 'Sliders',
+                components: [
+                    './src/components/Slider/Slider.tsx',
+                    './src/components/Slider/SliderRange.tsx',
+                    './src/components/SliderExtended/SliderExtended.tsx',
                 ],
             },
             {
@@ -371,26 +281,28 @@ module.exports = [
             },
             {
                 name: 'TableBasic',
-                content: './styleguidist/components/Tables/TableBasic/TableBasic.md',
+                components: [
+                    './src/components/Tables/TableBasic/TableBasic.tsx'
+                ],
             },
             {
                 name: 'Tabs',
-                content: './styleguidist/components/Tabs/Tabs.md',
+                components: './src/components/Tabs/Tabs.tsx',
             },
             {
                 name: 'TabsExtended',
-                components: ['./src/components/TabsExtended/TabsExtended.tsx'],
+                components: './src/components/TabsExtended/TabsExtended.tsx',
             },
             {
                 name: 'TabsFolder',
-                components: ['./src/components/TabsFolder/TabsFolder.tsx'],
+                components: './src/components/TabsFolder/TabsFolder.tsx',
             },
             {
                 name: 'TabsFolderExtended',
-                content: './styleguidist/components/TabsFolderExtended/TabsFolderExtended.md',
+                components: './src/components/CarouselExtended/CarouselExtended.tsx',
             },
             {
-                name: 'Tag',
+                name: 'Tags',
                 components: [
                     './src/components/Tag/Tag.tsx',
                     './src/components/Tag/TagGroup.tsx',
@@ -398,20 +310,15 @@ module.exports = [
             },
             {
                 name: 'TextField',
-                sections: [
-                    {
-                        name: 'Input',
-                        content: 'styleguidist/components/TextField/TextField.md'
-                    },
-                    {
-                        name: 'MaskedInput',
-                        content: 'styleguidist/components/TextField/TextFieldMasked.md'
-                    }
-                ],
+                components: './src/components/TextField/TextField.tsx',
+            },
+            {
+                name: 'ThemeProvider',
+                components: ['./src/components/ThemeProvider/ThemeProvider.tsx'],
             },
             {
                 name: 'Tooltip',
-                components: ['./src/components/Tooltip/Tooltip.tsx'],
+                components: './src/components/Tooltip/Tooltip.tsx',
             },
             {
                 name: 'Typography',
@@ -422,7 +329,7 @@ module.exports = [
             },
             {
                 name: 'UploadZone',
-                content: './styleguidist/components/UploadZone/UploadZone.md',
+                components: './src/components/UploadZone/UploadZone.tsx',
             },
             {
                 name: 'Widget',
@@ -499,10 +406,6 @@ module.exports = [
             {
                 name: 'Input with no autofill',
                 content: './styleguidist/components/Input/InputNoAutofill.md'
-            },
-            {
-                name: 'Select accessibility',
-                content: './styleguidist/components/Select/SelectAccessibility.md',
             },
             {
                 name: 'SMSInput in TableBasic',
@@ -622,7 +525,7 @@ module.exports = [
                 content: './styleguidist/test-examples/Multiselect/Multiselect.md',
             },
             {
-                name: 'Radios',
+                name: 'Radio buttons',
                 sections: [
                     {
                         name: 'Radio',

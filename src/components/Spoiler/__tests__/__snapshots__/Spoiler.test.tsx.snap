@@ -8,7 +8,7 @@ exports[`Spoiler renders correctly 1`] = `
     className="cssClass[head]"
   >
     <button
-      className="cssClass[button] cssClass[link] cssClass[SM] cssClass[toggleButton]"
+      className="cssClass[button] cssClass[link] cssClass[SM] hoverable cssClass[toggleButton]"
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}

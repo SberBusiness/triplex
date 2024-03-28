@@ -1,20 +1,9 @@
 import React from 'react';
 
-/**
- * Свойства компонента LabelDescription.
- * @prop {string} children Дополнительное описание лейбла.
- */
+/** Свойства компонента LabelDescription. */
 interface ILabelDescriptionProps {
-    children: string;
+    children?: React.ReactNode;
 }
 
-/**
- * Компонент LabelDescription. Дополнительное описание лейбла в виде текста под ним.
- */
-export class LabelDescription extends React.Component<ILabelDescriptionProps> {
-    public render() {
-        const {children} = this.props;
-
-        return <div className="cssClass[description]">{children}</div>;
-    }
-}
+/** Дополнительное описание лейбла в виде текста под ним. */
+export const LabelDescription: React.FC<ILabelDescriptionProps> = ({children}) => <div className="cssClass[description]">{children}</div>;

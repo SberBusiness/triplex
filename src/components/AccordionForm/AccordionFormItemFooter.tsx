@@ -1,10 +1,11 @@
 import React from 'react';
 
-/**
- * Компонент подвала элемента акоордеона.
- */
-const AccordionFormItemFooter: React.FC = ({children}) => <div className="cssClass[footer]">{children}</div>;
+/** Свойства компонента AccordionFormItemFooter. */
+export interface IAccordionFormItemFooterProps {
+    children?: React.ReactNode;
+}
+
+/** Компонент подвала элемента акоордеона. */
+export const AccordionFormItemFooter: React.FC<IAccordionFormItemFooterProps> = ({children}) => <div className="cssClass[footer]">{children}</div>;
 
 AccordionFormItemFooter.displayName = 'AccordionFormItemFooter';
-
-export {AccordionFormItemFooter};

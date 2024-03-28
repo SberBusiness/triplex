@@ -2,7 +2,6 @@ import {shallow} from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
-import {allure} from '@jest/unit/allure-report';
 
 describe('Link', () => {
     beforeEach(() => {
@@ -132,7 +131,7 @@ describe('Link', () => {
         );
         link.simulate('click');
 
-        expect(handleClick).toBeCalledTimes(1);
+        expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
     it('triggers mouseOver event', () => {
@@ -144,7 +143,7 @@ describe('Link', () => {
         );
         link.simulate('mouseOver');
 
-        expect(handleMouseOver).toBeCalledTimes(1);
+        expect(handleMouseOver).toHaveBeenCalledTimes(1);
     });
 
     it('triggers mouseOut event', () => {
@@ -156,7 +155,7 @@ describe('Link', () => {
         );
         link.simulate('mouseOut');
 
-        expect(handleMouseOut).toBeCalledTimes(1);
+        expect(handleMouseOut).toHaveBeenCalledTimes(1);
     });
 
     it('triggers mouseDown event', () => {
@@ -168,7 +167,7 @@ describe('Link', () => {
         );
         link.simulate('mouseDown');
 
-        expect(handleMouseDown).toBeCalledTimes(1);
+        expect(handleMouseDown).toHaveBeenCalledTimes(1);
     });
 
     it('triggers mouseUp event', () => {
@@ -180,6 +179,6 @@ describe('Link', () => {
         );
         link.simulate('mouseUp');
 
-        expect(handleMouseUp).toBeCalledTimes(1);
+        expect(handleMouseUp).toHaveBeenCalledTimes(1);
     });
 });

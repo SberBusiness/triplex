@@ -2,11 +2,10 @@ import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EOverlayDirection, IOverlayChildrenProvideProps} from './OverlayBase';
 
-interface IOverlayPanelProps extends IOverlayChildrenProvideProps, React.HTMLAttributes<HTMLDivElement> {}
+/** Свойства компонента OverlayPanel. */
+interface IOverlayPanelProps extends  React.HTMLAttributes<HTMLDivElement>, IOverlayChildrenProvideProps {}
 
-/**
- * Выезжающая с контентом панель оверлея.
- */
+/** Выезжающая с контентом панель оверлея. */
 export const OverlayPanel = React.forwardRef<HTMLDivElement, IOverlayPanelProps>(
     (
         {

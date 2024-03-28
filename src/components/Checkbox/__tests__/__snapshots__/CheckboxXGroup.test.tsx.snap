@@ -6,7 +6,7 @@ exports[`CheckboxXGroup renders correctly 1`] = `
   role="group"
 >
   <label
-    className="cssClass[b1] cssClass[general] cssClass[regular] cssClass[extra] cssClass[label] cssClass[enabled] cssClass[nonempty]"
+    className="cssClass[label] cssClass[nonempty]"
     onClick={[Function]}
     onMouseDown={[Function]}
   >
@@ -25,7 +25,7 @@ exports[`CheckboxXGroup renders correctly 1`] = `
     Sample Text
   </label>
   <label
-    className="cssClass[b1] cssClass[general] cssClass[regular] cssClass[extra] cssClass[label] cssClass[enabled] cssClass[nonempty]"
+    className="cssClass[label] cssClass[nonempty]"
     onClick={[Function]}
     onMouseDown={[Function]}
   >
@@ -44,7 +44,7 @@ exports[`CheckboxXGroup renders correctly 1`] = `
     Sample Text
   </label>
   <label
-    className="cssClass[b1] cssClass[general] cssClass[regular] cssClass[extra] cssClass[label] cssClass[enabled] cssClass[nonempty]"
+    className="cssClass[label] cssClass[nonempty]"
     onClick={[Function]}
     onMouseDown={[Function]}
   >

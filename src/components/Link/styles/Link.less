@@ -1,17 +1,16 @@
 @import 'src/styles/style';
-@import 'src/styles/variables/Link';
 
 .link {
     cursor: pointer;
     padding: 0 2px;
     margin: -1px -3px;
-    border: 1px solid transparent;
+    border: 1px solid var(--triplex-Link-BorderColor_Default);
 
     &:focus {
         outline: none;
 
         &.focusVisible {
-            border: 1px solid @color-sunny-01;
+            border-color: var(--triplex-Link-BorderColor_Focus);
         }
     }
 }
@@ -26,29 +25,28 @@
 
 .text {
     position: relative;
-    color: @color-sky-02;
-    color: var(--link-color);
+    color: var(--triplex-Link-Text_Color_Default);
     text-decoration: none;
 
     &:hover {
-        color: @color-malachite-02;
-        color: var(--link-color-hover);
+        color: var(--triplex-Link-Text_Color_Hover);
     }
 
     &:active {
-        color: @color-sky-01;
-        color: var(--link-color-active);
+        color: var(--triplex-Link-Text_Color_Active);
     }
 }
 
 .line {
-    color: @color-snowy;
-    color: var(--line-color);
+    color: var(--triplex-Link-Line_Color_Default);
     text-decoration: underline;
 
-    &:hover:not(:active) {
-        color: @color-asphalt-01;
-        color: var(--line-color-hover);
+    &:hover {
+        color: var(--triplex-Link-Line_Color_Hover)
+    }
+
+    &:active {
+        color: var(--triplex-Link-Line_Color_Active);
     }
 }
 

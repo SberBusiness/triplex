@@ -1,15 +1,9 @@
 import React from 'react';
 
-/**
- * Свойства компонента.
- */
-export interface ITopOverlayContentTitleProps extends React.HTMLAttributes<HTMLDivElement> {
-    children?: string;
-}
+/** Свойства компонента TopOverlayContentTitle. */
+export interface ITopOverlayContentTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-/**
- * Компонент заголовка блока с контентом.
- */
+/** Компонент заголовка блока с контентом. */
 export const TopOverlayContentTitle: React.FC<ITopOverlayContentTitleProps> = ({children, ...divHTMLAttributes}) => (
     <div {...divHTMLAttributes} className="cssClass[globalTopOverlayTitle]">
         {children}

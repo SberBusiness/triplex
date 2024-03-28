@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {allure} from '@jest/unit/allure-report';
 import {RadioYGroup} from '@sberbusiness/triplex/components/Radio/RadioYGroup';
 import {Radio} from '@sberbusiness/triplex/components/Radio/Radio';
 

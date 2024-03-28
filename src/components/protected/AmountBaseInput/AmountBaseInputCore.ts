@@ -1,32 +1,45 @@
-import {AmountConst} from '@sberbusiness/triplex/consts/AmountConst';
 import {AmountBaseInputParser} from './AmountBaseInputParser';
 import {AmountBaseInputFormatter} from './AmountBaseInputFormatter';
+
+/** Свойства кэша AmountBaseInputCore. */
+interface IAmountBaseInputCoreCache {
+    /** Отформатированное значение. */
+    formattedValue: string;
+    /** Значение нажатой клавиши. */
+    key: string;
+    /** Позиция начала выделения. */
+    selectionStart: number | null;
+    /** Позиция конца выделения. */
+    selectionEnd: number | null;
+    /** Направление выделения. */
+    selectionDirection: 'forward' | 'backward' | 'none' | null;
+}
 
 /** Основная логика в AmountBaseInput. */
 export class AmountBaseInputCore {
     /** Значение. */
     public value: string;
-    /** Отформатированное значение */
+    /** Отформатированное значение. */
     public formattedValue: string;
     /** Положение каретки. */
     public caret: number;
-    /** Текст подсказки. */
-    public placeholder: string;
-    /** Максимальное количество знаков. */
-    private readonly maxLength: number;
+    /** Максимальное количество знаков перед запятой. */
+    public maxIntegerDigits: number;
     /** Количество чисел после запятой. */
-    private readonly fractionLength: number;
+    public fractionDigits: number;
+    /** Кэш для хранения значений. */
+    public cache: IAmountBaseInputCoreCache;
 
-    constructor(maxLength: number, fractionDigits: number) {
+    constructor(maxIntegerDigits: number, fractionDigits: number) {
         this.value = '';
         this.formattedValue = '';
         this.caret = 0;
-        this.maxLength = maxLength;
-        this.fractionLength = fractionDigits;
-        this.placeholder = this.getPlaceholder();
+        this.maxIntegerDigits = maxIntegerDigits;
+        this.fractionDigits = fractionDigits;
+        this.cache = {formattedValue: '', key: '', selectionStart: null, selectionEnd: null, selectionDirection: null};
     }
 
-    /** Применение входных данных для основной логики. */
+    /** Применение входных данных. */
     public apply(value: string, caret: number): void {
         this.parse(value, caret);
         this.format(this.value);
@@ -34,9 +47,9 @@ export class AmountBaseInputCore {
 
     /** Обработка значения. */
     private parse(value: string, caret: number): void {
-        const parser = new AmountBaseInputParser(this.maxLength, this.fractionLength);
+        const parser = new AmountBaseInputParser(this.maxIntegerDigits, this.fractionDigits);
 
-        parser.apply(value, caret);
+        parser.apply(value, caret, this.cache.key);
 
         this.value = parser.getValue();
         this.caret = caret + parser.getCaretOffset();
@@ -44,26 +57,11 @@ export class AmountBaseInputCore {
 
     /** Форматирование значения. */
     private format(value: string): void {
-        const formatter = new AmountBaseInputFormatter(this.maxLength, this.fractionLength);
+        const formatter = new AmountBaseInputFormatter(this.maxIntegerDigits, this.fractionDigits);
 
         formatter.apply(value);
 
         this.formattedValue = formatter.getValue();
         this.caret += formatter.getCaretOffset();
-    }
-
-    /** Получение текста подсказки. */
-    private getPlaceholder(): string {
-        const buffer: string[] = [];
-
-        buffer.push('0');
-        if (this.fractionLength > 0) {
-            buffer.push(AmountConst.DecimalComma);
-            for (let i = 0; i < this.fractionLength; i++) {
-                buffer.push('0');
-            }
-        }
-
-        return buffer.join('');
     }
 }

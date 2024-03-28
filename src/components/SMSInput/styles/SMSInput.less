@@ -8,7 +8,6 @@
     .input {
         padding-left: 33px;
         padding-right: 33px;
-        background-color: @color-snowy;
         border-radius: @radius-16;
         box-sizing: border-box;
         text-align: center;
@@ -18,14 +17,6 @@
             padding-top: 5px;
             padding-bottom: 5px;
             border-radius: 14px;
-        }
-
-        &:focus {
-            border-color: @color-graphite-01;
-        }
-
-        &.error {
-            border-color: @color-ruby-02;
         }
     }
 
@@ -46,12 +37,12 @@
             cursor: default;
         }
 
-        .light {
-            fill: @color-asphalt-02;
+        .full {
+            fill: var(--triplex-SMSInput-Refresh_Fill_Full);
         }
 
-        .dark {
-            fill: @color-graphite-02;
+        .empty {
+            fill: var(--triplex-SMSInput-Refresh_Fill_Empty);
         }
     }
 
