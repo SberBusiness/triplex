@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ComponentControlCheckbox.less';
+import './styles/ComponentControlCheckbox.less';
 
 /** Свойства ComponentControlCheckbox. */
 interface IComponentControlCheckboxProps {

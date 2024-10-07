@@ -26,9 +26,9 @@
 ```jsx {"file": "./examples/TableBasic_5_selection.jsx"}
 ```
 
-### TableFilter
+### TabsLine
 
-```jsx {"file": "./examples/TableBasic_6_TableFilter.jsx"}
+```jsx {"file": "./examples/TableBasic_6_TabsLine.jsx"}
 ```
 
 ### FilterPanel (Quick Filter)

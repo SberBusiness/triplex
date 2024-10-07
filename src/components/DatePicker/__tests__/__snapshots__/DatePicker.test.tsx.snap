@@ -3,41 +3,43 @@
 exports[`DatePicker renders correctly 1`] = `
 <div
   className="cssClass[datePicker]"
+  data-tx="10.0.0"
+  onKeyDown={[Function]}
   onMouseDown={[Function]}
 >
   <div
-    className="cssClass[datePickerInput]"
+    className="cssClass[datePickerTarget]"
   >
     <div
       className="cssClass[maskedInputWrapper]"
     >
       <input
         aria-hidden="true"
-        className="cssClass[input] cssClass[maskedInputPlaceholder] cssClass[datePickerInputTarget]"
+        className="cssClass[input] cssClass[maskedInputPlaceholder]"
+        data-tx="10.0.0"
         onChange={[Function]}
         placeholder=""
         readOnly={true}
         tabIndex={-1}
       />
       <input
-        className="cssClass[maskedInput] cssClass[datePickerInputTarget]"
+        className="cssClass[maskedInput]"
         defaultValue=""
         guide={false}
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
+        pipe={[Function]}
         render={[Function]}
         type="text"
-        value="01.01.2021"
+        value="01.01.1970"
       />
     </div>
     <button
-      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[datePickerInputIcon]"
-      onBlur={[Function]}
+      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[datePickerTargetButton]"
+      data-tx="10.0.0"
       onClick={[Function]}
-      onFocus={[Function]}
-      onMouseDown={[Function]}
       type="button"
     >
       <svg />

@@ -128,6 +128,7 @@ export const SliderExtended: React.FC<ISliderExtendedProps> & {
                     'cssClass[disabled]': Boolean(disabled),
                 })}
                 {...htmlDivAttributes}
+                data-tx={process.env.npm_package_version}
             >
                 {children}
             </div>

@@ -4,14 +4,14 @@ exports[`SMSInput renders correctly 1`] = `
 <div
   className="cssClass[globalSmsInput]"
   data-test-id="SMSInput"
+  data-tx="10.0.0"
 >
   <button
     aria-disabled={false}
     className="cssClass[buttonIcon] cssClass[circle] hoverable cssClass[btnRefresh] cssClass[MD]"
-    onBlur={[Function]}
+    data-tx="10.0.0"
     onClick={[Function]}
-    onFocus={[Function]}
-    onMouseDown={[Function]}
+    onKeyDown={[Function]}
     type="button"
   >
     <svg
@@ -42,6 +42,7 @@ exports[`SMSInput renders correctly 1`] = `
   <input
     autoComplete="off"
     className="cssClass[input] cssClass[input] cssClass[MD]"
+    data-tx="10.0.0"
     maxLength={8}
     onChange={[Function]}
     onKeyDown={[Function]}
@@ -50,11 +51,9 @@ exports[`SMSInput renders correctly 1`] = `
   />
   <button
     className="cssClass[buttonIcon] cssClass[circle] hoverable cssClass[btnSubmit] cssClass[MD] disabled"
+    data-tx="10.0.0"
     disabled={true}
-    onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
-    onMouseDown={[Function]}
     type="button"
   >
     <svg />

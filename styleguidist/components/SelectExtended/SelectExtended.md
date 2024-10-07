@@ -2,8 +2,18 @@
 
 ```jsx
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
+import {SelectExtendedDropdownDefault} from '@sberbusiness/triplex/components/SelectExtended/components/SelectExtendedDropdownDefault';
 import {decorate} from '@sberbusiness/triplex/utils/accountsUtils';
 import {formatAmount} from '@sberbusiness/triplex/utils/amountUtils';
+import {
+    DropdownMobileBody,
+    DropdownMobileClose,
+    DropdownMobileHeader,
+    DropdownMobileList,
+    DropdownMobileListItem,
+} from '@sberbusiness/triplex/components/Dropdown/mobile';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 const [selected, setSelected] = React.useState();
 const [activeDescendant, setActiveDescendant] = React.useState();
@@ -52,16 +62,32 @@ const styles = {
         textOverflow: 'ellipsis',
     },
     company: {
-        width: '50%',
+        width: '100%',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+        marginBottom: '6px',
     },
     amount: {
-        width: '150px',
-        textAlign: 'right',
         color: '#7d838a',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
+    },
+};
+
+const stylesAdditional = {
+    optionDropdown: {
+        ...styles.option,
+        flexDirection: 'column',
+    },
+    labelDropdown: {
+        ...styles.label,
+        color: '#7d838a',
+        marginBottom: '8px',
+    },
+    amountSelected: {
+        ...styles.amount,
+        width: '150px',
+        textAlign: 'right',
     },
 };
 
@@ -72,7 +98,9 @@ const renderTarget = (props) => (
             selected && (
                 <div title={`${decorate(selected.label)} ${selected.amount}`} style={styles.option}>
                     <span style={styles.label}>{decorate(selected.label)}</span>
-                    <span style={styles.amount}>{formatAmount(selected.amount, 2)} {selected.currency}</span>
+                    <span style={stylesAdditional.amountSelected}>
+                        {formatAmount(selected.amount, 2)} {selected.currency}
+                    </span>
                 </div>
             )
         }
@@ -88,9 +116,49 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
         <SelectExtended.Dropdown
             {...rest}
             opened={opened}
+            setOpened={setOpened}
             targetRef={targetRef}
             forwardedRef={dropdownRef}
             fixedWidth
+            mobileViewProps={{
+                children: (
+                    <>
+                        <DropdownMobileHeader closeButton={() => <DropdownMobileClose onClick={() => setOpened(false)} />}>
+                            <Text tag="div" size={ETextSize.B1}>
+                                Выберите значение
+                            </Text>
+                        </DropdownMobileHeader>
+                        <DropdownMobileBody>
+                            <DropdownMobileList>
+                                {options.map((option) => {
+                                    return (
+                                        <DropdownMobileListItem
+                                            key={option.value}
+                                            id={option.value}
+                                            selected={selected && option.value === selected.value}
+                                            onSelect={() => {
+                                                setSelected(option);
+                                                setOpened(false);
+                                            }}
+                                        >
+                                            <div
+                                                title={`${option.company} ${option.label} ${decorate(option.label)}`}
+                                                style={stylesAdditional.optionDropdown}
+                                            >
+                                                <span style={styles.company}>{option.company}</span>
+                                                <span style={stylesAdditional.labelDropdown}>{decorate(option.value)}</span>
+                                                <span style={styles.amount}>
+                                                    {formatAmount(option.amount, 2)} {option.currency}
+                                                </span>
+                                            </div>
+                                        </DropdownMobileListItem>
+                                    );
+                                })}
+                            </DropdownMobileList>
+                        </DropdownMobileBody>
+                    </>
+                ),
+            }}
         >
             <SelectExtended.Dropdown.List dropdownOpened={opened} id="select-extended-dropdown-custom">
                 {options.map((option) => (
@@ -103,13 +171,12 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
                             setOpened(false);
                         }}
                     >
-                        <div
-                            title={`${option.company} ${option.label} ${decorate(option.label)}`}
-                            style={styles.option}
-                        >
+                        <div title={`${option.company} ${option.label} ${decorate(option.label)}`} style={styles.option}>
                             <span style={styles.company}>{option.company}</span>
                             <span style={styles.label}>{decorate(option.value)}</span>
-                            <span style={styles.amount}>{formatAmount(option.amount, 2)} {option.currency}</span>
+                            <span style={styles.amount}>
+                                {formatAmount(option.amount, 2)} {option.currency}
+                            </span>
                         </div>
                     </SelectExtended.Dropdown.List.Item>
                 ))}
@@ -120,7 +187,7 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
 
 <SelectExtended renderTarget={renderTarget} closeOnTab>
     {renderDropdown}
-</SelectExtended>
+</SelectExtended>;
 ```
 
 ### Disabled state
@@ -130,9 +197,7 @@ const [selected, setSelected] = React.useState();
 
 const targetRef = React.useRef(null);
 
-const options = [
-    {value: 'i1', label: 'Первый'},
-];
+const options = [{value: 'i1', label: 'Первый'}];
 
 const renderTarget = (props) => (
     <SelectExtended.Target
@@ -145,13 +210,7 @@ const renderTarget = (props) => (
 );
 
 const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
-    <SelectExtended.Dropdown
-        {...rest}
-        opened={opened}
-        targetRef={targetRef}
-        forwardedRef={dropdownRef}
-        fixedWidth
-    >
+    <SelectExtended.Dropdown {...rest} opened={opened} targetRef={targetRef} forwardedRef={dropdownRef} fixedWidth>
         <SelectExtended.Dropdown.List dropdownOpened={opened}>
             {options.map((option) => (
                 <SelectExtended.Dropdown.List.Item
@@ -172,7 +231,7 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
 
 <SelectExtended renderTarget={renderTarget} closeOnTab>
     {renderDropdown}
-</SelectExtended>
+</SelectExtended>;
 ```
 
 ### Error state
@@ -182,6 +241,15 @@ import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/Dro
 import {AlertContext} from '@sberbusiness/triplex/components/Alert/AlertContext/AlertContext';
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
+import {
+    DropdownMobileBody,
+    DropdownMobileClose,
+    DropdownMobileHeader,
+    DropdownMobileList,
+    DropdownMobileListItem,
+} from '@sberbusiness/triplex/components/Dropdown/mobile';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 const [selected, setSelected] = React.useState();
 const [activeDescendant, setActiveDescendant] = React.useState();
@@ -200,7 +268,6 @@ const options = [
     {value: 'i9', label: 'Девятый'},
     {value: 'i10', label: 'Десятый'},
 ];
-
 
 const renderTarget = (props) => (
     <SelectExtended.Target
@@ -221,9 +288,40 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
         <SelectExtended.Dropdown
             {...rest}
             opened={opened}
+            setOpened={setOpened}
             targetRef={targetRef}
             forwardedRef={dropdownRef}
             fixedWidth
+            mobileViewProps={{
+                children: (
+                    <>
+                        <DropdownMobileHeader closeButton={() => <DropdownMobileClose onClick={() => setOpened(false)} />}>
+                            <Text tag="div" size={ETextSize.B1}>
+                                Выберите значение
+                            </Text>
+                        </DropdownMobileHeader>
+                        <DropdownMobileBody>
+                            <DropdownMobileList>
+                                {options.map((option) => {
+                                    return (
+                                        <DropdownMobileListItem
+                                            key={option.value}
+                                            id={option.value}
+                                            selected={selected && option.value === selected.value}
+                                            onSelect={() => {
+                                                setSelected(option);
+                                                setOpened(false);
+                                            }}
+                                        >
+                                            <div>{option.label}</div>
+                                        </DropdownMobileListItem>
+                                    );
+                                })}
+                            </DropdownMobileList>
+                        </DropdownMobileBody>
+                    </>
+                ),
+            }}
         >
             <SelectExtended.Dropdown.List dropdownOpened={opened} id="select-extended-dropdown-list-error">
                 {options.map((option) => (
@@ -249,8 +347,10 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
         {renderDropdown}
     </SelectExtended>
     <Gap size={8} />
-    <AlertContext title={'Lala'} id="select-extender-error-id" type={EAlertType.ERROR}>Описание ошибки</AlertContext>
-</>
+    <AlertContext id="select-extender-error-id" type={EAlertType.ERROR}>
+        Описание ошибки
+    </AlertContext>
+</>;
 ```
 
 ### With label
@@ -260,6 +360,16 @@ import {Col} from '@sberbusiness/triplex/components/Col/Col';
 import {Label} from '@sberbusiness/triplex/components/Label/Label';
 import {Field} from '@sberbusiness/triplex/components/Field/Field';
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
+import {
+    DropdownMobileBody,
+    DropdownMobileClose,
+    DropdownMobileHeader,
+    DropdownMobileList,
+    DropdownMobileListItem,
+} from '@sberbusiness/triplex/components/Dropdown/mobile';
+import {SelectExtendedDropdownDefault} from '@sberbusiness/triplex/components/SelectExtended/components/SelectExtendedDropdownDefault';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 const [selected, setSelected] = React.useState();
 const [activeDescendant, setActiveDescendant] = React.useState();
@@ -279,7 +389,6 @@ const options = [
     {value: 'i10', label: 'Киви'},
 ];
 
-
 const renderTarget = (props) => (
     <SelectExtended.Target
         placeholder="Выберите значение"
@@ -297,9 +406,40 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
         <SelectExtended.Dropdown
             {...rest}
             opened={opened}
+            setOpened={setOpened}
             targetRef={targetRef}
             forwardedRef={dropdownRef}
             fixedWidth
+            mobileViewProps={{
+                children: (
+                    <>
+                        <DropdownMobileHeader closeButton={() => <DropdownMobileClose onClick={() => setOpened(false)} />}>
+                            <Text tag="div" size={ETextSize.B1}>
+                                Выберите значение
+                            </Text>
+                        </DropdownMobileHeader>
+                        <DropdownMobileBody>
+                            <DropdownMobileList>
+                                {options.map((option) => {
+                                    return (
+                                        <DropdownMobileListItem
+                                            key={option.value}
+                                            id={option.value}
+                                            selected={selected && option.value === selected.value}
+                                            onSelect={() => {
+                                                setSelected(option);
+                                                setOpened(false);
+                                            }}
+                                        >
+                                            <div>{option.label}</div>
+                                        </DropdownMobileListItem>
+                                    );
+                                })}
+                            </DropdownMobileList>
+                        </DropdownMobileBody>
+                    </>
+                ),
+            }}
         >
             <SelectExtended.Dropdown.List dropdownOpened={opened} id="select-extended-dropdown-list-with-label">
                 {options.map((option) => (
@@ -319,7 +459,7 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
         </SelectExtended.Dropdown>
     </DropdownListContext.Provider>
 );
-    
+
 <Field alignLabel>
     <Col size={3}>
         <Label>
@@ -331,5 +471,5 @@ const renderDropdown = ({opened, setOpened, dropdownRef, ...rest}) => (
             {renderDropdown}
         </SelectExtended>
     </Col>
-</Field>
+</Field>;
 ```

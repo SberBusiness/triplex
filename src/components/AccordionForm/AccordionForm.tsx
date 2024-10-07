@@ -89,7 +89,11 @@ export class AccordionForm extends React.PureComponent<IAccordionProps> {
         }
 
         return (
-            <ul {...rest} className={classnames(className, 'cssClass[accordion]', {'cssClass[single]': hasSingleChild})} style={{}}>
+            <ul
+                {...rest}
+                className={classnames(className, 'cssClass[accordion]', {'cssClass[single]': hasSingleChild})}
+                data-tx={process.env.npm_package_version}
+            >
                 {content}
             </ul>
         );

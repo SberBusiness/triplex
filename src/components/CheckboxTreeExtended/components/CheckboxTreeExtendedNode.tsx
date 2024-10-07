@@ -21,14 +21,13 @@ export interface ICheckboxTreeExtendedCheckboxProvideProps {
 
 /**
  * Свойства CheckboxTreeExtendedNode.
- *
- * @prop {Function} checkbox - Render-функция компонента чекбокс.
- * @prop {JSX.Element[]} [children] - Массив нод CheckboxTreeNode, если имеются вложенные ноды.
- * @prop {string} id - Id ноды.
  */
 interface ICheckboxTreeExtendedNodeProps extends Omit<ICollapsableTreeNodeProps, 'children' | 'renderBody' | 'renderHeader'> {
+    // Render-функция компонента чекбокс.
     checkbox: (props: ICheckboxTreeExtendedCheckboxProvideProps) => JSX.Element;
-    children?: JSX.Element[];
+    // Массив нод CheckboxTreeNode, если имеются вложенные ноды.
+    children?: React.ReactNode;
+    // Id ноды.
     id: string;
 }
 

@@ -1,7 +1,7 @@
 import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokenTypes';
 
 // Название токенов компонента AccordionView.
-export const designTokensComponentsAccordionViewKeys = ['BorderColor_Default', 'BorderColor_Focus', 'Header_Color'] as const;
+export const designTokensComponentsAccordionViewKeys = ['Background', 'BorderColor_Default', 'BorderColor_Focus', 'Header_Color'] as const;
 // Тип, содержащий названия токенов компонента AccordionView.
 export type TDesignTokensComponentsAccordionViewKeys = (typeof designTokensComponentsAccordionViewKeys)[number];
 // Тип, содержащий названия токенов компонента AccordionView и их значения.
@@ -13,6 +13,7 @@ export type TDesignTokensComponentsAccordionView = {AccordionView: TDesignTokens
 
 // Токены компонента AccordionView в светлой и темной темах.
 export const AccordionView_Tokens: TDesignTokensComponentsAccordionViewValues = {
+    Background: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-AccordionView-Background)
     BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.500'}], // var(--triplex-AccordionView-BorderColor_Default)
     BorderColor_Focus: [{ref: 'Accent.500'}, {ref: 'Accent.500'}], // var(--triplex-AccordionView-BorderColor_Focus)
     Header_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-AccordionView-Header_Color)

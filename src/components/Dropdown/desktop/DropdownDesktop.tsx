@@ -1,6 +1,7 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EDropdownAlignment, EDropdownDirection} from '../Dropdown';
+import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 
 /** Свойства компонента DropdownDesktop. */
 export interface IDropdownDesktopProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -36,6 +37,40 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownRes = useRef<{width: number; height: number}>({height: 0, width: 0});
     const classNames = classnames('cssClass[dropdown]', className);
+
+    /** Блокировка скролла вне дропдауна. */
+    const wheelHandler = useCallback(
+        (event: Event) => {
+            if (!dropdownRef.current?.contains(event.target as Node)) {
+                event.preventDefault();
+            }
+        },
+        [dropdownRef]
+    );
+
+    const keyDownHandler = useCallback((event: Event) => {
+        const keyboardEvent = event as KeyboardEvent;
+        const key = keyboardEvent.code || keyboardEvent.keyCode;
+
+        if (isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN') || isKey(key, 'SPACE')) {
+            event.preventDefault();
+        }
+    }, []);
+
+    /** Управление скроллом внешней области.  */
+    const toggleScrollEventListener = useCallback(
+        /** Запрет скролла всей страницы. */
+        (add: boolean) => {
+            if (add) {
+                document.addEventListener('wheel', wheelHandler, {passive: false});
+                document.addEventListener('keydown', keyDownHandler);
+            } else {
+                document.removeEventListener('wheel', wheelHandler);
+                document.removeEventListener('keydown', keyDownHandler);
+            }
+        },
+        [wheelHandler, keyDownHandler]
+    );
 
     /** Расчёт положения по горизонтали. */
     const calculatePositionHorizontal = useCallback(
@@ -139,15 +174,15 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
 
     useEffect(() => {
         if (opened) {
-            document.addEventListener('scroll', handleReposition, true);
             window.addEventListener('resize', handleReposition);
+            toggleScrollEventListener(true);
 
             return () => {
-                document.removeEventListener('scroll', handleReposition, true);
                 window.removeEventListener('resize', handleReposition);
+                toggleScrollEventListener(false);
             };
         }
-    }, [opened, handleReposition]);
+    }, [opened, handleReposition, toggleScrollEventListener]);
 
     /** Функция для хранения ссылки. */
     const setRef = (instance: HTMLDivElement | null) => {
@@ -164,7 +199,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
     }
 
     return (
-        <div className={classNames} style={{...styles}} ref={setRef} {...rest}>
+        <div className={classNames} style={{...styles}} ref={setRef} {...rest} data-tx={process.env.npm_package_version}>
             {children}
         </div>
     );

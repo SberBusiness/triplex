@@ -38,20 +38,20 @@
         margin-bottom: @metric-8;
     }
 
+    .notificationIcon {
+        // Убирает нижний отступ от иконки.
+        line-height: 0;
+    }
+
     .notificationBody {
-        width: @ufs-theme-notification-content-width-without-icon;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin-left: @metric-8;
-
-        ul {
-            margin-top: 0;
-        }
     }
 
-    .notificationIcon + .notificationBody {
-        width: @ufs-theme-notification-content-width-with-icon;
+    .notificationBodyList {
+        margin-top: 8px;
     }
 
     .notificationBodyContent {
@@ -118,12 +118,11 @@
     .notificationGroupedFooterItem {
         border-radius: 0 0 @metric-8 @metric-8;
         position: absolute;
-        background: var(--triplex-Basic-100);
-        width: @ufs-theme-notification-width - 2px;
-        transform: translateX(-50%);
-        left: 50%;
+        background: var(--triplex-Notification-Background);
+        left: 1px;
+        right: 1px;
         height: @metric-16;
-        box-shadow: @shadow-02;
+        box-shadow: var(--triplex-Notification-Shadow);
 
         &.first {
             bottom: -@metric-8;
@@ -134,5 +133,12 @@
             bottom: -@metric-16;
             z-index: @z-index-step;
         }
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .notification,
+    .notificationGroupedWrapper {
+        width: 100%;
     }
 }

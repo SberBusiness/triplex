@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {IOverlayChildrenProvideProps} from '@sberbusiness/triplex/components/Overlay/OverlayBase';
 
@@ -49,9 +49,11 @@ export const DropdownMobileInner = React.forwardRef<HTMLDivElement, IDropdownMob
             }
         };
 
-        const handleTouchStart = () => {
-            // Закрытие popup по клику на Backdrop.
-            setOpened(false);
+        /** Функция закрытия DropdownMobile. */
+        const closeDropdown = () => {
+            if (openedProps) {
+                setOpened(false);
+            }
         };
 
         if (!openingProps && !openedProps && !closing) {
@@ -61,7 +63,12 @@ export const DropdownMobileInner = React.forwardRef<HTMLDivElement, IDropdownMob
         return (
             <div className={classNamesWrapper}>
                 {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                <div className={classNamesBackDrop} onTransitionEnd={handleTransitionEnd} onTouchStart={handleTouchStart} />
+                <div
+                    className={classNamesBackDrop}
+                    onTransitionEnd={handleTransitionEnd}
+                    onTouchStart={closeDropdown}
+                    onMouseDown={closeDropdown}
+                />
                 <div className={classNamesContent} ref={ref} {...htmlAttributes}>
                     {children}
                 </div>

@@ -40,7 +40,7 @@ export const Notification: INotificationSFC = ((props) => {
 
     return (
         // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-        <div {...HTMLAttributes} role="alertdialog" className={cn} onClick={onClick}>
+        <div {...HTMLAttributes} role="alertdialog" className={cn} onClick={onClick} data-tx={process.env.npm_package_version}>
             {children}
         </div>
     );

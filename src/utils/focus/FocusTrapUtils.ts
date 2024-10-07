@@ -9,7 +9,7 @@ export const FocusTrapUtils: IFocusTrapUtils = {
     firstInteractionElementDataAttr: 'data-first-interaction-element',
     getFirstInteractionElementByDataAttr: (rootElement) => {
         if (rootElement) {
-            return rootElement.querySelector<HTMLElement>(`[${FocusTrapUtils.firstInteractionElementDataAttr}`) || undefined;
+            return rootElement.querySelector<HTMLElement>(`[${FocusTrapUtils.firstInteractionElementDataAttr}]`) || undefined;
         }
         return undefined;
     },

@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import FocusTrap from 'focus-trap-react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Dropdown, IDropdownProps} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {MultiselectDropdownHeader} from '@sberbusiness/triplex/components/Multiselect/components/MultiselectDropdownHeader';
 import {MultiselectDropdownContent} from '@sberbusiness/triplex/components/Multiselect/components/MultiselectDropdownContent';
 import {MultiselectDropdownFooter} from '@sberbusiness/triplex/components/Multiselect/components/MultiselectDropdownFooter';
-import {ISelectExtendedDropdownProvideProps} from '@sberbusiness/triplex/components/SelectExtended/SelectExtended';
-
-export interface IMultiselectDropdownProvideProps extends ISelectExtendedDropdownProvideProps {}
 
 /** Свойства компонента MultiselectDropdown. */
 interface IMultiselectDropdownProps extends IDropdownProps {
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
     forwardedRef?: React.RefObject<HTMLDivElement>;
 }
 
@@ -20,7 +20,7 @@ export interface IMultiselectDropdownFC extends React.FC<IMultiselectDropdownPro
 }
 
 /** Компонент выпадающего блока мильти-списка. */
-export const MultiselectDropdown: IMultiselectDropdownFC = ({children, opened, targetRef, forwardedRef, ...rest}) => {
+export const MultiselectDropdown: IMultiselectDropdownFC = ({children, focusTrapProps, opened, targetRef, forwardedRef, mobileViewProps, ...rest}) => {
     const [trapActive, setTrapActive] = useState(false);
 
     useEffect(() => {
@@ -36,8 +36,22 @@ export const MultiselectDropdown: IMultiselectDropdownFC = ({children, opened, t
     }
 
     return (
-        <FocusTrap active={trapActive} focusTrapOptions={{clickOutsideDeactivates: true, preventScroll: true}}>
-            <Dropdown opened={opened} fixedWidth={true} targetRef={targetRef} {...rest} ref={forwardedRef}>
+        <FocusTrap
+            active={trapActive}
+            {...focusTrapProps}
+            focusTrapOptions={{clickOutsideDeactivates: true, preventScroll: true, ...focusTrapProps?.focusTrapOptions}}
+        >
+            <Dropdown
+                fixedWidth
+                mobileViewProps={{
+                    ...mobileViewProps,
+                    className: classnames('cssClass[globalMultiselectDropdownMobileWrapper]', mobileViewProps?.className),
+                }}
+                targetRef={targetRef}
+                opened={opened}
+                {...rest}
+                ref={forwardedRef}
+            >
                 {children}
             </Dropdown>
         </FocusTrap>

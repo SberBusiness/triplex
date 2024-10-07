@@ -15,6 +15,10 @@ jest.mock('@sberbusiness/icons/CaretdownSrvxIcon16', () => ({
     CaretdownSrvxIcon16: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 jest.mock('@sberbusiness/triplex/utils/uniqueId', () => ({
     uniqueId: jest.fn(() => 0),
 }));

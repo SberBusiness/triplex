@@ -1,13 +1,56 @@
 @import 'src/styles/style';
 
-.tooltipSM .tooltipBody {
-    width: 192px;
-    min-height: 52px;
+.tooltipDesktop {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: none;
+    pointer-events: auto;
+    z-index: @z-index-tooltip;
+
+    .tooltipBody {
+        .b1-text-main(@color-snowy);
+
+        color: var(--triplex-Tooltip-Color);
+        text-align: left;
+        overflow-y: auto;
+        position: relative;
+        padding: @metric-16;
+        background-color: var(--triplex-Tooltip-Background);
+        border-radius: @radius-8;
+        box-sizing: border-box;
+    }
+
+    .tooltipXButton {
+        position: absolute;
+        right: @metric-8;
+        top: @metric-8;
+    }
+
+    &.withTooltipXButton .tooltipBody {
+        padding-right: @metric-32;
+    }
 }
 
-.tooltipLG .tooltipBody {
-    width: 384px;
-    min-height: 72px;
+.tooltipMobile {
+    .tooltipXButton {
+        position: absolute;
+        right: @metric-16;
+        top: @metric-16;
+    }
+}
+
+.tooltipBody {
+    .tooltipSM & {
+        width: 192px;
+        min-height: 52px;
+    }
+
+    .tooltipLG & {
+        width: 384px;
+        min-height: 72px;
+    }
 }
 
 .tooltipOverlay {
@@ -18,37 +61,8 @@
     left: 0;
     pointer-events: none;
     z-index: @z-index-tooltip - 1;
+}
 
-    .tooltip {
-        display: flex;
-        position: absolute;
-        top: 0;
-        left: 0;
-        outline: none;
-        pointer-events: auto;
-        z-index: @z-index-tooltip;
-
-        .tooltipBody {
-            .b1-text-main(@color-snowy);
-
-            color: var(--triplex-Tooltip-Color);
-            text-align: left;
-            overflow-y: auto;
-            position: relative;
-            padding: @metric-16;
-            background-color: var(--triplex-Tooltip-Background);
-            border-radius: @radius-8;
-            box-sizing: border-box;
-        }
-
-        .tooltipXButton {
-            position: absolute;
-            right: @metric-8;
-            top: @metric-8;
-        }
-
-        &.withTooltipXButton .tooltipBody {
-            padding-right: @metric-32;
-        }
-    }
+.tooltipDropdownMobileBody {
+    padding: 16px;
 }

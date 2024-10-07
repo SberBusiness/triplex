@@ -26,7 +26,7 @@ export const Input = React.forwardRef<HTMLInputElement, IInputProps>(({className
         className
     );
 
-    return <input className={classNames} {...rest} ref={ref} />;
+    return <input className={classNames} {...rest} ref={ref} data-tx={process.env.npm_package_version} />;
 });
 
 Input.displayName = 'Input';

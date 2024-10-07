@@ -10,6 +10,6 @@
 Подключение библиотеки к новому проекту:
 
 1. `npm i @sberbusiness/triplex` - установка npm пакета Triplex. 
-2. `@sberbusiness/triplex/styles/desktop/styles.css` - импорт стилей. 
+2. `@sberbusiness/triplex/styles/styles.css` - импорт стилей. 
 
 В случае ошибки установите дополнительно пакет tslib.

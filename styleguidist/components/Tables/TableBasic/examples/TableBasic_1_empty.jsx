@@ -1,5 +1,5 @@
 import React from 'react';
-import {EmptytableSrvIcon64} from "@sberbusiness/icons/EmptytableSrvIcon64";
+import {EmptytableSrvIcon64} from '@sberbusiness/icons/EmptytableSrvIcon64';
 import {MasterTable} from '@sberbusiness/triplex/components/Tables/MasterTable';
 import {EHorizontalAlign} from '@sberbusiness/triplex/components/Tables/TableBasic/enums';
 import {Amount} from '@sberbusiness/triplex/components/Amount/Amount';

@@ -127,6 +127,8 @@ const renderPage = () => (
 
 ### Loading emulation
 
+Флаг `isLoading` нужно передать и в LightBox и в LightBox.Content.
+
 ```jsx
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
@@ -341,7 +343,7 @@ const renderTopOverlay = () => (
                     size={EButtonSize.MD}
                     onClick={() => setIsTopOverlayOpened(false)}
                 >
-                    Продолжить
+                    Отмена
                 </Button>
                 <Button
                     theme={EButtonTheme.DANGER}
@@ -858,7 +860,7 @@ const renderTopOverlay = () => (
                         setIsTopOverlayOpened(false);
                     }}
                 >
-                    Продолжить
+                    Отмена
                 </Button>
                 <Button
                     theme={EButtonTheme.DANGER}
@@ -1441,6 +1443,8 @@ import {ELightBoxSideOverlaySize} from '@sberbusiness/triplex/components/LightBo
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import {Page} from '@sberbusiness/triplex/components/Page/Page';
+import {Portal} from '@sberbusiness/triplex/components/Portal/Portal';
+
 import './styles.less';
 
 const [open, setOpen] = React.useState(false);
@@ -1563,41 +1567,22 @@ const renderPage = () => (
         Open LightBox
     </Button>
     {open && renderLightBox()}
-    {/* DOM элемент, в границах которого рендерится LightBox. ID этого элемента передается в \
-    <LightBox lightBoxViewManagerNodeId="lightBoxViewManagerNodeId" ... /> */}
-    <div className={`custom-top-panel ${isCustomPanelOpened ? 'opened' : ''}`} style={{
-        left: (100 - viewManagerNodeWidth) / 2 + '%',
-        width: viewManagerNodeWidth + '%',
-    }}>
-        <br />
-        Ширина области с LightBox, в процентах от размера экрана:
-        <input
-            type="number"
-            value={viewManagerNodeWidth}
-            onChange={(event) => setViewManagerNodeWidth(parseInt(event.target.value))}
-            min={1}
-            max={100}
-            style={{width: '60px'}}
-        />
-        
-        <br />
 
-        <button onClick={() => setIsCustomPanelOpened(false)}>Скрыть панель</button>
-
-        {/* Элемент, в визуальных границах (левая и правая координата) которого рендерится LightBox. \
-        Отступ LightBox от верхней границы экрана равен высоте этого элемента. */}
+    <Portal container={document.body}>
+        {/* Элемент, в визуальных границах (левая и правая координата) которого рендерится LightBox.
+            Отступ LightBox от верхней границы экрана равен высоте этого элемента. */}
         <div
             id="lightBoxViewManagerNodeId"
             style={{
-                position: 'absolute',
+                position: 'fixed',
                 top: 0,
-                bottom: 0,
+                height: 0,
                 left: 0,
-                right: 0,
-                pointerEvents: 'none'
+                right: '20%',
+                pointerEvents: 'none',
             }}
         />
-    </div>
+    </Portal>
 </>
 ```
 

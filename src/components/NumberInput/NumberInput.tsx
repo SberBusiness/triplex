@@ -40,6 +40,8 @@ export const NumberInput = React.forwardRef<HTMLInputElement, INumberInputProps>
                     buffer[separatorIndex] = '';
                     separatorIndex = buffer.length - 1;
                 }
+            } else if (i === 0 && StringUtils.isUnaryMinus(value[i])) {
+                buffer.push('-');
             }
         }
 

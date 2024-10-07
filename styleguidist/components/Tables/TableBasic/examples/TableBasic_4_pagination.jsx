@@ -40,33 +40,31 @@ const columns = [
     },
 ];
 
-const data = Array.from({length: 100}, ((value, index) => (
-    {
-        rowKey: `table-basic-row-${index}`,
-        rowData: {
-            number: 1397450 + index,
-            value: (
-                <>
-                    <Text tag="div" size={ETextSize.B1} type={EFontType.GENERAL} line={ELineType.EXTRA}>
-                        Платежное поручение ООО Ромашка
-                        <br />
-                        {decorate(`40702810205275000000`)}
-                    </Text>
-                    <Gap size={4} />
-                    <Text tag="div" size={ETextSize.B2} type={EFontType.SECONDARY}>
-                        В том числе НДС 20%
-                    </Text>
-                </>
-            ),
-            sum: '1220000000',
-            status: (
-                <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
-                    Исполнено
-                </MarkerStatus>
-            )
-        }
-    }
-)));
+const data = Array.from({length: 100}, (value, index) => ({
+    rowKey: `table-basic-row-${index}`,
+    rowData: {
+        number: 1397450 + index,
+        value: (
+            <>
+                <Text tag="div" size={ETextSize.B1} type={EFontType.GENERAL} line={ELineType.EXTRA}>
+                    Платежное поручение ООО Ромашка
+                    <br />
+                    {decorate(`40702810205275000000`)}
+                </Text>
+                <Gap size={4} />
+                <Text tag="div" size={ETextSize.B2} type={EFontType.SECONDARY}>
+                    В том числе НДС 20%
+                </Text>
+            </>
+        ),
+        sum: '1220000000',
+        status: (
+            <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
+                Исполнено
+            </MarkerStatus>
+        ),
+    },
+}));
 
 const rowNumberOptions = [10, 30, 50, 100];
 

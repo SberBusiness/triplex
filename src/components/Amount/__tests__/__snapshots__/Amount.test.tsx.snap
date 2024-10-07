@@ -3,6 +3,7 @@
 exports[`Amount renders correctly 1`] = `
 <span
   className=""
+  data-tx="10.0.0"
 >
   <span
     data-test-id="amount__amount"

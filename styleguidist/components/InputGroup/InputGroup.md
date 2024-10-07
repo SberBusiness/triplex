@@ -2,7 +2,7 @@
 import {Input} from '@sberbusiness/triplex/components/Input/Input';
 import {Select} from '@sberbusiness/triplex/components/Select/Select';
 
-const options = Array(5).fill().map((item, index) => ({value: index + 1, label: `Option ${index + 1}`}));
+const options = Array(5).fill().map((item, index) => ({id: index.toString(), value: index + 1, label: `Option ${index + 1}`}));
 
 const renderInput = () => <Input placeholder="Введите значение" />;
 
@@ -24,16 +24,10 @@ const renderSelect = () => {
     {renderSelect()}
 </InputGroup>
 ```
-
-
-### Other inputs
-
+###  Amount input / Masked input
 ```jsx
 import {AmountInput} from '@sberbusiness/triplex/components/AmountInput/AmountInput';
 import {MaskedInput} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
-import {Suggest} from '@sberbusiness/triplex/components/Suggest/Suggest';
-
-const options = Array(5).fill().map((item, index) => ({value: index + 1, label: `Option ${index + 1}`}));
 
 const renderAmountInput = () => {
     const [value, setValue] = React.useState('');
@@ -50,10 +44,24 @@ const renderMaskedInput = () => {
         <MaskedInput
             value={value}
             mask={[/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]}
-            onChange={setValue}
+            onChange={(event) => setValue(event.target.value)}
         />
     );
 };
+
+<InputGroup>
+    {renderAmountInput()}
+    {renderMaskedInput()}
+</InputGroup>
+```
+
+### Suggest / Number input
+
+```jsx
+import {Suggest} from '@sberbusiness/triplex/components/Suggest/Suggest';
+import {NumberInput} from '@sberbusiness/triplex/components/NumberInput/NumberInput';
+
+const options = Array(5).fill().map((item, index) => ({value: index + 1, label: `Option ${index + 1}`}));
 
 const renderSuggest = () => {
     const [state, setState] = React.useState({options});
@@ -77,9 +85,14 @@ const renderSuggest = () => {
     );
 };
 
+const renderNumberInput = () => {
+    return (
+        <NumberInput placeholder="Введите значение" />
+    )
+};
+
 <InputGroup>
-    {renderAmountInput()}
-    {renderMaskedInput()}
     {renderSuggest()}
+    {renderNumberInput()}
 </InputGroup>
 ```

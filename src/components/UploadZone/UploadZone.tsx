@@ -107,7 +107,7 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZon
                     },
                 }}
             >
-                <div className={classnames('cssClass[uploadZone]')}>
+                <div className={classnames('cssClass[uploadZone]')} data-tx={process.env.npm_package_version}>
                     <div
                         className={classnames('cssClass[uploadZoneDragArea]')}
                         onClick={this.handleAreaClick}

@@ -2,6 +2,17 @@
 
 .maskedInputWrapper {
     position: relative;
+
+    .maskedInputPlaceholder {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        &::placeholder {
+            // Переопределяет opacity: 0 в FormFieldInput.less.
+            opacity: 1;
+        }
+    }
 }
 
 .maskedInput {
@@ -10,11 +21,7 @@
     background: none !important;
 }
 
-.maskedInputPlaceholder {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
+
 
 .grouped {
     flex: 1;

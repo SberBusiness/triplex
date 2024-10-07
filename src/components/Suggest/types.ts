@@ -83,7 +83,7 @@ export interface ISuggestOption {
     id?: string;
     label: string;
     value?: any;
-    /** @deprecated Используйте свойство renderDropdownItemLabel компонента SuggestCustom. */
+    /** Отображается в списке options, при значении undefined в списке отображается label. */
     labelReactNode?: React.ReactNode;
 }
 

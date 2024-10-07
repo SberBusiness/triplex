@@ -23,5 +23,6 @@ export const Skeleton: React.FC<ISkeletonProps> = ({className, type = ESkeletonT
             'cssClass[light]': type === ESkeletonType.LIGHT,
         })}
         {...htmlDivAttributes}
+        data-tx={process.env.npm_package_version}
     />
 );

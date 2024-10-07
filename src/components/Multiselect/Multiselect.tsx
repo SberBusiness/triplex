@@ -3,7 +3,7 @@ import {ISelectExtendedProps, SelectExtended} from '@sberbusiness/triplex/compon
 import {SelectExtendedTarget} from '@sberbusiness/triplex/components/SelectExtended/components/SelectExtendedTarget';
 import {MultiselectDropdown} from './components/MultiselectDropdown';
 
-interface IMultiselectProps extends ISelectExtendedProps {}
+export interface IMultiselectProps extends ISelectExtendedProps {}
 
 /** Компонент мульти-списка. */
 export class Multiselect extends React.PureComponent<IMultiselectProps> {

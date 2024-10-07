@@ -9,7 +9,7 @@ export interface IFilterPanelProps extends React.HTMLAttributes<HTMLDivElement> 
 
 /** Компонент панели под элементы фильтрации данных для таблицы. */
 export const FilterPanel: React.FC<IFilterPanelProps> = ({children, className, isLoading, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[filterPanel]')} {...htmlDivAttributes}>
+    <div className={classnames(className, 'cssClass[filterPanel]')} {...htmlDivAttributes} data-tx={process.env.npm_package_version}>
         {children}
     </div>
 );

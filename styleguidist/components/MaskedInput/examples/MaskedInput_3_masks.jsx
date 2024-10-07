@@ -109,7 +109,8 @@ const renderRowExample = (label, props) => {
     {renderRowExample({
         text: 'УИН'
     }, {
-        mask: MaskedInput.presets.masks.uin
+        mask: MaskedInput.presets.masks.uin,
+        placeholderMask: MaskedInput.presets.placeholderMasks.uin
     })}
 
     {renderRowExample({

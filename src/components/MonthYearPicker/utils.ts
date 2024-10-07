@@ -1,0 +1,39 @@
+import moment from 'moment';
+import {TPickedDate} from '@sberbusiness/triplex/components/Calendar/types';
+import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
+import {inputMonthYearFormat} from '@sberbusiness/triplex/components/MonthYearPicker/const';
+
+/** Значения MonthYearPicker. */
+interface IMonthYearPickerValues {
+    inputString: string;
+    calendarDate: TPickedDate;
+}
+
+/** Утилиты для компонента MonthYearPicker. */
+export const MonthYearPickerUtils = {
+    /** Получить значения пикера. */
+    getPickerValues: (value: string, format: string, limitRange: IDateLimitRange): IMonthYearPickerValues => {
+        if (value.length === 0) {
+            return {calendarDate: null, inputString: ''};
+        }
+
+        const date = MonthYearPickerUtils.getCalendarDate(value, format, limitRange);
+
+        if (date === null) {
+            return {calendarDate: null, inputString: ''};
+        }
+
+        return {calendarDate: date, inputString: date.format(inputMonthYearFormat)};
+    },
+
+    /** Получить календарную дату. */
+    getCalendarDate: (value: string, format: string, limitRange: IDateLimitRange) => {
+        const date = moment(value, format, true);
+
+        if (!date.isValid() || date.isBefore(limitRange.dateFrom, 'day') || date.isAfter(limitRange.dateTo, 'day')) {
+            return null;
+        }
+
+        return date;
+    },
+};

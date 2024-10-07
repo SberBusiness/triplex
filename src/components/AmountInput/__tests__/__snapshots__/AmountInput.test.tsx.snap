@@ -7,6 +7,7 @@ exports[`AmountInput renders correctly 1`] = `
   <input
     autoComplete="off"
     className="cssClass[input]"
+    data-tx="10.0.0"
     onChange={[Function]}
     onKeyDown={[Function]}
     onSelect={[Function]}

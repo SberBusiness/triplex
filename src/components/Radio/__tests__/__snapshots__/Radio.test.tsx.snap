@@ -3,6 +3,7 @@
 exports[`Radio renders correctly 1`] = `
 <label
   className="cssClass[label] cssClass[nonempty]"
+  data-tx="10.0.0"
   onClick={[Function]}
   onMouseDown={[Function]}
 >
@@ -22,6 +23,7 @@ exports[`Radio renders correctly 1`] = `
 exports[`Radio renders disabled state correctly 1`] = `
 <label
   className="cssClass[label] cssClass[disabled] cssClass[nonempty]"
+  data-tx="10.0.0"
   onClick={[Function]}
   onMouseDown={[Function]}
 >

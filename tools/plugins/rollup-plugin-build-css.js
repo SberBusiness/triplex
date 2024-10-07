@@ -1,3 +1,4 @@
+/* eslint-env node */
 const stylesheetRegExp = /[\d\D]*stylesheet="(.*)";[\d\D]*/;
 const stylesRegEx = /.*\.css$/;
 

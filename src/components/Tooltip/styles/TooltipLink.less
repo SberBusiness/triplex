@@ -1,0 +1,41 @@
+.tooltipLink {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.desktop {
+    color: var(--triplex-Tooltip-Link_Desktop_Color_Default);
+
+    &:hover {
+        color: var(--triplex-Tooltip-Link_Desktop_Color_Hover);
+    }
+
+    &:active {
+        color: var(--triplex-Tooltip-Link_Desktop_Color_Active);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--triplex-Tooltip-Link_Desktop_Shadow_Focus);
+    }
+}
+
+.mobile {
+    color: var(--triplex-Tooltip-Link_Mobile_Color_Default);
+
+    &:hover {
+        color: var(--triplex-Tooltip-Link_Mobile_Color_Hover);
+    }
+
+    &:active {
+        color: var(--triplex-Tooltip-Link_Mobile_Color_Active);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--triplex-Tooltip-Link_Mobile_Shadow_Focus);
+    }
+}

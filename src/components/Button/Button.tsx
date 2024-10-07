@@ -1,10 +1,10 @@
 import React from 'react';
+import {HeaderkebabSrvxIcon16} from '@sberbusiness/icons/HeaderkebabSrvxIcon16';
+import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
+import {SpinnersmallwhiteAniIcon20} from '@sberbusiness/icons/SpinnersmallwhiteAniIcon20';
 import {EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button/enums';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {SpinnersmallwhiteAniIcon20} from '@sberbusiness/icons/SpinnersmallwhiteAniIcon20';
-import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
 import {ButtonBase} from '../protected/ButtonBase/ButtonBase';
-import {DotsIcon} from '@sberbusiness/triplex/components/Button/DotsIcon';
 
 /** Свойства кнопки типа General. */
 export interface IButtonGeneralProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -163,7 +163,7 @@ export const Button = React.forwardRef<HTMLButtonElement, TButtonProps>((props, 
     return (
         <ButtonBase className={classNames} tabIndex={loading ? -1 : undefined} ref={ref} disabled={disabled} {...rest}>
             <span className="cssClass[content]">
-                {theme === EButtonTheme.DOTS ? <DotsIcon className="cssClass[dotsIcon]" /> : children}
+                {theme === EButtonTheme.DOTS ? <HeaderkebabSrvxIcon16 className="cssClass[dotsIcon]" /> : children}
             </span>
             {loading && <span className="cssClass[spinner]">{spinnerIcon || renderLoadingIcon()}</span>}
         </ButtonBase>

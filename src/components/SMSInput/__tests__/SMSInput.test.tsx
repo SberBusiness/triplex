@@ -11,6 +11,10 @@ jest.mock('@sberbusiness/icons/ClosetooltipSrvxIcon16', () => ({
     ClosetooltipSrvxIcon16: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
+    ClosenotificationSrvxIcon16: 'svg',
+}));
+
 jest.mock('react-dom', () => ({
     findDOMNode: () => ({addEventListener: jest.fn()}),
 }));

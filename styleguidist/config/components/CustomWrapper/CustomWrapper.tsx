@@ -1,6 +1,9 @@
-import React, {useRef} from 'react';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
+import React, {useEffect} from 'react';
 import Wrapper from 'react-styleguidist/lib/client/rsg-components/Wrapper/Wrapper';
+import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
+import {EIconsTheme, ThemeProvider as IconsThemeProvider} from '@sberbusiness/icons/ThemeProvider';
+import {ThemeProvider} from '@sberbusiness/triplex/components/ThemeProvider/ThemeProvider';
+import {ThemeObserver} from '../../../common/components/Observer/ThemeObserver';
 import './styles.less';
 
 interface ICustomWrapperProps {
@@ -8,15 +11,30 @@ interface ICustomWrapperProps {
 }
 
 const CustomWrapper: React.FC<ICustomWrapperProps> = (props) => {
-    const ref = useRef(null);
+    const [iconsTheme, setIconsTheme] = React.useState(
+        localStorage.getItem('triplex-theme') === ETriplexTheme.DARK ? EIconsTheme.DARK : EIconsTheme.LIGHT
+    );
+    const [theme, setTheme] = React.useState(
+        localStorage.getItem('triplex-theme') === ETriplexTheme.DARK ? ETriplexTheme.DARK : ETriplexTheme.LIGHT
+    );
+
+    useEffect(() => {
+        const unsubscribe = ThemeObserver.subscribe((nextTriplexTheme) => {
+            setTheme(nextTriplexTheme);
+            setIconsTheme(nextTriplexTheme === ETriplexTheme.LIGHT ? EIconsTheme.LIGHT : EIconsTheme.DARK);
+        });
+
+        return unsubscribe;
+    }, []);
 
     return (
-        <div className={classnames('custom-wrapper')} ref={ref}>
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/*
-          // @ts-ignore */}
-          <Wrapper {...props} />
-        </div>
+        <IconsThemeProvider theme={iconsTheme}>
+            <ThemeProvider theme={theme} scopeClassName="styleguide-example-theme">
+                <div className="custom-wrapper">
+                    <Wrapper {...props} />
+                </div>
+            </ThemeProvider>
+        </IconsThemeProvider>
     );
 };
 

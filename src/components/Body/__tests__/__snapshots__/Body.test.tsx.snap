@@ -3,6 +3,7 @@
 exports[`Body renders correctly 1`] = `
 <div
   className="cssClass[body] cssClass[withWhiteBackground]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[bodyInner]"

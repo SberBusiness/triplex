@@ -1,8 +1,18 @@
+@import 'src/styles/style';
+
 .styleguide-section-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 32px;
+
+    @media (max-width: @screen-md-max) {
+        margin-bottom: 16px;
+
+        &:has(> h3) {
+            margin-bottom: 0px;
+        }
+    }
 }
 
 .styleguide-section-heading-link {

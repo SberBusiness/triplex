@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import cx from 'clsx';
 import Rsg from 'react-styleguidist/lib/typings';
 import Link from 'react-styleguidist/lib/client/rsg-components/Link';
 import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
+import {StyleGuideContext} from '../StyleGuideContext';
 import './styles.less';
 
 interface IComponentsListRendererProps {
@@ -20,11 +21,22 @@ const ComponentsListSectionRenderer: React.FunctionComponent<Rsg.TOCItem> = ({
     forcedOpen,
 }) => {
     const [open, setOpen] = useState(Boolean(initialOpen));
+    const {sidebarOpen, setSidebarOpen} = useContext(StyleGuideContext);
 
     return (
         <li className={cx('styleguide-components-list-section', {selected})} key={href}>
             <div className={cx('styleguide-components-list-section-heading', {selected, open})} onClick={() => setOpen(!open)}>
-                <Link href={href} target={shouldOpenInNewTab ? '_blank' : undefined} data-testid="rsg-toc-link">
+                <Link
+                    href={href}
+                    target={shouldOpenInNewTab ? '_blank' : undefined}
+                    data-testid="rsg-toc-link"
+                    onClick={() => {
+                        if (!content) {
+                            setSidebarOpen(false);
+                        }
+                        setOpen(!open);
+                    }}
+                >
                     {visibleName}
                 </Link>
                 {content && <CaretdownSrvxIcon16 className="styleguide-components-list-section-heading-icon" />}

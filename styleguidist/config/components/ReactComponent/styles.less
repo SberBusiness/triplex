@@ -1,7 +1,27 @@
-.styleguide-react-component-header,
-.styleguide-react-component-docs,
+@import 'src/styles/style';
+
+.styleguide-react-component-header {
+    margin-bottom: 20px;
+
+    @media (max-width: @screen-md-max) {
+        margin-bottom: 8px;
+    }
+}
+
+.styleguide-react-component-docs {
+    margin-bottom: 20px;
+
+    @media (max-width: @screen-md-max) {
+        margin-bottom: 16px;
+    }
+}
+
 .styleguide-react-component-tab-buttons {
     margin-bottom: 20px;
+
+    @media (max-width: @screen-md-max) {
+        margin-bottom: 16px;
+    }
 }
 
 .styleguide-react-component-tab-body {

@@ -2,34 +2,33 @@ import React, {useState, useEffect, useCallback, useRef} from 'react';
 import FocusTrap from 'focus-trap-react';
 import {HintSrvIcon16} from '@sberbusiness/icons/HintSrvIcon16';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
+import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
+import {Tooltip, ITooltipProps} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
-import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/TooltipBody';
-import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
-import {ITooltipProps} from '@sberbusiness/triplex/components/Tooltip/types';
-import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/TooltipTarget';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {getAriaHTMLAttributes, TAriaHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/AriaAttributes';
 import {getDataHTMLAttributes, TDataHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/DataAttributes';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
-import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 
 /** Свойства компонента HelpBox. */
 export interface IHelpBoxProps
     extends React.HTMLAttributes<HTMLButtonElement>,
         Pick<ITooltipProps, 'isOpen' | 'preferPlace' | 'onShow' | 'toggle'> {
-    /** Aria-атрибуты tooltip. */
+    /** Свойства FocusTrap. Используется npm-пакет focus-trap-react. */
+    focusTrapProps?: FocusTrap.Props;
+    /** Aria-атрибуты Tooltip. */
     tooltipAriaAttributes?: TAriaHTMLAttributes;
-    /** Data-атрибуты tooltip. */
+    /** Data-атрибуты Tooltip. */
     tooltipDataAttributes?: TDataHTMLAttributes;
-    /** Размер тултипа. */
+    /** Размер Tooltip. */
     tooltipSize: ETooltipSize;
 }
 
-/** Иконка "?" со всплывающей подсказкой выбраного размера. */
+/** Иконка "?" со всплывающей подсказкой выбранного размера. */
 export const HelpBox: React.FC<IHelpBoxProps> = ({
     children,
     className,
+    focusTrapProps,
     isOpen,
     onClick,
     onShow,
@@ -43,7 +42,6 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
 }) => {
     const [opened, setOpened] = useState(Boolean(isOpen));
     const tooltipId = useRef(uniqueId());
-    const tooltipBodyRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Изменение внутреннего флага opened, когда состояние компонента контролируется снаружи.
@@ -69,16 +67,6 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
     );
 
     /**
-     * Обработчик клика по кнопке закрытия Tooltip.
-     */
-    const handleClickCloseButton = () => {
-        // Тригеррится событие mouseleave вместо setOpened(false) тк внутри Tooltip компонент Hoverable имеет флаг isHovered, который останется true на мобильных устройствах.
-        const event = new MouseEvent('mouseleave', {bubbles: true, cancelable: true});
-
-        tooltipBodyRef.current?.dispatchEvent(event);
-    };
-
-    /**
      * Обработчик нажатия мыши на TargetButton.
      * Скринридеры на Windows при нажатии на кнопку вызывают не событие клавиатуры(Enter), а клик.
      */
@@ -101,11 +89,10 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
             preferPlace={preferPlace}
             onShow={onShow}
             toggleType="hover"
-            tabSensitive={false}
             {...(Boolean(tooltipAriaAttributes) && getAriaHTMLAttributes(tooltipAriaAttributes!))}
             {...(Boolean(tooltipDataAttributes) && getDataHTMLAttributes(tooltipDataAttributes!))}
         >
-            <TooltipTarget>
+            <Tooltip.Target>
                 <ButtonIcon
                     className={classnames('cssClass[helpBoxButton]', className)}
                     aria-label="Подсказка"
@@ -115,18 +102,24 @@ export const HelpBox: React.FC<IHelpBoxProps> = ({
                 >
                     <HintSrvIcon16 />
                 </ButtonIcon>
-            </TooltipTarget>
-            <TooltipBody className="cssClass[helpBoxTooltipBody]" forwardedRef={tooltipBodyRef}>
+            </Tooltip.Target>
+            <Tooltip.Body className="cssClass[helpBoxTooltipBody]">
                 <FocusTrap
                     active={opened}
-                    focusTrapOptions={{clickOutsideDeactivates: true, initialFocus: `[id='${tooltipId.current}']`, preventScroll: true}}
+                    {...focusTrapProps}
+                    focusTrapOptions={{
+                        clickOutsideDeactivates: true,
+                        initialFocus: `[id='${tooltipId.current}']`,
+                        preventScroll: true,
+                        ...focusTrapProps?.focusTrapOptions,
+                    }}
                 >
                     <div>
                         {children}
-                        <Tooltip.XButton aria-label="Закрыть" onClick={handleClickCloseButton} />
+                        <Tooltip.XButton aria-label="Закрыть" />
                     </div>
                 </FocusTrap>
-            </TooltipBody>
+            </Tooltip.Body>
         </Tooltip>
     );
 };

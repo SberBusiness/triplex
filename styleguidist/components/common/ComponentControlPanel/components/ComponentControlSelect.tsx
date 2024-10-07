@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
-import '../styles/ComponentControlSelect.less';
+import './styles/ComponentControlSelect.less';
 
 /** Свойства ComponentControlSelect. */
 interface IComponentControlSelectProps {

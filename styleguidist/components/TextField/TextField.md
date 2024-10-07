@@ -1,8 +1,9 @@
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -23,10 +24,11 @@ const [value, setValue] = React.useState('');
 ### Without HelpBox
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -40,14 +42,14 @@ const [value, setValue] = React.useState('');
 />
 ```
 
-
 ### Without HelpBox shrink view
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -65,10 +67,11 @@ const [value, setValue] = React.useState('');
 ### Success status
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -90,10 +93,11 @@ const [value, setValue] = React.useState('');
 ### Disabled state
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -115,10 +119,11 @@ const [value, setValue] = React.useState('');
 ### Error state
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -140,11 +145,12 @@ const [value, setValue] = React.useState('');
 ### MaskedInput usage
 
 ```jsx
-import {ITextFieldProps, TextField} from '@sberbusiness/triplex/components/TextField/TextField';
+import React, {useState} from 'react';
+import {TextField} from '@sberbusiness/triplex/components/TextField/TextField';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {MaskedInput} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
 
-const [value, setValue] = React.useState('');
+const [value, setValue] = useState('');
 
 <TextField
     clearButtonProps={{onClick: () => setValue('')}}
@@ -163,4 +169,3 @@ const [value, setValue] = React.useState('');
     label="Phone"
 />
 ```
-

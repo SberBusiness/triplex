@@ -49,6 +49,7 @@ export const FormField: React.FC<IFormFieldProps> = ({children, className, onMou
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 {...htmlDivAttributes}
+                data-tx={process.env.npm_package_version}
             >
                 {children}
             </div>

@@ -1,10 +1,7 @@
 ```jsx
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import ComponentOptions from '../../common/components/ComponentOptions/ComponentOptions';
 import ComponentPreview from '../../common/components/ComponentPreview/ComponentPreview';
-import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/TooltipTarget';
-import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/TooltipBody';
-import {TooltipXButton} from '@sberbusiness/triplex/components/Tooltip/TooltipXButton';
 import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
 import {
     ETooltipPreferPlace,
@@ -53,14 +50,14 @@ const inputOptions = [
     <ComponentPreview
         style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: 250, width: 900}}>
         <Tooltip size={ETooltipSize.LG} toggleType="click" preferPlace={preferPlace} alignTip={alignTip}>
-            <TooltipBody>
+            <Tooltip.Body>
                 Tooltip body Tooltip body Tooltip body Tooltip body Tooltip body Tooltip body Tooltip body Tooltip body
                 Tooltip body Tooltip
-            </TooltipBody>
-            <TooltipXButton/>
-            <TooltipTarget>
+            </Tooltip.Body>
+            <Tooltip.XButton />
+            <Tooltip.Target>
                 <span ref={tooltipRef}>target</span>
-            </TooltipTarget>
+            </Tooltip.Target>
         </Tooltip>
     </ComponentPreview>
 </>;

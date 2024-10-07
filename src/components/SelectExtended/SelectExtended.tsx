@@ -4,6 +4,16 @@ import {isKey, EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
 import {SelectExtendedTarget} from './components/SelectExtendedTarget';
 import {SelectExtendedDropdown} from './components/SelectExtendedDropdown';
+import {IDropdownListItemProps} from '@sberbusiness/triplex/components/Dropdown/desktop/DropdownListItem';
+
+/** Свойства опции списка. */
+export interface ISelectExtendedDefaultOption
+    extends Omit<IDropdownListItemProps, 'active' | 'onSelect' | 'selected' | 'keyCodesForSelection' | 'className' | 'key'> {
+    /** Значение опции. */
+    value: string;
+    /** Название опции. */
+    label: React.ReactNode;
+}
 
 /** Свойства, передаваемые из Select в функцию рендера target - renderTarget. */
 export interface ISelectExtendedTargetProvideProps {
@@ -15,11 +25,10 @@ export interface ISelectExtendedTargetProvideProps {
 
 /** Свойства, передаваемые из Select в функцию рендера dropdown - children. */
 export interface ISelectExtendedDropdownProvideProps {
-    className?: string;
     /** Флаг открытости выпадающего списка. */
     opened: boolean;
-    setOpened: (opened: boolean) => void;
     /** Функция открытия/закрытия Select. */
+    setOpened: (opened: boolean) => void;
     targetRef: React.RefObject<HTMLDivElement>;
     dropdownRef: React.RefObject<HTMLDivElement>;
 }

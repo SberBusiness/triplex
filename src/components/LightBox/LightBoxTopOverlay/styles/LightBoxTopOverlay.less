@@ -1,4 +1,4 @@
-@import 'src/styles/style';
+@import url('src/styles/style');
 
 .lightBoxTopOverlayMask {
     transition: opacity 0s;
@@ -14,12 +14,14 @@
     &.opened {
         bottom: 0;
     }
+
+    .lightBoxTopOverlayPanel {
+        transition: transform 0.6s;
+        box-shadow: none;
+    }
 }
 
 .lightBoxTopOverlay {
-    z-index: @page-header-sticky-z-index + @z-index-step;
-}
-
-.lightBoxTopOverlayPanel {
-    transition: transform 0.6s;
+    // Нужен, чтобы панель была над .lightBoxControls.
+    z-index: @z-index-step * 5;
 }

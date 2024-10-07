@@ -32,10 +32,10 @@ describe('AmountCurrencySelect', () => {
             <AmountCurrencySelect
                 value="1234567890"
                 onChange={() => void 0}
-                currency={{label: 'RUB', value: 'RUB'}}
+                currency={{id: 'amount-currency-select-0', label: 'RUB', value: 'RUB'}}
                 currencyOptions={[
-                    {label: 'RUB', value: 'RUB'},
-                    {label: 'USD', value: 'USD'},
+                    {id: 'amount-currency-select-1', label: 'RUB', value: 'RUB'},
+                    {id: 'amount-currency-select-2', label: 'USD', value: 'USD'},
                 ]}
                 onSelect={() => void 0}
             />

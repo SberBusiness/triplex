@@ -1,4 +1,4 @@
-@import 'src/styles/style';
+@import url('src/styles/style');
 
 each(@scroll-sizes, {
     @scroll-width: @value;
@@ -35,6 +35,11 @@ each(@scroll-sizes, {
             .lightBoxContent {
                 left: @lightBox-content-left;
                 width: @lightBox-content-width;
+            }
+
+            .lightBox.isLoading .lightBoxControls {
+                // Нужен, чтобы панель была над .loadingContentOverlay.
+                z-index: @z-index-step * 4;
             }
 
             .lightBoxControls,
@@ -171,8 +176,7 @@ each(@scroll-sizes, {
         .LB-more-media-point-1-no-hash {
             .lightBox {
                 &.lightBoxSideOverlayActive,
-                &.lightBoxTopOverlayActive,
-                &.isLoading {
+                &.lightBoxTopOverlayActive {
                     .lightBoxClose,
                     .lightBoxPrev,
                     .lightBoxNext {

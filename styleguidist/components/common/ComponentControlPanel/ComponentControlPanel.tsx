@@ -6,7 +6,7 @@ import ComponentControlNumber from './components/ComponentControlNumber';
 import ComponentControlSelect from './components/ComponentControlSelect';
 import './styles/ComponentControlPanel.less';
 
-/** Свойства ComponentControlPanel. */
+/** Свойства компонента ComponentControlPanel. */
 interface IComponentControlPanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Внутренние составляющие ComponentControlPanel. */

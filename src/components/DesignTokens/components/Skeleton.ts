@@ -14,11 +14,11 @@ export type TDesignTokensComponentsSkeleton = {Skeleton: TDesignTokensComponents
 // Токены компонента Skeleton в светлой и темной темах.
 export const Skeleton_Tokens: TDesignTokensComponentsSkeletonValues = {
     BackgroundImage_Dark: [
-        {value: 'linear-gradient(88deg, #F2F4F7 0%, #E4E8EB 70.95%, #F2F4F7 100%)'},
-        {value: 'linear-gradient(88deg, #565B62 0%, #1F1F22 70.95%, #565B62 100%)'},
+        {value: 'linear-gradient(90deg, #F2F4F7 0%, #E4E8EB 71%, #F2F4F7 100%)'},
+        {value: 'linear-gradient(90deg, #2D2D30 0%, #1F1F22 71%, #2D2D30 100%)'},
     ], // var(--triplex-Skeleton-BackgroundImage_Dark)
     BackgroundImage_Light: [
-        {value: 'linear-gradient(88deg, #FFFFFF 0%, #E4E8EB 70.95%, #FFFFFF 100%)'},
-        {value: 'linear-gradient(88deg, #1F1F22 0%, #565B62 70.95%, #1F1F22 100%)'},
+        {value: 'linear-gradient(90deg, #FFFFFF 0%, #E4E8EB 71%, #FFFFFF 100%)'},
+        {value: 'linear-gradient(90deg, #1F1F22 0%, #2D2D30 71%, #1F1F22 100%)'},
     ], // var(--triplex-Skeleton-BackgroundImage_Light)
 };

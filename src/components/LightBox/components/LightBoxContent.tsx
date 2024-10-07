@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
 import {WindowResizeListener} from '@sberbusiness/triplex/components/WindowResizeListener/WindowResizeListener';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SpinnerWidget} from '@sberbusiness/triplex/components/SpinnerWidget/SpinnerWidget';
@@ -67,6 +68,10 @@ export class LightBoxContent extends React.Component<ILightBoxContentProps, ILig
                     <div className={classnames('cssClass[loadingContentOverlay]', {'cssClass[hidden]': !isLoading})}>
                         {isLoading && <SpinnerWidget>{loadingTitle}</SpinnerWidget>}
                     </div>
+
+                    <div className="cssClass[lightBoxContentResizeWrapper]">
+                        <ReactResizeDetector onResize={this.updateStyleWithTimeout} refreshMode="debounce" refreshRate={100} />
+                    </div>
                 </div>
             </WindowResizeListener>
         );
@@ -103,6 +108,7 @@ export class LightBoxContent extends React.Component<ILightBoxContentProps, ILig
      * LightBoxViewManager добавляет className, от которых зависят стили LightBox. При смене брейкпоинтов, расчет без таймаута может быть неверный.
      */
     private updateStyleWithTimeout = () => {
+        clearTimeout(this.updateStyleTimeoutId);
         this.updateStyleTimeoutId = setTimeout(this.updateStyle, 100);
     };
 }

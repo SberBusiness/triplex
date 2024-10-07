@@ -1,0 +1,47 @@
+.calendarViewDays {
+    width: calc(100% + 2px + 2px);
+    margin: 6px -2px -2px;
+    border-spacing: 2px;
+    table-layout: fixed;
+
+    .adaptive & {
+        width: 100%;
+        margin: 14px 0 -6px;
+        border-spacing: 0 6px;
+    }
+}
+
+.calendarViewMonths,
+.calendarViewYears {
+    width: calc(100% + 6px + 6px);
+    margin: -2px -6px -8px;
+    border-spacing: 6px 12px;
+    table-layout: fixed;
+
+    .adaptive & {
+        width: 100%;
+        margin: 14px 0 -6px;
+        border-spacing: 0 6px;
+    }
+}
+
+.calendarViewDaysHeader {
+    padding: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: var(--triplex-Calendar-View_Header_Color);
+}
+
+.calendarViewDaysBody {
+    &::before {
+        display: block;
+        content: '\200C';
+        line-height: 8px;
+
+        .adaptive & {
+            line-height: 4px;
+        }
+    }
+}

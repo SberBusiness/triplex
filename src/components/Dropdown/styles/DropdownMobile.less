@@ -25,7 +25,7 @@
 
     &.opening,
     &.opened {
-        opacity: 0.7;
+        opacity: var(--triplex-DropdownMobile-Opacity);
     }
 }
 
@@ -39,6 +39,7 @@
     max-height: 50vh;
     display: flex;
     flex-direction: column;
+    outline: none;
 
     &.closing {
         transform: translateY(100%);
@@ -50,10 +51,16 @@
     }
 }
 
+.globalMultiselectDropdownMobileWrapper .dropdownMobile {
+    height: 50vh;
+    justify-content: space-between;
+}
+
+
 .dropdownMobileHeader {
     // Если title не задан.
-    min-height: 20px;
-    padding: 12px 40px 12px 16px;
+    min-height: 16px;
+    padding: 16px 40px 16px 16px;
     background: var(--triplex-DropdownMobile-Header_Background);
     position: relative;
     flex-shrink: 1;
@@ -61,12 +68,14 @@
 
 .dropdownMobileContent {
     background: var(--triplex-DropdownMobile-Content_Background);
+    flex-grow: 1;
     overflow: auto;
 }
 
 .dropdownMobileFooter {
-    padding: 8px 16px;
+    padding: 16px;
     background: var(--triplex-DropdownMobile-Footer_Background);
+    border-top: 1px solid var(--triplex-DropdownMobile-Border_Color);
     flex-shrink: 1;
 }
 
@@ -84,7 +93,7 @@
 
 button.dropdownMobileClose {
     position: absolute;
-    top: 14px;
+    top: 16px;
     right: 16px;
 }
 

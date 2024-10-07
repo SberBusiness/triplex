@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import MaskedInputTextMask, {conformToMask, MaskedInputProps} from 'react-text-mask';
+import MaskedInputTextMask, {conformToMask, MaskedInputProps, PipeConfig} from 'react-text-mask';
 import {Input} from '../Input/Input';
 import {EInputGroupPosition} from '../InputGroup/InputGroup';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
@@ -16,7 +16,8 @@ export interface IMaskedInputProps extends Omit<MaskedInputProps, 'guide' | 'mas
     error?: boolean;
     /** Позиция внутри компонента InputGroup. */
     groupPosition?: EInputGroupPosition;
-    forwardRef?: React.MutableRefObject<HTMLElement | null>;
+    /** Ссылка на поле ввода. */
+    forwardedRef?: React.Ref<HTMLInputElement>;
     /** Маска. Каждый элемент массива должен быть либо строкой, либо регулярным выражением. Каждая строка — это фиксированный символ в маске, а каждое регулярное выражение — это заполнитель, который принимает пользовательский ввод.
      * Подробнее можно ознакомиться https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md#mask.
      * */
@@ -41,7 +42,7 @@ const mapInputGroupPositionToCSSClass = {
  */
 export const MaskedInput: IIMaskedInputFC = ({
     className,
-    forwardRef,
+    forwardedRef,
     disabled,
     groupPosition,
     mask,
@@ -115,25 +116,55 @@ export const MaskedInput: IIMaskedInputFC = ({
         [value, onChange]
     );
 
-    // Возвращает value в случае, если маска является номером телефона.
-    const getPhoneValue = (): string => {
-        // Выражение, для поиска чисел вида {любая цифра}7, например 87, 971 и т.д.
-        const regEx = /^\d7/;
-        if (regEx.test(value)) {
-            // Если вторая цифра номера 7, добавляется +7 перед этим, иначе conformToMask вместо 9701234567 вернет +7901234567.
-            value = '+7' + value;
+    // Постобработчик введенных значений. Выполняется после внутреннего форматирования и до onChange.
+    const pipe = (conformedValue: string, config: PipeConfig) => {
+        // Для маски с номером телефона отдельный обработчик.
+        if (mask === MaskedInput.presets.masks.phone) {
+            // Пустое значение не обрабатывается, чтобы значение в инпуте можно было стереть полностью.
+            if (!conformedValue.length) {
+                return conformedValue;
+            }
+
+            return phonePipe(config.rawValue);
         }
 
-        return conformToMask(value, mask, {guide: false, placeholderChar}).conformedValue;
+        return conformedValue;
+    };
+
+    // Постобработчик введенных значений, если маска является номером телефона.
+    const phonePipe = (text: string) => {
+        // Выражение, для поиска чисел вида {любая цифра}7, например 87, 971 и т.д.
+        const regEx = /^\d7/;
+        let indexesOfPipedChars: number[] = [];
+
+        if (regEx.test(text)) {
+            const prefix = '+7';
+            // Если вторая цифра номера 7, добавляется +7 перед этим, иначе conformToMask вместо 9701234567 вернет +7901234567.
+            text = prefix + text;
+            indexesOfPipedChars = Array.from(prefix).map((_, i) => i);
+        }
+
+        return {indexesOfPipedChars, value: conformToMask(text, mask, {guide: false, placeholderChar}).conformedValue};
     };
 
     // Возвращает value, для передачи в компоненты рендера. Для некоторых типов масок, value приходится модифицировать из-за багов.
     const getValue = (): string => {
         if (mask === MaskedInput.presets.masks.phone) {
-            return getPhoneValue();
+            value = phonePipe(value).value;
+            return value;
         }
 
         return conformToMask(value, mask, {guide: false, placeholderChar}).conformedValue;
+    };
+
+    /** Функция для хранения ссылки. */
+    const setRef = (ref: (inputElement: HTMLElement) => void) => (instance: HTMLInputElement | null) => {
+        instance && ref(instance);
+        if (typeof forwardedRef === 'function') {
+            forwardedRef(instance);
+        } else if (forwardedRef) {
+            (forwardedRef as React.MutableRefObject<HTMLInputElement | null>).current = instance;
+        }
     };
 
     return (
@@ -167,23 +198,13 @@ export const MaskedInput: IIMaskedInputFC = ({
                 disabled={disabled}
                 /* Input отображает только введенное значение без маски, маска рисуется в inputPlaceholder. */
                 guide={false}
-                render={(ref, props) => (
-                    <Input
-                        ref={(el) => {
-                            if (el) {
-                                ref(el);
-                                forwardRef && (forwardRef.current = el);
-                            }
-                        }}
-                        {...props}
-                        placeholder={placeholder || ''}
-                    />
-                )}
+                render={(ref, props) => <Input {...props} placeholder={placeholder || ''} ref={setRef(ref)} />}
                 mask={mask}
                 onChange={handleChange}
                 placeholderChar={placeholderChar}
                 // value={value} не используется т.к. возникает баг при передаче снаружи изначально пустого value, а затем не пустого.
                 value={getValue()}
+                pipe={pipe}
                 style={style}
                 {...inputProps}
             />

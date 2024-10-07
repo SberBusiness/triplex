@@ -25,7 +25,7 @@ const sums = ['5000', '1000', '500', '100', ''];
 
 const handleRemove = (event) => {
     event.stopPropagation();
-    alert('Remove handler called.')
+    alert('Remove handler called.');
 };
 
 const handleClickRow = (rowKey) => {
@@ -36,7 +36,7 @@ const handleKeyDown = (rowKey) => (event) => {
     const key = event.code || event.keyCode;
 
     if (isKey(key, 'ENTER') || isKey(key, 'SPACE')) {
-        handleClickRow(rowKey)
+        handleClickRow(rowKey);
     }
 
     // Предотвращения прокрутки страницы при нажатии на пробел.
@@ -85,32 +85,30 @@ const renderRowCheckbox = (rowKey) => {
     );
 };
 
-const data = Array.from({length: 5}, ((value, index) => (
-    {
-        rowKey: `table-basic-row-${index}`,
-        rowData: {
-            checkbox: renderRowCheckbox(`table-basic-row-${index}`),
-            number: 1397450 + index,
-            value: renderTabbableField(`table-basic-row-${index}`),
-            sum: sums[index],
-            status: (
-                <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
-                    Исполнено
-                </MarkerStatus>
-            ),
-            action: (
-                <ButtonIcon onClick={handleRemove} aria-label="Удалить">
-                    <DeleteSrvIcon20 table />
-                </ButtonIcon>
-            )
-        },
-        selected: checkedRows.includes(`table-basic-row-${index}`)
-    }
-)));
+const data = Array.from({length: 5}, (value, index) => ({
+    rowKey: `table-basic-row-${index}`,
+    rowData: {
+        checkbox: renderRowCheckbox(`table-basic-row-${index}`),
+        number: 1397450 + index,
+        value: renderTabbableField(`table-basic-row-${index}`),
+        sum: sums[index],
+        status: (
+            <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
+                Исполнено
+            </MarkerStatus>
+        ),
+        action: (
+            <ButtonIcon onClick={handleRemove} aria-label="Удалить">
+                <DeleteSrvIcon20 table />
+            </ButtonIcon>
+        ),
+    },
+    selected: checkedRows.includes(`table-basic-row-${index}`),
+}));
 
 const renderHeaderCheckbox = () => {
     const checked = Boolean(checkedRows.length);
-    const bulk = checkedRows.length != data.length;
+    const bulk = checkedRows.length !== data.length;
 
     return (
         <Checkbox
@@ -128,7 +126,7 @@ const renderHeaderCheckbox = () => {
             aria-label="Выбрать все"
         />
     );
-}
+};
 
 const columns = [
     {
@@ -158,6 +156,7 @@ const columns = [
     {
         fieldKey: 'action',
         label: '',
+        horizontalAlign: EHorizontalAlign.CENTER,
     },
 ];
 
@@ -171,7 +170,7 @@ function getCheckedSum() {
             );
             return Big(str);
         });
-    return array.length == 0 ? String(0) : array.reduce((a, b) => a.plus(b)).toString();
+    return array.length === 0 ? String(0) : array.reduce((a, b) => a.plus(b)).toString();
 }
 
 const renderTableFooter = () => (

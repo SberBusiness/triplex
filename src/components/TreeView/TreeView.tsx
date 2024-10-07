@@ -16,7 +16,7 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства TreeView. */
 export interface ITreeViewProps extends React.HTMLAttributes<HTMLUListElement> {
-    children: React.ReactElement | React.ReactElement[];
+    children: React.ReactNode;
 }
 
 /** Состояния TreeView. */

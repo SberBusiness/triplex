@@ -3,6 +3,7 @@
 exports[`Spoiler renders correctly 1`] = `
 <div
   className="cssClass[spoiler]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[head]"
@@ -11,10 +12,8 @@ exports[`Spoiler renders correctly 1`] = `
       aria-controls="Spoiler-0"
       aria-expanded={false}
       className="cssClass[button] cssClass[link] cssClass[SM] hoverable cssClass[toggleButton]"
-      onBlur={[Function]}
+      data-tx="10.0.0"
       onClick={[Function]}
-      onFocus={[Function]}
-      onMouseDown={[Function]}
       type="button"
     >
       <span

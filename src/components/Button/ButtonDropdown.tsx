@@ -20,7 +20,7 @@ import {DropdownMobileList} from '@sberbusiness/triplex/components/Dropdown/mobi
 import {DropdownMobileListItem} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileListItem';
 import {DropdownMobileClose} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileClose';
 import {Text} from '@sberbusiness/triplex/components/Typography/Text';
-import {ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
+import {ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 
 /** Свойства опции в выпадающем списке действий. */
 export interface IButtonDropdownOption
@@ -34,7 +34,7 @@ export interface IButtonDropdownOption
 }
 
 /** Свойства кнопки с выпадающим списком действий. */
-interface IButtonDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IButtonDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
     /** HTML-атрибуты кнопки. */
     buttonAttributes?: React.ButtonHTMLAttributes<HTMLButtonElement>;
     /** Размер кнопки. */
@@ -142,7 +142,7 @@ export const ButtonDropdown = React.forwardRef<HTMLButtonElement, IButtonDropdow
                         children: (
                             <>
                                 <DropdownMobileHeader>
-                                    <Text size={ETextSize.B1} line={ELineType.EXTRA}>
+                                    <Text tag="div" size={ETextSize.B1}>
                                         {children}
                                     </Text>
                                     <DropdownMobileClose onClick={() => setOpened(false)} />

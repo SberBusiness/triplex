@@ -9,6 +9,9 @@
     line-height: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
+    transition: top .3s  ease-out, left .3s  ease-out;
+    // Иначе не кликается вся область Select.
+    pointer-events: none;
 
     &.floating {
         top: -8px;
@@ -20,7 +23,13 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    display: inline-block;
     color: var(--triplex-FormField-Label_Color_Default);
+    transition-property:  font-size, padding-left, padding-right;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+    padding-left: 0;
+    padding-right: 0;
 
     .floating & {
         padding-left: 4px;

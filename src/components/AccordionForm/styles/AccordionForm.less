@@ -7,7 +7,6 @@
     .item {
         border-radius: @radius-16;
         background: var(--triplex-AccordionForm-Background_Default);
-        min-height: @metric-64;
         position: relative;
         list-style-type: none;
 
@@ -76,7 +75,7 @@
             .h5-header-form(@color-graphite-01);
 
             color: var(--triplex-AccordionForm-Title_Color_Default);
-            margin: 0 @metric-24 0 0;
+            margin: 0 12px 0 0;
             flex-grow: 1;
             overflow: hidden;
             white-space: nowrap;
@@ -86,7 +85,7 @@
         .caret {
             margin: @metric-4;
             flex-shrink: 0;
-            transition: transform 0.25s ease-in-out;
+            transition: transform 0.3s ease-in-out;
         }
 
         .step {
@@ -238,6 +237,46 @@
         .content,
         .footer {
             padding-left: 32px;
+        }
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .accordion {
+        .item {
+            .header {
+                padding: 16px;
+            }
+
+            .body,
+            .body.bodyWithoutStatus {
+                padding-left: 0;
+
+                .content {
+                    padding: 0 16px 16px 16px;
+                    border-top: none;
+                }
+
+                .footer {
+                    border-top: none;
+                    text-align: left;
+                    padding: 0 16px 16px 16px;
+                    // Отступы, компенсирующие отступы у Button.
+                    margin-top: -16px;
+                    margin-left: -16px;
+
+                    > button,
+                    > .globalButtonDropdownExtended {
+                        margin-left: 16px;
+                        margin-top: 16px;
+                    }
+                }
+            }
+
+            .nextLine,
+            .prevLine {
+                display: none;
+            }
         }
     }
 }

@@ -1,8 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import renderer from 'react-test-renderer';
+import {MonthYearPicker} from '@sberbusiness/triplex/components/MonthYearPicker/MonthYearPicker';
 import {getFormattedDate} from '@sberbusiness/triplex/utils/dateUtils';
-import {MonthYearPicker} from '../MonthYearPicker';
+
+jest.mock('@sberbusiness/icons/SpinnersmallAniIcon20', () => ({
+    SpinnersmallAniIcon20: 'svg',
+}));
+
+jest.mock('@sberbusiness/icons/SpinnersmallwhiteAniIcon20', () => ({
+    SpinnersmallwhiteAniIcon20: 'svg',
+}));
 
 jest.mock('@sberbusiness/icons/CalendarSrvIcon20', () => ({
     CalendarSrvIcon20: 'svg',
@@ -16,10 +24,18 @@ jest.mock('@sberbusiness/icons/CaretrightSrvxIcon24', () => ({
     CaretrightSrvxIcon24: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
+    ClosenotificationSrvxIcon16: 'svg',
+}));
+
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 describe('MonthYearPicker', () => {
-    (global as any).document = {
-        addEventListener: jest.fn(),
-    };
+    beforeEach(() => {
+        allure.feature('DatePicker');
+    });
 
     it('renders correctly', () => {
         const handleChange = jest.fn();

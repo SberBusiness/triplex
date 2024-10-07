@@ -1,51 +1,17 @@
-@inactive-theme-fill: #B2B8BF;
-@active-theme-fill: #565B62;
-
-.theme-switcher {
-    position: absolute;
-    right: 200px;
-    top: 4px;
-}
-.theme-switcher-button {
-    background: #fff;
-    border: 1px solid #D0D7DD;
-    box-sizing: border-box;
-    width: 32px;
+.themeIcon {
     height: 32px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 8px;
     cursor: pointer;
+}
 
-    &.active {
-        cursor: default;
-        background: #D0D7DD;
-    }
-
-    &:first-child {
-        border-radius: 8px 0 0 8px;
-    }
-
-    &:last-child {
-        border-radius: 0 8px 8px 0;
-        margin-left: -1px;
+.styleguidist-light-theme .themeIcon {
+    &:hover {
+        background-color: #ffffff;
     }
 }
 
-
-.theme-switcher-icon-dark path {
-    stroke: @inactive-theme-fill;
+.styleguidist-dark-theme .themeIcon {
+    &:hover {
+        background-color: #686977;
+    }
 }
-.active .theme-switcher-icon-dark path {
-    stroke: @active-theme-fill;
-}
-
-.theme-switcher-icon-light path,
-.theme-switcher-icon-light circle {
-    stroke: @inactive-theme-fill;
-}
-.active .theme-switcher-icon-light path,
-.active .theme-switcher-icon-light circle {
-    stroke: @active-theme-fill;
-}
-

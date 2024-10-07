@@ -18,14 +18,9 @@ const closeNotification = () => alert('Обработчик закрытия н�
             <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.SM}>
                 Button Name
             </Button>
-            <Link
-                href="#"
-                linkType={ELinkType.TEXT}
-                size={ELinkSize.LG}
-                onClick={(event) => event.preventDefault()}
-            >
-                Текст ссылки
-            </Link>
+            <Button theme={EButtonTheme.LINK} size={EButtonSize.SM}>
+                Кнопка ссылка
+            </Button>
         </Notification.Body.Footer>
     </Notification.Body>
     <Notification.Close onClick={closeNotification} />

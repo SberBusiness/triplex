@@ -26,6 +26,7 @@ export function parsePickedDate(value: TPickedDateProp | undefined, format: stri
  */
 export function getHeader(pickedDate: TPickedDate, date?: moment.Moment): string {
     let currentDate;
+
     if (date && date.isValid()) {
         currentDate = date;
     } else if (pickedDate && pickedDate.isValid()) {
@@ -39,24 +40,23 @@ export function getHeader(pickedDate: TPickedDate, date?: moment.Moment): string
 
 /**
  * Получить текст заголовка из текущей даты.
- * @param date Отображаемая дата.
- * @param tab Текущая вкладка.
+ * @param viewDate Отображаемая дата.
+ * @param viewMode Текущая вкладка.
  */
-export function formatDate(date: TPickedDate, tab: ECalendarViewMode): string | null {
-    const checkedDate = date ? date : moment();
+export function formatDate(viewDate: TPickedDate, viewMode: ECalendarViewMode): string {
+    const checkedDate = viewDate ? viewDate : moment();
 
-    const yearFrom = checkedDate.clone().add(-5, 'y').format('YYYY');
-    const yearTo = checkedDate.clone().add(6, 'y').format('YYYY');
-
-    switch (tab) {
-        case ECalendarViewMode.YEARS:
-            return `${yearFrom} - ${yearTo}`;
-        case ECalendarViewMode.MONTHS:
-            return checkedDate.clone().format('YYYY');
+    switch (viewMode) {
         case ECalendarViewMode.DAYS:
             return getHeader(checkedDate);
-        default:
-            return null;
+        case ECalendarViewMode.MONTHS:
+            return checkedDate.clone().format('YYYY');
+        case ECalendarViewMode.YEARS: {
+            const yearFrom = checkedDate.clone().add(-5, 'y').format('YYYY');
+            const yearTo = checkedDate.clone().add(6, 'y').format('YYYY');
+
+            return `${yearFrom} - ${yearTo}`;
+        }
     }
 }
 

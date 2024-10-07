@@ -21,11 +21,11 @@
         background: var(--triplex-Button-Tile_Background_Active);
     }
 
-    &:disabled {
-        background: var(--triplex-Button-Tile_Background_Disabled);;
+    &:focus-visible {
+        box-shadow: var(--triplex-Button-Tile_Shadow_Focus);
     }
 
-    &[data-focus-visible]:focus {
-        box-shadow: inset 0 0 1px 1px var(--triplex-Accent-500);
+    &:disabled {
+        background: var(--triplex-Button-Tile_Background_Disabled);;
     }
 }

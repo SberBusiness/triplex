@@ -7,10 +7,12 @@ import {
     ETooltipPreferPlace,
     ETooltipSizeParameter,
     ETooltipStartCoordinates,
-    ETooltipSize,
     ETooltipTypeName,
 } from '@sberbusiness/triplex/components/Tooltip/enums';
-import {TOrderedChildren} from '@sberbusiness/triplex/utils/reactChildDeprecated';
+import {ITooltipTargetProps} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipTarget';
+import {ITooltipBodyProps} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipBody';
+import {ITooltipXButtonProps} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipXButton';
+import {ITooltipMobileHeaderProps} from '@sberbusiness/triplex/components/Tooltip/components/mobile/components/TooltipMobileHeader';
 
 /** Интерфейс координат X. */
 export interface ITooltipXCoordinates {
@@ -93,47 +95,10 @@ export type TTooltipAxesCoordinates = ITooltipXCoordinates | ITooltipYCoordinate
 /** Тип взаимодействия с тултипом. */
 export type TTooltipToggleType = 'click' | 'hover';
 
-/** Свойства компонента Tooltip. */
-export interface ITooltipProps extends Omit<ITooltipBaseProps, 'setTooltipRef' | 'closeTooltip'> {
-    /** Тултип должен появлятся по ховеру или по клику. */
-    toggleType?: TTooltipToggleType;
-    /** Добавление обработчиков фокуса и потери фокуса. Закрытие и открытие тултипа по табу (для screen reader). По умолчанию включен. */
-    tabSensitive?: boolean;
-    /** Контролирующая функция закрытия/открытия. */
-    toggle?: (nextExpanded: boolean) => void;
-}
-
-/** Базовые свойства компонента Tooltip. */
-export interface ITooltipBaseProps extends React.HTMLAttributes<HTMLDivElement> {
-    children: React.ReactElement[];
-    /** Признак открыт ли Tooltip. */
-    isOpen?: boolean;
-    /** Получение ноды тултипа. */
-    setTooltipRef?: (tooltipElement: HTMLDivElement) => void;
-    /** Обработчик закрытия тултипа по нажатию на крестик. */
-    closeTooltip?: () => void;
-    /** Обработчик открытия тултипа, tooltip - реф на тултип. */
-    onShow?: (tooltip: HTMLDivElement) => void;
-    /** Предпочитаемое место расположения тултипа, если в этом месте тултип не помещается, он отобразится там где помещается. */
-    preferPlace?: ETooltipPreferPlace;
-    /** Расположение указателя. */
-    alignTip?: ETooltipAlign;
-    /** Размер тултипа. */
-    size: ETooltipSize;
-    /** Элемент в который будет рендерится тултип. */
-    tooltipRenderContainer?: Element;
-}
-
-/** Базовые состояния компонента Tooltip. */
-export interface ITooltipBaseState {
-    /** Отсортированный массив детей. */
-    orderedChildren: TOrderedChildren;
-    /** Для отслеживания того что анимация при закрытии тултипа в прогрессе. */
-    exiting: boolean;
-    /** Положение Tooltip'a. */
-    standing: ETooltipPreferPlace;
-    /** Открыт/закрыт ли tooltip. */
-    opened: boolean;
-    /** Нужно рендерить тултип или нет, признак анимационно зависимого рендериннга открыт/закрыт ли tooltip. */
-    needRenderTooltip: boolean;
+/** React-элементы Tooltip. */
+export interface ITooltipElements {
+    target: React.ReactElement<ITooltipTargetProps> | null;
+    body: React.ReactElement<ITooltipBodyProps> | null;
+    closeButton: React.ReactElement<ITooltipXButtonProps> | null;
+    mobileHeader: React.ReactElement<ITooltipMobileHeaderProps> | null;
 }

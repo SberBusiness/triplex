@@ -10,12 +10,11 @@ export function TargetLabel<T extends ISuggestOption>({
     opened,
     optionsLength,
     value,
-    placeholder,
     query,
     setRef,
     loading,
     dataTestId,
     ...rest
-}: ISuggestTargetProps<T>): JSX.Element {
-    return <Input value={value?.label || ''} placeholder={placeholder} readOnly={true} aria-hidden="true" {...rest} />;
+}: ISuggestTargetProps<T>) {
+    return <Input value={value?.label || ''} readOnly aria-hidden="true" {...rest} />;
 }

@@ -61,7 +61,7 @@ const PathlineRenderer: React.FC<IPathlineRendererProps> = ({children}) => {
 
     return (
         <span className="styleguide-pathline">
-            {renderPath(children)}
+            <div className="styleguide-path">{renderPath(children)}</div>
             <ToolbarButton className="styleguide-pathline-copy-button" onClick={handleCopy}>
                 {renderIcon()}
             </ToolbarButton>

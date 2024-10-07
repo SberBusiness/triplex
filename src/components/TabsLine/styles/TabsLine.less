@@ -1,0 +1,138 @@
+@import 'src/styles/style';
+
+@tabsLine-tab-height: 32px;
+
+@paddingXsizes: 0, 4, 8, 12, 16, 24;
+
+each(@paddingXsizes, {
+    .tabsLineWrapper[data-paddingx-size='@{value}'] {
+        padding-left: ~'@{value}px';
+        padding-right: ~'@{value}px';
+    }
+});
+
+.border-color-hover() {
+    border-top-color: var(--triplex-TableBasic-TabsLine_BorderColor_Hover);
+}
+
+.border-element() {
+    &::after {
+        content: '';
+        position: relative;
+        display: block;
+        // Компенсация padding .tab.
+        margin: 8px -16px 0 -16px;
+        border-top: 4px solid;
+        border-radius: 2px 2px 0 0;
+        border-color: transparent;
+        transition: border-color 500ms;
+    }
+
+    &:hover::after,
+    &:focus::after {
+        .border-color-hover();
+    }
+
+    &.active::after {
+        border-top-color: var(--triplex-TableBasic-TabsLine_BorderColor_Active);
+    }
+}
+
+.tabsLineWrapper {
+    position: relative;
+
+    &.withSeparator {
+        &::before {
+            content: '';
+            position: absolute;
+            height: 1px;
+            background: @color-asphalt-03;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
+.tabsLine {
+    position: relative;
+    height: @tabsLine-tab-height;
+    z-index: 1;
+    line-height: 0;
+    white-space: nowrap;
+}
+
+.tab {
+    position: relative;
+    padding: 0 16px;
+    height: @tabsLine-tab-height;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    .b1-text-main(@color-graphite-01);
+    color: var(--triplex-TableBasic-TabsLine_Color);
+
+    &::-moz-focus-inner {
+        border: none;
+        padding: 0;
+    }
+
+    &.active {
+        cursor: default;
+    }
+
+    .border-element();
+}
+
+.notificationIcon {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    width: @metric-8;
+    height: @metric-8;
+    border-radius: 50%;
+    background-color: var(--triplex-TableBasic-TabsLine_Notification_Color);
+}
+
+.tabsLineDropdown {
+    display: inline-block;
+
+    .dropdownTarget.active {
+        cursor: pointer;
+    }
+
+    .dropdownTargetInner {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .dropdownTargetCaret {
+        margin-left: @metric-4;
+        transition: transform 0.3s ease-in-out;
+
+        &.opened {
+            transform: rotate(-180deg);
+        }
+
+        path {
+            fill: var(--triplex-TableBasic-TabsLine_Caret_Color);
+        }
+    }
+
+    .dropdown {
+        right: 0;
+        padding: @metric-4;
+    }
+
+    .dropdownItem.withNotification {
+        .dropdownItemInner {
+            margin-right: 2px;
+        }
+
+        .notificationIcon {
+            top: 2px;
+            right: 2px;
+        }
+    }
+}

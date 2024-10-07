@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import cx from 'clsx';
-import Version from 'react-styleguidist/lib/client/rsg-components/Version';
 import Ribbon from 'react-styleguidist/lib/client/rsg-components/Ribbon';
 import {StyleGuideFooter} from './components/StyleGuideFooter';
 import {StyleGuideSidebar} from './components/StyleGuideSidebar';
-import ThemeSwitcher from '../../../common/components/ThemeSwitcher/ThemeSwitcher';
+import StyleGuideHeader from './components/StyleGuideHeader';
+import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
+import {ThemeObserver} from '../../../common/components/Observer/ThemeObserver';
+import {ThemeProvider} from '@sberbusiness/triplex/components/ThemeProvider/ThemeProvider';
 import './styles.less';
 
 interface StyleGuideRendererProps {
@@ -15,17 +17,34 @@ interface StyleGuideRendererProps {
     hasSidebar?: boolean;
 }
 
-const StyleGuideRenderer: React.FC<StyleGuideRendererProps> = ({children, title, version, toc, hasSidebar}) => (
-    <div className={cx('styleguide', {'has-sidebar': hasSidebar})}>
-        {version && <Version>{version}</Version>}
-        {/* Переключатель темы light/dark. */}
-        <ThemeSwitcher>
-            <main className="styleguide-content">{children}</main>
-        </ThemeSwitcher>
-        {hasSidebar && <StyleGuideSidebar title={title} toc={toc} />}
-        <StyleGuideFooter />
-        <Ribbon />
-    </div>
-);
+export const TRIPLEX_THEME_STORAGE_KEY = 'triplex-theme';
+
+const StyleGuideRenderer: React.FC<StyleGuideRendererProps> = ({children, title, toc, version, hasSidebar}) => {
+    const [theme, setTheme] = useState(
+        localStorage.getItem(TRIPLEX_THEME_STORAGE_KEY) === ETriplexTheme.DARK ? ETriplexTheme.DARK : ETriplexTheme.LIGHT
+    );
+
+    useEffect(() => {
+        ThemeObserver.publish(theme);
+        localStorage.setItem(TRIPLEX_THEME_STORAGE_KEY, theme);
+    }, [theme]);
+
+    return (
+        <div className={cx('styleguide', {'has-sidebar': hasSidebar})}>
+            <StyleGuideHeader theme={theme} onChangeTheme={setTheme} version={version} />
+
+            <ThemeProvider
+                theme={theme}
+                scopeClassName={theme === ETriplexTheme.LIGHT ? 'styleguidist-light-theme' : 'styleguidist-dark-theme'}
+            >
+                <main className="styleguide-content">{children}</main>
+            </ThemeProvider>
+
+            {hasSidebar && <StyleGuideSidebar title={title} toc={toc} />}
+            <StyleGuideFooter />
+            <Ribbon />
+        </div>
+    );
+};
 
 export default StyleGuideRenderer;

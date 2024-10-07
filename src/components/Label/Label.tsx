@@ -15,7 +15,7 @@ export interface ILabelFC extends React.FC<ILabelProps> {
 
 /** Компонент Label. */
 export const Label: ILabelFC = ({children, className, ...props}) => (
-    <div className={classnames('cssClass[globalLabelWrapper]', className)} {...props}>
+    <div className={classnames('cssClass[globalLabelWrapper]', className)} {...props} data-tx={process.env.npm_package_version}>
         {children}
     </div>
 );

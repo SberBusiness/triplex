@@ -1,7 +1,7 @@
 import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokenTypes';
 
 // Название токенов компонента TopOverlay.
-export const designTokensComponentsTopOverlayKeys = ['Background', 'Color'] as const;
+export const designTokensComponentsTopOverlayKeys = ['Background', 'Color', 'Shadow'] as const;
 // Тип, содержащий названия токенов компонента TopOverlay.
 export type TDesignTokensComponentsTopOverlayKeys = (typeof designTokensComponentsTopOverlayKeys)[number];
 // Тип, содержащий названия токенов компонента TopOverlay и их значения.
@@ -14,5 +14,6 @@ export type TDesignTokensComponentsTopOverlay = {TopOverlay: TDesignTokensCompon
 // Токены компонента TopOverlay в светлой и темной темах.
 export const TopOverlay_Tokens: TDesignTokensComponentsTopOverlayValues = {
     Background: [{ref: 'Error.100'}, {ref: 'Basic.700'}], // var(--triplex-TopOverlay-Background)
-    Color: [{ref: 'Basic.700'}, {ref: 'Neutral.500'}], // var(--triplex-TopOverlay-Color)
+    Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-TopOverlay-Color)
+    Shadow: [{value: '0 -1px 0 0 #C11030 inset'}, {value: '0 -1px 0 0 #DB1237 inset'}], // var(--triplex-TopOverlay-Shadow)
 };

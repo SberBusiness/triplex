@@ -7,4 +7,7 @@ export const StringUtils = {
 
     /** Является ли символ десятичным разделителем. */
     isDecimalSeparator: (char: string): boolean => char == AmountConst.DecimalComma || char == AmountConst.DecimalPoint,
+
+    /** Является ли символ унарным минусом. */
+    isUnaryMinus: (char: string): boolean => char == '-',
 };

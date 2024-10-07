@@ -15,5 +15,5 @@ export type TDesignTokensComponentsNotification = {Notification: TDesignTokensCo
 export const Notification_Tokens: TDesignTokensComponentsNotificationValues = {
     Background: [{ref: 'Basic.100'}, {ref: 'Basic.500'}], // var(--triplex-Notification-Background)
     Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Notification-Color)
-    Shadow: [{value: '0px 2px 7px rgba(31, 31, 34, 0.25)'}, {value: 'none'}], // var(--triplex-Notification-Shadow)
+    Shadow: [{value: '0px 2px 7px rgba(31, 31, 34, 0.25)'}, {value: '0px 0px 0px 1px #565B62 inset'}], // var(--triplex-Notification-Shadow)
 };

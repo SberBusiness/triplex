@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
-import '../styles/ComponentControlText.less';
+import './styles/ComponentControlText.less';
 
 interface IComponentControlNumberProps {
     children: React.ReactNode;

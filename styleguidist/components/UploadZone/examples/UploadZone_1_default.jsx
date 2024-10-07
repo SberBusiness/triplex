@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {UploadZone} from '@sberbusiness/triplex/components/UploadZone/UploadZone';
 import {ClouddraguploadSrvIcon32} from '@sberbusiness/icons/ClouddraguploadSrvIcon32';
 import {PlugSrvIcon32} from '@sberbusiness/icons/PlugSrvIcon32';
@@ -16,13 +16,15 @@ import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import './UploadZone.less';
 
-const [container, setContainer] = React.useState();
+const [container, setContainer] = useState(null);
 
 const renderContainerContent = () => (
-    <div className="uploadZoneOverlay">
+    <div className="uploadZoneContainerContent">
         <ClouddraguploadSrvIcon32 />
         <Gap size={4} />
-        <div className="text">Положите файлы сюда</div>
+        <Text type={EFontType.GENERAL} size={ETextSize.B1}>
+            Положите файлы сюда
+        </Text>
     </div>
 );
 
@@ -157,7 +159,7 @@ const renderUploadZoneContent = (openUploadDialog) => (
             {'\u00A0'}
             <HelpBox tooltipSize={ETooltipSize.LG}>
                 {
-                    'Максимальный размер одного файла – не более 40 Мб в форматах PDF, TIFF, JPEG, PNG, PCX, DOCX. Имя файла должно содержать русские и английские буквы, цифры, пробелы и следующие символы: !№%()+-.;=@[]^_{}'
+                    'Максимальный размер одного файла – не более 40 Мб в форматах PDF, TIFF, JPEG, PNG, PCX, DOCX. Имя файла может содержать русские и английские буквы и символы: !№%()+-.;=@[]^_{}'
                 }
             </HelpBox>
         </span>
@@ -165,7 +167,7 @@ const renderUploadZoneContent = (openUploadDialog) => (
     </div>
 );
 
-<div ref={(node) => setContainer(node)} style={{position: 'relative'}}>
+<div ref={(node) => setContainer(node)} style={{display: 'flow-root', position: 'relative'}}>
     <UploadZone renderContainerContent={renderContainerContent} dropZoneContainer={container}>
         {({openUploadDialog}) => renderUploadZoneContent(openUploadDialog)}
     </UploadZone>

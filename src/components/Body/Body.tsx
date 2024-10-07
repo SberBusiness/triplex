@@ -20,6 +20,7 @@ export const Body: React.FC<IBodyProps> = ({children, className, backgroundColor
             'cssClass[withWhiteBackground]': backgroundColor === EBodyBackgroundColor.WHITE,
         })}
         {...htmlDivAttributes}
+        data-tx={process.env.npm_package_version}
     >
         <div className="cssClass[bodyInner]">{children}</div>
     </div>

@@ -30,6 +30,10 @@ jest.mock('@sberbusiness/icons/DropdownwhiteSrvxIcon16', () => ({
     DropdownwhiteSrvxIcon16: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 jest.mock('@sberbusiness/icons/CloselargeNavIcon32', () => ({
     CloselargeNavIcon32: 'svg',
 }));

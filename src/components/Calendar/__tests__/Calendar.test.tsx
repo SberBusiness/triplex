@@ -1,8 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import renderer from 'react-test-renderer';
+import {Calendar} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {getFormattedDate} from '@sberbusiness/triplex/utils/dateUtils';
-import {Calendar} from '../Calendar';
+
+jest.mock('@sberbusiness/icons/SpinnersmallAniIcon20', () => ({
+    SpinnersmallAniIcon20: 'svg',
+}));
+
+jest.mock('@sberbusiness/icons/SpinnersmallwhiteAniIcon20', () => ({
+    SpinnersmallwhiteAniIcon20: 'svg',
+}));
 
 jest.mock('@sberbusiness/icons/CaretleftSrvxIcon24', () => ({
     CaretleftSrvxIcon24: 'svg',
@@ -16,41 +24,45 @@ jest.mock('@sberbusiness/triplex/utils/uniqueId', () => ({
     uniqueId: jest.fn(() => 0),
 }));
 
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 describe('Calendar', () => {
     beforeEach(() => {
         allure.feature('Calendar');
     });
 
     it('renders correctly', () => {
-        const onChangeDate = jest.fn();
-        const pickedDate = moment('20210101');
-        const tree = renderer.create(<Calendar onChangeDate={onChangeDate} pickedDate={pickedDate} />).toJSON();
+        const pickedDate = moment('19700101');
+        const onDateChange = jest.fn();
+        const tree = renderer.create(<Calendar pickedDate={pickedDate} onDateChange={onDateChange} />).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 
     it('render disabled days', () => {
-        const onChangeDate = jest.fn();
-        const pickedDate = moment('20210101');
+        const pickedDate = moment('19700101');
         const disabledDays = [
-            getFormattedDate(moment('20210102')),
-            getFormattedDate(moment('20210103')),
-            getFormattedDate(moment('20210104')),
+            getFormattedDate(moment('19700101')),
+            getFormattedDate(moment('19700102')),
+            getFormattedDate(moment('19700103')),
         ];
-        const tree = renderer.create(<Calendar onChangeDate={onChangeDate} pickedDate={pickedDate} disabledDays={disabledDays} />).toJSON();
+        const onDateChange = jest.fn();
+        const tree = renderer.create(<Calendar pickedDate={pickedDate} disabledDays={disabledDays} onDateChange={onDateChange} />).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 
     it('render marked days', () => {
-        const onChangeDate = jest.fn();
-        const pickedDate = moment('20210101');
+        const pickedDate = moment('19700101');
         const markedDays = [
-            getFormattedDate(moment('20210105')),
-            getFormattedDate(moment('20210106')),
-            getFormattedDate(moment('20210107')),
+            getFormattedDate(moment('19700101')),
+            getFormattedDate(moment('19700102')),
+            getFormattedDate(moment('19700103')),
         ];
-        const tree = renderer.create(<Calendar onChangeDate={onChangeDate} pickedDate={pickedDate} markedDays={markedDays} />).toJSON();
+        const onDateChange = jest.fn();
+        const tree = renderer.create(<Calendar pickedDate={pickedDate} markedDays={markedDays} onDateChange={onDateChange} />).toJSON();
 
         expect(tree).toMatchSnapshot();
     });

@@ -1,8 +1,8 @@
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
-<div style={{display: 'flex', alignItems: 'center'}}>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD}>
         Button Name
     </Button>
@@ -16,7 +16,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
         Button Name
     </Button>
     <Button theme={EButtonTheme.TILE}>
-        <MailbellPrdIcon32 />
+        <MailbellNavIcon24 />
     </Button>
 </div>
 ```
@@ -26,7 +26,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
-<div style={{display: 'flex', alignItems: 'center'}}>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.LG}>
         Button Name
     </Button>
@@ -47,7 +47,7 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
-<>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.SM}>
         Button Name
     </Button>
@@ -60,14 +60,14 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
     <Button theme={EButtonTheme.LINK} size={EButtonSize.SM}>
         Button Name
     </Button>
-</>
+</div>
 ```
 
 ### Block mode
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
 <>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} block>
@@ -83,7 +83,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
     </Button>
     <br />
     <Button theme={EButtonTheme.TILE} size={EButtonSize.MD} block>
-        <MailbellPrdIcon32 />
+        <MailbellNavIcon24 />
     </Button>
 </>
 ```
@@ -92,9 +92,9 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
-<div style={{display: 'flex', alignItems: 'center'}}>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} disabled>
         Button Name
     </Button>
@@ -108,7 +108,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
         Button Name
     </Button>
     <Button theme={EButtonTheme.TILE} size={EButtonSize.MD} disabled>
-        <MailbellPrdIcon32 />
+        <MailbellNavIcon24 />
     </Button>
 </div>
 ```
@@ -117,9 +117,9 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
-<div style={{display: 'flex', alignItems: 'center'}}>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} loading>
         Button Name
     </Button>
@@ -130,7 +130,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
         Button Name
     </Button>
     <Button theme={EButtonTheme.TILE} size={EButtonSize.MD} loading>
-        <MailbellPrdIcon32 />
+        <MailbellNavIcon24 />
     </Button>
 </div>
 ```
@@ -139,9 +139,9 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
-<div style={{display: 'flex', alignItems: 'center'}}>
+<div style={{display: 'flex', flexWrap: 'wrap', rowGap: '12px', alignItems: 'center'}}>
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD} aria-expanded>
         Button Name
     </Button>
@@ -149,7 +149,7 @@ import {MailbellPrdIcon32} from '@sberbusiness/icons/MailbellPrdIcon32';
         Button Name
     </Button>
     <Button theme={EButtonTheme.TILE} size={EButtonSize.MD} aria-expanded>
-        <MailbellPrdIcon32 />
+        <MailbellNavIcon24 />
     </Button>
 </div>
 ```

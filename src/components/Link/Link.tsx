@@ -10,6 +10,7 @@ export enum ELinkSize {
 // Типы компонента Link.
 export enum ELinkType {
     TEXT = 'text',
+    /** @deprecated Используйте TooltipLink. */
     LINE = 'line',
 }
 
@@ -24,7 +25,7 @@ interface ILinkCommonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 /** Свойства компонента Link типа Text. */
 export interface ILinkTextProps extends ILinkCommonProps {
     /** Тип ссылки. */
-    linkType: ELinkType.TEXT;
+    linkType?: ELinkType.TEXT;
     /** Рендер функция предшествующего контента. */
     contentBefore?: () => JSX.Element;
     /** Рендер функция последующего контента. */
@@ -34,7 +35,7 @@ export interface ILinkTextProps extends ILinkCommonProps {
 /** Свойства компонента Link типа Line. */
 export interface ILinkLineProps extends ILinkCommonProps {
     /** Тип ссылки. */
-    linkType: ELinkType.LINE;
+    linkType?: ELinkType.LINE;
     /** Рендер функция предшествующего контента. */
     contentBefore?: never;
     /** Рендер функция последующего контента. */
@@ -46,14 +47,16 @@ type TLinkProps = ILinkTextProps | ILinkLineProps;
 
 /** Гиперссылка. */
 export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
-    ({children, className, linkType, size, onBlur, onMouseDown, contentBefore, contentAfter, ...rest}, ref) => {
+    ({children, className, linkType = ELinkType.TEXT, size, onBlur, onMouseDown, contentBefore, contentAfter, ...rest}, ref) => {
         const [focusedByClick, setFocusedByClick] = useState(false);
 
+        /** Обработчик нажатия мыши. */
         const handleMouseDown = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
             onMouseDown?.(event);
             setFocusedByClick(true);
         };
 
+        /** Обработчик потери фокуса. */
         const handleBlur = (event: React.FocusEvent<HTMLAnchorElement>) => {
             onBlur?.(event);
             if (event.target !== document.activeElement) {
@@ -61,6 +64,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
             }
         };
 
+        /** Рендер функция предшествующего контента. */
         const renderContentBefore = () =>
             contentBefore ? (
                 <>
@@ -70,6 +74,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
                 </>
             ) : null;
 
+        /** Рендер функция последующего контента. */
         const renderContentAfter = () => (contentAfter ? contentAfter() : null);
 
         /** Рендерит как простой текст. */
@@ -145,8 +150,6 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
 
         return (
             <a
-                ref={ref}
-                tabIndex={0}
                 role="link"
                 {...rest}
                 className={classnames(className, 'cssClass[link]', 'hoverable', {
@@ -158,6 +161,8 @@ export const Link = React.forwardRef<HTMLAnchorElement, TLinkProps>(
                 })}
                 onBlur={handleBlur}
                 onMouseDown={handleMouseDown}
+                data-tx={process.env.npm_package_version}
+                ref={ref}
             >
                 {content}
             </a>

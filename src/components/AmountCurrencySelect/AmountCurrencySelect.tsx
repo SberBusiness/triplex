@@ -108,17 +108,11 @@ export class AmountCurrencySelect extends React.Component<IAmountCurrencySelectP
                     renderTarget={renderTarget}
                     closeOnTab
                 >
-                    {({
-                        className: dropdownClassName,
-                        opened,
-                        setOpened,
-                        dropdownRef,
-                        ...restDropdownProps
-                    }: ISelectExtendedDropdownProvideProps) => (
+                    {({opened, setOpened, dropdownRef, ...restDropdownProps}: ISelectExtendedDropdownProvideProps) => (
                         <DropdownListContext.Provider value={{activeDescendant, setActiveDescendant: this.setActiveDescendant}}>
                             <SelectExtended.Dropdown
                                 {...restDropdownProps}
-                                className={classnames('cssClass[currencySelectExtendedDropdown]', dropdownClassName)}
+                                className="cssClass[currencySelectExtendedDropdown]"
                                 data-test-id={dataTestId && `${dataTestId}${TestIds.AmountCurrencySelect.dropdown}`}
                                 opened={opened}
                                 setOpened={setOpened}

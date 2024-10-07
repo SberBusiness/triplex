@@ -3,9 +3,9 @@ const [value, setValue] = React.useState('');
 const [currency, setCurrency] = React.useState(null);
 
 const currencyOptions = [
-    {label: 'RUB', value: 'RUB'},
-    {label: 'USD', value: 'USD'},
-    {label: 'EUR', value: 'EUR'},
+    {label: 'RUB', id: 'amount-currency-select-0-0', value: 'RUB'},
+    {label: 'USD', id: 'amount-currency-select-0-1', value: 'USD'},
+    {label: 'EUR', id: 'amount-currency-select-0-2', value: 'EUR'},
 ];
 
 <AmountCurrencySelect
@@ -25,9 +25,9 @@ const [value, setValue] = React.useState('');
 const [currency, setCurrency] = React.useState(null);
 
 const currencyOptions = [
-    {label: 'RUB', value: 'RUB'},
-    {label: 'USD', value: 'USD'},
-    {label: 'EUR', value: 'EUR'},
+    {label: 'RUB', id: 'amount-currency-select-1-0', value: 'RUB'},
+    {label: 'USD', id: 'amount-currency-select-1-1', value: 'USD'},
+    {label: 'EUR', id: 'amount-currency-select-1-2', value: 'EUR'},
 ];
 
 <AmountCurrencySelect
@@ -48,9 +48,9 @@ const [value, setValue] = React.useState('');
 const [currency, setCurrency] = React.useState(null);
 
 const currencyOptions = [
-    {label: 'RUB', value: 'RUB'},
-    {label: 'USD', value: 'USD'},
-    {label: 'EUR', value: 'EUR'},
+    {label: 'RUB', id: 'amount-currency-select-2-0', value: 'RUB'},
+    {label: 'USD', id: 'amount-currency-select-2-1', value: 'USD'},
+    {label: 'EUR', id: 'amount-currency-select-2-2', value: 'EUR'},
 ];
 
 <AmountCurrencySelect
@@ -71,9 +71,9 @@ const [value, setValue] = React.useState('');
 const [currency, setCurrency] = React.useState(null);
 
 const currencyOptions = [
-    {label: 'RUB', value: 'RUB'},
-    {label: 'USD', value: 'USD'},
-    {label: 'EUR', value: 'EUR'},
+    {label: 'RUB', id: 'amount-currency-select-3-0', value: 'RUB'},
+    {label: 'USD', id: 'amount-currency-select-3-1', value: 'USD'},
+    {label: 'EUR', id: 'amount-currency-select-3-2', value: 'EUR'},
 ];
 
 <AmountCurrencySelect
@@ -94,9 +94,9 @@ const [value, setValue] = React.useState('');
 const [currency, setCurrency] = React.useState(null);
 
 const currencyOptions = [
-    {label: 'RUB', value: 'RUB'},
-    {label: 'USD', value: 'USD'},
-    {label: 'EUR', value: 'EUR'},
+    {label: 'RUB', id: 'amount-currency-select-4-0', value: 'RUB'},
+    {label: 'USD', id: 'amount-currency-select-4-1', value: 'USD'},
+    {label: 'EUR', id: 'amount-currency-select-4-2', value: 'EUR'},
 ];
 
 <AmountCurrencySelect

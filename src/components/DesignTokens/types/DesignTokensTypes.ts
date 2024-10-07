@@ -9,6 +9,7 @@ import {
     TDesignTokensComponentsCalendar,
     TDesignTokensComponentsCard,
     TDesignTokensComponentsCheckbox,
+    TDesignTokensComponentsChip,
     TDesignTokensComponentsConfirm,
     TDesignTokensComponentsDivider,
     TDesignTokensComponentsSmallInput,
@@ -23,6 +24,9 @@ import {
     TDesignTokensComponentsLabel,
     TDesignTokensComponentsLightBox,
     TDesignTokensComponentsLink,
+    TDesignTokensComponentsListItem,
+    TDesignTokensComponentsListItemControlsButton,
+    TDesignTokensComponentsListMaster,
     TDesignTokensComponentsMarker,
     TDesignTokensComponentsMarkerStatus,
     TDesignTokensComponentsMultiselect,
@@ -35,6 +39,7 @@ import {
     TDesignTokensComponentsSMSInput,
     TDesignTokensComponentsSpinner,
     TDesignTokensComponentsSpoiler,
+    TDesignTokensComponentsStep,
     TDesignTokensComponentsStepper,
     TDesignTokensComponentsTableBasic,
     TDesignTokensComponentsTabs,
@@ -156,6 +161,7 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsCalendar &
     TDesignTokensComponentsCard &
     TDesignTokensComponentsCheckbox &
+    TDesignTokensComponentsChip &
     TDesignTokensComponentsConfirm &
     TDesignTokensComponentsDivider &
     TDesignTokensComponentsDropdown &
@@ -169,6 +175,9 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsLabel &
     TDesignTokensComponentsLightBox &
     TDesignTokensComponentsLink &
+    TDesignTokensComponentsListItem &
+    TDesignTokensComponentsListItemControlsButton &
+    TDesignTokensComponentsListMaster &
     TDesignTokensComponentsMarker &
     TDesignTokensComponentsMarkerStatus &
     TDesignTokensComponentsMultiselect &
@@ -183,6 +192,7 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsSMSInput &
     TDesignTokensComponentsSpinner &
     TDesignTokensComponentsSpoiler &
+    TDesignTokensComponentsStep &
     TDesignTokensComponentsStepper &
     TDesignTokensComponentsTableBasic &
     TDesignTokensComponentsTabs &

@@ -3,6 +3,7 @@
 exports[`Checkbox renders correctly 1`] = `
 <label
   className="cssClass[label] cssClass[nonempty]"
+  data-tx="10.0.0"
   onClick={[Function]}
   onMouseDown={[Function]}
 >
@@ -25,6 +26,7 @@ exports[`Checkbox renders correctly 1`] = `
 exports[`Checkbox renders disabled state correctly 1`] = `
 <label
   className="cssClass[label] cssClass[disabled] cssClass[nonempty]"
+  data-tx="10.0.0"
   onClick={[Function]}
   onMouseDown={[Function]}
 >

@@ -2,8 +2,8 @@ import {FilterPanel} from '@sberbusiness/triplex/components/Tables/FilterPanel';
 import {PaginationBasic} from '@sberbusiness/triplex/components/Tables/PaginationBasic';
 import {TableFooter} from '@sberbusiness/triplex/components/Tables/TableFooter/TableFooter';
 import {TableBasic} from '@sberbusiness/triplex/components/Tables/TableBasic/TableBasic';
-import {TableFilter} from '@sberbusiness/triplex/components/Tables/TableFilter';
-import {TableFilterPanel} from '@sberbusiness/triplex/components/Tables/TableFilterPanel';
+import {TabsLine} from '@sberbusiness/triplex/components/TabsLine/TabsLine';
+import {TabsLinePanel} from '@sberbusiness/triplex/components/Tables/TabsLinePanel';
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {isComponentType, isReactElement} from '../../utils/reactChild';
@@ -19,8 +19,8 @@ export class MasterTable extends React.PureComponent<IMasterTableProps> {
     public static displayName = 'MasterTable';
 
     public static FilterPanel = FilterPanel;
-    public static TableFilter = TableFilter;
-    public static TableFilterPanel = TableFilterPanel;
+    public static TabsLine = TabsLine;
+    public static TabsLinePanel = TabsLinePanel;
     public static TableBasic = TableBasic;
     public static TableFooter = TableFooter;
     public static Pagination = PaginationBasic;
@@ -42,7 +42,11 @@ export class MasterTable extends React.PureComponent<IMasterTableProps> {
         });
 
         return (
-            <div className={classnames(className, 'cssClass[masterTable]')} {...htmlDivAttributes}>
+            <div
+                className={classnames(className, 'cssClass[masterTable]')}
+                {...htmlDivAttributes}
+                data-tx={process.env.npm_package_version}
+            >
                 {newChildren}
             </div>
         );

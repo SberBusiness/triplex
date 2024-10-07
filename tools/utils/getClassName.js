@@ -23,7 +23,7 @@ function getClassName(fileName, className) {
     // ^scroll-\d для зависимых от ширины скролла классов, в SBBOL на html намешивается класс scroll-{n}
     // service-fill - класс внутри svg иконок
     // Transition-exit для react-transition-group
-    if (className.match(/(triplex-theme-|^scroll-\d|table-icon|service-fill|no-hash|Transition-exit$)/)) {
+    if (className.match(/(^scroll-\d|table-icon|service-fill|no-hash|Transition-exit$)/)) {
         return className;
     }
 

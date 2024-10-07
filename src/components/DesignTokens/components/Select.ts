@@ -28,7 +28,7 @@ export type TDesignTokensComponentsSelect = {Select: TDesignTokensComponentsSele
 
 // Токены компонента Select в светлой и темной темах.
 export const Select_Tokens: TDesignTokensComponentsSelectValues = {
-    Background_Default: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-Select-Background_Default)
+    Background_Default: [{ref: 'Basic.100'}, {value: 'none'}], // var(--triplex-Select-Background_Default)
     Background_Disabled: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Select-Background_Disabled)
 
     Border_Color_Default: [{ref: 'Neutral.500'}, {ref: 'Neutral.900'}], // var(--triplex-Select-Border_Color_Default)

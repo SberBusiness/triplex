@@ -25,11 +25,11 @@
         color: var(--triplex-Button-Link_Color_Active);
     }
 
-    &:disabled {
-        color: var(--triplex-Button-Link_Color_Disabled);
+    &:focus-visible {
+        box-shadow: var(--triplex-Button-Link_Shadow_Focus);
     }
 
-    &[data-focus-visible]:focus {
-        box-shadow: inset 0 0 1px 1px var(--triplex-Accent-500);
+    &:disabled {
+        color: var(--triplex-Button-Link_Color_Disabled);
     }
 }

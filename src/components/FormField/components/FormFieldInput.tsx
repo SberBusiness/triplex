@@ -13,12 +13,12 @@ export interface IFormFieldInputProps extends Omit<IInputProps, 'groupPosition'>
     /** Рендер-функция, в которую можно передать любой инпут с нужным функционалом (валидация ввода, маска).
      *  Через аргументы props инпуту передастся нужная стилизация.
      * */
-    render?: (props: IFormFieldInputProvideProps, ref?: React.ForwardedRef<HTMLInputElement>) => React.ReactElement | null;
+    render?: (props: IFormFieldInputProvideProps, ref?: React.Ref<HTMLInputElement>) => React.ReactElement | null;
 }
 
 /** Компонент, отображающий input. */
 export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInputProps>((props, ref) => {
-    const {className, disabled, error, id, onBlur, onFocus, placeholder, style, value} = props;
+    const {className, disabled, error, id, onAnimationStart, onBlur, onFocus, placeholder, style, value} = props;
     const {render, ...renderProvideProps} = props;
     const {focused, prefixWidth, postfixWidth, setDisabled, setFocused, setId, setValueExist} = useContext(FormFieldContext);
     const classNames = classnames('cssClass[formFieldInput]', {'cssClass[error]': !!error}, className);
@@ -63,6 +63,24 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
         onFocus?.(event);
     };
 
+    /**
+     * Обработчик начала анимации.
+     *
+     * Примечание:
+     * Текущая реализация необходима для кейсов с автозаполнением:
+     * - Браузер устанавливает значение в поле при загрузке страницы;
+     * - Браузер устанавливает значение в поле при навигации пользователем по сохранённым опциям заполнения.
+     */
+    const handleAnimationStart = (event: React.AnimationEvent<HTMLInputElement>) => {
+        if (event.animationName.startsWith('autofill-applied-hook')) {
+            setValueExist(true);
+        } else if (event.animationName.startsWith('autofill-cancelled-hook')) {
+            // Необходимо проверить, что при отмене автозаполнения, в поле не находится значение.
+            !value && setValueExist(false);
+        }
+        onAnimationStart?.(event);
+    };
+
     if (render) {
         // Рендер инпута, переданного снаружи.
         return render(
@@ -70,6 +88,7 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
                 ...renderProvideProps,
                 className: classNames,
                 id: instanceId.current,
+                onAnimationStart: handleAnimationStart,
                 onBlur: handleBlur,
                 onFocus: handleFocus,
                 /* Когда элемент не в фокусе, вместо placeholder показывается Label. */
@@ -85,10 +104,9 @@ export const FormFieldInput = React.forwardRef<HTMLInputElement, IFormFieldInput
                 className={classNames}
                 {...props}
                 id={instanceId.current}
+                onAnimationStart={handleAnimationStart}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                /* Когда элемент не в фокусе, вместо placeholder показывается Label. */
-                placeholder={focused ? placeholder : undefined}
                 style={{paddingLeft, paddingRight, ...style}}
                 ref={ref}
             />

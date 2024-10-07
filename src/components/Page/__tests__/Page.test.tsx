@@ -22,6 +22,10 @@ jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
     ClosenotificationSrvxIcon16: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 describe.skip('Page', () => {
     beforeEach(() => {
         allure.feature('Page');

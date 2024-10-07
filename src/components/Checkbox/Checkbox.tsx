@@ -84,7 +84,13 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckboxProps>((prop
     };
 
     return (
-        <label {...labelAttributes} className={classNamesLabel} onClick={handleClick} onMouseDown={handleMouseDown}>
+        <label
+            {...labelAttributes}
+            className={classNamesLabel}
+            onClick={handleClick}
+            onMouseDown={handleMouseDown}
+            data-tx={process.env.npm_package_version}
+        >
             <input
                 type="checkbox"
                 className={classNames}
