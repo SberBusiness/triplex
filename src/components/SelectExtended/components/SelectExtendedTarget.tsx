@@ -107,6 +107,7 @@ export const SelectExtendedTarget = React.forwardRef<HTMLDivElement, ISelectExte
             data-test-id={dataTestId}
             ref={setRef}
             {...rest}
+            data-tx={process.env.npm_package_version}
         >
             <div
                 className="cssClass[label]"

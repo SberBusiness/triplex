@@ -230,6 +230,7 @@ export class AccordionFormItem extends React.Component<IAccordionItemProps, IAcc
                         onMouseUp={focusButton}
                         onBlur={this.handleHeaderBlur}
                         disabled={disabled}
+                        data-tx={process.env.npm_package_version}
                     >
                         {prevStatus && (
                             <div className={classnames('cssClass[prevLine]', mapStepStatusToCssClass[status!])} aria-hidden="true" />

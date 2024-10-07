@@ -24,7 +24,11 @@ export const CardStatic: React.FC<ICardStaticProps> & ICardStaticComposition = (
     roundingSize = ECardRoundingSize.MD,
     ...rest
 }) => (
-    <div className={classnames('cssClass[card]', mapCardRoundingSizeToCssClass[roundingSize], className)} {...rest}>
+    <div
+        className={classnames('cssClass[card]', mapCardRoundingSizeToCssClass[roundingSize], className)}
+        {...rest}
+        data-tx={process.env.npm_package_version}
+    >
         {children}
     </div>
 );

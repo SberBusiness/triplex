@@ -20,7 +20,7 @@ export const StatusTracker: React.FC<IStatusTrackerProps> & IStatusTrackerCompos
     const classNames = classnames('cssClass[statusTracker]', className);
 
     return (
-        <div className={classNames} {...rest}>
+        <div className={classNames} {...rest} data-tx={process.env.npm_package_version}>
             {children}
         </div>
     );

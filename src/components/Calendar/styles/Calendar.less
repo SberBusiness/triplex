@@ -1,27 +1,29 @@
-@import url('src/styles/style');
-
 .calendar {
     width: 180px;
     padding: 8px 12px;
+    // Чтобы переопределить внешние стили вида * {box-sizing: border-box}.
+    box-sizing: content-box;
     background: var(--triplex-Calendar-Background);
-    border-radius: @radius-8;
+    border-radius: 8px;
     user-select: none;
 
     &.adaptive {
         width: auto;
         padding: 20px;
     }
+
+    + .calendar {
+        margin-top: 20px
+    }
 }
 
 .calendarHeader {
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .b1-text-main(@color-graphite-01);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
     color: var(--triplex-Calendar-View_Item_Color_Default);
-
-    .adaptive & {
-        margin-right: 8px;
-        margin-left: 8px;
-    }
 }

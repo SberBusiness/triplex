@@ -13,10 +13,10 @@ import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/
         </CardStatic.Content.Header>
         <CardStatic.Content.Body>
             <Text tag="div" size={ETextSize.B1} line={ELineType.EXTRA}>
-                Текст пояснения, которое коротко описывает суть атрибута.
+                Текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть атрибута.
+                Дополнительная информация: текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Title size={ETitleSize.H4}>1234567,00</Title>
@@ -62,10 +62,10 @@ import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/
         </CardStatic.Content.Header>
         <CardStatic.Content.Body>
             <Text tag="div" size={ETextSize.B1} line={ELineType.EXTRA}>
-                Текст пояснения, которое коротко описывает суть атрибута.
+                Текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть атрибута.
+                Дополнительная информация: текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Title size={ETitleSize.H4}>1234567,00</Title>
@@ -111,10 +111,10 @@ import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/
         </CardStatic.Content.Header>
         <CardStatic.Content.Body>
             <Text tag="div" size={ETextSize.B1} line={ELineType.EXTRA}>
-                Текст пояснения, которое коротко описывает суть атрибута.
+                Текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть атрибута.
+                Дополнительная информация: текст пояснения, который коротко описывает суть атрибута.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Title size={ETitleSize.H4}>1234567,00</Title>

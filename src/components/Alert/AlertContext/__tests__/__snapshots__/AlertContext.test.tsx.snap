@@ -3,6 +3,7 @@
 exports[`AlertContext type error renders correctly 1`] = `
 <span
   className="cssClass[alertContext] cssClass[alertTypeError]"
+  data-tx="10.0.0"
   role="alert"
 >
   <svg />
@@ -17,6 +18,7 @@ exports[`AlertContext type error renders correctly 1`] = `
 exports[`AlertContext type info renders correctly 1`] = `
 <span
   className="cssClass[alertContext] cssClass[alertTypeInfo]"
+  data-tx="10.0.0"
   role="alert"
 >
   <svg />
@@ -31,6 +33,7 @@ exports[`AlertContext type info renders correctly 1`] = `
 exports[`AlertContext type system renders correctly 1`] = `
 <span
   className="cssClass[alertContext] cssClass[alertTypeSystem]"
+  data-tx="10.0.0"
   role="alert"
 >
   <svg />
@@ -45,6 +48,7 @@ exports[`AlertContext type system renders correctly 1`] = `
 exports[`AlertContext type warning renders correctly 1`] = `
 <span
   className="cssClass[alertContext] cssClass[alertTypeWarning]"
+  data-tx="10.0.0"
   role="alert"
 >
   <svg />

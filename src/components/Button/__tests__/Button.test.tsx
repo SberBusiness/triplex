@@ -12,6 +12,10 @@ jest.mock('@sberbusiness/icons/SpinnersmallwhiteAniIcon20', () => ({
     SpinnersmallwhiteAniIcon20: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
+    HeaderkebabSrvxIcon16: 'svg',
+}));
+
 describe('Button', () => {
     beforeEach(() => {
         allure.feature('Button');

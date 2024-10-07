@@ -293,7 +293,7 @@ const ref = React.useRef(null);
                 value={value}
                 render={(props, ref) => (
                     <MaskedInput
-                        forwardRef={ref}
+                        forwardedRef={ref}
                         {...props}
                         mask={MaskedInput.presets.masks.phone}
                     />

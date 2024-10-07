@@ -147,14 +147,14 @@ export const SuggestMobileDropdown = React.forwardRef<HTMLDivElement, ISuggestMo
                                         {options.map((option) => (
                                             <DropdownMobileListItem
                                                 selected={isEqual(value, option)}
-                                                key={option.label}
+                                                key={option.id || option.label}
                                                 onSelect={() => {
                                                     onSelect(option);
                                                     setOpened(false);
                                                 }}
-                                                id={option.label}
+                                                id={option.id || option.label}
                                             >
-                                                {option.label}
+                                                {option.labelReactNode || option.label}
                                             </DropdownMobileListItem>
                                         ))}
 

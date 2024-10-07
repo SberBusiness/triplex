@@ -7,6 +7,7 @@ import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETri
 
 jest.mock('rc-util/es/Dom/canUseDom', () => jest.requireActual('rc-util/lib/Dom/canUseDom'));
 jest.mock('rc-util/es/Dom/dynamicCSS', () => ({
+    removeCSS: jest.fn(),
     updateCSS: jest.fn(),
 }));
 

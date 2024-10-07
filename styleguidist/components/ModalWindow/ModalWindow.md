@@ -207,6 +207,79 @@ const closeButton = <ModalWindowClose onClick={handleClose} key="close" />;
 </>
 ```
 
+### With scroll
+
+```jsx
+import {
+    ModalWindow,
+    ModalWindowHeader,
+    ModalWindowBody,
+    ModalWindowFooter,
+    ModalWindowClose,
+    ModalWindowContent,
+} from '@sberbusiness/triplex/components/ModalWindow';
+import {Header} from '@sberbusiness/triplex/components/Header/Header';
+import {FooterDescription} from '@sberbusiness/triplex/components/Footer/components/FooterDescription';
+import {Button} from '@sberbusiness/triplex/components/Button/Button';
+import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
+
+const [open, setOpen] = React.useState(false);
+const [isLongContent, setIsLongContent] = React.useState(true);
+
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+
+const longText =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+const createLongContent = () => {
+    let result = [];
+
+    for (let i = 0; i < 20; i++) {
+        result.push(longText, <Gap key={i} size={16} />);
+    }
+
+    return result;
+};
+
+const modalContent = (
+    <ModalWindowContent>
+        <ModalWindowHeader>
+            <Header.Title>
+                <Header.Title.Content>
+                    <Header.Title.Content.Text>Текст заголовка в одну строку</Header.Title.Content.Text>
+                </Header.Title.Content>
+            </Header.Title>
+        </ModalWindowHeader>
+        <ModalWindowBody>{isLongContent ? createLongContent() : 'Content'}</ModalWindowBody>
+        <ModalWindowFooter>
+            <FooterDescription>
+                <FooterDescription.Controls>
+                    <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                        Button Name
+                    </Button>
+                    <Button theme={EButtonTheme.GENERAL} size={EButtonSize.MD}>
+                        Button Name
+                    </Button>
+                </FooterDescription.Controls>
+            </FooterDescription>
+        </ModalWindowFooter>
+    </ModalWindowContent>
+);
+
+const closeButton = <ModalWindowClose onClick={handleClose} key="close" />;
+
+<>
+    <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD} onClick={handleOpen}>
+        Open ModalWindow
+    </Button>
+    <ModalWindow closeButton={closeButton} isOpen={open}>
+        {modalContent}
+    </ModalWindow>
+</>
+```
+
 ### Disabled focus trap
 
 ```jsx
@@ -401,7 +474,6 @@ const closeButton = <ModalWindowClose onClick={handleClose} key="close" />;
     </ModalWindow>
 </>
 ```
-
 
 ### Custom positioning
 

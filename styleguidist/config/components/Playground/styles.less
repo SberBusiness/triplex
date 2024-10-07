@@ -1,3 +1,5 @@
+@import 'src/styles/style';
+
 .styleguide-playground {
     font-family: SBSansUI, sans-serif;
 }
@@ -6,6 +8,10 @@
     padding: 20px - 1;
     border: 1px solid #D0D7DD;
     border-radius: 8px;
+
+    @media (max-width: @screen-md-max) {
+        padding: 16px;
+    }
 
     &.light-mode.light-background,
     &.dark-mode.dark-background {
@@ -19,12 +25,12 @@
 
     &.light-mode.white-to-black-background,
     &.dark-mode.black-to-white-background {
-        background: linear-gradient(to right, #ffffff 50%, #181819 50%);
+        background: linear-gradient(to right, #FFFFFF 50%, #1F1F22 50%);
     }
 
     &.light-mode.black-to-white-background,
     &.dark-mode.white-to-black-background {
-        background: linear-gradient(to left, #ffffff 50%, #181819 50%);
+        background: linear-gradient(to left, #E4E8EB 50%, #1F1F22 50%);
     }
 }
 
@@ -32,6 +38,10 @@
     margin-top: 20px;
     line-height: 0;
     text-align: right;
+
+    @media (max-width: @screen-md-max) {
+        margin-top: 8px;
+    }
 }
 
 .styleguide-playground-tabs,
@@ -47,4 +57,8 @@
 .styleguide-playground-tab {
     margin-top: 20px;
     margin-bottom: 20px;
+
+    @media (max-width: @screen-md-max) {
+        margin-top: 16px;
+    }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import {NotificationHeader} from '@sberbusiness/triplex/components/Notification/components/NotificationHeader';
 import {NotificationBodyContent} from '@sberbusiness/triplex/components/Notification/components/NotificationBodyContent';
-import {UnorderedList} from '@sberbusiness/triplex/components/List/UnorderedList';
 import {NotificationFooter} from '@sberbusiness/triplex/components/Notification/components/NotificationFooter';
+import {NotificationBodyList} from '@sberbusiness/triplex/components/Notification/components/NotificationBodyList';
 
 /** Свойства компонента NotificationBody. */
 interface INotificationBodyProps {
@@ -12,7 +12,7 @@ interface INotificationBodyProps {
 export interface INotificationBodySFC extends React.FC<INotificationBodyProps> {
     Header: typeof NotificationHeader;
     Content: typeof NotificationBodyContent;
-    List: typeof UnorderedList;
+    List: typeof NotificationBodyList;
     Footer: typeof NotificationFooter;
 }
 
@@ -26,5 +26,5 @@ export const NotificationBody: INotificationBodySFC = ((props) => {
 NotificationBody.displayName = 'NotificationBody';
 NotificationBody.Header = NotificationHeader;
 NotificationBody.Content = NotificationBodyContent;
-NotificationBody.List = UnorderedList;
+NotificationBody.List = NotificationBodyList;
 NotificationBody.Footer = NotificationFooter;

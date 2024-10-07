@@ -3,6 +3,7 @@ import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/compo
 // Название токенов компонента Tabs.
 export const designTokensComponentsTabsKeys = [
     'Background',
+
     'Tab_Background_Default',
     'Tab_Background_Hover',
     'Tab_Background_Selected',
@@ -21,6 +22,7 @@ export type TDesignTokensComponentsTabs = {Tabs: TDesignTokensComponentsTabsValu
 // Токены компонента Tabs в светлой и темной темах.
 export const Tabs_Tokens: TDesignTokensComponentsTabsValues = {
     Background: [{ref: 'Basic.100'}, {ref: 'Basic.500'}], // var(--triplex-Tabs-Background)
+
     Tab_Background_Default: [{ref: 'Basic.100'}, {ref: 'Basic.500'}], // var(--triplex-Tabs-Tab_Background_Default)
     Tab_Background_Hover: [{ref: 'Neutral.100'}, {ref: 'Basic.300'}], // var(--triplex-Tabs-Tab_Background_Hover)
     Tab_Background_Selected: [{ref: 'Neutral.500'}, {ref: 'Neutral.900'}], // var(--triplex-Tabs-Tab_Background_Selected)

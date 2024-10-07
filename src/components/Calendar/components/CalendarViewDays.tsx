@@ -1,129 +1,167 @@
-import React from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
 import moment from 'moment';
-import {TPickedDate, TPickedRange, TDayHtmlAttributes} from '@sberbusiness/triplex/components/Calendar/types';
-import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
-import {WEEKDAYS_SET, globalLimitRange, dateFormatYYYYMMDD} from '@sberbusiness/triplex/consts/DateConst';
-import {CalendarDay} from '@sberbusiness/triplex/components/Calendar/components/CalendarDay';
+import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
+import {dateFormatYYYYMMDD, globalLimitRange, WEEKDAYS_SET} from '@sberbusiness/triplex/consts/DateConst';
+import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
+import {CalendarViewItem} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewItem';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
+import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 
 /** Свойства компонента CalendarViewDays. */
-export interface ICalendarViewDaysProps {
-    /** Дата, являющаяся курсором для навигации по интерфейсу. */
-    viewDate: moment.Moment;
-    /** Выбранная дата. */
-    pickedDate: TPickedDate;
-    /** Отображаемый период. */
-    pickedRange?: TPickedRange;
-    /** Ограничение выбираемого периода. */
-    limitRange?: IDateLimitRange;
-    /** HTML атрибуты дня. */
-    dayHtmlAttributes?: TDayHtmlAttributes;
-    /** Отмеченные дни. */
-    markedDays?: string[];
-    /** Отключённые дни. */
-    disabledDays?: string[];
-    /** День, доступный для фокусировки в текущий момент при навигации с клавиатуры. */
-    tabbableDay?: moment.Moment;
-    /** День, находящийся в фокусе в текущий момент при навигации с клавиатуры. */
-    focusedDay?: moment.Moment;
-    /** Идентификатор для связи календаря и наименования текущего периода. */
-    periodId?: string;
-    /** Callback-функция выбора дня. */
-    onClick(day: moment.Moment): void;
-    /** Callback-функция изменения дня для фокуса. */
-    onChangeFocusedDay(focusedDay?: moment.Moment, byKeyDown?: boolean): void;
-}
+export interface ICalendarViewDaysProps extends Omit<ICalendarViewProps, 'viewMode' | 'monthHtmlAttributes' | 'yearHtmlAttributes'> {}
 
 /** Вид календаря с выбором дня. */
 export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
     viewDate,
     pickedDate,
     pickedRange,
-    limitRange = globalLimitRange,
-    dayHtmlAttributes,
-    tabbableDay,
-    focusedDay,
-    markedDays,
-    disabledDays,
+    limitRange,
     periodId,
-    onClick,
-    onChangeFocusedDay,
+    disabledDays,
+    markedDays,
+    dayHtmlAttributes = {},
+    onDateSelect,
+    onPageChange,
 }) => {
-    const startDate = moment(viewDate).startOf('month').startOf('week');
+    const {viewItemFocusedRef} = useContext(CalendarViewContext);
+    const startDate = viewDate.clone().startOf('month').startOf('week');
 
-    /** Отрисовка дней недели. */
-    const renderDaysOfWeek = () => {
+    /** Проверяет, выходит ли дата за разрешённый период. */
+    const isOutOfRangeDate = useCallback(
+        (date: moment.Moment) => {
+            const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
+            const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
+
+            return date.isBefore(dateFrom, 'day') || date.isAfter(dateTo, 'day');
+        },
+        [limitRange.dateFrom, limitRange.dateTo]
+    );
+
+    /** Проверяет, является ли дата отключенной. */
+    const isDisabledDate = useCallback(
+        (date: moment.Moment) => {
+            if (isOutOfRangeDate(date)) {
+                return true;
+            }
+
+            if (disabledDays) {
+                return disabledDays.includes(date.format(dateFormatYYYYMMDD));
+            }
+
+            return false;
+        },
+        [disabledDays, isOutOfRangeDate]
+    );
+
+    /** Получить первую доступную для фокуса дату. */
+    const getInitialTabbableDate = useCallback(() => {
+        if (pickedDate && pickedDate.isSame(viewDate, 'month')) {
+            return pickedDate;
+        } else {
+            const date = viewDate.clone().startOf('month');
+
+            for (let i = 0; i < date.daysInMonth(); i++) {
+                date.add(i, 'day');
+
+                if (!isDisabledDate(date)) {
+                    return date;
+                }
+            }
+        }
+    }, [pickedDate, viewDate, isDisabledDate]);
+
+    const [tabbableDate, setTabbableDate] = useState(getInitialTabbableDate());
+
+    useEffect(() => {
+        if (!viewItemFocusedRef.current) {
+            setTabbableDate(getInitialTabbableDate());
+        }
+    }, [viewDate, viewItemFocusedRef, getInitialTabbableDate]);
+
+    /** Рендер заголовка таблицы. */
+    const renderTableHead = () => {
         const weekdays = moment.weekdays(true);
         const weekdaysMin = moment.weekdaysMin(true);
 
         return (
-            <tr>
-                {WEEKDAYS_SET.map((header) => (
-                    <th key={`calendar-view-days-header-${header}`} className="cssClass[calendarViewDaysHeader]" abbr={weekdays[header]}>
-                        {weekdaysMin[header]}
-                    </th>
-                ))}
-            </tr>
+            <thead>
+                <tr>
+                    {WEEKDAYS_SET.map((header) => (
+                        <th key={`calendar-table-header-${header}`} className="cssClass[calendarViewDaysHeader]" abbr={weekdays[header]}>
+                            {weekdaysMin[header]}
+                        </th>
+                    ))}
+                </tr>
+            </thead>
         );
     };
 
-    /** Отрисовка дня. */
-    const renderDay = (row: number, cell: number) => {
+    /** Рендер тела таблицы. */
+    const renderTableBody = () => (
+        <tbody className="cssClass[calendarViewDaysBody]">
+            {[0, 1, 2, 3, 4, 5].map((row) => (
+                <tr key={`calendar-table-row-${row}`}>{[0, 1, 2, 3, 4, 5, 6].map((cell) => renderTableData(row, cell))}</tr>
+            ))}
+        </tbody>
+    );
+
+    /** Рендер ячейки таблицы. */
+    const renderTableData = (row: number, cell: number) => {
         const date = moment(startDate).add(row * 7 + cell, 'day');
+        const classNames = classnames({
+            'cssClass[current]': isCurrentDate(date),
+            'cssClass[rangeBetween]': isRangeBetweenDate(date),
+            'cssClass[rangeEnd]': isRangeEndDate(date),
+            'cssClass[rangeStart]': isRangeStartDate(date),
+        });
+        const active = isActiveDate(date);
+        const disabled = isDisabledDate(date);
+        const tabbable = !disabled && isTabbableDay(date);
+        const muted = isMutedDate(date);
+        const marked = isMarkedDate(date);
 
         return (
-            <CalendarDay
-                key={`calendar-view-days-cell-${cell}`}
-                tabbable={isTabbableDay(date)}
-                focused={isFocusedDay(date)}
-                muted={isMutedDay(date)}
-                current={isCurrentDay(date)}
-                active={isActiveDay(date)}
-                marked={isMarkedDay(date)}
-                disabled={isDisabledDay(date)}
-                rangeStart={isRangeStartDay(date)}
-                rangeEnd={isRangeEndDay(date)}
-                rangeBetween={isRangeBetweenDay(date)}
-                htmlAttributes={dayHtmlAttributes}
-                onFocus={handleFocusDay(date)}
-                onKeyDown={handleKeyDownDay(date)}
-                onClick={handleClickDay(date)}
+            <CalendarViewItem
+                key={`calendar-table-data-${cell}`}
+                className={classNames}
+                {...(typeof dayHtmlAttributes == 'function' ? dayHtmlAttributes({marked}) : dayHtmlAttributes)}
+                date={date}
+                unit="day"
+                active={active}
+                disabled={disabled}
+                tabbable={tabbable}
+                muted={muted}
+                marked={marked}
+                onKeyDown={handleItemKeyDown(date)}
+                onDateSelect={handleDateSelect}
             >
                 {date.date()}
-            </CalendarDay>
+            </CalendarViewItem>
         );
     };
 
-    /** Проверяет, доступен ли день для фокусировки с клавиатуры. */
+    /** Проверяет, может ли дата получить фокус при навигации. */
     const isTabbableDay = (date: moment.Moment) => {
-        if (tabbableDay) {
-            return date.isSame(tabbableDay, 'day');
+        if (tabbableDate) {
+            return date.isSame(tabbableDate, 'day');
         }
 
         return false;
     };
 
-    /** Проверяет, является ли день в фокусе. */
-    const isFocusedDay = (date: moment.Moment) => {
-        if (focusedDay) {
-            return date.isSame(focusedDay, 'day');
-        }
-
-        return false;
-    };
-
-    /** Проверяет, относится ли день к текущему месяцу. */
-    const isMutedDay = (date: moment.Moment) => {
+    /** Проверяет, относится ли дата к текущему месяцу. */
+    const isMutedDate = (date: moment.Moment) => {
         return !date.isSame(viewDate, 'month');
     };
 
-    /** Проверяет, является ли день сегодняшним. */
-    const isCurrentDay = (date: moment.Moment) => {
+    /** Проверяет, является ли дата сегодняшней. */
+    const isCurrentDate = (date: moment.Moment) => {
         return date.isSame(moment(), 'day');
     };
 
-    /** Проверяет, является ли месяц активным. */
-    const isActiveDay = (date: moment.Moment) => {
+    /** Проверяет, является ли дата активной. */
+    const isActiveDate = (date: moment.Moment) => {
         if (pickedRange) {
             return !!(pickedRange[0]?.isSame(date, 'day') || pickedRange[1]?.isSame(date, 'day'));
         } else {
@@ -131,8 +169,8 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         }
     };
 
-    /** Проверяет, является ли месяц отмеченным. */
-    const isMarkedDay = (date: moment.Moment) => {
+    /** Проверяет, является ли дата отмеченной. */
+    const isMarkedDate = (date: moment.Moment) => {
         if (markedDays) {
             return markedDays.includes(date.format(dateFormatYYYYMMDD));
         }
@@ -140,29 +178,8 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         return false;
     };
 
-    /** Проверяет, является ли день отключенным. */
-    const isDisabledDay = (date: moment.Moment) => {
-        if (isOutOfRangeDay(date)) {
-            return true;
-        }
-
-        if (disabledDays) {
-            return disabledDays.includes(date.format(dateFormatYYYYMMDD));
-        }
-
-        return false;
-    };
-
-    /** Проверяет, принадлежит ли день к разрешённому периоду. */
-    const isOutOfRangeDay = (date: moment.Moment) => {
-        const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
-        const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
-
-        return date.isBefore(dateFrom) || date.isAfter(dateTo);
-    };
-
-    /** Проверяет, является ли день началом выбранного периода. */
-    const isRangeStartDay = (date: moment.Moment): boolean => {
+    /** Проверяет, является ли дата началом выбранного периода. */
+    const isRangeStartDate = (date: moment.Moment) => {
         if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
             return false;
         }
@@ -170,8 +187,8 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         return pickedRange[0].isSame(date, 'day');
     };
 
-    /** Проверяет, является ли день концом выбранного периода. */
-    const isRangeEndDay = (date: moment.Moment): boolean => {
+    /** Проверяет, является ли дата концом выбранного периода. */
+    const isRangeEndDate = (date: moment.Moment) => {
         if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
             return false;
         }
@@ -179,8 +196,8 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         return pickedRange[1].isSame(date, 'day');
     };
 
-    /** Проверяет, находится ли день между началом/концом выбранного периода. */
-    const isRangeBetweenDay = (date: moment.Moment): boolean => {
+    /** Проверяет, является ли дата промежуточной в выбранном периоде. */
+    const isRangeBetweenDate = (date: moment.Moment) => {
         if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
             return false;
         }
@@ -188,9 +205,9 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         return date.isBetween(pickedRange[0], pickedRange[1], 'day');
     };
 
-    /** Возвращает доступный для выбора день после сдвига. */
-    const getShiftedDay = (current: moment.Moment, operation: 'add' | 'subtract', amount: number, unit: 'day' | 'week' | 'month') => {
-        const day = moment(current);
+    /** Возвращает доступную для выбора дату после сдвига. */
+    const getShiftedDate = (currentDate: moment.Moment, operation: 'add' | 'subtract', amount: number, unit: 'day' | 'week' | 'month') => {
+        const day = currentDate.clone();
         const shiftDay = {
             add: moment.fn.add.bind(day),
             subtract: moment.fn.subtract.bind(day),
@@ -198,11 +215,11 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
 
         while (shiftDay(amount, unit)) {
             // Если вышли за пределы доступного периода – возвращаем текущий день.
-            if (isOutOfRangeDay(day)) {
-                return current;
+            if (isOutOfRangeDate(day)) {
+                return currentDate;
             }
             // Если день доступен для выбора – выходим из поиска.
-            if (!isDisabledDay(day)) {
+            if (!isDisabledDate(day)) {
                 break;
             }
         }
@@ -210,62 +227,58 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         return day;
     };
 
-    /** Обработчик получения фокуса днём. */
-    const handleFocusDay = (day: moment.Moment) => () => {
-        onChangeFocusedDay(day);
-    };
-
-    /** Обработчик нажатия клавиши по дню. */
-    const handleKeyDownDay = (day: moment.Moment) => (event: React.KeyboardEvent<HTMLTableDataCellElement>) => {
+    /** Обработчик нажатия клавиши CalendarViewItem. */
+    const handleItemKeyDown = (date: moment.Moment) => (event: React.KeyboardEvent<HTMLTableCellElement>) => {
         const key = event.code || event.keyCode;
-        let newFocusedDay;
-        let newSelectedDate;
+        let nextFocusedDate;
 
-        if (isKey(key, 'SPACE') || isKey(key, 'ENTER')) {
-            newSelectedDate = day;
-            event.preventDefault();
-        } else if (isKey(key, 'ARROW_RIGHT')) {
-            newFocusedDay = getShiftedDay(day, 'add', 1, 'day');
+        if (isKey(key, 'ARROW_RIGHT')) {
+            nextFocusedDate = getShiftedDate(date, 'add', 1, 'day');
             event.preventDefault();
         } else if (isKey(key, 'ARROW_LEFT')) {
-            newFocusedDay = getShiftedDay(day, 'subtract', 1, 'day');
+            nextFocusedDate = getShiftedDate(date, 'subtract', 1, 'day');
             event.preventDefault();
         } else if (isKey(key, 'ARROW_DOWN')) {
-            newFocusedDay = getShiftedDay(day, 'add', 1, 'week');
+            nextFocusedDate = getShiftedDate(date, 'add', 1, 'week');
             event.preventDefault();
         } else if (isKey(key, 'ARROW_UP')) {
-            newFocusedDay = getShiftedDay(day, 'subtract', 1, 'week');
+            nextFocusedDate = getShiftedDate(date, 'subtract', 1, 'week');
             event.preventDefault();
         } else if (isKey(key, 'PAGE_DOWN')) {
-            newFocusedDay = getShiftedDay(day, 'add', 1, 'month');
+            nextFocusedDate = getShiftedDate(date, 'add', 1, 'month');
             event.preventDefault();
         } else if (isKey(key, 'PAGE_UP')) {
-            newFocusedDay = getShiftedDay(day, 'subtract', 1, 'month');
+            nextFocusedDate = getShiftedDate(date, 'subtract', 1, 'month');
             event.preventDefault();
         }
 
-        if (newFocusedDay) {
-            onChangeFocusedDay(newFocusedDay, true);
-        }
-
-        if (newSelectedDate) {
-            onClick(newSelectedDate);
+        if (nextFocusedDate) {
+            changeTabbableDate(nextFocusedDate);
         }
     };
 
-    /** Обработчик клика по дню. */
-    const handleClickDay = (day: moment.Moment) => () => {
-        onClick(day);
+    /** Обработчик клика по дате. */
+    const handleDateSelect = (date: moment.Moment) => {
+        onDateSelect(date);
+    };
+
+    /** Изменение фокусируемой даты. */
+    const changeTabbableDate = (date: moment.Moment) => {
+        setTabbableDate(date);
+
+        if (date.isBefore(viewDate, 'month')) {
+            date = viewDate.clone().subtract(1, 'month');
+            onPageChange(date, ECalendarViewMode.DAYS);
+        } else if (date.isAfter(viewDate, 'month')) {
+            date = viewDate.clone().add(1, 'month');
+            onPageChange(date, ECalendarViewMode.DAYS);
+        }
     };
 
     return (
         <table className="cssClass[calendarViewDays]" role="grid" aria-labelledby={periodId}>
-            <thead className="cssClass[calendarViewDaysHead]">{renderDaysOfWeek()}</thead>
-            <tbody className="cssClass[calendarViewDaysBody]">
-                {[0, 1, 2, 3, 4, 5].map((row) => (
-                    <tr key={`calendar-view-days-row-${row}`}>{[0, 1, 2, 3, 4, 5, 6].map((cell) => renderDay(row, cell))}</tr>
-                ))}
-            </tbody>
+            {renderTableHead()}
+            {renderTableBody()}
         </table>
     );
 };

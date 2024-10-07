@@ -3,6 +3,7 @@
 exports[`AccordionView closes correctly 1`] = `
 <div
   className="cssClass[accordionView]"
+  data-tx="10.0.0"
 >
   <div
     aria-controls="AccordionBase-0"
@@ -49,6 +50,7 @@ exports[`AccordionView closes correctly 1`] = `
 exports[`AccordionView opens correctly 1`] = `
 <div
   className="cssClass[accordionView]"
+  data-tx="10.0.0"
 >
   <div
     aria-controls="AccordionBase-0"
@@ -95,6 +97,7 @@ exports[`AccordionView opens correctly 1`] = `
 exports[`AccordionView renders correctly 1`] = `
 <div
   className="cssClass[accordionView]"
+  data-tx="10.0.0"
 >
   <div
     aria-controls="AccordionBase-0"

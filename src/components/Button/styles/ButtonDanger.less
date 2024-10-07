@@ -34,6 +34,10 @@
         background: var(--triplex-Button-Danger_Background_Active);
         color: var(--triplex-Button-Danger_Color_Active);
     }
+    
+    &:focus-visible {
+        box-shadow: var(--triplex-Button-Danger_Shadow_Focus);
+    }
 
     &:disabled {
         background: var(--triplex-Button-Danger_Background_Disabled);
@@ -42,9 +46,5 @@
         .caretIcon path {
             fill: var(--triplex-Button-Danger_Caret_Color_Disabled);
         }
-    }
-
-    &[data-focus-visible]:focus {
-        box-shadow: inset 0 0 1px 1px var(--triplex-Accent-500);
     }
 }

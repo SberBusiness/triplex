@@ -75,7 +75,13 @@ export const Radio = React.forwardRef<HTMLInputElement, IRadioProps>((props, ref
     };
 
     return (
-        <label {...labelAttributes} className={labelClassNames} onClick={handleClick} onMouseDown={handleMouseDown}>
+        <label
+            {...labelAttributes}
+            className={labelClassNames}
+            onClick={handleClick}
+            onMouseDown={handleMouseDown}
+            data-tx={process.env.npm_package_version}
+        >
             <input
                 type="radio"
                 className={classNames}

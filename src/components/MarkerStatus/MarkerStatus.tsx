@@ -18,7 +18,7 @@ export class MarkerStatus extends React.PureComponent<IMarkerStatusProps> {
     render(): JSX.Element {
         const {children, className, description, status} = this.props;
         return (
-            <div className={classnames(className, 'cssClass[globalMarkerStatus]')}>
+            <div className={classnames(className, 'cssClass[globalMarkerStatus]')} data-tx={process.env.npm_package_version}>
                 <div className="cssClass[markerContainer]">
                     <Marker status={status} />
                 </div>

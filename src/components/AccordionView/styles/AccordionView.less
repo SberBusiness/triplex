@@ -1,6 +1,7 @@
 @import url('src/styles/style');
 
 .accordionView {
+    background: var(--triplex-AccordionView-Background);
     border-radius: @radius-16;
 
     .accordionViewHeaderWrapper {
@@ -23,8 +24,8 @@
         }
 
         .caretIcon {
-            transition: transform 0.25s ease-in-out;
-            margin: @metric-4 0 @metric-4 @metric-24;
+            transition: transform 0.3s ease-in-out;
+            margin: 4px 0 4px 20px;
             flex-shrink: 0;
         }
 
@@ -56,6 +57,15 @@
             border-top: none;
             border-radius: 0 0 @metric-16 @metric-16;
             visibility: visible;
+        }
+    }
+}
+
+@media (max-width: @screen-sm-max) {
+    .accordionView {
+        .accordionViewHeaderWrapper,
+        .accordionViewBody {
+            padding: 15px;
         }
     }
 }

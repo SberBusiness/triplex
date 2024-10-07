@@ -1,0 +1,58 @@
+.svg-preview-section + .svg-preview-section {
+    margin-top: 32px;
+}
+
+.svg-preview-section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, auto));
+    margin-top: 25px;
+    overflow: auto;
+    transition: max-height 500ms ease;
+    gap: 20px 32px;
+
+    &.collapsed {
+        display: none;
+    }
+}
+
+.svg-preview-section-spoiler {
+    position: relative;
+    width: 100%;
+    padding: 5px 0;
+    text-align: left;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+
+    .styleguidist-light-theme & {
+        color: #2E2F36;
+        border-color: #D9D9D9;
+    }
+
+    .styleguidist-dark-theme & {
+        color: #F2F4F7;
+        border-color: #2E2F36;
+    }
+}
+
+.svg-preview-section-spoiler-caret {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    transition: transform 500ms ease;
+
+    .collapsed & {
+        transform: rotateX(180deg);
+    }
+
+    .styleguidist-light-theme & {
+        stroke: #2E2F36;
+    }
+
+    .styleguidist-dark-theme & {
+        stroke: #F2F4F7;
+    }
+}

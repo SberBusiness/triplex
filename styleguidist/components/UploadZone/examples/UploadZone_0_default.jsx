@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {UploadZone} from '@sberbusiness/triplex/components/UploadZone/UploadZone';
 import {ClouddraguploadSrvIcon32} from '@sberbusiness/icons/ClouddraguploadSrvIcon32';
 import {PlugSrvIcon32} from '@sberbusiness/icons/PlugSrvIcon32';
@@ -15,16 +15,17 @@ import {EFontType, ETextSize, ELineType} from '@sberbusiness/triplex/components/
 import {MarkerStatus} from '@sberbusiness/triplex/components/MarkerStatus/MarkerStatus';
 import {EMarkerStatus} from '@sberbusiness/triplex/components/Marker/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
-
 import './UploadZone.less';
 
-const [container, setContainer] = React.useState();
+const [container, setContainer] = useState(null);
 
 const renderContainerContent = () => (
-    <div className="uploadZoneOverlay">
+    <div className="uploadZoneContainerContent">
         <ClouddraguploadSrvIcon32 />
         <Gap size={4} />
-        <div className="uploadZoneOverlayText">Положите файлы сюда</div>
+        <Text type={EFontType.GENERAL} size={ETextSize.B1}>
+            Положите файлы сюда
+        </Text>
     </div>
 );
 
@@ -158,7 +159,7 @@ const renderUploadZoneContent = (openUploadDialog) => (
     </div>
 );
 
-<div ref={(node) => setContainer(node)} style={{position: 'relative'}}>
+<div ref={(node) => setContainer(node)} style={{display: 'flow-root', position: 'relative'}}>
     <UploadZone renderContainerContent={renderContainerContent} dropZoneContainer={container}>
         {({openUploadDialog}) => renderUploadZoneContent(openUploadDialog)}
     </UploadZone>

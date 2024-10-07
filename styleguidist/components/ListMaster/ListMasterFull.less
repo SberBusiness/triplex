@@ -1,0 +1,25 @@
+// Список опций саджеста "Выбор счета".
+.account-filter-item,
+.counterparty-filter-item {
+    display: flex;
+    justify-content: space-between;
+
+    .account-filter-item-title,
+    .counterparty-filter-item-title {
+        text-overflow: ellipsis;
+        width: 50%;
+    }
+}
+
+.inputs-layout {
+    display: flex;
+    justify-content: space-between;
+
+    &.dates-layout {
+        justify-content: normal;
+    }
+
+    .dash {
+        padding: 4px 8px 0;
+    }
+}

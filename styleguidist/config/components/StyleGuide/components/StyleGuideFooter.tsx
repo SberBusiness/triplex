@@ -67,16 +67,12 @@ export const StyleGuideFooter: React.FC = () => {
 
     return (
         <footer className="styleguide-footer">
+            <div className="styleguide-footer-text">
+                <span>Написать нам {renderLink('Triplex@sberbank.ru', 'mailto:Triplex@sberbank.ru')}</span>
+                <span>© 1997—{new Date().getFullYear()} ПАО Сбербанк</span>
+                <span>{renderLink('BitBucket', 'https://stash.sigma.sbrf.ru/projects/CIBUFS/repos/sbbol-web-library')}</span>
+            </div>
             <StyleGuideFooterLogo />
-            <span>
-                {'© 1997—2023 ПАО Сбербанк  | '}
-                {renderLink('BitBucket', 'https://stash.sigma.sbrf.ru/projects/CIBUFS/repos/sbbol-web-library')}
-                {' | '}
-                {renderLink('Confluence', 'https://sbtatlas.sigma.sbrf.ru/wiki/pages/viewpage.action?pageId=1569564009')}
-                {' | '}
-                {renderLink('Figma Community', 'https://www.figma.com/@triplex')}
-            </span>
-            <span>Написать нам | {renderLink('Triplex@sberbank.ru', 'mailto:Triplex@sberbank.ru')}</span>
         </footer>
     );
 };

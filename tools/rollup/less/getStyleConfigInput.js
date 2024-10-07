@@ -1,3 +1,4 @@
+/* eslint-env node */
 const postcss = require('rollup-plugin-postcss');
 const {getClassName} = require('../../utils/getClassName');
 const buildCssPlugin = require('../../plugins/rollup-plugin-build-css');
@@ -25,7 +26,7 @@ function getPlugins() {
             use: {
                 less: {
                     math: 'always',
-                }
+                },
             },
         }),
         buildCssPlugin(shared),

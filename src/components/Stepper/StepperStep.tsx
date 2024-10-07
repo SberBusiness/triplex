@@ -111,7 +111,7 @@ export const StepperStep: React.FC<IStepperStepProps> & IStepperStepComposition 
     };
 
     const renderContent = () => (
-        <div className="cssClass[content]">
+        <div className="cssClass[content]" data-tx={process.env.npm_package_version}>
             {icon && renderIcon()}
             {children}
         </div>

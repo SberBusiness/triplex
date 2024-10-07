@@ -33,15 +33,10 @@ module.exports = [
                 ],
             },
             {
-                name: 'Calendar',
-                components: ['./src/components/Calendar/Calendar.tsx'],
-            },
-            {
                 name: 'Cards',
                 components: [
                     './src/components/Card/CardStatic.tsx',
                     './src/components/Card/CardAction.tsx',
-                    './src/components/Card/CardTableTotal.tsx',
                 ],
             },
             {
@@ -50,6 +45,20 @@ module.exports = [
                     './src/components/Checkbox/Checkbox.tsx',
                     './src/components/Checkbox/CheckboxXGroup.tsx',
                     './src/components/Checkbox/CheckboxYGroup.tsx',
+                ],
+            },
+            {
+                name: 'Chips',
+                components: [
+                    './src/components/Chip/Chip.tsx',
+                    './src/components/Chip/ChipDatePicker.tsx',
+                    './src/components/Chip/ChipIcon.tsx',
+                    './src/components/Chip/ChipMultiselect.tsx',
+                    './src/components/Chip/ChipOptions.tsx',
+                    './src/components/Chip/ChipSelect.tsx',
+                    './src/components/Chip/ChipSort.tsx',
+                    './src/components/Chip/ChipSuggest.tsx',
+                    './src/components/ChipGroup/ChipGroup.tsx',
                 ],
             },
             {
@@ -64,16 +73,13 @@ module.exports = [
                 content: './styleguidist/components/Col/Col.md',
             },
             {
-                name: 'Date components',
+                name: 'Date Pickers',
                 components: [
+                    './src/components/Calendar/Calendar.tsx',
                     './src/components/DatePicker/DatePicker.tsx',
                     './src/components/MonthYearPicker/MonthYearPicker.tsx',
                     './src/components/DateRange/DateRange.tsx',
                 ],
-            },
-            {
-                name: 'DesignTokens',
-                content: './styleguidist/components/DesignTokens/DesignTokens.md',
             },
             {
                 name: 'Divider',
@@ -114,36 +120,15 @@ module.exports = [
             },
             {
                 name: 'Inputs',
-                sections: [
-                    {
-                        name: 'AmountInput',
-                        components: ['./src/components/AmountInput/AmountInput.tsx'],
-                    },
-                    {
-                        name: 'Input',
-                        components: ['./src/components/Input/Input.tsx'],
-                    },
-                    {
-                        name: 'MaskedInput',
-                        components: ['./src/components/MaskedInput/MaskedInput.tsx'],
-                    },
-                    {
-                        name: 'NumberInput',
-                        components: ['./src/components/NumberInput/NumberInput.tsx'],
-                    },
-                    {
-                        name: 'SMSInput',
-                        components: ['./src/components/SMSInput/SMSInput.tsx'],
-                    },
-                    {
-                        name: 'TextArea',
-                        components: ['./src/components/TextArea/TextArea.tsx'],
-                    },
+                components: [
+                    './src/components/Input/Input.tsx',
+                    './src/components/NumberInput/NumberInput.tsx',
+                    './src/components/AmountInput/AmountInput.tsx',
+                    './src/components/TextArea/TextArea.tsx',
+                    './src/components/MaskedInput/MaskedInput.tsx',
+                    './src/components/InputGroup/InputGroup.tsx',
+                    './src/components/SMSInput/SMSInput.tsx',
                 ],
-            },
-            {
-                name: 'InputGroup',
-                components: './src/components/InputGroup/InputGroup.tsx',
             },
             {
                 name: 'Labels',
@@ -156,6 +141,15 @@ module.exports = [
             {
                 name: 'Link',
                 components: './src/components/Link/Link.tsx',
+            },
+            {
+                name: 'List',
+                components: [
+                    './src/components/List/List.tsx',
+                    './src/components/List/components/ListItem.tsx',
+                    './src/components/List/components/ListItemControls.tsx',
+                    './src/components/ListMaster/ListMaster.tsx'
+                ],
             },
             {
                 name: 'MarkerStatus',
@@ -302,6 +296,10 @@ module.exports = [
                 components: './src/components/CarouselExtended/CarouselExtended.tsx',
             },
             {
+                name: 'TabsLine',
+                components: './src/components/TabsLine/TabsLine.tsx',
+            },
+            {
                 name: 'Tags',
                 components: [
                     './src/components/Tag/Tag.tsx',
@@ -328,6 +326,10 @@ module.exports = [
                 ],
             },
             {
+                name: 'UnorderedList',
+                components: './src/components/UnorderedList/UnorderedList.tsx',
+            },
+            {
                 name: 'UploadZone',
                 components: './src/components/UploadZone/UploadZone.tsx',
             },
@@ -343,6 +345,10 @@ module.exports = [
             {
                 name: 'Icons',
                 sections: [
+                    {
+                        name: 'How to use',
+                        content: './styleguidist/components/Icons/HowToUse.md'
+                    },
                     {
                         name: 'Accent',
                         content: './styleguidist/components/Icons/Accent.md',
@@ -372,8 +378,8 @@ module.exports = [
                         content: './styleguidist/components/Icons/Service.md',
                     },
                     {
-                        name: 'Statuses',
-                        content: './styleguidist/components/Icons/Statuses.md',
+                        name: 'Status',
+                        content: './styleguidist/components/Icons/Status.md',
                     },
                 ],
             },
@@ -391,6 +397,10 @@ module.exports = [
                 ],
             },
         ],
+    },
+    {
+        name: 'DesignTokens',
+        content: './styleguidist/components/DesignTokens/DesignTokens.md',
     },
     {
         name: 'Examples',

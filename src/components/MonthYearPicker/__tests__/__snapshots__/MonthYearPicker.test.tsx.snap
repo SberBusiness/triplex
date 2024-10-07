@@ -3,24 +3,33 @@
 exports[`MonthYearPicker renders correctly 1`] = `
 <div
   className="cssClass[monthYearPicker]"
+  data-tx="10.0.0"
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
 >
   <div
-    className="cssClass[monthYearInput]"
+    className="cssClass[monthYearPickerTarget]"
   >
     <input
       className="cssClass[input]"
+      data-tx="10.0.0"
       onFocus={[Function]}
+      onKeyDown={[Function]}
       placeholder="мм.гггг"
       readOnly={true}
+      role="button"
       value="Jan 1970"
     />
-    <span
-      aria-hidden="true"
-      className="cssClass[calendarIcon] hoverable"
-      onMouseDown={[Function]}
+    <button
+      className="cssClass[buttonIcon] cssClass[squircle] hoverable cssClass[datePickerTargetButton]"
+      data-tx="10.0.0"
+      onClick={[Function]}
+      role="presentation"
+      tabIndex={-1}
+      type="button"
     >
       <svg />
-    </span>
+    </button>
   </div>
 </div>
 `;

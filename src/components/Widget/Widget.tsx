@@ -34,7 +34,11 @@ export class Widget extends React.Component<IWidgetProps> {
     public render(): React.ReactElement {
         const {className, isOpen, isStatic, onToggle, toggle} = this.props;
         return (
-            <div className={classnames(className, 'cssClass[widget]')} {...this.getHtmlDivAttributes()}>
+            <div
+                className={classnames(className, 'cssClass[widget]')}
+                {...this.getHtmlDivAttributes()}
+                data-tx={process.env.npm_package_version}
+            >
                 <AccordionBase
                     expandAnimationClassName="cssClass[widgetContent]"
                     renderBody={this.renderAccordionBody}

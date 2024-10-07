@@ -51,7 +51,7 @@ export type TDesignTokensComponentsSegmentedControl = {SegmentedControl: TDesign
 
 // Токены компонента SegmentedControl в светлой и темной темах.
 export const SegmentedControl_Tokens: TDesignTokensComponentsSegmentedControlValues = {
-    General_Background_Default: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-SegmentedControl-General_Background_Default)
+    General_Background_Default: [{ref: 'Basic.100'}, {value: 'none'}], // var(--triplex-SegmentedControl-General_Background_Default)
     General_Background_Disabled: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-SegmentedControl-General_Background_Disabled)
     General_Background_Selected_Default: [{ref: 'Primary.700'}, {ref: 'Primary.500'}], // var(--triplex-SegmentedControl-General_Background_Selected_Default)
     General_Background_Selected_Disabled: [{ref: 'Primary.300'}, {ref: 'Basic.500'}], // var(--triplex-SegmentedControl-General_Background_Selected_Disabled)
@@ -70,7 +70,7 @@ export const SegmentedControl_Tokens: TDesignTokensComponentsSegmentedControlVal
     General_Color_Selected_Default: [{ref: 'Basic.100'}, {ref: 'Neutral.100'}], // var(--triplex-SegmentedControl-General_Color_Selected_Default)
     General_Color_Selected_Disabled: [{ref: 'Basic.100'}, {ref: 'Basic.300'}], // var(--triplex-SegmentedControl-General_Color_Selected_Disabled)
 
-    Secondary_Background_Default: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-SegmentedControl-Secondary_Background_Default)
+    Secondary_Background_Default: [{ref: 'Basic.100'}, {value: 'none'}], // var(--triplex-SegmentedControl-Secondary_Background_Default)
     Secondary_Background_Disabled: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-SegmentedControl-Secondary_Background_Disabled)
     Secondary_Background_Selected_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-SegmentedControl-Secondary_Background_Selected_Default)
     Secondary_Background_Selected_Disabled: [{ref: 'Neutral.100'}, {ref: 'Basic.500'}], // var(--triplex-SegmentedControl-Secondary_Background_Selected_Disabled)

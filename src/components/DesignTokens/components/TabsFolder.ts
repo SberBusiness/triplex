@@ -5,7 +5,9 @@ export const designTokensComponentsTabsFolderKeys = [
     'Background',
     'ButtonNext_Background',
     'ButtonPrev_Background',
+
     'Shadow',
+
     'Tab_Background_Default',
     'Tab_Background_Hover',
     'Tab_Background_Selected',
@@ -33,7 +35,9 @@ export const TabsFolder_Tokens: TDesignTokensComponentsTabsFolderValues = {
         {value: 'linear-gradient(to right, #F2F4F7 39.06%, transparent)'},
         {value: 'linear-gradient(to right, #1F1F22 39.06%, transparent)'},
     ], // var(--triplex-TabsFolder-ButtonPrev_Background)
+
     Shadow: [{value: '0 -1px 0 0 #D0D7DD inset'}, {value: '0 -1px 0 0 #565B62 inset'}], // var(--triplex-TabsFolder-Shadow)
+
     Tab_Background_Default: [{ref: 'Neutral.100'}, {ref: 'Basic.500'}], // var(--triplex-TabsFolder-Tab_Background_Default)
     Tab_Background_Hover: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-TabsFolder-Tab_Background_Hover)
     Tab_Background_Selected: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-TabsFolder-Tab_Background_Selected)

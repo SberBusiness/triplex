@@ -5,7 +5,6 @@
     .font-size-inline(@font-size-14);
 
     text-transform: none;
-    color: var(--triplex-Basic-100);
 
     display: flex;
     flex-shrink: 0; //ie11-fix
@@ -17,33 +16,36 @@
     user-select: none;
     cursor: default;
     box-shadow: @shadow-05;
-    border: 2px solid transparent;
+    border: 2px solid;
     border-radius: 50%;
 
     &.wait {
-        color: var(--triplex-Primary-700);
-        background-color: var(--triplex-Basic-100);
-        border-color: var(--triplex-Primary-700);
+        color: var(--triplex-Step-Color_Wait);
+        background-color: var(--triplex-Step-Background_Color_Wait);
+        border-color: var(--triplex-Step-Border_Color_Wait);
     }
 
     &.disabled {
-        color: var(--triplex-Neutral-700);
-        background-color: var(--triplex-Basic-100);
+        color: var(--triplex-Step-Color_Disabled);
+        background-color: var(--triplex-Step-Background_Color_Disabled);
+        border-color: var(--triplex-Step-Border_Color_Disabled);
     }
 
     &.success {
-        color: var(--triplex-Basic-100);
-        background-color: var(--triplex-Primary-700);
+        color: var(--triplex-Step-Color_Success);
+        background-color: var(--triplex-Step-Background_Color_Success);
+        border-color: var(--triplex-Step-Border_Color_Success);
     }
 
     &.warning {
-        color: var(--triplex-Warning-700);
-        background-color: var(--triplex-Basic-100);
-        border-color: var(--triplex-Warning-700);
+        color: var(--triplex-Step-Color_Warning);
+        background-color: var(--triplex-Step-Background_Color_Warning);
+        border-color: var(--triplex-Step-Border_Color_Warning);
     }
 
     &.error {
-        color: var(--triplex-Basic-100);
-        background-color: var(--triplex-Error-700);
+        color: var(--triplex-Step-Color_Error);
+        background-color: var(--triplex-Step-Background_Color_Error);
+        border-color: var(--triplex-Step-Border_Color_Error);
     }
 }

@@ -30,6 +30,7 @@ export const Header: IHeaderFC = ({children, className, sticky, ...htmlDivAttrib
             'cssClass[sticky]': Boolean(sticky),
         })}
         {...htmlDivAttributes}
+        data-tx={process.env.npm_package_version}
     >
         {children}
     </div>

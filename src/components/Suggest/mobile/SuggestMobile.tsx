@@ -4,11 +4,22 @@ import {ISuggestMobileDropdown, SuggestMobileDropdown} from '@sberbusiness/tripl
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {EInputGroupPosition} from '@sberbusiness/triplex/components/InputGroup/InputGroup';
 
-export interface ISuggestMobile
+export interface ISuggestMobileProps
     extends Omit<ISuggestMobileDropdown, 'opened' | 'setOpened'>,
-        Pick<ISuggestMobileTarget, 'disabled' | 'error' | 'onFocus' | 'placeholder'> {
+        Pick<ISuggestMobileTarget, 'className' | 'disabled' | 'error' | 'onFocus' | 'placeholder'> {
     /** Позиция внутри компонента InputGroup. */
     groupPosition?: EInputGroupPosition;
+    /** Рендер-функция Target элемента. */
+    renderTarget?: (props: ISuggestMobileTargetProvideProps) => React.ReactNode;
+}
+
+export interface ISuggestMobileTargetProvideProps {
+    /** Обработчик получения фокуса. */
+    onFocus: (event: React.FocusEvent<HTMLElement>) => void;
+    /** Флаг, показывающий состояние dropdown - открыт/закрыт. */
+    opened: boolean;
+    /** Ref на элемент. */
+    targetRef: React.MutableRefObject<HTMLElement | null>;
 }
 
 const mapInputGroupPositionToCSSClass = {
@@ -21,7 +32,8 @@ const mapInputGroupPositionToCSSClass = {
  * Мобильный Suggest.
  * Отображает поле ввода (target). При получении полем ввода фокуса - отображает мобильный Dropdown.
  */
-export const SuggestMobile: React.FC<ISuggestMobile> = ({
+export const SuggestMobile: React.FC<ISuggestMobileProps> = ({
+    className,
     disabled,
     error,
     loadingDropdownInput,
@@ -32,48 +44,54 @@ export const SuggestMobile: React.FC<ISuggestMobile> = ({
     options,
     placeholder,
     loadingDropdownList,
+    renderTarget,
     saveFilterOnFocus,
     dropdownHint,
     value,
     groupPosition,
 }) => {
     const [dropdownOpened, setDropdownOpened] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const targetRef = useRef<HTMLInputElement>(null);
     // Предыдущее состояние dropdownOpened.
     const prevDropdownOpened = useRef<boolean>(false);
     const classNames = classnames(
         'cssClass[suggest]',
         'hoverable',
         {'cssClass[grouped]': !!groupPosition},
-        groupPosition && mapInputGroupPositionToCSSClass[groupPosition]
+        groupPosition && mapInputGroupPositionToCSSClass[groupPosition],
+        className
     );
 
-    const handleFocusTarget = (event: React.FocusEvent<HTMLInputElement>) => {
+    const handleFocusTarget = (event: React.FocusEvent<HTMLElement>) => {
         // Когда target получает фокус, открывается Dropdown.
         setDropdownOpened(true);
-        onFocus?.(event);
+        onFocus?.(event as React.FocusEvent<HTMLInputElement>);
         event.preventDefault();
     };
 
     useEffect(() => {
         // Дропдаун закрылся.
-        if (prevDropdownOpened.current && !dropdownOpened && inputRef.current) {
+        if (prevDropdownOpened.current && !dropdownOpened && targetRef.current) {
             // Обратный скролл к инпуту тк при открытии Dropdown в iOS страница скроллится вверх.
-            inputRef.current.scrollIntoView({block: 'center'});
+            targetRef.current.scrollIntoView({block: 'center'});
         }
         prevDropdownOpened.current = dropdownOpened;
     }, [dropdownOpened]);
 
     return (
         <div className={classNames}>
-            <SuggestMobileTarget
-                value={value}
-                disabled={disabled}
-                error={error}
-                onFocus={handleFocusTarget}
-                placeholder={placeholder}
-                ref={inputRef}
-            />
+            {renderTarget ? (
+                renderTarget({onFocus: handleFocusTarget, opened: dropdownOpened, targetRef})
+            ) : (
+                <SuggestMobileTarget
+                    value={value}
+                    disabled={disabled}
+                    error={error}
+                    onFocus={handleFocusTarget}
+                    placeholder={placeholder}
+                    ref={targetRef}
+                />
+            )}
 
             <SuggestMobileDropdown
                 opened={dropdownOpened}

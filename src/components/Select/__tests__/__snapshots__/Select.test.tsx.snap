@@ -12,6 +12,7 @@ exports[`Select should render correctly 1`] = `
     aria-haspopup="listbox"
     className="cssClass[selectExtendedTarget] cssClass[selectTarget]"
     data-test-id="Select__target"
+    data-tx="10.0.0"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="combobox"

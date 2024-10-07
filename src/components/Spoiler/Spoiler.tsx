@@ -72,7 +72,11 @@ export class Spoiler extends React.Component<TSpoilerProps, ISpoilerState> {
 
         return (
             <KeyDownListener eventKeyCode={EVENT_KEY_CODES.ENTER} onMatch={this.toggleContentByKeyDown}>
-                <div {...divHTMLAttributes} className={classnames('cssClass[spoiler]', className)}>
+                <div
+                    {...divHTMLAttributes}
+                    className={classnames('cssClass[spoiler]', className)}
+                    data-tx={process.env.npm_package_version}
+                >
                     <div className={'cssClass[head]'}>
                         <Button
                             aria-controls={this.instanceId}

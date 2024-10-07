@@ -50,7 +50,7 @@ export const SMSInput: React.FC<ISMSInputProps> & ISMSInputComposition = (props)
                 tooltipId,
             }}
         >
-            <div className={classSMSInput} {...htmlDivAttributes}>
+            <div className={classSMSInput} {...htmlDivAttributes} data-tx={process.env.npm_package_version}>
                 {children}
             </div>
         </SMSInputContext.Provider>

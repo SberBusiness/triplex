@@ -189,3 +189,33 @@ const options = [
     <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} disabled />
 </>
 ```
+
+### Selected item
+
+Свойство selected подсвечивает выбранный элемент.
+
+```jsx
+import {EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button/enums';
+
+const [selected, setSelected] = React.useState();
+
+const options = [
+    {
+        id: 'button-dropdown-option-1',
+        label: 'Текст пункта меню 1',
+        onSelect: () => setSelected({id: 'button-dropdown-option-1'}),
+    },
+    {
+        id: 'button-dropdown-option-2',
+        label: 'Текст пункта меню 2',
+        onSelect: () => setSelected({id: 'button-dropdown-option-2'}),
+    },
+    {
+        id: 'button-dropdown-option-3',
+        label: 'Текст пункта меню 3',
+        onSelect: () => setSelected({id: 'button-dropdown-option-3'}),
+    },
+];
+
+<ButtonDropdown selected={selected} theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
+```

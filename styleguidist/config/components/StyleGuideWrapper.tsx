@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 import StyleGuide from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuide';
 import {isIE} from './utils';
+import {StyleGuideContext} from './StyleGuideContext';
 
 // Подгружаем заранее собранные стили.
 import '@sberbusiness/triplex/styles/styles.css';
@@ -14,6 +15,8 @@ const styleguidistLiveClassName = 'styleguidist-live';
 moment.locale('ru');
 
 const StyleGuideWrapper: React.FC<any> = (props) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     useEffect(() => {
         const {hash} = document.location;
 
@@ -36,7 +39,11 @@ const StyleGuideWrapper: React.FC<any> = (props) => {
         };
     }, []);
 
-    return <StyleGuide {...props} />;
+    return (
+        <StyleGuideContext.Provider value={{setSidebarOpen, sidebarOpen}}>
+            <StyleGuide {...props} />
+        </StyleGuideContext.Provider>
+    );
 };
 
 export default StyleGuideWrapper;

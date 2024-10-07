@@ -4,8 +4,8 @@ import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {AccountsPrdIcon20} from '@sberbusiness/icons/AccountsPrdIcon20';
 import {renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
 import {LinkNavIcon16} from '@sberbusiness/icons/LinkNavIcon16';
-import {OninfowarningStsIcon16} from '@sberbusiness/icons/OninfowarningStsIcon16';
-import {OninfoerrorStsIcon16} from '@sberbusiness/icons/OninfoerrorStsIcon16';
+import {NoinfowarningStsIcon16} from '@sberbusiness/icons/NoinfowarningStsIcon16';
+import {NoinfoerrorStsIcon16} from '@sberbusiness/icons/NoinfoerrorStsIcon16';
 
 const getAlertParamsByType = (type: Exclude<EAlertType, EAlertType.SYSTEM>): IAlertProcessProps => {
     const closable = EAlertType.FEATURE === type;
@@ -20,9 +20,9 @@ const getCustomIconByType = (type: Exclude<EAlertType, EAlertType.SYSTEM>): JSX.
         case EAlertType.INFO:
             return <LinkNavIcon16 />;
         case EAlertType.WARNING:
-            return <OninfowarningStsIcon16 />;
+            return <NoinfowarningStsIcon16 />;
         case EAlertType.ERROR:
-            return <OninfoerrorStsIcon16 />;
+            return <NoinfoerrorStsIcon16 />;
         case EAlertType.FEATURE:
             return (
                 <div className="hoverable active">

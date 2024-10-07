@@ -23,7 +23,9 @@ const mapInputGroupPositionToCSSClass = {
  * В качестве value и options принимает объекты типа ISelectOption.
  * Если требуется кастомизация options или другой формат value – создайте свой на основе SelectExtended.
  */
-export const Select: React.FC<ISelectProps> = ({className, groupPosition, targetProps, ...selectBaseProps}) => {
+export const Select = React.forwardRef<HTMLDivElement, ISelectProps>((props, ref) => {
+    const {className, groupPosition, targetProps, ...selectBaseProps} = props;
+
     const targetClassName = classnames(
         'cssClass[selectTarget]',
         targetProps?.className,
@@ -39,7 +41,10 @@ export const Select: React.FC<ISelectProps> = ({className, groupPosition, target
                 className: targetClassName,
             }}
             dropdownListItemClassName="cssClass[selectDropdownListItem]"
+            ref={ref}
             {...selectBaseProps}
         />
     );
-};
+});
+
+Select.displayName = 'Select';

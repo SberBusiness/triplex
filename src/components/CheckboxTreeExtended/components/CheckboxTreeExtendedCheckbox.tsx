@@ -1,16 +1,16 @@
 import React from 'react';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Checkbox} from '@sberbusiness/triplex/components/Checkbox/Checkbox';
 import {ICheckboxProps} from '@sberbusiness/triplex/components/Checkbox/types';
 import {isStaticCheckboxTreeExtended} from '@sberbusiness/triplex/components/CheckboxTreeExtended/isStaticCheckboxTreeExtended';
 
 /**
  * Свойства CheckboxTreeExtendedCheckbox.
- *
- * @prop {boolean} [active] - Текущая нода является активной при перемещении с клавиатуры.
- * @prop {boolean} [opened] - Текущая нода раскрыта.
  */
 interface ICheckboxTreeExtendedCheckboxProps extends ICheckboxProps {
+    // Текущая нода является активной при перемещении с клавиатуры.
     active?: boolean;
+    // Текущая нода раскрыта.
     opened?: boolean;
 }
 
@@ -35,9 +35,16 @@ export class CheckboxTreeExtendedCheckbox extends React.Component<ICheckboxTreeE
     }
 
     public render(): JSX.Element {
-        const {active, opened, ...checkboxProps} = this.props;
+        const {active, className, opened, ...checkboxProps} = this.props;
 
-        return <Checkbox ref={this.setCheckboxNode} labelAttributes={{onFocus: this.handleFocus}} {...checkboxProps} />;
+        return (
+            <Checkbox
+                className={classnames('cssClass[checkboxTreeCheckbox]', className)}
+                ref={this.setCheckboxNode}
+                labelAttributes={{className: 'cssClass[checkboxTreeCheckboxLabel]', onFocus: this.handleFocus}}
+                {...checkboxProps}
+            />
+        );
     }
 
     private handleFocus = (event: React.FocusEvent<HTMLLabelElement>) => {

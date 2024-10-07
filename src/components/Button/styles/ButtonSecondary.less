@@ -46,6 +46,10 @@
         }
     }
 
+    &:focus-visible {
+        box-shadow: var(--triplex-Button-Secondary_Shadow_Focus);
+    }
+
     &:disabled {
         background: var(--triplex-Button-Secondary_Background_Disabled);
         box-shadow: var(--triplex-Button-Secondary_Shadow_Disabled);
@@ -54,9 +58,5 @@
         .caretIcon path {
             fill: var(--triplex-Button-Secondary_Caret_Color_Disabled);
         }
-    }
-
-    &[data-focus-visible]:focus {
-        box-shadow: var(--triplex-Button-Secondary_Shadow_Focus);
     }
 }

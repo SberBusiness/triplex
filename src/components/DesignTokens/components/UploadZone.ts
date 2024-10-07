@@ -4,6 +4,7 @@ import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/compo
 export const designTokensComponentsUploadZoneKeys = [
     'BorderColor_Default',
     'BorderColor_Hover',
+
     'DragArea_Background',
     'DragArea_BorderColor',
 ] as const;
@@ -20,6 +21,7 @@ export type TDesignTokensComponentsUploadZone = {UploadZone: TDesignTokensCompon
 export const UploadZone_Tokens: TDesignTokensComponentsUploadZoneValues = {
     BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-UploadZone-BorderColor_Default)
     BorderColor_Hover: [{ref: 'Basic.700'}, {ref: 'Neutral.500'}], // var(--triplex-UploadZone-BorderColor_Hover)
+
     DragArea_Background: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-UploadZone-DragArea_Background)
     DragArea_BorderColor: [{ref: 'Basic.700'}, {ref: 'Neutral.500'}], // var(--triplex-UploadZone-DragArea_BorderColor)
 };

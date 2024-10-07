@@ -5,14 +5,21 @@
     padding-top: 16px;
     padding-bottom: 16px;
     border: none;
+    -webkit-appearance: none; // iOS fix
     box-shadow: var(--triplex-FormField-Shadow_Default);
 
     &::placeholder {
         color: var(--triplex-FormField-Placeholder_Color);
+        opacity: 0;
+        transition: opacity .3s ease-out;
     }
 
     &:focus {
         box-shadow: var(--triplex-FormField-Shadow_Focus);
+
+        &::placeholder {
+            opacity: 1;
+        }
     }
 
     &:disabled {
@@ -21,5 +28,29 @@
 
     &.error {
         box-shadow: var(--triplex-FormField-Shadow_Error);
+    }
+
+    // Создаём хук для отслеживания применения автозаполнения.
+    &:-webkit-autofill {
+        animation-name: autofill-applied-hook;
+        animation-duration: 1ms;
+    }
+
+    // Создаём хук для отслеживания отмены автозаполнения.
+    &:not(:-webkit-autofill) {
+        animation-name: autofill-cancelled-hook;
+        animation-duration: 1ms;
+    }
+}
+
+@keyframes autofill-applied-hook {
+    0% {
+        transform: none;
+    }
+}
+
+@keyframes autofill-cancelled-hook {
+    0% {
+        transform: none;
     }
 }

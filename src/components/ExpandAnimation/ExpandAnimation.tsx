@@ -33,7 +33,7 @@ export interface IExpandAnimationState {
 }
 
 // Время исполнения анимации по-умолчанию.
-const ANIMATION_TIME_DEFAULT = 250;
+const ANIMATION_TIME_DEFAULT = 300;
 
 /** Компонент анимации сворачивания/разворачивания контента. */
 export class ExpandAnimation extends React.Component<IExpandAnimationProps, IExpandAnimationState> {

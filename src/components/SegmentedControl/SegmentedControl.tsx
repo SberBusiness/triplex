@@ -92,7 +92,7 @@ export const SegmentedControl: React.FC<ISegmentedControlSingleProps | ISegmente
                 value,
             }}
         >
-            <div className={classNames} {...divHTMLAttributes}>
+            <div className={classNames} {...divHTMLAttributes} data-tx={process.env.npm_package_version}>
                 {children}
             </div>
         </SegmentedControlContext.Provider>

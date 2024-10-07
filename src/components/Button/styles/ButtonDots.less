@@ -39,6 +39,10 @@
         }
     }
 
+    &:focus-visible {
+        box-shadow: var(--triplex-Button-Dots_Shadow_Focus);
+    }
+
     &:disabled {
         background: var(--triplex-Button-Dots_Background_Disabled);
         box-shadow: var(--triplex-Button-Dots_Shadow_Disabled);
@@ -46,9 +50,5 @@
         .dotsIcon path {
             fill: var(--triplex-Button-Dots_Color_Disabled);
         }
-    }
-
-    &[data-focus-visible]:focus {
-        box-shadow: var(--triplex-Button-Dots_Shadow_Focus);
     }
 }

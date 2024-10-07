@@ -26,7 +26,12 @@
 ```jsx {"file": "./examples/DatePicker_5_days.jsx"}
 ```
 
-### Disable focusTrap
+### Accessible
 
-```jsx {"file": "./examples/DatePicker_6_disable_focusTrap.jsx"}
+```jsx {"file": "./examples/DatePicker_6_accessible.jsx"}  
+```
+
+### Disabled focus trap
+
+```jsx {"file": "./examples/DatePicker_7_disabled_focus_trap.jsx"}
 ```

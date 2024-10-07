@@ -1,0 +1,15 @@
+@import (reference) 'src/styles/style';
+
+@tabsLine-tab-height: 32px;
+
+.tabsLinePanelLinks {
+    display: flex;
+    height: @tabsLine-tab-height;
+    z-index: 1;
+    padding-right: @metric-24;
+    margin-left: auto;
+
+    > a:not(:first-child) {
+        margin-left: @metric-16;
+    }
+}

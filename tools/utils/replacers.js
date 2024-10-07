@@ -1,8 +1,8 @@
-const hash = require('../utils/hash');
+/* eslint-env node */
 const {version} = require('../../package');
 const {getClassName, regExpFileName} = require('../utils/getClassName');
 const regExpStyle = /(["'])cssClass\[(\w+)\](["'])/g;
-const regExpRuntimeCssClass = /(cssClass\([^)]+)\)/g;
+const regExpRuntimeCssClass = /(cssClass\([^()]*(?:\([^()]*\)[^()]*)*)\)/g;
 
 let currentFile = ''; // Текущий файл.
 

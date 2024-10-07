@@ -20,7 +20,6 @@ const themeContainerRef = React.useRef(null);
 
 <ThemeProvider
   theme={ETriplexTheme.LIGHT}
-  styleTagId="example-light-theme"
   scopeRef={themeContainerRef}
 >
   <div ref={themeContainerRef}>
@@ -41,7 +40,6 @@ const themeContainerRef = React.useRef(null);
 
 <ThemeProvider
   theme={ETriplexTheme.DARK}
-  styleTagId="example-dark-theme"
   scopeRef={themeContainerRef}
 >
   <div ref={themeContainerRef}>
@@ -61,7 +59,6 @@ import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETri
 const themeContainerRef = React.useRef(null);
 
 <ThemeProvider
-  styleTagId="example-change-token"
   scopeRef={themeContainerRef}
   tokens={{
     Basic: {
@@ -90,13 +87,11 @@ const themeContainerRef2 = React.useRef(null);
 
 <ThemeProvider
   theme={ETriplexTheme.DARK}
-  styleTagId="example-nested-configs-1"
   scopeRef={themeContainerRef1}
 >
   <div ref={themeContainerRef1}>
     <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>Button name</Button>
     <ThemeProvider
-      styleTagId="example-nested-configs-2"
       scopeRef={themeContainerRef2}
       tokens={{
         Basic: {
@@ -139,7 +134,6 @@ const UseTokenExample = () => {
 };
 
 <ThemeProvider
-  styleTagId="example-hook-token"
   scopeRef={themeContainerRef}
   tokens={{
     Basic: {
@@ -197,7 +191,6 @@ const options = [
       <br />
       <br />
       <ThemeProvider
-        styleTagId="example-demo-other-themes"
         tokens={{
           Primary: {
             700: {value: primary700},

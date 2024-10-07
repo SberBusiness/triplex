@@ -52,7 +52,7 @@ export const mapCSSBundleComponents: Record<string, string[]> = {
         'Widget',
     ],
     Calendar: ['Calendar', 'DatePicker'],
-    Cards: ['CardStatic', 'CardAction', 'CardTableTotal'],
+    Cards: ['CardStatic', 'CardAction'],
     Checkbox: ['Checkbox', 'CheckboxXGroup', 'CheckboxYGroup'],
     Col: ['Col'],
     DatePicker: ['DatePicker'],

@@ -1,7 +1,6 @@
 import React from 'react';
 import SectionHeading from 'react-styleguidist/lib/client/rsg-components/SectionHeading';
 import Markdown from '../CustomMarkdown/CustomMarkdown';
-import './styles.less';
 
 interface SectionRendererProps {
     slug: string;

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Text} from '@sberbusiness/triplex/components/Typography/Text';
+import {EFontType, ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {KeyDownListener} from '@sberbusiness/triplex/components/KeyDownListener/KeyDownListener';
-import {ISmallInputProps, SmallInput} from '@sberbusiness/triplex/components/SmallInput/SmallInput';
+import {SmallInput, ISmallInputProps} from '@sberbusiness/triplex/components/SmallInput/SmallInput';
 import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
 import {focusButton} from '@sberbusiness/triplex/components/Button/utils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
@@ -65,7 +67,9 @@ export class DocumentNumberEdit extends React.Component<IDocumentNumberEditProps
 
         return (
             <div className={classnames('cssClass[documentNumberEdit]', className)}>
-                <span className="cssClass[label]">{labelText}</span>
+                <Text className="cssClass[label]" type={EFontType.SECONDARY} size={ETextSize.B1} line={ELineType.EXTRA}>
+                    {labelText}
+                </Text>
 
                 {isEdit ? (
                     <KeyDownListener onMatch={this.endEdit} eventKeyCode={EVENT_KEY_CODES.ENTER}>

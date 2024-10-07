@@ -1,229 +1,131 @@
-import {Hoverable} from '@sberbusiness/triplex/components/Hoverable/Hoverable';
-import {TooltipBase} from '@sberbusiness/triplex/components/Tooltip/components/TooltipBase';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {ITooltipProps} from './types';
-import {isKey} from '@sberbusiness/triplex/utils/keyboard';
-import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/TooltipBody';
-import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/TooltipTarget';
-import {TooltipXButton} from '@sberbusiness/triplex/components/Tooltip/TooltipXButton';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
+import {TooltipContext} from '@sberbusiness/triplex/components/Tooltip/TootlipContext';
+import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
+import {TooltipDesktop} from '@sberbusiness/triplex/components/Tooltip/components/desktop/TooltipDesktop';
+import {TooltipMobile} from '@sberbusiness/triplex/components/Tooltip/components/mobile/TooltipMobile';
+import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipBody';
+import {TooltipLink} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipLink';
+import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipTarget';
+import {TooltipXButton} from '@sberbusiness/triplex/components/Tooltip/components/common/TooltipXButton';
+import {TooltipMobileHeader} from '@sberbusiness/triplex/components/Tooltip/components/mobile/components/TooltipMobileHeader';
+import {ETooltipAlign, ETooltipPreferPlace, ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {ITooltipElements, TTooltipToggleType} from '@sberbusiness/triplex/components/Tooltip/types';
 
-interface IState {
+/** Свойства компонента Tooltip. */
+export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Размер подсказки. */
+    size: ETooltipSize;
+    /** Подсказка должна появляться по наведению или по клику. */
+    toggleType?: TTooltipToggleType;
+    /** Предпочитаемое место расположения подсказки. Если не помещается, то отобразится там где помещается. */
+    preferPlace?: ETooltipPreferPlace;
+    /** Расположение указателя. */
+    alignTip?: ETooltipAlign;
+    /** Элемент в который будет происходить рендер подсказки. */
+    renderContainer?: Element;
+    /** Отключить режим адаптивности. */
+    disableAdaptiveMode?: boolean;
     /** Признак открыт ли Tooltip. */
-    isOpen: boolean;
-    /** Признак контролируемый ли Tooltip. */
-    isControlled: boolean;
-    /** Нода Tooltip'а. */
-    tooltipNode: HTMLDivElement | null;
+    isOpen?: boolean;
+    /** Контролирующая функция закрытия/открытия. */
+    toggle?: (open: boolean) => void;
+    /** Callback-функция появления Tooltip. */
+    onShow?: (node: HTMLDivElement) => void;
+}
+
+/** Внутренние составляющие компонента Tooltip. */
+interface ITooltipComposition {
+    Target: typeof TooltipTarget;
+    Body: typeof TooltipBody;
+    Link: typeof TooltipLink;
+    XButton: typeof TooltipXButton;
+    MobileHeader: typeof TooltipMobileHeader;
 }
 
 /** Всплывающая подсказка. */
-export class Tooltip extends React.Component<ITooltipProps, IState> {
-    public static displayName = 'Tooltip';
+export const Tooltip: React.FC<ITooltipProps> & ITooltipComposition = ({
+    children,
+    toggleType,
+    preferPlace,
+    disableAdaptiveMode,
+    isOpen: openProp,
+    toggle,
+    ...rest
+}) => {
+    const [openState, setOpenState] = useState(false);
+    const hoveredRef = useRef(false);
+    const open = openProp ?? openState;
 
-    public static defaultProps = {
-        tabSensitive: true,
-    };
-
-    public static Body = TooltipBody;
-    public static Target = TooltipTarget;
-    public static XButton = TooltipXButton;
-
-    public target: Element | null | Text = null;
-
-    public state: IState = {
-        isControlled: this.props.isOpen !== undefined && this.props.toggle !== undefined,
-        isOpen: !!this.props.isOpen,
-        tooltipNode: null,
-    };
-
-    public render(): JSX.Element {
-        const {toggleType, children, isOpen: isOpenProp, tabSensitive, toggle, ...tooltipBaseProps} = this.props;
-        const {isOpen: isOpenState, isControlled} = this.state;
-        const open = isControlled ? isOpenProp : isOpenState;
-
-        if (toggleType === 'hover') {
-            return (
-                <Hoverable onHoverToggle={this.onHoverToggle} additionalTarget={this.state.tooltipNode || undefined}>
-                    {() => (
-                        <TooltipBase
-                            {...tooltipBaseProps}
-                            setTooltipRef={this.setTooltip}
-                            isOpen={open}
-                            closeTooltip={this.onClickCloseByHover}
-                        >
-                            {children}
-                        </TooltipBase>
-                    )}
-                </Hoverable>
-            );
-        } else if (toggleType === 'click') {
-            return (
-                <TooltipBase {...tooltipBaseProps} setTooltipRef={this.setTooltip} isOpen={open} closeTooltip={this.onClose}>
-                    {children}
-                </TooltipBase>
-            );
-        } else {
-            return (
-                <TooltipBase {...tooltipBaseProps} isOpen={open} closeTooltip={this.onClose}>
-                    {children}
-                </TooltipBase>
-            );
+    useEffect(() => {
+        if (openProp === false) {
+            hoveredRef.current = false;
         }
-    }
+    }, [openProp]);
 
-    public componentDidMount(): void {
-        // если тултип открывается по клику, то должен уметь закрываться по клику вне
-        if (this.props.isOpen) {
-            document.addEventListener('click', this.closeIfOuterAction);
-        }
+    /** Получить дочерние React-элементы. */
+    const getChildrenElements = useCallback(() => {
+        const elements: ITooltipElements = {body: null, closeButton: null, mobileHeader: null, target: null};
 
-        this.addTargetListeners();
-    }
-
-    public componentDidUpdate(prevProps: Readonly<ITooltipProps>, prevState: Readonly<IState>): void {
-        // если тултип открывается по клику, то должен уметь закрываться по клику вне
-        const isOpened = this.state.isControlled ? !prevProps.isOpen && this.props.isOpen : !prevState.isOpen && this.state.isOpen;
-        const isClosed = this.state.isControlled ? prevProps.isOpen && !this.props.isOpen : prevState.isOpen && !this.state.isOpen;
-        if (isOpened) {
-            // Tooltip открылся.
-            // Таймаут, чтобы tooltip не закрылся при первом открытии, в случае контролируемого tooltip.
-            setTimeout(() => {
-                document.addEventListener('click', this.closeIfOuterAction);
-            });
-        }
-
-        if (isClosed) {
-            // Tooltip закрылся.
-            document.removeEventListener('click', this.closeIfOuterAction);
-        }
-
-        if (prevProps.toggleType !== this.props.toggleType) {
-            this.removeTargetListeners();
-
-            // eslint-disable-next-line react/no-find-dom-node
-            this.target = ReactDOM.findDOMNode(this);
-
-            this.addTargetListeners();
-        }
-    }
-
-    public componentWillUnmount(): void {
-        document.removeEventListener('click', this.closeIfOuterAction);
-
-        this.removeTargetListeners();
-    }
-
-    private setTooltip = (element: HTMLDivElement) => {
-        this.setState({tooltipNode: element});
-    };
-
-    // Закрываем тултип если был клик вне тултипа и таргета
-    private closeIfOuterAction = (event: Event) => {
-        if (this.state.tooltipNode && this.target) {
-            let notTarget = true;
-            // В IE функция contains не потдерживается для svg
-            if (!this.target.contains) {
-                this.target.childNodes.forEach((child) => {
-                    if (child === event.target) {
-                        notTarget = false;
-                    }
-                });
-            } else {
-                notTarget = !this.target.contains(event.target as Node);
-            }
-
-            const isOuterAction = !this.state.tooltipNode.contains(event.target as Node) && notTarget;
-            if (isOuterAction) {
-                this.onClose();
-            }
-        }
-    };
-
-    private onHoverToggle = (isHovered: boolean) => {
-        if (this.state.isControlled) {
-            this.props.toggle?.(isHovered);
-        } else {
-            this.setState({isOpen: isHovered});
-        }
-    };
-
-    private handleClick = () => {
-        if (this.props.toggleType === 'click') {
-            this.onOpen();
-        }
-    };
-
-    private onClickCloseByHover = () => {
-        const event = new MouseEvent('mouseleave');
-
-        this.state.tooltipNode?.dispatchEvent(event);
-    };
-
-    private onClose = () => {
-        if (this.state.isControlled) {
-            this.props.toggle?.(false);
-        } else {
-            this.setState({isOpen: false});
-        }
-    };
-
-    private onOpen = () => {
-        const {isControlled, isOpen: isOpenState} = this.state;
-        const {isOpen: isOpenProp} = this.props;
-
-        if (!(isControlled ? isOpenProp : isOpenState)) {
-            if (this.state.isControlled) {
-                this.props.toggle?.(true);
-            } else {
-                this.setState({isOpen: true});
-            }
-        }
-    };
-
-    private onKeyup = (event: any): void => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-        const key = event.code || event.keyCode;
-
-        if (isKey(key, 'TAB')) {
-            this.onOpen();
-        }
-    };
-
-    private onBlur = (e: Event) => {
-        requestAnimationFrame(() => {
-            const relatedTarget = (e as FocusEvent).relatedTarget;
-            const contains = this.state.tooltipNode?.contains(relatedTarget as Element);
-
-            if (relatedTarget && !contains) {
-                this.onClose();
+        React.Children.map(children, (child) => {
+            if (React.isValidElement<React.ReactElement>(child)) {
+                if (child.type === TooltipTarget) {
+                    elements.target = child as React.ReactElement;
+                } else if (child.type === TooltipBody) {
+                    elements.body = child as React.ReactElement;
+                } else if (child.type === TooltipXButton) {
+                    elements.closeButton = child as React.ReactElement;
+                } else if (child.type === TooltipMobileHeader) {
+                    elements.mobileHeader = child as React.ReactElement;
+                }
             }
         });
-    };
 
-    private addTargetListeners = () => {
-        const {toggleType, tabSensitive} = this.props;
+        return elements;
+    }, [children]);
 
-        // eslint-disable-next-line react/no-find-dom-node
-        this.target = ReactDOM.findDOMNode(this);
-
-        this.target?.addEventListener('click', this.handleClick);
-
-        // закрытие и открытие тултипа на таб (для screen reader)
-        if (this.target && tabSensitive && (toggleType === 'click' || toggleType === 'hover')) {
-            this.target.addEventListener('keyup', this.onKeyup);
-            this.target.addEventListener('blur', this.onBlur, true);
+    /** Обработчик изменения состояния компонента. */
+    const handleOpen = (nextOpen: boolean) => {
+        if (openProp === undefined) {
+            if (!nextOpen) {
+                hoveredRef.current = false;
+            }
+            setOpenState(nextOpen);
         }
+
+        toggle?.(nextOpen);
     };
 
-    private removeTargetListeners = () => {
-        const {toggleType, tabSensitive} = this.props;
-
-        this.target?.removeEventListener('click', this.handleClick);
-
-        if (this.target && tabSensitive && (toggleType === 'click' || toggleType === 'hover')) {
-            this.target.removeEventListener('keyup', this.onKeyup);
-            this.target.removeEventListener('blur', this.onBlur, true);
-        }
+    /** Рендер десктоп версии компонента. */
+    const renderDesktopTooltip = () => {
+        return <TooltipDesktop isOpen={open} toggleType={toggleType} preferPlace={preferPlace} {...rest} />;
     };
-}
+
+    /** Рендер мобильной версии компонента. */
+    const renderMobileTooltip = () => {
+        return <TooltipMobile isOpen={open} {...rest} />;
+    };
+
+    return (
+        <TooltipContext.Provider
+            value={{
+                elements: getChildrenElements(),
+                setTooltipOpen: handleOpen,
+                toggleType,
+                tooltipHoveredRef: hoveredRef,
+                tooltipOpen: open,
+            }}
+        >
+            {disableAdaptiveMode ? (
+                renderDesktopTooltip()
+            ) : (
+                <MobileView fallback={renderDesktopTooltip()}>{renderMobileTooltip()}</MobileView>
+            )}
+        </TooltipContext.Provider>
+    );
+};
+
+Tooltip.Target = TooltipTarget;
+Tooltip.Body = TooltipBody;
+Tooltip.Link = TooltipLink;
+Tooltip.XButton = TooltipXButton;
+Tooltip.MobileHeader = TooltipMobileHeader;

@@ -1,3 +1,5 @@
+@import 'src/styles/style';
+
 .styleguide-heading {
     margin: 0;
     color: #2E2F36;
@@ -7,6 +9,10 @@
     font-size: 48px;
     line-height: 52px;
     font-weight: 900;
+
+    @media (max-width: @screen-md-max) {
+        font-size: 32px;
+    }
 }
 
 .heading-level-2 {

@@ -3,15 +3,15 @@ import React, {useState, useEffect, useRef} from 'react';
 import {LightBox} from '@sberbusiness/triplex/components/LightBox/LightBox';
 import {Page} from '@sberbusiness/triplex/components/Page/Page';
 import {Row} from '@sberbusiness/triplex/components/Row/Row';
-import {Col} from '@sberbusiness/triplex/components/Col/Col'
+import {Col} from '@sberbusiness/triplex/components/Col/Col';
 import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
 import {Field} from '@sberbusiness/triplex/components/Field/Field';
 import {Label} from '@sberbusiness/triplex/components/Label/Label';
 import {DocumentNumberEdit} from '@sberbusiness/triplex/components/DocumentNumberEdit/DocumentNumberEdit';
 import {AlertProcess} from '@sberbusiness/triplex/components/Alert/AlertProcess/AlertProcess';
 import {AlertContext} from '@sberbusiness/triplex/components/Alert/AlertContext/AlertContext';
-import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType'
-import {UnorderedList} from '@sberbusiness/triplex/components/List/UnorderedList';
+import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
+import {UnorderedList} from '@sberbusiness/triplex/components/UnorderedList/UnorderedList';
 import {Input} from '@sberbusiness/triplex/components/Input/Input';
 import {AmountInput} from '@sberbusiness/triplex/components/AmountInput/AmountInput';
 import {MaskedInput} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
@@ -21,7 +21,7 @@ import {TextArea} from '@sberbusiness/triplex/components/TextArea/TextArea';
 import {Divider} from '@sberbusiness/triplex/components/Divider/Divider';
 import {Suggest} from '@sberbusiness/triplex/components/Suggest/Suggest';
 import {Spoiler} from '@sberbusiness/triplex/components/Spoiler/Spoiler';
-import {SubRow} from '@sberbusiness/triplex/components/SubRow/SubRow'
+import {SubRow} from '@sberbusiness/triplex/components/SubRow/SubRow';
 import {SubLabel} from '@sberbusiness/triplex/components/SubLabel/SubLabel';
 import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
@@ -54,8 +54,8 @@ const steps = [
 ];
 
 const vatOptions = [
-    {value: '0', label: 'НДС включен в сумму платежа'},
-    {value: '1', label: 'НДС добавляется к сумме платежа'},
+    {value: '0', id: 'form-editable-0-0', label: 'НДС включен в сумму платежа'},
+    {value: '1', id: 'form-editable-0-1', label: 'НДС добавляется к сумме платежа'},
 ];
 
 const vatAmounts = [
@@ -65,9 +65,9 @@ const vatAmounts = [
 ];
 
 const senders = [
-    {value: '0', label: '40702810205275000000'},
-    {value: '1', label: '40702810205275000001'},
-    {value: '2', label: '40702810205275000002'},
+    {value: '0', id: 'form-editable-2-1', label: '40702810205275000000'},
+    {value: '1', id: 'form-editable-2-0', label: '40702810205275000001'},
+    {value: '2', id: 'form-editable-2-2', label: '40702810205275000002'},
 ];
 
 const receivers = [
@@ -119,9 +119,9 @@ const handleFilter = (str) => setOptions(receivers.filter((item) => item.label.s
 
 const handleScroll = () => {
     if (lightBoxRef.current) {
-        setShadow(lightBoxRef.current.scrollTop > 0)
+        setShadow(lightBoxRef.current.scrollTop > 0);
     }
-}
+};
 
 useEffect(() => {
     if (receiver) {
@@ -161,8 +161,7 @@ useEffect(() => {
                     </Page.Header>
                     <Page.Body>
                         <AlertProcess type={EAlertType.INFO}>
-                            По вопросам внешнеэкономической деятельности обращайтесь по телефону 8 800 200-94-45 с 0:00 до 20:00
-                            МСК.
+                            По вопросам внешнеэкономической деятельности обращайтесь по телефону 8 800 200-94-45 с 0:00 до 20:00 МСК.
                         </AlertProcess>
                         {error && renderProcessError('Укажите сумму платежа', 'Укажите ИНН/КИО получателя.')}
                         <Gap size={16} />
@@ -189,11 +188,8 @@ useEffect(() => {
                             </Col>
                             <Col size={3}>
                                 <SegmentedControl type={ESegmentedControlType.SINGLE} value={vatAmount} onSelect={setVatAmount}>
-                                    {vatAmounts.map(segmentValue => (
-                                        <SegmentedControl.Segment
-                                            key={segmentValue.value}
-                                            value={segmentValue.value}
-                                        >
+                                    {vatAmounts.map((segmentValue) => (
+                                        <SegmentedControl.Segment key={segmentValue.value} value={segmentValue.value}>
                                             {segmentValue.label}
                                         </SegmentedControl.Segment>
                                     ))}
@@ -227,12 +223,7 @@ useEffect(() => {
                                 <Label>Счёт списания</Label>
                             </Col>
                             <Col size={7}>
-                                <Select
-                                    options={senders}
-                                    value={sender}
-                                    onChange={setSender}
-                                    placeholder={'Выберите счет списания'}
-                                />
+                                <Select options={senders} value={sender} onChange={setSender} placeholder={'Выберите счет списания'} />
                             </Col>
                         </Field>
                         <Row paddingBottom={false}>
@@ -292,7 +283,11 @@ useEffect(() => {
                                                     </div>
                                                 </Col>
                                                 <Col size={7}>
-                                                    <MaskedInput value={account} mask={MaskedInput.presets.masks.account} onChange={(event) => setAccount(event.target.value)} />
+                                                    <MaskedInput
+                                                        value={account}
+                                                        mask={MaskedInput.presets.masks.account}
+                                                        onChange={(event) => setAccount(event.target.value)}
+                                                    />
                                                 </Col>
                                             </Field>
                                         </Col>
@@ -327,7 +322,11 @@ useEffect(() => {
                         <Row>
                             <Col>
                                 <Label>
-                                    Нажимая на кнопку «Создать» вы соглашаетесь с <Link linkType={ELinkType.TEXT} size={ELinkSize.LG}>условиями предложения</Link>.
+                                    Нажимая на кнопку «Создать» вы соглашаетесь с{' '}
+                                    <Link linkType={ELinkType.TEXT} size={ELinkSize.LG}>
+                                        условиями предложения
+                                    </Link>
+                                    .
                                 </Label>
                             </Col>
                         </Row>
@@ -356,5 +355,5 @@ useEffect(() => {
             Open Form
         </Button>
     )}
-</>
+</>;
 ```

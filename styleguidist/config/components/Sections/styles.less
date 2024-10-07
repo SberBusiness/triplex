@@ -1,0 +1,26 @@
+.styleguide-sections {
+    &.multi {
+        .styleguide-section {
+            padding-bottom: 24px;
+        }
+
+        .styleguide-para {
+            margin-bottom: 16px;
+        }
+    }
+}
+
+.styleguide-section-divider {
+    height: 30px;
+    margin-right: -42px;
+    margin-left: -42px;
+    background-color: #F2F4F7;
+
+    + .styleguide-section {
+        padding-top: 24px;
+    }
+
+    .styleguidist-dark-theme & {
+        background-color: #1F1F22
+    }
+}

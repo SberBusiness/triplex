@@ -40,7 +40,7 @@ export class AccordionView extends React.Component<AccordionViewPros> {
         const {children, className, isOpen, onToggle, toggle, ...htmlAttributes} = this.props;
 
         return (
-            <div {...htmlAttributes} className={classnames(className, 'cssClass[accordionView]')}>
+            <div {...htmlAttributes} className={classnames(className, 'cssClass[accordionView]')} data-tx={process.env.npm_package_version}>
                 <AccordionBase
                     expandAnimationClassName="cssClass[accordionViewContent]"
                     renderBody={this.renderBody}

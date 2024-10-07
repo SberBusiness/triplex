@@ -48,7 +48,7 @@ dts.bundle({
 /**
  * Из получившегося бандла надо убрать индексные импорты, поскольку предполагается покомпонентное использование библиотеки.
  */
-var regExpRemoveIndex = /[\w\W]+declare module '@sberbusiness\/triplex' {[^}]+}\n\n/;
+var regExpRemoveIndex = /[\w\W]+declare module '@sber-business\/triplex' {[^}]+}\n\n/;
 
 var index = fs.readFileSync(outFolder + '/index.d.ts').toString('utf8');
 index = index.replace(/\r\n/g, '\n').replace(regExpRemoveIndex, '');

@@ -6,13 +6,7 @@ export enum ECalendarPickType {
 
 /** Режим отображения календаря. */
 export enum ECalendarViewMode {
-    DAYS,
-    MONTHS,
-    YEARS,
-}
-
-/** Направление переключения страницы календаря. */
-export enum ECalendarPageDirection {
-    FORWARD,
-    BACKWARD,
+    DAYS = 'days',
+    MONTHS = 'months',
+    YEARS = 'years',
 }

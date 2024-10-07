@@ -43,7 +43,7 @@ const handlePropagation = (event) => event.stopPropagation();
                 </Text>
             </div>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть.
+                Дополнительная информация: текст пояснения, который коротко описывает суть.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Link
@@ -141,7 +141,7 @@ const handlePropagation = (event) => event.stopPropagation();
                 </Text>
             </div>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть.
+                Дополнительная информация: текст пояснения, который коротко описывает суть.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Link
@@ -239,7 +239,7 @@ const handlePropagation = (event) => event.stopPropagation();
                 </Text>
             </div>
             <Text tag="div" type={EFontType.SECONDARY} size={ETextSize.B2} style={{marginTop: '8px'}}>
-                Дополнительная информация: текст пояснения, которое коротко описывает суть.
+                Дополнительная информация: текст пояснения, который коротко описывает суть.
             </Text>
             <div style={{marginTop: '8px', lineHeight: '100%'}}>
                 <Link
@@ -350,7 +350,7 @@ const handlePropagation = (event) => event.stopPropagation();
                     size={ETextSize.B2}
                     style={{marginTop: '8px'}}
                 >
-                    Дополнительная информация: текст пояснения, которое коротко описывает суть.
+                    Дополнительная информация: текст пояснения, который коротко описывает суть.
                 </Text>
                 <div style={{marginTop: '8px', lineHeight: '100%'}}>
                     <Link

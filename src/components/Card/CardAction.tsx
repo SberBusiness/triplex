@@ -87,6 +87,7 @@ export class CardAction extends React.Component<ICardActionProps, ICardActionSta
                 role="button"
                 {...attributes}
                 ref={this.ref}
+                data-tx={process.env.npm_package_version}
             >
                 {children}
             </div>

@@ -1,7 +1,7 @@
 import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokenTypes';
 
 // Название токенов компонента Widget.
-export const designTokensComponentsWidgetKeys = ['Background', 'Caret_Color', 'Title_Color'] as const;
+export const designTokensComponentsWidgetKeys = ['Background', 'Caret_Color', 'Shadow', 'Title_Color'] as const;
 // Тип, содержащий названия токенов компонента Widget.
 export type TDesignTokensComponentsWidgetKeys = (typeof designTokensComponentsWidgetKeys)[number];
 // Тип, содержащий названия токенов компонента Widget и их значения.
@@ -15,5 +15,6 @@ export type TDesignTokensComponentsWidget = {Widget: TDesignTokensComponentsWidg
 export const Widget_Tokens: TDesignTokensComponentsWidgetValues = {
     Background: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-Widget-Background)
     Caret_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.700'}], // var(--triplex-Widget-Caret_Color)
+    Shadow: [{value: '0 0 0 1px #D0D7DD inset'}, {value: '0 0 0 1px #565B62 inset'}], // var(--triplex-Widget-Shadow)
     Title_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Widget-Title_Color)
 };

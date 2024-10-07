@@ -1,6 +1,5 @@
 import React from 'react';
 import {MaskedInput, IMaskedInputProps, IIMaskedInputFC} from '@sberbusiness/triplex/components/MaskedInput/MaskedInput';
-import {presets} from '@sberbusiness/triplex/components/MaskedInput/presets';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента DropdownMobileMaskedInput. */
@@ -14,4 +13,4 @@ export const DropdownMobileMaskedInput: IDropdownMobileMaskedInputFC = ({classNa
     <MaskedInput className={classnames('cssClass[dropdownMobileMaskedInput]', className)} {...rest} />
 );
 
-DropdownMobileMaskedInput.presets = presets;
+DropdownMobileMaskedInput.presets = MaskedInput.presets;

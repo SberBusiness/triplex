@@ -12,7 +12,7 @@ export const DesignTokensCore: TDesignTokensCore = {
             value: 'transparent', //     var(--triplex-Basic-0)
         },
         100: {
-            value: '#FFF', // @color-snowy     var(--triplex-Basic-100)
+            value: '#FFFFFF', // @color-snowy     var(--triplex-Basic-100)
         },
         300: {
             value: '#565B62', // @color-graphite-02     var(--triplex-Basic-300)
@@ -106,7 +106,7 @@ export const DesignTokensCore: TDesignTokensCore = {
             value: '#FFB13B', // @color-pumpkin-03     var(--triplex-Warning-500)
         },
         700: {
-            value: '#F90', // @color-pumpkin-02     var(--triplex-Warning-700)
+            value: '#FF9900', // @color-pumpkin-02     var(--triplex-Warning-700)
         },
         900: {
             value: '#E58A00', // @color-pumpkin-01     var(--triplex-Warning-900)

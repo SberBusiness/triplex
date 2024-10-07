@@ -1,83 +1,192 @@
-import React from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
 import moment from 'moment';
-import {TPickedDate} from '@sberbusiness/triplex/components/Calendar/types';
-import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
+import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
 import {globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
-import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
+import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
+import {CalendarViewItem} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewItem';
+import {isKey} from '@sberbusiness/triplex/utils/keyboard';
+import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 
-/** Свойства компонента CalendarViewYears. */
-export interface ICalendarViewYearsProps {
-    /** Дата, являющаяся курсором для навигации по интерфейсу. */
-    viewDate: moment.Moment;
-    /** Выбранная дата. */
-    pickedDate: TPickedDate;
-    /** Ограничение выбираемого периода. */
-    limitRange?: IDateLimitRange;
-    /** HTML атрибуты года. */
-    yearHtmlAttributes?: React.HTMLAttributes<HTMLTableCellElement>;
-    /** Callback-функция выбора года. */
-    onClick(year: number): void;
-}
+/** Свойства компонента CalendarViewMonths. */
+export interface ICalendarViewYearsProps extends Omit<ICalendarViewProps, 'viewMode' | 'dayHtmlAttributes' | 'monthHtmlAttributes'> {}
 
 /** Вид календаря с выбором года. */
 export const CalendarViewYears: React.FC<ICalendarViewYearsProps> = ({
     viewDate,
     pickedDate,
-    limitRange = globalLimitRange,
-    yearHtmlAttributes,
-    onClick,
+    limitRange,
+    periodId,
+    yearHtmlAttributes = {},
+    onPageChange,
+    onViewChange,
 }) => {
+    const {viewItemFocusedRef} = useContext(CalendarViewContext);
     const currentYear = viewDate.year();
 
-    /** Отрисовка года. */
-    const renderYear = (row: number, cell: number) => {
+    /** Проверяет, выходит ли дата за разрешённый период. */
+    const isOutOfRangeDate = useCallback(
+        (date: moment.Moment) => {
+            const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
+            const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
+
+            return date.isBefore(dateFrom, 'year') || date.isAfter(dateTo, 'year');
+        },
+        [limitRange.dateFrom, limitRange.dateTo]
+    );
+
+    /** Проверяет, является ли дата отключенной. */
+    const isDisabledDate = useCallback(
+        (date: moment.Moment) => {
+            return isOutOfRangeDate(date);
+        },
+        [isOutOfRangeDate]
+    );
+
+    /** Получить первую доступную для фокуса дату. */
+    const getInitialTabbableDate = useCallback(() => {
+        if (pickedDate && pickedDate.isSame(viewDate, 'year')) {
+            return pickedDate;
+        } else {
+            const date = viewDate.clone().subtract(5, 'year');
+
+            for (let i = 0; i < 12; i++) {
+                date.add(i, 'month');
+
+                if (!isDisabledDate(date)) {
+                    return date;
+                }
+            }
+        }
+    }, [pickedDate, viewDate, isDisabledDate]);
+
+    const [tabbableDate, setTabbableDate] = useState(getInitialTabbableDate());
+
+    useEffect(() => {
+        if (!viewItemFocusedRef.current) {
+            setTabbableDate(getInitialTabbableDate());
+        }
+    }, [viewDate, viewItemFocusedRef, getInitialTabbableDate]);
+
+    /** Рендер тела таблицы. */
+    const renderTableBody = () => (
+        <tbody>
+            {[0, 1, 2, 3].map((row) => (
+                <tr key={`calendar-view-years-row-${row}`}>{[0, 1, 2].map((cell) => renderTableData(row, cell))}</tr>
+            ))}
+        </tbody>
+    );
+
+    /** Рендер ячейки таблицы. */
+    const renderTableData = (row: number, cell: number) => {
         const year = currentYear + row * 3 + cell - 5;
-        const active = isActiveYear(year);
-        const disabled = isDisabledYear(year);
-        const classNames = classnames('cssClass[calendarYear]', {
-            'cssClass[active]': active,
-            'cssClass[disabled]': disabled,
-        });
+        const date = viewDate.clone().startOf('year').year(year);
+        const active = isActiveDate(date);
+        const disabled = isDisabledDate(date);
+        const tabbable = !disabled && isTabbableDate(date);
 
         return (
-            <td
-                key={`calendar-view-years-cell-${cell}`}
+            <CalendarViewItem
+                key={`calendar-table-data-${cell}`}
                 {...yearHtmlAttributes}
-                className={classNames}
-                onClick={!disabled ? handleYearClick(year) : undefined}
+                date={date}
+                unit="year"
+                active={active}
+                disabled={disabled}
+                tabbable={tabbable}
+                onKeyDown={handleItemKeyDown(date)}
+                onDateSelect={handleDateSelect}
             >
                 {year}
-            </td>
+            </CalendarViewItem>
         );
     };
 
-    /** Проверяет, является ли год активным. */
-    const isActiveYear = (year: number): boolean => {
+    /** Проверяет, является ли дата активной. */
+    const isActiveDate = (date: moment.Moment) => {
         if (pickedDate == null) {
             return false;
         }
 
-        return pickedDate.year() == year;
+        return pickedDate.isSame(date, 'year');
     };
 
-    /** Проверяет, является ли год отключенным. */
-    const isDisabledYear = (year: number): boolean => {
-        const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
-        const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
+    /** Проверяет, может ли дата получить фокус при навигации. */
+    const isTabbableDate = (date: moment.Moment) => {
+        if (tabbableDate) {
+            return date.isSame(tabbableDate, 'year');
+        }
 
-        return viewDate.year(year).isBefore(dateFrom) || viewDate.year(year).isAfter(dateTo);
+        return false;
     };
 
-    /** Обработчик выбора года. */
-    const handleYearClick = (year: number) => () => onClick(year);
+    /** Обработчик нажатия клавиши CalendarViewItem. */
+    const handleItemKeyDown = (date: moment.Moment) => (event: React.KeyboardEvent<HTMLTableCellElement>) => {
+        const key = event.code || event.keyCode;
+        let nextFocusedDate;
+
+        if (isKey(key, 'ARROW_RIGHT')) {
+            nextFocusedDate = getShiftedDate(date, 'add', 1, 'year');
+            event.preventDefault();
+        } else if (isKey(key, 'ARROW_LEFT')) {
+            nextFocusedDate = getShiftedDate(date, 'subtract', 1, 'year');
+            event.preventDefault();
+        } else if (isKey(key, 'ARROW_DOWN')) {
+            nextFocusedDate = getShiftedDate(date, 'add', 3, 'year');
+            event.preventDefault();
+        } else if (isKey(key, 'ARROW_UP')) {
+            nextFocusedDate = getShiftedDate(date, 'subtract', 3, 'year');
+            event.preventDefault();
+        } else if (isKey(key, 'PAGE_DOWN')) {
+            nextFocusedDate = getShiftedDate(date, 'add', 12, 'year');
+            event.preventDefault();
+        } else if (isKey(key, 'PAGE_UP')) {
+            nextFocusedDate = getShiftedDate(date, 'subtract', 12, 'year');
+            event.preventDefault();
+        }
+
+        if (nextFocusedDate) {
+            changeFocusedDate(nextFocusedDate);
+        }
+    };
+
+    /** Возвращает доступную для выбора дату после сдвига. */
+    const getShiftedDate = (currentDate: moment.Moment, operation: 'add' | 'subtract', amount: number, unit: 'month' | 'year') => {
+        const date = currentDate.clone();
+        const shiftDate = {
+            add: moment.fn.add.bind(date),
+            subtract: moment.fn.subtract.bind(date),
+        }[operation];
+
+        shiftDate(amount, unit);
+
+        if (isOutOfRangeDate(date)) {
+            return currentDate;
+        }
+
+        return date;
+    };
+
+    /** Обработчик выбора даты. */
+    const handleDateSelect = (date: moment.Moment) => {
+        onViewChange(date, ECalendarViewMode.MONTHS);
+    };
+
+    /** Изменение фокусируемой даты. */
+    const changeFocusedDate = (date: moment.Moment) => {
+        setTabbableDate(date);
+
+        if (date.year() + 5 < viewDate.year()) {
+            date = viewDate.clone().subtract(12, 'years');
+            onPageChange(date, ECalendarViewMode.YEARS);
+        } else if (date.year() - 6 > viewDate.year()) {
+            date = viewDate.clone().add(12, 'years');
+            onPageChange(date, ECalendarViewMode.YEARS);
+        }
+    };
 
     return (
-        <table className="cssClass[calendarViewYears]">
-            <tbody>
-                {[0, 1, 2, 3].map((row) => (
-                    <tr key={`calendar-view-years-row-${row}`}>{[0, 1, 2].map((cell) => renderYear(row, cell))}</tr>
-                ))}
-            </tbody>
+        <table className="cssClass[calendarViewYears]" role="grid" aria-labelledby={periodId}>
+            {renderTableBody()}
         </table>
     );
 };

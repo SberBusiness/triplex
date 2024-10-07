@@ -13,6 +13,8 @@ export interface TMaskedInputPresets {
         inn: string;
         // Доб. номер 000 (от 3 до 4 символов).
         phoneExtension: string;
+        // УИН 00000000000000000000 (от 20 до 25 символов).
+        uin: string;
         // Единый лицевой счёт поставщика услуг (ЖКУ) 00АА000000.
         zhkuAccount: string;
         // Идентификатор ЖКУ 00АА000000-00.
@@ -65,7 +67,7 @@ export interface TMaskedInputPresets {
         postalCode: TMaskedInputMask;
         // СНЛС 000-000-000 00.
         snils: TMaskedInputMask;
-        // УИН 00000000000000000000.
+        // УИН 00000000000000000000 (от 20 до 25 символов).
         uin: TMaskedInputMask;
         // Единый лицевой счёт поставщика услуг (ЖКУ) 00АА000000.
         zhkuAccount: TMaskedInputMask;
@@ -170,8 +172,8 @@ export const presets: TMaskedInputPresets = {
         postalCode: Array<RegExp>(6).fill(/\d/),
         // СНИЛС 000-000-000 00.
         snils: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, ' ', /\d/, /\d/],
-        // УИН 00000000000000000000.
-        uin: Array<RegExp>(20).fill(/\d/),
+        // УИН 00000000000000000000 (от 20 до 25 символов).
+        uin: Array<RegExp>(25).fill(/\d/),
         // Единый лицевой счёт поставщика услуг (ЖКУ) 00АА000000.
         zhkuAccount: [/\d/, /\d/, /[а-яА-ЯЁё]/, /[а-яА-ЯЁё]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
         // Идентификатор ЖКУ 00АА000000-00.
@@ -210,6 +212,8 @@ export const presets: TMaskedInputPresets = {
         inn: '0000000000  ',
         // Доб. номер 000 (от 3 до 4 символов).
         phoneExtension: '000 ',
+        // УИН 00000000000000000000 (от 20 до 25 символов).
+        uin: '00000000000000000000     ',
         // Единый лицевой счёт поставщика услуг (ЖКУ) 00АА000000.
         zhkuAccount: '00АА000000',
         // Идентификатор ЖКУ 00АА000000-00.

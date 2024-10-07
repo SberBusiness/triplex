@@ -29,7 +29,7 @@ export const DropdownMobile = React.forwardRef<HTMLDivElement, IDropdownMobilePr
         return (
             <OverlayBase setOpened={setOpened} opened={opened} direction={EOverlayDirection.BOTTOM}>
                 {(props: IOverlayChildrenProvideProps) => (
-                    <DropdownMobileInner {...props} {...htmlAttributes} ref={ref}>
+                    <DropdownMobileInner {...props} {...htmlAttributes} ref={ref} data-tx={process.env.npm_package_version}>
                         {children}
                     </DropdownMobileInner>
                 )}

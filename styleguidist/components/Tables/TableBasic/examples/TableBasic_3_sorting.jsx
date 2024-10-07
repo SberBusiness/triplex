@@ -36,42 +36,40 @@ const columns = [
 
 const sums = ['1337', '7355608', '58008', '100500', '9001'];
 
-const data = Array.from({length: 5}, ((value, index) => (
-    {
-        rowKey: `table-basic-row-${index}`,
-        rowData: {
-            number: 1397450 + index,
-            value: (
-                <>
-                    <Text tag="div" size={ETextSize.B1} type={EFontType.GENERAL} line={ELineType.EXTRA}>
-                        Платежное поручение ООО Ромашка
-                        <br />
-                        {decorate(`40702810205275000000`)}
-                    </Text>
-                    <Gap size={4} />
-                    <Text tag="div" size={ETextSize.B2} type={EFontType.SECONDARY}>
-                        В том числе НДС 20%
-                    </Text>
-                </>
-            ),
-            sum: sums[index],
-            status: (
-                <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
-                    Исполнено
-                </MarkerStatus>
-            )
-        }
-    }
-)));
+const data = Array.from({length: 5}, (value, index) => ({
+    rowKey: `table-basic-row-${index}`,
+    rowData: {
+        number: 1397450 + index,
+        value: (
+            <>
+                <Text tag="div" size={ETextSize.B1} type={EFontType.GENERAL} line={ELineType.EXTRA}>
+                    Платежное поручение ООО Ромашка
+                    <br />
+                    {decorate(`40702810205275000000`)}
+                </Text>
+                <Gap size={4} />
+                <Text tag="div" size={ETextSize.B2} type={EFontType.SECONDARY}>
+                    В том числе НДС 20%
+                </Text>
+            </>
+        ),
+        sum: sums[index],
+        status: (
+            <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
+                Исполнено
+            </MarkerStatus>
+        ),
+    },
+}));
 
 function handleOrderBy(order) {
     setOrder(order);
 }
 
 function getSortedData() {
-    if (order.direction == EOrderDirection.ASC) {
+    if (order.direction === EOrderDirection.ASC) {
         data.sort((a, b) => amountComparator(a.rowData.sum, b.rowData.sum));
-    } else if (order.direction == EOrderDirection.DESC) {
+    } else if (order.direction === EOrderDirection.DESC) {
         data.sort((a, b) => amountComparator(b.rowData.sum, a.rowData.sum));
     }
     return data;

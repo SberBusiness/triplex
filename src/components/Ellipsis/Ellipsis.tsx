@@ -50,7 +50,7 @@ export class Ellipsis extends React.Component<IEllipsisProps> {
             const ellipsisClassName = classnames(className, 'cssClass[ellipsisLineClamp]', {'cssClass[oneLine]': maxLine === 1});
 
             return (
-                <div {...rest} className={ellipsisClassName} ref={this.setRef}>
+                <div {...rest} className={ellipsisClassName} ref={this.setRef} data-tx={process.env.npm_package_version}>
                     {children}
                 </div>
             );

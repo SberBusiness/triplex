@@ -3,6 +3,7 @@
 exports[`AlertProcess type error renders correctly 1`] = `
 <div
   className="cssClass[alertProcess] cssClass[alertTypeError]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[themeIcon]"
@@ -20,6 +21,7 @@ exports[`AlertProcess type error renders correctly 1`] = `
 exports[`AlertProcess type info renders correctly 1`] = `
 <div
   className="cssClass[alertProcess] cssClass[alertTypeInfo]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[themeIcon]"
@@ -37,6 +39,7 @@ exports[`AlertProcess type info renders correctly 1`] = `
 exports[`AlertProcess type system renders correctly 1`] = `
 <div
   className="cssClass[alertProcess] cssClass[alertTypeFeature]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[themeIcon]"
@@ -58,6 +61,7 @@ exports[`AlertProcess type system renders correctly 1`] = `
 exports[`AlertProcess type warning renders correctly 1`] = `
 <div
   className="cssClass[alertProcess] cssClass[alertTypeWarning]"
+  data-tx="10.0.0"
 >
   <div
     className="cssClass[themeIcon]"

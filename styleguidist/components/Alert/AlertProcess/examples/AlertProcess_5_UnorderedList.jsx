@@ -2,7 +2,7 @@ import React from 'react';
 import {AlertProcess} from '@sberbusiness/triplex/components/Alert/AlertProcess/AlertProcess';
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
-import {UnorderedList} from '@sberbusiness/triplex/components/List/UnorderedList';
+import {UnorderedList} from '@sberbusiness/triplex/components/UnorderedList/UnorderedList';
 
 const items = [
     'Текст элемента списка',

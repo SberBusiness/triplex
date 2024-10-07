@@ -14,7 +14,7 @@ export const StepperWrapper: React.FC<IStepperWrapperProps> = ({children, classN
     });
 
     return (
-        <div className={classNames} {...rest}>
+        <div className={classNames} {...rest} data-tx={process.env.npm_package_version}>
             {children}
         </div>
     );

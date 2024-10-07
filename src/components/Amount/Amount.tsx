@@ -10,7 +10,7 @@ interface IAmountProps extends React.HTMLAttributes<HTMLSpanElement> {
     /** Значение суммы. */
     value: string;
     /** Количество знаков после запятой. */
-    fractionLength?: 0 | 4;
+    fractionLength?: 0 | 1 | 2 | 3 | 4;
     /** Сокращённое обозначение валюты. */
     currency?: string;
     /** Сообщение подсказки названия валюты. */
@@ -48,7 +48,7 @@ export const Amount: React.FC<IAmountProps> = ({
     ];
 
     return (
-        <span className={classNames} {...restProps}>
+        <span className={classNames} {...restProps} data-tx={process.env.npm_package_version}>
             <span data-test-id={dataTestId && `${dataTestId}__amount`}>{formattedAmount}</span>
             {currency && renderCurrencyName()}
         </span>

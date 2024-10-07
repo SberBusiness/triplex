@@ -1,3 +1,4 @@
+/* eslint-env node */
 const {
     regExpStyle,
     regExpRuntimeCssClass,

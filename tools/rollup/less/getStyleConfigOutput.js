@@ -1,3 +1,4 @@
+/* eslint-env node */
 const parseComponentPath = require('../../utils/parseComponentPath');
 
 /**

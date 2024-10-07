@@ -15,7 +15,11 @@ export const Spinner: React.FC<ISpinnerProps> = ({children, className, size = ES
     const isSM = size === ESpinnerSize.SM;
 
     return (
-        <div className={classnames('cssClass[spinnerWrapper]', className)} {...htmlDivAttributes}>
+        <div
+            className={classnames('cssClass[spinnerWrapper]', className)}
+            {...htmlDivAttributes}
+            data-tx={process.env.npm_package_version}
+        >
             {isSM ? <SpinnersmallAniIcon20 className="cssClass[globalSpin]" /> : <SpinnerlargeAniIcon64 className="cssClass[globalSpin]" />}
             {children && <div className={classnames('cssClass[textWrapper]', {'cssClass[sm]': isSM})}>{children}</div>}
         </div>

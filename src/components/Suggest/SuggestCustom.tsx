@@ -4,8 +4,6 @@ import isEqual from 'lodash.isequal';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
 import {EVENT_KEY_CODES, isKey} from '@sberbusiness/triplex/utils/keyboard';
-import {TooltipBody} from '@sberbusiness/triplex/components/Tooltip/TooltipBody';
-import {TooltipTarget} from '@sberbusiness/triplex/components/Tooltip/TooltipTarget';
 import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
 import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {TestIds} from '@sberbusiness/triplex/dataTestIds/dataTestIds';
@@ -116,9 +114,10 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                 size={ETooltipSize.SM}
                 isOpen={!!((isTooltipOpened && focused) || (notFound && focused)) && !disabled}
                 toggle={() => {}}
+                disableAdaptiveMode
             >
-                <TooltipBody data-test-id={dataTestId && `${dataTestId}${TestIds.Suggest.tooltip}`}>{tooltipHint}</TooltipBody>
-                <TooltipTarget>{this.renderSuggest()}</TooltipTarget>
+                <Tooltip.Body data-test-id={dataTestId && `${dataTestId}${TestIds.Suggest.tooltip}`}>{tooltipHint}</Tooltip.Body>
+                <Tooltip.Target>{this.renderSuggest()}</Tooltip.Target>
             </Tooltip>
         );
     }
@@ -238,6 +237,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                         'cssClass[hidden]': focused || opened,
                         'cssClass[placeholder]': !props.value,
                     })}
+                    data-tx={process.env.npm_package_version}
                 />
                 <Input
                     role="combobox"

@@ -2,7 +2,8 @@ import React from 'react';
 import {Moment} from 'moment';
 import {ICalendarRangeProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {IButtonIconProps} from '@sberbusiness/triplex/components/Button/ButtonIcon';
-import {ILinkTextProps} from '../Link/Link';
+import {IButtonLinkProps} from '@sberbusiness/triplex/components/Button/Button';
+import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 
 /** Внешний тип даты, который можно передать в компонент через свойства компонента. */
 export type TPickedDateProp = string | Moment | null;
@@ -26,14 +27,14 @@ export interface IDayHtmlAttributesFunctionParams {
 }
 
 /** Функция для получения HTML атрибутов компонента дня. */
-export type TDayHtmlAttributesFunction = (params: IDayHtmlAttributesFunctionParams) => React.HTMLAttributes<HTMLTableCellElement>;
+export type TDayHtmlAttributesFunction = (params: IDayHtmlAttributesFunctionParams) => React.TdHTMLAttributes<HTMLTableCellElement>;
 
 /** Alias для data атрибутов. */
 type TDataAttributeAlias = `data-${string}`;
 
 export type THTMLAttributesWithData = {
     [dataAttribute in TDataAttributeAlias]: string;
-} & React.HTMLAttributes<HTMLTableCellElement>;
+} & React.TdHTMLAttributes<HTMLTableCellElement>;
 
 /** Тип HTML атрибутов компонента дня. */
 export type TDayHtmlAttributes = THTMLAttributesWithData | TDayHtmlAttributesFunction;
@@ -42,15 +43,15 @@ export interface ICalendarNestedProps {
     /** HTML атрибуты компонента дня. */
     dayHtmlAttributes?: TDayHtmlAttributes;
     /** HTML атрибуты компонента месяца. */
-    monthHtmlAttributes?: React.HTMLAttributes<HTMLTableCellElement>;
+    monthHtmlAttributes?: React.TdHTMLAttributes<HTMLTableCellElement>;
     /** HTML атрибуты компонента года. */
-    yearHtmlAttributes?: React.HTMLAttributes<HTMLTableCellElement>;
-    /** Пропсы кнопки переключения на предыдущую страницу. */
-    prevButtonProps?: IButtonIconProps;
-    /** Пропсы кнопки переключения на следующую страницу. */
-    nextButtonProps?: IButtonIconProps;
-    /** Пропсы ссылки для смены вида календаря. */
-    changeViewLinkProps?: Omit<ILinkTextProps, 'linkType' | 'size'>;
+    yearHtmlAttributes?: React.TdHTMLAttributes<HTMLTableCellElement>;
+    /** Свойства кнопки переключения на предыдущую страницу календаря. */
+    prevButtonProps?: IButtonIconProps | ((viewMode: ECalendarViewMode) => IButtonIconProps);
+    /** Свойства кнопки переключения на следующую страницу календаря. */
+    nextButtonProps?: IButtonIconProps | ((viewMode: ECalendarViewMode) => IButtonIconProps);
+    /** Свойства кнопки для смены вида календаря. */
+    viewButtonProps?: IButtonLinkProps | ((viewMode: ECalendarViewMode) => IButtonLinkProps);
 }
 
 /** Свойства Calendar, передаваемые в рендер-функцию CalendarRange. */

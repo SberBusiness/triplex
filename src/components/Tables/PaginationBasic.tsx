@@ -52,12 +52,16 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
             this.props;
         const dataTestId = dataAttributes ? dataAttributes['test-id'] : undefined;
 
-        const options: ISelectOption[] = rowNumberOptions.map((o) => ({label: o, value: String(o)}));
+        const options: ISelectOption[] = rowNumberOptions.map((o) => ({label: o, value: String(o), id: String(o)}));
         const filteredOptions = options.filter((x) => x.value === String(rowNumber));
         const selectedOption = filteredOptions.length ? filteredOptions[0] : options[0];
 
         return (
-            <div className="cssClass[paginationWrapper]" {...(Boolean(dataAttributes) && getDataHTMLAttributes(dataAttributes!))}>
+            <div
+                className="cssClass[paginationWrapper]"
+                {...(Boolean(dataAttributes) && getDataHTMLAttributes(dataAttributes!))}
+                data-tx={process.env.npm_package_version}
+            >
                 <div className="cssClass[paginationSelectBlock]">
                     <div className="cssClass[paginationSelectText]" id={this.instanceId}>
                         {paginationLabel}

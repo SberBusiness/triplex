@@ -31,11 +31,11 @@ import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
 import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
 
-const [open, setOpen] = React.useState(false);
+const [isOpen, setIsOpen] = React.useState(false);
 
 const renderControlPanel = () => (
     <ComponentControlPanel>
-        <ComponentControlPanel.Checkbox checked={open} setChecked={setOpen}>
+        <ComponentControlPanel.Checkbox checked={isOpen} setChecked={setIsOpen}>
             Open
         </ComponentControlPanel.Checkbox>
     </ComponentControlPanel>
@@ -43,7 +43,7 @@ const renderControlPanel = () => (
 
 <>
     {renderControlPanel()}
-    <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT} isOpen={open} toggle={setOpen}>
+    <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT} isOpen={isOpen} toggle={setIsOpen}>
         <div>Текст подсказки.</div>
     </HelpBox>
 </>

@@ -7,6 +7,7 @@ exports[`RadioYGroup renders correctly 1`] = `
 >
   <label
     className="cssClass[label] cssClass[nonempty]"
+    data-tx="10.0.0"
     onClick={[Function]}
     onMouseDown={[Function]}
   >
@@ -23,6 +24,7 @@ exports[`RadioYGroup renders correctly 1`] = `
   </label>
   <label
     className="cssClass[label] cssClass[nonempty]"
+    data-tx="10.0.0"
     onClick={[Function]}
     onMouseDown={[Function]}
   >
@@ -39,6 +41,7 @@ exports[`RadioYGroup renders correctly 1`] = `
   </label>
   <label
     className="cssClass[label] cssClass[nonempty]"
+    data-tx="10.0.0"
     onClick={[Function]}
     onMouseDown={[Function]}
   >

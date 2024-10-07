@@ -12,47 +12,47 @@ import {AccordionBase} from '../../AccordionBase/protected/AccordionBase';
 /**
  * Свойства, передаваемые CollapsableTreeNode в рендер-функцию renderBody.
  *
- * @prop {boolean} activeNode - Текущая нода является активной при перемещении с клавиатуры.
- * @prop {boolean} animating - В текущий момент происходит анимация открытия/закрытия.
- * @prop {boolean} hasChildNodes - Текущая нода имеет дочерние ноды.
- * @prop {boolean} opened - Текущая нода раскрыта.
- * @prop {Function} toggle - Функция смены значения opened.
+ * activeNode - Текущая нода является активной при перемещении с клавиатуры.
+ * animating - В текущий момент происходит анимация открытия/закрытия.
+ * hasChildNodes - Текущая нода имеет дочерние ноды.
  */
 export interface ICollapsableTreeNodeBodyProvideProps
     extends Pick<IAccordionBodyProvideProps, 'animating'>,
         Pick<ITreeViewNodeProvideProps, 'activeNode' | 'hasChildNodes'> {
+    // Текущая нода раскрыта.
     opened: boolean;
+    // Функция смены значения opened.
     toggle: (opened: boolean) => void;
 }
 
 /**
  * Свойства, передаваемые CollapsableTreeNode в рендер-функцию renderHeader.
  *
- * @prop {boolean} activeNode - Текущая нода является активной при перемещении с клавиатуры.
- * @prop {boolean} animating - В текущий момент происходит анимация открытия/закрытия.
- * @prop {boolean} hasChildNodes - Текущая нода имеет дочерние ноды.
- * @prop {boolean} isLastNode - Текущая нода является последней в дереве.
- * @prop {boolean} opened - Текущая нода раскрыта.
- * @prop {Function} toggle - Функция смены значения opened.
+ * activeNode - Текущая нода является активной при перемещении с клавиатуры.
+ * animating - В текущий момент происходит анимация открытия/закрытия.
+ * hasChildNodes - Текущая нода имеет дочерние ноды.
+ * isLastNode - Текущая нода является последней в дереве.
  */
 export interface ICollapsableTreeNodeHeaderProvideProps
     extends Pick<IAccordionHeaderProvideProps, 'animating'>,
         Pick<ITreeViewNodeProvideProps, 'activeNode' | 'hasChildNodes' | 'isLastNode'> {
+    // Текущая нода раскрыта.
     opened: boolean;
+    // Функция смены значения opened.
     toggle: (opened: boolean) => void;
 }
 
 /**
  * Свойства CollapsableTreeNode.
  *
- * @param {Function} renderBody - Render-функция дочерних нод.
- * @param {Function} renderHeader - Render-функция не сворачиваемой части ноды.
- * @prop {Function} [toggle] - Функция смены значения opened.
- * @prop {Function} [onToggle] - Функция, вызываемая после окончания анимации открытия/закрытия.
+ * toggle - Функция смены значения opened.
+ * onToggle - Функция, вызываемая после окончания анимации открытия/закрытия.
  */
 export interface ICollapsableTreeNodeProps extends Omit<ITreeViewNodeProps, 'children'>, Pick<IAccordionBaseProps, 'onToggle' | 'toggle'> {
     children?: never;
-    renderBody: (props: ICollapsableTreeNodeBodyProvideProps) => JSX.Element | JSX.Element[] | undefined;
+    // Render-функция дочерних нод.
+    renderBody: (props: ICollapsableTreeNodeBodyProvideProps) => React.ReactNode;
+    // Render-функция не сворачиваемой части ноды.
     renderHeader: (props: ICollapsableTreeNodeHeaderProvideProps) => JSX.Element;
 }
 
