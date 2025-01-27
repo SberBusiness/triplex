@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import moment from 'moment';
 import {Calendar} from '@sberbusiness/triplex/components/Calendar/Calendar';
 import {dateFormatYYYYMMDD} from '@sberbusiness/triplex/consts/DateConst';
 
-const [pickedDate, setPickedDate] = React.useState(moment());
+const [pickedDate, setPickedDate] = useState(moment());
 
 const markedDays = [
     moment().subtract(10, 'days').format(dateFormatYYYYMMDD),
@@ -20,7 +20,7 @@ const disabledDays = [
 
 <Calendar
     pickedDate={pickedDate}
-    onChangeDate={setPickedDate}
+    onDateChange={setPickedDate}
     markedDays={markedDays}
     disabledDays={disabledDays}
     dayHtmlAttributes={{'data-action': 'click', 'data-label': 'calendar-day'}}
@@ -28,5 +28,5 @@ const disabledDays = [
     yearHtmlAttributes={{'data-action': 'click', 'data-label': 'calendar-year'}}
     prevButtonProps={{'data-action': 'click', 'data-label': 'calendar-prev-button'}}
     nextButtonProps={{'data-action': 'click', 'data-label': 'calendar-next-button'}}
-    changeViewLinkProps={{'data-action': 'click', 'data-label': 'calendar-change-view-link'}}
+    viewButtonProps={{'data-action': 'click', 'data-label': 'calendar-view-button'}}
 />

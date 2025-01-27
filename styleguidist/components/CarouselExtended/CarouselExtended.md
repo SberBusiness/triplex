@@ -1,12 +1,14 @@
 ```jsx
-import {TabsExtended} from '@sberbusiness/triplex/components/TabsExtended/TabsExtended';
-import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
+import React, {useState} from 'react';
 import {TabfoldercarouselleftSrvxIcon32} from '@sberbusiness/icons/TabfoldercarouselleftSrvxIcon32';
 import {TabfoldercarouselrightSrvxIcon32} from '@sberbusiness/icons/TabfoldercarouselrightSrvxIcon32';
+import {CarouselExtended} from '@sberbusiness/triplex/components/CarouselExtended/CarouselExtended';
+import {TabsExtended} from '@sberbusiness/triplex/components/TabsExtended/TabsExtended';
+import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import './styles.less';
 
-const [selectedTabId, setSelectedTabId] = React.useState('tabs-folder-extended-tab-1');
+const [selectedTabId, setSelectedTabId] = useState('tabs-folder-extended-tab-0');
 
 const tabs = [
     {id: 'tabs-folder-extended-tab-0', label: 'Tab Name', notification: true},
@@ -42,14 +44,21 @@ const renderNextButton = ({hidden, ...rest}) =>
     stepPrev={100}
     stepNext={100}
 >
-    <TabsExtended className="inner" selectedId={selectedTabId} onSelectTab={setSelectedTabId}>
-        <TabsExtended.Content className="content">
+    <TabsExtended
+        className="tabs-folder-extended-inner"
+        selectedId={selectedTabId}
+        onSelectTab={setSelectedTabId}
+    >
+        <TabsExtended.Content className="tabs-folder-extended-content">
             <TabsExtended.Content.TabsWrapper>
                 {tabs.map(({id, label, notification}) => (
-                    <TabsExtended.Content.Tab key={id} id={id} className="tab">
+                    <TabsExtended.Content.Tab key={id} id={id} className="tabs-folder-extended-tab">
                         {({selected}) => (
                             <TabsExtended.Content.TabButton
-                                className={classnames('tab-button', {selected, notification})}
+                                className={classnames('tabs-folder-extended-tab-button', {
+                                    selected,
+                                    notification
+                                })}
                                 selected={selected}
                             >
                                 {label}

@@ -1,84 +1,24 @@
-```jsx
-import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+### Small size
 
-<HelpBox tooltipSize={ETooltipSize.SM}>
-    <div>Текст подсказки.</div>
-</HelpBox>
+```jsx {"file": "./examples/HelpBox_small.jsx"}
 ```
 
-### Large Tooltip with Link
+### Large size with TooltipLink
 
-```jsx
-import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
-import {Gap} from '@sberbusiness/triplex/components/Gap/Gap';
-import {Link, ELinkType, ELinkSize} from '@sberbusiness/triplex/components/Link/Link';
-
-<HelpBox tooltipSize={ETooltipSize.LG}>
-    <div>
-        Текст подсказки.
-        <Gap size={16} />
-        <Link linkType={ELinkType.LINE} size={ELinkSize.SM}>Подробнее</Link>
-    </div>
-</HelpBox>
+```jsx {"file": "./examples/HelpBox_large.jsx"}
 ```
 
 ### Controlled
 
-```jsx
-import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
-
-const [isOpen, setIsOpen] = React.useState(false);
-
-const renderControlPanel = () => (
-    <ComponentControlPanel>
-        <ComponentControlPanel.Checkbox checked={isOpen} setChecked={setIsOpen}>
-            Open
-        </ComponentControlPanel.Checkbox>
-    </ComponentControlPanel>
-);
-
-<>
-    {renderControlPanel()}
-    <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT} isOpen={isOpen} toggle={setIsOpen}>
-        <div>Текст подсказки.</div>
-    </HelpBox>
-</>
+```jsx {"file": "./examples/HelpBox_controlled.jsx"}
 ```
 
 ### Placement types
 
-```jsx
-import {HelpBox} from '@sberbusiness/triplex/components/HelpBox/HelpBox';
-import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
+```jsx {"file": "./examples/HelpBox_placement.jsx"}
+```
 
-<div style={{display: 'flex', textAlign: 'center'}}>
-    <div style={{flex: '1 1 0'}}>
-        <div>Left</div>
-        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.LEFT}>
-            <div>Текст подсказки.</div>
-        </HelpBox>
-    </div>
-    <div style={{flex: '1 1 0'}}>
-        <div>Above</div>
-        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.ABOVE}>
-            <div>Текст подсказки.</div>
-        </HelpBox>
-    </div>
-    <div style={{flex: '1 1 0'}}>
-        <div>Below</div>
-        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.BELOW}>
-            <div>Текст подсказки.</div>
-        </HelpBox>
-    </div>
-    <div style={{flex: '1 1 0'}}>
-        <div>Right</div>
-        <HelpBox tooltipSize={ETooltipSize.SM} preferPlace={ETooltipPreferPlace.RIGHT}>
-            <div>Текст подсказки.</div>
-        </HelpBox>
-    </div>
-</div>
+### MobileHeader usage
+
+```jsx {"file": "./examples/HelpBox_header.jsx"}
 ```

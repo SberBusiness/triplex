@@ -66,7 +66,7 @@ export const MonthYearPicker = React.forwardRef<HTMLDivElement, IMonthYearPicker
 
     /** Рендер-функция управляющего элемента в заголовке DropdownMobile. */
     const renderDropdownHeaderTarget = () => {
-        return <MonthYearPickerDropdownHeaderTarget value={value} placeholder={placeholder} />;
+        return <MonthYearPickerDropdownHeaderTarget value={pickerValues.inputString} placeholder={placeholder} />;
     };
 
     /** Обработчик выбора даты. */

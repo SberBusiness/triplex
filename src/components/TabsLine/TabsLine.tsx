@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
-import {ITabsLineDesktopProps, TabsLineDesktop} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineDesktop';
+import {TabsLineDesktop, ITabsLineDesktopProps} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineDesktop';
 import {TabsLineMobile} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineMobile';
 
 /** Состояние компонента TabsLine. */
@@ -27,6 +27,7 @@ export const TabsLine: React.FC<ITabsLineProps> = ({
 }) => {
     return (
         <div
+            role="tablist"
             className={classnames(className, 'cssClass[tabsLineWrapper]', {
                 'cssClass[withSeparator]': Boolean(withSeparator),
             })}

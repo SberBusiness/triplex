@@ -1,78 +1,18 @@
 .tabs-folder-extended {
     position: relative;
-    background: #f2f4f7;
-    box-shadow: inset 0 -1px 0 0 #d0d7dd;
-
-    .inner {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
-
-    .content {
-        padding: 0;
-        background: transparent;
-    }
-
-    .tab + .tab {
-        margin-left: -1px;
-    }
-
-    .tab-button {
-        padding: 7px 15px;
-        box-sizing: border-box;
-        white-space: nowrap;
-        color: #1f1f22;
-        background: #f2f4f7;
-        outline: none;
-        border: 1px solid #d0d7dd;
-        border-radius: 8px 8px 0 0;
-        cursor: pointer;
-
-        &:hover {
-            background: #fff;
-        }
-
-        &.selected {
-            background: #fff;
-            border-bottom-color: #fff;
-
-            &:hover {
-                background: #fff;
-            }
-        }
-
-        &:focus {
-            z-index: 1;
-        }
-
-        &.notification {
-            &::after {
-                content: '';
-                position: absolute;
-                right: 8px;
-                top: 8px;
-                width: 8px;
-                height: 8px;
-                background: #f90;
-                border-radius: 4px;
-            }
-
-            > span {
-                margin-right: 8px;
-            }
-        }
-    }
+    background: #F2F4F7;
+    box-shadow: inset 0 -1px 0 0 #D0D7DD;
 
     .button-prev {
         left: 0;
-        background: linear-gradient(90deg, #f2f4f7 39.06%, rgba(242, 244, 247, 0) 100%) padding-box;
-        border-image: linear-gradient(90deg, #d0d7dd 39.06%, rgba(242, 244, 247, 0) 100%) 1;
+        background: linear-gradient(90deg, #F2F4F7 39.06%, rgba(242, 244, 247, 0) 100%) padding-box;
+        border-image: linear-gradient(90deg, #D0D7DD 39.06%, rgba(242, 244, 247, 0) 100%) 1;
     }
 
     .button-next {
         right: 0;
-        background: linear-gradient(270deg, #f2f4f7 39.06%, rgba(242, 244, 247, 0) 100%) padding-box;
-        border-image: linear-gradient(270deg, #d0d7dd 39.06%, rgba(242, 244, 247, 0) 100%) 1;
+        background: linear-gradient(270deg, #F2F4F7 39.06%, rgba(242, 244, 247, 0) 100%) padding-box;
+        border-image: linear-gradient(270deg, #D0D7DD 39.06%, rgba(242, 244, 247, 0) 100%) 1;
     }
 
     .button-prev,
@@ -87,5 +27,61 @@
         z-index: 1;
         border-width: 0 0 1px 0;
         border-bottom-style: solid;
+    }
+}
+
+.tabs-folder-extended-inner {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.tabs-folder-extended-content {
+    padding: 0;
+    background: transparent;
+}
+
+.tabs-folder-extended-tab + .tabs-folder-extended-tab {
+    margin-left: -1px;
+}
+
+.tabs-folder-extended-tab-button {
+    padding: 7px 15px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    color: #1F1F22;
+    background: #f2f4f7;
+    outline: none;
+    border: 1px solid #D0D7DD;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+
+    &:hover {
+        background: #FFFFFF;
+    }
+
+    &.selected {
+        background: #FFFFFF;
+        border-bottom-color: #FFFFFF;
+    }
+
+    &:focus {
+        z-index: 1;
+    }
+
+    &.notification {
+        &::after {
+            content: '';
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #FF9900;
+            border-radius: 4px;
+        }
+
+        > span {
+            margin-right: 8px;
+        }
     }
 }

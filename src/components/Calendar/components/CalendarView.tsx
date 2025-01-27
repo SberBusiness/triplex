@@ -14,7 +14,7 @@ export interface ICalendarViewProps
             ICalendarCommonProps,
             'pickType' | 'disabledDays' | 'markedDays' | 'yearHtmlAttributes' | 'monthHtmlAttributes' | 'dayHtmlAttributes'
         >,
-        Required<Pick<ICalendarCommonProps, 'limitRange' | 'onPageChange' | 'onViewChange'>> {
+        Required<Pick<ICalendarCommonProps, 'format' | 'limitRange' | 'onPageChange' | 'onViewChange'>> {
     /** Дочерние элементы. */
     children?: never;
     /** Вид отображения. */

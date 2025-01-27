@@ -35,7 +35,10 @@ export const DatePickerExtendedDropdown = React.forwardRef<HTMLDivElement, IDate
             role="dialog"
             aria-modal="true"
             targetRef={targetRef}
-            mobileViewProps={{children: renderMobileContent()}}
+            mobileViewProps={{
+                children: renderMobileContent(),
+                className: 'cssClass[globalDatePickerExtendedDropdownMobileWrapper]',
+            }}
             setOpened={setOpened}
             {...rest}
             ref={ref}

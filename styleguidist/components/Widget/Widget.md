@@ -88,7 +88,7 @@ const renderHeader = (props) => (
 ### Контролируемый виджет.
 
 ```jsx
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ComponentControlPanel} from '../../common/components/ComponentControlPanel/ComponentControlPanel';
 
 const [isOpen, setIsOpen] = React.useState(true);
 
@@ -114,6 +114,6 @@ const renderControlPanel = () => (
 
 <>
     {renderControlPanel()}
-    <Widget isOpen={isOpen} toggle={setIsOpen} renderBody={renderBody} renderHeader={renderHeader} />
+    <Widget isOpen={isOpen} toggle={setIsOpen} renderBody={renderBody} renderHeader={renderHeader}/>
 </>
 ```

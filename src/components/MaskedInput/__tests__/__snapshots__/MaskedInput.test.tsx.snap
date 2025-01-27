@@ -18,6 +18,7 @@ exports[`MaskedInput renders correctly 1`] = `
     defaultValue=""
     guide={false}
     onChange={[Function]}
+    onPaste={[Function]}
     pipe={[Function]}
     render={[Function]}
     type="text"

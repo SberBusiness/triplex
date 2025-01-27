@@ -38,36 +38,20 @@
         border: none;
     }
 
-    &:disabled {
-        cursor: default;
-        pointer-events: none;
-    }
-
     &:hover {
         z-index: @segment-hover-z-index;
     }
 
-    &[data-focus-visible]:focus {
-        border-color: var(--triplex-SegmentedControl-General_BorderColor_Focus);
+    &.selected {
+        z-index: @segment-selected-z-index;
+    }
+
+    &:focus-visible {
         z-index: @segment-focus-z-index;
     }
 
-    &.selected,
-    &.selected:hover {
-        z-index: @segment-selected-z-index;
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        &[data-focus-visible]:focus {
-            border-color: var(--triplex-SegmentedControl-General_BorderColor_Focus);
-            z-index: @segment-focus-z-index;
-        }
-    }
-
-    .segmentedControlSegmentContent {
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
+    &:disabled {
+        cursor: default;
     }
 
     &:first-child {
@@ -81,90 +65,108 @@
     & + .segmentedControlSegment {
         margin-left: -1px;
     }
+}
 
-    &.segmentedControlSingleSegment {
-        &.selected:hover {
-            cursor: default;
-        }
+.segmentedControlSegmentContent {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.segmentedControlSingleSegment {
+    &.selected {
+        cursor: default;
     }
+}
 
-    &.segmentedControlMultipleSegment {
-        &.selected:hover {
-            &[data-focus-visible]:focus {
+.segmentedControlGeneral {
+    .segmentedControlSegment {
+        background: var(--triplex-SegmentedControl-General_Background_Default);
+        border-color: var(--triplex-SegmentedControl-General_BorderColor_Default);
+        color: var(--triplex-SegmentedControl-General_Color_Default);
+
+        &:hover {
+            border-color: var(--triplex-SegmentedControl-General_BorderColor_Hover);
+        }
+
+        &.selected {
+            font-weight: @font-weight-600;
+            background: var(--triplex-SegmentedControl-General_Background_Selected_Default);
+            border-color: var(--triplex-SegmentedControl-General_BorderColor_Selected_Default);
+            color: var(--triplex-SegmentedControl-General_Color_Selected_Default);
+
+            &:disabled {
+                background: var(--triplex-SegmentedControl-General_Background_Selected_Disabled);
+                border-color: var(--triplex-SegmentedControl-General_BorderColor_Selected_Disabled);
+                color: var(--triplex-SegmentedControl-General_Color_Selected_Disabled);
+            }
+        }
+
+        &:focus-visible {
+            border-color: var(--triplex-SegmentedControl-General_BorderColor_Focus);
+        }
+
+        &:disabled {
+            background: var(--triplex-SegmentedControl-General_Background_Disabled);
+            border-color: var(--triplex-SegmentedControl-General_BorderColor_Disabled);
+            color: var(--triplex-SegmentedControl-General_Color_Disabled);
+        }
+
+        &.segmentedControlMultipleSegment {
+            &.selected:hover {
+                background: var(--triplex-SegmentedControl-General_Multiple_Background_Selected_Hover);
+                border-color: var(--triplex-SegmentedControl-General_Multiple_BorderColor_Selected_Hover);
+            }
+
+            &.selected:focus-visible {
                 border-color: var(--triplex-SegmentedControl-General_BorderColor_Focus);
             }
         }
     }
 }
 
-.segmentedControlGeneral .segmentedControlSegment {
-    background: var(--triplex-SegmentedControl-General_Background_Default);
-    border-color: var(--triplex-SegmentedControl-General_BorderColor_Default);
-    color: var(--triplex-SegmentedControl-General_Color_Default);
+.segmentedControlSecondary {
+    .segmentedControlSegment {
+        background: var(--triplex-SegmentedControl-Secondary_Background_Default);
+        border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Default);
+        color: var(--triplex-SegmentedControl-Secondary_Color_Default);
 
-    &:hover {
-        border-color: var(--triplex-SegmentedControl-General_BorderColor_Hover);
-    }
+        &:hover {
+            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Hover);
+        }
 
-    &:disabled {
-        background: var(--triplex-SegmentedControl-General_Background_Disabled);
-        border-color: var(--triplex-SegmentedControl-General_BorderColor_Disabled);
-        color: var(--triplex-SegmentedControl-General_Color_Disabled);
-    }
+        &.selected {
+            background: var(--triplex-SegmentedControl-Secondary_Background_Selected_Default);
+            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Selected_Default);
+            color: var(--triplex-SegmentedControl-Secondary_Color_Selected_Default);
 
-    &.selected,
-    &.selected:hover {
-        font-weight: @font-weight-600;
-        background: var(--triplex-SegmentedControl-General_Background_Selected_Default);
-        border-color: var(--triplex-SegmentedControl-General_BorderColor_Selected_Default);
-        color: var(--triplex-SegmentedControl-General_Color_Selected_Default);
+            &:disabled {
+                background: var(--triplex-SegmentedControl-Secondary_Background_Selected_Disabled);
+                border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Selected_Disabled);
+                color: var(--triplex-SegmentedControl-Secondary_Color_Selected_Disabled)
+            }
+        }
+
+        &:focus-visible {
+            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Focus);
+        }
 
         &:disabled {
-            background: var(--triplex-SegmentedControl-General_Background_Selected_Disabled);
-            border-color: var(--triplex-SegmentedControl-General_BorderColor_Selected_Disabled);
-            color: var(--triplex-SegmentedControl-General_Color_Selected_Disabled);
+            background: var(--triplex-SegmentedControl-Secondary_Background_Disabled);
+            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Disabled);
+            color: var(--triplex-SegmentedControl-Secondary_Color_Disabled);
         }
     }
 
-    &.segmentedControlMultipleSegment {
-        &.selected:hover {
-            background: var(--triplex-SegmentedControl-General_Multiple_Background_Selected_Hover);
-            border-color: var(--triplex-SegmentedControl-General_Multiple_BorderColor_Selected_Hover);
-        }
-    }
-}
-
-.segmentedControlSecondary .segmentedControlSegment {
-    background: var(--triplex-SegmentedControl-Secondary_Background_Default);
-    border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Default);
-    color: var(--triplex-SegmentedControl-Secondary_Color_Default);
-
-    &:hover {
-        border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Hover);
-    }
-    &:disabled {
-        background: var(--triplex-SegmentedControl-Secondary_Background_Disabled);
-        border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Disabled);
-        color: var(--triplex-SegmentedControl-Secondary_Color_Disabled);
-    }
-
-    &.selected,
-    &.selected:hover {
-        background: var(--triplex-SegmentedControl-Secondary_Background_Selected_Default);
-        border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Selected_Default);
-        color: var(--triplex-SegmentedControl-Secondary_Color_Selected_Default);
-
-        &:disabled {
-            background: var(--triplex-SegmentedControl-Secondary_Background_Selected_Disabled);
-            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Selected_Disabled);
-            color: var(--triplex-SegmentedControl-Secondary_Color_Selected_Disabled)
-        }
-    }
-
-    &.segmentedControlMultipleSegment {
+    .segmentedControlMultipleSegment {
         &.selected:hover {
             background: var(--triplex-SegmentedControl-Secondary_Multiple_Background_Selected_Hover);
             border-color: var(--triplex-SegmentedControl-Secondary_Multiple_BorderColor_Selected_Hover);
+        }
+
+        &.selected:focus-visible {
+            border-color: var(--triplex-SegmentedControl-Secondary_BorderColor_Focus);
         }
     }
 }

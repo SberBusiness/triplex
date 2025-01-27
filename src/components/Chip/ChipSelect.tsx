@@ -4,11 +4,10 @@ import {
     ISelectExtendedTargetProvideProps,
     SelectExtended,
 } from '@sberbusiness/triplex/components/SelectExtended/SelectExtended';
-import {Chip, ChipClearButton} from '@sberbusiness/triplex/components/Chip/index';
+import {Chip, ChipClearButton, ChipDropdownArrow} from '@sberbusiness/triplex/components/Chip/index';
 import {ISelectBaseProps} from '@sberbusiness/triplex/components/SelectBase/SelectBase';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SelectExtendedDropdownDefault} from '@sberbusiness/triplex/components/SelectExtended/components/SelectExtendedDropdownDefault';
-import {ChipscaretdownSrvxIcon24} from '@sberbusiness/icons/ChipscaretdownSrvxIcon24';
 
 export interface IChipSelectProps extends Omit<ISelectBaseProps, 'targetProps' | 'placeholder'> {
     /** Функция отмены выбора. */
@@ -35,13 +34,7 @@ export const ChipSelect = React.forwardRef<HTMLDivElement, IChipSelectProps>(
                 aria-expanded={opened}
                 disabled={disabled}
                 onClick={() => setOpened(true)}
-                postfix={
-                    value ? (
-                        <ChipClearButton onClick={handleClickClearButton} />
-                    ) : (
-                        <ChipscaretdownSrvxIcon24 className={classnames('cssClass[caretIcon]', {'cssClass[caretIconOpened]': opened})} />
-                    )
-                }
+                postfix={value ? <ChipClearButton onClick={handleClickClearButton} /> : <ChipDropdownArrow rotated={opened} />}
                 role="combobox"
                 ref={ref}
                 selected={Boolean(value)}

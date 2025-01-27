@@ -14,31 +14,35 @@
         font-weight: 600;
     }
 
-    &.rangeStart {
+    &.rangeSingle,
+    &.rangeStart,
+    &.rangeEnd,
+    &.rangeBetween {
         background: var(--triplex-Calendar-View_Item_Background_Range);
-        box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range);
-        border-radius: 50% 0 0 50%;
     }
 
-    &.rangeEnd {
-        background: var(--triplex-Calendar-View_Item_Background_Range);
-        box-shadow: -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+    &.rangeSingle,
+    &.rangeStart:last-child,
+    &.rangeEnd:first-child {
+        border-radius: 50%;
+        box-shadow: none;
+    }
+
+    &.rangeStart,
+    &.rangeBetween:first-child {
+        border-radius: 50% 0 0 50%;
+        box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range);
+    }
+
+    &.rangeEnd,
+    &.rangeBetween:last-child {
         border-radius: 0 50% 50% 0;
+        box-shadow: -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
     }
 
     &.rangeBetween {
-        background: var(--triplex-Calendar-View_Item_Background_Range);
+        border-radius: 0;
         box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range), -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
-
-        &:first-child {
-            box-shadow: 1px 0 var(--triplex-Calendar-View_Item_Background_Range);
-            border-radius: 50% 0 0 50%;
-        }
-
-        &:last-child {
-            box-shadow: -1px 0 var(--triplex-Calendar-View_Item_Background_Range);
-            border-radius: 0 50% 50% 0;
-        }
     }
 
     &.disabled {
@@ -47,7 +51,6 @@
 }
 
 .calendarViewItemLabel {
-    white-space: nowrap;
     display: flex;
     justify-content: center;
     align-items: center;

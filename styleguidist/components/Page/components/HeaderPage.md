@@ -11,7 +11,7 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Text>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Basic Link Controls
@@ -46,7 +46,7 @@ const options = [
             </Button>
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Extended
@@ -65,7 +65,7 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Extended Controls
@@ -99,7 +99,7 @@ const options = [
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Extended Link
@@ -121,7 +121,7 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Extended Link Controls
@@ -158,9 +158,8 @@ const options = [
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
-
 
 ### Редактирование номера документа
 
@@ -187,8 +186,10 @@ const handleChange = (value) => setValue(value);
     </HeaderPage.Link>
     <HeaderPage.Title>
         <HeaderPage.Title.Content>
-            <HeaderPage.Title.Content.Text>Рублёвый платёж контрагенту</HeaderPage.Title.Content.Text>
-            
+            <HeaderPage.Title.Content.Text>
+                Рублёвый платёж контрагенту
+            </HeaderPage.Title.Content.Text>
+
             <HeaderPage.Title.Content.Subhead>
                 <DocumentNumberEdit
                     onChange={handleChange}
@@ -208,7 +209,7 @@ const handleChange = (value) => setValue(value);
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>
+</HeaderPage>;
 ```
 
 ### Tabs
@@ -265,6 +266,80 @@ const tabs = [
         </HeaderPage.Tabs>
     </HeaderPage>
 </>
+```
+
+### TabsFolder
+
+```jsx
+import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
+import {Button} from '@sberbusiness/triplex/components/Button/Button';
+import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
+import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {TabsFolder} from '@sberbusiness/triplex/components/TabsFolder/TabsFolder';
+
+const [selectedTabId, setSelectedTabId] = React.useState('3');
+const [selectedTabFolderId, setSelectedTabFolderId] = React.useState('3');
+
+const options = [
+    {id: 'header-page-tabs-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
+    {id: 'header-page-tabs-option-2', label: 'действие 2', onSelect: () => alert('действие 2')},
+    {id: 'header-page-tabs-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
+];
+
+const tabs = [
+    {id: '1', label: 'Tab Name'},
+    {id: '2', label: 'Tab Name'},
+    {id: '3', label: 'Tab Name'},
+    {id: '4', label: 'Tab Name'},
+    {id: '5', label: 'Tab Name'},
+    {id: '6', label: 'Tab Name'},
+    {id: '7', label: 'Tab Name'},
+    {id: '8', label: 'Tab Name'},
+    {id: '9', label: 'Tab Name'},
+];
+
+const tabsFolderTabs = [
+    {id: '1', label: 'Tab Name'},
+    {id: '2', label: 'Tab Name'},
+    {id: '3', label: 'Tab Name'},
+    {id: '4', label: 'Tab Name'},
+    {id: '5', label: 'Tab Name'},
+    {id: '6', label: 'Tab Name'},
+];
+
+<>
+    <HeaderPage>
+        <HeaderPage.Title>
+            <HeaderPage.Title.Content>
+                <HeaderPage.Title.Content.Text>
+                    Шаблонный текст заголовка в одну строку
+                </HeaderPage.Title.Content.Text>
+            </HeaderPage.Title.Content>
+        </HeaderPage.Title>
+        <HeaderPage.Tabs>
+            <HeaderPage.Tabs.Content>
+                <HeaderPage.Tabs.Content.Tabs
+                    tabs={tabs}
+                    selectedTabId={selectedTabId}
+                    onSelectTab={(id) => setSelectedTabId(id)}
+                />
+            </HeaderPage.Tabs.Content>
+            <HeaderPage.Tabs.Controls>
+                <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                    Button Name
+                </Button>
+                <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
+            </HeaderPage.Tabs.Controls>
+        </HeaderPage.Tabs>
+        <HeaderPage.Subhead className="tabsFolder">
+            <TabsFolder
+                tabs={tabsFolderTabs}
+                selectedTabId={selectedTabFolderId}
+                onSelectTab={(id) => setSelectedTabFolderId(id)}
+            />
+        </HeaderPage.Subhead>
+    </HeaderPage>
+</>;
 ```
 
 ### With sidebar
@@ -328,5 +403,5 @@ const tabs = [
             <span className="sidebar-background" />
         </HeaderPage.LayoutSidebar.Sidebar>
     </HeaderPage.LayoutSidebar>
-</HeaderPage>
+</HeaderPage>;
 ```

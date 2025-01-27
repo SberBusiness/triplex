@@ -1,5 +1,5 @@
 import React from 'react';
-import {SwipeableArea} from '@sberbusiness/triplex/components/SwipeableArea/SwipeableArea';
+import {ISwipeableAreaRef, SwipeableArea} from '@sberbusiness/triplex/components/SwipeableArea/SwipeableArea';
 import {
     IListItemProps,
     ListItem,
@@ -26,18 +26,23 @@ interface IListItemTableProps extends Omit<IListItemProps, 'onSelect'> {
     onSelect?: never;
     /** Флаг состояния selected. */
     selected?: never;
+    /** Ref компонента SwipeableArea. */
+    swipeableAreaRef?: React.Ref<ISwipeableAreaRef>;
 }
 
 /** Элемент списка, для отображения табличных данных. */
 export const ListItemTable = React.forwardRef<HTMLLIElement, IListItemTableProps | IListItemTableSelectableProps>(
-    ({children, className, controlButtons, onClickItem, onSelect, selected, ...rest}, ref) => {
+    ({children, className, controlButtons, onClickItem, onSelect, selected, swipeableAreaRef, ...rest}, ref) => {
         const selectable = typeof onSelect !== 'undefined' && typeof selected !== 'undefined';
 
         const renderContent = () => <ListItemContent onClick={onClickItem}>{children}</ListItemContent>;
 
         return (
             <ListItem className={classnames('cssClass[listItemTable]', className)} {...rest} ref={ref}>
-                <SwipeableArea rightSwipeableArea={controlButtons ? <ListItemControls>{controlButtons}</ListItemControls> : undefined}>
+                <SwipeableArea
+                    ref={swipeableAreaRef}
+                    rightSwipeableArea={controlButtons ? <ListItemControls>{controlButtons}</ListItemControls> : undefined}
+                >
                     <ListItemTailRight />
 
                     {selectable ? (

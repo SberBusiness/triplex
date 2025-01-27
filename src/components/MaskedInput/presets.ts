@@ -46,7 +46,7 @@ export interface TMaskedInputPresets {
         latitude: TMaskedInputMask;
         // Долгота 00.000000.
         longitude: TMaskedInputMask;
-        // ОГРН 00000000000000000000.
+        // ОГРН 0000000000000.
         ogrn: TMaskedInputMask;
         // ОКТМО 00000000.
         oktmo: TMaskedInputMask;
@@ -151,8 +151,8 @@ export const presets: TMaskedInputPresets = {
         latitude: [/\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
         // Долгота 00.000000.
         longitude: [/\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/],
-        // ОГРН 00000000000000000000.
-        ogrn: Array<RegExp>(20).fill(/\d/),
+        // ОГРН 0000000000000.
+        ogrn: Array<RegExp>(13).fill(/\d/),
         // ОКТМО 00000000.
         oktmo: Array<RegExp>(8).fill(/\d/),
         // Паспорт РФ.

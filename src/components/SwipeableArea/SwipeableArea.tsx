@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useImperativeHandle, useRef, useState} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 export interface ISwipeableAreaProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,12 +27,21 @@ enum EDragType {
     vertical = 'vertical',
 }
 
+export interface ISwipeableAreaRef {
+    /** Закрывает leftSwipeableAreaRef или rightSwipeableArea. */
+    closeSwipe: () => void;
+    /** Открывает rightSwipeableArea. */
+    swipeLeft: () => void;
+    /** Открывает leftSwipeableAreaRef. */
+    swipeRight: () => void;
+}
+
 /**
  * Контейнер с реализацией свайпа.
  * При свайпе влево открывается rightSwipeableArea.
  * При свайпе вправо открывается leftSwipeableArea.
  */
-export const SwipeableArea = React.forwardRef<HTMLDivElement, ISwipeableAreaProps>(
+export const SwipeableArea = React.forwardRef<ISwipeableAreaRef, ISwipeableAreaProps>(
     ({children, className, leftSwipeableArea, rightSwipeableArea, ...rest}, ref) => {
         // Происходит анимация завершения свайпа.
         const [animating, setAnimating] = useState(false);
@@ -205,21 +214,55 @@ export const SwipeableArea = React.forwardRef<HTMLDivElement, ISwipeableAreaProp
             return () => document.removeEventListener('touchstart', handleDocumentTouchStart);
         }, []);
 
-        const setRef = (instance: HTMLDivElement | null) => {
-            containerRef.current = instance;
-            if (typeof ref === 'function') {
-                ref(instance);
-            } else if (ref) {
-                ref.current = instance;
+        // Открывает leftSwipeableAreaRef.
+        const openLeftSwipeableArea = () => {
+            if (leftSwipeableAreaRef.current) {
+                // Установка анимации завершения свайпа.
+                setAnimating(true);
+                setContentTranslateX(leftSwipeableAreaRef.current.getBoundingClientRect().width);
             }
         };
+
+        // Открывает rightSwipeableArea.
+        const openRightSwipeableArea = () => {
+            if (rightSwipeableAreaRef.current) {
+                // Установка анимации завершения свайпа.
+                setAnimating(true);
+                setContentTranslateX(-rightSwipeableAreaRef.current.getBoundingClientRect().width);
+            }
+        };
+
+        // Закрывает leftSwipeableAreaRef или rightSwipeableArea.
+        const closeSwipeableArea = () => {
+            if (rightSwipeableAreaRef.current || leftSwipeableAreaRef.current) {
+                // Установка анимации завершения свайпа.
+                setAnimating(true);
+                setContentTranslateX(0);
+            }
+        };
+
+        useImperativeHandle(
+            ref,
+            () => ({
+                closeSwipe: () => {
+                    closeSwipeableArea();
+                },
+                swipeLeft: () => {
+                    openRightSwipeableArea();
+                },
+                swipeRight: () => {
+                    openLeftSwipeableArea();
+                },
+            }),
+            [closeSwipeableArea, openRightSwipeableArea, openLeftSwipeableArea]
+        );
 
         return (
             <div
                 className={classnames('cssClass[swipeableArea]', className)}
                 {...rest}
                 data-tx={process.env.npm_package_version}
-                ref={setRef}
+                ref={containerRef}
             >
                 {typeof leftSwipeableArea !== 'undefined' ? (
                     <div

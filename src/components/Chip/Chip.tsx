@@ -15,7 +15,7 @@ export interface IChipProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 
 
 /**
  * Предоставляет возможность произвести действие по нажатию, также отображает выбранное состояние.
- * Рекомендуется всегда располагать Chip внутри компонента Chips.
+ * Рекомендуется всегда располагать Chip внутри компонента ChipGroup.
  */
 export const Chip = React.forwardRef<HTMLSpanElement, IChipProps>(
     ({children, className, disabled, postfix, prefix, selected, ...rest}, ref) => (

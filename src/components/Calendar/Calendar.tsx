@@ -217,6 +217,7 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
                     viewDate={viewDate}
                     pickedDate={pickedDate}
                     pickedRange={pickedRange}
+                    format={format!}
                     pickType={pickType}
                     limitRange={limitRange!}
                     disabledDays={disabledDays}

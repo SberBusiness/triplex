@@ -15,15 +15,20 @@ export interface ITabsLineItemProps extends React.HTMLAttributes<HTMLButtonEleme
 }
 
 /** Компонент TabsLineItem. */
-export const TabsLineItem: React.FC<ITabsLineItemProps> = ({id, label, selected, showNotificationIcon, ...htmlButtonAttributes}) => (
-    <button
-        {...htmlButtonAttributes}
-        key={id}
-        className={classnames('cssClass[tab]', {'cssClass[active]': Boolean(selected)})}
-        aria-pressed={selected}
-        type="button"
-    >
-        {label}
-        {showNotificationIcon && <span className="cssClass[notificationIcon]" />}
-    </button>
+export const TabsLineItem = React.forwardRef<HTMLButtonElement, ITabsLineItemProps>(
+    ({id, label, selected, showNotificationIcon, ...htmlButtonAttributes}, ref) => (
+        <button
+            {...htmlButtonAttributes}
+            key={id}
+            className={classnames('cssClass[tab]', {'cssClass[active]': Boolean(selected)})}
+            role="tab"
+            aria-selected={selected}
+            ref={ref}
+        >
+            {label}
+            {showNotificationIcon && <span className="cssClass[notificationIcon]" />}
+        </button>
+    )
 );
+
+TabsLineItem.displayName = 'TabsLineItem';

@@ -6,17 +6,19 @@ import './styles.less';
 
 const IsolateButton: React.FC<IsolateButtonProps> = ({href, name, example, isolated}) => {
     if (isolated && !href) {
-        return null;
+        // Если адрес страницы содержит больше 2 уровней вложенности, регулярное выражение извлекает два уровня пути. Иначе - только первый уровень
+        const regEx = /!\/[^\/]+\/.*/.test(window.location.hash) ? /!\/([^\/]+\/[^\/]+).*/ : /!\/([^\/]+)\/.*/;
+        href = window.location.hash.replace(regEx, '/$1');
     }
 
     if (isolated) {
         return (
             <ToolbarButton href={href} title="Show all components">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M16 8H12V4" stroke="#7D838A" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M4 8H8V4" stroke="#7D838A" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M4 12H8V16" stroke="#7D838A" strokeWidth="1.5" strokeLinecap="round" />
-                    <path d="M16 12H12V16" stroke="#7D838A" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M16 8H12V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M4 8H8V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M4 12H8V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M16 12H12V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
             </ToolbarButton>
         );

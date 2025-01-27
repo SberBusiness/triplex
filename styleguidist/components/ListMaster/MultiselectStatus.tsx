@@ -18,24 +18,24 @@ import {EListItemStatus} from './listItemsData';
 
 // Список опций мультиселекта Статус.
 export const optionsMultiselectStatus = [
-    {id: 'optionsMultiselectStatus-1', label: 'Создан', value: 'Sozdan'},
+    {id: 'optionsMultiselectStatus-1', label: 'Создан', value: 'sozdan'},
     {
         id: 'optionsMultiselectStatus-2',
         label: 'Ошибка контроля',
-        value: 'OshibkaKontrolja',
+        value: 'oshibkakontrolja',
     },
-    {id: 'optionsMultiselectStatus-3', label: 'Отозван', value: 'Otozvan'},
+    {id: 'optionsMultiselectStatus-3', label: 'Отозван', value: 'otozvan'},
     {
         id: 'optionsMultiselectStatus-4',
         label: 'Запрошен отзыв',
-        value: 'ZaproshenOtzyv',
+        value: 'zaproshenotzyv',
     },
     {
         id: 'optionsMultiselectStatus-5',
         label: 'Импортирован',
-        value: 'Importirovan',
+        value: 'importirovan',
     },
-    {id: 'optionsMultiselectStatus-6', label: 'Подписан', value: 'Podpisan'},
+    {id: 'optionsMultiselectStatus-6', label: 'Подписан', value: 'podpisan'},
 ];
 
 const CHIP_LABEL = 'Статус';
@@ -56,12 +56,12 @@ const MultiselectStatus: React.FC<IMultiselectStatusProps> = ({onChange, value})
 
         if (checked) {
             onChange([
-                'Sozdan',
-                'OshibkaKontrolja',
-                'Otozvan',
-                'ZaproshenOtzyv',
-                'Importirovan',
-                'Podpisan',
+                'sozdan',
+                'oshibkakontrolja',
+                'otozvan',
+                'zaproshenotzyv',
+                'importirovan',
+                'podpisan',
             ] as EListItemStatus[]);
         } else {
             onChange([]);

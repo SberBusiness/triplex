@@ -1,6 +1,7 @@
 export * from './Chip';
 export * from './ChipDatePicker';
 export * from './ChipClearButton';
+export * from './ChipDropdownArrow';
 export * from './ChipIcon';
 export * from './ChipMultiselect';
 export * from './ChipOptions';

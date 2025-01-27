@@ -40,7 +40,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
 
     /** Блокировка скролла вне дропдауна. */
     const wheelHandler = useCallback(
-        (event: Event) => {
+        (event: WheelEvent) => {
             if (!dropdownRef.current?.contains(event.target as Node)) {
                 event.preventDefault();
             }
@@ -48,12 +48,23 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
         [dropdownRef]
     );
 
-    const keyDownHandler = useCallback((event: Event) => {
-        const keyboardEvent = event as KeyboardEvent;
-        const key = keyboardEvent.code || keyboardEvent.keyCode;
+    const keyDownHandler = useCallback((event: KeyboardEvent) => {
+        if (event.target === document.body) {
+            const key = event.code || event.keyCode;
 
-        if (isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN') || isKey(key, 'SPACE')) {
-            event.preventDefault();
+            if (
+                isKey(key, 'SPACE') ||
+                isKey(key, 'PAGE_UP') ||
+                isKey(key, 'PAGE_DOWN') ||
+                isKey(key, 'END') ||
+                isKey(key, 'HOME') ||
+                isKey(key, 'ARROW_LEFT') ||
+                isKey(key, 'ARROW_UP') ||
+                isKey(key, 'ARROW_RIGHT') ||
+                isKey(key, 'ARROW_DOWN')
+            ) {
+                event.preventDefault();
+            }
         }
     }, []);
 
@@ -174,10 +185,12 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
 
     useEffect(() => {
         if (opened) {
+            document.addEventListener('scroll', handleReposition, true);
             window.addEventListener('resize', handleReposition);
             toggleScrollEventListener(true);
 
             return () => {
+                document.removeEventListener('scroll', handleReposition, true);
                 window.removeEventListener('resize', handleReposition);
                 toggleScrollEventListener(false);
             };

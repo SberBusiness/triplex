@@ -33,7 +33,7 @@
 ```jsx {"file": "./examples/Tooltip_portal.jsx"}
 ```
 
-### Mobile header
+### MobileHeader usage
 
 ```jsx {"file": "./examples/Tooltip_header.jsx"}
 ```

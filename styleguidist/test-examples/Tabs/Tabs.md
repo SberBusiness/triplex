@@ -6,7 +6,7 @@ import ComponentOptions from '../../common/components/ComponentOptions/Component
 import {
     ExampleBackground,
     ExampleBackgroundColor
-} from '../../components/common/ExampleBackground/ExampleBackground';
+} from '../../common/components/ExampleBackground/ExampleBackground';
 
 const [tabs, setTabs] = useState([]);
 const [count, setCount] = useState(3);

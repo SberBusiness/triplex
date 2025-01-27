@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {ListItemContext} from './ListItemContext';
+import {ListItemContext} from '@sberbusiness/triplex/components/List/components/ListItemContext';
 
 /** Свойства компонента ListItem. */
 export interface IListItemProps extends React.HTMLAttributes<HTMLLIElement> {}

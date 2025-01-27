@@ -302,7 +302,7 @@ import {SeaSrvIcon20} from '@sberbusiness/icons/SeaSrvIcon20';
 import {SuccessStsIcon16} from '@sberbusiness/icons/SuccessStsIcon16';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ComponentControlPanel} from '../../common/components/ComponentControlPanel/ComponentControlPanel';
 
 const [selected, setSelected] = React.useState(false);
 
@@ -327,19 +327,19 @@ const handlePropagation = (event) => event.stopPropagation();
             </CardAction.Content.Header>
             <CardAction.Content.Body>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <NotificationwaitStsIcon20 />
+                    <NotificationwaitStsIcon20/>
                     <Text size={ETextSize.B1} style={{marginLeft: '8px'}}>
                         Название
                     </Text>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', marginTop: '16px'}}>
-                    <SeaSrvIcon20 />
+                    <SeaSrvIcon20/>
                     <Text size={ETextSize.B1} style={{marginLeft: '8px'}}>
                         Название
                     </Text>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', marginTop: '16px'}}>
-                    <SeaSrvIcon20 />
+                    <SeaSrvIcon20/>
                     <Text size={ETextSize.B1} style={{marginLeft: '8px'}}>
                         Название
                     </Text>
@@ -376,7 +376,7 @@ const handlePropagation = (event) => event.stopPropagation();
                     </Button>
                 ) : (
                     <div style={{display: 'flex', alignItems: 'center'}}>
-                        <SuccessStsIcon16 />
+                        <SuccessStsIcon16/>
                         <Text
                             size={ETextSize.B1}
                             line={ELineType.EXTRA}

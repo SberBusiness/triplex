@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import MaskedInputTextMask, {conformToMask, MaskedInputProps, PipeConfig} from 'react-text-mask';
-import {Input} from '../Input/Input';
-import {EInputGroupPosition} from '../InputGroup/InputGroup';
+import {Input} from '@sberbusiness/triplex/components/Input/Input';
+import {EInputGroupPosition} from '@sberbusiness/triplex/components/InputGroup/InputGroup';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {presets, TMaskedInputPresets} from './presets';
+import {presets, TMaskedInputPresets} from '@sberbusiness/triplex/components/MaskedInput/presets';
 
 /** Маска. Каждый элемент массива должен быть либо строкой, либо регулярным выражением. Каждая строка — это фиксированный символ в маске, а каждое регулярное выражение — это заполнитель, который принимает пользовательский ввод.
  * Подробнее можно ознакомиться https://github.com/text-mask/text-mask/blob/master/componentDocumentation.md#mask.
@@ -56,6 +56,7 @@ export const MaskedInput: IIMaskedInputFC = ({
 }) => {
     // Значение инпута, отображающего часть введенного значения и оставшуюся маску.
     const [placeholderValue, setPlaceholderValue] = useState('');
+    const pasted = useRef(false);
 
     useEffect(() => {
         /**
@@ -109,12 +110,18 @@ export const MaskedInput: IIMaskedInputFC = ({
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const {value: nextValue} = event.target;
 
+            pasted.current = false;
+
             if (value !== nextValue) {
                 onChange?.(event);
             }
         },
         [value, onChange]
     );
+
+    const handlePaste = () => {
+        pasted.current = true;
+    };
 
     // Постобработчик введенных значений. Выполняется после внутреннего форматирования и до onChange.
     const pipe = (conformedValue: string, config: PipeConfig) => {
@@ -133,15 +140,25 @@ export const MaskedInput: IIMaskedInputFC = ({
 
     // Постобработчик введенных значений, если маска является номером телефона.
     const phonePipe = (text: string) => {
-        // Выражение, для поиска чисел вида {любая цифра}7, например 87, 971 и т.д.
-        const regEx = /^\d7/;
         let indexesOfPipedChars: number[] = [];
 
-        if (regEx.test(text)) {
-            const prefix = '+7';
+        if (pasted.current) {
+            // Выражение для поиска чисел из 1 цифры и более, начинающихся с 7 или 8
+            let regEx = /^[78]((\D*\d)*)/;
+
+            text = text.replace(regEx, '+7 ($1');
+
+            // Выражение для поиска чисел вида {любая цифра}7, например 87, 971 и т.д.
+            regEx = /^\d7/;
+
             // Если вторая цифра номера 7, добавляется +7 перед этим, иначе conformToMask вместо 9701234567 вернет +7901234567.
-            text = prefix + text;
-            indexesOfPipedChars = Array.from(prefix).map((_, i) => i);
+            text = text.replace(regEx, (match) => {
+                indexesOfPipedChars = Array.from('+7 (').map((_, i) => i);
+                return `+7 (${match}`;
+            });
+        } else if (text === '7' || text === '8') {
+            // Если первая введенная цифра 7 или 8, заменяем её на +7 (
+            text = '+7 (';
         }
 
         return {indexesOfPipedChars, value: conformToMask(text, mask, {guide: false, placeholderChar}).conformedValue};
@@ -201,6 +218,7 @@ export const MaskedInput: IIMaskedInputFC = ({
                 render={(ref, props) => <Input {...props} placeholder={placeholder || ''} ref={setRef(ref)} />}
                 mask={mask}
                 onChange={handleChange}
+                onPaste={handlePaste}
                 placeholderChar={placeholderChar}
                 // value={value} не используется т.к. возникает баг при передаче снаружи изначально пустого value, а затем не пустого.
                 value={getValue()}

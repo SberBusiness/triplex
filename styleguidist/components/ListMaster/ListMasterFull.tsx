@@ -23,6 +23,7 @@ import OptionDefaultValues from './OptionDefaultValues';
 import {EFontWeight, ELineType, ETextSize} from '@sberbusiness/triplex/components/Typography/enums';
 import {Text} from '@sberbusiness/triplex/components/Typography/Text';
 import {ListEmptyState} from '@sberbusiness/triplex/components/List';
+import {NotfoundSrvIcon64} from '@sberbusiness/icons/NotfoundSrvIcon64';
 import './ListMasterFull.less';
 
 // Список табов в верхней части ListMaster.
@@ -421,6 +422,10 @@ export const ListMasterFullExample: React.FC = () => {
                         </List>
                     ) : (
                         <ListEmptyState>
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                                <NotfoundSrvIcon64 />
+                            </div>
+
                             <Text size={ETextSize.B1} line={ELineType.EXTRA}>
                                 Ничего не найдено.
                                 <br />

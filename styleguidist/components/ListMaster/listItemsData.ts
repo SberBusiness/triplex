@@ -4,12 +4,12 @@ import {EMarkerStatus} from '@sberbusiness/triplex/components/Marker/enums';
 
 // Статусы элементов списка. По ним происходит фильтр.
 export enum EListItemStatus {
-    Sozdan = 'Sozdan',
-    OshibkaKontrolja = 'OshibkaKontrolja',
-    Otozvan = 'Otozvan',
-    ZaproshenOtzyv = 'ZaproshenOtzyv',
-    Importirovan = 'Importirovan',
-    Podpisan = 'Podpisan',
+    Sozdan = 'sozdan',
+    OshibkaKontrolja = 'oshibkakontrolja',
+    Otozvan = 'otozvan',
+    ZaproshenOtzyv = 'zaproshenotzyv',
+    Importirovan = 'importirovan',
+    Podpisan = 'podpisan',
 }
 
 const listItemsData: IListItemData[] = [

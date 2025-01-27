@@ -33,6 +33,8 @@ export interface IDateRangeProps extends Omit<React.HTMLAttributes<HTMLDivElemen
     shiftAmount?: number;
     /** Единица измерения сдвига диапазона дат. */
     shiftUnit?: EDateRangeShiftUnit;
+    /** Управление отображением/скрытием кнопок сдвига диапазона дат. */
+    hideNavigation?: boolean;
     /** Функция рендеринга поля выбора даты "от". */
     renderPickerFrom: (props: IDateRangePickerProvideProps) => React.ReactNode;
     /** Функция рендеринга поля выбора даты "до". */
@@ -51,6 +53,7 @@ export const DateRange: React.FC<IDateRangeProps> = ({
     onChange,
     shiftAmount = 1,
     shiftUnit = EDateRangeShiftUnit.MONTH,
+    hideNavigation,
     renderPickerFrom,
     renderPickerTo,
     renderButtonForward,
@@ -117,12 +120,13 @@ export const DateRange: React.FC<IDateRangeProps> = ({
 
     return (
         <div className={classNames} {...rest}>
-            {renderButtonBack({
-                children: <TabfoldercarouselleftSrvxIcon32 />,
-                className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
-                disabled: !(start && end),
-                onClick: shiftRangeBack,
-            })}
+            {!hideNavigation &&
+                renderButtonBack({
+                    children: <TabfoldercarouselleftSrvxIcon32 />,
+                    className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
+                    disabled: !(start && end),
+                    onClick: shiftRangeBack,
+                })}
             {renderPickerFrom({
                 onChange: handleChangePickerFrom,
                 value: start,
@@ -132,12 +136,13 @@ export const DateRange: React.FC<IDateRangeProps> = ({
                 onChange: handleChangePickerTo,
                 value: end,
             })}
-            {renderButtonForward({
-                children: <TabfoldercarouselrightSrvxIcon32 />,
-                className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
-                disabled: !(start && end),
-                onClick: shiftRangeForward,
-            })}
+            {!hideNavigation &&
+                renderButtonForward({
+                    children: <TabfoldercarouselrightSrvxIcon32 />,
+                    className: classnames('cssClass[dateRangeButton]', {disabled: !(start && end)}),
+                    disabled: !(start && end),
+                    onClick: shiftRangeForward,
+                })}
         </div>
     );
 };

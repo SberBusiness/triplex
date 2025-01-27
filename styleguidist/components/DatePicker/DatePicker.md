@@ -26,9 +26,9 @@
 ```jsx {"file": "./examples/DatePicker_5_days.jsx"}
 ```
 
-### Accessible
+### Accessibility
 
-```jsx {"file": "./examples/DatePicker_6_accessible.jsx"}  
+```jsx {"file": "./examples/DatePicker_6_accessibility.jsx"}  
 ```
 
 ### Disabled focus trap

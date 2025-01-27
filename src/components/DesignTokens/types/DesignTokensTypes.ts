@@ -31,6 +31,7 @@ import {
     TDesignTokensComponentsMarkerStatus,
     TDesignTokensComponentsMultiselect,
     TDesignTokensComponentsNotification,
+    TDesignTokensComponentsPagination,
     TDesignTokensComponentsRadio,
     TDesignTokensComponentsSegmentedControl,
     TDesignTokensComponentsSelect,
@@ -49,7 +50,6 @@ import {
     TDesignTokensComponentsTitle,
     TDesignTokensComponentsTooltip,
     TDesignTokensComponentsTopOverlay,
-    TDesignTokensComponentsUnorderedList,
     TDesignTokensComponentsUploadZone,
     TDesignTokensComponentsWidget,
 } from '@sberbusiness/triplex/components/DesignTokens/components';
@@ -183,6 +183,7 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsMultiselect &
     TDesignTokensComponentsNotification &
     TDesignTokensComponentsOverlay &
+    TDesignTokensComponentsPagination &
     TDesignTokensComponentsRadio &
     TDesignTokensComponentsSegmentedControl &
     TDesignTokensComponentsSelect &
@@ -202,7 +203,6 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsTitle &
     TDesignTokensComponentsTooltip &
     TDesignTokensComponentsTopOverlay &
-    TDesignTokensComponentsUnorderedList &
     TDesignTokensComponentsUploadZone &
     TDesignTokensComponentsWidget;
 

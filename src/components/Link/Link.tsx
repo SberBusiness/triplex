@@ -3,8 +3,8 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 // Размеры компонента Link.
 export enum ELinkSize {
-    SM = 'SM',
-    LG = 'LG',
+    SM = 'sm',
+    LG = 'lg',
 }
 
 // Типы компонента Link.

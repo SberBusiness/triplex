@@ -19,13 +19,14 @@ export interface ITooltipMobileProps extends Omit<ITooltipProps, 'preferPlace' |
 export const TooltipMobile: React.FC<ITooltipMobileProps> = ({children, className, renderContainer, isOpen, onShow, ...rest}) => {
     const {elements, setTooltipOpen} = useContext(TooltipContext);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
-    const classNames = classnames('cssClass[tooltipMobile]', className);
+    const classNames = classnames('cssClass[tooltipMobile]', {'cssClass[headerless]': elements.mobileHeader === null}, className);
 
     useEffect(() => {
         if (isOpen) {
             onShow?.(tooltipRef.current!);
         }
-    }, [isOpen, onShow]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     /** Рендер кнопки закрытия. */
     const renderCloseButton = () => {
@@ -38,7 +39,7 @@ export const TooltipMobile: React.FC<ITooltipMobileProps> = ({children, classNam
             <Portal container={document.body}>
                 <DropdownMobile className={classNames} tabIndex={-1} opened={isOpen} setOpened={setTooltipOpen} {...rest} ref={tooltipRef}>
                     {elements.mobileHeader}
-                    <DropdownMobileBody className="cssClass[tooltipDropdownMobileBody]">
+                    <DropdownMobileBody className="cssClass[tooltipMobileContent]">
                         {elements.body}
                         {elements.mobileHeader === null && renderCloseButton()}
                     </DropdownMobileBody>

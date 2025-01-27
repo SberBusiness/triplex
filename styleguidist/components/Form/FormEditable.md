@@ -93,6 +93,14 @@ const [selectedStepId, setSelectedStepId] = useState('stepper-step-3');
 const lightBoxRef = useRef(null);
 const [shadow, setShadow] = useState(false);
 
+useEffect(() => {
+    if (open) {
+        document.body.classList.add('dialogOpenExample');
+    } else {
+        document.body.classList.remove('dialogOpenExample');
+    }
+}, [open]);
+
 const renderProcessError = (...values) => {
     return (
         <>

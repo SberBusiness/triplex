@@ -31,7 +31,7 @@ export const TooltipDesktopTip = React.forwardRef<HTMLDivElement, ITooltipDeskto
             break;
     }
 
-    return <div className={classnames('cssClass[tip]', directionClass)} ref={ref} />;
+    return <div className={classnames('cssClass[tooltipDesktopTip]', directionClass)} ref={ref} />;
 });
 
 TooltipDesktopTip.displayName = 'TooltipDesktopTip';

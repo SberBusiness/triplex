@@ -1,9 +1,10 @@
-import React from 'react';
-import isEqual from 'lodash.isequal';
+import React, {useEffect, useRef, useState} from 'react';
 import {TestProps} from '@sberbusiness/triplex/types/CoreTypes';
 import {TabsLineDropdown} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineDropdown';
 import {ITabsLineItemProps, TabsLineItem} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineItem';
 import {ITabsLineBase} from '@sberbusiness/triplex/components/TabsLine/types';
+import {isKey} from '@sberbusiness/triplex/utils/keyboard';
+import isEqual from 'lodash.isequal';
 
 /** Свойства компонента TabsLineDesktop. */
 export interface ITabsLineDesktopProps extends ITabsLineBase {
@@ -13,72 +14,98 @@ export interface ITabsLineDesktopProps extends ITabsLineBase {
     maxVisible?: number;
 }
 
-/** Состояние компонента TabsLineDesktop. */
-interface ITabsLineDesktopState {
-    /** Табы, отображаемые в дропдауне. */
-    dropdownTabs: ITabsLineItemProps[];
-    /** Видимые табы. */
-    inlineTabs: ITabsLineItemProps[];
-}
+export const TabsLineDesktop: React.FC<ITabsLineDesktopProps> = ({
+    tabs,
+    dropdownTargetHtmlAttributes,
+    selectedTabId,
+    onChangeTab,
+    maxVisible,
+}) => {
+    const [inlineTabs, setInlineTabs] = useState<ITabsLineItemProps[]>([]);
+    const [dropdownTabs, setDropdownTabs] = useState<ITabsLineItemProps[]>([]);
 
-/** Компонент TabsLineDesktop. */
-export class TabsLineDesktop extends React.PureComponent<ITabsLineDesktopProps, ITabsLineDesktopState> {
-    public static displayName = 'TabsLineDesktop';
+    const tabsRef = useRef<HTMLDivElement>(null);
+    const focusableTabIndexRef = useRef(0);
+    const inlineTabsRefs = useRef<HTMLButtonElement[]>([]);
 
-    constructor(props: ITabsLineDesktopProps) {
-        super(props);
-
-        this.state = this.calculateState();
-    }
-
-    public componentDidUpdate(prevProps: ITabsLineDesktopProps): void {
-        const isUpdateRequired = !isEqual(this.props.tabs, prevProps.tabs) || this.props.maxVisible !== prevProps.maxVisible;
-        if (isUpdateRequired) {
-            this.setState(this.calculateState());
-        }
-    }
-
-    public render() {
-        const {tabs} = this.props;
-
-        return tabs.length ? <div className="cssClass[tabsLine]">{this.renderTabs()}</div> : null;
-    }
-
-    private calculateState = (): ITabsLineDesktopState => {
-        const {tabs, maxVisible} = this.props;
-
-        const dropdownTabs: ITabsLineItemProps[] = [];
-        const inlineTabs: ITabsLineItemProps[] = [];
+    useEffect(() => {
+        const newDropdownTabs: ITabsLineItemProps[] = [];
+        const newInlineTabs: ITabsLineItemProps[] = [];
 
         tabs.forEach((item: ITabsLineItemProps, i: number) => {
-            const fromDropdown = maxVisible && i + 1 >= maxVisible && tabs.length > maxVisible;
-            const target = fromDropdown ? dropdownTabs : inlineTabs;
+            const collapsed = maxVisible && i + 1 >= maxVisible && tabs.length > maxVisible;
+            const target = collapsed ? newDropdownTabs : newInlineTabs;
 
             target.push(item);
         });
 
-        return {
-            dropdownTabs,
-            inlineTabs,
-        };
-    };
+        if (isEqual(newInlineTabs, inlineTabs) === false) {
+            setInlineTabs(newInlineTabs);
+        }
 
-    private renderTab = ({selected, ...item}: ITabsLineItemProps) => {
-        const {onChangeTab, selectedTabId} = this.props;
+        if (isEqual(newDropdownTabs, dropdownTabs) === false) {
+            setDropdownTabs(newDropdownTabs);
+        }
+    }, [tabs, maxVisible]);
 
-        const handleClick = (event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+    const renderInlineTab = ({selected, onClick, onFocus, onBlur, ...item}: ITabsLineItemProps, index: number) => {
+        const tabIndex = focusableTabIndexRef.current === index ? 0 : -1;
+
+        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
             onChangeTab(item.id);
-            item.onClick?.(event);
+            onClick?.(event);
         };
 
-        return <TabsLineItem key={item.id} selected={selectedTabId === item.id} {...item} onClick={handleClick} />;
+        const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+            /** Является ли таб в фокусе последним перед дропдауном */
+            const isLastInlineTab = inlineTabs.length - 1 === focusableTabIndexRef.current;
+
+            if (isKey(event.code, 'ARROW_LEFT') || (isKey(event.code, 'ARROW_RIGHT') && !isLastInlineTab)) {
+                /** Движение влево или вправо */
+                const delta = isKey(event.code, 'ARROW_RIGHT') ? 1 : -1;
+
+                /** Следующий таб, к которому переходим клавишей ArrowLeft/ArrowRight */
+                const nextTabIndex = focusableTabIndexRef.current + delta;
+                const nextTab = inlineTabsRefs.current[nextTabIndex];
+
+                if (nextTab) {
+                    event.preventDefault();
+                    nextTab.focus();
+                }
+            }
+        };
+
+        const handleFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
+            focusableTabIndexRef.current = index;
+            onFocus?.(event);
+        };
+
+        const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
+            focusableTabIndexRef.current = 0;
+            onBlur?.(event);
+        };
+
+        const setRef = (node: HTMLButtonElement) => {
+            inlineTabsRefs.current[index] = node;
+        };
+
+        return (
+            <TabsLineItem
+                key={item.id}
+                selected={selectedTabId === item.id}
+                onClick={handleClick}
+                onKeyDown={handleKeyDown}
+                tabIndex={tabIndex}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                {...item}
+                ref={setRef}
+            />
+        );
     };
 
-    private renderTabs = () => {
-        const {dropdownTargetHtmlAttributes, selectedTabId, onChangeTab} = this.props;
-        const {dropdownTabs, inlineTabs} = this.state;
-
-        const itemsToRender: JSX.Element[] = inlineTabs.map(this.renderTab);
+    const renderTabs = () => {
+        const itemsToRender: JSX.Element[] = inlineTabs.map((item, index) => renderInlineTab(item, index));
 
         if (dropdownTabs.length > 0) {
             const selectedTab = dropdownTabs.find((item) => item.id === selectedTabId);
@@ -99,4 +126,10 @@ export class TabsLineDesktop extends React.PureComponent<ITabsLineDesktopProps, 
 
         return itemsToRender;
     };
-}
+
+    return tabs.length ? (
+        <div className="cssClass[tabsLine]" ref={tabsRef}>
+            {renderTabs()}
+        </div>
+    ) : null;
+};

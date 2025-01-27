@@ -1,22 +1,23 @@
 .unorderedList {
+    position: relative;
     margin: 0;
-    padding: 0;
+    padding-left: 14px;
     list-style: none;
 }
 
 .unorderedListItem {
-    margin-bottom: 8px;
-    color: var(--triplex-UnorderedList-Color);
-
-    &:last-child {
-        margin-bottom: 0;
+    &::before {
+        content: '';
+        width: 4px;
+        height: 4px;
+        margin: 8px 1px;
+        position: absolute;
+        left: 0;
+        background-color: currentColor;
+        border-radius: 50%;
     }
 
-    &::before {
-        content: '\2022';
-        display: inline-block;
-        width: 12px;
-        font-weight: bold;
-        color: var(--triplex-UnorderedList-Color);
+    + .unorderedListItem {
+        margin-top: 8px;
     }
 }

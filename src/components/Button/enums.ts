@@ -10,9 +10,9 @@ export enum EButtonTheme {
 
 /** Размеры кнопки. */
 export enum EButtonSize {
-    LG = 'LG',
-    MD = 'MD',
-    SM = 'SM',
+    LG = 'lg',
+    MD = 'md',
+    SM = 'sm',
 }
 
 /** Форма границы кнопки. */

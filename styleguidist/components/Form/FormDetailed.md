@@ -1,5 +1,5 @@
 ```jsx
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {LightBox} from '@sberbusiness/triplex/components/LightBox/LightBox';
 import {Page} from '@sberbusiness/triplex/components/Page/Page';
 import {Row} from '@sberbusiness/triplex/components/Row/Row';
@@ -32,6 +32,14 @@ const requisites = [
 ];
 
 const [open, setOpen] = useState(false);
+
+useEffect(() => {
+    if (open) {
+        document.body.classList.add('dialogOpenExample');
+    } else {
+        document.body.classList.remove('dialogOpenExample');
+    }
+}, [open]);
 
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
@@ -79,7 +87,9 @@ const renderLightBox = () => (
                     <Page.Header.Title>
                         <Page.Header.Title.Content>
                             <Page.Header.Title.Content.Text>Рублёвый платёж контрагенту</Page.Header.Title.Content.Text>
-                            <Page.Header.Title.Content.Subhead>Рублёвый платёж контрагенту № 58 от 26.04.2021</Page.Header.Title.Content.Subhead>
+                            <Page.Header.Title.Content.Subhead>
+                                Рублёвый платёж контрагенту № 58 от 26.04.2021
+                            </Page.Header.Title.Content.Subhead>
                         </Page.Header.Title.Content>
                     </Page.Header.Title>
                 </Page.Header>
@@ -104,9 +114,7 @@ const renderLightBox = () => (
                                 .
                             </Label>
                         </Col>
-                        <Col size={4}>
-                            
-                        </Col>
+                        <Col size={4} />
                     </Row>
                 </Page.Body>
             </Page>
@@ -119,5 +127,5 @@ const renderLightBox = () => (
         Open Form
     </Button>
     {open && renderLightBox()}
-</>
+</>;
 ```

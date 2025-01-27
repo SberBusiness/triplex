@@ -11,7 +11,7 @@ import {DropdownMobileList} from '@sberbusiness/triplex/components/Dropdown/mobi
 import {DropdownMobileListItem} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileListItem';
 import {DropdownMobileClose} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileClose';
 import {ButtonDropdownExtended} from "@sberbusiness/triplex/components/Button/ButtonDropdownExtended";
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ComponentControlPanel} from '../../common/components/ComponentControlPanel/ComponentControlPanel';
 import './style.less';
 
 const [opened, setOpened] = React.useState(false);

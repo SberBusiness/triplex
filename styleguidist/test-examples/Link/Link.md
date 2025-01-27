@@ -4,7 +4,7 @@ import ComponentPreview from '../../common/components/ComponentPreview/Component
 import {
     ExampleBackground,
     ExampleBackgroundColor
-} from '../../components/common/ExampleBackground/ExampleBackground';
+} from '../../common/components/ExampleBackground/ExampleBackground';
 import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
 import {LinkNavIcon16} from '@sberbusiness/icons/LinkNavIcon16';
 import {useEffect, useRef, useState} from 'react';
@@ -59,8 +59,8 @@ useEffect(() => {
 
 const linkType = type === 'line' ? ELinkType.LINE : ELinkType.TEXT;
 const linkSize = size === 'lg' ? ELinkSize.LG : ELinkSize.SM;
-const contentBefore = type === 'text' && hasContentBefore ? () => <LinkNavIcon16 /> : undefined;
-const contentAfter = type === 'text' && hasContentAfter ? () => <LinkNavIcon16 /> : undefined;
+const contentBefore = type === 'text' && hasContentBefore ? () => <LinkNavIcon16/> : undefined;
+const contentAfter = type === 'text' && hasContentAfter ? () => <LinkNavIcon16/> : undefined;
 
 const renderLink = () => (
     <Link href="#" linkType={linkType} size={linkSize} ref={linkRef} contentBefore={contentBefore} contentAfter={contentAfter}>
@@ -69,7 +69,7 @@ const renderLink = () => (
 );
 
 <>
-    <ComponentOptions checkboxOptions={checkboxOptions} inputOptions={inputOptions} />
+    <ComponentOptions checkboxOptions={checkboxOptions} inputOptions={inputOptions}/>
     <ComponentPreview style={{paddingLeft: '10px'}}>
         {type === 'line' ? (
             <ExampleBackground background={ExampleBackgroundColor.DARK}>
