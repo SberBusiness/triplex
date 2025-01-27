@@ -1,0 +1,24 @@
+.component-control-text {
+    position: relative;
+
+    & + .component-control-text,
+    & + .component-control-number,
+    & + .component-control-checkbox,
+    & + .component-control-select {
+        margin-top: 10px;
+    }
+
+    > label {
+        display: inline-block;
+        width: 128px;
+    }
+
+    input[type='text'] {
+        height: 32px;
+        width: 128px;
+        padding: 5px 9px 5px 11px;
+        box-sizing: border-box;
+        border: 1px solid #D0D7DD;
+        appearance: none;
+    }
+}
