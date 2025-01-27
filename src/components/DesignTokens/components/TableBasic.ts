@@ -25,6 +25,7 @@ export const designTokensComponentsTableBasicKeys = [
     'TabsLine_Caret_Color',
     'TabsLine_Color',
     'TabsLine_Notification_Color',
+    'TabsLine_Shadow_Focus',
 ] as const;
 // Тип, содержащий названия токенов компонента TableBasic.
 export type TDesignTokensComponentsTableBasicKeys = (typeof designTokensComponentsTableBasicKeys)[number];
@@ -60,4 +61,5 @@ export const TableBasic_Tokens: TDesignTokensComponentsTableBasicValues = {
     TabsLine_Caret_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.700'}], // var(--triplex-TableBasic-TabsLine_Caret_Color)
     TabsLine_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-TableBasic-TabsLine_Color)
     TabsLine_Notification_Color: [{ref: 'Warning.700'}, {ref: 'Warning.700'}], // var(--triplex-TableBasic-TabsLine_Notification_Color)
+    TabsLine_Shadow_Focus: [{value: '0 0 0 1px #FFDD64 inset'}, {value: '0 0 0 1px #FFDD64 inset'}], // var(--triplex-TableBasic-TabsLine_Shadow_Focus)
 };

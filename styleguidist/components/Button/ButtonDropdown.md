@@ -19,7 +19,7 @@ const options = [
     },
 ];
 
-<>
+<div className="buttonRowWrapper">
     <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.MD} options={options}>
         Button Name
     </ButtonDropdown>
@@ -30,7 +30,7 @@ const options = [
         Button Name
     </ButtonDropdown>
     <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
-</>
+</div>;
 ```
 
 ### Size large
@@ -58,7 +58,7 @@ const options = [
     },
 ];
 
-<>
+<div className="buttonRowWrapper">
     <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.LG} options={options}>
         Button Name
     </ButtonDropdown>
@@ -69,7 +69,7 @@ const options = [
         Button Name
     </ButtonDropdown>
     <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.LG} options={options} />
-</>
+</div>;
 ```
 
 ### Size small
@@ -97,7 +97,7 @@ const options = [
     },
 ];
 
-<>
+<div className="buttonRowWrapper">
     <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.SM} options={options}>
         Button Name
     </ButtonDropdown>
@@ -108,7 +108,7 @@ const options = [
         Button Name
     </ButtonDropdown>
     <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.SM} options={options} />
-</>
+</div>;
 ```
 
 ### Block mode
@@ -136,19 +136,17 @@ const options = [
     },
 ];
 
-<>
+<div className="buttonColumnWrapper">
     <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.MD} options={options} block>
         Button Name
     </ButtonDropdown>
-    <br />
     <ButtonDropdown theme={EButtonTheme.SECONDARY} size={EButtonSize.MD} options={options} block>
         Button Name
     </ButtonDropdown>
-    <br />
     <ButtonDropdown theme={EButtonTheme.DANGER} size={EButtonSize.MD} options={options} block>
         Button Name
     </ButtonDropdown>
-</>
+</div>;
 ```
 
 ### Disabled
@@ -176,7 +174,7 @@ const options = [
     },
 ];
 
-<>
+<div className="buttonRowWrapper">
     <ButtonDropdown theme={EButtonTheme.GENERAL} size={EButtonSize.MD} options={options} disabled>
         Button Name
     </ButtonDropdown>
@@ -187,7 +185,7 @@ const options = [
         Button Name
     </ButtonDropdown>
     <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} disabled />
-</>
+</div>;
 ```
 
 ### Selected item
@@ -217,5 +215,5 @@ const options = [
     },
 ];
 
-<ButtonDropdown selected={selected} theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
+<ButtonDropdown selected={selected} theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />;
 ```

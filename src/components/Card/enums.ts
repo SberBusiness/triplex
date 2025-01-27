@@ -1,11 +1,11 @@
 /** Возможные размеры внутреннего отступа. */
 export enum ECardContentPaddingSize {
-    MD = 'MD',
-    SM = 'SM',
+    MD = 'md',
+    SM = 'sm',
 }
 
 /** Возможные размеры скругления карточки. */
 export enum ECardRoundingSize {
-    MD = 'MD',
-    SM = 'SM',
+    MD = 'md',
+    SM = 'sm',
 }

@@ -4,7 +4,7 @@ import {TestProps} from '@sberbusiness/triplex/types/CoreTypes';
 import {Dropdown} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {DropdownList} from '@sberbusiness/triplex/components/Dropdown/desktop/DropdownList';
 import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
-import {EVENT_KEY_CODES} from '@sberbusiness/triplex/utils/keyboard';
+import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 import {DropdownListContext} from '@sberbusiness/triplex/components/Dropdown/DropdownListContext';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 import {ITabsLineItemProps} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineItem';
@@ -88,6 +88,7 @@ export class TabsLineDropdown extends React.PureComponent<ITabsLineDropdownProps
                 onClick={this.handleTargetClick}
                 onKeyDown={this.handleTargetKeyDown}
                 type="button"
+                role="tab"
                 aria-haspopup="menu"
                 aria-expanded={opened}
                 aria-controls={this.instanceId}
@@ -172,9 +173,7 @@ export class TabsLineDropdown extends React.PureComponent<ITabsLineDropdownProps
 
         if (!opened) {
             // При нажатии Enter, Space, ArrowUp или ArrowDown открывается выпадающий список.
-            if (
-                [EVENT_KEY_CODES.SPACE, EVENT_KEY_CODES.ENTER, EVENT_KEY_CODES.ARROW_DOWN, EVENT_KEY_CODES.ARROW_UP].includes(event.keyCode)
-            ) {
+            if (isKey(event.code, 'ARROW_UP') || isKey(event.code, 'ARROW_DOWN')) {
                 event.preventDefault();
                 this.setState({opened: true});
             }
@@ -182,7 +181,7 @@ export class TabsLineDropdown extends React.PureComponent<ITabsLineDropdownProps
 
         if (opened) {
             // При нажатии Tab или Esc закрывается выпадающий список.
-            if ([EVENT_KEY_CODES.TAB, EVENT_KEY_CODES.ESCAPE].includes(event.keyCode)) {
+            if (isKey(event.code, 'TAB') || isKey(event.code, 'ESCAPE')) {
                 this.setState({opened: false});
             }
         }

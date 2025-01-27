@@ -30,8 +30,8 @@ const columns = [
     },
     {
         fieldKey: 'sum',
-        label: 'Сумма',
         horizontalAlign: EHorizontalAlign.RIGHT,
+        label: 'Сумма',
         renderCell: (fieldValue) => fieldValue && <Amount value={fieldValue} currency="RUB" />,
     },
     {
@@ -41,9 +41,14 @@ const columns = [
 ];
 
 const data = Array.from({length: 100}, (value, index) => ({
-    rowKey: `table-basic-row-${index}`,
     rowData: {
         number: 1397450 + index,
+        status: (
+            <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
+                Исполнено
+            </MarkerStatus>
+        ),
+        sum: '1220000000',
         value: (
             <>
                 <Text tag="div" size={ETextSize.B1} type={EFontType.GENERAL} line={ELineType.EXTRA}>
@@ -57,13 +62,8 @@ const data = Array.from({length: 100}, (value, index) => ({
                 </Text>
             </>
         ),
-        sum: '1220000000',
-        status: (
-            <MarkerStatus status={EMarkerStatus.SUCCESS} description="Пояснения к статусу">
-                Исполнено
-            </MarkerStatus>
-        ),
     },
+    rowKey: `table-basic-row-${index}`,
 }));
 
 const rowNumberOptions = [10, 30, 50, 100];
@@ -85,20 +85,22 @@ function getPaginatedData() {
     return data.slice((currentPageNumber - 1) * rowNumber, currentPageNumber * rowNumber);
 }
 
-<MasterTable>
-    <MasterTable.TableBasic columns={columns} data={getPaginatedData()} />
-    <MasterTable.Pagination
-        paginationLabel="Показать на странице"
-        rowNumber={rowNumber}
-        rowNumberOptions={rowNumberOptions}
-        currentPageNumber={currentPageNumber}
-        onSelectRowNumber={handleSelectRowNumber}
-        onClickPrevPage={handleClickPrevPage}
-        onClickNextPage={handleClickNextPage}
-        hasPrevPage={hasPrevPage}
-        hasNextPage={hasNextPage}
-        dataAttributes={{'test-id': 'TestTable__MasterTable.Pagination'}}
-        buttonPrevProps={{'aria-label': 'Предыдущая страница'}}
-        buttonNextProps={{'aria-label': 'Следующая страница'}}
-    />
-</MasterTable>
+<>
+    <MasterTable>
+        <MasterTable.TableBasic columns={columns} data={getPaginatedData()} />
+        <MasterTable.Pagination
+            paginationLabel="Показать на странице"
+            rowNumber={rowNumber}
+            rowNumberOptions={rowNumberOptions}
+            currentPageNumber={currentPageNumber}
+            onSelectRowNumber={handleSelectRowNumber}
+            onClickPrevPage={handleClickPrevPage}
+            onClickNextPage={handleClickNextPage}
+            hasPrevPage={hasPrevPage}
+            hasNextPage={hasNextPage}
+            dataAttributes={{'test-id': 'TestTable__MasterTable.Pagination'}}
+            buttonPrevProps={{'aria-label': 'Предыдущая страница'}}
+            buttonNextProps={{'aria-label': 'Следующая страница'}}
+        />
+    </MasterTable>
+</>;

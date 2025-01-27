@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react';
 import moment from 'moment';
 import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
-import {dateFormatYYYYMMDD, globalLimitRange, WEEKDAYS_SET} from '@sberbusiness/triplex/consts/DateConst';
+import {globalLimitRange, WEEKDAYS_SET} from '@sberbusiness/triplex/consts/DateConst';
 import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
 import {CalendarViewItem} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewItem';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
@@ -16,6 +16,7 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
     viewDate,
     pickedDate,
     pickedRange,
+    format,
     limitRange,
     periodId,
     disabledDays,
@@ -46,12 +47,12 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
             }
 
             if (disabledDays) {
-                return disabledDays.includes(date.format(dateFormatYYYYMMDD));
+                return disabledDays.includes(date.format(format));
             }
 
             return false;
         },
-        [disabledDays, isOutOfRangeDate]
+        [disabledDays, format, isOutOfRangeDate]
     );
 
     /** Получить первую доступную для фокуса дату. */
@@ -109,12 +110,7 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
     /** Рендер ячейки таблицы. */
     const renderTableData = (row: number, cell: number) => {
         const date = moment(startDate).add(row * 7 + cell, 'day');
-        const classNames = classnames({
-            'cssClass[current]': isCurrentDate(date),
-            'cssClass[rangeBetween]': isRangeBetweenDate(date),
-            'cssClass[rangeEnd]': isRangeEndDate(date),
-            'cssClass[rangeStart]': isRangeStartDate(date),
-        });
+        const classNames = classnames({'cssClass[current]': isCurrentDate(date)}, getRangeClassName(date));
         const active = isActiveDate(date);
         const disabled = isDisabledDate(date);
         const tabbable = !disabled && isTabbableDay(date);
@@ -172,37 +168,31 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
     /** Проверяет, является ли дата отмеченной. */
     const isMarkedDate = (date: moment.Moment) => {
         if (markedDays) {
-            return markedDays.includes(date.format(dateFormatYYYYMMDD));
+            return markedDays.includes(date.format(format));
         }
 
         return false;
     };
 
-    /** Проверяет, является ли дата началом выбранного периода. */
-    const isRangeStartDate = (date: moment.Moment) => {
-        if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
-            return false;
+    /** Возвращает класс положения даты в выбранном периоде. */
+    const getRangeClassName = (date: moment.Moment) => {
+        if (!pickedRange || !pickedRange[0] || !pickedRange[1] || !date.isBetween(pickedRange[0], pickedRange[1], 'day', '[]')) {
+            return;
         }
 
-        return pickedRange[0].isSame(date, 'day');
-    };
+        let className: string;
 
-    /** Проверяет, является ли дата концом выбранного периода. */
-    const isRangeEndDate = (date: moment.Moment) => {
-        if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
-            return false;
+        if (pickedRange[0].isSame(pickedRange[1], 'day')) {
+            className = 'cssClass[rangeSingle]';
+        } else if (date.isSame(pickedRange[0], 'day')) {
+            className = 'cssClass[rangeStart]';
+        } else if (date.isSame(pickedRange[1], 'day')) {
+            className = 'cssClass[rangeEnd]';
+        } else {
+            className = 'cssClass[rangeBetween]';
         }
 
-        return pickedRange[1].isSame(date, 'day');
-    };
-
-    /** Проверяет, является ли дата промежуточной в выбранном периоде. */
-    const isRangeBetweenDate = (date: moment.Moment) => {
-        if (!pickedRange || !pickedRange[0] || !pickedRange[1]) {
-            return false;
-        }
-
-        return date.isBetween(pickedRange[0], pickedRange[1], 'day');
+        return className;
     };
 
     /** Возвращает доступную для выбора дату после сдвига. */

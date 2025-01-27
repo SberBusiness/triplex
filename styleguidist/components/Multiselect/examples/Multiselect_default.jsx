@@ -84,7 +84,13 @@ const targetRef = useRef();
 
 /** Рендерит tag с названием выбранного чекбокса. */
 const renderTag = (tagId, tagText, onRemove) => (
-    <Tag key={tagId} id={tagId} size={ETagSize.SM} onClick={(event) => event.stopPropagation()} onRemove={onRemove}>
+    <Tag
+        key={tagId}
+        id={tagId}
+        size={ETagSize.SM}
+        onClick={(event) => event.stopPropagation()}
+        onRemove={onRemove}
+    >
         {tagText}
     </Tag>
 );
@@ -107,8 +113,9 @@ const traverseCheckboxes = (checkboxes, callback) => {
 
 /** Обновление флага checked и bulk родителя, при изменении дочернего чекбокса. */
 const checkParentCheckboxes = (checkbox) => {
-    if (!checkbox.children)
+    if (!checkbox.children) {
         return;
+    }
 
     let checkedChildrenCount = 0;
     let bulkChildrenCount = 0;
@@ -173,7 +180,12 @@ const renderCheckboxNode = (checkbox) => {
             key={checkbox.id}
             id={checkbox.id}
             checkbox={(props) => (
-                <CheckboxTreeExtended.Checkbox {...props} bulk={checkbox.bulk} checked={checkbox.checked} onChange={handleChange(checkbox)}>
+                <CheckboxTreeExtended.Checkbox
+                    {...props}
+                    bulk={checkbox.bulk}
+                    checked={checkbox.checked}
+                    onChange={handleChange(checkbox)}
+                >
                     {checkbox.label}
                 </CheckboxTreeExtended.Checkbox>
             )}
@@ -254,7 +266,14 @@ const renderTags = () => {
 };
 
 /** Рендерит нескрываемую часть Select. */
-const renderTarget = (props) => <Multiselect.Target label={renderTags()} placeholder="Выберите значение" {...props} ref={targetRef} />;
+const renderTarget = (props) => (
+    <Multiselect.Target
+        label={renderTags()}
+        placeholder="Выберите значение"
+        {...props}
+        ref={targetRef}
+    />
+);
 
 /** Обработчик нажатия - "Очистить фильтр". */
 const handleClickClearFilter = () => {
@@ -278,15 +297,27 @@ const renderDropdown = (dropdownProps) => {
                 children: (
                     <>
                         <DropdownMobileHeader>
-                            <DropdownMobileInput placeholder="Начните вводить" value={filter} onChange={handleFilterChange} />
+                            <DropdownMobileInput
+                                placeholder="Начните вводить"
+                                value={filter}
+                                onChange={handleFilterChange}
+                            />
                             <DropdownMobileClose onClick={() => setOpened(false)} />
                         </DropdownMobileHeader>
                         <DropdownMobileBody>{renderDropdownContent()}</DropdownMobileBody>
                         <DropdownMobileFooter>
-                            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD} onClick={() => setOpened(false)}>
+                            <Button
+                                theme={EButtonTheme.SECONDARY}
+                                size={EButtonSize.MD}
+                                onClick={() => setOpened(false)}
+                            >
                                 Выбрать
                             </Button>
-                            <Button theme={EButtonTheme.LINK} size={EButtonSize.MD} onClick={handleClickClearFilter}>
+                            <Button
+                                theme={EButtonTheme.LINK}
+                                size={EButtonSize.MD}
+                                onClick={handleClickClearFilter}
+                            >
                                 Сбросить
                             </Button>
                         </DropdownMobileFooter>
@@ -300,10 +331,18 @@ const renderDropdown = (dropdownProps) => {
             <div style={{position: 'relative'}}>
                 <Multiselect.Dropdown.Content>{renderDropdownContent()}</Multiselect.Dropdown.Content>
                 <Multiselect.Dropdown.Footer>
-                    <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.SM} onClick={() => setOpened(false)}>
+                    <Button
+                        theme={EButtonTheme.SECONDARY}
+                        size={EButtonSize.SM}
+                        onClick={() => setOpened(false)}
+                    >
                         Выбрать
                     </Button>
-                    <Button theme={EButtonTheme.LINK} size={EButtonSize.SM} onClick={handleClickClearFilter}>
+                    <Button
+                        theme={EButtonTheme.LINK}
+                        size={EButtonSize.SM}
+                        onClick={handleClickClearFilter}
+                    >
                         Сбросить
                     </Button>
                 </Multiselect.Dropdown.Footer>
@@ -318,7 +357,9 @@ const renderDropdownContent = () => {
     const renderCheckboxes = !filter || (filteredCheckboxesId.length && filter);
 
     return renderCheckboxes ? (
-        <CheckboxTreeExtended>{checkboxes.map((checkbox) => renderCheckboxNode(checkbox))}</CheckboxTreeExtended>
+        <CheckboxTreeExtended>
+            {checkboxes.map((checkbox) => renderCheckboxNode(checkbox))}
+        </CheckboxTreeExtended>
     ) : (
         <div className="not-found">Ничего не найдено</div>
     );
@@ -352,4 +393,4 @@ const handleFilterChange = (event) => {
 
 <Multiselect renderTarget={renderTarget} data-test-id="multiselect">
     {(dropdownProps) => renderDropdown(dropdownProps)}
-</Multiselect>;
+</Multiselect>

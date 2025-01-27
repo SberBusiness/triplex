@@ -1,15 +1,19 @@
-import React, {useContext} from 'react';
-import {Chip, IChipProps} from '@sberbusiness/triplex/components/Chip';
+import React, {useContext, useRef} from 'react';
+import {Chip, ChipClearButton, ChipDropdownArrow, IChipProps} from '@sberbusiness/triplex/components/Chip';
 import {DatePickerExtendedContext} from '@sberbusiness/triplex/components/DatePickerExtended/DatePickerExtendedContext';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 
 /** Свойства компонента ChipDatePickerTarget. */
-export interface IChipDatePickerTargetProps extends IChipProps {}
+export interface IChipDatePickerTargetProps extends IChipProps {
+    /** Функция, вызывающаяся при клике по ChipClearButton. */
+    onClear: () => void;
+}
 
 /** Управляющий элемент компонента ChipDatePicker. */
 export const ChipDatePickerTarget = React.forwardRef<HTMLSpanElement, IChipDatePickerTargetProps>((props, ref) => {
-    const {children, onKeyDown, onClick, ...rest} = props;
+    const {children, selected, onKeyDown, onClick, onClear, ...rest} = props;
     const {dropdownOpen, setDropdownOpen} = useContext(DatePickerExtendedContext);
+    const chipRef = useRef<HTMLSpanElement | null>(null);
 
     /** Обработчик нажатия клавиши. */
     const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
@@ -30,8 +34,47 @@ export const ChipDatePickerTarget = React.forwardRef<HTMLSpanElement, IChipDateP
         onClick?.(event);
     };
 
+    /** Рендер постфикса. */
+    const renderPostfix = () => {
+        if (selected) {
+            return <ChipClearButton onKeyDown={handleClearButtonKeyDown} onClick={handleClearButtonClick} />;
+        } else {
+            return <ChipDropdownArrow rotated={dropdownOpen} />;
+        }
+    };
+
+    /** Обработчик нажатия клавиши ChipClearButton. */
+    const handleClearButtonKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+    };
+
+    /** Обработчик клика ChipClearButton. */
+    const handleClearButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        chipRef.current!.focus();
+        onClear();
+    };
+
+    /** Функция установки ссылки. */
+    const setRef = (instance: HTMLInputElement | null) => {
+        chipRef.current = instance;
+        if (typeof ref === 'function') {
+            ref(instance);
+        } else if (ref) {
+            ref.current = instance;
+        }
+    };
+
     return (
-        <Chip aria-expanded={dropdownOpen} onKeyDown={handleKeyDown} onClick={handleClick} {...rest} ref={ref}>
+        <Chip
+            postfix={renderPostfix()}
+            selected={selected}
+            aria-expanded={dropdownOpen}
+            onKeyDown={handleKeyDown}
+            onClick={handleClick}
+            {...rest}
+            ref={setRef}
+        >
             {children}
         </Chip>
     );

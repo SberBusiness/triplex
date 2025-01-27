@@ -131,6 +131,7 @@ export class LightBox extends React.Component<ILightBoxProps> {
             <>
                 <Portal container={this.lightBoxMountNode}>
                     <FocusTrap
+                        active={!isLoading}
                         {...focusTrapProps}
                         focusTrapOptions={{
                             clickOutsideDeactivates: true,

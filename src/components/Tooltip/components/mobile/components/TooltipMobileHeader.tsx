@@ -17,7 +17,7 @@ export const TooltipMobileHeader: React.FC = ({children, ...rest}) => {
 
     return (
         <DropdownMobileHeader closeButton={renderCloseButton} {...rest}>
-            <Text size={ETextSize.B1} type={EFontType.SECONDARY}>
+            <Text size={ETextSize.B1} type={EFontType.GENERAL} tag="div">
                 {children}
             </Text>
         </DropdownMobileHeader>

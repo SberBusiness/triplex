@@ -1,32 +1,34 @@
-```jsx
-import {Notification} from '@sberbusiness/triplex/components/Notification/Notification';
-import {Link, ELinkSize, ELinkType} from '@sberbusiness/triplex/components/Link/Link';
-import {LinkNavIcon16} from '@sberbusiness/icons/LinkNavIcon16';
+### Success
 
-const handleClick = () => alert('Обработчик клика на нотификацию');
-const closeNotification = () => alert('Обработчик закрытия нотификации');
+```jsx {"file": "./examples/Notification_0_success.jsx"}
+```
 
-const renderLink = (children) => (
-    <Link
-        href="#"
-        linkType={ELinkType.TEXT}
-        size={ELinkSize.LG}
-        contentAfter={() => <LinkNavIcon16 />}
-        onClick={(event) => event.preventDefault()}
-    >
-        {children}
-    </Link>
-);
+### Warning
 
-<Notification withExtraBottomPadding isShowCloseOnHover onClick={handleClick}>
-    <Notification.Body>
-        <Notification.Body.Header>Внимание</Notification.Body.Header>
-        <Notification.Body.Content>
-            Вы собираетесь перейти по {renderLink('ссылке')} Не указывайте свой логин и пароль от
-            интернет-банка на внешнем ресурсе.
-        </Notification.Body.Content>
-    </Notification.Body>
-    <Notification.Close onClick={closeNotification} />
-    <Notification.Time time="22:45" />
-</Notification>
+```jsx {"file": "./examples/Notification_1_warning.jsx"}
+```
+
+### Error
+
+```jsx {"file": "./examples/Notification_2_error.jsx"}
+```
+
+### Redirect
+
+```jsx {"file": "./examples/Notification_3_redirect.jsx"}
+```
+
+### Grouped
+
+```jsx {"file": "./examples/Notification_4_group.jsx"}
+```
+
+### With analytics
+
+```jsx {"file": "./examples/Notification_5_with_analytics.jsx"}
+```
+
+### With isShowCloseOnHover, withExtraBottomPadding
+
+```jsx {"file": "./examples/Notification_6_isShowCloseOnHover_withExtraBotomPadding.jsx"}
 ```

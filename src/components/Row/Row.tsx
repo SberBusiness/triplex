@@ -3,7 +3,7 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {isComponentType, isReactElement} from '@sberbusiness/triplex/utils/reactChild';
 
 /** Свойства компонента Row. */
-interface IRowProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IRowProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Вертикальный нижний отступ. */
     paddingBottom?: boolean;
 }

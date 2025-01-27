@@ -9,7 +9,7 @@ module.exports = [
                 name: 'Accordions',
                 components: [
                     './src/components/AccordionForm/AccordionForm.tsx',
-                    './src/components/AccordionView/AccordionView.tsx',
+                    './src/components/AccordionView/AccordionView.tsx'
                 ],
             },
             {
@@ -21,7 +21,7 @@ module.exports = [
             },
             {
                 name: 'Amount',
-                components: ['./src/components/Amount/Amount.tsx'],
+                components: './src/components/Amount/Amount.tsx',
             },
             {
                 name: 'Buttons',
@@ -36,7 +36,7 @@ module.exports = [
                 name: 'Cards',
                 components: [
                     './src/components/Card/CardStatic.tsx',
-                    './src/components/Card/CardAction.tsx',
+                    './src/components/Card/CardAction.tsx'
                 ],
             },
             {
@@ -70,7 +70,7 @@ module.exports = [
             },
             {
                 name: 'Col',
-                content: './styleguidist/components/Col/Col.md',
+                components: './src/components/Col/Col.tsx',
             },
             {
                 name: 'Date Pickers',
@@ -91,32 +91,19 @@ module.exports = [
             },
             {
                 name: 'Ellipsis',
-                components: ['./src/components/Ellipsis/Ellipsis.tsx'],
+                components: './src/components/Ellipsis/Ellipsis.tsx',
             },
             {
                 name: 'Gap',
-                content: './styleguidist/components/Gap/Gap.md',
+                components: './src/components/Gap/Gap.tsx',
             },
             {
                 name: 'FormGroup',
-                sections: [
-                    {
-                        name: 'FormGroup с FormFieldInput',
-                        content: './styleguidist/components/FormGroup/FormGroupInput.md',
-                    },
-                    {
-                        name: 'FormGroup с другими видами полей ввода (в разработке)',
-                        content: './styleguidist/components/FormGroup/FormGroupDev.md',
-                    },
-                ],
+                components: './src/components/FormGroup/FormGroup.tsx',
             },
             {
                 name: 'HelpBoxes',
-                components: [
-                    './src/components/HelpBox/HelpBox.tsx',
-                    './src/components/HelpBox/HelpBoxSM.tsx',
-                    './src/components/HelpBox/HelpBoxLG.tsx',
-                ],
+                components: './src/components/HelpBox/HelpBox.tsx',
             },
             {
                 name: 'Inputs',
@@ -131,8 +118,8 @@ module.exports = [
                 ],
             },
             {
-                name: 'Labels',
-                content: './styleguidist/components/Labels/Labels.md',
+                name: 'Label',
+                components: './src/components/Label/Label.tsx',
             },
             {
                 name: 'LightBox',
@@ -143,21 +130,21 @@ module.exports = [
                 components: './src/components/Link/Link.tsx',
             },
             {
-                name: 'List',
+                name: 'List components',
                 components: [
                     './src/components/List/List.tsx',
                     './src/components/List/components/ListItem.tsx',
                     './src/components/List/components/ListItemControls.tsx',
-                    './src/components/ListMaster/ListMaster.tsx'
+                    './src/components/ListMaster/ListMaster.tsx',
                 ],
             },
             {
                 name: 'MarkerStatus',
-                content: './styleguidist/components/MarkerStatus/MarkerStatus.md',
+                components: './src/components/MarkerStatus/MarkerStatus.tsx',
             },
             {
                 name: 'MediaWidth',
-                content: './styleguidist/components/MediaWidth/MediaWidth.md',
+                components: './src/components/MediaWidth/MediaWidth.tsx',
             },
             {
                 name: 'ModalWindow',
@@ -169,47 +156,28 @@ module.exports = [
             },
             {
                 name: 'Notification',
-                sections: [
-                    {
-                        name: 'Notification Success',
-                        content: './styleguidist/components/Notification/Success.md',
-                    },
-                    {
-                        name: 'Notification Warning',
-                        content: './styleguidist/components/Notification/Warning.md',
-                    },
-                    {
-                        name: 'Notification Error',
-                        content: './styleguidist/components/Notification/Error.md',
-                    },
-                    {
-                        name: 'Notification Redirect',
-                        content: './styleguidist/components/Notification/Redirect.md',
-                    },
-                    {
-                        name: 'Notification сгруппированная',
-                        content: './styleguidist/components/Notification/Group.md',
-                    },
-                    {
-                        name: 'Notification c аналитикой',
-                        content: './styleguidist/components/Notification/Analytics.md',
-                    },
-                    {
-                        name: 'Notification c isShowCloseOnHover и withExtraBottomPadding',
-                        content: './styleguidist/components/Notification/Notification.md',
-                    },
-                ],
+                components: './src/components/Notification/Notification.tsx',
+            },
+            {
+                name: 'OrderedList',
+                components: './src/components/OrderedList/OrderedList.tsx',
             },
             {
                 name: 'Overlay',
-                components: ['./src/components/Overlay/Overlay.tsx'],
+                components: './src/components/Overlay/Overlay.tsx',
             },
             {
-                name: 'Page',
+                name: 'Page components',
                 components: [
                     './src/components/Page/Page.tsx',
                     './src/components/Page/components/HeaderPage.tsx',
                     './src/components/Page/components/FooterPage.tsx',
+                ],
+            },
+            {
+                name: 'Pagination',
+                components: [
+                    './src/components/Pagination/Pagination.tsx',
                 ],
             },
             {
@@ -222,11 +190,11 @@ module.exports = [
             },
             {
                 name: 'SegmentedControl',
-                components: ['./src/components/SegmentedControl/SegmentedControl.tsx'],
+                components: './src/components/SegmentedControl/SegmentedControl.tsx',
             },
             {
                 name: 'Skeleton',
-                components: ['./src/components/Skeleton/Skeleton.tsx'],
+                components: './src/components/Skeleton/Skeleton.tsx',
             },
             {
                 name: 'Selects',
@@ -248,36 +216,34 @@ module.exports = [
                 name: 'Spinners',
                 components: [
                     './src/components/Spinner/Spinner.tsx',
-                    './src/components/SpinnerWidget/SpinnerWidget.tsx',
+                    './src/components/SpinnerWidget/SpinnerWidget.tsx'
                 ],
             },
             {
                 name: 'Spoiler',
-                components: ['./src/components/Spoiler/Spoiler.tsx'],
+                components: './src/components/Spoiler/Spoiler.tsx',
             },
             {
                 name: 'StatusTracker',
-                components: ['./src/components/StatusTracker/StatusTracker.tsx'],
+                components: './src/components/StatusTracker/StatusTracker.tsx',
             },
             {
-                name: 'Stepper',
+                name: 'Steppers',
                 components: [
                     './src/components/Stepper/Stepper.tsx',
                     './src/components/Stepper/StepperExtended.tsx'
                 ],
             },
             {
-                name: 'Suggest',
+                name: 'Suggests',
                 components: [
                     './src/components/Suggest/Suggest.tsx',
-                    './src/components/Suggest/SuggestCustom.tsx',
+                    './src/components/Suggest/SuggestCustom.tsx'
                 ],
             },
             {
                 name: 'TableBasic',
-                components: [
-                    './src/components/Tables/TableBasic/TableBasic.tsx'
-                ],
+                components: './src/components/Tables/TableBasic/TableBasic.tsx',
             },
             {
                 name: 'Tabs',
@@ -303,7 +269,7 @@ module.exports = [
                 name: 'Tags',
                 components: [
                     './src/components/Tag/Tag.tsx',
-                    './src/components/Tag/TagGroup.tsx',
+                    './src/components/Tag/TagGroup.tsx'
                 ],
             },
             {
@@ -312,7 +278,7 @@ module.exports = [
             },
             {
                 name: 'ThemeProvider',
-                components: ['./src/components/ThemeProvider/ThemeProvider.tsx'],
+                components: './src/components/ThemeProvider/ThemeProvider.tsx',
             },
             {
                 name: 'Tooltip',
@@ -322,7 +288,7 @@ module.exports = [
                 name: 'Typography',
                 components: [
                     './src/components/Typography/Text.tsx',
-                    './src/components/Typography/Title.tsx',
+                    './src/components/Typography/Title.tsx'
                 ],
             },
             {
@@ -335,7 +301,7 @@ module.exports = [
             },
             {
                 name: 'Widget',
-                components: ['./src/components/Widget/Widget.tsx'],
+                components: './src/components/Widget/Widget.tsx',
             },
         ],
     },
@@ -347,7 +313,7 @@ module.exports = [
                 sections: [
                     {
                         name: 'How to use',
-                        content: './styleguidist/components/Icons/HowToUse.md'
+                        content: './styleguidist/components/Icons/Usage.md',
                     },
                     {
                         name: 'Accent',
@@ -387,11 +353,11 @@ module.exports = [
                 name: 'Illustrations',
                 sections: [
                     {
-                        name: 'Screen Market',
+                        name: 'Screens Marketing',
                         content: './styleguidist/components/Icons/ScreenMarket.md',
                     },
                     {
-                        name: 'Screen System',
+                        name: 'Screens Systems',
                         content: './styleguidist/components/Icons/ScreenSystem.md',
                     },
                 ],
@@ -415,7 +381,7 @@ module.exports = [
             },
             {
                 name: 'Input with no autofill',
-                content: './styleguidist/components/Input/InputNoAutofill.md'
+                content: './styleguidist/components/Input/InputNoAutofill.md',
             },
             {
                 name: 'SMSInput in TableBasic',

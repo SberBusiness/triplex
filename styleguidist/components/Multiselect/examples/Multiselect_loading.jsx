@@ -98,16 +98,18 @@ const renderCountInfoTag = (count, onRemove) => {
 /** Обход чекбоксов. */
 const traverseCheckboxes = (checkboxes, callback) => {
     checkboxes.forEach((checkbox) => {
-        if (checkbox.children)
+        if (checkbox.children) {
             traverseCheckboxes(checkbox.children, callback);
+        }
         callback(checkbox);
     });
 };
 
 /** Обновление флага checked и bulk родителя, при изменении дочернего чекбокса. */
 const checkParentCheckboxes = (checkbox) => {
-    if (!checkbox.children)
+    if (!checkbox.children) {
         return;
+    }
 
     let checkedChildrenCount = 0;
     let bulkChildrenCount = 0;
@@ -133,8 +135,9 @@ const checkParentCheckboxes = (checkbox) => {
 
 /** Обновление флага checked дочерних чекбоксов, при изменении родителя. */
 const checkChildrenCheckboxes = (checkbox) => {
-    if (!checkbox.children)
+    if (!checkbox.children) {
         return;
+    }
 
     checkbox.children.forEach((child) => {
         child.checked = checkbox.checked;
@@ -162,8 +165,9 @@ const renderCheckboxNode = (checkbox) => {
     const {filteredCheckboxesId, filter} = state;
 
     // Текущий чекбокс не подходит под фильтр.
-    if (filter && !filteredCheckboxesId.includes(checkbox.id))
+    if (filter && !filteredCheckboxesId.includes(checkbox.id)) {
         return null;
+    }
 
     return (
         <CheckboxTreeExtended.Node
@@ -200,8 +204,9 @@ const unselectCheckbox = (id) => {
         }
     });
 
-    if (!changedCheckbox)
+    if (!changedCheckbox) {
         return;
+    }
 
     checkChildrenCheckboxes(changedCheckbox);
     // Обновление флага checked и bulk всех чекбоксов снизу вверх.
@@ -228,17 +233,20 @@ const renderTags = () => {
     const filtered = [];
 
     traverseCheckboxes(checkboxes, (checkbox) => {
-        if (checkbox.checked && !checkbox.bulk && !checkbox.children)
+        if (checkbox.checked && !checkbox.bulk && !checkbox.children) {
             filtered.push(checkbox);
+        }
     });
 
     const length = filtered.length;
 
-    if (length === 0)
+    if (length === 0) {
         return null;
+    }
 
-    if (length > 3)
+    if (length > 3) {
         return renderCountInfoTag(length, () => unselectAll());
+    }
 
     return (
         <TagGroup size={ETagSize.SM}>
@@ -317,9 +325,7 @@ const renderDropdownContent = () => {
             {checkboxes.map((checkbox) => renderCheckboxNode(checkbox))}
         </CheckboxTreeExtended>
     ) : (
-        <div className="not-found">
-            Ничего не найдено
-        </div>
+        <div className="not-found">Ничего не найдено</div>
     );
 };
 

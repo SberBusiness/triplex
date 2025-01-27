@@ -10,7 +10,7 @@ import {Select, ISelectOption} from '@sberbusiness/triplex/components/Select/Sel
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 
 /** Свойства компонента TableBasicPagination. */
-interface ITableBasicPaginationProps {
+export interface ITableBasicPaginationProps {
     /** Опции отображения количества строк в таблице. */
     rowNumberOptions: number[];
     /** Количество записей на страницу. */
@@ -52,7 +52,7 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
             this.props;
         const dataTestId = dataAttributes ? dataAttributes['test-id'] : undefined;
 
-        const options: ISelectOption[] = rowNumberOptions.map((o) => ({label: o, value: String(o), id: String(o)}));
+        const options: ISelectOption[] = rowNumberOptions.map((o) => ({id: String(o), label: o, value: String(o)}));
         const filteredOptions = options.filter((x) => x.value === String(rowNumber));
         const selectedOption = filteredOptions.length ? filteredOptions[0] : options[0];
 

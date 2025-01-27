@@ -4,7 +4,7 @@ import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
 import {ETooltipSize, ETooltipPreferPlace} from '@sberbusiness/triplex/components/Tooltip/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {EButtonIconShape} from '@sberbusiness/triplex/components/Button/enums';
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ComponentControlPanel} from '../../common/components/ComponentControlPanel/ComponentControlPanel';
 import './styles.less';
 
 const [isOpen, setIsOpen] = useState(false);

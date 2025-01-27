@@ -49,6 +49,7 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
     const lastValidPickerValuesRef = useRef(pickerValues);
     const inputFocusedRef = useRef(false);
     const dropdownOpenRef = useRef(false);
+    const dropdownClosedByCalendarRef = useRef(false); // Dropdown закрыт при выборе даты в календаре
 
     useEffect(() => {
         const newPickerValues = DatePickerUtils.getPickerValues(value, format, limitRange, disabledDays);
@@ -153,7 +154,9 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
     const handleDropdownClose = () => {
         dropdownOpenRef.current = false;
 
-        if (!inputFocusedRef.current && pickerValues.inputString !== lastValidPickerValuesRef.current.inputString) {
+        if (dropdownClosedByCalendarRef.current) {
+            dropdownClosedByCalendarRef.current = false;
+        } else if (!inputFocusedRef.current && pickerValues.inputString !== lastValidPickerValuesRef.current.inputString) {
             triggerChangeFromInput();
         }
 
@@ -162,6 +165,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
 
     /** Обработчик изменения даты. */
     const handleDateChange = (date: moment.Moment) => {
+        dropdownClosedByCalendarRef.current = true;
+
         onChange(date.format(format));
     };
 

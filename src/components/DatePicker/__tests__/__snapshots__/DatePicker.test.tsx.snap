@@ -30,6 +30,7 @@ exports[`DatePicker renders correctly 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
+        onPaste={[Function]}
         pipe={[Function]}
         render={[Function]}
         type="text"

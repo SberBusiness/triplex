@@ -33,6 +33,7 @@ import {
     MarkerStatus_Tokens,
     Multiselect_Tokens,
     Notification_Tokens,
+    Pagination_Tokens,
     Radio_Tokens,
     SegmentedControl_Tokens,
     Select_Tokens,
@@ -52,7 +53,6 @@ import {
     Title_Tokens,
     Tooltip_Tokens,
     TopOverlay_Tokens,
-    UnorderedList_Tokens,
     UploadZone_Tokens,
     Widget_Tokens,
     TDesignTokensComponentsAccordionFormValue,
@@ -85,6 +85,7 @@ import {
     TDesignTokensComponentsMarkerStatusValue,
     TDesignTokensComponentsMultiselectValue,
     TDesignTokensComponentsNotificationValue,
+    TDesignTokensComponentsPaginationValue,
     TDesignTokensComponentsRadioValue,
     TDesignTokensComponentsSegmentedControlValue,
     TDesignTokensComponentsSelectValue,
@@ -103,7 +104,6 @@ import {
     TDesignTokensComponentsTitleValue,
     TDesignTokensComponentsTooltipValue,
     TDesignTokensComponentsTopOverlayValue,
-    TDesignTokensComponentsUnorderedListValue,
     TDesignTokensComponentsUploadZoneValue,
     TDesignTokensComponentsWidgetValue,
 } from '@sberbusiness/triplex/components/DesignTokens/components';
@@ -155,6 +155,7 @@ export const DesignTokensComponents: TDesignTokensComponents = {
             value: 'rgba(255, 255, 255, 0.8)', //     var(--triplex-Overlay-maskBackground)
         },
     },
+    Pagination: GetTokensValueByTheme<TDesignTokensComponentsPaginationValue>(ETriplexTheme.LIGHT, Pagination_Tokens),
     Radio: GetTokensValueByTheme<TDesignTokensComponentsRadioValue>(ETriplexTheme.LIGHT, Radio_Tokens),
     SMSInput: GetTokensValueByTheme<TDesignTokensComponentsSMSInputValue>(ETriplexTheme.LIGHT, SMSInput_Tokens),
     SegmentedControl: GetTokensValueByTheme<TDesignTokensComponentsSegmentedControlValue>(ETriplexTheme.LIGHT, SegmentedControl_Tokens),
@@ -174,7 +175,6 @@ export const DesignTokensComponents: TDesignTokensComponents = {
     Title: GetTokensValueByTheme<TDesignTokensComponentsTitleValue>(ETriplexTheme.LIGHT, Title_Tokens),
     Tooltip: GetTokensValueByTheme<TDesignTokensComponentsTooltipValue>(ETriplexTheme.LIGHT, Tooltip_Tokens),
     TopOverlay: GetTokensValueByTheme<TDesignTokensComponentsTopOverlayValue>(ETriplexTheme.LIGHT, TopOverlay_Tokens),
-    UnorderedList: GetTokensValueByTheme<TDesignTokensComponentsUnorderedListValue>(ETriplexTheme.LIGHT, UnorderedList_Tokens),
     UploadZone: GetTokensValueByTheme<TDesignTokensComponentsUploadZoneValue>(ETriplexTheme.LIGHT, UploadZone_Tokens),
     Widget: GetTokensValueByTheme<TDesignTokensComponentsWidgetValue>(ETriplexTheme.LIGHT, Widget_Tokens),
 };

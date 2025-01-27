@@ -1,7 +1,7 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
-/** Свойства компонента FormGroup. */
+/** Свойства компонента FormGroup. */
 interface IFormGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**

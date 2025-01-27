@@ -7,7 +7,7 @@
 ### Spoiler Controlled
 
 ```jsx
-import {ComponentControlPanel} from '../common/ComponentControlPanel/ComponentControlPanel';
+import {ComponentControlPanel} from '../../common/components/ComponentControlPanel/ComponentControlPanel';
 
 const [expanded, setExpanded] = React.useState(false);
 

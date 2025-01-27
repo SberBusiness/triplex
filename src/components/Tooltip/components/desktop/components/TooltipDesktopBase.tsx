@@ -529,20 +529,18 @@ export class TooltipDesktopBase extends React.Component<ITooltipDesktopBaseProps
         const {elements} = this.context;
 
         const sizeClass = size === ETooltipSize.SM ? 'cssClass[tooltipSM]' : 'cssClass[tooltipLG]';
-        const classNames = classnames('cssClass[tooltipDesktop]', sizeClass, className);
+        const classNames = classnames('cssClass[tooltipDesktop]', sizeClass, {'cssClass[closable]': !!elements.closeButton}, className);
 
-        const tooltipEl = (
-            <div className={classNames} onKeyDown={this.handleKeyDown} {...rest} ref={this.setTooltipNode}>
-                <div className="cssClass[tooltipBody]" ref={this.bodyRef}>
-                    {elements.body}
-                    {elements.closeButton}
+        return (
+            <div className="cssClass[tooltipOverlay]">
+                <div className={classNames} onKeyDown={this.handleKeyDown} {...rest} ref={this.setTooltipNode}>
+                    <div className="cssClass[tooltipDesktopContent]" ref={this.bodyRef}>
+                        {elements.body}
+                        {elements.closeButton}
+                    </div>
+                    <TooltipDesktopTip direction={DIRECTIONS[this.state.standing]} ref={this.tipRef} />
                 </div>
-                <TooltipDesktopTip direction={DIRECTIONS[this.state.standing]} ref={this.tipRef} />
             </div>
         );
-
-        // Класс tooltipOverlay создает контейнер размером с экран для того,
-        // чтобы не появлялся скролл на элементе body, так как есть скрол у page.
-        return <div className="cssClass[tooltipOverlay]">{tooltipEl}</div>;
     };
 }

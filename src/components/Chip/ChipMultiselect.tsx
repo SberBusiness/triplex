@@ -1,9 +1,8 @@
 import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {IMultiselectProps, Multiselect} from '@sberbusiness/triplex/components/Multiselect/Multiselect';
-import {Chip, ChipClearButton} from '@sberbusiness/triplex/components/Chip/index';
+import {Chip, ChipClearButton, ChipDropdownArrow} from '@sberbusiness/triplex/components/Chip/index';
 import {ISelectExtendedTargetProvideProps} from '@sberbusiness/triplex/components/SelectExtended/SelectExtended';
-import {ChipscaretdownSrvxIcon24} from '@sberbusiness/icons/ChipscaretdownSrvxIcon24';
 
 export interface IChipMultiselectProps extends Omit<IMultiselectProps, 'renderTarget'> {
     /** Функция отмены выбора. */
@@ -34,13 +33,7 @@ export const ChipMultiselect = React.forwardRef<HTMLDivElement, IChipMultiselect
                 aria-expanded={opened}
                 disabled={disabled}
                 onClick={() => setOpened(true)}
-                postfix={
-                    selected ? (
-                        <ChipClearButton onClick={handleClickClearButton} />
-                    ) : (
-                        <ChipscaretdownSrvxIcon24 className={classnames('cssClass[caretIcon]', {'cssClass[caretIconOpened]': opened})} />
-                    )
-                }
+                postfix={selected ? <ChipClearButton onClick={handleClickClearButton} /> : <ChipDropdownArrow rotated={opened} />}
                 ref={ref}
                 role="listbox"
                 selected={Boolean(selected)}

@@ -6,7 +6,7 @@
 ```jsx {"file": "./examples/TabsExtended_1_marked.jsx", "props": {"className": "light-background"}}
 ```
 
-### Accessibility support
+### Accessibility
 
-```jsx {"file": "./examples/TabsExtended_2_accessible.jsx", "props": {"className": "light-background"}}
+```jsx {"file": "./examples/TabsExtended_2_accessibility.jsx", "props": {"className": "light-background"}}
 ```

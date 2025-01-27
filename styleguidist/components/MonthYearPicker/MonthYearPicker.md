@@ -21,9 +21,9 @@
 ```jsx {"file": "./examples/MonthYearPicker_4_limit.jsx"}
 ```
 
-### Accessible
+### Accessibility
 
-```jsx {"file": "./examples/MonthYearPicker_5_accessible.jsx"}  
+```jsx {"file": "./examples/MonthYearPicker_5_accessibility.jsx"}  
 ```
 
 ### Disabled focus trap

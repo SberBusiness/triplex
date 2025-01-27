@@ -7,3 +7,21 @@
 .caret-icon.opened {
     transform: rotate(-180deg);
 }
+
+.buttonRowWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+
+    & button,
+    & div {
+        margin-left: 0px !important;
+    }
+}
+
+.buttonColumnWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

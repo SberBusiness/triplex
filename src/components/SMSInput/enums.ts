@@ -1,5 +1,5 @@
 /** Возможные размеры SMSInput. */
 export enum ESMSInputSize {
-    MD = 'MD',
-    SM = 'SM',
+    MD = 'md',
+    SM = 'sm',
 }

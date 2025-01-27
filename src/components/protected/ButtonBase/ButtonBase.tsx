@@ -1,7 +1,7 @@
 import React from 'react';
 
 /** Свойства компонента ButtonBase. */
-interface IButtonBaseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface IButtonBaseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 /** База для кнопок. */
 export const ButtonBase = React.forwardRef<HTMLButtonElement, IButtonBaseProps>((props, ref) => {
