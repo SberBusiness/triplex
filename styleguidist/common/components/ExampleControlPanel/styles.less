@@ -1,0 +1,35 @@
+.example-control-panel {
+    margin-bottom: 16px;
+    transition: color 0.5s;
+
+    label {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    br + label {
+        margin-top: 4px;
+    }
+
+    select {
+        margin-left: 4px;
+    }
+
+    input[type='checkbox'],
+    input[type='radio'] {
+        margin: 0 4px 0 0;
+    }
+
+    input[type='text'],
+    input[type='number'] {
+        margin: 0 0 0 4px;
+    }
+
+    .triplex-theme-dark & {
+        color: white;
+    }
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        border-color: threedface;
+    }
+}

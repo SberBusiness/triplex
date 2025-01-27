@@ -1,0 +1,30 @@
+@import 'src/styles/style';
+
+.paginationPageButton {
+    font-family: inherit;
+    color: var(--triplex-Pagination-PageButton_Color);
+    background-color: var(--triplex-Pagination-PageButton_Background_Default);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    border: 1px solid var(--triplex-Pagination-PageButton_BorderColor_Default);
+    border-radius: 50%;
+    margin: 0 2px;
+    cursor: pointer;
+
+    &:focus-visible {
+        border-color: var(--triplex-Pagination-PageButton_BorderColor_Focus);
+        outline: none;
+    }
+
+    &:hover {
+        background-color: var(--triplex-Pagination-PageButton_Background_Hover);
+    }
+
+    &.currentPage {
+        background-color: var(--triplex-Pagination-PageButton_Background_Selected);
+        cursor: default;
+    }
+}
