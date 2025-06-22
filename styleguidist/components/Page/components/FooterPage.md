@@ -1,6 +1,7 @@
 ### Basic
 
 ```jsx
+import React from 'react';
 import {FooterPage} from '@sberbusiness/triplex/components/Page/components/FooterPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
@@ -22,6 +23,7 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 ### Basic Link
 
 ```jsx
+import React from 'react';
 import {FooterPage} from '@sberbusiness/triplex/components/Page/components/FooterPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ELinkSize, ELinkType, Link} from '@sberbusiness/triplex/components/Link/Link';
@@ -54,6 +56,7 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 ### Extended
 
 ```jsx
+import React from 'react';
 import {FooterPage} from '@sberbusiness/triplex/components/Page/components/FooterPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';

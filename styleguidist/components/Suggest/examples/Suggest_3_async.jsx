@@ -5,7 +5,7 @@ import {Suggest} from '@sberbusiness/triplex/components/Suggest/Suggest';
 const getInitialState = () => ({
     value: undefined,
     options: [],
-    tooltipHint: 'Введите более трёх символов.',
+    tooltipHint: 'Введите не менее четырёх символов.',
     saveFilterOnFocus: true,
     isTooltipOpened: false,
     loading: false,
@@ -47,7 +47,7 @@ class SuggestAsyncExample extends React.Component {
         const {value} = this.state;
 
         if (!value) {
-            this.setState({options: [], tooltipHint: 'Введите более трёх символов.'})
+            this.setState({options: [], tooltipHint: 'Введите не менее четырёх символов.'});
         } else if (!this.isInCache(value.login)) {
             this.setState({options: [], loading: true, page: 1}, () => {
                 this.sendRequest(value.login, this.state.page);
@@ -83,7 +83,7 @@ class SuggestAsyncExample extends React.Component {
                 query,
                 options: [],
                 isTooltipOpened: !!query.length,
-                tooltipHint: 'Введите более трёх символов.',
+                tooltipHint: 'Введите не менее четырёх символов.',
                 loading: false,
             });
         } else if (this.isInCache(query)) {

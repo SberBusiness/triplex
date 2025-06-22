@@ -1,18 +1,6 @@
-import React from 'react';
-
-// Шаги анимации.
-enum EExpandAnimationStep {
-    // Закрыт.
-    CLOSED,
-    // Закрывается.
-    CLOSING,
-    // Перед закрытием. Шаг нужен для установки текущей высоты перед анимацией.
-    PRE_CLOSING,
-    // Открыт.
-    OPENED,
-    // Открывается.
-    OPENING,
-}
+import React, {useRef} from 'react';
+import {Transition, TransitionStatus} from 'react-transition-group';
+import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента ExpandAnimation. */
 export interface IExpandAnimationProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,143 +12,89 @@ export interface IExpandAnimationProps extends React.HTMLAttributes<HTMLDivEleme
     onStart?: () => void;
     /** Коллбэк на окончание анимации. */
     onEnd?: () => void;
-}
-
-/** Состояние компонента ExpandAnimation. */
-export interface IExpandAnimationState {
-    /** Текущий шаг анимации. */
-    currentAnimationStep: EExpandAnimationStep;
+    /** Свойства компонента Transition (react-transition-group). */
+    transitionProps?: React.ComponentProps<typeof Transition<HTMLDivElement>>;
 }
 
 // Время исполнения анимации по-умолчанию.
-const ANIMATION_TIME_DEFAULT = 300;
+const TIMEOUT_DEFAULT = 300;
 
 /** Компонент анимации сворачивания/разворачивания контента. */
-export class ExpandAnimation extends React.Component<IExpandAnimationProps, IExpandAnimationState> {
-    public static displayName = 'ExpandAnimation';
+export const ExpandAnimation = React.forwardRef<HTMLDivElement, IExpandAnimationProps>(
+    ({children, className, expanded, animationTime = TIMEOUT_DEFAULT, style, onStart, onEnd, transitionProps, ...rest}, ref) => {
+        const transitionStylesRef = useRef<Record<TransitionStatus, React.CSSProperties>>({
+            entering: {height: undefined, overflow: 'hidden'},
+            entered: {},
+            exiting: {height: 0, overflow: 'hidden'},
+            exited: {height: 0, overflow: 'hidden', visibility: 'hidden'},
+            unmounted: {},
+        });
+        const nodeRef = useRef<HTMLDivElement | null>(null);
 
-    public static defaultProps = {
-        animationTime: ANIMATION_TIME_DEFAULT,
-    };
+        const handleEnter = (appearing: boolean) => {
+            if (nodeRef.current) {
+                transitionStylesRef.current['entering'].height = nodeRef.current.scrollHeight;
+            }
 
-    constructor(props: IExpandAnimationProps) {
-        super(props);
-
-        this.state = {
-            currentAnimationStep: props.expanded ? EExpandAnimationStep.OPENED : EExpandAnimationStep.CLOSED,
+            onStart?.();
+            transitionProps?.onEnter?.(appearing);
         };
-    }
 
-    public componentDidMount(): void {
-        // Для правильного обновления стилей, когда уже определен this.container.
-        this.forceUpdate();
-    }
+        const handleEntered = (appearing: boolean) => {
+            onEnd?.();
+            transitionProps?.onEntered?.(appearing);
+        };
 
-    public componentDidUpdate(prevProps: Readonly<IExpandAnimationProps>): void {
-        const {expanded} = this.props;
-        const {currentAnimationStep} = this.state;
+        const handleExit = () => {
+            if (nodeRef.current) {
+                nodeRef.current.style.height = nodeRef.current.scrollHeight + 'px';
+                // trigger reflow
+                nodeRef.current.scrollHeight;
+            }
 
-        if (prevProps.expanded !== expanded) {
-            this.startAnimation(expanded);
-        }
+            onStart?.();
+            transitionProps?.onExit?.();
+        };
 
-        // Начало анимации закрытия.
-        if (currentAnimationStep === EExpandAnimationStep.PRE_CLOSING) {
-            // https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Performance_best_practices_for_Firefox_fe_engineers#How_do_I_avoid_triggering_uninterruptible_reflow
-            requestAnimationFrame(() => setTimeout(() => this.setState({currentAnimationStep: EExpandAnimationStep.CLOSING})));
-        }
-    }
+        const handleExited = () => {
+            onEnd?.();
+            transitionProps?.onExited?.();
+        };
 
-    public render(): React.ReactElement {
-        const {animationTime, children, expanded, onStart, onEnd, ...rest} = this.props;
-        const styles = this.getStyles();
+        const setRef = (instance: HTMLDivElement | null) => {
+            nodeRef.current = instance;
+
+            if (typeof ref === 'function') {
+                ref(instance);
+            } else if (ref) {
+                ref.current = instance;
+            }
+        };
 
         return (
-            <div {...rest} ref={this.setWrapper} style={styles} onTransitionEnd={this.handleAnimationEnd}>
-                <div ref={this.setContainer}>{children}</div>
-            </div>
+            <Transition
+                in={expanded}
+                timeout={animationTime}
+                nodeRef={nodeRef}
+                {...transitionProps}
+                onEnter={handleEnter}
+                onEntered={handleEntered}
+                onExit={handleExit}
+                onExited={handleExited}
+            >
+                {(state) => (
+                    <div
+                        className={classnames('cssClass[expandAnimation]', className)}
+                        style={{transitionDuration: animationTime + 'ms', ...transitionStylesRef.current[state], ...style}}
+                        {...rest}
+                        ref={setRef}
+                    >
+                        {children}
+                    </div>
+                )}
+            </Transition>
         );
     }
+);
 
-    private container: HTMLDivElement | null = null;
-    private wrapper: HTMLDivElement | null = null;
-
-    private getStyles = (): React.CSSProperties => {
-        // При первом рендере this.container еще не определен, и стили вычислить невозможно,
-        if (!this.container) {
-            return {
-                display: 'none',
-            };
-        }
-
-        const {currentAnimationStep} = this.state;
-        const {animationTime} = this.props;
-
-        let height: string | number | undefined = 0;
-        let overflow = 'visible';
-
-        switch (currentAnimationStep) {
-            case EExpandAnimationStep.CLOSED:
-                overflow = 'hidden';
-                break;
-            case EExpandAnimationStep.CLOSING:
-                overflow = 'hidden';
-                break;
-            case EExpandAnimationStep.OPENED:
-                height = 'auto';
-                break;
-            case EExpandAnimationStep.OPENING:
-                height = `${this.container.clientHeight}px`;
-                overflow = 'hidden';
-                break;
-            case EExpandAnimationStep.PRE_CLOSING:
-                height = `${this.container.clientHeight}px`;
-                overflow = 'hidden';
-                break;
-        }
-
-        return {
-            height,
-            overflow,
-            transition: `height ${animationTime!}ms ease-in-out`,
-        };
-    };
-
-    private handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => {
-        const {target} = event;
-        if (this.wrapper !== target) {
-            return;
-        }
-
-        const {onEnd} = this.props;
-
-        this.setState(
-            (prevState) => ({
-                currentAnimationStep:
-                    prevState.currentAnimationStep === EExpandAnimationStep.OPENING
-                        ? EExpandAnimationStep.OPENED
-                        : EExpandAnimationStep.CLOSED,
-            }),
-            onEnd
-        );
-    };
-
-    private startAnimation = (expanded: boolean) => {
-        const {onStart} = this.props;
-
-        this.setState(
-            {
-                currentAnimationStep: expanded ? EExpandAnimationStep.OPENING : EExpandAnimationStep.PRE_CLOSING,
-            },
-            onStart
-        );
-    };
-
-    private setContainer = (element: HTMLDivElement): void => {
-        this.container = element;
-    };
-
-    private setWrapper = (element: HTMLDivElement): void => {
-        this.wrapper = element;
-    };
-}
+ExpandAnimation.displayName = 'ExpandAnimation';

@@ -7,7 +7,8 @@ export const designTokensComponentsCardKeys = [
     'BorderColor_Default',
     'BorderColor_Focus',
     'BorderColor_Hover',
-    'BorderColor_Selected',
+    'BorderColor_Selected_Default',
+    'BorderColor_Selected_Hover',
 
     'Shadow_Default',
     'Shadow_Hover',
@@ -28,7 +29,8 @@ export const Card_Tokens: TDesignTokensComponentsCardValues = {
     BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-Card-BorderColor_Default)
     BorderColor_Focus: [{ref: 'Accent.500'}, {ref: 'Accent.500'}], // var(--triplex-Card-BorderColor_Focus)
     BorderColor_Hover: [{ref: 'Neutral.500'}, {ref: 'Neutral.900'}], // var(--triplex-Card-BorderColor_Hover)
-    BorderColor_Selected: [{ref: 'Primary.700'}, {ref: 'Primary.500'}], // var(--triplex-Card-BorderColor_Selected)
+    BorderColor_Selected_Default: [{ref: 'Primary.700'}, {ref: 'Primary.500'}], // var(--triplex-Card-BorderColor_Selected_Default)
+    BorderColor_Selected_Hover: [{ref: 'Primary.700'}, {ref: 'Primary.300'}], // var(--triplex-Card-BorderColor_Selected_Hover)
 
     Shadow_Default: [{value: '0 1px 3px 0 rgba(31, 31, 34, 0.25)'}, {value: 'none'}], // var(--triplex-Card-Shadow_Default)
     Shadow_Hover: [{value: '0 2px 7px 0 rgba(31, 31, 34, 0.25)'}, {value: 'none'}], // var(--triplex-Card-Shadow_Hover)

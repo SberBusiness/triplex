@@ -12,7 +12,7 @@ each(@paddingXsizes, {
 });
 
 .border-color-hover() {
-    border-top-color: var(--triplex-TableBasic-TabsLine_BorderColor_Hover);
+    border-top-color: var(--triplex-TabsLine-BorderColor_Hover);
 }
 
 .border-element() {
@@ -34,7 +34,7 @@ each(@paddingXsizes, {
     }
 
     &.active::after {
-        border-top-color: var(--triplex-TableBasic-TabsLine_BorderColor_Active);
+        border-top-color: var(--triplex-TabsLine-BorderColor_Active);
     }
 }
 
@@ -46,7 +46,7 @@ each(@paddingXsizes, {
             content: '';
             position: absolute;
             height: 1px;
-            background: @color-asphalt-03;
+            background: var(--triplex-TabsLine-Separator_Background);
             bottom: 0;
             left: 0;
             right: 0;
@@ -71,7 +71,7 @@ each(@paddingXsizes, {
     background: transparent;
     cursor: pointer;
     .b1-text-main(@color-graphite-01);
-    color: var(--triplex-TableBasic-TabsLine_Color);
+    color: var(--triplex-TabsLine-Color);
 
     &::-moz-focus-inner {
         border: none;
@@ -79,7 +79,7 @@ each(@paddingXsizes, {
     }
 
     &:focus-visible {
-        box-shadow: var(--triplex-TableBasic-TabsLine_Shadow_Focus);
+        box-shadow: var(--triplex-TabsLine-Shadow_Focus);
     }
 
     &.active {
@@ -96,7 +96,7 @@ each(@paddingXsizes, {
     width: @metric-8;
     height: @metric-8;
     border-radius: 50%;
-    background-color: var(--triplex-TableBasic-TabsLine_Notification_Color);
+    background-color: var(--triplex-TabsLine-Notification_Color);
 }
 
 .tabsLineDropdown {
@@ -117,10 +117,6 @@ each(@paddingXsizes, {
 
         &.opened {
             transform: rotate(-180deg);
-        }
-
-        path {
-            fill: var(--triplex-TableBasic-TabsLine_Caret_Color);
         }
     }
 

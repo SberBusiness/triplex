@@ -2,18 +2,15 @@ import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента FooterDescriptionContent. */
-interface IFooterDescriptionContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface IFooterDescriptionContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Футер, контент основной части. */
-export class FooterDescriptionContent extends React.PureComponent<IFooterDescriptionContentProps> {
-    public static displayName = 'FooterDescriptionContent';
+export const FooterDescriptionContent = React.forwardRef<HTMLDivElement, IFooterDescriptionContentProps>(
+    ({children, className, ...rest}, ref) => (
+        <div className={classnames('cssClass[footerDescriptionContent]', className)} {...rest} ref={ref}>
+            {children}
+        </div>
+    )
+);
 
-    public render(): JSX.Element {
-        const {children, className, ...htmlDivAttributes} = this.props;
-        return (
-            <div className={classnames(className, 'cssClass[footerDescriptionContent]')} {...htmlDivAttributes}>
-                {children}
-            </div>
-        );
-    }
-}
+FooterDescriptionContent.displayName = 'FooterDescriptionContent';

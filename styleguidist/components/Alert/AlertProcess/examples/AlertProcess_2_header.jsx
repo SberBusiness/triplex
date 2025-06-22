@@ -17,6 +17,10 @@ const renderHeader = () => <AlertProcess.Header>Текст заголовка</A
         Текст сообщения
     </AlertProcess>
     <br />
+    <AlertProcess type={EAlertType.SYSTEM} renderHeader={renderHeader}>
+        Текст сообщения
+    </AlertProcess>
+    <br />
     <AlertProcess type={EAlertType.FEATURE} renderHeader={renderHeader}>
         Текст сообщения
     </AlertProcess>

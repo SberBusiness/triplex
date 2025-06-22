@@ -28,6 +28,10 @@ jest.mock('@sberbusiness/icons/ClosenotificationSrvxIcon16', () => ({
     ClosenotificationSrvxIcon16: 'svg',
 }));
 
+jest.mock('@sberbusiness/icons/ClosetooltipSrvxIcon16', () => ({
+    ClosetooltipSrvxIcon16: 'svg',
+}));
+
 jest.mock('@sberbusiness/icons/HeaderkebabSrvxIcon16', () => ({
     HeaderkebabSrvxIcon16: 'svg',
 }));
@@ -60,7 +64,9 @@ describe('DatePicker', () => {
     it('renders correctly', () => {
         const handleChange = jest.fn();
         const value = getFormattedDate(moment('1970-01-01'));
-        const tree = renderer.create(<DatePicker value={value} onChange={handleChange} />).toJSON();
+        const tree = renderer
+            .create(<DatePicker value={value} onChange={handleChange} invalidDateHint="Указана недоступная для выбора дата." />)
+            .toJSON();
 
         expect(tree).toMatchSnapshot();
     });

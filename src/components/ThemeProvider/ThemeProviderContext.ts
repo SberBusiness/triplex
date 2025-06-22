@@ -4,11 +4,13 @@ import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETri
 import {DesignTokensCore, DesignTokensComponents} from '@sberbusiness/triplex/components/DesignTokens';
 
 export interface IThemeProviderContext {
+    scopeClassName: string;
     theme: ETriplexTheme;
     tokens: TDesignTokens;
 }
 
 const contextInitial: IThemeProviderContext = {
+    scopeClassName: '',
     theme: ETriplexTheme.LIGHT,
     tokens: {...DesignTokensCore, ...DesignTokensComponents},
 };

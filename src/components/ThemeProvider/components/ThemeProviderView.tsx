@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import defaultsDeep from 'lodash.defaultsdeep';
+import {defaultsDeep} from 'lodash';
 import {TDesignTokens, TDesignTokensPartial} from '@sberbusiness/triplex/components/DesignTokens/types/DesignTokensTypes';
 // Импорт не должен быть относительным.
 import {ThemeProviderContext} from '@sberbusiness/triplex/components/ThemeProvider/ThemeProviderContext';
@@ -56,5 +56,5 @@ export const ThemeProviderView: React.FC<IThemeProviderViewProps> = ({
         theme === ETriplexTheme.LIGHT ? DesignTokensComponents : DesignTokensComponentsThemeDark
     );
 
-    return <ThemeProviderContext.Provider value={{theme, tokens}}>{children}</ThemeProviderContext.Provider>;
+    return <ThemeProviderContext.Provider value={{scopeClassName, theme, tokens}}>{children}</ThemeProviderContext.Provider>;
 };

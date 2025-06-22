@@ -9,7 +9,9 @@
         justify-content: space-between;
 
         .icon {
-            margin-left: @metric-4;
+            align-self: start;
+            margin: 2px 0 0 @metric-4;
+            flex-shrink: 0;
 
             path {
                 fill: var(--triplex-Spoiler-Caret_Color);
@@ -24,8 +26,16 @@
             }
         }
 
-        .toggleButton {
-            margin-left: -2px;
+        button {
+            &.toggleButton {
+                margin-left: -2px;
+                height: auto;
+            }
+
+            & > span {
+                white-space: normal;
+                text-align: left;
+            }
         }
     }
 

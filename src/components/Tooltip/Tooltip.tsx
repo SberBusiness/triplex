@@ -53,12 +53,12 @@ export const Tooltip: React.FC<ITooltipProps> & ITooltipComposition = ({
     ...rest
 }) => {
     const [openState, setOpenState] = useState(false);
-    const hoveredRef = useRef(false);
+    const targetHoveredRef = useRef(false);
     const open = openProp ?? openState;
 
     useEffect(() => {
         if (openProp === false) {
-            hoveredRef.current = false;
+            targetHoveredRef.current = false;
         }
     }, [openProp]);
 
@@ -87,7 +87,7 @@ export const Tooltip: React.FC<ITooltipProps> & ITooltipComposition = ({
     const handleOpen = (nextOpen: boolean) => {
         if (openProp === undefined) {
             if (!nextOpen) {
-                hoveredRef.current = false;
+                targetHoveredRef.current = false;
             }
             setOpenState(nextOpen);
         }
@@ -110,8 +110,8 @@ export const Tooltip: React.FC<ITooltipProps> & ITooltipComposition = ({
             value={{
                 elements: getChildrenElements(),
                 setTooltipOpen: handleOpen,
+                targetHoveredRef,
                 toggleType,
-                tooltipHoveredRef: hoveredRef,
                 tooltipOpen: open,
             }}
         >

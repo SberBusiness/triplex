@@ -93,7 +93,7 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZon
     }
 
     render(): JSX.Element {
-        const {children, onChange, renderContainerContent, dropZoneContainer, ...restHtmlAttributes} = this.props;
+        const {children, className, onChange, renderContainerContent, dropZoneContainer, ...rest} = this.props;
         const {inputNode} = this.state;
 
         return (
@@ -107,11 +107,11 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZon
                     },
                 }}
             >
-                <div className={classnames('cssClass[uploadZone]')} data-tx={process.env.npm_package_version}>
+                <div className="cssClass[uploadZone]" data-tx={process.env.npm_package_version}>
                     <div
-                        className={classnames('cssClass[uploadZoneDragArea]')}
+                        className={classnames('cssClass[uploadZoneDragArea]', className)}
                         onClick={this.handleAreaClick}
-                        {...restHtmlAttributes}
+                        {...rest}
                         key="uploadZoneDragArea"
                         role="none"
                     />
@@ -140,18 +140,18 @@ export class UploadZone extends React.PureComponent<IUploadZoneProps, IUploadZon
     };
 
     private createDropZoneDiv = (): HTMLDivElement => {
-        const {children, onChange, renderContainerContent, dropZoneContainer, ...restHtmlAttributes} = this.props;
+        const {children, className, onChange, renderContainerContent, dropZoneContainer, ...restHtmlAttributes} = this.props;
         const wrapperDiv = document.createElement('div');
         ReactDOM.render(
             <div
-                className={classnames('cssClass[uploadZoneContainerDragArea]')}
+                className={classnames('cssClass[uploadZoneContainerDragArea]', className)}
                 onDragOver={this.handlePreventDefault}
                 onDrop={this.fileDrop}
                 {...restHtmlAttributes}
                 key="uploadZoneDragArea"
                 role="none"
             >
-                <div className="cssClass[border]">{renderContainerContent?.()}</div>
+                {renderContainerContent?.()}
             </div>,
             wrapperDiv
         );

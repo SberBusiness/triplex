@@ -151,7 +151,7 @@ useEffect(() => {
                                 <Page.Header.Title.Content.Subhead>
                                     <DocumentNumberEdit
                                         value={number}
-                                        onChange={setNumber}
+                                        onChange={(event) => setNumber(event.target.value)}
                                         buttonLabel="Изменить"
                                         emptyNumberButtonLabel="Задать номер"
                                         emptyNumberLabel="Номер документа будет присвоен автоматически"

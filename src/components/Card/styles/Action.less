@@ -5,8 +5,12 @@
     cursor: pointer;
 
     &.selected {
-        border-color: var(--triplex-Card-BorderColor_Selected);
+        border-color: var(--triplex-Card-BorderColor_Selected_Default);
         box-shadow: none;
+
+        &:hover {
+            border-color: var(--triplex-Card-BorderColor_Selected_Hover);
+        }
     }
 
     &:hover {

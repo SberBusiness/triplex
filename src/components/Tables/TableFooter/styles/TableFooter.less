@@ -1,8 +1,10 @@
 @import 'src/styles/style';
 
 .tableFooterWrapper {
+    position: sticky;
     height: 76px;
     margin-top: @metric-16;
+    bottom: 0;
 
     .tableFooter {
         background: var(--triplex-TableBasic-TableFooter_Background);
@@ -25,26 +27,11 @@
 
             .tableFooterSummarySelectedCount,
             .tableFooterSummaryAmount,
+            .tableFooterSummarySelectAllButton,
             .tableFooterSummaryDivider {
                 margin-left: @metric-24;
             }
         }
-    }
-
-    &.ieBrowser .tableFooter {
-        position: relative;
-
-        &.fixed {
-            position: fixed;
-            bottom: 0;
-            z-index: 1;
-            box-sizing: border-box;
-        }
-    }
-
-    &:not(.ieBrowser) {
-        position: sticky; // IE не поддерживает.
-        bottom: 0;
     }
 }
 

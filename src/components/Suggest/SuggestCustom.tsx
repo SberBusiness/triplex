@@ -1,6 +1,5 @@
 import React from 'react';
-import isFunction from 'lodash.isfunction';
-import isEqual from 'lodash.isequal';
+import {isEqual, isFunction} from 'lodash';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
 import {EVENT_KEY_CODES, isKey} from '@sberbusiness/triplex/utils/keyboard';
@@ -332,7 +331,6 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
                 {this.renderDropdownItemLabel({option, renderCustom: renderDropdownItemLabel})}
             </DropdownList.Item>
         );
-        /* eslint-enable @typescript-eslint/ban-ts-comment */
     };
 
     private renderDropdownItemLabel = (props: ISuggestDropdownItemLabelProps<T>) => {
@@ -380,31 +378,14 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         }
     };
 
-    /** Обработчик открытия выпадающего списка. */
-    private openSuggest = () => {
-        const {saveFilterOnFocus, value} = this.props;
-        this.setOpened(true, {
-            focused: true,
-            query: saveFilterOnFocus && value?.label ? value.label : '',
-        });
-    };
-
-    private setOpened = (opened: boolean, stateDiff?: Partial<ISuggestCustomState>, cb?: () => void) => {
+    private setOpened = (opened: boolean, stateDiff?: Partial<ISuggestCustomState>, callback?: () => void) => {
         this.setState(
             (prevState) => ({
                 ...prevState,
                 ...stateDiff,
                 opened,
             }),
-            () => {
-                if (opened) {
-                    this.removeInputOnlyListener();
-                } else if (this.state.focused) {
-                    this.addInputOnlyListener();
-                }
-
-                cb?.();
-            }
+            callback
         );
     };
 
@@ -426,11 +407,6 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
     private handleClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         e.stopPropagation();
-
-        const {disabled, options} = this.props;
-        if (disabled) return;
-
-        !this.state.opened && !!options?.length && this.openSuggest();
     };
 
     /** Обработчик изменения значения. */
@@ -475,22 +451,11 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
         );
     };
 
-    /** Добавление слушателя нажатий клавиш для инпута в эксклюзивном режиме. */
-    private addInputOnlyListener = () => {
-        document.addEventListener('keydown', this.keyDownInputOnlyListener);
-    };
-
-    /** Удаление слушателя нажатий клавиш для инпута в эксклюзивном режиме. */
-    private removeInputOnlyListener = () => {
-        document.removeEventListener('keydown', this.keyDownInputOnlyListener);
-    };
-
     /** Добавление слушателей нажатий клавиш и слушателя клика снаружи компонента. */
     private addListeners = () => {
         const {disabled} = this.props;
         if (!disabled) {
             document.addEventListener('keydown', this.keyDownListener);
-            !this.state.opened && this.addInputOnlyListener();
             document.addEventListener('mousedown', this.clickOutsideListener);
         }
     };
@@ -498,18 +463,7 @@ export class SuggestCustom<T extends ISuggestOption = ISuggestOption> extends Re
     /** Удаление слушателей нажатий клавиш и слушателя клика снаружи компонента. */
     private removeListeners = () => {
         document.removeEventListener('keydown', this.keyDownListener);
-        this.removeInputOnlyListener();
         document.removeEventListener('mousedown', this.clickOutsideListener);
-    };
-
-    /** Слушатели нажатий клавиш, работающие только на инпуте, когда выпадающий список закрыт. */
-    private keyDownInputOnlyListener = (e: KeyboardEvent): void => {
-        const key = e.code || e.keyCode;
-        if (!this.state.opened) {
-            if (isKey(key, 'ENTER') || isKey(key, 'ARROW_UP') || isKey(key, 'ARROW_DOWN')) {
-                return this.openSuggest();
-            }
-        }
     };
 
     /** Слушатели нажатий клавиш. */

@@ -5,10 +5,12 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 export interface IHeaderTitleContentSubheadProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Подзаголовок. */
-export const HeaderTitleContentSubhead: React.FC<IHeaderTitleContentSubheadProps> = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[headerTitleContentSubhead]')} {...htmlDivAttributes}>
-        {children}
-    </div>
+export const HeaderTitleContentSubhead = React.forwardRef<HTMLDivElement, IHeaderTitleContentSubheadProps>(
+    ({children, className, ...rest}, ref) => (
+        <div className={classnames('cssClass[headerTitleContentSubhead]', className)} {...rest} ref={ref}>
+            {children}
+        </div>
+    )
 );
 
 HeaderTitleContentSubhead.displayName = 'HeaderTitleContentSubhead';

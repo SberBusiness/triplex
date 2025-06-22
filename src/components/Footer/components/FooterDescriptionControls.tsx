@@ -5,16 +5,12 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 export interface IFooterDescriptionControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Футер, кнопки действий основной части. */
-export class FooterDescriptionControls extends React.PureComponent<IFooterDescriptionControlsProps> {
-    public static displayName = 'FooterDescriptionControls';
+export const FooterDescriptionControls = React.forwardRef<HTMLDivElement, IFooterDescriptionControlsProps>(
+    ({children, className, ...rest}, ref) => (
+        <div className={classnames('cssClass[footerDescriptionControls]', className)} {...rest} ref={ref}>
+            {children}
+        </div>
+    )
+);
 
-    public render(): JSX.Element {
-        const {children, className, ...htmlDivAttributes} = this.props;
-
-        return (
-            <div className={classnames(className, 'cssClass[footerDescriptionControls]')} {...htmlDivAttributes}>
-                {children}
-            </div>
-        );
-    }
-}
+FooterDescriptionControls.displayName = 'FooterDescriptionControls';

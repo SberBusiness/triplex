@@ -21,15 +21,15 @@ const renderLightBox = () => (
     <LightBox isLoading={isLoading}>
         <LightBox.Content isLoading={isLoading}>{renderPage()}</LightBox.Content>
         <LightBox.Controls>
-            <LightBox.Controls.Next
-                title="Вперёд"
-                onClick={() => console.log('Next arrow clicked!')}
-                clickByArrowRight
-            />
             <LightBox.Controls.Prev
                 title="Назад"
                 onClick={() => console.log('Prev arrow clicked!')}
                 clickByArrowLeft
+            />
+            <LightBox.Controls.Next
+                title="Вперёд"
+                onClick={() => console.log('Next arrow clicked!')}
+                clickByArrowRight
             />
             <LightBox.Controls.Close
                 title="Закрыть"

@@ -1,5 +1,5 @@
 import React from 'react';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {ChipIcon, IChipSelectProps} from '@sberbusiness/triplex/components/Chip/index';
 import {ListsortingoffSrvxIcon24} from '@sberbusiness/icons/ListsortingoffSrvxIcon24';
 import {ListsortingonSrvxIcon24} from '@sberbusiness/icons/ListsortingonSrvxIcon24';

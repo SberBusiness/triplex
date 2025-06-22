@@ -46,10 +46,10 @@ export const Chip_Tokens: TDesignTokensComponentsChipValues = {
     Color_Default: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Chip-Color_Default)
     Color_Disabled: [{ref: 'Neutral.700'}, {ref: 'Basic.300'}], // var(--triplex-Chip-Color_Disabled)
     Color_Hover: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-Chip-Color_Hover)
-    Color_Selected_Active: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Active)
-    Color_Selected_Default: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Default)
+    Color_Selected_Active: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Active)
+    Color_Selected_Default: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Default)
     Color_Selected_Disabled: [{ref: 'Basic.300'}, {ref: 'Neutral.700'}], // var(--triplex-Chip-Color_Selected_Disabled)
-    Color_Selected_Hover: [{ref: 'Basic.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Hover)
+    Color_Selected_Hover: [{ref: 'Neutral.100'}, {ref: 'Basic.700'}], // var(--triplex-Chip-Color_Selected_Hover)
 
     Shadow_Focus: [{value: '0 0 0 1px #FFDD64 inset'}, {value: '0 0 0 1px #FFDD64 inset'}], // var(--triplex-Chip-Shadow_Focus)
 };

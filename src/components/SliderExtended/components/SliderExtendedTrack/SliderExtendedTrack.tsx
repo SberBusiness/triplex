@@ -1,5 +1,5 @@
 import React, {useState, useLayoutEffect, useContext, useRef} from 'react';
-import throttle from 'lodash.throttle';
+import {throttle} from 'lodash';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SliderExtendedContext} from '../../SliderExtendedContext';
 import {SliderExtendedMoveHandler, TOnTargetMouseDown, TOnTargetTouchStart} from '../SliderExtendedMoveHandler';

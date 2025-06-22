@@ -1,7 +1,7 @@
 import React from 'react';
 
 /** Свойства контекста CalendarView. */
-interface ICalendarViewContext {
+export interface ICalendarViewContext {
     viewItemFocusedRef: React.MutableRefObject<boolean>;
 }
 

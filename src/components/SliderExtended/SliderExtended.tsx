@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useLayoutEffect} from 'react';
-import range from 'lodash.range';
+import {range} from 'lodash';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SliderExtendedDot} from './components/SliderExtendedDot/SliderExtendedDot';
 import {SliderExtendedMarks} from './components/SliderExtendedMarks/SliderExtendedMarks';

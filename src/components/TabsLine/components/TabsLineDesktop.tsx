@@ -4,7 +4,7 @@ import {TabsLineDropdown} from '@sberbusiness/triplex/components/TabsLine/compon
 import {ITabsLineItemProps, TabsLineItem} from '@sberbusiness/triplex/components/TabsLine/components/TabsLineItem';
 import {ITabsLineBase} from '@sberbusiness/triplex/components/TabsLine/types';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 
 /** Свойства компонента TabsLineDesktop. */
 export interface ITabsLineDesktopProps extends ITabsLineBase {

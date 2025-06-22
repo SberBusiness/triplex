@@ -6,4 +6,9 @@ const [value, setValue] = useState('');
 
 const limitRange = {dateFrom: moment().startOf('month'), dateTo: moment().endOf('month')};
 
-<DatePicker value={value} onChange={setValue} limitRange={limitRange} />
+<DatePicker
+    value={value}
+    onChange={setValue}
+    invalidDateHint="Указана недоступная для выбора дата."
+    limitRange={limitRange}
+/>

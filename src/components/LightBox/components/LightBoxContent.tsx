@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
+import ReactResizeDetector from 'react-resize-detector';
 import {WindowResizeListener} from '@sberbusiness/triplex/components/WindowResizeListener/WindowResizeListener';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {SpinnerWidget} from '@sberbusiness/triplex/components/SpinnerWidget/SpinnerWidget';

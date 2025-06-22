@@ -1,2 +1,2 @@
-```jsx {"file": "./examples/Icons_2_animated.jsx"}
+```jsx {"file": "./examples/Icons_2_animated.jsx", "noeditor": "true"}
 ```

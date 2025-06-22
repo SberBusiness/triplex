@@ -25,6 +25,7 @@ import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
 <div className="buttonRowWrapper">
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.LG}>
@@ -39,6 +40,9 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
     <Button theme={EButtonTheme.LINK} size={EButtonSize.LG}>
         Button Name
     </Button>
+    <Button theme={EButtonTheme.TILE} size={EButtonSize.LG}>
+        <MailbellNavIcon24 />
+    </Button>
 </div>;
 ```
 
@@ -46,6 +50,7 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
 
 ```jsx
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
+import {MailbellNavIcon24} from '@sberbusiness/icons/MailbellNavIcon24';
 
 <div className="buttonRowWrapper">
     <Button theme={EButtonTheme.GENERAL} size={EButtonSize.SM}>
@@ -59,6 +64,9 @@ import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button
     </Button>
     <Button theme={EButtonTheme.LINK} size={EButtonSize.SM}>
         Button Name
+    </Button>
+    <Button theme={EButtonTheme.TILE} size={EButtonSize.SM}>
+        <MailbellNavIcon24 />
     </Button>
 </div>;
 ```

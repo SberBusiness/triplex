@@ -113,7 +113,12 @@ const getData = () => {
                 logo: <PlugSrvIcon32 />,
                 summary: (
                     <>
-                        <Text tag="div" type={EFontType.GENERAL} size={ETextSize.B1} line={ELineType.EXTRA}>
+                        <Text
+                            tag="div"
+                            type={EFontType.GENERAL}
+                            size={ETextSize.B1}
+                            line={ELineType.EXTRA}
+                        >
                             {d.summary.name}
                         </Text>
                         <Gap size={4} />
@@ -142,6 +147,10 @@ const getData = () => {
     });
 };
 
+const handleChange = () => {
+    alert('Change handler called.');
+};
+
 const renderUploadZoneContent = (openUploadDialog) => (
     <div className="uploadZoneContent">
         <UploadZone.Input multiple />
@@ -158,9 +167,8 @@ const renderUploadZoneContent = (openUploadDialog) => (
             </Link>
             {'\u00A0'}
             <HelpBox tooltipSize={ETooltipSize.LG}>
-                {
-                    'Максимальный размер одного файла – не более 40 Мб в форматах PDF, TIFF, JPEG, PNG, PCX, DOCX. Имя файла может содержать русские и английские буквы и символы: !№%()+-.;=@[]^_{}'
-                }
+                Максимальный размер одного файла – не более 40 Мб в форматах PDF, TIFF, JPEG, PNG, PCX,
+                DOCX. Имя файла может содержать русские и английские буквы и символы: !№%()+-.;=@[]^_{}
             </HelpBox>
         </span>
         <Gap size={16} />
@@ -168,7 +176,11 @@ const renderUploadZoneContent = (openUploadDialog) => (
 );
 
 <div ref={(node) => setContainer(node)} style={{display: 'flow-root', position: 'relative'}}>
-    <UploadZone renderContainerContent={renderContainerContent} dropZoneContainer={container}>
+    <UploadZone
+        renderContainerContent={renderContainerContent}
+        dropZoneContainer={container}
+        onChange={handleChange}
+    >
         {({openUploadDialog}) => renderUploadZoneContent(openUploadDialog)}
     </UploadZone>
     <Gap size={16} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import {RangeSrvIcon24} from "@sberbusiness/icons/RangeSrvIcon24";
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {dateFormatYYYYMMDD} from '@sberbusiness/triplex/consts/DateConst';
 import {EDateRangeShiftUnit} from './enums';
@@ -111,13 +112,6 @@ export const DateRange: React.FC<IDateRangeProps> = ({
         ]);
     };
 
-    /** Функция рендеринга разделителя между двумя полями выбора даты. */
-    const renderSeparator = () => (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" fill="none" focusable={false}>
-            <rect x="7" y="16" width="10" height="2" rx="1" fill="#565B62" />
-        </svg>
-    );
-
     return (
         <div className={classNames} {...rest}>
             {!hideNavigation &&
@@ -131,7 +125,7 @@ export const DateRange: React.FC<IDateRangeProps> = ({
                 onChange: handleChangePickerFrom,
                 value: start,
             })}
-            {renderSeparator()}
+            <RangeSrvIcon24 />
             {renderPickerTo({
                 onChange: handleChangePickerTo,
                 value: end,

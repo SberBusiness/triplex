@@ -1,5 +1,5 @@
 import React, {useContext, useState, useRef, useLayoutEffect, isValidElement} from 'react';
-import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
+import ReactResizeDetector from 'react-resize-detector';
 import pickBy from 'lodash/pickBy';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TabsExtendedContext} from '../TabsExtendedContext';

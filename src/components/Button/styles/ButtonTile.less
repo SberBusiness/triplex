@@ -1,12 +1,29 @@
 @import 'src/styles/style';
 
 .button.tile {
-    padding: 8px;
-    min-width: 48px;
-    min-height: 48px;
     background: var(--triplex-Button-Tile_Background_Default);
     background-clip: border-box;
-    border-radius: 16px;
+
+    &.MD {
+        min-height: 32px;
+        min-width: 32px;
+        border-radius: 8px;
+        padding: 4px;
+    }
+
+    &.SM {
+        min-height: 28px;
+        min-width: 28px;
+        border-radius: 6px;
+        padding: 6px;
+    }
+
+    &.LG {
+        min-height: 48px;
+        min-width: 48px;
+        border-radius: 12px;
+        padding: 12px;
+    }
 
     .content {
         vertical-align: middle;

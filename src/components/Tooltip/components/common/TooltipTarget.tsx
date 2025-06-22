@@ -10,7 +10,7 @@ export interface ITooltipTargetProps {
 
 /** Целевой элемент компонента Tooltip. */
 export const TooltipTarget: React.FC<ITooltipTargetProps> = ({children}) => {
-    const {toggleType, tooltipOpen, tooltipHoveredRef, setTooltipOpen} = useContext(TooltipContext);
+    const {toggleType, tooltipOpen, targetHoveredRef, setTooltipOpen} = useContext(TooltipContext);
     const child = React.Children.only(children);
 
     /** Обработчик нажатия клавиши. */
@@ -27,7 +27,10 @@ export const TooltipTarget: React.FC<ITooltipTargetProps> = ({children}) => {
 
     /** Обработчик клика. */
     const handleClick = (onClick?: React.MouseEventHandler) => (event: React.MouseEvent) => {
-        if (toggleType === 'click' || (toggleType === 'hover' && !tooltipHoveredRef.current)) {
+        if (
+            toggleType === 'click' ||
+            (toggleType === 'hover' && !targetHoveredRef.current && event.currentTarget.contains(event.target as Node))
+        ) {
             setTooltipOpen(!tooltipOpen);
         }
         onClick?.(event);
@@ -35,8 +38,8 @@ export const TooltipTarget: React.FC<ITooltipTargetProps> = ({children}) => {
 
     if (React.isValidElement<React.HTMLAttributes<Element>>(child)) {
         return React.cloneElement(child, {
-            onKeyDown: handleKeyDown(child.props.onKeyDown),
             onClick: handleClick(child.props.onClick),
+            onKeyDown: handleKeyDown(child.props.onKeyDown),
         });
     }
 

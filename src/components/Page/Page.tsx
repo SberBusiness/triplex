@@ -5,21 +5,22 @@ import {FooterPage} from '@sberbusiness/triplex/components/Page/components/Foote
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 
 /** Свойства компонента Page. */
-interface IPageProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface IPageProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-interface IPageFC extends React.FC<IPageProps> {
-    Header: typeof HeaderPage;
-    Body: typeof BodyPage;
-    Footer: typeof FooterPage;
-}
-
-/** Страница. Может содержать только PageHeader, BodyPage, PageFooter. */
-export const Page: IPageFC = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames('cssClass[page]', className)} {...htmlDivAttributes}>
-        {children}
-    </div>
+/** Страница. Может содержать только BodyPage, PageHeader и PageFooter. */
+export const Page = Object.assign(
+    React.forwardRef<HTMLDivElement, IPageProps>(function Page({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames('cssClass[page]', className)} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Body: BodyPage,
+        Header: HeaderPage,
+        Footer: FooterPage,
+    }
 );
 
-Page.Header = HeaderPage;
-Page.Body = BodyPage;
-Page.Footer = FooterPage;
+Page.displayName = 'Page';

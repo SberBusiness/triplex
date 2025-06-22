@@ -1,44 +1,24 @@
-import React, {useRef} from 'react';
-import moment from 'moment/moment';
-import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
-import {TPickedRange, TPickedDate} from '@sberbusiness/triplex/components/Calendar/types';
-import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
+import React, {useContext, useRef} from 'react';
 import {ICalendarCommonProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
+import {TPickedDate, TPickedRange} from '@sberbusiness/triplex/components/Calendar/types';
+import {CalendarContext} from '@sberbusiness/triplex/components/Calendar/CalendarContext';
+import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
+import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 import {CalendarViewDays} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewDays';
 import {CalendarViewMonths} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewMonths';
 import {CalendarViewYears} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewYears';
 
 /** Свойства компонента CalendarView. */
-export interface ICalendarViewProps
-    extends Pick<
-            ICalendarCommonProps,
-            'pickType' | 'disabledDays' | 'markedDays' | 'yearHtmlAttributes' | 'monthHtmlAttributes' | 'dayHtmlAttributes'
-        >,
-        Required<Pick<ICalendarCommonProps, 'format' | 'limitRange' | 'onPageChange' | 'onViewChange'>> {
-    /** Дочерние элементы. */
-    children?: never;
-    /** Вид отображения. */
-    viewMode: ECalendarViewMode;
-    /** Дата, являющая курсором для навигации по интерфейсу. */
-    viewDate: moment.Moment;
+export interface ICalendarViewProps extends Pick<ICalendarCommonProps, 'dayHtmlAttributes' | 'monthHtmlAttributes' | 'yearHtmlAttributes'> {
     /** Выбранная дата. */
     pickedDate?: TPickedDate;
     /** Выбранный период. */
     pickedRange?: TPickedRange;
-    /** Идентификатор для связи календаря и наименования текущего периода. */
-    periodId: string;
-    /** Функция, вызывающаяся при выборе даты. */
-    onDateSelect: (date: moment.Moment) => void;
 }
 
 /** Вид календаря. */
-export const CalendarView: React.FC<ICalendarViewProps> = ({
-    viewMode,
-    yearHtmlAttributes,
-    monthHtmlAttributes,
-    dayHtmlAttributes,
-    ...rest
-}) => {
+export const CalendarView: React.FC<ICalendarViewProps> = ({dayHtmlAttributes, monthHtmlAttributes, yearHtmlAttributes, ...rest}) => {
+    const {viewMode} = useContext(CalendarContext);
     const viewItemFocusedRef = useRef(false);
 
     /** Рендер текущего вида календаря. */

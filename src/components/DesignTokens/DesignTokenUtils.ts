@@ -1,4 +1,4 @@
-import defaultsDeep from 'lodash.defaultsdeep';
+import {defaultsDeep} from 'lodash';
 import {TDesignTokens, TDesignTokensComponentsWithIndex, TDesignTokensGroupAbstract, TDesignTokensPartial} from './types/DesignTokensTypes';
 import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
 import {DesignTokensCore} from '@sberbusiness/triplex/components/DesignTokens/DesignTokensCore';

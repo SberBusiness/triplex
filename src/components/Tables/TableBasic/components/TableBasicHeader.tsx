@@ -1,14 +1,15 @@
+import React from 'react';
 import {SortdecreaseSrvxIcon16} from '@sberbusiness/icons/SortdecreaseSrvxIcon16';
 import {SortincreaseSrvxIcon16} from '@sberbusiness/icons/SortincreaseSrvxIcon16';
 import {SortSrvxIcon16} from '@sberbusiness/icons/SortSrvxIcon16';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {ECellType, EHorizontalAlign, EOrderDirection} from '@sberbusiness/triplex/components/Tables/TableBasic/enums';
 import {ISortOrder, ITableBasicColumn} from '@sberbusiness/triplex/components/Tables/TableBasic/types';
-import {mapScreenSizeToClassName, mapHorizontalAlignToClassName} from '@sberbusiness/triplex/components/Tables/utils';
+import {mapHorizontalAlignToClassName} from '@sberbusiness/triplex/components/Tables/utils';
 import {getAriaHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/AriaAttributes';
 import {getDataHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/DataAttributes';
 import {isNullOrUndefined} from '@sberbusiness/triplex/utils/isNullOrUndefined';
-import React from 'react';
+import {MasterTableContext} from '@sberbusiness/triplex/components/Tables/MasterTableContext';
 
 interface ITableBasicHeaderProps {
     /** Структура заголовков таблицы. */
@@ -20,6 +21,9 @@ interface ITableBasicHeaderProps {
 /** Компонент заголовка таблицы. */
 export class TableBasicHeader extends React.PureComponent<ITableBasicHeaderProps> {
     public static displayName = 'TableBasicHeader';
+
+    static contextType = MasterTableContext;
+    declare context: React.ContextType<typeof MasterTableContext>;
 
     public render(): JSX.Element {
         const {columns, onOrderBy} = this.props;
@@ -62,11 +66,16 @@ export class TableBasicHeader extends React.PureComponent<ITableBasicHeaderProps
 
     /** Рендер заголовка таблицы. */
     private renderTh = (c: ITableBasicColumn, hasOrderFunc: boolean) => {
+        // Столбец скрыт.
+        if (c.hidden) {
+            return null;
+        }
+
         const styleTh = c.width ? {maxWidth: c.width, minWidth: c.width, width: c.width} : undefined;
         const orderEnabled = hasOrderFunc && !isNullOrUndefined(c.orderDirection);
         const handleClickOrder = orderEnabled ? () => this.handleClickOrder(c.fieldKey, c.orderDirection!) : undefined;
         const orderIcon = orderEnabled && this.renderOrderIcon(c);
-        const classNameTh = classnames(mapHorizontalAlignToClassName(c.horizontalAlign), mapScreenSizeToClassName(c.hideScreenWidth));
+        const classNameTh = mapHorizontalAlignToClassName(c.horizontalAlign);
         const classNameThBlock = classnames('cssClass[thBlock]', 'hoverable', {
             'cssClass[checkboxType]': c.cellType === ECellType.CHECKBOX,
             'cssClass[order]': orderEnabled,

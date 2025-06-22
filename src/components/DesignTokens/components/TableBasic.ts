@@ -18,14 +18,6 @@ export const designTokensComponentsTableBasicKeys = [
 
     'TableFooter_Background',
     'TableFooter_Highlight',
-
-    'TabsLine_BorderColor_Default',
-    'TabsLine_BorderColor_Hover',
-    'TabsLine_BorderColor_Active',
-    'TabsLine_Caret_Color',
-    'TabsLine_Color',
-    'TabsLine_Notification_Color',
-    'TabsLine_Shadow_Focus',
 ] as const;
 // Тип, содержащий названия токенов компонента TableBasic.
 export type TDesignTokensComponentsTableBasicKeys = (typeof designTokensComponentsTableBasicKeys)[number];
@@ -54,12 +46,4 @@ export const TableBasic_Tokens: TDesignTokensComponentsTableBasicValues = {
 
     TableFooter_Background: [{ref: 'Neutral.300'}, {ref: 'Basic.500'}], // var(--triplex-TableBasic-TableFooter_Background)
     TableFooter_Highlight: [{value: 'linear-gradient(transparent, #FFFFFF)'}, {value: 'linear-gradient(transparent, #181819)'}], // var(--triplex-TableBasic-TableFooter_Highlight)
-
-    TabsLine_BorderColor_Active: [{ref: 'Primary.900'}, {ref: 'Primary.500'}], // var(--triplex-TableBasic-TabsLine_BorderColor_Active)
-    TabsLine_BorderColor_Default: [{ref: 'Basic.0'}, {ref: 'Basic.0'}], // var(--triplex-TableBasic-TabsLine_BorderColor_Default)
-    TabsLine_BorderColor_Hover: [{ref: 'Primary.500'}, {ref: 'Primary.700'}], // var(--triplex-TableBasic-TabsLine_BorderColor_Hover)
-    TabsLine_Caret_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.700'}], // var(--triplex-TableBasic-TabsLine_Caret_Color)
-    TabsLine_Color: [{ref: 'Basic.700'}, {ref: 'Neutral.100'}], // var(--triplex-TableBasic-TabsLine_Color)
-    TabsLine_Notification_Color: [{ref: 'Warning.700'}, {ref: 'Warning.700'}], // var(--triplex-TableBasic-TabsLine_Notification_Color)
-    TabsLine_Shadow_Focus: [{value: '0 0 0 1px #FFDD64 inset'}, {value: '0 0 0 1px #FFDD64 inset'}], // var(--triplex-TableBasic-TabsLine_Shadow_Focus)
 };

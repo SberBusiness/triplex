@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react';
 import moment from 'moment';
 import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
-import {globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
+import {CalendarContext} from '@sberbusiness/triplex/components/Calendar/CalendarContext';
 import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
+import {isDateOutOfRange} from '@sberbusiness/triplex/components/Calendar/utils';
 import {CalendarViewItem} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewItem';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
@@ -11,36 +12,13 @@ import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums
 export interface ICalendarViewYearsProps extends Omit<ICalendarViewProps, 'viewMode' | 'dayHtmlAttributes' | 'monthHtmlAttributes'> {}
 
 /** Вид календаря с выбором года. */
-export const CalendarViewYears: React.FC<ICalendarViewYearsProps> = ({
-    viewDate,
-    pickedDate,
-    limitRange,
-    periodId,
-    yearHtmlAttributes = {},
-    onPageChange,
-    onViewChange,
-}) => {
+export const CalendarViewYears: React.FC<ICalendarViewYearsProps> = ({pickedDate, yearHtmlAttributes = {}}) => {
+    const {periodId, limitRange, viewDate, onPageChange, onViewChange} = useContext(CalendarContext);
     const {viewItemFocusedRef} = useContext(CalendarViewContext);
     const currentYear = viewDate.year();
 
-    /** Проверяет, выходит ли дата за разрешённый период. */
-    const isOutOfRangeDate = useCallback(
-        (date: moment.Moment) => {
-            const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
-            const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
-
-            return date.isBefore(dateFrom, 'year') || date.isAfter(dateTo, 'year');
-        },
-        [limitRange.dateFrom, limitRange.dateTo]
-    );
-
     /** Проверяет, является ли дата отключенной. */
-    const isDisabledDate = useCallback(
-        (date: moment.Moment) => {
-            return isOutOfRangeDate(date);
-        },
-        [isOutOfRangeDate]
-    );
+    const isDisabledDate = useCallback((date: moment.Moment) => isDateOutOfRange(date, limitRange, 'year'), [limitRange]);
 
     /** Получить первую доступную для фокуса дату. */
     const getInitialTabbableDate = useCallback(() => {
@@ -159,7 +137,7 @@ export const CalendarViewYears: React.FC<ICalendarViewYearsProps> = ({
 
         shiftDate(amount, unit);
 
-        if (isOutOfRangeDate(date)) {
+        if (isDateOutOfRange(date, limitRange, 'year')) {
             return currentDate;
         }
 

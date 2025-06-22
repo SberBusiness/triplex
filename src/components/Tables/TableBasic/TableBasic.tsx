@@ -1,9 +1,12 @@
+import React from 'react';
+import {isEqual} from 'lodash';
 import {Spinner} from '@sberbusiness/triplex/components/Spinner/Spinner';
 import {SpinnerWidget} from '@sberbusiness/triplex/components/SpinnerWidget/SpinnerWidget';
 import {TableBasicBody} from '@sberbusiness/triplex/components/Tables/TableBasic/components/TableBasicBody';
 import {TableBasicHeader} from '@sberbusiness/triplex/components/Tables/TableBasic/components/TableBasicHeader';
 import {ISortOrder, ITableBasicColumn, ITableBasicRow} from '@sberbusiness/triplex/components/Tables/TableBasic/types';
-import React from 'react';
+// Импорт должен быть абсолютный.
+import {MasterTableContext} from '@sberbusiness/triplex/components/Tables/MasterTableContext';
 
 interface ITableBasicProps extends React.HTMLAttributes<HTMLTableElement> {
     /** Структура заголовков таблицы. */
@@ -12,8 +15,11 @@ interface ITableBasicProps extends React.HTMLAttributes<HTMLTableElement> {
     data: ITableBasicRow[];
     /** Функция рендера при отсутствии данных в таблице. */
     renderNoData: () => JSX.Element;
-    /** Состояние загрузки. */
-    isLoading?: boolean;
+    /**
+     * Функция рендера при скрытии пользователем всех колонок в таблице.
+     * Вызывается, когда каждый элемент columns имеет свойство hidden.
+     * */
+    renderNoColumns?: () => React.ReactNode;
     /** Подсветка строк при наведении мышки. */
     highlightRowOnHover?: boolean;
     /** Текст под спиннером. */
@@ -29,6 +35,26 @@ interface ITableBasicProps extends React.HTMLAttributes<HTMLTableElement> {
 /** Компонент обычной таблицы. */
 export class TableBasic extends React.PureComponent<ITableBasicProps> {
     public static displayName = 'TableBasic';
+
+    static contextType = MasterTableContext;
+    declare context: React.ContextType<typeof MasterTableContext>;
+
+    public componentDidMount() {
+        const {columns} = this.props;
+        const {setColumns} = this.context;
+
+        setColumns(columns);
+    }
+
+    public componentDidUpdate(prevProps: ITableBasicProps): void {
+        const {columns} = this.props;
+        const {columns: prevColumns} = prevProps;
+        const {setColumns} = this.context;
+
+        if (!isEqual(columns, prevColumns)) {
+            setColumns(columns);
+        }
+    }
 
     public render(): JSX.Element {
         const {data} = this.props;
@@ -50,11 +76,15 @@ export class TableBasic extends React.PureComponent<ITableBasicProps> {
             loadingTitle,
             onOrderBy,
             onClickRow,
+            renderNoColumns,
             renderNoData,
-            isLoading,
             headless,
             ...htmlTableAttributes
         } = this.props;
+
+        if (columns.every((c) => c.hidden) && renderNoColumns) {
+            return renderNoColumns();
+        }
 
         return (
             <table key="table" {...htmlTableAttributes}>
@@ -65,7 +95,8 @@ export class TableBasic extends React.PureComponent<ITableBasicProps> {
     };
 
     private renderFooter = (isEmptyData: boolean) => {
-        const {isLoading, loadingTitle, renderNoData} = this.props;
+        const {loadingTitle, renderNoData} = this.props;
+        const {isLoading} = this.context;
 
         if (isLoading && isEmptyData) {
             return this.renderFooterEmptyData(this.renderNoDataLoading());

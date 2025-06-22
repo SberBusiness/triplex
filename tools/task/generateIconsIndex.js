@@ -36,6 +36,10 @@ const iconsCategories = [
         name: 'Animated',
         short: ['Ani']
     },
+    {
+        name: 'Illustrative',
+        short: ['Ill']
+    },
 ];
 
 // Категории иллюстраций

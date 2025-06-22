@@ -1,58 +1,28 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react';
 import moment from 'moment';
 import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
-import {globalLimitRange, WEEKDAYS_SET} from '@sberbusiness/triplex/consts/DateConst';
+import {isDateOutOfRange, isDayDisabled} from '@sberbusiness/triplex/components/Calendar/utils';
+import {WEEKDAYS_SET} from '@sberbusiness/triplex/consts/DateConst';
 import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
 import {CalendarViewItem} from '@sberbusiness/triplex/components/Calendar/components/CalendarViewItem';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
+import {ECalendarDateMarkType, ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
+import {CalendarContext} from '@sberbusiness/triplex/components/Calendar/CalendarContext';
 
 /** Свойства компонента CalendarViewDays. */
-export interface ICalendarViewDaysProps extends Omit<ICalendarViewProps, 'viewMode' | 'monthHtmlAttributes' | 'yearHtmlAttributes'> {}
+export interface ICalendarViewDaysProps extends Omit<ICalendarViewProps, 'monthHtmlAttributes' | 'yearHtmlAttributes'> {}
 
 /** Вид календаря с выбором дня. */
-export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
-    viewDate,
-    pickedDate,
-    pickedRange,
-    format,
-    limitRange,
-    periodId,
-    disabledDays,
-    markedDays,
-    dayHtmlAttributes = {},
-    onDateSelect,
-    onPageChange,
-}) => {
+export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({pickedDate, pickedRange, dayHtmlAttributes = {}}) => {
+    const {format, periodId, limitRange, viewDate, markedDays, disabledDays, onDateSelect, onPageChange} = useContext(CalendarContext);
     const {viewItemFocusedRef} = useContext(CalendarViewContext);
     const startDate = viewDate.clone().startOf('month').startOf('week');
 
-    /** Проверяет, выходит ли дата за разрешённый период. */
-    const isOutOfRangeDate = useCallback(
-        (date: moment.Moment) => {
-            const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
-            const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
-
-            return date.isBefore(dateFrom, 'day') || date.isAfter(dateTo, 'day');
-        },
-        [limitRange.dateFrom, limitRange.dateTo]
-    );
-
     /** Проверяет, является ли дата отключенной. */
     const isDisabledDate = useCallback(
-        (date: moment.Moment) => {
-            if (isOutOfRangeDate(date)) {
-                return true;
-            }
-
-            if (disabledDays) {
-                return disabledDays.includes(date.format(format));
-            }
-
-            return false;
-        },
-        [disabledDays, format, isOutOfRangeDate]
+        (date: moment.Moment) => isDateOutOfRange(date, limitRange, 'day') || isDayDisabled(date.format(format), disabledDays),
+        [limitRange, disabledDays, format]
     );
 
     /** Получить первую доступную для фокуса дату. */
@@ -115,20 +85,20 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
         const disabled = isDisabledDate(date);
         const tabbable = !disabled && isTabbableDay(date);
         const muted = isMutedDate(date);
-        const marked = isMarkedDate(date);
+        const markType = getMarkType(date);
 
         return (
             <CalendarViewItem
                 key={`calendar-table-data-${cell}`}
                 className={classNames}
-                {...(typeof dayHtmlAttributes == 'function' ? dayHtmlAttributes({marked}) : dayHtmlAttributes)}
+                {...(typeof dayHtmlAttributes === 'function' ? dayHtmlAttributes({marked: markType !== undefined}) : dayHtmlAttributes)}
                 date={date}
                 unit="day"
                 active={active}
                 disabled={disabled}
                 tabbable={tabbable}
                 muted={muted}
-                marked={marked}
+                markType={markType}
                 onKeyDown={handleItemKeyDown(date)}
                 onDateSelect={handleDateSelect}
             >
@@ -166,12 +136,18 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
     };
 
     /** Проверяет, является ли дата отмеченной. */
-    const isMarkedDate = (date: moment.Moment) => {
+    const getMarkType = (date: moment.Moment) => {
         if (markedDays) {
-            return markedDays.includes(date.format(format));
-        }
+            const day = date.format(format);
 
-        return false;
+            if (Array.isArray(markedDays)) {
+                if (markedDays.includes(day)) {
+                    return ECalendarDateMarkType.BASIC;
+                }
+            } else if (day in markedDays) {
+                return markedDays[date.format(format)];
+            }
+        }
     };
 
     /** Возвращает класс положения даты в выбранном периоде. */
@@ -205,7 +181,7 @@ export const CalendarViewDays: React.FC<ICalendarViewDaysProps> = ({
 
         while (shiftDay(amount, unit)) {
             // Если вышли за пределы доступного периода – возвращаем текущий день.
-            if (isOutOfRangeDate(day)) {
+            if (isDateOutOfRange(day, limitRange, 'day')) {
                 return currentDate;
             }
             // Если день доступен для выбора – выходим из поиска.

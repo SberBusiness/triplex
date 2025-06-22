@@ -1,4 +1,6 @@
 import React from 'react';
+import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
+import {ClearSrvIcon16} from '@sberbusiness/icons/ClearSrvIcon16';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {AccordionFormItemTitle} from '@sberbusiness/triplex/components/AccordionForm/AccordionFormItemTitle';
 import {AccordionFormItemContent} from '@sberbusiness/triplex/components/AccordionForm/AccordionFormItemContent';
@@ -6,10 +8,8 @@ import {AccordionFormItemFooter} from '@sberbusiness/triplex/components/Accordio
 import {Step} from '@sberbusiness/triplex/components/Step/Step';
 import {EStepPosition, EStepStatus} from '@sberbusiness/triplex/components/Step/enums';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
-import {CaretdownSrvxIcon16} from '@sberbusiness/icons/CaretdownSrvxIcon16';
-import {ClearSrvIcon16} from '@sberbusiness/icons/ClearSrvIcon16';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
-import {ExpandAnimation} from '@sberbusiness/triplex/components/ExpandAnimation/ExpandAnimation';
+import {ExpandAnimation, IExpandAnimationProps} from '@sberbusiness/triplex/components/ExpandAnimation/ExpandAnimation';
 import {focusButton} from '@sberbusiness/triplex/components/Button/utils';
 
 /** Свойства компонента элемента аккордеона. */
@@ -40,6 +40,8 @@ export interface IAccordionItemProps extends Omit<React.HTMLAttributes<HTMLLIEle
     nextStatus?: EStepStatus;
     /** Ссылка на контейнер элемента аккордеона. */
     forwardedRef?: React.RefObject<HTMLLIElement>;
+    /** Свойства компонента Transition (react-transition-group). */
+    transitionProps?: IExpandAnimationProps['transitionProps'];
 }
 
 /** Состояния компонента элемента аккордеона. */
@@ -197,6 +199,7 @@ export class AccordionFormItem extends React.Component<IAccordionItemProps, IAcc
             prevStatus,
             nextStatus,
             forwardedRef,
+            transitionProps,
             ...rest
         } = this.props;
         const {isOpen, focused, focusedByMouse, headerFocused} = this.state;
@@ -263,10 +266,11 @@ export class AccordionFormItem extends React.Component<IAccordionItemProps, IAcc
 
                 <ExpandAnimation
                     expanded={isOpen}
-                    role="region"
                     id={this.bodyInstanceId}
-                    aria-labelledby={this.headerInstanceId}
                     className={classnames('cssClass[body]', {'cssClass[bodyWithoutStatus]': !status})}
+                    role="region"
+                    aria-labelledby={this.headerInstanceId}
+                    transitionProps={transitionProps}
                 >
                     {children}
                 </ExpandAnimation>

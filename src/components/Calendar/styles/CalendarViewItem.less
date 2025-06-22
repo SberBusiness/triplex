@@ -73,6 +73,48 @@
 
         &:hover {
             background: var(--triplex-Calendar-View_Item_Background_Selected_Hover);
+
+            &.basicMark::after {
+                background: var(--triplex-Calendar-View_Item_Mark_Basic_Background_Selected_Hover);
+            }
+
+            &.standardMark::after {
+                background: var(--triplex-Calendar-View_Item_Mark_Standard_Background_Selected_Hover);
+            }
+
+            &.attentionMark::after {
+                background: var(--triplex-Calendar-View_Item_Mark_Attention_Background_Selected_Hover);
+            }
+
+            &.criticalMark::after {
+                background: var(--triplex-Calendar-View_Item_Mark_Critical_Background_Selected_Hover);
+            }
+        }
+
+        &.muted {
+            color: var(--triplex-Calendar-View_Item_Color_Selected_Muted_Default);
+            background: var(--triplex-Calendar-View_Item_Background_Selected_Muted_Default);
+
+            &:hover {
+                color: var(--triplex-Calendar-View_Item_Color_Selected_Muted_Hover);
+                background: var(--triplex-Calendar-View_Item_Background_Selected_Muted_Hover);
+            }
+        }
+
+        &.basicMark::after {
+            background: var(--triplex-Calendar-View_Item_Mark_Basic_Background_Selected_Default);
+        }
+
+        &.standardMark::after {
+            background: var(--triplex-Calendar-View_Item_Mark_Standard_Background_Selected_Default);
+        }
+
+        &.attentionMark::after {
+            background: var(--triplex-Calendar-View_Item_Mark_Attention_Background_Selected_Default);
+        }
+
+        &.criticalMark::after {
+            background: var(--triplex-Calendar-View_Item_Mark_Critical_Background_Selected_Default);
         }
     }
 
@@ -84,9 +126,24 @@
         bottom: 0;
         width: 4px;
         height: 4px;
-        background: var(--triplex-Calendar-View_Item_Mark_Background);
         border-radius: 50%;
         pointer-events: none;
+    }
+
+    &.basicMark::after {
+        background: var(--triplex-Calendar-View_Item_Mark_Basic_Background_Default);
+    }
+
+    &.standardMark::after {
+        background: var(--triplex-Calendar-View_Item_Mark_Standard_Background_Default);
+    }
+
+    &.attentionMark::after {
+        background: var(--triplex-Calendar-View_Item_Mark_Attention_Background_Default);
+    }
+
+    &.criticalMark::after {
+        background: var(--triplex-Calendar-View_Item_Mark_Critical_Background_Default);
     }
 
     &.muted {
@@ -95,6 +152,7 @@
 
     &.disabled {
         color: var(--triplex-Calendar-View_Item_Color_Disabled);
+        background: none;
     }
 }
 

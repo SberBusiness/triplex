@@ -20,11 +20,11 @@ interface IMediaBetweenWidthProps {
  * В противном случае рендерится fallback.
  */
 export const MediaBetweenWidth: React.FC<IMediaBetweenWidthProps> = ({children, fallback, minWidth, maxWidth}) => {
-    const [matches, setMatches] = React.useState(window.innerWidth > parseInt(minWidth) && window.innerWidth < parseInt(maxWidth));
+    const [matches, setMatches] = React.useState(window.innerWidth >= parseInt(minWidth) && window.innerWidth <= parseInt(maxWidth));
 
     useEffect(() => {
         const mediaQueryList = window.matchMedia(`(max-width: ${maxWidth}) and (min-width: ${minWidth}`);
-        const handleChangeMatches = (e: MediaQueryListEvent) => setMatches(e.matches);
+        const handleChangeMatches = (event: MediaQueryListEvent) => setMatches(event.matches);
 
         if ('addEventListener' in mediaQueryList) {
             mediaQueryList.addEventListener('change', handleChangeMatches);

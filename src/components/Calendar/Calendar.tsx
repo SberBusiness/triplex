@@ -4,15 +4,19 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {dateFormatYYYYMMDD, globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
 import {
     ICalendarNestedProps,
+    TCalendarMarkedDays,
     TPickedDate,
     TPickedDateProp,
     TPickedRange,
     TPickedRangeProp,
 } from '@sberbusiness/triplex/components/Calendar/types';
+import {ECalendarPickType, ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
+import {CalendarContext} from '@sberbusiness/triplex/components/Calendar/CalendarContext';
 import {CalendarControls} from '@sberbusiness/triplex/components/Calendar/components/CalendarControls';
 import {CalendarView} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
-import {ECalendarPickType, ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
+import {CalendarFooter} from '@sberbusiness/triplex/components/Calendar/components/CalendarFooter';
+import {CalendarTodayButton} from '@sberbusiness/triplex/components/Calendar/components/CalendarTodayButton';
 import {CalendarRange} from '@sberbusiness/triplex/components/Calendar/CalendarRange';
 import {formatDate, getHeader, isCalendarRange, parsePickedDate} from '@sberbusiness/triplex/components/Calendar/utils';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
@@ -28,8 +32,8 @@ export interface ICalendarCommonProps extends ICalendarNestedProps {
     /** Ограничение выбираемого периода. */
     limitRange?: IDateLimitRange;
     /** Отмеченные дни. */
-    markedDays?: string[];
-    /** Отключённые дни. */
+    markedDays?: TCalendarMarkedDays;
+    /** Дни недоступные для выбора. */
     disabledDays?: string[];
     /** Обратный порядок выбора даты. */
     reversedPick?: boolean;
@@ -83,6 +87,9 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
         limitRange: globalLimitRange,
         pickType: ECalendarPickType.datePick,
     };
+
+    static contextType = CalendarContext;
+    declare context: React.ContextType<typeof CalendarContext>;
 
     // Уникальный идентификатор для связи периода с таблицей.
     private periodId = `calendar-period-${uniqueId()}`;
@@ -179,14 +186,27 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
     }
 
     public render() {
-        const {format, pickType, limitRange, disabledDays, markedDays, prevButtonProps, nextButtonProps, viewButtonProps} = this.props;
+        const {
+            format,
+            pickType,
+            limitRange,
+            markedDays,
+            disabledDays,
+            dayHtmlAttributes,
+            monthHtmlAttributes,
+            yearHtmlAttributes,
+            prevButtonProps,
+            nextButtonProps,
+            viewButtonProps,
+            todayButtonProps,
+        } = this.props;
         const {viewMode, viewDate, header} = this.state;
         const classNames = classnames('cssClass[calendar]', {
             'cssClass[adaptive]': !isCalendarRange(this.props) && !!this.props.adaptiveMode,
         });
 
-        let pickedDate;
-        let pickedRange;
+        let pickedDate: TPickedDate | undefined;
+        let pickedRange: TPickedRange | undefined;
 
         if (isCalendarRange(this.props)) {
             pickedRange = [
@@ -199,34 +219,33 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
 
         return (
             <div className={classNames} data-tx={process.env.npm_package_version}>
-                <CalendarControls
-                    viewDate={viewDate}
-                    viewMode={viewMode}
-                    periodId={this.periodId}
-                    limitRange={limitRange!}
-                    prevButtonProps={prevButtonProps}
-                    nextButtonProps={nextButtonProps}
-                    viewButtonProps={viewButtonProps}
-                    onPageChange={this.handlePageChange}
-                    onViewChange={this.handleViewChange}
+                <CalendarContext.Provider
+                    value={{
+                        format: format!,
+                        limitRange: limitRange!,
+                        pickType: pickType!,
+                        markedDays: markedDays,
+                        disabledDays: disabledDays,
+                        viewDate: viewDate,
+                        viewMode: viewMode,
+                        periodId: this.periodId,
+                        onDateSelect: this.handleDateSelect,
+                        onPageChange: this.handlePageChange,
+                        onViewChange: this.handleViewChange,
+                    }}
                 >
-                    {header}
-                </CalendarControls>
-                <CalendarView
-                    viewMode={viewMode}
-                    viewDate={viewDate}
-                    pickedDate={pickedDate}
-                    pickedRange={pickedRange}
-                    format={format!}
-                    pickType={pickType}
-                    limitRange={limitRange!}
-                    disabledDays={disabledDays}
-                    markedDays={markedDays}
-                    periodId={this.periodId}
-                    onDateSelect={this.handleDateSelect}
-                    onPageChange={this.handlePageChange}
-                    onViewChange={this.handleViewChange}
-                />
+                    <CalendarControls prevButtonProps={prevButtonProps} nextButtonProps={nextButtonProps} viewButtonProps={viewButtonProps}>
+                        {header}
+                    </CalendarControls>
+                    <CalendarView
+                        pickedDate={pickedDate}
+                        pickedRange={pickedRange}
+                        dayHtmlAttributes={dayHtmlAttributes}
+                        monthHtmlAttributes={monthHtmlAttributes}
+                        yearHtmlAttributes={yearHtmlAttributes}
+                    />
+                    {todayButtonProps && this.renderFooter()}
+                </CalendarContext.Provider>
             </div>
         );
     }
@@ -270,5 +289,31 @@ export class Calendar extends React.PureComponent<TCalendarProps, ICalendarState
         });
 
         onViewChange?.(nextViewDate, nextViewMode);
+    };
+
+    /** Рендер футера. */
+    private renderFooter = () => {
+        const {pickType, todayButtonProps} = this.props;
+        const {viewDate, viewMode} = this.state;
+        let todayDate: moment.Moment;
+        let currentPeriodSelected: boolean;
+
+        if (pickType === ECalendarPickType.datePick) {
+            todayDate = moment().startOf('day');
+            currentPeriodSelected = viewMode === ECalendarViewMode.DAYS && viewDate.isSame(todayDate, 'month');
+        } else {
+            todayDate = moment().startOf('month');
+            currentPeriodSelected = viewMode === ECalendarViewMode.MONTHS && viewDate.isSame(todayDate, 'year');
+        }
+
+        return (
+            <CalendarFooter>
+                <CalendarTodayButton
+                    todayDate={todayDate}
+                    currentPeriodSelected={currentPeriodSelected}
+                    {...(typeof todayButtonProps === 'function' ? todayButtonProps({viewMode, currentPeriodSelected}) : todayButtonProps)}
+                />
+            </CalendarFooter>
+        );
     };
 }

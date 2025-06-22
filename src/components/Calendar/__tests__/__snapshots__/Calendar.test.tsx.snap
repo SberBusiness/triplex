@@ -862,7 +862,7 @@ exports[`Calendar render marked days 1`] = `
           tabIndex={0}
         >
           <div
-            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked] cssClass[selected]"
+            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked] cssClass[selected] cssClass[basicMark]"
             onClick={[Function]}
           >
             1
@@ -876,7 +876,7 @@ exports[`Calendar render marked days 1`] = `
           tabIndex={-1}
         >
           <div
-            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked]"
+            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked] cssClass[basicMark]"
             onClick={[Function]}
           >
             2
@@ -890,7 +890,7 @@ exports[`Calendar render marked days 1`] = `
           tabIndex={-1}
         >
           <div
-            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked]"
+            className="cssClass[calendarViewItemLabel] cssClass[unitDay] cssClass[marked] cssClass[basicMark]"
             onClick={[Function]}
           >
             3

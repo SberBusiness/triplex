@@ -18,7 +18,7 @@ export const Skeleton_Tokens: TDesignTokensComponentsSkeletonValues = {
         {value: 'linear-gradient(90deg, #2D2D30 0%, #1F1F22 71%, #2D2D30 100%)'},
     ], // var(--triplex-Skeleton-BackgroundImage_Dark)
     BackgroundImage_Light: [
-        {value: 'linear-gradient(90deg, #FFFFFF 0%, #E4E8EB 71%, #FFFFFF 100%)'},
+        {value: 'linear-gradient(90deg, #FFFFFF 0%, #F2F4F7 71%, #FFFFFF 100%)'},
         {value: 'linear-gradient(90deg, #1F1F22 0%, #2D2D30 71%, #1F1F22 100%)'},
     ], // var(--triplex-Skeleton-BackgroundImage_Light)
 };

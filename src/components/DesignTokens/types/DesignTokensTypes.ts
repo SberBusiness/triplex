@@ -43,8 +43,10 @@ import {
     TDesignTokensComponentsStep,
     TDesignTokensComponentsStepper,
     TDesignTokensComponentsTableBasic,
+    TDesignTokensComponentsTableBasicSettings,
     TDesignTokensComponentsTabs,
     TDesignTokensComponentsTabsFolder,
+    TDesignTokensComponentsTabsLine,
     TDesignTokensComponentsTag,
     TDesignTokensComponentsText,
     TDesignTokensComponentsTitle,
@@ -196,8 +198,10 @@ export type TDesignTokensComponents = TDesignTokensComponentsAccordionForm &
     TDesignTokensComponentsStep &
     TDesignTokensComponentsStepper &
     TDesignTokensComponentsTableBasic &
+    TDesignTokensComponentsTableBasicSettings &
     TDesignTokensComponentsTabs &
     TDesignTokensComponentsTabsFolder &
+    TDesignTokensComponentsTabsLine &
     TDesignTokensComponentsTag &
     TDesignTokensComponentsText &
     TDesignTokensComponentsTitle &

@@ -8,6 +8,9 @@ import {DatePickerTarget} from '@sberbusiness/triplex/components/DatePicker/comp
 import {DatePickerDropdownHeaderTarget} from '@sberbusiness/triplex/components/DatePicker/components/DatePickerDropdownHeaderTarget';
 import {inputDateFormat} from '@sberbusiness/triplex/components/DatePicker/const';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
+import {Tooltip} from '@sberbusiness/triplex/components/Tooltip/Tooltip';
+import {ETooltipSize} from '@sberbusiness/triplex/components/Tooltip/enums';
+import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
 
 /** Свойства компонента DatePicker. */
 export interface IDatePickerProps
@@ -24,6 +27,8 @@ export interface IDatePickerProps
     inputRef?: React.Ref<HTMLInputElement>;
     /** Функция, вызывающаяся при изменении значения. */
     onChange: (value: string) => void;
+    /** Текст подсказки в тултипе. */
+    invalidDateHint: React.ReactNode;
 }
 
 /** Компонент ввода и выбора даты. */
@@ -43,13 +48,15 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
         onChange,
         onDropdownOpen,
         onDropdownClose,
+        invalidDateHint,
         ...rest
     } = props;
     const [pickerValues, setPickerValues] = useState(DatePickerUtils.getPickerValues(value, format, limitRange, disabledDays));
     const lastValidPickerValuesRef = useRef(pickerValues);
     const inputFocusedRef = useRef(false);
     const dropdownOpenRef = useRef(false);
-    const dropdownClosedByCalendarRef = useRef(false); // Dropdown закрыт при выборе даты в календаре
+    const dropdownClosedByCalendarRef = useRef(false); // Dropdown закрылся от выбора даты в календаре
+    const tooltipOpened = useRef(false);
 
     useEffect(() => {
         const newPickerValues = DatePickerUtils.getPickerValues(value, format, limitRange, disabledDays);
@@ -108,7 +115,19 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
 
     /** Обработчик изменения значения DatePickerTargetInput. */
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const date = DatePickerUtils.getCalendarDate(event.target.value, inputDateFormat, limitRange, disabledDays);
+        let date: moment.Moment | null = null;
+
+        if (event.target.value.length === inputDateFormat.length) {
+            date = moment(event.target.value, inputDateFormat, true);
+
+            if (!date.isValid() || !DatePickerUtils.isAvailableDate(date, date.format(format), limitRange, disabledDays)) {
+                date = null;
+            }
+
+            tooltipOpened.current = !date;
+        } else {
+            tooltipOpened.current = false;
+        }
 
         setPickerValues({calendarDate: date, inputString: event.target.value});
     };
@@ -128,18 +147,24 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
             return onChange(pickerValues.inputString);
         }
 
-        const date = DatePickerUtils.getCalendarDate(pickerValues.inputString, inputDateFormat, limitRange, disabledDays);
+        const date = moment(pickerValues.inputString, inputDateFormat, true);
 
-        if (date) {
+        if (date.isValid()) {
             const newValue = date.format(format);
-            if (newValue !== value) {
-                onChange(newValue);
+
+            if (newValue === value) {
+                return;
             }
-        } else {
-            // Текущее значение в поле невалидно, возвращаем последнее валидное.
-            if (pickerValues.inputString !== lastValidPickerValuesRef.current.inputString) {
-                setPickerValues(lastValidPickerValuesRef.current);
+
+            if (DatePickerUtils.isAvailableDate(date, newValue, limitRange, disabledDays)) {
+                return onChange(newValue);
             }
+        }
+
+        // Текущее значение в поле невалидно, возвращаем последнее валидное.
+        if (pickerValues.inputString !== lastValidPickerValuesRef.current.inputString) {
+            tooltipOpened.current = false;
+            setPickerValues(lastValidPickerValuesRef.current);
         }
     };
 
@@ -166,16 +191,18 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
     /** Обработчик изменения даты. */
     const handleDateChange = (date: moment.Moment) => {
         dropdownClosedByCalendarRef.current = true;
+        tooltipOpened.current = false;
 
         onChange(date.format(format));
     };
 
-    return (
+    const renderDatePickerExtended = () => (
         <DatePickerExtended
             className={classnames('cssClass[datePicker]', className)}
             renderTarget={renderTarget}
             renderDropdownHeaderTarget={renderDropdownHeaderTarget}
             pickedDate={pickerValues.calendarDate}
+            format={format}
             limitRange={limitRange}
             disabledDays={disabledDays}
             onDropdownOpen={handleDropdownOpen}
@@ -184,6 +211,19 @@ export const DatePicker = React.forwardRef<HTMLDivElement, IDatePickerProps>((pr
             {...rest}
             ref={ref}
         />
+    );
+
+    return (
+        <MobileView
+            fallback={
+                <Tooltip size={ETooltipSize.SM} isOpen={tooltipOpened.current}>
+                    <Tooltip.Body>{invalidDateHint}</Tooltip.Body>
+                    <Tooltip.Target>{renderDatePickerExtended()}</Tooltip.Target>
+                </Tooltip>
+            }
+        >
+            {renderDatePickerExtended()}
+        </MobileView>
     );
 });
 

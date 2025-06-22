@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {IOverlayChildrenProvideProps} from '@sberbusiness/triplex/components/Overlay/OverlayBase';
+import {useToken} from '../../ThemeProvider/useToken';
 
 /** Свойства компонента DropdownMobileInner. */
 export interface IDropdownMobileInnerProps extends IOverlayChildrenProvideProps, React.HTMLAttributes<HTMLDivElement> {}
@@ -14,6 +15,7 @@ export const DropdownMobileInner = React.forwardRef<HTMLDivElement, IDropdownMob
         // OpeningState после рендера становится равен openingProps. Чтобы появилась анимация открытия, сначала нужно отрендерить элемент в закрытом виде.
         const [openingState, setOpeningState] = useState(false);
         const [openedState, setOpenedState] = useState(false);
+        const {scopeClassName} = useToken();
 
         useEffect(() => {
             setTimeout(() => setOpeningState(openingProps));
@@ -23,7 +25,7 @@ export const DropdownMobileInner = React.forwardRef<HTMLDivElement, IDropdownMob
             setTimeout(() => setOpenedState(openedProps));
         }, [openedProps]);
 
-        const classNamesWrapper = classnames('cssClass[dropdownMobileWrapper]', className);
+        const classNamesWrapper = classnames('cssClass[dropdownMobileWrapper]', scopeClassName, className);
 
         const classNamesBackDrop = classnames('cssClass[dropdownMobileBackdrop]', {
             'cssClass[closing]': closing,

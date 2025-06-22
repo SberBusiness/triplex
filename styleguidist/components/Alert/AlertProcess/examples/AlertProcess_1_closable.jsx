@@ -17,6 +17,10 @@ const handleClose = () => alert();
         Текст сообщения
     </AlertProcess>
     <br />
+    <AlertProcess type={EAlertType.SYSTEM} onClose={handleClose} closable>
+        Текст сообщения
+    </AlertProcess>
+    <br />
     <AlertProcess type={EAlertType.FEATURE} onClose={handleClose} closable>
         Текст сообщения
     </AlertProcess>

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import Wrapper from 'react-styleguidist/lib/client/rsg-components/Wrapper/Wrapper';
 import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
 import {EIconsTheme, ThemeProvider as IconsThemeProvider} from '@sberbusiness/icons/ThemeProvider';
+import {ThemeProvider as IllustrationsThemeProvider} from '@sberbusiness/illustrations/ThemeProvider';
 import {ThemeProvider} from '@sberbusiness/triplex/components/ThemeProvider/ThemeProvider';
 import {ThemeObserver} from '../../../common/components/Observer/ThemeObserver';
 import './styles.less';
@@ -29,11 +30,13 @@ const CustomWrapper: React.FC<ICustomWrapperProps> = (props) => {
 
     return (
         <IconsThemeProvider theme={iconsTheme}>
-            <ThemeProvider theme={theme} scopeClassName="styleguide-example-theme">
-                <div className="custom-wrapper">
-                    <Wrapper {...props} />
-                </div>
-            </ThemeProvider>
+            <IllustrationsThemeProvider theme={iconsTheme}>
+                <ThemeProvider theme={theme} scopeClassName="styleguide-example-theme">
+                    <div className="custom-wrapper">
+                        <Wrapper {...props} />
+                    </div>
+                </ThemeProvider>
+            </IllustrationsThemeProvider>
         </IconsThemeProvider>
     );
 };

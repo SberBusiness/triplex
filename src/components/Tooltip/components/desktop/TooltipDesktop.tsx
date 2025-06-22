@@ -119,11 +119,11 @@ export class TooltipDesktop extends React.Component<ITooltipDesktopProps> {
     };
 
     private handleMouseEnter = () => {
-        const {tooltipOpen, tooltipHoveredRef, setTooltipOpen} = this.context;
+        const {tooltipOpen, targetHoveredRef, setTooltipOpen} = this.context;
 
         if (!tooltipOpen) {
             setTooltipOpen(true);
-            tooltipHoveredRef.current = true;
+            targetHoveredRef.current = true;
         }
         clearTimeout(this.timeout);
     };

@@ -21,12 +21,17 @@
 ```jsx {"file": "./examples/MonthYearPicker_4_limit.jsx"}
 ```
 
+### Today button
+
+```jsx {"file": "./examples/MonthYearPicker_5_today.jsx"}
+```
+
 ### Accessibility
 
-```jsx {"file": "./examples/MonthYearPicker_5_accessibility.jsx"}  
+```jsx {"file": "./examples/MonthYearPicker_6_accessibility.jsx"}  
 ```
 
 ### Disabled focus trap
 
-```jsx {"file": "./examples/MonthYearPicker_6_disabled_focus_trap.jsx"}
+```jsx {"file": "./examples/MonthYearPicker_7_disabled_focus_trap.jsx"}
 ```

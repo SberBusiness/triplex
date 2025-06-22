@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {SpinnersmallAniIcon20} from '@sberbusiness/icons/SpinnersmallAniIcon20';
 import {Dropdown} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {DropdownMobileInput} from '@sberbusiness/triplex/components/Dropdown/mobile/DropdownMobileInput';

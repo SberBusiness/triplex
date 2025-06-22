@@ -1,19 +1,18 @@
 import React from 'react';
-import {isOnlyIE} from '@sberbusiness/triplex/utils/userAgentUtils';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {EllipsisForIE} from './protected/EllipsisForIE';
 
+/** Свойства компонента Ellipsis. */
 export interface IEllipsisProps extends React.HTMLProps<HTMLDivElement> {
-    /** Текст который нужно свернуть в троеточие. */
+    /** Текст который нужно свернуть в многоточие. */
     children: React.ReactText;
-    /** Количество строк после которых происходит сворачивание в троеточие. */
+    /** Количество строк после которых происходит сворачивание в многоточие. */
     maxLine: number;
 }
 
 /**
- * Компонент, для сворачивания в троеточие текста, который не поместился в заданное количество строк.
- * Данному компоненту нельзя устанавливать паддинги, так как во всех браузерах кроме IE реализация через css свойство line-clamp,
- * и если установить паддинги то в них будет видно часть спрятанного текста.
+ * Компонент, для сворачивания в многоточие текста, который не поместился в заданное количество строк.
+ * Данному компоненту нельзя устанавливать паддинги, так как реализация через CSS свойство line-clamp, и если установить паддинги то в них
+ * будет видно часть спрятанного текста.
  */
 export class Ellipsis extends React.Component<IEllipsisProps> {
     static displayName = 'Ellipsis';
@@ -32,28 +31,23 @@ export class Ellipsis extends React.Component<IEllipsisProps> {
 
     private setCssVar = (): void => {
         const {maxLine} = this.props;
-        if (!isOnlyIE && this.ref) {
+        if (this.ref) {
             this.ref.style.setProperty('--ellipsis-line-clamp', maxLine.toString());
         }
     };
 
-    private setRef = (el: HTMLDivElement) => {
-        this.ref = el;
+    private setRef = (instance: HTMLDivElement) => {
+        this.ref = instance;
     };
 
     render(): JSX.Element {
-        if (isOnlyIE) {
-            const {children, ref, ...rest} = this.props;
-            return <EllipsisForIE {...rest}>{children}</EllipsisForIE>;
-        } else {
-            const {children, maxLine, className, ...rest} = this.props;
-            const ellipsisClassName = classnames(className, 'cssClass[ellipsisLineClamp]', {'cssClass[oneLine]': maxLine === 1});
+        const {children, className, maxLine, ...rest} = this.props;
+        const classNames = classnames('cssClass[ellipsisLineClamp]', {'cssClass[oneLine]': maxLine === 1}, className);
 
-            return (
-                <div {...rest} className={ellipsisClassName} ref={this.setRef} data-tx={process.env.npm_package_version}>
-                    {children}
-                </div>
-            );
-        }
+        return (
+            <div className={classNames} {...rest} data-tx={process.env.npm_package_version} ref={this.setRef}>
+                {children}
+            </div>
+        );
     }
 }

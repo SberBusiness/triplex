@@ -134,7 +134,7 @@ each(@scroll-sizes, {
     // Ширина экрана без скрола.
     @screen-width-without-scroll: calc(var(--lightBox-screen-width) - @scroll-width-px);
 
-    html:not(.LightBoxIE).scroll-@{scroll-width} {
+    html.scroll-@{scroll-width} {
         /*
           Breakpoint до которого стрелки находятся наверху лайтбокса.
           Тело лайтбокса фиксированной ширины(@lightBox-content-min-width), после начинает увеличиваться до @lightBox-content-max-width.

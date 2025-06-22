@@ -11,22 +11,23 @@ export interface IFooterProps extends React.HTMLAttributes<HTMLDivElement> {
     sticky?: boolean;
 }
 
-interface IFooterFC extends React.FC<IFooterProps> {
-    Description: typeof FooterDescription;
-}
-
-/** Подвал. */
-export const Footer: IFooterFC = ({children, className, sticky, ...htmlDivAttributes}) => (
-    <div
-        className={classnames('cssClass[footer]', className, {
-            'cssClass[sticky]': Boolean(sticky),
-        })}
-        {...htmlDivAttributes}
-        data-tx={process.env.npm_package_version}
-    >
-        {children}
-    </div>
+/** Футер. */
+export const Footer = Object.assign(
+    React.forwardRef<HTMLDivElement, IFooterProps>(function Footer({children, className, sticky, ...rest}, ref) {
+        return (
+            <div
+                className={classnames('cssClass[footer]', {'cssClass[sticky]': Boolean(sticky)}, className)}
+                {...rest}
+                data-tx={process.env.npm_package_version}
+                ref={ref}
+            >
+                {children}
+            </div>
+        );
+    }),
+    {
+        Description: FooterDescription,
+    }
 );
 
-Footer.Description = FooterDescription;
 Footer.displayName = 'Footer';

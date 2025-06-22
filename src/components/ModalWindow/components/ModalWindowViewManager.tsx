@@ -1,8 +1,7 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
+import ReactResizeDetector from 'react-resize-detector';
+import {isEqual, pick} from 'lodash';
 import {Portal} from '../../Portal/Portal';
-import isEqual from 'lodash.isequal';
-import pick from 'lodash.pick';
 
 // Id элемента, в визуальных границах (левая и правая координата) которого рендерится ModalWindow. Отступ ModalWindow от верхней границы экрана равен высоте этого элемента.
 export const modalWindowViewManagerNodeId = 'modalWindowViewManagerNodeId';

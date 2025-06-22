@@ -6,13 +6,13 @@ import {ECellType} from '@sberbusiness/triplex/components/Tables/TableBasic/enum
 import {ITableBasicColumn, ITableBasicRow, ITableRowCellSpanProps} from '@sberbusiness/triplex/components/Tables/TableBasic/types';
 import {
     mapCellTypeToClassName,
-    mapScreenSizeToClassName,
     mapHorizontalAlignToClassName,
     mapVerticalAlignToClassName,
 } from '@sberbusiness/triplex/components/Tables/utils';
 import {getAriaHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/AriaAttributes';
 import {getDataHTMLAttributes} from '@sberbusiness/triplex/utils/HTML/DataAttributes';
 import {TestIds} from '@sberbusiness/triplex/dataTestIds/dataTestIds';
+import {MasterTableContext} from '@sberbusiness/triplex/components/Tables/MasterTableContext';
 
 /** Свойства TableBasicRow. */
 interface ITableBasicRowProps {
@@ -27,6 +27,9 @@ interface ITableBasicRowProps {
 /** Компонент строки в теле таблицы. */
 export class TableBasicRow extends React.PureComponent<ITableBasicRowProps> {
     public static displayName = 'TableBasicRow';
+
+    static contextType = MasterTableContext;
+    declare context: React.ContextType<typeof MasterTableContext>;
 
     public render(): JSX.Element {
         const {columns, data, onClickRow} = this.props;
@@ -57,12 +60,16 @@ export class TableBasicRow extends React.PureComponent<ITableBasicRowProps> {
     }
 
     private renderTd = (column: ITableBasicColumn, value: React.ReactNode, spanProps?: ITableRowCellSpanProps, dataTestId?: string) => {
+        // Столбец скрыт.
+        if (column.hidden) {
+            return null;
+        }
+
         const cellNode: React.ReactNode = column.renderCell ? column.renderCell(value) : value;
         const classNames = classnames(
             mapCellTypeToClassName(column.cellType),
             mapHorizontalAlignToClassName(column.horizontalAlign),
             mapVerticalAlignToClassName(column.verticalAlign),
-            mapScreenSizeToClassName(column.hideScreenWidth)
         );
         const style = column.width ? {width: column.width} : undefined;
 

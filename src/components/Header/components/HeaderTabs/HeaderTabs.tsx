@@ -4,18 +4,21 @@ import {HeaderTabsControls} from '@sberbusiness/triplex/components/Header/compon
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента HeaderTabs. */
-interface IHeaderTabsProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface IHeaderTabsFC extends React.FC<IHeaderTabsProps> {
-    Content: typeof HeaderTabsContent;
-    Controls: typeof HeaderTabsControls;
-}
+export interface IHeaderTabsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Второй уровень Header. Содержит в себе табы и кнопки действий. */
-export const HeaderTabs: IHeaderTabsFC = ({children, className}) => (
-    <div className={classnames(className, 'cssClass[globalHeaderTabs]')}>{children}</div>
+export const HeaderTabs = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderTabsProps>(function HeaderTabs({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames('cssClass[globalHeaderTabs]', className)} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Content: HeaderTabsContent,
+        Controls: HeaderTabsControls,
+    }
 );
 
-HeaderTabs.Content = HeaderTabsContent;
-HeaderTabs.Controls = HeaderTabsControls;
 HeaderTabs.displayName = 'HeaderTabs';

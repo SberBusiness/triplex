@@ -26,12 +26,17 @@
 ```jsx {"file": "./examples/DatePicker_5_days.jsx"}
 ```
 
+### Today button
+
+```jsx {"file": "./examples/DatePicker_6_today.jsx"}
+```
+
 ### Accessibility
 
-```jsx {"file": "./examples/DatePicker_6_accessibility.jsx"}  
+```jsx {"file": "./examples/DatePicker_7_accessibility.jsx"}
 ```
 
 ### Disabled focus trap
 
-```jsx {"file": "./examples/DatePicker_7_disabled_focus_trap.jsx"}
+```jsx {"file": "./examples/DatePicker_8_disabled_focus_trap.jsx"}
 ```

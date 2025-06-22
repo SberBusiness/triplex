@@ -1,19 +1,17 @@
 ```jsx {"props": {"className": "light-background"}}
-const [value, setValue] = React.useState();
+import React, {useState} from 'react';
+import {DocumentNumberEdit} from '@sberbusiness/triplex/components/DocumentNumberEdit/DocumentNumberEdit';
 
-const buttonLabel = 'Изменить';
-const emptyNumberButtonLabel = 'Задать номер';
-const emptyNumberLabel = 'Номер документа будет присвоен автоматически';
-const numberLabel = 'Документ №';
+const [value, setValue] = useState('');
 
-const handleChange = (value) => setValue(value);
+const handleChange = (event) => setValue(event.target.value);
 
 <DocumentNumberEdit
     value={value}
-    buttonLabel={buttonLabel}
-    emptyNumberButtonLabel={emptyNumberButtonLabel}
-    emptyNumberLabel={emptyNumberLabel}
-    numberLabel={numberLabel}
+    buttonLabel="Изменить"
+    emptyNumberButtonLabel="Задать номер"
+    emptyNumberLabel="Номер документа будет присвоен автоматически"
+    numberLabel="Документ №"
     onChange={handleChange} 
 />
 ```

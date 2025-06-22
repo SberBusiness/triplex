@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {scrollSmoothHorizontally} from '@sberbusiness/triplex/utils/scroll';
 
 export interface ICarouselExtendedButtonProvideProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}

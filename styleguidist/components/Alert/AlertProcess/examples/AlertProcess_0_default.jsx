@@ -3,19 +3,13 @@ import {AlertProcess} from '@sberbusiness/triplex/components/Alert/AlertProcess/
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 
 <>
-    <AlertProcess type={EAlertType.INFO}>
-        Текст сообщения
-    </AlertProcess>
+    <AlertProcess type={EAlertType.INFO}>Текст сообщения</AlertProcess>
     <br />
-    <AlertProcess type={EAlertType.WARNING}>
-        Текст сообщения
-    </AlertProcess>
+    <AlertProcess type={EAlertType.WARNING}>Текст сообщения</AlertProcess>
     <br />
-    <AlertProcess type={EAlertType.ERROR}>
-        Текст сообщения
-    </AlertProcess>
+    <AlertProcess type={EAlertType.ERROR}>Текст сообщения</AlertProcess>
     <br />
-    <AlertProcess type={EAlertType.FEATURE}>
-        Текст сообщения
-    </AlertProcess>
+    <AlertProcess type={EAlertType.SYSTEM}>Текст сообщения</AlertProcess>
+    <br />
+    <AlertProcess type={EAlertType.FEATURE}>Текст сообщения</AlertProcess>
 </>

@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 
 /** Базовая реализация абстрактного дерева. */
 export class AbstractTreeNode<T extends AbstractTreeNode<T>> {

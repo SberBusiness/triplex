@@ -18,11 +18,11 @@ interface IMediaMinWidthProps {
  * В противном случае рендерится fallback.
  */
 export const MediaMinWidth: React.FC<IMediaMinWidthProps> = ({children, fallback, minWidth}) => {
-    const [matches, setMatches] = React.useState(window.innerWidth > parseInt(minWidth));
+    const [matches, setMatches] = React.useState(window.innerWidth >= parseInt(minWidth));
 
     useEffect(() => {
         const mediaQueryList = window.matchMedia(`(min-width: ${minWidth})`);
-        const handleChangeMatches = (e: MediaQueryListEvent) => setMatches(e.matches);
+        const handleChangeMatches = (event: MediaQueryListEvent) => setMatches(event.matches);
 
         if ('addEventListener' in mediaQueryList) {
             mediaQueryList.addEventListener('change', handleChangeMatches);

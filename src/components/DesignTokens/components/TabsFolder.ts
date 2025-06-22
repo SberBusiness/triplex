@@ -11,7 +11,8 @@ export const designTokensComponentsTabsFolderKeys = [
     'Tab_Background_Default',
     'Tab_Background_Hover',
     'Tab_Background_Selected',
-    'Tab_BorderColor',
+    'Tab_BorderColor_Default',
+    'Tab_BorderColor_Focus',
     'Tab_Color_Default',
     'Tab_Color_Disabled',
 ] as const;
@@ -41,7 +42,8 @@ export const TabsFolder_Tokens: TDesignTokensComponentsTabsFolderValues = {
     Tab_Background_Default: [{ref: 'Neutral.100'}, {ref: 'Basic.500'}], // var(--triplex-TabsFolder-Tab_Background_Default)
     Tab_Background_Hover: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-TabsFolder-Tab_Background_Hover)
     Tab_Background_Selected: [{ref: 'Basic.100'}, {ref: 'Basic.900'}], // var(--triplex-TabsFolder-Tab_Background_Selected)
-    Tab_BorderColor: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-TabsFolder-Tab_BorderColor)
+    Tab_BorderColor_Default: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-TabsFolder-Tab_BorderColor_Default)
+    Tab_BorderColor_Focus: [{ref: 'Accent.500'}, {ref: 'Accent.500'}], // var(--triplex-TabsFolder-Tab_BorderColor_Focus)
     Tab_Color_Default: [{ref: 'Basic.700'}, {ref: 'Basic.100'}], // var(--triplex-TabsFolder-Tab_Color_Default)
     Tab_Color_Disabled: [{ref: 'Neutral.500'}, {ref: 'Basic.300'}], // var(--triplex-TabsFolder-Tab_Color_Disabled)
 };

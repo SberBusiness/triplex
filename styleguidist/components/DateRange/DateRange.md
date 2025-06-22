@@ -10,3 +10,8 @@
 
 ```jsx {"file": "./examples/DateRange_2_custom_period_change.jsx"}
 ```
+
+### Without period buttons
+
+```jsx {"file": "./examples/DateRange_3_without_period_buttons.jsx"}
+```

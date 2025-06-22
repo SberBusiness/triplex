@@ -43,23 +43,6 @@ export const mapVerticalAlignToClassName = (verticalAlign: EVerticalAlign = EVer
 };
 
 /**
- * Преобразование значений скрытия колонок в css-классы.
- * @param {EScreenWidth} [size] Массив размеров ширины экрана, при которых скрывать колонку.
- */
-export const mapScreenSizeToClassName = (size?: EScreenWidth): string | undefined => {
-    switch (size) {
-        case EScreenWidth.XS_MAX:
-            return 'cssClass[hideXS]';
-        case EScreenWidth.SM_MAX:
-            return 'cssClass[hideSM]';
-        case EScreenWidth.MD_MAX:
-            return 'cssClass[hideMD]';
-        case EScreenWidth.LG_MAX:
-            return 'cssClass[hideLG]';
-    }
-};
-
-/**
  * Преобразование типа ячейки в css-класс.
  * @param {ECellType} [cellType] Тип ячейки.
  */
