@@ -18,11 +18,11 @@ interface IMediaMaxWidthProps {
  * В противном случае рендерится fallback.
  */
 export const MediaMaxWidth: React.FC<IMediaMaxWidthProps> = ({children, fallback, maxWidth}) => {
-    const [matches, setMatches] = React.useState(window.innerWidth < parseInt(maxWidth));
+    const [matches, setMatches] = React.useState(window.innerWidth <= parseInt(maxWidth));
 
     useEffect(() => {
         const mediaQueryList = window.matchMedia(`(max-width: ${maxWidth})`);
-        const handleChangeMatches = (e: MediaQueryListEvent) => setMatches(e.matches);
+        const handleChangeMatches = (event: MediaQueryListEvent) => setMatches(event.matches);
 
         if ('addEventListener' in mediaQueryList) {
             mediaQueryList.addEventListener('change', handleChangeMatches);

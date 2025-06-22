@@ -6,19 +6,19 @@ export interface ITooltipContext {
     toggleType?: TTooltipToggleType;
     elements: ITooltipElements;
     tooltipOpen: boolean;
-    tooltipHoveredRef: React.MutableRefObject<boolean>;
+    targetHoveredRef: React.MutableRefObject<boolean>;
     setTooltipOpen: (open: boolean) => void;
 }
 
 /** Контекст компонента Tooltip. */
 export const TooltipContext = React.createContext<ITooltipContext>({
     elements: {
-        target: null,
         body: null,
         closeButton: null,
         mobileHeader: null,
+        target: null,
     },
-    tooltipOpen: false,
-    tooltipHoveredRef: {current: false},
     setTooltipOpen: () => {},
+    targetHoveredRef: {current: false},
+    tooltipOpen: false,
 });

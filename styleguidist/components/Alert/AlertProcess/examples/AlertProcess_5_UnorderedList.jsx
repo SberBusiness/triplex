@@ -29,6 +29,12 @@ const items = [
         <UnorderedList values={items} />
     </AlertProcess>
     <br />
+    <AlertProcess type={EAlertType.SYSTEM}>
+        Текст сообщения
+        <Gap size={8} />
+        <UnorderedList values={items} />
+    </AlertProcess>
+    <br />
     <AlertProcess type={EAlertType.FEATURE}>
         Текст сообщения
         <Gap size={8} />

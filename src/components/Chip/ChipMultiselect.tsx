@@ -13,6 +13,8 @@ export interface IChipMultiselectProps extends Omit<IMultiselectProps, 'renderTa
     selected?: boolean;
     /** Название поля или число выбранных вариантов. */
     label: React.ReactNode;
+    /** Лейбл, отображаемый вместо выбранного значения. */
+    displayedValue?: React.ReactNode;
 }
 
 /**
@@ -20,7 +22,7 @@ export interface IChipMultiselectProps extends Omit<IMultiselectProps, 'renderTa
  * Количество выбранных значений отображается компонентом Chip.
  */
 export const ChipMultiselect = React.forwardRef<HTMLDivElement, IChipMultiselectProps>(
-    ({children, className, clearSelected, disabled, label, selected, ...rest}, ref) => {
+    ({children, className, clearSelected, disabled, label, displayedValue, selected, ...rest}, ref) => {
         const handleClickClearButton = (event: React.MouseEvent<HTMLButtonElement>) => {
             // Предотвращение нажатия на родительский элемент Chip.
             event.stopPropagation();
@@ -38,7 +40,7 @@ export const ChipMultiselect = React.forwardRef<HTMLDivElement, IChipMultiselect
                 role="listbox"
                 selected={Boolean(selected)}
             >
-                {label}
+                {selected ? displayedValue ?? label : label}
             </Chip>
         );
 

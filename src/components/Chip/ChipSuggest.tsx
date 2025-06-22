@@ -12,15 +12,17 @@ export interface IChipSuggestProps extends Omit<ISuggestMobileProps, 'renderTarg
     clearSelected: () => void;
     /** Название поля, когда не выбрано значение. */
     label: React.ReactNode;
+    /** Лейбл, отображаемый вместо выбранного значения. */
+    displayedValue?: React.ReactNode;
 }
 
 /**
  * Компонент выбора одного значения из списка с возможностью фильтрации.
  * Выбранное значение отображается компонентом Chip.
- * Кастомизированный компонент SelectMobile.
+ * Кастомизированный компонент SuggestMobile.
  * Работает только на мобильном устройстве.
  */
-export const ChipSuggest: React.FC<IChipSuggestProps> = ({children, clearSelected, disabled, label, value, ...rest}) => {
+export const ChipSuggest: React.FC<IChipSuggestProps> = ({children, clearSelected, disabled, label, displayedValue, value, ...rest}) => {
     const handleClickClearButton = (event: React.MouseEvent<HTMLButtonElement>) => {
         // Предотвращение нажатия на родительский элемент Chip.
         event.stopPropagation();
@@ -50,7 +52,7 @@ export const ChipSuggest: React.FC<IChipSuggestProps> = ({children, clearSelecte
             role="combobox"
             selected={Boolean(value)}
         >
-            {value ? value.label : label}
+            {value ? displayedValue ?? value.label : label}
         </Chip>
     );
 

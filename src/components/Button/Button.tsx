@@ -81,7 +81,7 @@ export interface IButtonTileProps extends React.ButtonHTMLAttributes<HTMLButtonE
     /** Тема кнопки. */
     theme: EButtonTheme.TILE;
     /** Размер кнопки. */
-    size?: never;
+    size?: EButtonSize;
     /** Блочный режим. */
     block?: boolean;
     /** Режим загрузки. */
@@ -131,7 +131,7 @@ const getButtonSizeCssClass = (size?: EButtonSize) => {
 
 /** Кнопка. */
 export const Button = React.forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
-    const {children, className, disabled, theme, size, block, loading, spinnerIcon, ...rest} = props;
+    const {children, className, disabled, theme, size = EButtonSize.MD, block, loading, spinnerIcon, ...rest} = props;
     const {'aria-expanded': expanded} = props;
     const classNames = classnames(
         'cssClass[button]',

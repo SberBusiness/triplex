@@ -1,7 +1,8 @@
 import React from 'react';
 import cx from 'clsx';
 import {useToken} from '@sberbusiness/triplex/components/ThemeProvider/useToken';
-import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETriplexTheme';
+import {useStyleGuideContext} from 'react-styleguidist/lib/client/rsg-components/Context/Context';
+import {DisplayModes} from 'react-styleguidist/lib/client/consts';
 import './styles.less';
 
 interface PlaygroundRendererProps {
@@ -27,6 +28,7 @@ const PlaygroundRenderer: React.FC<PlaygroundRendererProps> = ({
 }) => {
     const {className, ...restProps} = previewProps;
     const {theme} = useToken();
+    const {displayMode} = useStyleGuideContext();
 
     return (
         <div className="styleguide-playground">
@@ -35,7 +37,8 @@ const PlaygroundRenderer: React.FC<PlaygroundRendererProps> = ({
             </div>
             <div className="styleguide-playground-controls">
                 <div className="styleguide-playground-tabs">{tabButtons}</div>
-                <div className="styleguide-playground-toolbar">{toolbar}</div>
+                {/* Проверка на isolated. */}
+                {displayMode === DisplayModes.all && <div className="styleguide-playground-toolbar">{toolbar}</div>}
             </div>
             <div className="styleguide-playground-tab">{tabBody}</div>
         </div>

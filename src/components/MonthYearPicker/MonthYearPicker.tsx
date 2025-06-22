@@ -81,6 +81,7 @@ export const MonthYearPicker = React.forwardRef<HTMLDivElement, IMonthYearPicker
             renderDropdownHeaderTarget={renderDropdownHeaderTarget}
             pickedDate={pickerValues.calendarDate}
             pickType={ECalendarPickType.monthYearPick}
+            format={format}
             limitRange={limitRange}
             onDateChange={handleDateChange}
             {...rest}

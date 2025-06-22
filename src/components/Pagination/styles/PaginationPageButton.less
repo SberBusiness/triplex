@@ -1,6 +1,8 @@
 @import 'src/styles/style';
 
 .paginationPageButton {
+    .font-size(@font-size-14);
+
     font-family: inherit;
     color: var(--triplex-Pagination-PageButton_Color);
     background-color: var(--triplex-Pagination-PageButton_Background_Default);
@@ -21,6 +23,10 @@
 
     &:hover {
         background-color: var(--triplex-Pagination-PageButton_Background_Hover);
+    }
+
+    &:active {
+        background-color: var(--triplex-Pagination-PageButton_Background_Active);
     }
 
     &.currentPage {

@@ -30,6 +30,14 @@ import {EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button
         </Button>
     </AlertProcess>
     <br />
+    <AlertProcess type={EAlertType.SYSTEM}>
+        Текст сообщения
+        <Gap size={8} />
+        <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.SM}>
+            Button Name
+        </Button>
+    </AlertProcess>
+    <br />
     <AlertProcess type={EAlertType.FEATURE}>
         Текст сообщения
         <Gap size={8} />

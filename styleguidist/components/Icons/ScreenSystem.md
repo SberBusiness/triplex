@@ -1,2 +1,2 @@
-```jsx {"file": "./examples/Illustrations_1_screensystem.jsx"}
+```jsx {"file": "./examples/Illustrations_1_screensystem.jsx", "noeditor": "true"}
 ```

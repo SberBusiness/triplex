@@ -1,3 +1,4 @@
+/* eslint-env node */
 const fs = require('fs');
 const path = require('path');
 const {version} = require('./package');
@@ -23,14 +24,6 @@ module.exports = {
             scripts: [
                 {
                     src: './styleguidist/public/gtm.js',
-                }, {
-                    // Скрипт обратной связи в Jira.
-                    src:
-                        'https://sbtatlas.sigma.sbrf.ru/jira/s/d41d8cd98f00b204e9800998ecf8427e-CDN/ysjv9y/805006/bbbe3b77172f966b31f08ab7da14db44/2.2.4.7/_/download/batch/com.atlassian.plugins.jquery:jquery/com.atlassian.plugins.jquery:jquery.js?collectorId=e35580a9',
-                }, {
-                    // Скрипт обратной связи в Jira.
-                    src:
-                        'https://sbtatlas.sigma.sbrf.ru/jira/s/34d89b404b18c9b021fce0934969cc08-T/ysjv9y/805006/bbbe3b77172f966b31f08ab7da14db44/4.0.0/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=ru-RU&collectorId=e35580a9',
                 },
             ],
         },
@@ -46,6 +39,7 @@ module.exports = {
         PlaygroundRenderer: path.join(__dirname, './styleguidist/config/components/Playground/PlaygroundRenderer.tsx'),
         ReactComponentRenderer: path.join(__dirname, './styleguidist/config/components/ReactComponent/ReactComponentRenderer.tsx'),
         SectionRenderer: path.join(__dirname, './styleguidist/config/components/Section/SectionRenderer.tsx'),
+        SectionsRenderer: path.join(__dirname, './styleguidist/config/components/Sections/SectionsRenderer.tsx'),
         SectionHeadingRenderer: path.join(__dirname, './styleguidist/config/components/SectionHeading/SectionHeadingRenderer.tsx'),
         StyleGuideRenderer: path.join(__dirname, './styleguidist/config/components/StyleGuide/StyleGuideRenderer.tsx'),
         TabButtonRenderer: path.join(__dirname, './styleguidist/config/components/TabButton/TabButton.tsx'),

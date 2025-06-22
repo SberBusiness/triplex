@@ -27,21 +27,20 @@ exports[`AccordionView closes correctly 1`] = `
     />
   </div>
   <div
-    className="cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating]"
+    className="cssClass[expandAnimation] cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating]"
     id="AccordionBase-0"
-    onTransitionEnd={[Function]}
     style={
       {
-        "display": "none",
+        "height": 0,
+        "overflow": "hidden",
+        "transitionDuration": "300ms",
       }
     }
   >
-    <div>
-      <div
-        className="cssClass[accordionViewBody]"
-      >
-        Test
-      </div>
+    <div
+      className="cssClass[accordionViewBody]"
+    >
+      Test
     </div>
   </div>
 </div>
@@ -74,21 +73,20 @@ exports[`AccordionView opens correctly 1`] = `
     />
   </div>
   <div
-    className="cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating] cssClass[globalExpandAnimationOpened]"
+    className="cssClass[expandAnimation] cssClass[accordionViewContent] cssClass[globalExpandAnimationAnimating] cssClass[globalExpandAnimationOpened]"
     id="AccordionBase-0"
-    onTransitionEnd={[Function]}
     style={
       {
-        "display": "none",
+        "height": undefined,
+        "overflow": "hidden",
+        "transitionDuration": "300ms",
       }
     }
   >
-    <div>
-      <div
-        className="cssClass[accordionViewBody]"
-      >
-        Test
-      </div>
+    <div
+      className="cssClass[accordionViewBody]"
+    >
+      Test
     </div>
   </div>
 </div>
@@ -121,21 +119,21 @@ exports[`AccordionView renders correctly 1`] = `
     />
   </div>
   <div
-    className="cssClass[accordionViewContent]"
+    className="cssClass[expandAnimation] cssClass[accordionViewContent]"
     id="AccordionBase-0"
-    onTransitionEnd={[Function]}
     style={
       {
-        "display": "none",
+        "height": 0,
+        "overflow": "hidden",
+        "transitionDuration": "300ms",
+        "visibility": "hidden",
       }
     }
   >
-    <div>
-      <div
-        className="cssClass[accordionViewBody]"
-      >
-        Test
-      </div>
+    <div
+      className="cssClass[accordionViewBody]"
+    >
+      Test
     </div>
   </div>
 </div>

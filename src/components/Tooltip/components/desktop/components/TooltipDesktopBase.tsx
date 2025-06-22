@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {TooltipContext} from '@sberbusiness/triplex/components/Tooltip/TootlipContext';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {Portal} from '@sberbusiness/triplex/components/Portal/Portal';

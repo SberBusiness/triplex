@@ -63,7 +63,7 @@ export const SVGPreview: React.FC<ISVGPreviewProps> = ({value, folder, status}) 
         let i = name.length;
 
         while (i > 0) {
-            if (StringUtils.isDigit(name[i - 1]) == false) {
+            if (StringUtils.isDigit(name[i - 1]) === false) {
                 break;
             }
             i--;

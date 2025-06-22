@@ -27,17 +27,10 @@ export function renderDefaultIcon(type: EAlertType): JSX.Element {
 }
 
 /** Получить класс по типу предупреждения. */
-export function mapAlertTypeToClassName(type: EAlertType): string {
-    switch (type) {
-        case EAlertType.INFO:
-            return 'cssClass[alertTypeInfo]';
-        case EAlertType.WARNING:
-            return 'cssClass[alertTypeWarning]';
-        case EAlertType.ERROR:
-            return 'cssClass[alertTypeError]';
-        case EAlertType.SYSTEM:
-            return 'cssClass[alertTypeSystem]';
-        case EAlertType.FEATURE:
-            return 'cssClass[alertTypeFeature]';
-    }
-}
+export const alertTypeToClassNameMap = {
+    [EAlertType.INFO]: 'cssClass[alertTypeInfo]',
+    [EAlertType.WARNING]: 'cssClass[alertTypeWarning]',
+    [EAlertType.ERROR]: 'cssClass[alertTypeError]',
+    [EAlertType.SYSTEM]: 'cssClass[alertTypeSystem]',
+    [EAlertType.FEATURE]: 'cssClass[alertTypeFeature]',
+};

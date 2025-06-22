@@ -5,7 +5,7 @@ const getStyleConfigInput = require('./getStyleConfigInput');
 const getStyleConfigOutput = require('./getStyleConfigOutput');
 const packageJson = require('../../../package');
 const rollup = require('rollup');
-var uniq = require('lodash.uniq');
+const {uniq} = require('lodash');
 const getLessFileList = require('./getLessFileList');
 
 const absoluteRootPath = path.resolve(__dirname, '../../../');

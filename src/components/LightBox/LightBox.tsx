@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import FocusTrap from 'focus-trap-react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {LightBoxContent} from '@sberbusiness/triplex/components/LightBox/components/LightBoxContent';
 import {LightBoxControls} from '@sberbusiness/triplex/components/LightBox/LightBoxControls/LightBoxControls';
 import {LightBoxSideOverlay} from '@sberbusiness/triplex/components/LightBox/LightBoxSideOverlay/LightBoxSideOverlay';
 import {Portal} from '@sberbusiness/triplex/components/Portal/Portal';
 import {addClassNameWithScrollbarWidth} from '@sberbusiness/triplex/utils/scroll/scrollbar';
-import {LightBoxTopOverlay} from './LightBoxTopOverlay/LightBoxTopOverlay';
-import {LightBoxViewManager} from './LightBoxViewManager/LightBoxViewManager';
-import {isOnlyIE} from '../../utils/userAgentUtils';
-import FocusTrap from 'focus-trap-react';
+import {LightBoxTopOverlay} from '@sberbusiness/triplex/components/LightBox/LightBoxTopOverlay/LightBoxTopOverlay';
+import {LightBoxViewManager} from '@sberbusiness/triplex/components/LightBox/LightBoxViewManager/LightBoxViewManager';
+import {MobileView} from '@sberbusiness/triplex/components/MobileView/MobileView';
 import {FocusTrapUtils} from '@sberbusiness/triplex/utils/focus/FocusTrapUtils';
+import {useToken} from '@sberbusiness/triplex/components/ThemeProvider/useToken';
 
 // Идентификатор DOM-элемента, в который рендерится лайтбокс. При отсутствии элемента в DOM – создается в body.
 export const lightBoxMountNodeIdDefault = 'LightBox-mount-node';
@@ -36,169 +37,164 @@ export interface ILightBoxProps extends React.HTMLAttributes<HTMLDivElement> {
     isTopOverlayOpened?: boolean;
 }
 
-const bodyClassNamesIsLightBoxOpen = ['cssClass[bodyOverflowHidden]'];
-if (isOnlyIE) {
-    bodyClassNamesIsLightBoxOpen.push('cssClass[LightBoxIE]');
+interface ILightBoxFC extends React.FC<ILightBoxProps> {
+    Content: typeof LightBoxContent;
+    SideOverlay: typeof LightBoxSideOverlay;
+    TopOverlay: typeof LightBoxTopOverlay;
+    Controls: typeof LightBoxControls;
 }
 
-/** Лайтбокс. */
-export class LightBox extends React.Component<ILightBoxProps> {
-    public static displayName = 'LightBox';
+const bodyClassNamesIsLightBoxOpen = ['cssClass[bodyOverflowHidden]'];
 
-    public static defaultProps = {
-        lightBoxViewManagerNodeId: lightBoxViewManagerNodeIdDefault,
+export const LightBox: ILightBoxFC = ({
+    children,
+    className,
+    focusTrapProps,
+    forwardRef,
+    mountNode,
+    lightBoxViewManagerNodeId = lightBoxViewManagerNodeIdDefault,
+    isLoading,
+    isSideOverlayOpened,
+    isTopOverlayOpened,
+    ...htmlDivAttributes
+}) => {
+    // Скрытый элемент для вызова ререндера при закрытии оверлея, фикс бага в Safari - DCBSWT-2866.
+    const tempButtonRef = useRef<HTMLSpanElement>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    const {scopeClassName} = useToken();
+
+    const getLightBoxMountNode = () => {
+        let lightBoxMountNode: HTMLDivElement | null = null;
+        if (mountNode) {
+            lightBoxMountNode = mountNode;
+        } else {
+            lightBoxMountNode = document.querySelector(`#${lightBoxMountNodeIdDefault}`);
+
+            if (!lightBoxMountNode) {
+                lightBoxMountNode = document.createElement('div');
+                lightBoxMountNode.setAttribute('id', lightBoxMountNodeIdDefault);
+                document.body.appendChild(lightBoxMountNode);
+            }
+        }
+
+        return lightBoxMountNode;
     };
 
-    public static Content = LightBoxContent;
-    public static SideOverlay = LightBoxSideOverlay;
-    public static TopOverlay = LightBoxTopOverlay;
-    public static Controls = LightBoxControls;
+    const getLightBoxViewManagerMountNode = () => {
+        let lightBoxViewManagerMountNode: HTMLDivElement | null = null;
+        if (lightBoxViewManagerNodeId) {
+            lightBoxViewManagerMountNode = document.querySelector(`#${lightBoxViewManagerNodeId}`);
+        }
 
-    // Скрытый элемент для вызова ререндера при закрытии оверлея, фикс бага в Safari - DCBSWT-2866.
-    private tempButtonRef: React.RefObject<HTMLSpanElement>;
+        if (!lightBoxViewManagerMountNode) {
+            lightBoxViewManagerMountNode = document.createElement('div');
+            lightBoxViewManagerMountNode.setAttribute('id', lightBoxViewManagerNodeIdDefault);
+            document.body.appendChild(lightBoxViewManagerMountNode);
+        }
+
+        return lightBoxViewManagerMountNode;
+    };
 
     /**
      * DOM node, в которую рендерится лайтбокс.
      */
-    private lightBoxMountNode: HTMLDivElement | null = null;
+    const lightBoxMountNode = useRef<HTMLDivElement | null>(getLightBoxMountNode());
     /**
      * DOM node, в визуальных границах которой рендерится лайтбокс.
      * Левая и правая граница LightBox будут соответствовать левой и правой границе lightBoxViewManagerNode.
      */
-    private lightBoxViewManagerNode: HTMLDivElement | null = null;
+    const lightBoxViewManagerNode = useRef<HTMLDivElement | null>(getLightBoxViewManagerMountNode());
 
-    private containerRef: HTMLDivElement | null = null;
-
-    constructor(props: ILightBoxProps) {
-        super(props);
-
-        this.tempButtonRef = React.createRef<HTMLSpanElement>();
-
+    useEffect(() => {
         addClassNameWithScrollbarWidth();
-
-        this.setLightBoxMountNode();
-        this.setLightBoxViewManagerMountNode();
-    }
-
-    public componentDidMount(): void {
-        this.addClassNamesToDocumentElement();
+        addClassNamesToDocumentElement();
         // Фикс бага в роутере - при переключении между лайтбоксами иногда сначала происходит componentDidMount 2го и затем componentWillUnmount первого, css классы удаляются.
-        setTimeout(this.addClassNamesToDocumentElement, 100);
-    }
+        setTimeout(addClassNamesToDocumentElement, 100);
 
-    public componentDidUpdate(prevProps: ILightBoxProps): void {
-        const {isSideOverlayOpened} = this.props;
-        const {isSideOverlayOpened: prevIsSideOverlayOpened} = prevProps;
+        return () => bodyClassNamesIsLightBoxOpen.forEach((className) => document.documentElement.classList.remove(className));
+    }, []);
 
-        if (prevIsSideOverlayOpened && !isSideOverlayOpened) {
-            if (this.tempButtonRef.current) {
-                // Изменение z-index у скрытого элемента вызывает repaint. Фикс бага в Safari - DCBSWT-2866.
-                const nextZIndex = Math.round(Math.random() * 100);
-                this.tempButtonRef.current.style.zIndex = nextZIndex.toString();
-            }
+    useEffect(() => {
+        if (!isSideOverlayOpened && tempButtonRef.current) {
+            // Изменение z-index у скрытого элемента вызывает repaint. Фикс бага в Safari - DCBSWT-2866.
+            const nextZIndex = Math.round(Math.random() * 100);
+            tempButtonRef.current.style.zIndex = nextZIndex.toString();
         }
-    }
+    }, [isSideOverlayOpened]);
 
-    public componentWillUnmount(): void {
-        bodyClassNamesIsLightBoxOpen.forEach((className) => document.documentElement.classList.remove(className));
-    }
-
-    public render(): React.ReactNode {
-        const {
-            children,
-            className,
-            focusTrapProps,
-            forwardRef,
-            isLoading,
-            isSideOverlayOpened,
-            isTopOverlayOpened,
-            lightBoxViewManagerNodeId,
-            mountNode,
-            ...htmlDivAttributes
-        } = this.props;
-
-        const classNameLightBox = classnames(className, 'cssClass[lightBox]', {
-            'cssClass[isLoading]': Boolean(isLoading),
-            'cssClass[lightBoxSideOverlayActive]': Boolean(isSideOverlayOpened),
-            'cssClass[lightBoxTopOverlayActive]': Boolean(isTopOverlayOpened),
-        });
-
-        if (!this.lightBoxMountNode) {
-            return null;
-        }
-
-        return (
-            <>
-                <Portal container={this.lightBoxMountNode}>
-                    <FocusTrap
-                        active={!isLoading}
-                        {...focusTrapProps}
-                        focusTrapOptions={{
-                            clickOutsideDeactivates: true,
-                            initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(this.containerRef),
-                            preventScroll: true,
-                            ...focusTrapProps?.focusTrapOptions,
-                        }}
-                    >
-                        <div className={classNameLightBox} ref={this.setRef} role="dialog" aria-modal="true" {...htmlDivAttributes}>
-                            <div className="cssClass[lightBoxBackdrop]" />
-                            {children}
-                            <span ref={this.tempButtonRef} className="cssClass[tempElSafariBug]" />
-                        </div>
-                    </FocusTrap>
-                </Portal>
-
-                {this.lightBoxViewManagerNode && (
-                    <LightBoxViewManager
-                        lightBoxViewManagerNode={this.lightBoxViewManagerNode}
-                        lightBoxMountNode={this.lightBoxMountNode}
-                    />
-                )}
-            </>
-        );
-    }
+    const addClassNamesToDocumentElement = () => {
+        bodyClassNamesIsLightBoxOpen.forEach((className) => document.documentElement.classList.add(className));
+    };
 
     /** Функция для хранения ссылки. */
-    private setRef = (instance: HTMLDivElement | null) => {
-        const {forwardRef} = this.props;
-        this.containerRef = instance;
+    const setRef = (instance: HTMLDivElement | null) => {
+        containerRef.current = instance;
 
         if (forwardRef) {
             forwardRef.current = instance;
         }
     };
 
-    private addClassNamesToDocumentElement = () => {
-        bodyClassNamesIsLightBoxOpen.forEach((className) => document.documentElement.classList.add(className));
-    };
+    const classNameLightBox = classnames(
+        scopeClassName,
+        'cssClass[lightBox]',
+        {
+            'cssClass[isLoading]': Boolean(isLoading),
+            'cssClass[lightBoxSideOverlayActive]': Boolean(isSideOverlayOpened),
+            'cssClass[lightBoxTopOverlayActive]': Boolean(isTopOverlayOpened),
+        },
+        className
+    );
 
-    private setLightBoxMountNode = () => {
-        const {mountNode} = this.props;
+    if (!lightBoxMountNode.current) {
+        return null;
+    }
 
-        if (mountNode) {
-            this.lightBoxMountNode = mountNode;
-        } else {
-            this.lightBoxMountNode = document.querySelector(`#${lightBoxMountNodeIdDefault}`);
+    const renderLightBox = () => (
+        <div className={classNameLightBox} ref={setRef} role="dialog" aria-modal="true" {...htmlDivAttributes}>
+            <div className="cssClass[lightBoxBackdrop]" />
+            {children}
+            <span ref={tempButtonRef} className="cssClass[tempElSafariBug]" />
+        </div>
+    );
 
-            if (!this.lightBoxMountNode) {
-                this.lightBoxMountNode = document.createElement('div');
-                this.lightBoxMountNode.setAttribute('id', lightBoxMountNodeIdDefault);
-                document.body.appendChild(this.lightBoxMountNode);
-            }
-        }
-    };
+    return (
+        <>
+            <Portal container={lightBoxMountNode.current}>
+                <MobileView
+                    fallback={
+                        <FocusTrap
+                            active={!isLoading}
+                            {...focusTrapProps}
+                            focusTrapOptions={{
+                                clickOutsideDeactivates: true,
+                                initialFocus: () => FocusTrapUtils.getFirstInteractionElementByDataAttr(containerRef.current),
+                                preventScroll: true,
+                                ...focusTrapProps?.focusTrapOptions,
+                            }}
+                        >
+                            {renderLightBox()}
+                        </FocusTrap>
+                    }
+                >
+                    {renderLightBox()}
+                </MobileView>
+            </Portal>
 
-    private setLightBoxViewManagerMountNode = () => {
-        const {lightBoxViewManagerNodeId} = this.props;
+            {lightBoxViewManagerNode.current && (
+                <LightBoxViewManager
+                    lightBoxViewManagerNode={lightBoxViewManagerNode.current}
+                    lightBoxMountNode={lightBoxMountNode.current}
+                />
+            )}
+        </>
+    );
+};
 
-        if (lightBoxViewManagerNodeId) {
-            this.lightBoxViewManagerNode = document.querySelector(`#${lightBoxViewManagerNodeId}`);
-        }
+LightBox.Content = LightBoxContent;
+LightBox.SideOverlay = LightBoxSideOverlay;
+LightBox.TopOverlay = LightBoxTopOverlay;
+LightBox.Controls = LightBoxControls;
 
-        if (!this.lightBoxViewManagerNode) {
-            this.lightBoxViewManagerNode = document.createElement('div');
-            this.lightBoxViewManagerNode.setAttribute('id', lightBoxViewManagerNodeIdDefault);
-            document.body.appendChild(this.lightBoxViewManagerNode);
-        }
-    };
-}
+LightBox.displayName = 'LightBox';

@@ -18,7 +18,7 @@ const generateCssFromDesignTokens = () => {
         mkdirSync(generatedDirName);
     }
 
-    const themesVariables = `:root {${lightThemeCssVariables}}`;
+    const themesVariables = `html {${lightThemeCssVariables}}`;
 
     writeFileSync(`${generatedDirName}/${cssVariablesFileName}`, themesVariables);
 };

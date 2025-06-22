@@ -109,7 +109,12 @@ const getData = () => {
                 logo: <PlugSrvIcon32 />,
                 summary: (
                     <>
-                        <Text tag="div" type={EFontType.GENERAL} size={ETextSize.B1} line={ELineType.EXTRA}>
+                        <Text
+                            tag="div"
+                            type={EFontType.GENERAL}
+                            size={ETextSize.B1}
+                            line={ELineType.EXTRA}
+                        >
                             {d.summary.name}
                         </Text>
                         <Gap size={4} />
@@ -138,6 +143,10 @@ const getData = () => {
     });
 };
 
+const handleChange = () => {
+    alert('Change handler called.');
+};
+
 const renderUploadZoneContent = (openUploadDialog) => (
     <div className="uploadZoneContent">
         <UploadZone.Input multiple />
@@ -153,14 +162,20 @@ const renderUploadZoneContent = (openUploadDialog) => (
                 выберите на компьютере
             </Link>
             {'\u00A0'}
-            <HelpBox tooltipSize={ETooltipSize.SM}>Допустимые форматы файлов: PDF, TIFF, JPEG, PNG, PCX, DOCX.</HelpBox>
+            <HelpBox tooltipSize={ETooltipSize.SM}>
+                Допустимые форматы файлов: PDF, TIFF, JPEG, PNG, PCX, DOCX.
+            </HelpBox>
         </div>
         <Gap size={16} />
     </div>
 );
 
 <div ref={(node) => setContainer(node)} style={{display: 'flow-root', position: 'relative'}}>
-    <UploadZone renderContainerContent={renderContainerContent} dropZoneContainer={container}>
+    <UploadZone
+        renderContainerContent={renderContainerContent}
+        dropZoneContainer={container}
+        onChange={handleChange}
+    >
         {({openUploadDialog}) => renderUploadZoneContent(openUploadDialog)}
     </UploadZone>
     <Gap size={16} />

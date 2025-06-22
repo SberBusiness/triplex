@@ -1,4 +1,4 @@
-/** Вариант выбора даты. */
+/** Вариант выбора даты в календаре. */
 export enum ECalendarPickType {
     datePick,
     monthYearPick,
@@ -9,4 +9,12 @@ export enum ECalendarViewMode {
     DAYS = 'days',
     MONTHS = 'months',
     YEARS = 'years',
+}
+
+/** Тип отметки даты календаря. */
+export enum ECalendarDateMarkType {
+    BASIC,
+    STANDARD,
+    ATTENTION,
+    CRITICAL,
 }

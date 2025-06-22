@@ -47,6 +47,7 @@ export const DatePickerExtended = React.forwardRef<HTMLDivElement, IDatePickerEx
         prevButtonProps,
         nextButtonProps,
         viewButtonProps,
+        todayButtonProps,
         onDateChange,
         // Other
         renderTarget,
@@ -120,6 +121,7 @@ export const DatePickerExtended = React.forwardRef<HTMLDivElement, IDatePickerEx
             prevButtonProps={prevButtonProps}
             nextButtonProps={nextButtonProps}
             viewButtonProps={viewButtonProps}
+            todayButtonProps={todayButtonProps}
         />
     );
 

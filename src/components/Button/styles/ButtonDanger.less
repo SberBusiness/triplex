@@ -1,11 +1,11 @@
 @import 'src/styles/style';
 
 .button.danger {
-    background: var(--triplex-Button-Danger_Background_Default);
-    .font-medium();
-    .font-size-inline(@font-size-14);
-
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
     text-transform: none;
+    background: var(--triplex-Button-Danger_Background_Default);
     color: var(--triplex-Button-Danger_Color_Default);
 
     .caretIcon path {
@@ -34,7 +34,7 @@
         background: var(--triplex-Button-Danger_Background_Active);
         color: var(--triplex-Button-Danger_Color_Active);
     }
-    
+
     &:focus-visible {
         box-shadow: var(--triplex-Button-Danger_Shadow_Focus);
     }

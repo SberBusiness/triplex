@@ -1,39 +1,26 @@
-import React from 'react';
-import moment from 'moment';
+import React, {useContext} from 'react';
 import {CaretleftSrvxIcon24} from '@sberbusiness/icons/CaretleftSrvxIcon24';
 import {CaretrightSrvxIcon24} from '@sberbusiness/icons/CaretrightSrvxIcon24';
+import {ICalendarCommonProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
+import {CalendarContext} from '@sberbusiness/triplex/components/Calendar/CalendarContext';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {EButtonIconShape, EButtonSize, EButtonTheme} from '@sberbusiness/triplex/components/Button/enums';
 import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 import {globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
-import {ICalendarCommonProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
 
 /** Свойства компонента CalendarControls. */
-export interface ICalendarControlsProps
-    extends Pick<ICalendarCommonProps, 'prevButtonProps' | 'nextButtonProps' | 'viewButtonProps'>,
-        Required<Pick<ICalendarCommonProps, 'limitRange' | 'onPageChange' | 'onViewChange'>> {
-    /** Дата, являющая курсором для навигации по интерфейсу. */
-    viewDate: moment.Moment;
-    /** Вид отображения. */
-    viewMode: ECalendarViewMode;
-    /** Уникальный идентификатор для связи периода с таблицей. */
-    periodId: string;
-}
+export interface ICalendarControlsProps extends Pick<ICalendarCommonProps, 'prevButtonProps' | 'nextButtonProps' | 'viewButtonProps'> {}
 
 /** Элементы управления календаря. */
 export const CalendarControls: React.FC<ICalendarControlsProps> = ({
     children,
-    viewDate,
-    viewMode,
-    periodId,
-    limitRange,
     prevButtonProps = {},
     nextButtonProps = {},
     viewButtonProps = {},
-    onPageChange,
-    onViewChange,
 }): JSX.Element => {
+    const {viewDate, viewMode, limitRange, periodId, onPageChange, onViewChange} = useContext(CalendarContext);
+
     /** Рендер кнопки "назад". */
     const renderPrevButton = () => {
         const {disabled, onClick, ...rest} = typeof prevButtonProps === 'function' ? prevButtonProps(viewMode) : prevButtonProps;

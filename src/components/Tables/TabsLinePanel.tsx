@@ -3,24 +3,16 @@ import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 import {TabsLinePanelLinks} from '@sberbusiness/triplex/components/Tables/TabsLinePanelLinks';
 
 /** Свойства компонента TabsLinePanel. */
-export interface ITabsLinePanelProps extends React.HTMLAttributes<HTMLDivElement> {
-    // Свойство не используется в компоненте, нужно для типизации т.к. MasterTable передает isLoading всем дочерним компонентам.
-    isLoading?: boolean;
-}
+export interface ITabsLinePanelProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Внутренние составляющие панели табличных фильтров. */
-export interface ITabsLinePanelComposition {
+export interface ITabsLinePanelComposition extends React.FC<ITabsLinePanelProps> {
     Links: typeof TabsLinePanelLinks;
 }
 
 /** Компонент TabsLinePanel. */
-export const TabsLinePanel: React.FC<ITabsLinePanelProps> & ITabsLinePanelComposition = ({
-    children,
-    className,
-    isLoading,
-    ...htmlDivAttributes
-}) => (
-    <div className={classnames(className, 'cssClass[tabsLinePanel]')} {...htmlDivAttributes}>
+export const TabsLinePanel: ITabsLinePanelComposition = ({children, className, ...htmlDivAttributes}) => (
+    <div className={classnames('cssClass[tabsLinePanel]', className)} {...htmlDivAttributes}>
         {children}
     </div>
 );

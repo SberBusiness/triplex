@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import '../../../tests/mock/matchMedia.mock';
-import {ISelectOption, Select} from '../Select';
+import {Select, ISelectOption} from '@sberbusiness/triplex/components/Select/Select';
+import '@sberbusiness/triplex/tests/mock/matchMedia.mock';
 
 jest.mock('@sberbusiness/icons/CaretdownSrvxIcon16', () => ({
     CaretdownSrvxIcon16: 'svg',

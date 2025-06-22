@@ -7,22 +7,26 @@ import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
 export interface IPaginationSelectProps extends ISelectProps {
     /** Текст лейбла пагинации. */
     paginationLabel: React.ReactNode;
+    /** Компонент скрыт. */
+    hidden?: boolean;
 }
 
 /** Выбор количества элементов на странице. */
-export const PaginationSelect = React.forwardRef<HTMLDivElement, IPaginationSelectProps>(({paginationLabel, className, ...rest}, ref) => {
-    const instanceId = useRef(`Pagination-${uniqueId()}`);
+export const PaginationSelect = React.forwardRef<HTMLDivElement, IPaginationSelectProps>(
+    ({paginationLabel, className, hidden, ...rest}, ref) => {
+        const instanceId = useRef(`Pagination-${uniqueId()}`);
 
-    return (
-        <div className={classnames('cssClass[paginationSelect]', className)} ref={ref}>
-            <div className="cssClass[paginationSelectLabel]" id={instanceId.current}>
-                {paginationLabel}
+        return hidden ? null : (
+            <div className={classnames('cssClass[paginationSelect]', className)} ref={ref}>
+                <div className="cssClass[paginationSelectLabel]" id={instanceId.current}>
+                    {paginationLabel}
+                </div>
+                <div className="cssClass[paginationSelectControl]">
+                    <Select aria-labelledby={instanceId.current} {...rest} />
+                </div>
             </div>
-            <div className="cssClass[paginationSelectControl]">
-                <Select aria-labelledby={instanceId.current} {...rest} />
-            </div>
-        </div>
-    );
-});
+        );
+    }
+);
 
 PaginationSelect.displayName = 'PaginationSelect';

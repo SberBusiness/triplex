@@ -1,9 +1,7 @@
 import React from 'react';
 import {Moment} from 'moment';
 import {ICalendarRangeProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
-import {IButtonIconProps} from '@sberbusiness/triplex/components/Button/ButtonIcon';
-import {IButtonLinkProps} from '@sberbusiness/triplex/components/Button/Button';
-import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
+import {ECalendarViewMode, ECalendarDateMarkType} from '@sberbusiness/triplex/components/Calendar/enums';
 
 /** Внешний тип даты, который можно передать в компонент через свойства компонента. */
 export type TPickedDateProp = string | Moment | null;
@@ -16,6 +14,9 @@ export type TPickedRangeProp = [TPickedDateProp, TPickedDateProp];
 
 /** Приведенный к Moment тип периода для внутренних вычислений. */
 export type TPickedRange = [TPickedDate, TPickedDate];
+
+/** Тип отмеченных дней календаря. */
+export type TCalendarMarkedDays = string[] | Record<string, ECalendarDateMarkType>;
 
 /**
  * Интерфейс параметров, которые можно передать в функцию для получения HTML атрибутов компонента дня,
@@ -47,11 +48,27 @@ export interface ICalendarNestedProps {
     /** HTML атрибуты компонента года. */
     yearHtmlAttributes?: React.TdHTMLAttributes<HTMLTableCellElement>;
     /** Свойства кнопки переключения на предыдущую страницу календаря. */
-    prevButtonProps?: IButtonIconProps | ((viewMode: ECalendarViewMode) => IButtonIconProps);
+    prevButtonProps?:
+        | React.ButtonHTMLAttributes<HTMLButtonElement>
+        | ((viewMode: ECalendarViewMode) => React.ButtonHTMLAttributes<HTMLButtonElement>);
     /** Свойства кнопки переключения на следующую страницу календаря. */
-    nextButtonProps?: IButtonIconProps | ((viewMode: ECalendarViewMode) => IButtonIconProps);
+    nextButtonProps?:
+        | React.ButtonHTMLAttributes<HTMLButtonElement>
+        | ((viewMode: ECalendarViewMode) => React.ButtonHTMLAttributes<HTMLButtonElement>);
     /** Свойства кнопки для смены вида календаря. */
-    viewButtonProps?: IButtonLinkProps | ((viewMode: ECalendarViewMode) => IButtonLinkProps);
+    viewButtonProps?:
+        | React.ButtonHTMLAttributes<HTMLButtonElement>
+        | ((viewMode: ECalendarViewMode) => React.ButtonHTMLAttributes<HTMLButtonElement>);
+    /** Свойства кнопки "Сегодня". */
+    todayButtonProps?:
+        | React.ButtonHTMLAttributes<HTMLButtonElement>
+        | (({
+              viewMode,
+              currentPeriodSelected,
+          }: {
+              viewMode: ECalendarViewMode;
+              currentPeriodSelected: boolean;
+          }) => React.ButtonHTMLAttributes<HTMLButtonElement>);
 }
 
 /** Свойства Calendar, передаваемые в рендер-функцию CalendarRange. */

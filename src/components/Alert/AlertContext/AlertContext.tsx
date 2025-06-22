@@ -1,7 +1,7 @@
 import React from 'react';
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {mapAlertTypeToClassName, renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
+import {alertTypeToClassNameMap, renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
 
 /** Свойства компонента AlertContext. */
 export interface IAlertContextProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -12,15 +12,20 @@ export interface IAlertContextProps extends React.HTMLAttributes<HTMLSpanElement
 }
 
 /** Компонент контекстного предупреждения. */
-export const AlertContext: React.FC<IAlertContextProps> = ({children, className, type, visible = true, ...rest}) =>
-    visible ? (
-        <span
-            role="alert"
-            className={classnames('cssClass[alertContext]', mapAlertTypeToClassName(type), className)}
-            {...rest}
-            data-tx={process.env.npm_package_version}
-        >
-            {renderDefaultIcon(type)}
-            <span className="cssClass[alertContextText]">{children}</span>
-        </span>
-    ) : null;
+export const AlertContext = React.forwardRef<HTMLSpanElement, IAlertContextProps>(
+    ({children, className, type, visible = true, ...rest}, ref) =>
+        visible ? (
+            <span
+                role="alert"
+                className={classnames('cssClass[alertContext]', alertTypeToClassNameMap[type], className)}
+                {...rest}
+                data-tx={process.env.npm_package_version}
+                ref={ref}
+            >
+                {renderDefaultIcon(type)}
+                <span className="cssClass[alertContextText]">{children}</span>
+            </span>
+        ) : null
+);
+
+AlertContext.displayName = 'AlertContext';

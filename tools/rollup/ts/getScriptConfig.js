@@ -49,9 +49,10 @@ function external(id, parentId, isResolved) {
         id === 'react-transition-group' ||
         id === 'react-text-mask' ||
         id === 'focus-trap-react' ||
-        id === 'react-resize-detector/build/withPolyfill' ||
+        id === 'react-resize-detector' ||
         id.indexOf('lodash') === 0 ||
         id.indexOf('@sberbusiness/icons') === 0 ||
+        id.indexOf('@sberbusiness/illustrations') === 0 ||
         // Если импорт начинается с нашей либы.
         id.indexOf(packageJson.name) === 0
     );

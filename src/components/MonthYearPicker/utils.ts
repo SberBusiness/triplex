@@ -30,10 +30,15 @@ export const MonthYearPickerUtils = {
     getCalendarDate: (value: string, format: string, limitRange: IDateLimitRange) => {
         const date = moment(value, format, true);
 
-        if (!date.isValid() || date.isBefore(limitRange.dateFrom, 'day') || date.isAfter(limitRange.dateTo, 'day')) {
+        if (!date.isValid() || !MonthYearPickerUtils.isAvailableDate(date, value, limitRange)) {
             return null;
         }
 
         return date;
+    },
+
+    /** Является ли дата доступной. */
+    isAvailableDate: (date: moment.Moment, value: string, limitRange: IDateLimitRange) => {
+        return !(date.isBefore(limitRange.dateFrom, 'day') || date.isAfter(limitRange.dateTo, 'day'));
     },
 };

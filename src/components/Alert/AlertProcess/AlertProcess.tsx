@@ -1,21 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {EAlertType} from '@sberbusiness/triplex/components/Alert/EAlertType';
 import {AlertProcessHeader} from '@sberbusiness/triplex/components/Alert/AlertProcess/components/AlertProcessHeader';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {mapAlertTypeToClassName, renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
+import {alertTypeToClassNameMap, renderDefaultIcon} from '@sberbusiness/triplex/components/Alert/AlertTypeUtils';
 import {ButtonIcon} from '@sberbusiness/triplex/components/Button/ButtonIcon';
 import {ClosenotificationSrvxIcon16} from '@sberbusiness/icons/ClosenotificationSrvxIcon16';
-
-/** @deprecated Устаревшие свойства компонента AlertProcess. */
-export interface IDeprecatedAlertProcessProps extends Omit<IAlertProcessProps, 'type'> {
-    /** Текст внутри компонента. */
-    text: React.ReactNode;
-}
 
 /** Свойства компонента AlertProcess. */
 export interface IAlertProcessProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Тип предупреждения. */
-    type: Exclude<EAlertType, EAlertType.SYSTEM>;
+    type: EAlertType;
     /** Модификатор возможности закрытия предупреждения. */
     closable?: boolean;
     /** Функция обработки закрытия. */
@@ -26,55 +20,50 @@ export interface IAlertProcessProps extends React.HTMLAttributes<HTMLDivElement>
     renderIcon?: () => JSX.Element;
 }
 
-/** Внутренние составляющие процессного предупреждения. */
-interface IAlertProcessComposition {
-    Header: typeof AlertProcessHeader;
-}
-
 /** Компонент процессного предупреждения. */
-export const AlertProcess: React.FC<IAlertProcessProps> & IAlertProcessComposition = ({
-    children,
-    className,
-    type,
-    closable,
-    onClose,
-    renderHeader,
-    renderIcon,
-    ...rest
-}) => {
-    const [isOpen, setIsOpen] = useState(true);
+export const AlertProcess = Object.assign(
+    React.forwardRef<HTMLDivElement, IAlertProcessProps>(function AlertProcess(
+        {children, className, type, closable, onClose, renderHeader, renderIcon, ...rest},
+        ref
+    ) {
+        const [closed, setClosed] = useState(false);
 
-    useEffect(() => {
-        if (!isOpen) {
-            onClose?.();
+        if (closed) {
+            return null;
         }
-    }, [isOpen]);
 
-    const handleClose = () => setIsOpen(false);
+        const handleClose = () => {
+            setClosed(true);
 
-    const render = () => (
-        <div
-            className={classnames('cssClass[alertProcess]', mapAlertTypeToClassName(type), className)}
-            {...rest}
-            data-tx={process.env.npm_package_version}
-        >
-            <div className="cssClass[themeIcon]">{renderIcon ? renderIcon() : renderDefaultIcon(type)}</div>
-            <div className="cssClass[alertProcessContentBlock]">
-                {renderHeader?.()}
-                {children}
-            </div>
-            {closable && (
-                <div className="cssClass[closeButton]">
-                    <ButtonIcon onClick={handleClose}>
-                        <ClosenotificationSrvxIcon16 />
-                    </ButtonIcon>
+            onClose?.();
+        };
+
+        return (
+            <div
+                className={classnames('cssClass[alertProcess]', alertTypeToClassNameMap[type], className)}
+                {...rest}
+                data-tx={process.env.npm_package_version}
+                ref={ref}
+            >
+                <div className="cssClass[themeIcon]">{renderIcon ? renderIcon() : renderDefaultIcon(type)}</div>
+                <div className="cssClass[alertProcessContentBlock]">
+                    {renderHeader?.()}
+                    {children}
                 </div>
-            )}
-        </div>
-    );
-
-    return isOpen ? render() : null;
-};
+                {closable && (
+                    <div className="cssClass[closeButton]">
+                        <ButtonIcon onClick={handleClose}>
+                            <ClosenotificationSrvxIcon16 />
+                        </ButtonIcon>
+                    </div>
+                )}
+            </div>
+        );
+    }),
+    {
+        Header: AlertProcessHeader,
+    }
+);
 
 AlertProcess.displayName = 'AlertProcess';
 AlertProcess.Header = AlertProcessHeader;

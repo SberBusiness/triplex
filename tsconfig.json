@@ -22,7 +22,7 @@
         // Interop Constraints
         "esModuleInterop": true,
         // Language and Environment
-        "target": "es5",
+        "target": "esnext",
         "jsx": "react",
         "experimentalDecorators": true,
         // Completeness

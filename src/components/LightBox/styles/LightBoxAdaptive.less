@@ -6,7 +6,7 @@ each(@scroll-sizes, {
     // Ширина экрана без скрола.
     @screen-width-without-scroll: calc(var(--lightBox-screen-width) - @scroll-width-px);
 
-    html:not(.LightBoxIE).scroll-@{scroll-width} {
+    html.scroll-@{scroll-width} {
         .lightBox {
             left: var(--lightBox-screen-left);
 
@@ -48,19 +48,23 @@ each(@scroll-sizes, {
                 width: @lightBox-content-width;
             }
 
-            .lightBoxPrev,
-            .lightBoxNext,
+            .lightBoxControls {
+                padding: 24px 32px;
+            }
+
             .lightBoxClose {
                 top: 24px;
                 position: absolute;
             }
 
-            .lightBoxPrev {
-                left: @lightBox-arrow-prev-left;
+            .lightBoxPrev,
+            .lightBoxNext {
+                position: static;
+                display: inline-block;
             }
 
-            .lightBoxNext {
-                left: @lightBox-arrow-next-left;
+            .lightBoxPrev + .lightBoxNext {
+                margin-left: 8px;
             }
 
             .lightBoxClose {

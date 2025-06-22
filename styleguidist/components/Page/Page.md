@@ -1,4 +1,5 @@
 ```jsx
+import React from 'react';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 

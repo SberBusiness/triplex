@@ -8,6 +8,8 @@ import {getDataHTMLAttributes, TDataHTMLAttributes} from '@sberbusiness/triplex/
 import {TestIds} from '@sberbusiness/triplex/dataTestIds/dataTestIds';
 import {Select, ISelectOption} from '@sberbusiness/triplex/components/Select/Select';
 import {uniqueId} from '@sberbusiness/triplex/utils/uniqueId';
+// Импорт должен быть абсолютный.
+import {MasterTableContext} from '@sberbusiness/triplex/components/Tables/MasterTableContext';
 
 /** Свойства компонента TableBasicPagination. */
 export interface ITableBasicPaginationProps {
@@ -30,8 +32,6 @@ export interface ITableBasicPaginationProps {
     /** Функция при смене страницы на следующую. */
     onClickNextPage: () => void;
     children?: never;
-    /** Состояние загрузки. */
-    isLoading?: boolean;
     /** Data-атрибуты. */
     dataAttributes?: TDataHTMLAttributes;
     /** Свойства кнопки "Предыдущая страница". */
@@ -44,12 +44,15 @@ export interface ITableBasicPaginationProps {
 export class PaginationBasic extends React.PureComponent<ITableBasicPaginationProps> {
     public static displayName = 'PaginationBasic';
 
+    static contextType = MasterTableContext;
+    declare context: React.ContextType<typeof MasterTableContext>;
+
     // Уникальный id, для передачи aria-атрибутов accessibility.
     private instanceId = `PaginationBasic-${uniqueId()}`;
 
     public render(): JSX.Element {
-        const {rowNumberOptions, rowNumber, currentPageNumber, hasNextPage, hasPrevPage, isLoading, paginationLabel, dataAttributes} =
-            this.props;
+        const {rowNumberOptions, rowNumber, currentPageNumber, hasNextPage, hasPrevPage, paginationLabel, dataAttributes} = this.props;
+        const {isLoading} = this.context;
         const dataTestId = dataAttributes ? dataAttributes['test-id'] : undefined;
 
         const options: ISelectOption[] = rowNumberOptions.map((o) => ({id: String(o), label: o, value: String(o)}));
@@ -112,7 +115,7 @@ export class PaginationBasic extends React.PureComponent<ITableBasicPaginationPr
     };
 
     private renderButtonIcon = (icon: JSX.Element, isActive: boolean, buttonProps: Partial<IButtonIconProps>, dti?: string) => {
-        const {isLoading} = this.props;
+        const {isLoading} = this.context;
         const disabled = isLoading || !isActive;
 
         return (

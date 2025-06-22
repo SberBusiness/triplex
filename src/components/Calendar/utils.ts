@@ -1,8 +1,9 @@
 import moment from 'moment';
-import {headerDateFormat} from '@sberbusiness/triplex/consts/DateConst';
+import {headerDateFormat, globalLimitRange} from '@sberbusiness/triplex/consts/DateConst';
 import {ECalendarViewMode} from '@sberbusiness/triplex/components/Calendar/enums';
 import {TPickedDate, TPickedDateProp} from '@sberbusiness/triplex/components/Calendar/types';
 import {ICalendarRangeProps, TCalendarProps} from '@sberbusiness/triplex/components/Calendar/Calendar';
+import {IDateLimitRange} from '@sberbusiness/triplex/types/DateTypes';
 
 /**
  * Приведение даты к типу Moment.
@@ -63,4 +64,21 @@ export function formatDate(viewDate: TPickedDate, viewMode: ECalendarViewMode): 
 /** Type guard для проверки свойств календаря на выбор периода. */
 export function isCalendarRange(props: TCalendarProps): props is ICalendarRangeProps {
     return Array.isArray(props.pickedDate);
+}
+
+/** Проверяет, выходит ли дата за разрешённый период. */
+export function isDateOutOfRange(date: moment.Moment, limitRange: IDateLimitRange, unit: 'day' | 'month' | 'year') {
+    const dateFrom = limitRange.dateFrom || globalLimitRange.dateFrom;
+    const dateTo = limitRange.dateTo || globalLimitRange.dateTo;
+
+    return date.isBefore(dateFrom, unit) || date.isAfter(dateTo, unit);
+}
+
+/** Проверяет, является ли день недоступным для выбора. */
+export function isDayDisabled(day: string, disabledDays: string[] | undefined) {
+    if (disabledDays === undefined) {
+        return false;
+    }
+
+    return disabledDays.includes(day);
 }

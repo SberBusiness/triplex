@@ -25,3 +25,10 @@
 
 ```jsx {"file": "./examples/AccordionForm_5_one_open.jsx"}
 ```
+
+### Performance
+
+The AccordionForm item's content is mounted by default, you may want to change this behavior by setting "unmountOnExit" to true inside the "transitionProps" prop to improve performance.
+
+```jsx {"file": "./examples/AccordionForm_6_performance.jsx"}
+```

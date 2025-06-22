@@ -31,6 +31,14 @@ const handleClick = (event) => event.preventDefault();
         </Link>
     </AlertProcess>
     <br />
+    <AlertProcess type={EAlertType.SYSTEM}>
+        Текст сообщения
+        <Gap size={8} />
+        <Link href="#" linkType={ELinkType.TEXT} size={ELinkSize.LG} onClick={handleClick}>
+            Текст ссылки
+        </Link>
+    </AlertProcess>
+    <br />
     <AlertProcess type={EAlertType.FEATURE}>
         Текст сообщения
         <Gap size={8} />

@@ -14,6 +14,8 @@ export interface IChipSelectProps extends Omit<ISelectBaseProps, 'targetProps' |
     clearSelected: () => void;
     /** Название поля. */
     label?: React.ReactNode;
+    /** Лейбл, отображаемый вместо выбранного значения. */
+    displayedValue?: React.ReactNode;
 }
 
 /**
@@ -21,7 +23,7 @@ export interface IChipSelectProps extends Omit<ISelectBaseProps, 'targetProps' |
  * Выбранное значение отображается компонентом Chip.
  */
 export const ChipSelect = React.forwardRef<HTMLDivElement, IChipSelectProps>(
-    ({children, className, clearSelected, disabled, label, onChange, options, value, ...rest}, ref) => {
+    ({children, className, clearSelected, disabled, label, displayedValue, onChange, options, value, ...rest}, ref) => {
         const handleClickClearButton = (event: React.MouseEvent<HTMLButtonElement>) => {
             // Предотвращение нажатия на родительский элемент Chip.
             event.stopPropagation();
@@ -39,7 +41,7 @@ export const ChipSelect = React.forwardRef<HTMLDivElement, IChipSelectProps>(
                 ref={ref}
                 selected={Boolean(value)}
             >
-                {value ? value.label : label}
+                {value ? displayedValue ?? value.label : label}
             </Chip>
         );
 

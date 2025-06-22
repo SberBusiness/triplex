@@ -1,3 +1,4 @@
+/* eslint-env node */
 /** Создание объекта ошибки. */
 function createErrorWithMessage(msg) {
     const helpMessage =
@@ -8,7 +9,10 @@ function createErrorWithMessage(msg) {
 }
 
 /** Основная функция, заменяющая версию. */
-function replacePackageVersion(segment, newTag, match, major, minor, patch, tag, tagVersion) {
+function getUpdatedVersion(version, segment, newTag) {
+    const pattern = /(\d+).(\d+).(\d+)(?:-(alpha|beta|rc|hotfix).(\d+))?/g;
+    let [match, major, minor, patch, tag, tagVersion] = pattern.exec(version);
+
     switch (segment) {
         case 'major': {
             major = Number(major) + 1;
@@ -48,14 +52,8 @@ function replacePackageVersion(segment, newTag, match, major, minor, patch, tag,
     }
 
     const newTagSubstring = !!tag && !!tagVersion ? `-${tag}.${tagVersion}` : '';
-    const newVersion = `${major}.${minor}.${patch}${newTagSubstring}`;
-    return `"version": "${newVersion}"`;
+
+    return `${major}.${minor}.${patch}${newTagSubstring}`;
 }
 
-function updatePackageVersionInContent(segment, newTag, content) {
-    //TODO Избавиться от лишнего парсинга строки ("version": "XXX"), что бы работать только с самой версией пакета (5.0.0-beta.2).
-    const regexp = /"version": "(\d+).(\d+).(\d+)(?:-(alpha|beta|rc|hotfix).(\d+))?"/g;
-    return content.replace(regexp, replacePackageVersion.bind(null, segment, newTag));
-}
-
-module.exports = {updatePackageVersionInContent};
+module.exports = {getUpdatedVersion, createErrorWithMessage};

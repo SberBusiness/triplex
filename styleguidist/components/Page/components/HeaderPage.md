@@ -1,6 +1,7 @@
 ### Basic
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 
 <HeaderPage>
@@ -11,12 +12,13 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Text>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Basic Link Controls
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
@@ -46,12 +48,13 @@ const options = [
             </Button>
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Extended
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 
 <HeaderPage>
@@ -65,12 +68,13 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Extended Controls
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
@@ -99,12 +103,13 @@ const options = [
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Extended Link
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 
 <HeaderPage>
@@ -121,12 +126,13 @@ import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/Heade
             </HeaderPage.Title.Content.Subhead>
         </HeaderPage.Title.Content>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Extended Link Controls
 
 ```jsx
+import React from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
@@ -158,12 +164,13 @@ const options = [
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Редактирование номера документа
 
 ```jsx
+import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
@@ -176,9 +183,9 @@ const options = [
     {id: 'header-page-edit-option-3', label: 'действие 3', onSelect: () => alert('действие 3')},
 ];
 
-const [value, setValue] = React.useState();
+const [value, setValue] = useState();
 
-const handleChange = (value) => setValue(value);
+const handleChange = (event) => setValue(event.target.value);
 
 <HeaderPage>
     <HeaderPage.Link href="#" onClick={(event) => event.preventDefault()}>
@@ -209,18 +216,19 @@ const handleChange = (value) => setValue(value);
             <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
         </HeaderPage.Title.Controls>
     </HeaderPage.Title>
-</HeaderPage>;
+</HeaderPage>
 ```
 
 ### Tabs
 
 ```jsx
+import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 
-const [selectedTabId, setSelectedTabId] = React.useState('3');
+const [selectedTabId, setSelectedTabId] = useState('3');
 
 const options = [
     {id: 'header-page-tabs-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
@@ -240,45 +248,44 @@ const tabs = [
     {id: '9', label: 'Tab Name'},
 ];
 
-<>
-    <HeaderPage>
-        <HeaderPage.Title>
-            <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>
-                    Шаблонный текст заголовка в одну строку
-                </HeaderPage.Title.Content.Text>
-            </HeaderPage.Title.Content>
-        </HeaderPage.Title>
-        <HeaderPage.Tabs>
-            <HeaderPage.Tabs.Content>
-                <HeaderPage.Tabs.Content.Tabs
-                    tabs={tabs}
-                    selectedTabId={selectedTabId}
-                    onSelectTab={(id) => setSelectedTabId(id)}
-                />
-            </HeaderPage.Tabs.Content>
-            <HeaderPage.Tabs.Controls>
-                <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
-                    Button Name
-                </Button>
-                <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
-            </HeaderPage.Tabs.Controls>
-        </HeaderPage.Tabs>
-    </HeaderPage>
-</>
+<HeaderPage>
+    <HeaderPage.Title>
+        <HeaderPage.Title.Content>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+        </HeaderPage.Title.Content>
+    </HeaderPage.Title>
+    <HeaderPage.Tabs>
+        <HeaderPage.Tabs.Content>
+            <HeaderPage.Tabs.Content.Tabs
+                tabs={tabs}
+                selectedTabId={selectedTabId}
+                onSelectTab={(id) => setSelectedTabId(id)}
+            />
+        </HeaderPage.Tabs.Content>
+        <HeaderPage.Tabs.Controls>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
+            <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
+        </HeaderPage.Tabs.Controls>
+    </HeaderPage.Tabs>
+</HeaderPage>
 ```
 
 ### TabsFolder
 
 ```jsx
+import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import {TabsFolder} from '@sberbusiness/triplex/components/TabsFolder/TabsFolder';
 
-const [selectedTabId, setSelectedTabId] = React.useState('3');
-const [selectedTabFolderId, setSelectedTabFolderId] = React.useState('3');
+const [selectedTabId, setSelectedTabId] = useState('3');
+const [selectedTabFolderId, setSelectedTabFolderId] = useState('3');
 
 const options = [
     {id: 'header-page-tabs-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
@@ -307,51 +314,50 @@ const tabsFolderTabs = [
     {id: '6', label: 'Tab Name'},
 ];
 
-<>
-    <HeaderPage>
-        <HeaderPage.Title>
-            <HeaderPage.Title.Content>
-                <HeaderPage.Title.Content.Text>
-                    Шаблонный текст заголовка в одну строку
-                </HeaderPage.Title.Content.Text>
-            </HeaderPage.Title.Content>
-        </HeaderPage.Title>
-        <HeaderPage.Tabs>
-            <HeaderPage.Tabs.Content>
-                <HeaderPage.Tabs.Content.Tabs
-                    tabs={tabs}
-                    selectedTabId={selectedTabId}
-                    onSelectTab={(id) => setSelectedTabId(id)}
-                />
-            </HeaderPage.Tabs.Content>
-            <HeaderPage.Tabs.Controls>
-                <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
-                    Button Name
-                </Button>
-                <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
-            </HeaderPage.Tabs.Controls>
-        </HeaderPage.Tabs>
-        <HeaderPage.Subhead className="tabsFolder">
-            <TabsFolder
-                tabs={tabsFolderTabs}
-                selectedTabId={selectedTabFolderId}
-                onSelectTab={(id) => setSelectedTabFolderId(id)}
+<HeaderPage>
+    <HeaderPage.Title>
+        <HeaderPage.Title.Content>
+            <HeaderPage.Title.Content.Text>
+                Шаблонный текст заголовка в одну строку
+            </HeaderPage.Title.Content.Text>
+        </HeaderPage.Title.Content>
+    </HeaderPage.Title>
+    <HeaderPage.Tabs>
+        <HeaderPage.Tabs.Content>
+            <HeaderPage.Tabs.Content.Tabs
+                tabs={tabs}
+                selectedTabId={selectedTabId}
+                onSelectTab={(id) => setSelectedTabId(id)}
             />
-        </HeaderPage.Subhead>
-    </HeaderPage>
-</>;
+        </HeaderPage.Tabs.Content>
+        <HeaderPage.Tabs.Controls>
+            <Button theme={EButtonTheme.SECONDARY} size={EButtonSize.MD}>
+                Button Name
+            </Button>
+            <ButtonDropdown theme={EButtonTheme.DOTS} size={EButtonSize.MD} options={options} />
+        </HeaderPage.Tabs.Controls>
+    </HeaderPage.Tabs>
+    <HeaderPage.Subhead className="tabsFolder">
+        <TabsFolder
+            tabs={tabsFolderTabs}
+            selectedTabId={selectedTabFolderId}
+            onSelectTab={(id) => setSelectedTabFolderId(id)}
+        />
+    </HeaderPage.Subhead>
+</HeaderPage>
 ```
 
 ### With sidebar
 
 ```jsx
+import React, {useState} from 'react';
 import {HeaderPage} from '@sberbusiness/triplex/components/Page/components/HeaderPage';
 import {Button} from '@sberbusiness/triplex/components/Button/Button';
 import {ButtonDropdown} from '@sberbusiness/triplex/components/Button/ButtonDropdown';
 import {EButtonTheme, EButtonSize} from '@sberbusiness/triplex/components/Button/enums';
 import './style.less';
 
-const [selectedTabId, setSelectedTabId] = React.useState('3');
+const [selectedTabId, setSelectedTabId] = useState('3');
 
 const options = [
     {id: 'header-page-sidebar-option-1', label: 'действие 1', onSelect: () => alert('действие 1')},
@@ -403,5 +409,5 @@ const tabs = [
             <span className="sidebar-background" />
         </HeaderPage.LayoutSidebar.Sidebar>
     </HeaderPage.LayoutSidebar>
-</HeaderPage>;
+</HeaderPage>
 ```

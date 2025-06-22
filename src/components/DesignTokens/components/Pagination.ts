@@ -2,6 +2,7 @@ import {TDesignTokenValue, TDesignTokenValues} from '@sberbusiness/triplex/compo
 
 // Название токенов компонента Pagination.
 export const designTokensComponentsPaginationKeys = [
+    'PageButton_Background_Active',
     'PageButton_Background_Default',
     'PageButton_Background_Hover',
     'PageButton_Background_Selected',
@@ -20,6 +21,7 @@ export type TDesignTokensComponentsPagination = {Pagination: TDesignTokensCompon
 
 // Токены компонента Pagination в светлой и темной темах.
 export const Pagination_Tokens: TDesignTokensComponentsPaginationValues = {
+    PageButton_Background_Active: [{ref: 'Neutral.300'}, {ref: 'Basic.300'}], // var(--triplex-Pagination-PageButton_Background_Active)
     PageButton_Background_Default: [{ref: 'Basic.0'}, {ref: 'Basic.0'}], // var(--triplex-Pagination-PageButton_Background_Default)
     PageButton_Background_Hover: [{ref: 'Neutral.100'}, {ref: 'Neutral.900'}], // var(--triplex-Pagination-PageButton_Background_Hover)
     PageButton_Background_Selected: [{ref: 'Neutral.300'}, {ref: 'Basic.300'}], // var(--triplex-Pagination-PageButton_Background_Selected)

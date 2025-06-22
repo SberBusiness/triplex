@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import StyleGuide from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuide';
-import {isIE} from './utils';
+import StyleGuide, {StyleGuideProps} from 'react-styleguidist/lib/client/rsg-components/StyleGuide/StyleGuide';
 import {StyleGuideContext} from './StyleGuideContext';
 
 // Подгружаем заранее собранные стили.
@@ -14,7 +13,7 @@ const styleguidistLiveClassName = 'styleguidist-live';
 // Устанавливаем российскую локаль.
 moment.locale('ru');
 
-const StyleGuideWrapper: React.FC<any> = (props) => {
+const StyleGuideWrapper: React.FC<StyleGuideProps> = (props) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     useEffect(() => {
@@ -23,7 +22,8 @@ const StyleGuideWrapper: React.FC<any> = (props) => {
         if (hash.includes('styleguideLive=true')) {
             document.body.classList.add(styleguidistLiveClassName);
         }
-        if (!isIE && hash.includes('axe=true')) {
+
+        if (hash.includes('axe=true')) {
             // подключение библиотеки тестирования Accessibility
             const axe = require('@axe-core/react');
             axe(React, ReactDOM, 1000);

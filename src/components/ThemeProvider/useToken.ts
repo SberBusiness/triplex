@@ -7,8 +7,8 @@ import {ETriplexTheme} from '@sberbusiness/triplex/components/ThemeProvider/ETri
 /**
  * Хук, возвращающий текущую тему и токены.
  */
-export const useToken = (): {theme: ETriplexTheme; tokens: TDesignTokens} => {
-    const {theme, tokens} = useContext(ThemeProviderContext);
+export const useToken = (): {scopeClassName: string; theme: ETriplexTheme; tokens: TDesignTokens} => {
+    const {scopeClassName, theme, tokens} = useContext(ThemeProviderContext);
 
-    return {theme, tokens};
+    return {scopeClassName, theme, tokens};
 };

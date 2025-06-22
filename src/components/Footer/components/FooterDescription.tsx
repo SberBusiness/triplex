@@ -4,22 +4,21 @@ import {FooterDescriptionControls} from '@sberbusiness/triplex/components/Footer
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента FooterDescription. */
-interface IFooterDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface IFooterDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Футер, основная часть. */
-export class FooterDescription extends React.PureComponent<IFooterDescriptionProps> {
-    public static displayName = 'FooterDescription';
-
-    public static Content = FooterDescriptionContent;
-    public static Controls = FooterDescriptionControls;
-
-    public render(): JSX.Element {
-        const {children, className, ...htmlDivAttributes} = this.props;
-
+export const FooterDescription = Object.assign(
+    React.forwardRef<HTMLDivElement, IFooterDescriptionProps>(function FooterDescription({children, className, ...rest}, ref) {
         return (
-            <div className={classnames(className, 'cssClass[footerDescription]')} {...htmlDivAttributes}>
+            <div className={classnames('cssClass[footerDescription]', className)} {...rest} ref={ref}>
                 {children}
             </div>
         );
+    }),
+    {
+        Content: FooterDescriptionContent,
+        Controls: FooterDescriptionControls,
     }
-}
+);
+
+FooterDescription.displayName = 'FooterDescription';

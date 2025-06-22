@@ -11,7 +11,7 @@
 ```jsx {"file": "./examples/Pagination_2_minimum_size.jsx"}
 ```
 
-### Maximum size without overflow
+### Without PaginationSelect
 
-```jsx {"file": "./examples/Pagination_3_maximum_size_without_overflow.jsx"}
+```jsx {"file": "./examples/Pagination_3_without_paginationSelect.jsx"}
 ```

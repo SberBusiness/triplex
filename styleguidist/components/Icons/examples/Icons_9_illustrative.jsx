@@ -1,0 +1,5 @@
+import React from 'react';
+import * as module from '@sberbusiness/icons/IllustrativeIndex';
+import {SVGPreview} from '../../common/components/SVGPreview/SVGPreview';
+
+<SVGPreview value={module} folder="icons" />

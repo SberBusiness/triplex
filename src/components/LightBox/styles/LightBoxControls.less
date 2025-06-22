@@ -1,6 +1,7 @@
 @import 'src/styles/style';
 
 .lightBoxControls {
+    box-sizing: border-box;
     top: 0;
     top: var(--lightBox-screen-top);
     position: fixed;
@@ -56,6 +57,8 @@
     .LB-less-or-equal-media-point-0-no-hash {
         .lightBoxControls {
             height: @lightBox-controls-opened-height-SM;
+            // Перекрытие стилей из LightBoxAdaptive.less.
+            padding: 16px 16px !important;
 
             .lightBoxClose {
                 // Перекрытие стилей из LightBoxAdaptive.less.
@@ -63,16 +66,8 @@
                 right: 16px !important;
             }
 
-            .lightBoxPrev {
-                // Перекрытие стилей из LightBoxAdaptive.less.
-                top: 16px !important;
-                left: 16px !important;
-            }
-
-            .lightBoxNext {
-                // Перекрытие стилей из LightBoxAdaptive.less.
-                top: 16px !important;
-                left: 56px !important;
+            .lightBoxPrev + .lightBoxNext {
+                margin-left: 16px !important;
             }
         }
     }

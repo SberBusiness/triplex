@@ -1,10 +1,9 @@
 import React from 'react';
 import {useCallback, useLayoutEffect, useRef, useState} from 'react';
-import ReactResizeDetector from 'react-resize-detector/build/withPolyfill';
+import ReactResizeDetector from 'react-resize-detector';
 import {Portal} from '../../Portal/Portal';
 import {LightBoxViewManagerConsts} from './LightBoxViewManagerConsts';
-import isEqual from 'lodash.isequal';
-import pick from 'lodash.pick';
+import {isEqual, pick} from 'lodash';
 
 export interface ILightBoxViewManagerProps {
     // Элемент, в который рендерится LightBox.

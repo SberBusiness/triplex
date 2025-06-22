@@ -172,6 +172,7 @@ module.exports = [
                     './src/components/Page/Page.tsx',
                     './src/components/Page/components/HeaderPage.tsx',
                     './src/components/Page/components/FooterPage.tsx',
+                    './src/components/Page/components/BodyPage.tsx',
                 ],
             },
             {
@@ -201,7 +202,6 @@ module.exports = [
                 components: [
                     './src/components/Select/Select.tsx',
                     './src/components/SelectExtended/SelectExtended.tsx',
-                    './src/components/AmountCurrencySelect/AmountCurrencySelect.tsx',
                 ],
             },
             {
@@ -347,6 +347,10 @@ module.exports = [
                         name: 'Status',
                         content: './styleguidist/components/Icons/Status.md',
                     },
+                    {
+                        name: 'Illustrative',
+                        content: './styleguidist/components/Icons/Illustrative.md',
+                    },
                 ],
             },
             {
@@ -380,8 +384,12 @@ module.exports = [
                 content: './styleguidist/components/Form/FormDetailed.md',
             },
             {
-                name: 'Input with no autofill',
+                name: 'Input | Autofill prevention',
                 content: './styleguidist/components/Input/InputNoAutofill.md',
+            },
+            {
+                name: 'PDF Viewer',
+                content: './styleguidist/components/PDFViewer/PDFViewer.md',
             },
             {
                 name: 'SMSInput in TableBasic',
@@ -396,213 +404,5 @@ module.exports = [
     {
         name: 'Fonts',
         content: './styleguidist/components/Fonts/Fonts.md',
-    },
-    {
-        name: 'Screenshot tests',
-        sections: [
-            {
-                name: 'Alerts',
-                sections: [
-                    {
-                        name: 'AlertContext',
-                        content: './styleguidist/test-examples/Alert/AlertContext/AlertContext.md',
-                    },
-                    {
-                        name: 'AlertProcess',
-                        content: './styleguidist/test-examples/Alert/AlertProcess/AlertProcess.md',
-                    },
-                ],
-            },
-            {
-                name: 'Buttons',
-                sections: [
-                    {
-                        name: 'Button',
-                        content: './styleguidist/test-examples/Button/Button.md',
-                    },
-                    {
-                        name: 'ButtonIcon',
-                        content: './styleguidist/test-examples/Button/ButtonIcon.md',
-                    },
-                    {
-                        name: 'ButtonDropdown',
-                        content: './styleguidist/test-examples/Button/ButtonDropdown.md',
-                    },
-                ],
-            },
-            {
-                name: 'Cards',
-                sections: [
-                    {
-                        name: 'CardStatic',
-                        content: './styleguidist/test-examples/Card/CardStatic.md',
-                    },
-                    {
-                        name: 'CardAction',
-                        content: './styleguidist/test-examples/Card/CardAction.md',
-                    },
-                ],
-            },
-            {
-                name: 'Checkboxes',
-                sections: [
-                    {
-                        name: 'Checkbox',
-                        content: './styleguidist/test-examples/Checkbox/Checkbox.md',
-                    },
-                    {
-                        name: 'CheckboxXGroup',
-                        content: './styleguidist/test-examples/Checkbox/CheckboxXGroup.md',
-                    },
-                    {
-                        name: 'CheckboxYGroup',
-                        content: './styleguidist/test-examples/Checkbox/CheckboxYGroup.md',
-                    },
-                ],
-            },
-            {
-                name: 'Col',
-                content: './styleguidist/test-examples/Col/Col.md',
-            },
-            {
-                name: 'DatePicker',
-                content: './styleguidist/test-examples/DatePicker/DatePicker.md',
-            },
-            {
-                name: 'Divider',
-                content: './styleguidist/test-examples/Divider/Divider.md',
-            },
-            {
-                name: 'Ellipsis',
-                content: './styleguidist/test-examples/Ellipsis/Ellipsis.md',
-            },
-            {
-                name: 'Input',
-                content: './styleguidist/test-examples/Input/Input.md',
-            },
-            {
-                name: 'InputGroup',
-                content: './styleguidist/test-examples/InputGroup/InputGroup.md',
-            },
-            {
-                name: 'Link',
-                content: './styleguidist/test-examples/Link/Link.md',
-            },
-            {
-                name: 'MaskedInput',
-                content: './styleguidist/test-examples/MaskedInput/MaskedInput.md',
-            },
-            {
-                name: 'MonthYearPicker',
-                content: './styleguidist/test-examples/MonthYearPicker/MonthYearPicker.md',
-            },
-            {
-                name: 'Multiselect',
-                content: './styleguidist/test-examples/Multiselect/Multiselect.md',
-            },
-            {
-                name: 'Radio buttons',
-                sections: [
-                    {
-                        name: 'Radio',
-                        content: './styleguidist/test-examples/Radio/Radio.md',
-                    },
-                    {
-                        name: 'RadioXGroup',
-                        content: './styleguidist/test-examples/Radio/RadioXGroup.md',
-                    },
-                    {
-                        name: 'RadioYGroup',
-                        content: './styleguidist/test-examples/Radio/RadioYGroup.md',
-                    },
-                ],
-            },
-            {
-                name: 'SegmentedControl',
-                content: './styleguidist/test-examples/SegmentedControl/SegmentedControl.md',
-            },
-            {
-                name: 'Select',
-                content: './styleguidist/test-examples/Select/Select.md',
-            },
-            {
-                name: 'SliderExtended',
-                content: './styleguidist/test-examples/SliderExtended/SliderExtended.md',
-            },
-            {
-                name: 'StatusTracker',
-                content: './styleguidist/test-examples/StatusTracker/StatusTracker.md',
-            },
-            {
-                name: 'Stepper',
-                content: './styleguidist/test-examples/Stepper/Stepper.md',
-            },
-            {
-                name: 'Suggest',
-                content: './styleguidist/test-examples/Suggest/Suggest.md',
-            },
-            {
-                name: 'SuggestCustom',
-                content: './styleguidist/test-examples/Suggest/SuggestCustom.md',
-            },
-            {
-                name: 'SMSInput',
-                content: './styleguidist/test-examples/SMSInput/SMSInput.md',
-            },
-            {
-                name: 'Spoiler',
-                content: './styleguidist/test-examples/Spoiler/Spoiler.md',
-            },
-            {
-                name: 'Tabs',
-                content: './styleguidist/test-examples/Tabs/Tabs.md',
-            },
-            {
-                name: 'TabsFolder',
-                content: './styleguidist/test-examples/TabsFolder/TabsFolder.md',
-            },
-            {
-                name: 'Tag',
-                sections: [
-                    {
-                        name: 'Tag',
-                        content: './styleguidist/test-examples/Tag/Tag.md',
-                    },
-                    {
-                        name: 'TagGroup',
-                        content: './styleguidist/test-examples/Tag/TagGroup.md',
-                    },
-                ],
-            },
-            {
-                name: 'TextArea',
-                content: './styleguidist/test-examples/TextArea/TextArea.md',
-            },
-            {
-                name: 'Tooltip',
-                content: './styleguidist/test-examples/Tooltip/Tooltip.md',
-            },
-            {
-                name: 'Typography',
-                sections: [
-                    {
-                        name: 'Text',
-                        content: './styleguidist/test-examples/Typography/Text.md',
-                    },
-                    {
-                        name: 'Title',
-                        content: './styleguidist/test-examples/Typography/Title.md',
-                    },
-                ],
-            },
-            {
-                name: 'UploadZone',
-                content: './styleguidist/test-examples/UploadZone/UploadZone.md',
-            },
-            {
-                name: 'Widget',
-                content: './styleguidist/test-examples/Widget/Widget.md',
-            },
-        ],
     },
 ];

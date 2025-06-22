@@ -2,13 +2,13 @@ import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента HeaderTabsControls. */
-interface IHeaderTabsControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface IHeaderTabsControlsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Блок с кнопками действий HeaderTabs. */
-export const HeaderTabsControls: React.FC<IHeaderTabsControlsProps> = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[headerTabsControls]')} {...htmlDivAttributes}>
+export const HeaderTabsControls = React.forwardRef<HTMLDivElement, IHeaderTabsControlsProps>(({children, className, ...rest}, ref) => (
+    <div className={classnames('cssClass[headerTabsControls]', className)} {...rest} ref={ref}>
         {children}
     </div>
-);
+));
 
 HeaderTabsControls.displayName = 'HeaderTabsControls';

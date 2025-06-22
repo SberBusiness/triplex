@@ -23,14 +23,9 @@
             margin: 0 -2px;
             border: 1px solid transparent;
             white-space: nowrap;
-
-            // В IE11 не показывается боковая тень на :focus.
-            @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                margin: 0;
-            }
         }
 
-        &:focus {
+        &:focus-visible {
             outline: none;
 
             .buttonEditInner {

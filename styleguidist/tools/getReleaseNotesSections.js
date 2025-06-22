@@ -1,3 +1,4 @@
+/* eslint-env node */
 const fs = require('fs');
 const path = require('path');
 
@@ -23,7 +24,7 @@ const getReleaseNotesSections = (notesPath = RELEASE_NOTES_FOLDER_PATH) => {
                     sections: getReleaseNotesSections(path.resolve(notesPath, file)),
                 };
                 notesInCurrentFolder.push(nestedSection);
-            } else {
+            } else if (path.extname(file) === '.md') {
                 notesInCurrentFolder.push({
                     name: file,
                     content: path.join(notesPath, file),

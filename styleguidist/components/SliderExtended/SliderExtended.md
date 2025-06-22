@@ -120,7 +120,7 @@ const [value, setValue] = React.useState(0);
 ### Amount
 
 ```jsx
-import range from 'lodash.range';
+import {range} from 'lodash';
 
 const [value, setValue] = React.useState(1000000);
 

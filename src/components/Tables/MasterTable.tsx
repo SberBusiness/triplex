@@ -1,54 +1,61 @@
+import React, {useState} from 'react';
 import {FilterPanel} from '@sberbusiness/triplex/components/Tables/FilterPanel';
 import {PaginationBasic} from '@sberbusiness/triplex/components/Tables/PaginationBasic';
 import {TableFooter} from '@sberbusiness/triplex/components/Tables/TableFooter/TableFooter';
 import {TableBasic} from '@sberbusiness/triplex/components/Tables/TableBasic/TableBasic';
 import {TabsLine} from '@sberbusiness/triplex/components/TabsLine/TabsLine';
 import {TabsLinePanel} from '@sberbusiness/triplex/components/Tables/TabsLinePanel';
-import React from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {isComponentType, isReactElement} from '../../utils/reactChild';
+import {ITableBasicColumn} from '@sberbusiness/triplex/components/Tables/TableBasic/types';
+// Импорт должен быть абсолютный.
+import {MasterTableContext} from '@sberbusiness/triplex/components/Tables/MasterTableContext';
+import {NoColumns} from '@sberbusiness/triplex/components/Tables/NoColumns';
+import {TableBasicSettings} from '@sberbusiness/triplex/components/Tables/TableBasicSettings/TableBasicSettings';
 
-/**
- * @prop {boolean} [isLoading] Состояние загрузки.
- */
 interface IMasterTableProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Состояние загрузки. */
     isLoading?: boolean;
 }
 
-export class MasterTable extends React.PureComponent<IMasterTableProps> {
-    public static displayName = 'MasterTable';
+interface IMasterTableFC extends React.FC<IMasterTableProps> {
+    NoColumns: typeof NoColumns;
+    FilterPanel: typeof FilterPanel;
+    TabsLine: typeof TabsLine;
+    TabsLinePanel: typeof TabsLinePanel;
+    TableBasic: typeof TableBasic;
+    TableBasicSettings: typeof TableBasicSettings;
+    TableFooter: typeof TableFooter;
+    Pagination: typeof PaginationBasic;
+}
 
-    public static FilterPanel = FilterPanel;
-    public static TabsLine = TabsLine;
-    public static TabsLinePanel = TabsLinePanel;
-    public static TableBasic = TableBasic;
-    public static TableFooter = TableFooter;
-    public static Pagination = PaginationBasic;
+export const MasterTable: IMasterTableFC = ({children, className, isLoading = false, ...htmlDivAttributes}) => {
+    const [columns, setColumns] = useState<ITableBasicColumn[]>([]);
 
-    public render(): React.ReactNode {
-        const {children, className, isLoading, ...htmlDivAttributes} = this.props;
-
-        const newChildren = React.Children.map(children, (child) => {
-            if (child) {
-                let nextLoading = isLoading;
-                if (!isLoading && isReactElement(child) && isComponentType(child.type)) {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-                    nextLoading = child.props.isLoading;
-                }
-                return React.cloneElement(child as React.ReactElement, {
-                    isLoading: nextLoading,
-                });
-            }
-        });
-
-        return (
+    return (
+        <MasterTableContext.Provider
+            value={{
+                columns,
+                isLoading,
+                setColumns,
+            }}
+        >
             <div
-                className={classnames(className, 'cssClass[masterTable]')}
+                className={classnames('cssClass[masterTable]', className)}
                 {...htmlDivAttributes}
                 data-tx={process.env.npm_package_version}
             >
-                {newChildren}
+                {children}
             </div>
-        );
-    }
-}
+        </MasterTableContext.Provider>
+    );
+};
+
+MasterTable.displayName = 'MasterTable';
+MasterTable.NoColumns = NoColumns;
+MasterTable.FilterPanel = FilterPanel;
+MasterTable.TabsLine = TabsLine;
+MasterTable.TabsLinePanel = TabsLinePanel;
+MasterTable.TableBasic = TableBasic;
+MasterTable.TableBasicSettings = TableBasicSettings;
+MasterTable.TableFooter = TableFooter;
+MasterTable.Pagination = PaginationBasic;

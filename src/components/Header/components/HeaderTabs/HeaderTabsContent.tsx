@@ -3,16 +3,20 @@ import {Tabs} from '@sberbusiness/triplex/components/Tabs/Tabs';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента HeaderTabsContent. */
-interface IHeaderTabsContentProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface IHeaderTabsContentFC extends React.FC<IHeaderTabsContentProps> {
-    Tabs: typeof Tabs;
-}
+export interface IHeaderTabsContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Контейнер табов. */
-export const HeaderTabsContent: IHeaderTabsContentFC = ({children, className}) => (
-    <div className={classnames(className, 'cssClass[headerTabsContent]')}>{children}</div>
+export const HeaderTabsContent = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderTabsContentProps>(function HeaderTabsContent({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames('cssClass[headerTabsContent]', className)} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Tabs: Tabs,
+    }
 );
 
-HeaderTabsContent.Tabs = Tabs;
 HeaderTabsContent.displayName = 'HeaderTabsContent';

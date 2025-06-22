@@ -12,3 +12,7 @@
 ### Range Mode
 ```jsx {"file": "./examples/Calendar_3_range.jsx"}
 ```
+
+### Today button
+```jsx {"file": "./examples/Calendar_4_today.jsx"}
+```

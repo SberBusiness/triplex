@@ -15,30 +15,25 @@ export interface IHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     sticky?: boolean;
 }
 
-interface IHeaderFC extends React.FC<IHeaderProps> {
-    LayoutSidebar: typeof HeaderLayoutSidebar;
-    Link: typeof HeaderLink;
-    Subhead: typeof HeaderSubheader;
-    Tabs: typeof HeaderTabs;
-    Title: typeof HeaderTitle;
-}
-
 /** Заголовок. */
-export const Header: IHeaderFC = ({children, className, sticky, ...htmlDivAttributes}) => (
-    <div
-        className={classnames('cssClass[header]', className, {
-            'cssClass[sticky]': Boolean(sticky),
-        })}
-        {...htmlDivAttributes}
-        data-tx={process.env.npm_package_version}
-    >
-        {children}
-    </div>
+export const Header = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderProps>(function Header({className, sticky, ...rest}, ref) {
+        return (
+            <div
+                className={classnames('cssClass[header]', {'cssClass[sticky]': Boolean(sticky)}, className)}
+                {...rest}
+                data-tx={process.env.npm_package_version}
+                ref={ref}
+            />
+        );
+    }),
+    {
+        LayoutSidebar: HeaderLayoutSidebar,
+        Link: HeaderLink,
+        Subhead: HeaderSubheader,
+        Tabs: HeaderTabs,
+        Title: HeaderTitle,
+    }
 );
 
 Header.displayName = 'Header';
-Header.LayoutSidebar = HeaderLayoutSidebar;
-Header.Link = HeaderLink;
-Header.Subhead = HeaderSubheader;
-Header.Tabs = HeaderTabs;
-Header.Title = HeaderTitle;

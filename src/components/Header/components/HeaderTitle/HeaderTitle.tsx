@@ -4,20 +4,21 @@ import {HeaderTitleControls} from '@sberbusiness/triplex/components/Header/compo
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента HeaderTitle. */
-interface IHeaderTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface IHeaderTitleFC extends React.FC<IHeaderTitleProps> {
-    Content: typeof HeaderTitleContent;
-    Controls: typeof HeaderTitleControls;
-}
+export interface IHeaderTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Первый уровень Header. Содержит заголовок, подзаголовок и кнопки действий. */
-export const HeaderTitle: IHeaderTitleFC = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[globalHeaderTitle]')} {...htmlDivAttributes}>
-        {children}
-    </div>
+export const HeaderTitle = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderTitleProps>(function HeaderTitle({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames('cssClass[globalHeaderTitle]', className)} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Content: HeaderTitleContent,
+        Controls: HeaderTitleControls,
+    }
 );
 
-HeaderTitle.Content = HeaderTitleContent;
-HeaderTitle.Controls = HeaderTitleControls;
 HeaderTitle.displayName = 'HeaderTitle';

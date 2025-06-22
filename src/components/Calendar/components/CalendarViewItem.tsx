@@ -1,12 +1,12 @@
 import React, {useEffect, useContext, useRef} from 'react';
 import moment from 'moment';
+import {ECalendarDateMarkType} from '@sberbusiness/triplex/components/Calendar/enums';
 import {CalendarViewContext} from '@sberbusiness/triplex/components/Calendar/CalendarViewContext';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {ICalendarViewProps} from '@sberbusiness/triplex/components/Calendar/components/CalendarView';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
 
 /** Свойства компонента CalendarViewItem. */
-export interface ICalendarViewItemProps extends React.TdHTMLAttributes<HTMLTableCellElement>, Pick<ICalendarViewProps, 'onDateSelect'> {
+export interface ICalendarViewItemProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
     /** Дата. */
     date: moment.Moment;
     /** Единица измерения. */
@@ -19,9 +19,19 @@ export interface ICalendarViewItemProps extends React.TdHTMLAttributes<HTMLTable
     tabbable: boolean;
     /** Дата не относится к текущему месяцу. */
     muted?: boolean;
-    /** Дата является отмеченной. */
-    marked?: boolean;
+    /** Тип отметки. */
+    markType?: ECalendarDateMarkType;
+    /** Функция, вызывающаяся при выборе даты. */
+    onDateSelect: (date: moment.Moment) => void;
 }
+
+/** Соответствие типа отметки имени класса. */
+const markTypeToClassNameMap = {
+    [ECalendarDateMarkType.BASIC]: 'cssClass[basicMark]',
+    [ECalendarDateMarkType.STANDARD]: 'cssClass[standardMark]',
+    [ECalendarDateMarkType.ATTENTION]: 'cssClass[attentionMark]',
+    [ECalendarDateMarkType.CRITICAL]: 'cssClass[criticalMark]',
+};
 
 /** Соответствие единицы измерения имени класса. */
 const unitToClassNameMap = {
@@ -40,7 +50,7 @@ export const CalendarViewItem: React.FC<ICalendarViewItemProps> = ({
     active,
     disabled,
     muted,
-    marked,
+    markType,
     onFocus,
     onBlur,
     onKeyDown,
@@ -94,12 +104,17 @@ export const CalendarViewItem: React.FC<ICalendarViewItemProps> = ({
             ref={ref}
         >
             <div
-                className={classnames('cssClass[calendarViewItemLabel]', unitToClassNameMap[unit], {
-                    'cssClass[disabled]': disabled,
-                    'cssClass[marked]': !!marked,
-                    'cssClass[muted]': !!muted,
-                    'cssClass[selected]': active && !muted,
-                })}
+                className={classnames(
+                    'cssClass[calendarViewItemLabel]',
+                    unitToClassNameMap[unit],
+                    {
+                        'cssClass[disabled]': disabled,
+                        'cssClass[marked]': markType !== undefined,
+                        'cssClass[muted]': !!muted,
+                        'cssClass[selected]': active,
+                    },
+                    markType !== undefined ? markTypeToClassNameMap[markType] : undefined
+                )}
                 onClick={() => onDateSelect(date)}
             >
                 {children}

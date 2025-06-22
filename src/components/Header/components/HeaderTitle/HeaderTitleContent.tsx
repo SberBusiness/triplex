@@ -4,22 +4,21 @@ import {HeaderTitleContentSubhead} from '@sberbusiness/triplex/components/Header
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
 
 /** Свойства компонента HeaderTitleContent. */
-interface IHeaderTitleContentProps extends React.HTMLAttributes<HTMLDivElement> {
-    children?: React.ReactNode;
-}
-
-interface IHeaderTitleContentFC extends React.FC<IHeaderTitleContentProps> {
-    Text: typeof HeaderTitleContentText;
-    Subhead: typeof HeaderTitleContentSubhead;
-}
+export interface IHeaderTitleContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Часть HeaderTitle с заголовком и подзаголовком. */
-export const HeaderTitleContent: IHeaderTitleContentFC = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[headerTitleContent]')} {...htmlDivAttributes}>
-        {children}
-    </div>
+export const HeaderTitleContent = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderTitleContentProps>(function HeaderTitleContent({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames(className, 'cssClass[headerTitleContent]')} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Subhead: HeaderTitleContentSubhead,
+        Text: HeaderTitleContentText,
+    }
 );
 
-HeaderTitleContent.Text = HeaderTitleContentText;
-HeaderTitleContent.Subhead = HeaderTitleContentSubhead;
 HeaderTitleContent.displayName = 'HeaderTitleContent';

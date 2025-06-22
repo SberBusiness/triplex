@@ -4,20 +4,21 @@ import {HeaderLayoutSidebarContent} from './HeaderLayoutSidebarContent';
 import {HeaderLayoutSidebarSidebar} from './HeaderLayoutSidebarSidebar';
 
 /** Свойства компонента HeaderLayoutSidebar. */
-interface IHeaderLayoutSidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-interface IHeaderLayoutSidebarFC extends React.FC<IHeaderLayoutSidebarProps> {
-    Content: typeof HeaderLayoutSidebarContent;
-    Sidebar: typeof HeaderLayoutSidebarSidebar;
-}
+export interface IHeaderLayoutSidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /** Layout для Header с sidebar. */
-export const HeaderLayoutSidebar: IHeaderLayoutSidebarFC = ({children, className, ...htmlDivAttributes}) => (
-    <div className={classnames(className, 'cssClass[headerLayoutSidebar]')} {...htmlDivAttributes}>
-        {children}
-    </div>
+export const HeaderLayoutSidebar = Object.assign(
+    React.forwardRef<HTMLDivElement, IHeaderLayoutSidebarProps>(function HeaderLayoutSidebar({children, className, ...rest}, ref) {
+        return (
+            <div className={classnames('cssClass[headerLayoutSidebar]', className)} {...rest} ref={ref}>
+                {children}
+            </div>
+        );
+    }),
+    {
+        Content: HeaderLayoutSidebarContent,
+        Sidebar: HeaderLayoutSidebarSidebar,
+    }
 );
 
-HeaderLayoutSidebar.Content = HeaderLayoutSidebarContent;
-HeaderLayoutSidebar.Sidebar = HeaderLayoutSidebarSidebar;
 HeaderLayoutSidebar.displayName = 'HeaderLayoutSidebar';

@@ -23,8 +23,8 @@ export interface ITableBasicColumn {
     cellType?: ECellType;
     /** Ширина колонки (включая боковые внутренние отступы), пример значений 10|'10%'. */
     width?: React.ReactText;
-    /** Ширина экрана, когда столбец не виден. */
-    hideScreenWidth?: EScreenWidth;
+    /** Столбец скрыт. */
+    hidden?: boolean;
     /** Функция рендера ячейки. */
     renderCell?: (param: any) => React.ReactNode;
     /** Data-атрибуты. */

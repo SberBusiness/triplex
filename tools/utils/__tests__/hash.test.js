@@ -1,5 +1,6 @@
+/* eslint-env node */
 const hash = require('../hash');
-const flattenDeep = require('lodash.flattendeep');
+const {flattenDeep} = require('lodash');
 
 describe('hash', () => {
     it('Возвращает разные хеши для разных версий', () => {

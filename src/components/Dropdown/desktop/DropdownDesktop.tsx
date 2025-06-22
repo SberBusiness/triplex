@@ -1,7 +1,8 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {classnames} from '@sberbusiness/triplex/utils/classnames/classnames';
-import {EDropdownAlignment, EDropdownDirection} from '../Dropdown';
+import {EDropdownAlignment, EDropdownDirection} from '@sberbusiness/triplex/components/Dropdown/Dropdown';
 import {isKey} from '@sberbusiness/triplex/utils/keyboard';
+import {useToken} from '@sberbusiness/triplex/components/ThemeProvider/useToken';
 
 /** Свойства компонента DropdownDesktop. */
 export interface IDropdownDesktopProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,6 +20,8 @@ export interface IDropdownDesktopProps extends React.HTMLAttributes<HTMLDivEleme
     fixedWidth?: boolean;
 }
 
+const dropdownDesktopBodyOverflowClassName = 'cssClass[dropdownOverflowHidden]';
+
 /** Выпадающее меню. */
 export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktopProps>((props, ref) => {
     const {
@@ -33,10 +36,12 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
         targetRef,
         ...rest
     } = props;
+    const {scopeClassName} = useToken();
+
     const [styles, setStyles] = useState<React.CSSProperties>({...style, opacity: 0});
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownRes = useRef<{width: number; height: number}>({height: 0, width: 0});
-    const classNames = classnames('cssClass[dropdown]', className);
+    const classNames = classnames('cssClass[dropdown]', scopeClassName, className);
 
     /** Блокировка скролла вне дропдауна. */
     const wheelHandler = useCallback(
@@ -111,6 +116,7 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
     /** Расчёт положения по вертикали. */
     const calculatePositionVertical = useCallback(
         (css: React.CSSProperties, dropdownRect: DOMRect, targetRect: DOMRect) => {
+            // Отступ между target и dropdown.
             const offset = 4;
 
             if (direction === EDropdownDirection.AUTO) {
@@ -188,11 +194,13 @@ export const DropdownDesktop = React.forwardRef<HTMLDivElement, IDropdownDesktop
             document.addEventListener('scroll', handleReposition, true);
             window.addEventListener('resize', handleReposition);
             toggleScrollEventListener(true);
+            document.body.classList.add(dropdownDesktopBodyOverflowClassName);
 
             return () => {
                 document.removeEventListener('scroll', handleReposition, true);
                 window.removeEventListener('resize', handleReposition);
                 toggleScrollEventListener(false);
+                document.body.classList.remove(dropdownDesktopBodyOverflowClassName);
             };
         }
     }, [opened, handleReposition, toggleScrollEventListener]);

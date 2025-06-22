@@ -6,9 +6,8 @@ import './styles.less';
 
 const IsolateButton: React.FC<IsolateButtonProps> = ({href, name, example, isolated}) => {
     if (isolated && !href) {
-        // Если адрес страницы содержит больше 2 уровней вложенности, регулярное выражение извлекает два уровня пути. Иначе - только первый уровень
-        const regEx = /!\/[^\/]+\/.*/.test(window.location.hash) ? /!\/([^\/]+\/[^\/]+).*/ : /!\/([^\/]+)\/.*/;
-        href = window.location.hash.replace(regEx, '/$1');
+        // Регулярное выражение извлекает первый уровень вложенности в качестве пути для выхода из isolated.
+        href = window.location.hash.replace(/!\/([^\/]+)\/.*/, '/$1');
     }
 
     if (isolated) {
