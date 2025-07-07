@@ -4,7 +4,7 @@ const getScriptConfig = require('./getScriptConfig');
 const getTsFileList = require('./getTsFileList');
 
 module.exports = function() {
-    const fileList = getTsFileList('src/', [/protected/, /.*types\.ts$/, /.*common\/theme\/.*\.less$/, /__tests__/]);
+    const fileList = getTsFileList('src/', [/.*types\.ts$/, /.*common\/theme\/.*\.less$/, /__tests__/]);
 
     let tsIdx = 0;
     let tsCount = fileList.components.length;
